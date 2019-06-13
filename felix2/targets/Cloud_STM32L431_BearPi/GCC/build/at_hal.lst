@@ -1,0 +1,1302 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"at_hal.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.__do_nothing,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	__do_nothing:
+  25              	.LFB133:
+  26              		.file 1 "D:/iot/felix2/include/at_frame/at_main.h"
+   1:D:/iot/felix2/include/at_frame\at_main.h **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/include/at_frame\at_main.h ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/include/at_frame\at_main.h ****  * All rights reserved.
+   4:D:/iot/felix2/include/at_frame\at_main.h ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/include/at_frame\at_main.h ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/include/at_frame\at_main.h ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/include/at_frame\at_main.h ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/include/at_frame\at_main.h ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/include/at_frame\at_main.h ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/include/at_frame\at_main.h ****  * provided with the distribution.
+  11:D:/iot/felix2/include/at_frame\at_main.h ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/include/at_frame\at_main.h ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/include/at_frame\at_main.h ****  * permission.
+  14:D:/iot/felix2/include/at_frame\at_main.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/include/at_frame\at_main.h ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/include/at_frame\at_main.h ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/include/at_frame\at_main.h ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/include/at_frame\at_main.h ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/include/at_frame\at_main.h ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/include/at_frame\at_main.h ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/include/at_frame\at_main.h ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/include/at_frame\at_main.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/include/at_frame\at_main.h ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/include/at_frame\at_main.h ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/include/at_frame\at_main.h ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/include/at_frame\at_main.h **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/include/at_frame\at_main.h ****  * Notice of Export Control Law
+  28:D:/iot/felix2/include/at_frame\at_main.h ****  * ===============================================
+  29:D:/iot/felix2/include/at_frame\at_main.h ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/include/at_frame\at_main.h ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/include/at_frame\at_main.h ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/include/at_frame\at_main.h ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 2
+
+
+  33:D:/iot/felix2/include/at_frame\at_main.h ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/include/at_frame\at_main.h **** 
+  35:D:/iot/felix2/include/at_frame\at_main.h **** #ifndef __AT_MAIN_H__
+  36:D:/iot/felix2/include/at_frame\at_main.h **** #define __AT_MAIN_H__
+  37:D:/iot/felix2/include/at_frame\at_main.h **** #include <stdbool.h>
+  38:D:/iot/felix2/include/at_frame\at_main.h **** #include "los_queue.h"
+  39:D:/iot/felix2/include/at_frame\at_main.h **** #include "los_mux.h"
+  40:D:/iot/felix2/include/at_frame\at_main.h **** #include "los_task.h"
+  41:D:/iot/felix2/include/at_frame\at_main.h **** #include "los_sem.h"
+  42:D:/iot/felix2/include/at_frame\at_main.h **** 
+  43:D:/iot/felix2/include/at_frame\at_main.h **** #include "sal/atiny_socket.h"
+  44:D:/iot/felix2/include/at_frame\at_main.h **** #include "at_frame/at_api.h"
+  45:D:/iot/felix2/include/at_frame\at_main.h **** 
+  46:D:/iot/felix2/include/at_frame\at_main.h **** #ifdef __cplusplus
+  47:D:/iot/felix2/include/at_frame\at_main.h **** extern "C" {
+  48:D:/iot/felix2/include/at_frame\at_main.h **** #endif
+  49:D:/iot/felix2/include/at_frame\at_main.h **** 
+  50:D:/iot/felix2/include/at_frame\at_main.h **** 
+  51:D:/iot/felix2/include/at_frame\at_main.h **** /* MACRO DEFINE */
+  52:D:/iot/felix2/include/at_frame\at_main.h **** #ifdef AT_INTO
+  53:D:/iot/felix2/include/at_frame\at_main.h **** #define AT_LOG(fmt, arg...)  printf("[%lu][%s:%d][I]"fmt"\n", at_get_time(), __func__, __LINE__, ##
+  54:D:/iot/felix2/include/at_frame\at_main.h **** #else
+  55:D:/iot/felix2/include/at_frame\at_main.h **** static inline void __do_nothing(const char *fmt, ...) { (void)fmt; }
+  27              		.loc 1 55 0
+  28              		.cfi_startproc
+  29              		@ args = 4, pretend = 16, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 1
+  31              		@ link register save eliminated.
+  32 0000 0FB4     		push	{r0, r1, r2, r3}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 0, -16
+  36              		.cfi_offset 1, -12
+  37              		.cfi_offset 2, -8
+  38              		.cfi_offset 3, -4
+  39 0002 80B4     		push	{r7}
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 20
+  42              		.cfi_offset 7, -20
+  43 0004 00AF     		add	r7, sp, #0
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 7
+  46              		.loc 1 55 0
+  47 0006 00BF     		nop
+  48 0008 BD46     		mov	sp, r7
+  49              	.LCFI3:
+  50              		.cfi_def_cfa_register 13
+  51              		@ sp needed
+  52 000a 5DF8047B 		ldr	r7, [sp], #4
+  53              	.LCFI4:
+  54              		.cfi_restore 7
+  55              		.cfi_def_cfa_offset 16
+  56 000e 04B0     		add	sp, sp, #16
+  57              	.LCFI5:
+  58              		.cfi_restore 3
+  59              		.cfi_restore 2
+  60              		.cfi_restore 1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 3
+
+
+  61              		.cfi_restore 0
+  62              		.cfi_def_cfa_offset 0
+  63 0010 7047     		bx	lr
+  64              		.cfi_endproc
+  65              	.LFE133:
+  67              		.comm	at_usart,120,4
+  68              		.section	.data.s_pUSART,"aw",%progbits
+  69              		.align	2
+  72              	s_pUSART:
+  73 0000 00800040 		.word	1073774592
+  74              		.section	.data.s_uwIRQn,"aw",%progbits
+  75              		.align	2
+  78              	s_uwIRQn:
+  79 0000 46000000 		.word	70
+  80              		.global	buff_full
+  81              		.section	.bss.buff_full,"aw",%nobits
+  84              	buff_full:
+  85 0000 00       		.space	1
+  86              		.section	.bss.g_disscard_cnt,"aw",%nobits
+  87              		.align	2
+  90              	g_disscard_cnt:
+  91 0000 00000000 		.space	4
+  92              		.global	wi
+  93              		.section	.bss.wi,"aw",%nobits
+  94              		.align	2
+  97              	wi:
+  98 0000 00000000 		.space	4
+  99              		.global	pre_ri
+ 100              		.section	.bss.pre_ri,"aw",%nobits
+ 101              		.align	2
+ 104              	pre_ri:
+ 105 0000 00000000 		.space	4
+ 106              		.global	ri
+ 107              		.section	.bss.ri,"aw",%nobits
+ 108              		.align	2
+ 111              	ri:
+ 112 0000 00000000 		.space	4
+ 113              		.section	.text.at_usart_adapter,"ax",%progbits
+ 114              		.align	1
+ 115              		.syntax unified
+ 116              		.thumb
+ 117              		.thumb_func
+ 118              		.fpu fpv4-sp-d16
+ 120              	at_usart_adapter:
+ 121              	.LFB134:
+ 122              		.file 2 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src/at_hal.c"
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * All rights reserved.
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * provided with the distribution.
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 4
+
+
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * permission.
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * ===============================================
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** #if defined(WITH_AT_FRAMEWORK)
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** #include "at_hal.h"
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** #include "stm32l4xx_hal.h"
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** extern at_task at;
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** UART_HandleTypeDef at_usart;
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** static USART_TypeDef *s_pUSART = LPUART1;
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** static uint32_t s_uwIRQn = LPUART1_IRQn;
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** //uint32_t list_mux;
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** uint8_t buff_full = 0;
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** static uint32_t g_disscard_cnt = 0;
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** uint32_t wi       = 0;
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** uint32_t pre_ri   = 0;/*only save cur msg start*/
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** uint32_t ri       = 0;
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** static void at_usart_adapter(uint32_t port)
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 123              		.loc 2 57 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 8
+ 126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 127              		@ link register save eliminated.
+ 128 0000 80B4     		push	{r7}
+ 129              	.LCFI6:
+ 130              		.cfi_def_cfa_offset 4
+ 131              		.cfi_offset 7, -4
+ 132 0002 83B0     		sub	sp, sp, #12
+ 133              	.LCFI7:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 5
+
+
+ 134              		.cfi_def_cfa_offset 16
+ 135 0004 00AF     		add	r7, sp, #0
+ 136              	.LCFI8:
+ 137              		.cfi_def_cfa_register 7
+ 138 0006 7860     		str	r0, [r7, #4]
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     switch ( port )
+ 139              		.loc 2 58 0
+ 140 0008 7B68     		ldr	r3, [r7, #4]
+ 141 000a 013B     		subs	r3, r3, #1
+ 142 000c 032B     		cmp	r3, #3
+ 143 000e 27D8     		bhi	.L10
+ 144 0010 01A2     		adr	r2, .L5
+ 145 0012 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 146 0016 00BF     		.p2align 2
+ 147              	.L5:
+ 148 0018 29000000 		.word	.L4+1
+ 149 001c 37000000 		.word	.L6+1
+ 150 0020 45000000 		.word	.L7+1
+ 151 0024 53000000 		.word	.L8+1
+ 152              		.p2align 1
+ 153              	.L4:
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     case 1 :
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         s_pUSART = USART1;
+ 154              		.loc 2 61 0
+ 155 0028 114B     		ldr	r3, .L11
+ 156 002a 124A     		ldr	r2, .L11+4
+ 157 002c 1A60     		str	r2, [r3]
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         s_uwIRQn = USART1_IRQn;
+ 158              		.loc 2 62 0
+ 159 002e 124B     		ldr	r3, .L11+8
+ 160 0030 2522     		movs	r2, #37
+ 161 0032 1A60     		str	r2, [r3]
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         break;
+ 162              		.loc 2 63 0
+ 163 0034 15E0     		b	.L9
+ 164              	.L6:
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     case 2 :
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         s_pUSART = USART2;
+ 165              		.loc 2 65 0
+ 166 0036 0E4B     		ldr	r3, .L11
+ 167 0038 104A     		ldr	r2, .L11+12
+ 168 003a 1A60     		str	r2, [r3]
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         s_uwIRQn = USART2_IRQn;
+ 169              		.loc 2 66 0
+ 170 003c 0E4B     		ldr	r3, .L11+8
+ 171 003e 2622     		movs	r2, #38
+ 172 0040 1A60     		str	r2, [r3]
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         break;
+ 173              		.loc 2 67 0
+ 174 0042 0EE0     		b	.L9
+ 175              	.L7:
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     case 3 :
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         s_pUSART = USART3;
+ 176              		.loc 2 69 0
+ 177 0044 0A4B     		ldr	r3, .L11
+ 178 0046 0E4A     		ldr	r2, .L11+16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 6
+
+
+ 179 0048 1A60     		str	r2, [r3]
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         s_uwIRQn = USART3_IRQn;
+ 180              		.loc 2 70 0
+ 181 004a 0B4B     		ldr	r3, .L11+8
+ 182 004c 2722     		movs	r2, #39
+ 183 004e 1A60     		str	r2, [r3]
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         break;
+ 184              		.loc 2 71 0
+ 185 0050 07E0     		b	.L9
+ 186              	.L8:
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 		case 4 :
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 				s_pUSART = LPUART1;
+ 187              		.loc 2 73 0
+ 188 0052 074B     		ldr	r3, .L11
+ 189 0054 0B4A     		ldr	r2, .L11+20
+ 190 0056 1A60     		str	r2, [r3]
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 				s_uwIRQn = LPUART1_IRQn;
+ 191              		.loc 2 74 0
+ 192 0058 074B     		ldr	r3, .L11+8
+ 193 005a 4622     		movs	r2, #70
+ 194 005c 1A60     		str	r2, [r3]
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 				break;
+ 195              		.loc 2 75 0
+ 196 005e 00E0     		b	.L9
+ 197              	.L10:
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     default:
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         break;
+ 198              		.loc 2 77 0
+ 199 0060 00BF     		nop
+ 200              	.L9:
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 201              		.loc 2 79 0
+ 202 0062 00BF     		nop
+ 203 0064 0C37     		adds	r7, r7, #12
+ 204              	.LCFI9:
+ 205              		.cfi_def_cfa_offset 4
+ 206 0066 BD46     		mov	sp, r7
+ 207              	.LCFI10:
+ 208              		.cfi_def_cfa_register 13
+ 209              		@ sp needed
+ 210 0068 5DF8047B 		ldr	r7, [sp], #4
+ 211              	.LCFI11:
+ 212              		.cfi_restore 7
+ 213              		.cfi_def_cfa_offset 0
+ 214 006c 7047     		bx	lr
+ 215              	.L12:
+ 216 006e 00BF     		.align	2
+ 217              	.L11:
+ 218 0070 00000000 		.word	s_pUSART
+ 219 0074 00380140 		.word	1073821696
+ 220 0078 00000000 		.word	s_uwIRQn
+ 221 007c 00440040 		.word	1073759232
+ 222 0080 00480040 		.word	1073760256
+ 223 0084 00800040 		.word	1073774592
+ 224              		.cfi_endproc
+ 225              	.LFE134:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 7
+
+
+ 227              		.section	.text.at_irq_handler,"ax",%progbits
+ 228              		.align	1
+ 229              		.global	at_irq_handler
+ 230              		.syntax unified
+ 231              		.thumb
+ 232              		.thumb_func
+ 233              		.fpu fpv4-sp-d16
+ 235              	at_irq_handler:
+ 236              	.LFB135:
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** void at_irq_handler(void)
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 237              		.loc 2 84 0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 16
+ 240              		@ frame_needed = 1, uses_anonymous_args = 0
+ 241 0000 90B5     		push	{r4, r7, lr}
+ 242              	.LCFI12:
+ 243              		.cfi_def_cfa_offset 12
+ 244              		.cfi_offset 4, -12
+ 245              		.cfi_offset 7, -8
+ 246              		.cfi_offset 14, -4
+ 247 0002 85B0     		sub	sp, sp, #20
+ 248              	.LCFI13:
+ 249              		.cfi_def_cfa_offset 32
+ 250 0004 00AF     		add	r7, sp, #0
+ 251              	.LCFI14:
+ 252              		.cfi_def_cfa_register 7
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     recv_buff recv_buf;
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     at_config *at_user_conf = at_get_config();
+ 253              		.loc 2 86 0
+ 254 0006 FFF7FEFF 		bl	at_get_config
+ 255 000a F860     		str	r0, [r7, #12]
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if(__HAL_UART_GET_FLAG(&at_usart, UART_FLAG_RXNE) != RESET)
+ 256              		.loc 2 88 0
+ 257 000c 284B     		ldr	r3, .L19
+ 258 000e 1B68     		ldr	r3, [r3]
+ 259 0010 DB69     		ldr	r3, [r3, #28]
+ 260 0012 03F02003 		and	r3, r3, #32
+ 261 0016 202B     		cmp	r3, #32
+ 262 0018 20D1     		bne	.L14
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         at.recv_buf[wi++] = (uint8_t)(at_usart.Instance->RDR & 0x00FF);
+ 263              		.loc 2 90 0
+ 264 001a 254B     		ldr	r3, .L19
+ 265 001c 1B68     		ldr	r3, [r3]
+ 266 001e 9B8C     		ldrh	r3, [r3, #36]	@ movhi
+ 267 0020 9CB2     		uxth	r4, r3
+ 268 0022 244B     		ldr	r3, .L19+4
+ 269 0024 1A6A     		ldr	r2, [r3, #32]
+ 270 0026 244B     		ldr	r3, .L19+8
+ 271 0028 1B68     		ldr	r3, [r3]
+ 272 002a 591C     		adds	r1, r3, #1
+ 273 002c 2248     		ldr	r0, .L19+8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 8
+
+
+ 274 002e 0160     		str	r1, [r0]
+ 275 0030 1344     		add	r3, r3, r2
+ 276 0032 E2B2     		uxtb	r2, r4
+ 277 0034 1A70     		strb	r2, [r3]
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         if(wi == ri)buff_full = 1;
+ 278              		.loc 2 91 0
+ 279 0036 204B     		ldr	r3, .L19+8
+ 280 0038 1A68     		ldr	r2, [r3]
+ 281 003a 204B     		ldr	r3, .L19+12
+ 282 003c 1B68     		ldr	r3, [r3]
+ 283 003e 9A42     		cmp	r2, r3
+ 284 0040 02D1     		bne	.L15
+ 285              		.loc 2 91 0 is_stmt 0 discriminator 1
+ 286 0042 1F4B     		ldr	r3, .L19+16
+ 287 0044 0122     		movs	r2, #1
+ 288 0046 1A70     		strb	r2, [r3]
+ 289              	.L15:
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         if (wi >= at_user_conf->user_buf_len)wi = 0;
+ 290              		.loc 2 92 0 is_stmt 1
+ 291 0048 FB68     		ldr	r3, [r7, #12]
+ 292 004a 1A69     		ldr	r2, [r3, #16]
+ 293 004c 1A4B     		ldr	r3, .L19+8
+ 294 004e 1B68     		ldr	r3, [r3]
+ 295 0050 9A42     		cmp	r2, r3
+ 296 0052 28D8     		bhi	.L18
+ 297              		.loc 2 92 0 is_stmt 0 discriminator 1
+ 298 0054 184B     		ldr	r3, .L19+8
+ 299 0056 0022     		movs	r2, #0
+ 300 0058 1A60     		str	r2, [r3]
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     else if (__HAL_UART_GET_FLAG(&at_usart, UART_FLAG_IDLE) != RESET)
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         __HAL_UART_CLEAR_IDLEFLAG(&at_usart);
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         /*
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         Ring Buffer ri------------------------>wi
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****          __________________________________________________
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****          |      msg0           |  msg1        |   msg2    |           
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****          ri(pre_ri0)        pre_ri1         pre_ri2     wi(pre_ri3)
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****          __________________________________________________ 
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****          read_resp ---->ri= pre_ri1----------->---------->ri=wi=pre_ri3(end)  
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         */
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         recv_buf.ori = pre_ri;
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         recv_buf.end = wi;
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         pre_ri = recv_buf.end;
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         recv_buf.msg_type = AT_USART_RX;
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         if(LOS_QueueWriteCopy(at.rid, &recv_buf, sizeof(recv_buff), 0) != LOS_OK)
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         {
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****             g_disscard_cnt++;
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         }
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 301              		.loc 2 118 0 is_stmt 1 discriminator 1
+ 302 005a 24E0     		b	.L18
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 9
+
+
+ 303              	.L14:
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 304              		.loc 2 94 0
+ 305 005c 144B     		ldr	r3, .L19
+ 306 005e 1B68     		ldr	r3, [r3]
+ 307 0060 DB69     		ldr	r3, [r3, #28]
+ 308 0062 03F01003 		and	r3, r3, #16
+ 309 0066 102B     		cmp	r3, #16
+ 310 0068 1DD1     		bne	.L18
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         /*
+ 311              		.loc 2 96 0
+ 312 006a 114B     		ldr	r3, .L19
+ 313 006c 1B68     		ldr	r3, [r3]
+ 314 006e 1022     		movs	r2, #16
+ 315 0070 1A62     		str	r2, [r3, #32]
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         recv_buf.end = wi;
+ 316              		.loc 2 107 0
+ 317 0072 144B     		ldr	r3, .L19+20
+ 318 0074 1B68     		ldr	r3, [r3]
+ 319 0076 3B60     		str	r3, [r7]
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 320              		.loc 2 108 0
+ 321 0078 0F4B     		ldr	r3, .L19+8
+ 322 007a 1B68     		ldr	r3, [r3]
+ 323 007c 7B60     		str	r3, [r7, #4]
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         recv_buf.msg_type = AT_USART_RX;
+ 324              		.loc 2 110 0
+ 325 007e 7B68     		ldr	r3, [r7, #4]
+ 326 0080 104A     		ldr	r2, .L19+20
+ 327 0082 1360     		str	r3, [r2]
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 328              		.loc 2 111 0
+ 329 0084 0023     		movs	r3, #0
+ 330 0086 BB60     		str	r3, [r7, #8]
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         {
+ 331              		.loc 2 113 0
+ 332 0088 0A4B     		ldr	r3, .L19+4
+ 333 008a 9868     		ldr	r0, [r3, #8]
+ 334 008c 3946     		mov	r1, r7
+ 335 008e 0023     		movs	r3, #0
+ 336 0090 0C22     		movs	r2, #12
+ 337 0092 FFF7FEFF 		bl	LOS_QueueWriteCopy
+ 338 0096 0346     		mov	r3, r0
+ 339 0098 002B     		cmp	r3, #0
+ 340 009a 04D0     		beq	.L18
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         }
+ 341              		.loc 2 115 0
+ 342 009c 0A4B     		ldr	r3, .L19+24
+ 343 009e 1B68     		ldr	r3, [r3]
+ 344 00a0 0133     		adds	r3, r3, #1
+ 345 00a2 094A     		ldr	r2, .L19+24
+ 346 00a4 1360     		str	r3, [r2]
+ 347              	.L18:
+ 348              		.loc 2 118 0
+ 349 00a6 00BF     		nop
+ 350 00a8 1437     		adds	r7, r7, #20
+ 351              	.LCFI15:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 10
+
+
+ 352              		.cfi_def_cfa_offset 12
+ 353 00aa BD46     		mov	sp, r7
+ 354              	.LCFI16:
+ 355              		.cfi_def_cfa_register 13
+ 356              		@ sp needed
+ 357 00ac 90BD     		pop	{r4, r7, pc}
+ 358              	.L20:
+ 359 00ae 00BF     		.align	2
+ 360              	.L19:
+ 361 00b0 00000000 		.word	at_usart
+ 362 00b4 00000000 		.word	at
+ 363 00b8 00000000 		.word	wi
+ 364 00bc 00000000 		.word	ri
+ 365 00c0 00000000 		.word	buff_full
+ 366 00c4 00000000 		.word	pre_ri
+ 367 00c8 00000000 		.word	g_disscard_cnt
+ 368              		.cfi_endproc
+ 369              	.LFE135:
+ 371              		.section	.rodata
+ 372              		.align	2
+ 373              	.LC0:
+ 374 0000 443A2F69 		.ascii	"D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src/at"
+ 374      6F742F66 
+ 374      656C6978 
+ 374      322F7461 
+ 374      72676574 
+ 375 0033 5F68616C 		.ascii	"_hal.c\000"
+ 375      2E6300
+ 376              		.section	.text.at_usart_init,"ax",%progbits
+ 377              		.align	1
+ 378              		.global	at_usart_init
+ 379              		.syntax unified
+ 380              		.thumb
+ 381              		.thumb_func
+ 382              		.fpu fpv4-sp-d16
+ 384              	at_usart_init:
+ 385              	.LFB136:
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** int32_t at_usart_init(void)
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 386              		.loc 2 121 0
+ 387              		.cfi_startproc
+ 388              		@ args = 0, pretend = 0, frame = 8
+ 389              		@ frame_needed = 1, uses_anonymous_args = 0
+ 390 0000 80B5     		push	{r7, lr}
+ 391              	.LCFI17:
+ 392              		.cfi_def_cfa_offset 8
+ 393              		.cfi_offset 7, -8
+ 394              		.cfi_offset 14, -4
+ 395 0002 84B0     		sub	sp, sp, #16
+ 396              	.LCFI18:
+ 397              		.cfi_def_cfa_offset 24
+ 398 0004 02AF     		add	r7, sp, #8
+ 399              	.LCFI19:
+ 400              		.cfi_def_cfa 7, 16
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     UART_HandleTypeDef *usart = &at_usart;
+ 401              		.loc 2 122 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 11
+
+
+ 402 0006 264B     		ldr	r3, .L24
+ 403 0008 7B60     		str	r3, [r7, #4]
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     at_config *at_user_conf = at_get_config();
+ 404              		.loc 2 123 0
+ 405 000a FFF7FEFF 		bl	at_get_config
+ 406 000e 3860     		str	r0, [r7]
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     at_usart_adapter(at_user_conf->usart_port);
+ 407              		.loc 2 125 0
+ 408 0010 3B68     		ldr	r3, [r7]
+ 409 0012 5B68     		ldr	r3, [r3, #4]
+ 410 0014 1846     		mov	r0, r3
+ 411 0016 FFF7FEFF 		bl	at_usart_adapter
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Instance = s_pUSART;
+ 412              		.loc 2 127 0
+ 413 001a 224B     		ldr	r3, .L24+4
+ 414 001c 1A68     		ldr	r2, [r3]
+ 415 001e 7B68     		ldr	r3, [r7, #4]
+ 416 0020 1A60     		str	r2, [r3]
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Init.BaudRate = at_user_conf->buardrate;
+ 417              		.loc 2 128 0
+ 418 0022 3B68     		ldr	r3, [r7]
+ 419 0024 9A68     		ldr	r2, [r3, #8]
+ 420 0026 7B68     		ldr	r3, [r7, #4]
+ 421 0028 5A60     		str	r2, [r3, #4]
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Init.WordLength = UART_WORDLENGTH_8B;
+ 422              		.loc 2 130 0
+ 423 002a 7B68     		ldr	r3, [r7, #4]
+ 424 002c 0022     		movs	r2, #0
+ 425 002e 9A60     		str	r2, [r3, #8]
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Init.StopBits = UART_STOPBITS_1;
+ 426              		.loc 2 131 0
+ 427 0030 7B68     		ldr	r3, [r7, #4]
+ 428 0032 0022     		movs	r2, #0
+ 429 0034 DA60     		str	r2, [r3, #12]
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Init.Parity = UART_PARITY_NONE;
+ 430              		.loc 2 132 0
+ 431 0036 7B68     		ldr	r3, [r7, #4]
+ 432 0038 0022     		movs	r2, #0
+ 433 003a 1A61     		str	r2, [r3, #16]
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 434              		.loc 2 133 0
+ 435 003c 7B68     		ldr	r3, [r7, #4]
+ 436 003e 0022     		movs	r2, #0
+ 437 0040 9A61     		str	r2, [r3, #24]
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     usart->Init.Mode = UART_MODE_RX | UART_MODE_TX;
+ 438              		.loc 2 134 0
+ 439 0042 7B68     		ldr	r3, [r7, #4]
+ 440 0044 0C22     		movs	r2, #12
+ 441 0046 5A61     		str	r2, [r3, #20]
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if(HAL_UART_Init(usart) != HAL_OK)
+ 442              		.loc 2 135 0
+ 443 0048 7868     		ldr	r0, [r7, #4]
+ 444 004a FFF7FEFF 		bl	HAL_UART_Init
+ 445 004e 0346     		mov	r3, r0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 12
+
+
+ 446 0050 002B     		cmp	r3, #0
+ 447 0052 03D0     		beq	.L22
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         _Error_Handler(__FILE__, __LINE__);
+ 448              		.loc 2 137 0
+ 449 0054 8921     		movs	r1, #137
+ 450 0056 1448     		ldr	r0, .L24+8
+ 451 0058 FFF7FEFF 		bl	_Error_Handler
+ 452              	.L22:
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     __HAL_UART_CLEAR_FLAG(usart, UART_FLAG_TC);
+ 453              		.loc 2 139 0
+ 454 005c 7B68     		ldr	r3, [r7, #4]
+ 455 005e 1B68     		ldr	r3, [r3]
+ 456 0060 4022     		movs	r2, #64
+ 457 0062 1A62     		str	r2, [r3, #32]
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     LOS_HwiCreate(s_uwIRQn, 0, 0, at_irq_handler, 0);
+ 458              		.loc 2 140 0
+ 459 0064 114B     		ldr	r3, .L24+12
+ 460 0066 1868     		ldr	r0, [r3]
+ 461 0068 0023     		movs	r3, #0
+ 462 006a 0093     		str	r3, [sp]
+ 463 006c 104B     		ldr	r3, .L24+16
+ 464 006e 0022     		movs	r2, #0
+ 465 0070 0021     		movs	r1, #0
+ 466 0072 FFF7FEFF 		bl	LOS_HwiCreate
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     __HAL_UART_ENABLE_IT(usart, UART_IT_IDLE);
+ 467              		.loc 2 141 0
+ 468 0076 7B68     		ldr	r3, [r7, #4]
+ 469 0078 1B68     		ldr	r3, [r3]
+ 470 007a 1A68     		ldr	r2, [r3]
+ 471 007c 7B68     		ldr	r3, [r7, #4]
+ 472 007e 1B68     		ldr	r3, [r3]
+ 473 0080 42F01002 		orr	r2, r2, #16
+ 474 0084 1A60     		str	r2, [r3]
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     __HAL_UART_ENABLE_IT(usart, UART_IT_RXNE);
+ 475              		.loc 2 142 0
+ 476 0086 7B68     		ldr	r3, [r7, #4]
+ 477 0088 1B68     		ldr	r3, [r3]
+ 478 008a 1A68     		ldr	r2, [r3]
+ 479 008c 7B68     		ldr	r3, [r7, #4]
+ 480 008e 1B68     		ldr	r3, [r3]
+ 481 0090 42F02002 		orr	r2, r2, #32
+ 482 0094 1A60     		str	r2, [r3]
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     return AT_OK;
+ 483              		.loc 2 144 0
+ 484 0096 0023     		movs	r3, #0
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 485              		.loc 2 145 0
+ 486 0098 1846     		mov	r0, r3
+ 487 009a 0837     		adds	r7, r7, #8
+ 488              	.LCFI20:
+ 489              		.cfi_def_cfa_offset 8
+ 490 009c BD46     		mov	sp, r7
+ 491              	.LCFI21:
+ 492              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 13
+
+
+ 493              		@ sp needed
+ 494 009e 80BD     		pop	{r7, pc}
+ 495              	.L25:
+ 496              		.align	2
+ 497              	.L24:
+ 498 00a0 00000000 		.word	at_usart
+ 499 00a4 00000000 		.word	s_pUSART
+ 500 00a8 00000000 		.word	.LC0
+ 501 00ac 00000000 		.word	s_uwIRQn
+ 502 00b0 00000000 		.word	at_irq_handler
+ 503              		.cfi_endproc
+ 504              	.LFE136:
+ 506              		.section	.text.at_usart_deinit,"ax",%progbits
+ 507              		.align	1
+ 508              		.global	at_usart_deinit
+ 509              		.syntax unified
+ 510              		.thumb
+ 511              		.thumb_func
+ 512              		.fpu fpv4-sp-d16
+ 514              	at_usart_deinit:
+ 515              	.LFB137:
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** void at_usart_deinit(void)
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 516              		.loc 2 148 0
+ 517              		.cfi_startproc
+ 518              		@ args = 0, pretend = 0, frame = 8
+ 519              		@ frame_needed = 1, uses_anonymous_args = 0
+ 520              		@ link register save eliminated.
+ 521 0000 80B4     		push	{r7}
+ 522              	.LCFI22:
+ 523              		.cfi_def_cfa_offset 4
+ 524              		.cfi_offset 7, -4
+ 525 0002 83B0     		sub	sp, sp, #12
+ 526              	.LCFI23:
+ 527              		.cfi_def_cfa_offset 16
+ 528 0004 00AF     		add	r7, sp, #0
+ 529              	.LCFI24:
+ 530              		.cfi_def_cfa_register 7
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     UART_HandleTypeDef *husart = &at_usart;
+ 531              		.loc 2 149 0
+ 532 0006 104B     		ldr	r3, .L27
+ 533 0008 7B60     		str	r3, [r7, #4]
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     __HAL_UART_DISABLE(husart);
+ 534              		.loc 2 150 0
+ 535 000a 7B68     		ldr	r3, [r7, #4]
+ 536 000c 1B68     		ldr	r3, [r3]
+ 537 000e 1A68     		ldr	r2, [r3]
+ 538 0010 7B68     		ldr	r3, [r7, #4]
+ 539 0012 1B68     		ldr	r3, [r3]
+ 540 0014 22F00102 		bic	r2, r2, #1
+ 541 0018 1A60     		str	r2, [r3]
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     __HAL_UART_DISABLE_IT(husart, UART_IT_IDLE);
+ 542              		.loc 2 151 0
+ 543 001a 7B68     		ldr	r3, [r7, #4]
+ 544 001c 1B68     		ldr	r3, [r3]
+ 545 001e 1A68     		ldr	r2, [r3]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 14
+
+
+ 546 0020 7B68     		ldr	r3, [r7, #4]
+ 547 0022 1B68     		ldr	r3, [r3]
+ 548 0024 22F01002 		bic	r2, r2, #16
+ 549 0028 1A60     		str	r2, [r3]
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     __HAL_UART_DISABLE_IT(husart, UART_IT_RXNE);
+ 550              		.loc 2 152 0
+ 551 002a 7B68     		ldr	r3, [r7, #4]
+ 552 002c 1B68     		ldr	r3, [r3]
+ 553 002e 1A68     		ldr	r2, [r3]
+ 554 0030 7B68     		ldr	r3, [r7, #4]
+ 555 0032 1B68     		ldr	r3, [r3]
+ 556 0034 22F02002 		bic	r2, r2, #32
+ 557 0038 1A60     		str	r2, [r3]
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 558              		.loc 2 154 0
+ 559 003a 00BF     		nop
+ 560 003c 0C37     		adds	r7, r7, #12
+ 561              	.LCFI25:
+ 562              		.cfi_def_cfa_offset 4
+ 563 003e BD46     		mov	sp, r7
+ 564              	.LCFI26:
+ 565              		.cfi_def_cfa_register 13
+ 566              		@ sp needed
+ 567 0040 5DF8047B 		ldr	r7, [sp], #4
+ 568              	.LCFI27:
+ 569              		.cfi_restore 7
+ 570              		.cfi_def_cfa_offset 0
+ 571 0044 7047     		bx	lr
+ 572              	.L28:
+ 573 0046 00BF     		.align	2
+ 574              	.L27:
+ 575 0048 00000000 		.word	at_usart
+ 576              		.cfi_endproc
+ 577              	.LFE137:
+ 579              		.section	.text.at_transmit,"ax",%progbits
+ 580              		.align	1
+ 581              		.global	at_transmit
+ 582              		.syntax unified
+ 583              		.thumb
+ 584              		.thumb_func
+ 585              		.fpu fpv4-sp-d16
+ 587              	at_transmit:
+ 588              	.LFB138:
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** void at_transmit(uint8_t *cmd, int32_t len, int flag)
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 589              		.loc 2 157 0
+ 590              		.cfi_startproc
+ 591              		@ args = 0, pretend = 0, frame = 24
+ 592              		@ frame_needed = 1, uses_anonymous_args = 0
+ 593 0000 80B5     		push	{r7, lr}
+ 594              	.LCFI28:
+ 595              		.cfi_def_cfa_offset 8
+ 596              		.cfi_offset 7, -8
+ 597              		.cfi_offset 14, -4
+ 598 0002 86B0     		sub	sp, sp, #24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 15
+
+
+ 599              	.LCFI29:
+ 600              		.cfi_def_cfa_offset 32
+ 601 0004 00AF     		add	r7, sp, #0
+ 602              	.LCFI30:
+ 603              		.cfi_def_cfa_register 7
+ 604 0006 F860     		str	r0, [r7, #12]
+ 605 0008 B960     		str	r1, [r7, #8]
+ 606 000a 7A60     		str	r2, [r7, #4]
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     at_config *at_user_conf = at_get_config();
+ 607              		.loc 2 158 0
+ 608 000c FFF7FEFF 		bl	at_get_config
+ 609 0010 7861     		str	r0, [r7, #20]
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     char *line_end = at_user_conf->line_end;
+ 610              		.loc 2 160 0
+ 611 0012 7B69     		ldr	r3, [r7, #20]
+ 612 0014 9B69     		ldr	r3, [r3, #24]
+ 613 0016 3B61     		str	r3, [r7, #16]
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     (void)HAL_UART_Transmit(&at_usart, (uint8_t *)cmd, len, 0xffff);
+ 614              		.loc 2 161 0
+ 615 0018 BB68     		ldr	r3, [r7, #8]
+ 616 001a 9AB2     		uxth	r2, r3
+ 617 001c 4FF6FF73 		movw	r3, #65535
+ 618 0020 F968     		ldr	r1, [r7, #12]
+ 619 0022 0B48     		ldr	r0, .L32
+ 620 0024 FFF7FEFF 		bl	HAL_UART_Transmit
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if(flag == 1)
+ 621              		.loc 2 162 0
+ 622 0028 7B68     		ldr	r3, [r7, #4]
+ 623 002a 012B     		cmp	r3, #1
+ 624 002c 0CD1     		bne	.L31
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         (void)HAL_UART_Transmit(&at_usart, (uint8_t *)line_end, strlen(at_user_conf->line_end), 0xf
+ 625              		.loc 2 164 0
+ 626 002e 7B69     		ldr	r3, [r7, #20]
+ 627 0030 9B69     		ldr	r3, [r3, #24]
+ 628 0032 1846     		mov	r0, r3
+ 629 0034 FFF7FEFF 		bl	strlen
+ 630 0038 0346     		mov	r3, r0
+ 631 003a 9AB2     		uxth	r2, r3
+ 632 003c 4FF6FF73 		movw	r3, #65535
+ 633 0040 3969     		ldr	r1, [r7, #16]
+ 634 0042 0348     		ldr	r0, .L32
+ 635 0044 FFF7FEFF 		bl	HAL_UART_Transmit
+ 636              	.L31:
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 637              		.loc 2 166 0
+ 638 0048 00BF     		nop
+ 639 004a 1837     		adds	r7, r7, #24
+ 640              	.LCFI31:
+ 641              		.cfi_def_cfa_offset 8
+ 642 004c BD46     		mov	sp, r7
+ 643              	.LCFI32:
+ 644              		.cfi_def_cfa_register 13
+ 645              		@ sp needed
+ 646 004e 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 16
+
+
+ 647              	.L33:
+ 648              		.align	2
+ 649              	.L32:
+ 650 0050 00000000 		.word	at_usart
+ 651              		.cfi_endproc
+ 652              	.LFE138:
+ 654              		.section	.rodata
+ 655 003a 0000     		.align	2
+ 656              	.LC1:
+ 657 003c 62756620 		.ascii	"buf maybe full,buff_full is %d\000"
+ 657      6D617962 
+ 657      65206675 
+ 657      6C6C2C62 
+ 657      7566665F 
+ 658              		.section	.text.read_resp,"ax",%progbits
+ 659              		.align	1
+ 660              		.global	read_resp
+ 661              		.syntax unified
+ 662              		.thumb
+ 663              		.thumb_func
+ 664              		.fpu fpv4-sp-d16
+ 666              	read_resp:
+ 667              	.LFB139:
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** int read_resp(uint8_t *buf, recv_buff* recv_buf)
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 668              		.loc 2 169 0
+ 669              		.cfi_startproc
+ 670              		@ args = 0, pretend = 0, frame = 24
+ 671              		@ frame_needed = 1, uses_anonymous_args = 0
+ 672 0000 80B5     		push	{r7, lr}
+ 673              	.LCFI33:
+ 674              		.cfi_def_cfa_offset 8
+ 675              		.cfi_offset 7, -8
+ 676              		.cfi_offset 14, -4
+ 677 0002 86B0     		sub	sp, sp, #24
+ 678              	.LCFI34:
+ 679              		.cfi_def_cfa_offset 32
+ 680 0004 00AF     		add	r7, sp, #0
+ 681              	.LCFI35:
+ 682              		.cfi_def_cfa_register 7
+ 683 0006 7860     		str	r0, [r7, #4]
+ 684 0008 3960     		str	r1, [r7]
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     uint32_t len = 0;
+ 685              		.loc 2 170 0
+ 686 000a 0023     		movs	r3, #0
+ 687 000c 7B61     		str	r3, [r7, #20]
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     uint32_t tmp_len = 0;
+ 688              		.loc 2 172 0
+ 689 000e 0023     		movs	r3, #0
+ 690 0010 3B61     		str	r3, [r7, #16]
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     at_config *at_user_conf = at_get_config();
+ 691              		.loc 2 174 0
+ 692 0012 FFF7FEFF 		bl	at_get_config
+ 693 0016 F860     		str	r0, [r7, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 17
+
+
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if (NULL == buf)
+ 694              		.loc 2 176 0
+ 695 0018 7B68     		ldr	r3, [r7, #4]
+ 696 001a 002B     		cmp	r3, #0
+ 697 001c 02D1     		bne	.L35
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         return -1;
+ 698              		.loc 2 178 0
+ 699 001e 4FF0FF33 		mov	r3, #-1
+ 700 0022 4DE0     		b	.L36
+ 701              	.L35:
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if(1 == buff_full)
+ 702              		.loc 2 180 0
+ 703 0024 284B     		ldr	r3, .L42
+ 704 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 705 0028 012B     		cmp	r3, #1
+ 706 002a 05D1     		bne	.L37
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         AT_LOG("buf maybe full,buff_full is %d",buff_full);
+ 707              		.loc 2 182 0
+ 708 002c 264B     		ldr	r3, .L42
+ 709 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 710 0030 1946     		mov	r1, r3
+ 711 0032 2648     		ldr	r0, .L42+4
+ 712 0034 FFF7FEFF 		bl	__do_nothing
+ 713              	.L37:
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     //AT_LOG("wi is %d, ri is %d,pre_ri is %d, end(%d),ori(%d),buff_full is %d",
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     //    wi,ri,pre_ri,recv_buf->end,recv_buf->ori,buff_full);
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if (recv_buf->end == recv_buf->ori)
+ 714              		.loc 2 187 0
+ 715 0038 3B68     		ldr	r3, [r7]
+ 716 003a 5A68     		ldr	r2, [r3, #4]
+ 717 003c 3B68     		ldr	r3, [r7]
+ 718 003e 1B68     		ldr	r3, [r3]
+ 719 0040 9A42     		cmp	r2, r3
+ 720 0042 02D1     		bne	.L38
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         len = 0;
+ 721              		.loc 2 189 0
+ 722 0044 0023     		movs	r3, #0
+ 723 0046 7B61     		str	r3, [r7, #20]
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         goto END;
+ 724              		.loc 2 190 0
+ 725 0048 39E0     		b	.L39
+ 726              	.L38:
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if (recv_buf->end > recv_buf->ori)
+ 727              		.loc 2 193 0
+ 728 004a 3B68     		ldr	r3, [r7]
+ 729 004c 5A68     		ldr	r2, [r3, #4]
+ 730 004e 3B68     		ldr	r3, [r7]
+ 731 0050 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 18
+
+
+ 732 0052 9A42     		cmp	r2, r3
+ 733 0054 10D9     		bls	.L40
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         len = recv_buf->end - recv_buf->ori;
+ 734              		.loc 2 195 0
+ 735 0056 3B68     		ldr	r3, [r7]
+ 736 0058 5A68     		ldr	r2, [r3, #4]
+ 737 005a 3B68     		ldr	r3, [r7]
+ 738 005c 1B68     		ldr	r3, [r3]
+ 739 005e D31A     		subs	r3, r2, r3
+ 740 0060 7B61     		str	r3, [r7, #20]
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         memcpy(buf, &at.recv_buf[recv_buf->ori], len);
+ 741              		.loc 2 196 0
+ 742 0062 1B4B     		ldr	r3, .L42+8
+ 743 0064 1A6A     		ldr	r2, [r3, #32]
+ 744 0066 3B68     		ldr	r3, [r7]
+ 745 0068 1B68     		ldr	r3, [r3]
+ 746 006a 1344     		add	r3, r3, r2
+ 747 006c 7A69     		ldr	r2, [r7, #20]
+ 748 006e 1946     		mov	r1, r3
+ 749 0070 7868     		ldr	r0, [r7, #4]
+ 750 0072 FFF7FEFF 		bl	memcpy
+ 751 0076 1EE0     		b	.L41
+ 752              	.L40:
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     else
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         tmp_len = at_user_conf->user_buf_len - recv_buf->ori;
+ 753              		.loc 2 200 0
+ 754 0078 FB68     		ldr	r3, [r7, #12]
+ 755 007a 1A69     		ldr	r2, [r3, #16]
+ 756 007c 3B68     		ldr	r3, [r7]
+ 757 007e 1B68     		ldr	r3, [r3]
+ 758 0080 D31A     		subs	r3, r2, r3
+ 759 0082 3B61     		str	r3, [r7, #16]
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         memcpy(buf, &at.recv_buf[recv_buf->ori], tmp_len);
+ 760              		.loc 2 201 0
+ 761 0084 124B     		ldr	r3, .L42+8
+ 762 0086 1A6A     		ldr	r2, [r3, #32]
+ 763 0088 3B68     		ldr	r3, [r7]
+ 764 008a 1B68     		ldr	r3, [r3]
+ 765 008c 1344     		add	r3, r3, r2
+ 766 008e 3A69     		ldr	r2, [r7, #16]
+ 767 0090 1946     		mov	r1, r3
+ 768 0092 7868     		ldr	r0, [r7, #4]
+ 769 0094 FFF7FEFF 		bl	memcpy
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         memcpy(buf + tmp_len, at.recv_buf, recv_buf->end);
+ 770              		.loc 2 202 0
+ 771 0098 7A68     		ldr	r2, [r7, #4]
+ 772 009a 3B69     		ldr	r3, [r7, #16]
+ 773 009c D018     		adds	r0, r2, r3
+ 774 009e 0C4B     		ldr	r3, .L42+8
+ 775 00a0 196A     		ldr	r1, [r3, #32]
+ 776 00a2 3B68     		ldr	r3, [r7]
+ 777 00a4 5B68     		ldr	r3, [r3, #4]
+ 778 00a6 1A46     		mov	r2, r3
+ 779 00a8 FFF7FEFF 		bl	memcpy
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 19
+
+
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         len = recv_buf->end + tmp_len;
+ 780              		.loc 2 203 0
+ 781 00ac 3B68     		ldr	r3, [r7]
+ 782 00ae 5B68     		ldr	r3, [r3, #4]
+ 783 00b0 3A69     		ldr	r2, [r7, #16]
+ 784 00b2 1344     		add	r3, r3, r2
+ 785 00b4 7B61     		str	r3, [r7, #20]
+ 786              	.L41:
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     ri = recv_buf->end;
+ 787              		.loc 2 206 0
+ 788 00b6 3B68     		ldr	r3, [r7]
+ 789 00b8 5B68     		ldr	r3, [r3, #4]
+ 790 00ba 064A     		ldr	r2, .L42+12
+ 791 00bc 1360     		str	r3, [r2]
+ 792              	.L39:
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** END:
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     return len;
+ 793              		.loc 2 209 0
+ 794 00be 7B69     		ldr	r3, [r7, #20]
+ 795              	.L36:
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 796              		.loc 2 210 0
+ 797 00c0 1846     		mov	r0, r3
+ 798 00c2 1837     		adds	r7, r7, #24
+ 799              	.LCFI36:
+ 800              		.cfi_def_cfa_offset 8
+ 801 00c4 BD46     		mov	sp, r7
+ 802              	.LCFI37:
+ 803              		.cfi_def_cfa_register 13
+ 804              		@ sp needed
+ 805 00c6 80BD     		pop	{r7, pc}
+ 806              	.L43:
+ 807              		.align	2
+ 808              	.L42:
+ 809 00c8 00000000 		.word	buff_full
+ 810 00cc 3C000000 		.word	.LC1
+ 811 00d0 00000000 		.word	at
+ 812 00d4 00000000 		.word	ri
+ 813              		.cfi_endproc
+ 814              	.LFE139:
+ 816              		.section	.text.write_at_task_msg,"ax",%progbits
+ 817              		.align	1
+ 818              		.global	write_at_task_msg
+ 819              		.syntax unified
+ 820              		.thumb
+ 821              		.thumb_func
+ 822              		.fpu fpv4-sp-d16
+ 824              	write_at_task_msg:
+ 825              	.LFB140:
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** void write_at_task_msg(at_msg_type_e type)
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** {
+ 826              		.loc 2 213 0
+ 827              		.cfi_startproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 20
+
+
+ 828              		@ args = 0, pretend = 0, frame = 24
+ 829              		@ frame_needed = 1, uses_anonymous_args = 0
+ 830 0000 80B5     		push	{r7, lr}
+ 831              	.LCFI38:
+ 832              		.cfi_def_cfa_offset 8
+ 833              		.cfi_offset 7, -8
+ 834              		.cfi_offset 14, -4
+ 835 0002 86B0     		sub	sp, sp, #24
+ 836              	.LCFI39:
+ 837              		.cfi_def_cfa_offset 32
+ 838 0004 00AF     		add	r7, sp, #0
+ 839              	.LCFI40:
+ 840              		.cfi_def_cfa_register 7
+ 841 0006 7860     		str	r0, [r7, #4]
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     recv_buff recv_buf;
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     int ret;
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     memset(&recv_buf,  0, sizeof(recv_buf));
+ 842              		.loc 2 217 0
+ 843 0008 07F10803 		add	r3, r7, #8
+ 844 000c 0C22     		movs	r2, #12
+ 845 000e 0021     		movs	r1, #0
+ 846 0010 1846     		mov	r0, r3
+ 847 0012 FFF7FEFF 		bl	memset
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     recv_buf.msg_type = type;
+ 848              		.loc 2 218 0
+ 849 0016 7B68     		ldr	r3, [r7, #4]
+ 850 0018 3B61     		str	r3, [r7, #16]
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** 
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     ret = LOS_QueueWriteCopy(at.rid, &recv_buf, sizeof(recv_buff), 0);
+ 851              		.loc 2 220 0
+ 852 001a 0B4B     		ldr	r3, .L47
+ 853 001c 9868     		ldr	r0, [r3, #8]
+ 854 001e 07F10801 		add	r1, r7, #8
+ 855 0022 0023     		movs	r3, #0
+ 856 0024 0C22     		movs	r2, #12
+ 857 0026 FFF7FEFF 		bl	LOS_QueueWriteCopy
+ 858 002a 0346     		mov	r3, r0
+ 859 002c 7B61     		str	r3, [r7, #20]
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     if(ret != LOS_OK)
+ 860              		.loc 2 221 0
+ 861 002e 7B69     		ldr	r3, [r7, #20]
+ 862 0030 002B     		cmp	r3, #0
+ 863 0032 04D0     		beq	.L46
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     {
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****         g_disscard_cnt++;
+ 864              		.loc 2 223 0
+ 865 0034 054B     		ldr	r3, .L47+4
+ 866 0036 1B68     		ldr	r3, [r3]
+ 867 0038 0133     		adds	r3, r3, #1
+ 868 003a 044A     		ldr	r2, .L47+4
+ 869 003c 1360     		str	r3, [r2]
+ 870              	.L46:
+ 224:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c ****     }
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\at_hal.c **** }
+ 871              		.loc 2 225 0
+ 872 003e 00BF     		nop
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 21
+
+
+ 873 0040 1837     		adds	r7, r7, #24
+ 874              	.LCFI41:
+ 875              		.cfi_def_cfa_offset 8
+ 876 0042 BD46     		mov	sp, r7
+ 877              	.LCFI42:
+ 878              		.cfi_def_cfa_register 13
+ 879              		@ sp needed
+ 880 0044 80BD     		pop	{r7, pc}
+ 881              	.L48:
+ 882 0046 00BF     		.align	2
+ 883              	.L47:
+ 884 0048 00000000 		.word	at
+ 885 004c 00000000 		.word	g_disscard_cnt
+ 886              		.cfi_endproc
+ 887              	.LFE140:
+ 889              		.text
+ 890              	.Letext0:
+ 891              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 892              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 893              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 894              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 895              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 896              		.file 8 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 897              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 898              		.file 10 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 899              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 900              		.file 12 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 901              		.file 13 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l4xx.h"
+ 902              		.file 14 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 903              		.file 15 "D:/iot/felix2/kernel/include/los_list.h"
+ 904              		.file 16 "D:/iot/felix2/kernel/include/los_err.h"
+ 905              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 906              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 907              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 908              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 909              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 910              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 911              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 912              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 913              		.file 25 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 914              		.file 26 "D:/iot/felix2/kernel/include/los_config.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 at_hal.c
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:18     .text.__do_nothing:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:24     .text.__do_nothing:00000000 __do_nothing
+                            *COM*:00000078 at_usart
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:69     .data.s_pUSART:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:72     .data.s_pUSART:00000000 s_pUSART
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:75     .data.s_uwIRQn:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:78     .data.s_uwIRQn:00000000 s_uwIRQn
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:84     .bss.buff_full:00000000 buff_full
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:85     .bss.buff_full:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:87     .bss.g_disscard_cnt:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:90     .bss.g_disscard_cnt:00000000 g_disscard_cnt
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:97     .bss.wi:00000000 wi
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:94     .bss.wi:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:104    .bss.pre_ri:00000000 pre_ri
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:101    .bss.pre_ri:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:111    .bss.ri:00000000 ri
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:108    .bss.ri:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:114    .text.at_usart_adapter:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:120    .text.at_usart_adapter:00000000 at_usart_adapter
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:148    .text.at_usart_adapter:00000018 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:152    .text.at_usart_adapter:00000028 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:218    .text.at_usart_adapter:00000070 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:228    .text.at_irq_handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:235    .text.at_irq_handler:00000000 at_irq_handler
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:361    .text.at_irq_handler:000000b0 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:372    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:377    .text.at_usart_init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:384    .text.at_usart_init:00000000 at_usart_init
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:498    .text.at_usart_init:000000a0 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:507    .text.at_usart_deinit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:514    .text.at_usart_deinit:00000000 at_usart_deinit
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:575    .text.at_usart_deinit:00000048 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:580    .text.at_transmit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:587    .text.at_transmit:00000000 at_transmit
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:650    .text.at_transmit:00000050 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:659    .text.read_resp:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:666    .text.read_resp:00000000 read_resp
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:809    .text.read_resp:000000c8 $d
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:817    .text.write_at_task_msg:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:824    .text.write_at_task_msg:00000000 write_at_task_msg
+C:\Users\91458\AppData\Local\Temp\ccuC7HWP.s:884    .text.write_at_task_msg:00000048 $d
+
+UNDEFINED SYMBOLS
+at_get_config
+LOS_QueueWriteCopy
+at
+HAL_UART_Init
+_Error_Handler
+LOS_HwiCreate
+HAL_UART_Transmit
+strlen
+memcpy
+memset

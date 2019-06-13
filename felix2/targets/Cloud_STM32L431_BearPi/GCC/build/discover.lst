@@ -1,0 +1,2695 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"discover.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.prv_findAttributes,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	prv_findAttributes:
+  25              	.LFB134:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/core/discover.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** /*******************************************************************************
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * Copyright (c) 2015 Intel Corporation and others.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * All rights reserved. This program and the accompanying materials
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * are made available under the terms of the Eclipse Public License v1.0
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * and Eclipse Distribution License v1.0 which accompany this distribution.
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * The Eclipse Public License is available at
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *    http://www.eclipse.org/legal/epl-v10.html
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * The Eclipse Distribution License is available at
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *    http://www.eclipse.org/org/documents/edl-v10.php.
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** * Contributors:
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *    David Navarro, Intel Corporation - initial API and implementation
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** *******************************************************************************/
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** #include "internals.h"
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** #define PRV_LINK_BUFFER_SIZE  1024
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** #define PRV_CONCAT_STR(buf, len, index, str, str_len)    \
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {                                                    \
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if ((len)-(index) < (str_len)) return -1;        \
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memcpy((buf)+(index), (str), (str_len));         \
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         (index) += (str_len);                            \
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** #ifdef LWM2M_CLIENT_MODE
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** static lwm2m_attributes_t *prv_findAttributes(lwm2m_context_t *contextP,
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         lwm2m_uri_t *uriP,
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         lwm2m_server_t *serverP)
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** {
+  27              		.loc 1 37 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 32
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 88B0     		sub	sp, sp, #32
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 40
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 F860     		str	r0, [r7, #12]
+  43 0008 B960     		str	r1, [r7, #8]
+  44 000a 7A60     		str	r2, [r7, #4]
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_observed_t *observedP;
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_watcher_t *watcherP;
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_attributes_t *paramP;
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     paramP = NULL;
+  45              		.loc 1 42 0
+  46 000c 0023     		movs	r3, #0
+  47 000e BB61     		str	r3, [r7, #24]
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (contextP == NULL) return NULL;
+  48              		.loc 1 44 0
+  49 0010 FB68     		ldr	r3, [r7, #12]
+  50 0012 002B     		cmp	r3, #0
+  51 0014 01D1     		bne	.L2
+  52              		.loc 1 44 0 is_stmt 0 discriminator 1
+  53 0016 0023     		movs	r3, #0
+  54 0018 25E0     		b	.L3
+  55              	.L2:
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (serverP == NULL) return NULL;
+  56              		.loc 1 45 0 is_stmt 1
+  57 001a 7B68     		ldr	r3, [r7, #4]
+  58 001c 002B     		cmp	r3, #0
+  59 001e 01D1     		bne	.L4
+  60              		.loc 1 45 0 is_stmt 0 discriminator 1
+  61 0020 0023     		movs	r3, #0
+  62 0022 20E0     		b	.L3
+  63              	.L4:
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     observedP = observe_findByUri(contextP, uriP);
+  64              		.loc 1 47 0 is_stmt 1
+  65 0024 B968     		ldr	r1, [r7, #8]
+  66 0026 F868     		ldr	r0, [r7, #12]
+  67 0028 FFF7FEFF 		bl	observe_findByUri
+  68 002c 7861     		str	r0, [r7, #20]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 3
+
+
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (observedP == NULL || observedP->watcherList == NULL) return NULL;
+  69              		.loc 1 48 0
+  70 002e 7B69     		ldr	r3, [r7, #20]
+  71 0030 002B     		cmp	r3, #0
+  72 0032 03D0     		beq	.L5
+  73              		.loc 1 48 0 is_stmt 0 discriminator 2
+  74 0034 7B69     		ldr	r3, [r7, #20]
+  75 0036 DB68     		ldr	r3, [r3, #12]
+  76 0038 002B     		cmp	r3, #0
+  77 003a 01D1     		bne	.L6
+  78              	.L5:
+  79              		.loc 1 48 0 discriminator 3
+  80 003c 0023     		movs	r3, #0
+  81 003e 12E0     		b	.L3
+  82              	.L6:
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     for (watcherP = observedP->watcherList; watcherP != NULL; watcherP = watcherP->next)
+  83              		.loc 1 50 0 is_stmt 1
+  84 0040 7B69     		ldr	r3, [r7, #20]
+  85 0042 DB68     		ldr	r3, [r3, #12]
+  86 0044 FB61     		str	r3, [r7, #28]
+  87 0046 0AE0     		b	.L7
+  88              	.L9:
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (watcherP->server == serverP)
+  89              		.loc 1 52 0
+  90 0048 FB69     		ldr	r3, [r7, #28]
+  91 004a 9B68     		ldr	r3, [r3, #8]
+  92 004c 7A68     		ldr	r2, [r7, #4]
+  93 004e 9A42     		cmp	r2, r3
+  94 0050 02D1     		bne	.L8
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             paramP = watcherP->parameters;
+  95              		.loc 1 54 0
+  96 0052 FB69     		ldr	r3, [r7, #28]
+  97 0054 DB68     		ldr	r3, [r3, #12]
+  98 0056 BB61     		str	r3, [r7, #24]
+  99              	.L8:
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 100              		.loc 1 50 0 discriminator 2
+ 101 0058 FB69     		ldr	r3, [r7, #28]
+ 102 005a 1B68     		ldr	r3, [r3]
+ 103 005c FB61     		str	r3, [r7, #28]
+ 104              	.L7:
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 105              		.loc 1 50 0 is_stmt 0 discriminator 1
+ 106 005e FB69     		ldr	r3, [r7, #28]
+ 107 0060 002B     		cmp	r3, #0
+ 108 0062 F1D1     		bne	.L9
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     return paramP;
+ 109              		.loc 1 58 0 is_stmt 1
+ 110 0064 BB69     		ldr	r3, [r7, #24]
+ 111              	.L3:
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 4
+
+
+ 112              		.loc 1 59 0
+ 113 0066 1846     		mov	r0, r3
+ 114 0068 2037     		adds	r7, r7, #32
+ 115              	.LCFI3:
+ 116              		.cfi_def_cfa_offset 8
+ 117 006a BD46     		mov	sp, r7
+ 118              	.LCFI4:
+ 119              		.cfi_def_cfa_register 13
+ 120              		@ sp needed
+ 121 006c 80BD     		pop	{r7, pc}
+ 122              		.cfi_endproc
+ 123              	.LFE134:
+ 125              		.section	.rodata
+ 126              		.align	2
+ 127              	.LC0:
+ 128 0000 3B00     		.ascii	";\000"
+ 129 0002 0000     		.align	2
+ 130              	.LC1:
+ 131 0004 706D696E 		.ascii	"pmin=\000"
+ 131      3D00
+ 132 000a 0000     		.align	2
+ 133              	.LC2:
+ 134 000c 706D6178 		.ascii	"pmax=\000"
+ 134      3D00
+ 135 0012 0000     		.align	2
+ 136              	.LC3:
+ 137 0014 67743D00 		.ascii	"gt=\000"
+ 138              		.align	2
+ 139              	.LC4:
+ 140 0018 6C743D00 		.ascii	"lt=\000"
+ 141              		.align	2
+ 142              	.LC5:
+ 143 001c 73743D00 		.ascii	"st=\000"
+ 144              		.align	2
+ 145              	.LC6:
+ 146 0020 2C00     		.ascii	",\000"
+ 147              		.section	.text.prv_serializeAttributes,"ax",%progbits
+ 148              		.align	1
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.fpu fpv4-sp-d16
+ 154              	prv_serializeAttributes:
+ 155              	.LFB135:
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** static int prv_serializeAttributes(lwm2m_context_t *contextP,
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                    lwm2m_uri_t *uriP,
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                    lwm2m_server_t *serverP,
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                    lwm2m_attributes_t *objectParamP,
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                    uint8_t *buffer,
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                    size_t uriLen,
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                    size_t bufferLen)
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** {
+ 156              		.loc 1 68 0
+ 157              		.cfi_startproc
+ 158              		@ args = 12, pretend = 0, frame = 32
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 5
+
+
+ 160 0000 90B5     		push	{r4, r7, lr}
+ 161              	.LCFI5:
+ 162              		.cfi_def_cfa_offset 12
+ 163              		.cfi_offset 4, -12
+ 164              		.cfi_offset 7, -8
+ 165              		.cfi_offset 14, -4
+ 166 0002 89B0     		sub	sp, sp, #36
+ 167              	.LCFI6:
+ 168              		.cfi_def_cfa_offset 48
+ 169 0004 00AF     		add	r7, sp, #0
+ 170              	.LCFI7:
+ 171              		.cfi_def_cfa_register 7
+ 172 0006 F860     		str	r0, [r7, #12]
+ 173 0008 B960     		str	r1, [r7, #8]
+ 174 000a 7A60     		str	r2, [r7, #4]
+ 175 000c 3B60     		str	r3, [r7]
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int head;
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int res;
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_attributes_t *paramP;
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     head = 0;
+ 176              		.loc 1 73 0
+ 177 000e 0023     		movs	r3, #0
+ 178 0010 FB61     		str	r3, [r7, #28]
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     paramP = prv_findAttributes(contextP, uriP, serverP);
+ 179              		.loc 1 75 0
+ 180 0012 7A68     		ldr	r2, [r7, #4]
+ 181 0014 B968     		ldr	r1, [r7, #8]
+ 182 0016 F868     		ldr	r0, [r7, #12]
+ 183 0018 FFF7FEFF 		bl	prv_findAttributes
+ 184 001c B861     		str	r0, [r7, #24]
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (paramP == NULL) paramP = objectParamP;
+ 185              		.loc 1 76 0
+ 186 001e BB69     		ldr	r3, [r7, #24]
+ 187 0020 002B     		cmp	r3, #0
+ 188 0022 01D1     		bne	.L11
+ 189              		.loc 1 76 0 is_stmt 0 discriminator 1
+ 190 0024 3B68     		ldr	r3, [r7]
+ 191 0026 BB61     		str	r3, [r7, #24]
+ 192              	.L11:
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (paramP != NULL)
+ 193              		.loc 1 78 0 is_stmt 1
+ 194 0028 BB69     		ldr	r3, [r7, #24]
+ 195 002a 002B     		cmp	r3, #0
+ 196 002c 00F00882 		beq	.L12
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head = uriLen;
+ 197              		.loc 1 80 0
+ 198 0030 7B6B     		ldr	r3, [r7, #52]
+ 199 0032 FB61     		str	r3, [r7, #28]
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (paramP->toSet & LWM2M_ATTR_FLAG_MIN_PERIOD)
+ 200              		.loc 1 82 0
+ 201 0034 BB69     		ldr	r3, [r7, #24]
+ 202 0036 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 6
+
+
+ 203 0038 03F00103 		and	r3, r3, #1
+ 204 003c 002B     		cmp	r3, #0
+ 205 003e 3FD0     		beq	.L13
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 206              		.loc 1 84 0
+ 207 0040 FB69     		ldr	r3, [r7, #28]
+ 208 0042 BA6B     		ldr	r2, [r7, #56]
+ 209 0044 9A42     		cmp	r2, r3
+ 210 0046 02D1     		bne	.L14
+ 211              		.loc 1 84 0 is_stmt 0 discriminator 1
+ 212 0048 4FF0FF33 		mov	r3, #-1
+ 213 004c 01E2     		b	.L15
+ 214              	.L14:
+ 215              		.loc 1 84 0 discriminator 2
+ 216 004e FB69     		ldr	r3, [r7, #28]
+ 217 0050 3A6B     		ldr	r2, [r7, #48]
+ 218 0052 1344     		add	r3, r3, r2
+ 219 0054 0122     		movs	r2, #1
+ 220 0056 A449     		ldr	r1, .L44
+ 221 0058 1846     		mov	r0, r3
+ 222 005a FFF7FEFF 		bl	memcpy
+ 223 005e FB69     		ldr	r3, [r7, #28]
+ 224 0060 0133     		adds	r3, r3, #1
+ 225 0062 FB61     		str	r3, [r7, #28]
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_MIN_PERIOD_STR, ATTR_MIN_PERIOD_LEN);
+ 226              		.loc 1 85 0 is_stmt 1 discriminator 2
+ 227 0064 FB69     		ldr	r3, [r7, #28]
+ 228 0066 BA6B     		ldr	r2, [r7, #56]
+ 229 0068 D31A     		subs	r3, r2, r3
+ 230 006a 042B     		cmp	r3, #4
+ 231 006c 02D8     		bhi	.L16
+ 232              		.loc 1 85 0 is_stmt 0 discriminator 1
+ 233 006e 4FF0FF33 		mov	r3, #-1
+ 234 0072 EEE1     		b	.L15
+ 235              	.L16:
+ 236              		.loc 1 85 0 discriminator 2
+ 237 0074 FB69     		ldr	r3, [r7, #28]
+ 238 0076 3A6B     		ldr	r2, [r7, #48]
+ 239 0078 1344     		add	r3, r3, r2
+ 240 007a 0522     		movs	r2, #5
+ 241 007c 9B49     		ldr	r1, .L44+4
+ 242 007e 1846     		mov	r0, r3
+ 243 0080 FFF7FEFF 		bl	memcpy
+ 244 0084 FB69     		ldr	r3, [r7, #28]
+ 245 0086 0533     		adds	r3, r3, #5
+ 246 0088 FB61     		str	r3, [r7, #28]
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(paramP->minPeriod, buffer + head, bufferLen - head);
+ 247              		.loc 1 87 0 is_stmt 1 discriminator 2
+ 248 008a BB69     		ldr	r3, [r7, #24]
+ 249 008c 5B68     		ldr	r3, [r3, #4]
+ 250 008e 1846     		mov	r0, r3
+ 251 0090 4FF00001 		mov	r1, #0
+ 252 0094 FB69     		ldr	r3, [r7, #28]
+ 253 0096 3A6B     		ldr	r2, [r7, #48]
+ 254 0098 D418     		adds	r4, r2, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 7
+
+
+ 255 009a FB69     		ldr	r3, [r7, #28]
+ 256 009c BA6B     		ldr	r2, [r7, #56]
+ 257 009e D31A     		subs	r3, r2, r3
+ 258 00a0 2246     		mov	r2, r4
+ 259 00a2 FFF7FEFF 		bl	utils_intToText
+ 260 00a6 0346     		mov	r3, r0
+ 261 00a8 7B61     		str	r3, [r7, #20]
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 262              		.loc 1 88 0 discriminator 2
+ 263 00aa 7B69     		ldr	r3, [r7, #20]
+ 264 00ac 002B     		cmp	r3, #0
+ 265 00ae 02DC     		bgt	.L17
+ 266              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 267 00b0 4FF0FF33 		mov	r3, #-1
+ 268 00b4 CDE1     		b	.L15
+ 269              	.L17:
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 270              		.loc 1 89 0 is_stmt 1
+ 271 00b6 FA69     		ldr	r2, [r7, #28]
+ 272 00b8 7B69     		ldr	r3, [r7, #20]
+ 273 00ba 1344     		add	r3, r3, r2
+ 274 00bc FB61     		str	r3, [r7, #28]
+ 275 00be 44E0     		b	.L18
+ 276              	.L13:
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         else if (objectParamP->toSet & LWM2M_ATTR_FLAG_MIN_PERIOD)
+ 277              		.loc 1 91 0
+ 278 00c0 3B68     		ldr	r3, [r7]
+ 279 00c2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 280 00c4 03F00103 		and	r3, r3, #1
+ 281 00c8 002B     		cmp	r3, #0
+ 282 00ca 3ED0     		beq	.L18
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 283              		.loc 1 93 0
+ 284 00cc FB69     		ldr	r3, [r7, #28]
+ 285 00ce BA6B     		ldr	r2, [r7, #56]
+ 286 00d0 9A42     		cmp	r2, r3
+ 287 00d2 02D1     		bne	.L19
+ 288              		.loc 1 93 0 is_stmt 0 discriminator 1
+ 289 00d4 4FF0FF33 		mov	r3, #-1
+ 290 00d8 BBE1     		b	.L15
+ 291              	.L19:
+ 292              		.loc 1 93 0 discriminator 2
+ 293 00da FB69     		ldr	r3, [r7, #28]
+ 294 00dc 3A6B     		ldr	r2, [r7, #48]
+ 295 00de 1344     		add	r3, r3, r2
+ 296 00e0 0122     		movs	r2, #1
+ 297 00e2 8149     		ldr	r1, .L44
+ 298 00e4 1846     		mov	r0, r3
+ 299 00e6 FFF7FEFF 		bl	memcpy
+ 300 00ea FB69     		ldr	r3, [r7, #28]
+ 301 00ec 0133     		adds	r3, r3, #1
+ 302 00ee FB61     		str	r3, [r7, #28]
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_MIN_PERIOD_STR, ATTR_MIN_PERIOD_LEN);
+ 303              		.loc 1 94 0 is_stmt 1 discriminator 2
+ 304 00f0 FB69     		ldr	r3, [r7, #28]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 8
+
+
+ 305 00f2 BA6B     		ldr	r2, [r7, #56]
+ 306 00f4 D31A     		subs	r3, r2, r3
+ 307 00f6 042B     		cmp	r3, #4
+ 308 00f8 02D8     		bhi	.L20
+ 309              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 310 00fa 4FF0FF33 		mov	r3, #-1
+ 311 00fe A8E1     		b	.L15
+ 312              	.L20:
+ 313              		.loc 1 94 0 discriminator 2
+ 314 0100 FB69     		ldr	r3, [r7, #28]
+ 315 0102 3A6B     		ldr	r2, [r7, #48]
+ 316 0104 1344     		add	r3, r3, r2
+ 317 0106 0522     		movs	r2, #5
+ 318 0108 7849     		ldr	r1, .L44+4
+ 319 010a 1846     		mov	r0, r3
+ 320 010c FFF7FEFF 		bl	memcpy
+ 321 0110 FB69     		ldr	r3, [r7, #28]
+ 322 0112 0533     		adds	r3, r3, #5
+ 323 0114 FB61     		str	r3, [r7, #28]
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(objectParamP->minPeriod, buffer + head, bufferLen - head);
+ 324              		.loc 1 96 0 is_stmt 1 discriminator 2
+ 325 0116 3B68     		ldr	r3, [r7]
+ 326 0118 5B68     		ldr	r3, [r3, #4]
+ 327 011a 1846     		mov	r0, r3
+ 328 011c 4FF00001 		mov	r1, #0
+ 329 0120 FB69     		ldr	r3, [r7, #28]
+ 330 0122 3A6B     		ldr	r2, [r7, #48]
+ 331 0124 D418     		adds	r4, r2, r3
+ 332 0126 FB69     		ldr	r3, [r7, #28]
+ 333 0128 BA6B     		ldr	r2, [r7, #56]
+ 334 012a D31A     		subs	r3, r2, r3
+ 335 012c 2246     		mov	r2, r4
+ 336 012e FFF7FEFF 		bl	utils_intToText
+ 337 0132 0346     		mov	r3, r0
+ 338 0134 7B61     		str	r3, [r7, #20]
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 339              		.loc 1 97 0 discriminator 2
+ 340 0136 7B69     		ldr	r3, [r7, #20]
+ 341 0138 002B     		cmp	r3, #0
+ 342 013a 02DC     		bgt	.L21
+ 343              		.loc 1 97 0 is_stmt 0 discriminator 1
+ 344 013c 4FF0FF33 		mov	r3, #-1
+ 345 0140 87E1     		b	.L15
+ 346              	.L21:
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 347              		.loc 1 98 0 is_stmt 1
+ 348 0142 FA69     		ldr	r2, [r7, #28]
+ 349 0144 7B69     		ldr	r3, [r7, #20]
+ 350 0146 1344     		add	r3, r3, r2
+ 351 0148 FB61     		str	r3, [r7, #28]
+ 352              	.L18:
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (paramP->toSet & LWM2M_ATTR_FLAG_MAX_PERIOD)
+ 353              		.loc 1 101 0
+ 354 014a BB69     		ldr	r3, [r7, #24]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 9
+
+
+ 355 014c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 356 014e 03F00203 		and	r3, r3, #2
+ 357 0152 002B     		cmp	r3, #0
+ 358 0154 3FD0     		beq	.L22
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 359              		.loc 1 103 0
+ 360 0156 FB69     		ldr	r3, [r7, #28]
+ 361 0158 BA6B     		ldr	r2, [r7, #56]
+ 362 015a 9A42     		cmp	r2, r3
+ 363 015c 02D1     		bne	.L23
+ 364              		.loc 1 103 0 is_stmt 0 discriminator 1
+ 365 015e 4FF0FF33 		mov	r3, #-1
+ 366 0162 76E1     		b	.L15
+ 367              	.L23:
+ 368              		.loc 1 103 0 discriminator 2
+ 369 0164 FB69     		ldr	r3, [r7, #28]
+ 370 0166 3A6B     		ldr	r2, [r7, #48]
+ 371 0168 1344     		add	r3, r3, r2
+ 372 016a 0122     		movs	r2, #1
+ 373 016c 5E49     		ldr	r1, .L44
+ 374 016e 1846     		mov	r0, r3
+ 375 0170 FFF7FEFF 		bl	memcpy
+ 376 0174 FB69     		ldr	r3, [r7, #28]
+ 377 0176 0133     		adds	r3, r3, #1
+ 378 0178 FB61     		str	r3, [r7, #28]
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_MAX_PERIOD_STR, ATTR_MAX_PERIOD_LEN);
+ 379              		.loc 1 104 0 is_stmt 1 discriminator 2
+ 380 017a FB69     		ldr	r3, [r7, #28]
+ 381 017c BA6B     		ldr	r2, [r7, #56]
+ 382 017e D31A     		subs	r3, r2, r3
+ 383 0180 042B     		cmp	r3, #4
+ 384 0182 02D8     		bhi	.L24
+ 385              		.loc 1 104 0 is_stmt 0 discriminator 1
+ 386 0184 4FF0FF33 		mov	r3, #-1
+ 387 0188 63E1     		b	.L15
+ 388              	.L24:
+ 389              		.loc 1 104 0 discriminator 2
+ 390 018a FB69     		ldr	r3, [r7, #28]
+ 391 018c 3A6B     		ldr	r2, [r7, #48]
+ 392 018e 1344     		add	r3, r3, r2
+ 393 0190 0522     		movs	r2, #5
+ 394 0192 5749     		ldr	r1, .L44+8
+ 395 0194 1846     		mov	r0, r3
+ 396 0196 FFF7FEFF 		bl	memcpy
+ 397 019a FB69     		ldr	r3, [r7, #28]
+ 398 019c 0533     		adds	r3, r3, #5
+ 399 019e FB61     		str	r3, [r7, #28]
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(paramP->maxPeriod, buffer + head, bufferLen - head);
+ 400              		.loc 1 106 0 is_stmt 1 discriminator 2
+ 401 01a0 BB69     		ldr	r3, [r7, #24]
+ 402 01a2 9B68     		ldr	r3, [r3, #8]
+ 403 01a4 1846     		mov	r0, r3
+ 404 01a6 4FF00001 		mov	r1, #0
+ 405 01aa FB69     		ldr	r3, [r7, #28]
+ 406 01ac 3A6B     		ldr	r2, [r7, #48]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 10
+
+
+ 407 01ae D418     		adds	r4, r2, r3
+ 408 01b0 FB69     		ldr	r3, [r7, #28]
+ 409 01b2 BA6B     		ldr	r2, [r7, #56]
+ 410 01b4 D31A     		subs	r3, r2, r3
+ 411 01b6 2246     		mov	r2, r4
+ 412 01b8 FFF7FEFF 		bl	utils_intToText
+ 413 01bc 0346     		mov	r3, r0
+ 414 01be 7B61     		str	r3, [r7, #20]
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 415              		.loc 1 107 0 discriminator 2
+ 416 01c0 7B69     		ldr	r3, [r7, #20]
+ 417 01c2 002B     		cmp	r3, #0
+ 418 01c4 02DC     		bgt	.L25
+ 419              		.loc 1 107 0 is_stmt 0 discriminator 1
+ 420 01c6 4FF0FF33 		mov	r3, #-1
+ 421 01ca 42E1     		b	.L15
+ 422              	.L25:
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 423              		.loc 1 108 0 is_stmt 1
+ 424 01cc FA69     		ldr	r2, [r7, #28]
+ 425 01ce 7B69     		ldr	r3, [r7, #20]
+ 426 01d0 1344     		add	r3, r3, r2
+ 427 01d2 FB61     		str	r3, [r7, #28]
+ 428 01d4 44E0     		b	.L26
+ 429              	.L22:
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         else if (objectParamP->toSet & LWM2M_ATTR_FLAG_MAX_PERIOD)
+ 430              		.loc 1 110 0
+ 431 01d6 3B68     		ldr	r3, [r7]
+ 432 01d8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 433 01da 03F00203 		and	r3, r3, #2
+ 434 01de 002B     		cmp	r3, #0
+ 435 01e0 3ED0     		beq	.L26
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 436              		.loc 1 112 0
+ 437 01e2 FB69     		ldr	r3, [r7, #28]
+ 438 01e4 BA6B     		ldr	r2, [r7, #56]
+ 439 01e6 9A42     		cmp	r2, r3
+ 440 01e8 02D1     		bne	.L27
+ 441              		.loc 1 112 0 is_stmt 0 discriminator 1
+ 442 01ea 4FF0FF33 		mov	r3, #-1
+ 443 01ee 30E1     		b	.L15
+ 444              	.L27:
+ 445              		.loc 1 112 0 discriminator 2
+ 446 01f0 FB69     		ldr	r3, [r7, #28]
+ 447 01f2 3A6B     		ldr	r2, [r7, #48]
+ 448 01f4 1344     		add	r3, r3, r2
+ 449 01f6 0122     		movs	r2, #1
+ 450 01f8 3B49     		ldr	r1, .L44
+ 451 01fa 1846     		mov	r0, r3
+ 452 01fc FFF7FEFF 		bl	memcpy
+ 453 0200 FB69     		ldr	r3, [r7, #28]
+ 454 0202 0133     		adds	r3, r3, #1
+ 455 0204 FB61     		str	r3, [r7, #28]
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_MAX_PERIOD_STR, ATTR_MAX_PERIOD_LEN);
+ 456              		.loc 1 113 0 is_stmt 1 discriminator 2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 11
+
+
+ 457 0206 FB69     		ldr	r3, [r7, #28]
+ 458 0208 BA6B     		ldr	r2, [r7, #56]
+ 459 020a D31A     		subs	r3, r2, r3
+ 460 020c 042B     		cmp	r3, #4
+ 461 020e 02D8     		bhi	.L28
+ 462              		.loc 1 113 0 is_stmt 0 discriminator 1
+ 463 0210 4FF0FF33 		mov	r3, #-1
+ 464 0214 1DE1     		b	.L15
+ 465              	.L28:
+ 466              		.loc 1 113 0 discriminator 2
+ 467 0216 FB69     		ldr	r3, [r7, #28]
+ 468 0218 3A6B     		ldr	r2, [r7, #48]
+ 469 021a 1344     		add	r3, r3, r2
+ 470 021c 0522     		movs	r2, #5
+ 471 021e 3449     		ldr	r1, .L44+8
+ 472 0220 1846     		mov	r0, r3
+ 473 0222 FFF7FEFF 		bl	memcpy
+ 474 0226 FB69     		ldr	r3, [r7, #28]
+ 475 0228 0533     		adds	r3, r3, #5
+ 476 022a FB61     		str	r3, [r7, #28]
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(objectParamP->maxPeriod, buffer + head, bufferLen - head);
+ 477              		.loc 1 115 0 is_stmt 1 discriminator 2
+ 478 022c 3B68     		ldr	r3, [r7]
+ 479 022e 9B68     		ldr	r3, [r3, #8]
+ 480 0230 1846     		mov	r0, r3
+ 481 0232 4FF00001 		mov	r1, #0
+ 482 0236 FB69     		ldr	r3, [r7, #28]
+ 483 0238 3A6B     		ldr	r2, [r7, #48]
+ 484 023a D418     		adds	r4, r2, r3
+ 485 023c FB69     		ldr	r3, [r7, #28]
+ 486 023e BA6B     		ldr	r2, [r7, #56]
+ 487 0240 D31A     		subs	r3, r2, r3
+ 488 0242 2246     		mov	r2, r4
+ 489 0244 FFF7FEFF 		bl	utils_intToText
+ 490 0248 0346     		mov	r3, r0
+ 491 024a 7B61     		str	r3, [r7, #20]
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 492              		.loc 1 116 0 discriminator 2
+ 493 024c 7B69     		ldr	r3, [r7, #20]
+ 494 024e 002B     		cmp	r3, #0
+ 495 0250 02DC     		bgt	.L29
+ 496              		.loc 1 116 0 is_stmt 0 discriminator 1
+ 497 0252 4FF0FF33 		mov	r3, #-1
+ 498 0256 FCE0     		b	.L15
+ 499              	.L29:
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 500              		.loc 1 117 0 is_stmt 1
+ 501 0258 FA69     		ldr	r2, [r7, #28]
+ 502 025a 7B69     		ldr	r3, [r7, #20]
+ 503 025c 1344     		add	r3, r3, r2
+ 504 025e FB61     		str	r3, [r7, #28]
+ 505              	.L26:
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (paramP->toSet & LWM2M_ATTR_FLAG_GREATER_THAN)
+ 506              		.loc 1 120 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 12
+
+
+ 507 0260 BB69     		ldr	r3, [r7, #24]
+ 508 0262 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 509 0264 03F00403 		and	r3, r3, #4
+ 510 0268 002B     		cmp	r3, #0
+ 511 026a 49D0     		beq	.L30
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 512              		.loc 1 122 0
+ 513 026c FB69     		ldr	r3, [r7, #28]
+ 514 026e BA6B     		ldr	r2, [r7, #56]
+ 515 0270 9A42     		cmp	r2, r3
+ 516 0272 02D1     		bne	.L31
+ 517              		.loc 1 122 0 is_stmt 0 discriminator 1
+ 518 0274 4FF0FF33 		mov	r3, #-1
+ 519 0278 EBE0     		b	.L15
+ 520              	.L31:
+ 521              		.loc 1 122 0 discriminator 2
+ 522 027a FB69     		ldr	r3, [r7, #28]
+ 523 027c 3A6B     		ldr	r2, [r7, #48]
+ 524 027e 1344     		add	r3, r3, r2
+ 525 0280 0122     		movs	r2, #1
+ 526 0282 1949     		ldr	r1, .L44
+ 527 0284 1846     		mov	r0, r3
+ 528 0286 FFF7FEFF 		bl	memcpy
+ 529 028a FB69     		ldr	r3, [r7, #28]
+ 530 028c 0133     		adds	r3, r3, #1
+ 531 028e FB61     		str	r3, [r7, #28]
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_GREATER_THAN_STR, ATTR_GREATER_THAN_LEN);
+ 532              		.loc 1 123 0 is_stmt 1 discriminator 2
+ 533 0290 FB69     		ldr	r3, [r7, #28]
+ 534 0292 BA6B     		ldr	r2, [r7, #56]
+ 535 0294 D31A     		subs	r3, r2, r3
+ 536 0296 022B     		cmp	r3, #2
+ 537 0298 02D8     		bhi	.L32
+ 538              		.loc 1 123 0 is_stmt 0 discriminator 1
+ 539 029a 4FF0FF33 		mov	r3, #-1
+ 540 029e D8E0     		b	.L15
+ 541              	.L32:
+ 542              		.loc 1 123 0 discriminator 2
+ 543 02a0 FB69     		ldr	r3, [r7, #28]
+ 544 02a2 3A6B     		ldr	r2, [r7, #48]
+ 545 02a4 1344     		add	r3, r3, r2
+ 546 02a6 0322     		movs	r2, #3
+ 547 02a8 1249     		ldr	r1, .L44+12
+ 548 02aa 1846     		mov	r0, r3
+ 549 02ac FFF7FEFF 		bl	memcpy
+ 550 02b0 FB69     		ldr	r3, [r7, #28]
+ 551 02b2 0333     		adds	r3, r3, #3
+ 552 02b4 FB61     		str	r3, [r7, #28]
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_floatToText(paramP->greaterThan, buffer + head, bufferLen - head);
+ 553              		.loc 1 125 0 is_stmt 1 discriminator 2
+ 554 02b6 BB69     		ldr	r3, [r7, #24]
+ 555 02b8 93ED047B 		vldr.64	d7, [r3, #16]
+ 556 02bc FB69     		ldr	r3, [r7, #28]
+ 557 02be 3A6B     		ldr	r2, [r7, #48]
+ 558 02c0 D018     		adds	r0, r2, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 13
+
+
+ 559 02c2 FB69     		ldr	r3, [r7, #28]
+ 560 02c4 BA6B     		ldr	r2, [r7, #56]
+ 561 02c6 D31A     		subs	r3, r2, r3
+ 562 02c8 1946     		mov	r1, r3
+ 563 02ca B0EE470A 		vmov.f32	s0, s14
+ 564 02ce F0EE670A 		vmov.f32	s1, s15
+ 565 02d2 FFF7FEFF 		bl	utils_floatToText
+ 566 02d6 0346     		mov	r3, r0
+ 567 02d8 7B61     		str	r3, [r7, #20]
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 568              		.loc 1 126 0 discriminator 2
+ 569 02da 7B69     		ldr	r3, [r7, #20]
+ 570 02dc 002B     		cmp	r3, #0
+ 571 02de 0BDC     		bgt	.L33
+ 572              		.loc 1 126 0 is_stmt 0 discriminator 1
+ 573 02e0 4FF0FF33 		mov	r3, #-1
+ 574 02e4 B5E0     		b	.L15
+ 575              	.L45:
+ 576 02e6 00BF     		.align	2
+ 577              	.L44:
+ 578 02e8 00000000 		.word	.LC0
+ 579 02ec 04000000 		.word	.LC1
+ 580 02f0 0C000000 		.word	.LC2
+ 581 02f4 14000000 		.word	.LC3
+ 582              	.L33:
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 583              		.loc 1 127 0 is_stmt 1
+ 584 02f8 FA69     		ldr	r2, [r7, #28]
+ 585 02fa 7B69     		ldr	r3, [r7, #20]
+ 586 02fc 1344     		add	r3, r3, r2
+ 587 02fe FB61     		str	r3, [r7, #28]
+ 588              	.L30:
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (paramP->toSet & LWM2M_ATTR_FLAG_LESS_THAN)
+ 589              		.loc 1 129 0
+ 590 0300 BB69     		ldr	r3, [r7, #24]
+ 591 0302 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 592 0304 03F00803 		and	r3, r3, #8
+ 593 0308 002B     		cmp	r3, #0
+ 594 030a 40D0     		beq	.L34
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 595              		.loc 1 131 0
+ 596 030c FB69     		ldr	r3, [r7, #28]
+ 597 030e BA6B     		ldr	r2, [r7, #56]
+ 598 0310 9A42     		cmp	r2, r3
+ 599 0312 02D1     		bne	.L35
+ 600              		.loc 1 131 0 is_stmt 0 discriminator 1
+ 601 0314 4FF0FF33 		mov	r3, #-1
+ 602 0318 9BE0     		b	.L15
+ 603              	.L35:
+ 604              		.loc 1 131 0 discriminator 2
+ 605 031a FB69     		ldr	r3, [r7, #28]
+ 606 031c 3A6B     		ldr	r2, [r7, #48]
+ 607 031e 1344     		add	r3, r3, r2
+ 608 0320 0122     		movs	r2, #1
+ 609 0322 4E49     		ldr	r1, .L46
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 14
+
+
+ 610 0324 1846     		mov	r0, r3
+ 611 0326 FFF7FEFF 		bl	memcpy
+ 612 032a FB69     		ldr	r3, [r7, #28]
+ 613 032c 0133     		adds	r3, r3, #1
+ 614 032e FB61     		str	r3, [r7, #28]
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_LESS_THAN_STR, ATTR_LESS_THAN_LEN);
+ 615              		.loc 1 132 0 is_stmt 1 discriminator 2
+ 616 0330 FB69     		ldr	r3, [r7, #28]
+ 617 0332 BA6B     		ldr	r2, [r7, #56]
+ 618 0334 D31A     		subs	r3, r2, r3
+ 619 0336 022B     		cmp	r3, #2
+ 620 0338 02D8     		bhi	.L36
+ 621              		.loc 1 132 0 is_stmt 0 discriminator 1
+ 622 033a 4FF0FF33 		mov	r3, #-1
+ 623 033e 88E0     		b	.L15
+ 624              	.L36:
+ 625              		.loc 1 132 0 discriminator 2
+ 626 0340 FB69     		ldr	r3, [r7, #28]
+ 627 0342 3A6B     		ldr	r2, [r7, #48]
+ 628 0344 1344     		add	r3, r3, r2
+ 629 0346 0322     		movs	r2, #3
+ 630 0348 4549     		ldr	r1, .L46+4
+ 631 034a 1846     		mov	r0, r3
+ 632 034c FFF7FEFF 		bl	memcpy
+ 633 0350 FB69     		ldr	r3, [r7, #28]
+ 634 0352 0333     		adds	r3, r3, #3
+ 635 0354 FB61     		str	r3, [r7, #28]
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_floatToText(paramP->lessThan, buffer + head, bufferLen - head);
+ 636              		.loc 1 134 0 is_stmt 1 discriminator 2
+ 637 0356 BB69     		ldr	r3, [r7, #24]
+ 638 0358 93ED067B 		vldr.64	d7, [r3, #24]
+ 639 035c FB69     		ldr	r3, [r7, #28]
+ 640 035e 3A6B     		ldr	r2, [r7, #48]
+ 641 0360 D018     		adds	r0, r2, r3
+ 642 0362 FB69     		ldr	r3, [r7, #28]
+ 643 0364 BA6B     		ldr	r2, [r7, #56]
+ 644 0366 D31A     		subs	r3, r2, r3
+ 645 0368 1946     		mov	r1, r3
+ 646 036a B0EE470A 		vmov.f32	s0, s14
+ 647 036e F0EE670A 		vmov.f32	s1, s15
+ 648 0372 FFF7FEFF 		bl	utils_floatToText
+ 649 0376 0346     		mov	r3, r0
+ 650 0378 7B61     		str	r3, [r7, #20]
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 651              		.loc 1 135 0 discriminator 2
+ 652 037a 7B69     		ldr	r3, [r7, #20]
+ 653 037c 002B     		cmp	r3, #0
+ 654 037e 02DC     		bgt	.L37
+ 655              		.loc 1 135 0 is_stmt 0 discriminator 1
+ 656 0380 4FF0FF33 		mov	r3, #-1
+ 657 0384 65E0     		b	.L15
+ 658              	.L37:
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 659              		.loc 1 136 0 is_stmt 1
+ 660 0386 FA69     		ldr	r2, [r7, #28]
+ 661 0388 7B69     		ldr	r3, [r7, #20]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 15
+
+
+ 662 038a 1344     		add	r3, r3, r2
+ 663 038c FB61     		str	r3, [r7, #28]
+ 664              	.L34:
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (paramP->toSet & LWM2M_ATTR_FLAG_STEP)
+ 665              		.loc 1 138 0
+ 666 038e BB69     		ldr	r3, [r7, #24]
+ 667 0390 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 668 0392 03F01003 		and	r3, r3, #16
+ 669 0396 002B     		cmp	r3, #0
+ 670 0398 40D0     		beq	.L38
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ATTR_SEPARATOR, LINK_ATTR_SEPARATOR_SIZE);
+ 671              		.loc 1 140 0
+ 672 039a FB69     		ldr	r3, [r7, #28]
+ 673 039c BA6B     		ldr	r2, [r7, #56]
+ 674 039e 9A42     		cmp	r2, r3
+ 675 03a0 02D1     		bne	.L39
+ 676              		.loc 1 140 0 is_stmt 0 discriminator 1
+ 677 03a2 4FF0FF33 		mov	r3, #-1
+ 678 03a6 54E0     		b	.L15
+ 679              	.L39:
+ 680              		.loc 1 140 0 discriminator 2
+ 681 03a8 FB69     		ldr	r3, [r7, #28]
+ 682 03aa 3A6B     		ldr	r2, [r7, #48]
+ 683 03ac 1344     		add	r3, r3, r2
+ 684 03ae 0122     		movs	r2, #1
+ 685 03b0 2A49     		ldr	r1, .L46
+ 686 03b2 1846     		mov	r0, r3
+ 687 03b4 FFF7FEFF 		bl	memcpy
+ 688 03b8 FB69     		ldr	r3, [r7, #28]
+ 689 03ba 0133     		adds	r3, r3, #1
+ 690 03bc FB61     		str	r3, [r7, #28]
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(buffer, bufferLen, head, ATTR_STEP_STR, ATTR_STEP_LEN);
+ 691              		.loc 1 141 0 is_stmt 1 discriminator 2
+ 692 03be FB69     		ldr	r3, [r7, #28]
+ 693 03c0 BA6B     		ldr	r2, [r7, #56]
+ 694 03c2 D31A     		subs	r3, r2, r3
+ 695 03c4 022B     		cmp	r3, #2
+ 696 03c6 02D8     		bhi	.L40
+ 697              		.loc 1 141 0 is_stmt 0 discriminator 1
+ 698 03c8 4FF0FF33 		mov	r3, #-1
+ 699 03cc 41E0     		b	.L15
+ 700              	.L40:
+ 701              		.loc 1 141 0 discriminator 2
+ 702 03ce FB69     		ldr	r3, [r7, #28]
+ 703 03d0 3A6B     		ldr	r2, [r7, #48]
+ 704 03d2 1344     		add	r3, r3, r2
+ 705 03d4 0322     		movs	r2, #3
+ 706 03d6 2349     		ldr	r1, .L46+8
+ 707 03d8 1846     		mov	r0, r3
+ 708 03da FFF7FEFF 		bl	memcpy
+ 709 03de FB69     		ldr	r3, [r7, #28]
+ 710 03e0 0333     		adds	r3, r3, #3
+ 711 03e2 FB61     		str	r3, [r7, #28]
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_floatToText(paramP->step, buffer + head, bufferLen - head);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 16
+
+
+ 712              		.loc 1 143 0 is_stmt 1 discriminator 2
+ 713 03e4 BB69     		ldr	r3, [r7, #24]
+ 714 03e6 93ED087B 		vldr.64	d7, [r3, #32]
+ 715 03ea FB69     		ldr	r3, [r7, #28]
+ 716 03ec 3A6B     		ldr	r2, [r7, #48]
+ 717 03ee D018     		adds	r0, r2, r3
+ 718 03f0 FB69     		ldr	r3, [r7, #28]
+ 719 03f2 BA6B     		ldr	r2, [r7, #56]
+ 720 03f4 D31A     		subs	r3, r2, r3
+ 721 03f6 1946     		mov	r1, r3
+ 722 03f8 B0EE470A 		vmov.f32	s0, s14
+ 723 03fc F0EE670A 		vmov.f32	s1, s15
+ 724 0400 FFF7FEFF 		bl	utils_floatToText
+ 725 0404 0346     		mov	r3, r0
+ 726 0406 7B61     		str	r3, [r7, #20]
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 727              		.loc 1 144 0 discriminator 2
+ 728 0408 7B69     		ldr	r3, [r7, #20]
+ 729 040a 002B     		cmp	r3, #0
+ 730 040c 02DC     		bgt	.L41
+ 731              		.loc 1 144 0 is_stmt 0 discriminator 1
+ 732 040e 4FF0FF33 		mov	r3, #-1
+ 733 0412 1EE0     		b	.L15
+ 734              	.L41:
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 735              		.loc 1 145 0 is_stmt 1
+ 736 0414 FA69     		ldr	r2, [r7, #28]
+ 737 0416 7B69     		ldr	r3, [r7, #20]
+ 738 0418 1344     		add	r3, r3, r2
+ 739 041a FB61     		str	r3, [r7, #28]
+ 740              	.L38:
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ITEM_ATTR_END, LINK_ITEM_ATTR_END_SIZE);
+ 741              		.loc 1 147 0
+ 742 041c FB69     		ldr	r3, [r7, #28]
+ 743 041e BA6B     		ldr	r2, [r7, #56]
+ 744 0420 9A42     		cmp	r2, r3
+ 745 0422 02D1     		bne	.L42
+ 746              		.loc 1 147 0 is_stmt 0 discriminator 1
+ 747 0424 4FF0FF33 		mov	r3, #-1
+ 748 0428 13E0     		b	.L15
+ 749              	.L42:
+ 750              		.loc 1 147 0 discriminator 2
+ 751 042a FB69     		ldr	r3, [r7, #28]
+ 752 042c 3A6B     		ldr	r2, [r7, #48]
+ 753 042e 1344     		add	r3, r3, r2
+ 754 0430 0122     		movs	r2, #1
+ 755 0432 0D49     		ldr	r1, .L46+12
+ 756 0434 1846     		mov	r0, r3
+ 757 0436 FFF7FEFF 		bl	memcpy
+ 758 043a FB69     		ldr	r3, [r7, #28]
+ 759 043c 0133     		adds	r3, r3, #1
+ 760 043e FB61     		str	r3, [r7, #28]
+ 761              	.L12:
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (head > 0) head -= uriLen + 1;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 17
+
+
+ 762              		.loc 1 150 0 is_stmt 1
+ 763 0440 FB69     		ldr	r3, [r7, #28]
+ 764 0442 002B     		cmp	r3, #0
+ 765 0444 04DD     		ble	.L43
+ 766              		.loc 1 150 0 is_stmt 0 discriminator 1
+ 767 0446 FA69     		ldr	r2, [r7, #28]
+ 768 0448 7B6B     		ldr	r3, [r7, #52]
+ 769 044a D31A     		subs	r3, r2, r3
+ 770 044c 013B     		subs	r3, r3, #1
+ 771 044e FB61     		str	r3, [r7, #28]
+ 772              	.L43:
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     return head;
+ 773              		.loc 1 152 0 is_stmt 1
+ 774 0450 FB69     		ldr	r3, [r7, #28]
+ 775              	.L15:
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** }
+ 776              		.loc 1 153 0
+ 777 0452 1846     		mov	r0, r3
+ 778 0454 2437     		adds	r7, r7, #36
+ 779              	.LCFI8:
+ 780              		.cfi_def_cfa_offset 12
+ 781 0456 BD46     		mov	sp, r7
+ 782              	.LCFI9:
+ 783              		.cfi_def_cfa_register 13
+ 784              		@ sp needed
+ 785 0458 90BD     		pop	{r4, r7, pc}
+ 786              	.L47:
+ 787 045a 00BF     		.align	2
+ 788              	.L46:
+ 789 045c 00000000 		.word	.LC0
+ 790 0460 18000000 		.word	.LC4
+ 791 0464 1C000000 		.word	.LC5
+ 792 0468 20000000 		.word	.LC6
+ 793              		.cfi_endproc
+ 794              	.LFE135:
+ 796              		.section	.rodata
+ 797 0022 0000     		.align	2
+ 798              	.LC7:
+ 799 0024 3C00     		.ascii	"<\000"
+ 800 0026 0000     		.align	2
+ 801              	.LC8:
+ 802 0028 2F00     		.ascii	"/\000"
+ 803 002a 0000     		.align	2
+ 804              	.LC9:
+ 805 002c 3E3B6469 		.ascii	">;dim=\000"
+ 805      6D3D00
+ 806 0033 00       		.align	2
+ 807              	.LC10:
+ 808 0034 3E2C00   		.ascii	">,\000"
+ 809              		.section	.text.prv_serializeLinkData,"ax",%progbits
+ 810              		.align	1
+ 811              		.syntax unified
+ 812              		.thumb
+ 813              		.thumb_func
+ 814              		.fpu fpv4-sp-d16
+ 816              	prv_serializeLinkData:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 18
+
+
+ 817              	.LFB136:
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** static int prv_serializeLinkData(lwm2m_context_t *contextP,
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  lwm2m_data_t *tlvP,
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  lwm2m_server_t *serverP,
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  lwm2m_attributes_t *objectParamP,
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  lwm2m_uri_t *parentUriP,
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  uint8_t *parentUriStr,
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  size_t parentUriLen,
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  uint8_t *buffer,
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                                  size_t bufferLen)
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** {
+ 818              		.loc 1 164 0
+ 819              		.cfi_startproc
+ 820              		@ args = 20, pretend = 0, frame = 64
+ 821              		@ frame_needed = 1, uses_anonymous_args = 0
+ 822 0000 90B5     		push	{r4, r7, lr}
+ 823              	.LCFI10:
+ 824              		.cfi_def_cfa_offset 12
+ 825              		.cfi_offset 4, -12
+ 826              		.cfi_offset 7, -8
+ 827              		.cfi_offset 14, -4
+ 828 0002 97B0     		sub	sp, sp, #92
+ 829              	.LCFI11:
+ 830              		.cfi_def_cfa_offset 104
+ 831 0004 06AF     		add	r7, sp, #24
+ 832              	.LCFI12:
+ 833              		.cfi_def_cfa 7, 80
+ 834 0006 F860     		str	r0, [r7, #12]
+ 835 0008 B960     		str	r1, [r7, #8]
+ 836 000a 7A60     		str	r2, [r7, #4]
+ 837 000c 3B60     		str	r3, [r7]
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int head;
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int res;
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_uri_t uri;
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     head = 0;
+ 838              		.loc 1 169 0
+ 839 000e 0023     		movs	r3, #0
+ 840 0010 FB63     		str	r3, [r7, #60]
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     switch (tlvP->type)
+ 841              		.loc 1 171 0
+ 842 0012 BB68     		ldr	r3, [r7, #8]
+ 843 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 844 0016 092B     		cmp	r3, #9
+ 845 0018 00F2E581 		bhi	.L49
+ 846 001c 01A2     		adr	r2, .L51
+ 847 001e 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 848 0022 00BF     		.p2align 2
+ 849              	.L51:
+ 850 0024 4D000000 		.word	.L50+1
+ 851 0028 E7030000 		.word	.L49+1
+ 852 002c 0B020000 		.word	.L52+1
+ 853 0030 4D000000 		.word	.L50+1
+ 854 0034 4D000000 		.word	.L50+1
+ 855 0038 4D000000 		.word	.L50+1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 19
+
+
+ 856 003c 4D000000 		.word	.L50+1
+ 857 0040 4D000000 		.word	.L50+1
+ 858 0044 4D000000 		.word	.L50+1
+ 859 0048 4D000000 		.word	.L50+1
+ 860              		.p2align 1
+ 861              	.L50:
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_UNDEFINED:
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_STRING:
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_OPAQUE:
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_INTEGER:
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_FLOAT:
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_BOOLEAN:
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_OBJECT_LINK:
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_MULTIPLE_RESOURCE:
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (bufferLen < LINK_ITEM_START_SIZE) return -1;
+ 862              		.loc 1 181 0
+ 863 004c 3B6E     		ldr	r3, [r7, #96]
+ 864 004e 002B     		cmp	r3, #0
+ 865 0050 02D1     		bne	.L53
+ 866              		.loc 1 181 0 is_stmt 0 discriminator 1
+ 867 0052 4FF0FF33 		mov	r3, #-1
+ 868 0056 CBE1     		b	.L83
+ 869              	.L53:
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memcpy(buffer + head, LINK_ITEM_START, LINK_ITEM_START_SIZE);
+ 870              		.loc 1 182 0 is_stmt 1
+ 871 0058 FB6B     		ldr	r3, [r7, #60]
+ 872 005a FA6D     		ldr	r2, [r7, #92]
+ 873 005c 1344     		add	r3, r3, r2
+ 874 005e 0122     		movs	r2, #1
+ 875 0060 A149     		ldr	r1, .L85
+ 876 0062 1846     		mov	r0, r3
+ 877 0064 FFF7FEFF 		bl	memcpy
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head = LINK_ITEM_START_SIZE;
+ 878              		.loc 1 183 0
+ 879 0068 0123     		movs	r3, #1
+ 880 006a FB63     		str	r3, [r7, #60]
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (parentUriLen > 0)
+ 881              		.loc 1 185 0
+ 882 006c BB6D     		ldr	r3, [r7, #88]
+ 883 006e 002B     		cmp	r3, #0
+ 884 0070 14D0     		beq	.L55
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (bufferLen - head < parentUriLen) return -1;
+ 885              		.loc 1 187 0
+ 886 0072 FB6B     		ldr	r3, [r7, #60]
+ 887 0074 3A6E     		ldr	r2, [r7, #96]
+ 888 0076 D31A     		subs	r3, r2, r3
+ 889 0078 BA6D     		ldr	r2, [r7, #88]
+ 890 007a 9A42     		cmp	r2, r3
+ 891 007c 02D9     		bls	.L56
+ 892              		.loc 1 187 0 is_stmt 0 discriminator 1
+ 893 007e 4FF0FF33 		mov	r3, #-1
+ 894 0082 B5E1     		b	.L83
+ 895              	.L56:
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             memcpy(buffer + head, parentUriStr, parentUriLen);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 20
+
+
+ 896              		.loc 1 188 0 is_stmt 1
+ 897 0084 FB6B     		ldr	r3, [r7, #60]
+ 898 0086 FA6D     		ldr	r2, [r7, #92]
+ 899 0088 1344     		add	r3, r3, r2
+ 900 008a BA6D     		ldr	r2, [r7, #88]
+ 901 008c 796D     		ldr	r1, [r7, #84]
+ 902 008e 1846     		mov	r0, r3
+ 903 0090 FFF7FEFF 		bl	memcpy
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += parentUriLen;
+ 904              		.loc 1 189 0
+ 905 0094 FA6B     		ldr	r2, [r7, #60]
+ 906 0096 BB6D     		ldr	r3, [r7, #88]
+ 907 0098 1344     		add	r3, r3, r2
+ 908 009a FB63     		str	r3, [r7, #60]
+ 909              	.L55:
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (bufferLen - head < LINK_URI_SEPARATOR_SIZE) return -1;
+ 910              		.loc 1 192 0
+ 911 009c FB6B     		ldr	r3, [r7, #60]
+ 912 009e 3A6E     		ldr	r2, [r7, #96]
+ 913 00a0 9A42     		cmp	r2, r3
+ 914 00a2 02D1     		bne	.L57
+ 915              		.loc 1 192 0 is_stmt 0 discriminator 1
+ 916 00a4 4FF0FF33 		mov	r3, #-1
+ 917 00a8 A2E1     		b	.L83
+ 918              	.L57:
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memcpy(buffer + head, LINK_URI_SEPARATOR, LINK_URI_SEPARATOR_SIZE);
+ 919              		.loc 1 193 0 is_stmt 1
+ 920 00aa FB6B     		ldr	r3, [r7, #60]
+ 921 00ac FA6D     		ldr	r2, [r7, #92]
+ 922 00ae 1344     		add	r3, r3, r2
+ 923 00b0 0122     		movs	r2, #1
+ 924 00b2 8E49     		ldr	r1, .L85+4
+ 925 00b4 1846     		mov	r0, r3
+ 926 00b6 FFF7FEFF 		bl	memcpy
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head += LINK_URI_SEPARATOR_SIZE;
+ 927              		.loc 1 194 0
+ 928 00ba FB6B     		ldr	r3, [r7, #60]
+ 929 00bc 0133     		adds	r3, r3, #1
+ 930 00be FB63     		str	r3, [r7, #60]
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         res = utils_intToText(tlvP->id, buffer + head, bufferLen - head);
+ 931              		.loc 1 196 0
+ 932 00c0 BB68     		ldr	r3, [r7, #8]
+ 933 00c2 5B88     		ldrh	r3, [r3, #2]
+ 934 00c4 98B2     		uxth	r0, r3
+ 935 00c6 4FF00001 		mov	r1, #0
+ 936 00ca FB6B     		ldr	r3, [r7, #60]
+ 937 00cc FA6D     		ldr	r2, [r7, #92]
+ 938 00ce D418     		adds	r4, r2, r3
+ 939 00d0 FB6B     		ldr	r3, [r7, #60]
+ 940 00d2 3A6E     		ldr	r2, [r7, #96]
+ 941 00d4 D31A     		subs	r3, r2, r3
+ 942 00d6 2246     		mov	r2, r4
+ 943 00d8 FFF7FEFF 		bl	utils_intToText
+ 944 00dc 0346     		mov	r3, r0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 21
+
+
+ 945 00de 3B63     		str	r3, [r7, #48]
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (res <= 0) return -1;
+ 946              		.loc 1 197 0
+ 947 00e0 3B6B     		ldr	r3, [r7, #48]
+ 948 00e2 002B     		cmp	r3, #0
+ 949 00e4 02DC     		bgt	.L58
+ 950              		.loc 1 197 0 is_stmt 0 discriminator 1
+ 951 00e6 4FF0FF33 		mov	r3, #-1
+ 952 00ea 81E1     		b	.L83
+ 953              	.L58:
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head += res;
+ 954              		.loc 1 198 0 is_stmt 1
+ 955 00ec FA6B     		ldr	r2, [r7, #60]
+ 956 00ee 3B6B     		ldr	r3, [r7, #48]
+ 957 00f0 1344     		add	r3, r3, r2
+ 958 00f2 FB63     		str	r3, [r7, #60]
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (tlvP->type == LWM2M_TYPE_MULTIPLE_RESOURCE)
+ 959              		.loc 1 200 0
+ 960 00f4 BB68     		ldr	r3, [r7, #8]
+ 961 00f6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 962 00f8 032B     		cmp	r3, #3
+ 963 00fa 3FD1     		bne	.L59
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (bufferLen - head < LINK_ITEM_DIM_START_SIZE) return -1;
+ 964              		.loc 1 202 0
+ 965 00fc FB6B     		ldr	r3, [r7, #60]
+ 966 00fe 3A6E     		ldr	r2, [r7, #96]
+ 967 0100 D31A     		subs	r3, r2, r3
+ 968 0102 052B     		cmp	r3, #5
+ 969 0104 02D8     		bhi	.L60
+ 970              		.loc 1 202 0 is_stmt 0 discriminator 1
+ 971 0106 4FF0FF33 		mov	r3, #-1
+ 972 010a 71E1     		b	.L83
+ 973              	.L60:
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             memcpy(buffer + head, LINK_ITEM_DIM_START, LINK_ITEM_DIM_START_SIZE);
+ 974              		.loc 1 203 0 is_stmt 1
+ 975 010c FB6B     		ldr	r3, [r7, #60]
+ 976 010e FA6D     		ldr	r2, [r7, #92]
+ 977 0110 1344     		add	r3, r3, r2
+ 978 0112 0622     		movs	r2, #6
+ 979 0114 7649     		ldr	r1, .L85+8
+ 980 0116 1846     		mov	r0, r3
+ 981 0118 FFF7FEFF 		bl	memcpy
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += LINK_ITEM_DIM_START_SIZE;
+ 982              		.loc 1 204 0
+ 983 011c FB6B     		ldr	r3, [r7, #60]
+ 984 011e 0633     		adds	r3, r3, #6
+ 985 0120 FB63     		str	r3, [r7, #60]
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(tlvP->value.asChildren.count, buffer + head, bufferLen - head);
+ 986              		.loc 1 206 0
+ 987 0122 BB68     		ldr	r3, [r7, #8]
+ 988 0124 9B68     		ldr	r3, [r3, #8]
+ 989 0126 1846     		mov	r0, r3
+ 990 0128 4FF00001 		mov	r1, #0
+ 991 012c FB6B     		ldr	r3, [r7, #60]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 22
+
+
+ 992 012e FA6D     		ldr	r2, [r7, #92]
+ 993 0130 D418     		adds	r4, r2, r3
+ 994 0132 FB6B     		ldr	r3, [r7, #60]
+ 995 0134 3A6E     		ldr	r2, [r7, #96]
+ 996 0136 D31A     		subs	r3, r2, r3
+ 997 0138 2246     		mov	r2, r4
+ 998 013a FFF7FEFF 		bl	utils_intToText
+ 999 013e 0346     		mov	r3, r0
+ 1000 0140 3B63     		str	r3, [r7, #48]
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 1001              		.loc 1 207 0
+ 1002 0142 3B6B     		ldr	r3, [r7, #48]
+ 1003 0144 002B     		cmp	r3, #0
+ 1004 0146 02DC     		bgt	.L61
+ 1005              		.loc 1 207 0 is_stmt 0 discriminator 1
+ 1006 0148 4FF0FF33 		mov	r3, #-1
+ 1007 014c 50E1     		b	.L83
+ 1008              	.L61:
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 1009              		.loc 1 208 0 is_stmt 1
+ 1010 014e FA6B     		ldr	r2, [r7, #60]
+ 1011 0150 3B6B     		ldr	r3, [r7, #48]
+ 1012 0152 1344     		add	r3, r3, r2
+ 1013 0154 FB63     		str	r3, [r7, #60]
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (bufferLen - head < LINK_ITEM_ATTR_END_SIZE) return -1;
+ 1014              		.loc 1 210 0
+ 1015 0156 FB6B     		ldr	r3, [r7, #60]
+ 1016 0158 3A6E     		ldr	r2, [r7, #96]
+ 1017 015a 9A42     		cmp	r2, r3
+ 1018 015c 02D1     		bne	.L62
+ 1019              		.loc 1 210 0 is_stmt 0 discriminator 1
+ 1020 015e 4FF0FF33 		mov	r3, #-1
+ 1021 0162 45E1     		b	.L83
+ 1022              	.L62:
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             memcpy(buffer + head, LINK_ITEM_ATTR_END, LINK_ITEM_ATTR_END_SIZE);
+ 1023              		.loc 1 211 0 is_stmt 1
+ 1024 0164 FB6B     		ldr	r3, [r7, #60]
+ 1025 0166 FA6D     		ldr	r2, [r7, #92]
+ 1026 0168 1344     		add	r3, r3, r2
+ 1027 016a 0122     		movs	r2, #1
+ 1028 016c 6149     		ldr	r1, .L85+12
+ 1029 016e 1846     		mov	r0, r3
+ 1030 0170 FFF7FEFF 		bl	memcpy
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += LINK_ITEM_ATTR_END_SIZE;
+ 1031              		.loc 1 212 0
+ 1032 0174 FB6B     		ldr	r3, [r7, #60]
+ 1033 0176 0133     		adds	r3, r3, #1
+ 1034 0178 FB63     		str	r3, [r7, #60]
+ 1035 017a 12E0     		b	.L63
+ 1036              	.L59:
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         else
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (bufferLen - head < LINK_ITEM_END_SIZE) return -1;
+ 1037              		.loc 1 216 0
+ 1038 017c FB6B     		ldr	r3, [r7, #60]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 23
+
+
+ 1039 017e 3A6E     		ldr	r2, [r7, #96]
+ 1040 0180 D31A     		subs	r3, r2, r3
+ 1041 0182 012B     		cmp	r3, #1
+ 1042 0184 02D8     		bhi	.L64
+ 1043              		.loc 1 216 0 is_stmt 0 discriminator 1
+ 1044 0186 4FF0FF33 		mov	r3, #-1
+ 1045 018a 31E1     		b	.L83
+ 1046              	.L64:
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             memcpy(buffer + head, LINK_ITEM_END, LINK_ITEM_END_SIZE);
+ 1047              		.loc 1 217 0 is_stmt 1
+ 1048 018c FB6B     		ldr	r3, [r7, #60]
+ 1049 018e FA6D     		ldr	r2, [r7, #92]
+ 1050 0190 1344     		add	r3, r3, r2
+ 1051 0192 0222     		movs	r2, #2
+ 1052 0194 5849     		ldr	r1, .L85+16
+ 1053 0196 1846     		mov	r0, r3
+ 1054 0198 FFF7FEFF 		bl	memcpy
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += LINK_ITEM_END_SIZE;
+ 1055              		.loc 1 218 0
+ 1056 019c FB6B     		ldr	r3, [r7, #60]
+ 1057 019e 0233     		adds	r3, r3, #2
+ 1058 01a0 FB63     		str	r3, [r7, #60]
+ 1059              	.L63:
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (serverP != NULL)
+ 1060              		.loc 1 221 0
+ 1061 01a2 7B68     		ldr	r3, [r7, #4]
+ 1062 01a4 002B     		cmp	r3, #0
+ 1063 01a6 00F02181 		beq	.L84
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             memcpy(&uri, parentUriP, sizeof(lwm2m_uri_t));
+ 1064              		.loc 1 223 0
+ 1065 01aa 07F12803 		add	r3, r7, #40
+ 1066 01ae 0822     		movs	r2, #8
+ 1067 01b0 396D     		ldr	r1, [r7, #80]
+ 1068 01b2 1846     		mov	r0, r3
+ 1069 01b4 FFF7FEFF 		bl	memcpy
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             uri.resourceId = tlvP->id;
+ 1070              		.loc 1 224 0
+ 1071 01b8 BB68     		ldr	r3, [r7, #8]
+ 1072 01ba 5B88     		ldrh	r3, [r3, #2]
+ 1073 01bc FB85     		strh	r3, [r7, #46]	@ movhi
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             uri.flag |= LWM2M_URI_FLAG_RESOURCE_ID;
+ 1074              		.loc 1 225 0
+ 1075 01be 97F82830 		ldrb	r3, [r7, #40]	@ zero_extendqisi2
+ 1076 01c2 43F00103 		orr	r3, r3, #1
+ 1077 01c6 DBB2     		uxtb	r3, r3
+ 1078 01c8 87F82830 		strb	r3, [r7, #40]
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = prv_serializeAttributes(contextP, &uri, serverP, objectParamP, buffer, head - 1, 
+ 1079              		.loc 1 226 0
+ 1080 01cc FB6B     		ldr	r3, [r7, #60]
+ 1081 01ce 013B     		subs	r3, r3, #1
+ 1082 01d0 1A46     		mov	r2, r3
+ 1083 01d2 07F12801 		add	r1, r7, #40
+ 1084 01d6 3B6E     		ldr	r3, [r7, #96]
+ 1085 01d8 0293     		str	r3, [sp, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 24
+
+
+ 1086 01da 0192     		str	r2, [sp, #4]
+ 1087 01dc FB6D     		ldr	r3, [r7, #92]
+ 1088 01de 0093     		str	r3, [sp]
+ 1089 01e0 3B68     		ldr	r3, [r7]
+ 1090 01e2 7A68     		ldr	r2, [r7, #4]
+ 1091 01e4 F868     		ldr	r0, [r7, #12]
+ 1092 01e6 FFF7FEFF 		bl	prv_serializeAttributes
+ 1093 01ea 3863     		str	r0, [r7, #48]
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res < 0) return -1;    // careful, 0 is valid
+ 1094              		.loc 1 227 0
+ 1095 01ec 3B6B     		ldr	r3, [r7, #48]
+ 1096 01ee 002B     		cmp	r3, #0
+ 1097 01f0 02DA     		bge	.L66
+ 1098              		.loc 1 227 0 is_stmt 0 discriminator 1
+ 1099 01f2 4FF0FF33 		mov	r3, #-1
+ 1100 01f6 FBE0     		b	.L83
+ 1101              	.L66:
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res > 0) head += res;
+ 1102              		.loc 1 228 0 is_stmt 1
+ 1103 01f8 3B6B     		ldr	r3, [r7, #48]
+ 1104 01fa 002B     		cmp	r3, #0
+ 1105 01fc 40F3F680 		ble	.L84
+ 1106              		.loc 1 228 0 is_stmt 0 discriminator 1
+ 1107 0200 FA6B     		ldr	r2, [r7, #60]
+ 1108 0202 3B6B     		ldr	r3, [r7, #48]
+ 1109 0204 1344     		add	r3, r3, r2
+ 1110 0206 FB63     		str	r3, [r7, #60]
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         break;
+ 1111              		.loc 1 230 0 is_stmt 1 discriminator 1
+ 1112 0208 F0E0     		b	.L84
+ 1113              	.L52:
+ 1114              	.LBB2:
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_OBJECT_INSTANCE:
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         uint8_t uriStr[URI_MAX_STRING_LEN];
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         size_t uriLen;
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         size_t index;
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (parentUriLen > 0)
+ 1115              		.loc 1 238 0
+ 1116 020a BB6D     		ldr	r3, [r7, #88]
+ 1117 020c 002B     		cmp	r3, #0
+ 1118 020e 0FD0     		beq	.L68
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (URI_MAX_STRING_LEN < parentUriLen) return -1;
+ 1119              		.loc 1 240 0
+ 1120 0210 BB6D     		ldr	r3, [r7, #88]
+ 1121 0212 122B     		cmp	r3, #18
+ 1122 0214 02D9     		bls	.L69
+ 1123              		.loc 1 240 0 is_stmt 0 discriminator 1
+ 1124 0216 4FF0FF33 		mov	r3, #-1
+ 1125 021a E9E0     		b	.L83
+ 1126              	.L69:
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             memcpy(uriStr, parentUriStr, parentUriLen);
+ 1127              		.loc 1 241 0 is_stmt 1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 25
+
+
+ 1128 021c 07F11403 		add	r3, r7, #20
+ 1129 0220 BA6D     		ldr	r2, [r7, #88]
+ 1130 0222 796D     		ldr	r1, [r7, #84]
+ 1131 0224 1846     		mov	r0, r3
+ 1132 0226 FFF7FEFF 		bl	memcpy
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             uriLen = parentUriLen;
+ 1133              		.loc 1 242 0
+ 1134 022a BB6D     		ldr	r3, [r7, #88]
+ 1135 022c BB63     		str	r3, [r7, #56]
+ 1136 022e 01E0     		b	.L71
+ 1137              	.L68:
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         else
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             uriLen = 0;
+ 1138              		.loc 1 246 0
+ 1139 0230 0023     		movs	r3, #0
+ 1140 0232 BB63     		str	r3, [r7, #56]
+ 1141              	.L71:
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (URI_MAX_STRING_LEN - uriLen < LINK_URI_SEPARATOR_SIZE) return -1;
+ 1142              		.loc 1 249 0
+ 1143 0234 BB6B     		ldr	r3, [r7, #56]
+ 1144 0236 122B     		cmp	r3, #18
+ 1145 0238 02D1     		bne	.L72
+ 1146              		.loc 1 249 0 is_stmt 0 discriminator 1
+ 1147 023a 4FF0FF33 		mov	r3, #-1
+ 1148 023e D7E0     		b	.L83
+ 1149              	.L72:
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memcpy(uriStr + uriLen, LINK_URI_SEPARATOR, LINK_URI_SEPARATOR_SIZE);
+ 1150              		.loc 1 250 0 is_stmt 1
+ 1151 0240 07F11402 		add	r2, r7, #20
+ 1152 0244 BB6B     		ldr	r3, [r7, #56]
+ 1153 0246 1344     		add	r3, r3, r2
+ 1154 0248 0122     		movs	r2, #1
+ 1155 024a 2849     		ldr	r1, .L85+4
+ 1156 024c 1846     		mov	r0, r3
+ 1157 024e FFF7FEFF 		bl	memcpy
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         uriLen += LINK_URI_SEPARATOR_SIZE;
+ 1158              		.loc 1 251 0
+ 1159 0252 BB6B     		ldr	r3, [r7, #56]
+ 1160 0254 0133     		adds	r3, r3, #1
+ 1161 0256 BB63     		str	r3, [r7, #56]
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         res = utils_intToText(tlvP->id, uriStr + uriLen, URI_MAX_STRING_LEN - uriLen);
+ 1162              		.loc 1 253 0
+ 1163 0258 BB68     		ldr	r3, [r7, #8]
+ 1164 025a 5B88     		ldrh	r3, [r3, #2]
+ 1165 025c 98B2     		uxth	r0, r3
+ 1166 025e 4FF00001 		mov	r1, #0
+ 1167 0262 07F11402 		add	r2, r7, #20
+ 1168 0266 BB6B     		ldr	r3, [r7, #56]
+ 1169 0268 1A44     		add	r2, r2, r3
+ 1170 026a BB6B     		ldr	r3, [r7, #56]
+ 1171 026c C3F11203 		rsb	r3, r3, #18
+ 1172 0270 FFF7FEFF 		bl	utils_intToText
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 26
+
+
+ 1173 0274 0346     		mov	r3, r0
+ 1174 0276 3B63     		str	r3, [r7, #48]
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (res <= 0) return -1;
+ 1175              		.loc 1 254 0
+ 1176 0278 3B6B     		ldr	r3, [r7, #48]
+ 1177 027a 002B     		cmp	r3, #0
+ 1178 027c 02DC     		bgt	.L73
+ 1179              		.loc 1 254 0 is_stmt 0 discriminator 1
+ 1180 027e 4FF0FF33 		mov	r3, #-1
+ 1181 0282 B5E0     		b	.L83
+ 1182              	.L73:
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         uriLen += res;
+ 1183              		.loc 1 255 0 is_stmt 1
+ 1184 0284 3B6B     		ldr	r3, [r7, #48]
+ 1185 0286 BA6B     		ldr	r2, [r7, #56]
+ 1186 0288 1344     		add	r3, r3, r2
+ 1187 028a BB63     		str	r3, [r7, #56]
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memcpy(&uri, parentUriP, sizeof(lwm2m_uri_t));
+ 1188              		.loc 1 257 0
+ 1189 028c 07F12803 		add	r3, r7, #40
+ 1190 0290 0822     		movs	r2, #8
+ 1191 0292 396D     		ldr	r1, [r7, #80]
+ 1192 0294 1846     		mov	r0, r3
+ 1193 0296 FFF7FEFF 		bl	memcpy
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         uri.instanceId = tlvP->id;
+ 1194              		.loc 1 258 0
+ 1195 029a BB68     		ldr	r3, [r7, #8]
+ 1196 029c 5B88     		ldrh	r3, [r3, #2]
+ 1197 029e BB85     		strh	r3, [r7, #44]	@ movhi
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         uri.flag |= LWM2M_URI_FLAG_INSTANCE_ID;
+ 1198              		.loc 1 259 0
+ 1199 02a0 97F82830 		ldrb	r3, [r7, #40]	@ zero_extendqisi2
+ 1200 02a4 43F00203 		orr	r3, r3, #2
+ 1201 02a8 DBB2     		uxtb	r3, r3
+ 1202 02aa 87F82830 		strb	r3, [r7, #40]
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head = 0;
+ 1203              		.loc 1 261 0
+ 1204 02ae 0023     		movs	r3, #0
+ 1205 02b0 FB63     		str	r3, [r7, #60]
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ITEM_START, LINK_ITEM_START_SIZE);
+ 1206              		.loc 1 262 0
+ 1207 02b2 FB6B     		ldr	r3, [r7, #60]
+ 1208 02b4 3A6E     		ldr	r2, [r7, #96]
+ 1209 02b6 9A42     		cmp	r2, r3
+ 1210 02b8 02D1     		bne	.L74
+ 1211              		.loc 1 262 0 is_stmt 0 discriminator 1
+ 1212 02ba 4FF0FF33 		mov	r3, #-1
+ 1213 02be 97E0     		b	.L83
+ 1214              	.L74:
+ 1215              		.loc 1 262 0 discriminator 2
+ 1216 02c0 FB6B     		ldr	r3, [r7, #60]
+ 1217 02c2 FA6D     		ldr	r2, [r7, #92]
+ 1218 02c4 1344     		add	r3, r3, r2
+ 1219 02c6 0122     		movs	r2, #1
+ 1220 02c8 0749     		ldr	r1, .L85
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 27
+
+
+ 1221 02ca 1846     		mov	r0, r3
+ 1222 02cc FFF7FEFF 		bl	memcpy
+ 1223 02d0 FB6B     		ldr	r3, [r7, #60]
+ 1224 02d2 0133     		adds	r3, r3, #1
+ 1225 02d4 FB63     		str	r3, [r7, #60]
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         PRV_CONCAT_STR(buffer, bufferLen, head, uriStr, uriLen);
+ 1226              		.loc 1 263 0 is_stmt 1 discriminator 2
+ 1227 02d6 FB6B     		ldr	r3, [r7, #60]
+ 1228 02d8 3A6E     		ldr	r2, [r7, #96]
+ 1229 02da D31A     		subs	r3, r2, r3
+ 1230 02dc BA6B     		ldr	r2, [r7, #56]
+ 1231 02de 9A42     		cmp	r2, r3
+ 1232 02e0 0CD9     		bls	.L75
+ 1233              		.loc 1 263 0 is_stmt 0 discriminator 1
+ 1234 02e2 4FF0FF33 		mov	r3, #-1
+ 1235 02e6 83E0     		b	.L83
+ 1236              	.L86:
+ 1237              		.align	2
+ 1238              	.L85:
+ 1239 02e8 24000000 		.word	.LC7
+ 1240 02ec 28000000 		.word	.LC8
+ 1241 02f0 2C000000 		.word	.LC9
+ 1242 02f4 20000000 		.word	.LC6
+ 1243 02f8 34000000 		.word	.LC10
+ 1244              	.L75:
+ 1245              		.loc 1 263 0 discriminator 2
+ 1246 02fc FB6B     		ldr	r3, [r7, #60]
+ 1247 02fe FA6D     		ldr	r2, [r7, #92]
+ 1248 0300 1344     		add	r3, r3, r2
+ 1249 0302 07F11401 		add	r1, r7, #20
+ 1250 0306 BA6B     		ldr	r2, [r7, #56]
+ 1251 0308 1846     		mov	r0, r3
+ 1252 030a FFF7FEFF 		bl	memcpy
+ 1253 030e FA6B     		ldr	r2, [r7, #60]
+ 1254 0310 BB6B     		ldr	r3, [r7, #56]
+ 1255 0312 1344     		add	r3, r3, r2
+ 1256 0314 FB63     		str	r3, [r7, #60]
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         PRV_CONCAT_STR(buffer, bufferLen, head, LINK_ITEM_END, LINK_ITEM_END_SIZE);
+ 1257              		.loc 1 264 0 is_stmt 1 discriminator 2
+ 1258 0316 FB6B     		ldr	r3, [r7, #60]
+ 1259 0318 3A6E     		ldr	r2, [r7, #96]
+ 1260 031a D31A     		subs	r3, r2, r3
+ 1261 031c 012B     		cmp	r3, #1
+ 1262 031e 02D8     		bhi	.L76
+ 1263              		.loc 1 264 0 is_stmt 0 discriminator 1
+ 1264 0320 4FF0FF33 		mov	r3, #-1
+ 1265 0324 64E0     		b	.L83
+ 1266              	.L76:
+ 1267              		.loc 1 264 0 discriminator 2
+ 1268 0326 FB6B     		ldr	r3, [r7, #60]
+ 1269 0328 FA6D     		ldr	r2, [r7, #92]
+ 1270 032a 1344     		add	r3, r3, r2
+ 1271 032c 0222     		movs	r2, #2
+ 1272 032e 3249     		ldr	r1, .L87
+ 1273 0330 1846     		mov	r0, r3
+ 1274 0332 FFF7FEFF 		bl	memcpy
+ 1275 0336 FB6B     		ldr	r3, [r7, #60]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 28
+
+
+ 1276 0338 0233     		adds	r3, r3, #2
+ 1277 033a FB63     		str	r3, [r7, #60]
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (serverP != NULL)
+ 1278              		.loc 1 265 0 is_stmt 1 discriminator 2
+ 1279 033c 7B68     		ldr	r3, [r7, #4]
+ 1280 033e 002B     		cmp	r3, #0
+ 1281 0340 1FD0     		beq	.L77
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = prv_serializeAttributes(contextP, &uri, serverP, NULL, buffer, head - 1, bufferLe
+ 1282              		.loc 1 267 0
+ 1283 0342 FB6B     		ldr	r3, [r7, #60]
+ 1284 0344 013B     		subs	r3, r3, #1
+ 1285 0346 1A46     		mov	r2, r3
+ 1286 0348 07F12801 		add	r1, r7, #40
+ 1287 034c 3B6E     		ldr	r3, [r7, #96]
+ 1288 034e 0293     		str	r3, [sp, #8]
+ 1289 0350 0192     		str	r2, [sp, #4]
+ 1290 0352 FB6D     		ldr	r3, [r7, #92]
+ 1291 0354 0093     		str	r3, [sp]
+ 1292 0356 0023     		movs	r3, #0
+ 1293 0358 7A68     		ldr	r2, [r7, #4]
+ 1294 035a F868     		ldr	r0, [r7, #12]
+ 1295 035c FFF7FEFF 		bl	prv_serializeAttributes
+ 1296 0360 3863     		str	r0, [r7, #48]
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res < 0) return -1;    // careful, 0 is valid
+ 1297              		.loc 1 268 0
+ 1298 0362 3B6B     		ldr	r3, [r7, #48]
+ 1299 0364 002B     		cmp	r3, #0
+ 1300 0366 02DA     		bge	.L78
+ 1301              		.loc 1 268 0 is_stmt 0 discriminator 1
+ 1302 0368 4FF0FF33 		mov	r3, #-1
+ 1303 036c 40E0     		b	.L83
+ 1304              	.L78:
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res == 0) head = 0;    // rewind
+ 1305              		.loc 1 269 0 is_stmt 1
+ 1306 036e 3B6B     		ldr	r3, [r7, #48]
+ 1307 0370 002B     		cmp	r3, #0
+ 1308 0372 02D1     		bne	.L79
+ 1309              		.loc 1 269 0 is_stmt 0 discriminator 1
+ 1310 0374 0023     		movs	r3, #0
+ 1311 0376 FB63     		str	r3, [r7, #60]
+ 1312 0378 03E0     		b	.L77
+ 1313              	.L79:
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             else head += res;
+ 1314              		.loc 1 270 0 is_stmt 1
+ 1315 037a FA6B     		ldr	r2, [r7, #60]
+ 1316 037c 3B6B     		ldr	r3, [r7, #48]
+ 1317 037e 1344     		add	r3, r3, r2
+ 1318 0380 FB63     		str	r3, [r7, #60]
+ 1319              	.L77:
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         for (index = 0; index < tlvP->value.asChildren.count; index++)
+ 1320              		.loc 1 272 0
+ 1321 0382 0023     		movs	r3, #0
+ 1322 0384 7B63     		str	r3, [r7, #52]
+ 1323 0386 28E0     		b	.L80
+ 1324              	.L82:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 29
+
+
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = prv_serializeLinkData(contextP, tlvP->value.asChildren.array + index, serverP, ob
+ 1325              		.loc 1 274 0
+ 1326 0388 BB68     		ldr	r3, [r7, #8]
+ 1327 038a DA68     		ldr	r2, [r3, #12]
+ 1328 038c 7B6B     		ldr	r3, [r7, #52]
+ 1329 038e 1B01     		lsls	r3, r3, #4
+ 1330 0390 D018     		adds	r0, r2, r3
+ 1331 0392 FB6B     		ldr	r3, [r7, #60]
+ 1332 0394 FA6D     		ldr	r2, [r7, #92]
+ 1333 0396 1344     		add	r3, r3, r2
+ 1334 0398 FA6B     		ldr	r2, [r7, #60]
+ 1335 039a 396E     		ldr	r1, [r7, #96]
+ 1336 039c 8A1A     		subs	r2, r1, r2
+ 1337 039e 0492     		str	r2, [sp, #16]
+ 1338 03a0 0393     		str	r3, [sp, #12]
+ 1339 03a2 BB6B     		ldr	r3, [r7, #56]
+ 1340 03a4 0293     		str	r3, [sp, #8]
+ 1341 03a6 07F11403 		add	r3, r7, #20
+ 1342 03aa 0193     		str	r3, [sp, #4]
+ 1343 03ac 07F12803 		add	r3, r7, #40
+ 1344 03b0 0093     		str	r3, [sp]
+ 1345 03b2 3B68     		ldr	r3, [r7]
+ 1346 03b4 7A68     		ldr	r2, [r7, #4]
+ 1347 03b6 0146     		mov	r1, r0
+ 1348 03b8 F868     		ldr	r0, [r7, #12]
+ 1349 03ba FFF721FE 		bl	prv_serializeLinkData
+ 1350 03be 3863     		str	r0, [r7, #48]
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res < 0) return -1;
+ 1351              		.loc 1 275 0
+ 1352 03c0 3B6B     		ldr	r3, [r7, #48]
+ 1353 03c2 002B     		cmp	r3, #0
+ 1354 03c4 02DA     		bge	.L81
+ 1355              		.loc 1 275 0 is_stmt 0 discriminator 1
+ 1356 03c6 4FF0FF33 		mov	r3, #-1
+ 1357 03ca 11E0     		b	.L83
+ 1358              	.L81:
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 1359              		.loc 1 276 0 is_stmt 1 discriminator 2
+ 1360 03cc FA6B     		ldr	r2, [r7, #60]
+ 1361 03ce 3B6B     		ldr	r3, [r7, #48]
+ 1362 03d0 1344     		add	r3, r3, r2
+ 1363 03d2 FB63     		str	r3, [r7, #60]
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 1364              		.loc 1 272 0 discriminator 2
+ 1365 03d4 7B6B     		ldr	r3, [r7, #52]
+ 1366 03d6 0133     		adds	r3, r3, #1
+ 1367 03d8 7B63     		str	r3, [r7, #52]
+ 1368              	.L80:
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 1369              		.loc 1 272 0 is_stmt 0 discriminator 1
+ 1370 03da BB68     		ldr	r3, [r7, #8]
+ 1371 03dc 9B68     		ldr	r3, [r3, #8]
+ 1372 03de 7A6B     		ldr	r2, [r7, #52]
+ 1373 03e0 9A42     		cmp	r2, r3
+ 1374 03e2 D1D3     		bcc	.L82
+ 1375              	.LBE2:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 30
+
+
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     break;
+ 1376              		.loc 1 279 0 is_stmt 1
+ 1377 03e4 03E0     		b	.L67
+ 1378              	.L49:
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     case LWM2M_TYPE_OBJECT:
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     default:
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         return -1;
+ 1379              		.loc 1 283 0
+ 1380 03e6 4FF0FF33 		mov	r3, #-1
+ 1381 03ea 01E0     		b	.L83
+ 1382              	.L84:
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 1383              		.loc 1 230 0
+ 1384 03ec 00BF     		nop
+ 1385              	.L67:
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     return head;
+ 1386              		.loc 1 286 0
+ 1387 03ee FB6B     		ldr	r3, [r7, #60]
+ 1388              	.L83:
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** }
+ 1389              		.loc 1 287 0 discriminator 2
+ 1390 03f0 1846     		mov	r0, r3
+ 1391 03f2 4437     		adds	r7, r7, #68
+ 1392              	.LCFI13:
+ 1393              		.cfi_def_cfa_offset 12
+ 1394 03f4 BD46     		mov	sp, r7
+ 1395              	.LCFI14:
+ 1396              		.cfi_def_cfa_register 13
+ 1397              		@ sp needed
+ 1398 03f6 90BD     		pop	{r4, r7, pc}
+ 1399              	.L88:
+ 1400              		.align	2
+ 1401              	.L87:
+ 1402 03f8 34000000 		.word	.LC10
+ 1403              		.cfi_endproc
+ 1404              	.LFE136:
+ 1406              		.section	.text.discover_serialize,"ax",%progbits
+ 1407              		.align	1
+ 1408              		.global	discover_serialize
+ 1409              		.syntax unified
+ 1410              		.thumb
+ 1411              		.thumb_func
+ 1412              		.fpu fpv4-sp-d16
+ 1414              	discover_serialize:
+ 1415              	.LFB137:
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** int discover_serialize(lwm2m_context_t *contextP,
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                        lwm2m_uri_t *uriP,
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                        lwm2m_server_t *serverP,
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                        int size,
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                        lwm2m_data_t *dataP,
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                        uint8_t **bufferP)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 31
+
+
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** {
+ 1416              		.loc 1 295 0
+ 1417              		.cfi_startproc
+ 1418              		@ args = 8, pretend = 0, frame = 1144
+ 1419              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1420 0000 B0B5     		push	{r4, r5, r7, lr}
+ 1421              	.LCFI15:
+ 1422              		.cfi_def_cfa_offset 16
+ 1423              		.cfi_offset 4, -16
+ 1424              		.cfi_offset 5, -12
+ 1425              		.cfi_offset 7, -8
+ 1426              		.cfi_offset 14, -4
+ 1427 0002 ADF5926D 		sub	sp, sp, #1168
+ 1428              	.LCFI16:
+ 1429              		.cfi_def_cfa_offset 1184
+ 1430 0006 06AF     		add	r7, sp, #24
+ 1431              	.LCFI17:
+ 1432              		.cfi_def_cfa 7, 1160
+ 1433 0008 07F10C04 		add	r4, r7, #12
+ 1434 000c 2060     		str	r0, [r4]
+ 1435 000e 07F10800 		add	r0, r7, #8
+ 1436 0012 0160     		str	r1, [r0]
+ 1437 0014 391D     		adds	r1, r7, #4
+ 1438 0016 0A60     		str	r2, [r1]
+ 1439 0018 3A46     		mov	r2, r7
+ 1440 001a 1360     		str	r3, [r2]
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     uint8_t bufferLink[PRV_LINK_BUFFER_SIZE];
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     uint8_t baseUriStr[URI_MAX_STRING_LEN];
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int baseUriLen;
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int index;
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     size_t head;
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     int res;
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_uri_t parentUri;
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_attributes_t *paramP;
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     lwm2m_attributes_t mergedParam;
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     LOG_ARG("size: %d", size);
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     LOG_URI(uriP);
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     head = 0;
+ 1441              		.loc 1 309 0
+ 1442 001c 0023     		movs	r3, #0
+ 1443 001e C7F87034 		str	r3, [r7, #1136]
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     memset(&parentUri, 0, sizeof(lwm2m_uri_t));
+ 1444              		.loc 1 310 0
+ 1445 0022 07F14003 		add	r3, r7, #64
+ 1446 0026 0822     		movs	r2, #8
+ 1447 0028 0021     		movs	r1, #0
+ 1448 002a 1846     		mov	r0, r3
+ 1449 002c FFF7FEFF 		bl	memset
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     parentUri.objectId = uriP->objectId;
+ 1450              		.loc 1 311 0
+ 1451 0030 07F10803 		add	r3, r7, #8
+ 1452 0034 1B68     		ldr	r3, [r3]
+ 1453 0036 5A88     		ldrh	r2, [r3, #2]
+ 1454 0038 07F14003 		add	r3, r7, #64
+ 1455 003c 5A80     		strh	r2, [r3, #2]	@ movhi
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 32
+
+
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     parentUri.flag = LWM2M_URI_FLAG_OBJECT_ID;
+ 1456              		.loc 1 312 0
+ 1457 003e 07F14003 		add	r3, r7, #64
+ 1458 0042 0422     		movs	r2, #4
+ 1459 0044 1A70     		strb	r2, [r3]
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (LWM2M_URI_IS_SET_RESOURCE(uriP))
+ 1460              		.loc 1 314 0
+ 1461 0046 07F10803 		add	r3, r7, #8
+ 1462 004a 1B68     		ldr	r3, [r3]
+ 1463 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1464 004e 03F00103 		and	r3, r3, #1
+ 1465 0052 002B     		cmp	r3, #0
+ 1466 0054 00F09D80 		beq	.L90
+ 1467              	.LBB3:
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         lwm2m_uri_t tempUri;
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         lwm2m_attributes_t *objParamP;
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         lwm2m_attributes_t *instParamP;
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memset(&parentUri, 0, sizeof(lwm2m_uri_t));
+ 1468              		.loc 1 320 0
+ 1469 0058 07F14003 		add	r3, r7, #64
+ 1470 005c 0822     		movs	r2, #8
+ 1471 005e 0021     		movs	r1, #0
+ 1472 0060 1846     		mov	r0, r3
+ 1473 0062 FFF7FEFF 		bl	memset
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         tempUri.objectId = uriP->objectId;
+ 1474              		.loc 1 321 0
+ 1475 0066 07F10803 		add	r3, r7, #8
+ 1476 006a 1B68     		ldr	r3, [r3]
+ 1477 006c 5A88     		ldrh	r2, [r3, #2]
+ 1478 006e 07F11003 		add	r3, r7, #16
+ 1479 0072 5A80     		strh	r2, [r3, #2]	@ movhi
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         tempUri.flag = LWM2M_URI_FLAG_OBJECT_ID;
+ 1480              		.loc 1 322 0
+ 1481 0074 07F11003 		add	r3, r7, #16
+ 1482 0078 0422     		movs	r2, #4
+ 1483 007a 1A70     		strb	r2, [r3]
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         // get object level attributes
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         objParamP = prv_findAttributes(contextP, &tempUri, serverP);
+ 1484              		.loc 1 325 0
+ 1485 007c 3A1D     		adds	r2, r7, #4
+ 1486 007e 07F11001 		add	r1, r7, #16
+ 1487 0082 07F10C03 		add	r3, r7, #12
+ 1488 0086 1268     		ldr	r2, [r2]
+ 1489 0088 1868     		ldr	r0, [r3]
+ 1490 008a FFF7FEFF 		bl	prv_findAttributes
+ 1491 008e C7F86404 		str	r0, [r7, #1124]
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         // get object instance level attributes
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         tempUri.instanceId = uriP->instanceId;
+ 1492              		.loc 1 328 0
+ 1493 0092 07F10803 		add	r3, r7, #8
+ 1494 0096 1B68     		ldr	r3, [r3]
+ 1495 0098 9A88     		ldrh	r2, [r3, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 33
+
+
+ 1496 009a 07F11003 		add	r3, r7, #16
+ 1497 009e 9A80     		strh	r2, [r3, #4]	@ movhi
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         tempUri.flag = LWM2M_URI_FLAG_INSTANCE_ID;
+ 1498              		.loc 1 329 0
+ 1499 00a0 07F11003 		add	r3, r7, #16
+ 1500 00a4 0222     		movs	r2, #2
+ 1501 00a6 1A70     		strb	r2, [r3]
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         instParamP = prv_findAttributes(contextP, &tempUri, serverP);
+ 1502              		.loc 1 330 0
+ 1503 00a8 3A1D     		adds	r2, r7, #4
+ 1504 00aa 07F11001 		add	r1, r7, #16
+ 1505 00ae 07F10C03 		add	r3, r7, #12
+ 1506 00b2 1268     		ldr	r2, [r2]
+ 1507 00b4 1868     		ldr	r0, [r3]
+ 1508 00b6 FFF7FEFF 		bl	prv_findAttributes
+ 1509 00ba C7F86004 		str	r0, [r7, #1120]
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (objParamP != NULL)
+ 1510              		.loc 1 332 0
+ 1511 00be D7F86434 		ldr	r3, [r7, #1124]
+ 1512 00c2 002B     		cmp	r3, #0
+ 1513 00c4 55D0     		beq	.L91
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (instParamP != NULL)
+ 1514              		.loc 1 334 0
+ 1515 00c6 D7F86034 		ldr	r3, [r7, #1120]
+ 1516 00ca 002B     		cmp	r3, #0
+ 1517 00cc 4CD0     		beq	.L92
+ 335:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             {
+ 336:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 memset(&mergedParam, 0, sizeof(lwm2m_attributes_t));
+ 1518              		.loc 1 336 0
+ 1519 00ce 07F11803 		add	r3, r7, #24
+ 1520 00d2 2822     		movs	r2, #40
+ 1521 00d4 0021     		movs	r1, #0
+ 1522 00d6 1846     		mov	r0, r3
+ 1523 00d8 FFF7FEFF 		bl	memset
+ 337:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 mergedParam.toSet = objParamP->toSet | instParamP->toSet;
+ 1524              		.loc 1 337 0
+ 1525 00dc D7F86434 		ldr	r3, [r7, #1124]
+ 1526 00e0 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1527 00e2 D7F86034 		ldr	r3, [r7, #1120]
+ 1528 00e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1529 00e8 1343     		orrs	r3, r3, r2
+ 1530 00ea DAB2     		uxtb	r2, r3
+ 1531 00ec 07F11803 		add	r3, r7, #24
+ 1532 00f0 1A70     		strb	r2, [r3]
+ 338:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 if (mergedParam.toSet & LWM2M_ATTR_FLAG_MIN_PERIOD)
+ 1533              		.loc 1 338 0
+ 1534 00f2 07F11803 		add	r3, r7, #24
+ 1535 00f6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1536 00f8 03F00103 		and	r3, r3, #1
+ 1537 00fc 002B     		cmp	r3, #0
+ 1538 00fe 13D0     		beq	.L93
+ 339:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 {
+ 340:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     if (instParamP->toSet & LWM2M_ATTR_FLAG_MIN_PERIOD)
+ 1539              		.loc 1 340 0
+ 1540 0100 D7F86034 		ldr	r3, [r7, #1120]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 34
+
+
+ 1541 0104 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1542 0106 03F00103 		and	r3, r3, #1
+ 1543 010a 002B     		cmp	r3, #0
+ 1544 010c 06D0     		beq	.L94
+ 341:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     {
+ 342:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                         mergedParam.minPeriod = instParamP->minPeriod;
+ 1545              		.loc 1 342 0
+ 1546 010e D7F86034 		ldr	r3, [r7, #1120]
+ 1547 0112 5A68     		ldr	r2, [r3, #4]
+ 1548 0114 07F11803 		add	r3, r7, #24
+ 1549 0118 5A60     		str	r2, [r3, #4]
+ 1550 011a 05E0     		b	.L93
+ 1551              	.L94:
+ 343:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     }
+ 344:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     else
+ 345:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     {
+ 346:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                         mergedParam.minPeriod = objParamP->minPeriod;
+ 1552              		.loc 1 346 0
+ 1553 011c D7F86434 		ldr	r3, [r7, #1124]
+ 1554 0120 5A68     		ldr	r2, [r3, #4]
+ 1555 0122 07F11803 		add	r3, r7, #24
+ 1556 0126 5A60     		str	r2, [r3, #4]
+ 1557              	.L93:
+ 347:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     }
+ 348:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 }
+ 349:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 if (mergedParam.toSet & LWM2M_ATTR_FLAG_MAX_PERIOD)
+ 1558              		.loc 1 349 0
+ 1559 0128 07F11803 		add	r3, r7, #24
+ 1560 012c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1561 012e 03F00203 		and	r3, r3, #2
+ 1562 0132 002B     		cmp	r3, #0
+ 1563 0134 13D0     		beq	.L95
+ 350:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 {
+ 351:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     if (instParamP->toSet & LWM2M_ATTR_FLAG_MAX_PERIOD)
+ 1564              		.loc 1 351 0
+ 1565 0136 D7F86034 		ldr	r3, [r7, #1120]
+ 1566 013a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1567 013c 03F00203 		and	r3, r3, #2
+ 1568 0140 002B     		cmp	r3, #0
+ 1569 0142 06D0     		beq	.L96
+ 352:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     {
+ 353:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                         mergedParam.maxPeriod = instParamP->maxPeriod;
+ 1570              		.loc 1 353 0
+ 1571 0144 D7F86034 		ldr	r3, [r7, #1120]
+ 1572 0148 9A68     		ldr	r2, [r3, #8]
+ 1573 014a 07F11803 		add	r3, r7, #24
+ 1574 014e 9A60     		str	r2, [r3, #8]
+ 1575 0150 05E0     		b	.L95
+ 1576              	.L96:
+ 354:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     }
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     else
+ 356:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     {
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                         mergedParam.maxPeriod = objParamP->maxPeriod;
+ 1577              		.loc 1 357 0
+ 1578 0152 D7F86434 		ldr	r3, [r7, #1124]
+ 1579 0156 9A68     		ldr	r2, [r3, #8]
+ 1580 0158 07F11803 		add	r3, r7, #24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 35
+
+
+ 1581 015c 9A60     		str	r2, [r3, #8]
+ 1582              	.L95:
+ 358:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                     }
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 }
+ 360:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 paramP = &mergedParam;
+ 1583              		.loc 1 360 0
+ 1584 015e 07F11803 		add	r3, r7, #24
+ 1585 0162 C7F86834 		str	r3, [r7, #1128]
+ 1586 0166 08E0     		b	.L98
+ 1587              	.L92:
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             }
+ 362:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             else
+ 363:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             {
+ 364:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 paramP = objParamP;
+ 1588              		.loc 1 364 0
+ 1589 0168 D7F86434 		ldr	r3, [r7, #1124]
+ 1590 016c C7F86834 		str	r3, [r7, #1128]
+ 1591 0170 03E0     		b	.L98
+ 1592              	.L91:
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             }
+ 366:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         else
+ 368:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             paramP = instParamP;
+ 1593              		.loc 1 369 0
+ 1594 0172 D7F86034 		ldr	r3, [r7, #1120]
+ 1595 0176 C7F86834 		str	r3, [r7, #1128]
+ 1596              	.L98:
+ 370:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 371:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         uriP->flag &= ~LWM2M_URI_FLAG_RESOURCE_ID;
+ 1597              		.loc 1 371 0 discriminator 1
+ 1598 017a 07F10803 		add	r3, r7, #8
+ 1599 017e 1B68     		ldr	r3, [r3]
+ 1600 0180 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1601 0182 23F00103 		bic	r3, r3, #1
+ 1602 0186 DAB2     		uxtb	r2, r3
+ 1603 0188 07F10803 		add	r3, r7, #8
+ 1604 018c 1B68     		ldr	r3, [r3]
+ 1605 018e 1A70     		strb	r2, [r3]
+ 1606              	.LBE3:
+ 1607 0190 78E1     		b	.L99
+ 1608              	.L90:
+ 372:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     else
+ 374:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 375:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         paramP = NULL;
+ 1609              		.loc 1 375 0
+ 1610 0192 0023     		movs	r3, #0
+ 1611 0194 C7F86834 		str	r3, [r7, #1128]
+ 376:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 377:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (LWM2M_URI_IS_SET_INSTANCE(uriP))
+ 1612              		.loc 1 377 0
+ 1613 0198 07F10803 		add	r3, r7, #8
+ 1614 019c 1B68     		ldr	r3, [r3]
+ 1615 019e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1616 01a0 03F00203 		and	r3, r3, #2
+ 1617 01a4 002B     		cmp	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 36
+
+
+ 1618 01a6 00F0DB80 		beq	.L100
+ 378:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 379:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_ITEM_START, LINK_ITEM_START
+ 1619              		.loc 1 379 0
+ 1620 01aa D7F87034 		ldr	r3, [r7, #1136]
+ 1621 01ae B3F5806F 		cmp	r3, #1024
+ 1622 01b2 02D1     		bne	.L101
+ 1623              		.loc 1 379 0 is_stmt 0 discriminator 1
+ 1624 01b4 4FF0FF33 		mov	r3, #-1
+ 1625 01b8 EFE1     		b	.L122
+ 1626              	.L101:
+ 1627              		.loc 1 379 0 discriminator 2
+ 1628 01ba 07F15C02 		add	r2, r7, #92
+ 1629 01be D7F87034 		ldr	r3, [r7, #1136]
+ 1630 01c2 1344     		add	r3, r3, r2
+ 1631 01c4 0122     		movs	r2, #1
+ 1632 01c6 D449     		ldr	r1, .L123
+ 1633 01c8 1846     		mov	r0, r3
+ 1634 01ca FFF7FEFF 		bl	memcpy
+ 1635 01ce D7F87034 		ldr	r3, [r7, #1136]
+ 1636 01d2 0133     		adds	r3, r3, #1
+ 1637 01d4 C7F87034 		str	r3, [r7, #1136]
+ 380:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_URI_SEPARATOR, LINK_URI_SEP
+ 1638              		.loc 1 380 0 is_stmt 1 discriminator 2
+ 1639 01d8 D7F87034 		ldr	r3, [r7, #1136]
+ 1640 01dc B3F5806F 		cmp	r3, #1024
+ 1641 01e0 02D1     		bne	.L103
+ 1642              		.loc 1 380 0 is_stmt 0 discriminator 1
+ 1643 01e2 4FF0FF33 		mov	r3, #-1
+ 1644 01e6 D8E1     		b	.L122
+ 1645              	.L103:
+ 1646              		.loc 1 380 0 discriminator 2
+ 1647 01e8 07F15C02 		add	r2, r7, #92
+ 1648 01ec D7F87034 		ldr	r3, [r7, #1136]
+ 1649 01f0 1344     		add	r3, r3, r2
+ 1650 01f2 0122     		movs	r2, #1
+ 1651 01f4 C949     		ldr	r1, .L123+4
+ 1652 01f6 1846     		mov	r0, r3
+ 1653 01f8 FFF7FEFF 		bl	memcpy
+ 1654 01fc D7F87034 		ldr	r3, [r7, #1136]
+ 1655 0200 0133     		adds	r3, r3, #1
+ 1656 0202 C7F87034 		str	r3, [r7, #1136]
+ 381:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(uriP->objectId, bufferLink + head, PRV_LINK_BUFFER_SIZE - head);
+ 1657              		.loc 1 381 0 is_stmt 1 discriminator 2
+ 1658 0206 07F10803 		add	r3, r7, #8
+ 1659 020a 1B68     		ldr	r3, [r3]
+ 1660 020c 5B88     		ldrh	r3, [r3, #2]
+ 1661 020e 98B2     		uxth	r0, r3
+ 1662 0210 4FF00001 		mov	r1, #0
+ 1663 0214 07F15C02 		add	r2, r7, #92
+ 1664 0218 D7F87034 		ldr	r3, [r7, #1136]
+ 1665 021c 1A44     		add	r2, r2, r3
+ 1666 021e D7F87034 		ldr	r3, [r7, #1136]
+ 1667 0222 C3F58063 		rsb	r3, r3, #1024
+ 1668 0226 FFF7FEFF 		bl	utils_intToText
+ 1669 022a 0346     		mov	r3, r0
+ 1670 022c C7F86C34 		str	r3, [r7, #1132]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 37
+
+
+ 382:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 1671              		.loc 1 382 0 discriminator 2
+ 1672 0230 D7F86C34 		ldr	r3, [r7, #1132]
+ 1673 0234 002B     		cmp	r3, #0
+ 1674 0236 02DC     		bgt	.L104
+ 1675              		.loc 1 382 0 is_stmt 0 discriminator 1
+ 1676 0238 4FF0FF33 		mov	r3, #-1
+ 1677 023c ADE1     		b	.L122
+ 1678              	.L104:
+ 383:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 1679              		.loc 1 383 0 is_stmt 1
+ 1680 023e D7F86C34 		ldr	r3, [r7, #1132]
+ 1681 0242 D7F87024 		ldr	r2, [r7, #1136]
+ 1682 0246 1344     		add	r3, r3, r2
+ 1683 0248 C7F87034 		str	r3, [r7, #1136]
+ 384:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_URI_SEPARATOR, LINK_URI_SEP
+ 1684              		.loc 1 384 0
+ 1685 024c D7F87034 		ldr	r3, [r7, #1136]
+ 1686 0250 B3F5806F 		cmp	r3, #1024
+ 1687 0254 02D1     		bne	.L105
+ 1688              		.loc 1 384 0 is_stmt 0 discriminator 1
+ 1689 0256 4FF0FF33 		mov	r3, #-1
+ 1690 025a 9EE1     		b	.L122
+ 1691              	.L105:
+ 1692              		.loc 1 384 0 discriminator 2
+ 1693 025c 07F15C02 		add	r2, r7, #92
+ 1694 0260 D7F87034 		ldr	r3, [r7, #1136]
+ 1695 0264 1344     		add	r3, r3, r2
+ 1696 0266 0122     		movs	r2, #1
+ 1697 0268 AC49     		ldr	r1, .L123+4
+ 1698 026a 1846     		mov	r0, r3
+ 1699 026c FFF7FEFF 		bl	memcpy
+ 1700 0270 D7F87034 		ldr	r3, [r7, #1136]
+ 1701 0274 0133     		adds	r3, r3, #1
+ 1702 0276 C7F87034 		str	r3, [r7, #1136]
+ 385:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(uriP->instanceId, bufferLink + head, PRV_LINK_BUFFER_SIZE - head)
+ 1703              		.loc 1 385 0 is_stmt 1 discriminator 2
+ 1704 027a 07F10803 		add	r3, r7, #8
+ 1705 027e 1B68     		ldr	r3, [r3]
+ 1706 0280 9B88     		ldrh	r3, [r3, #4]
+ 1707 0282 98B2     		uxth	r0, r3
+ 1708 0284 4FF00001 		mov	r1, #0
+ 1709 0288 07F15C02 		add	r2, r7, #92
+ 1710 028c D7F87034 		ldr	r3, [r7, #1136]
+ 1711 0290 1A44     		add	r2, r2, r3
+ 1712 0292 D7F87034 		ldr	r3, [r7, #1136]
+ 1713 0296 C3F58063 		rsb	r3, r3, #1024
+ 1714 029a FFF7FEFF 		bl	utils_intToText
+ 1715 029e 0346     		mov	r3, r0
+ 1716 02a0 C7F86C34 		str	r3, [r7, #1132]
+ 386:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 1717              		.loc 1 386 0 discriminator 2
+ 1718 02a4 D7F86C34 		ldr	r3, [r7, #1132]
+ 1719 02a8 002B     		cmp	r3, #0
+ 1720 02aa 02DC     		bgt	.L106
+ 1721              		.loc 1 386 0 is_stmt 0 discriminator 1
+ 1722 02ac 4FF0FF33 		mov	r3, #-1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 38
+
+
+ 1723 02b0 73E1     		b	.L122
+ 1724              	.L106:
+ 387:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 1725              		.loc 1 387 0 is_stmt 1
+ 1726 02b2 D7F86C34 		ldr	r3, [r7, #1132]
+ 1727 02b6 D7F87024 		ldr	r2, [r7, #1136]
+ 1728 02ba 1344     		add	r3, r3, r2
+ 1729 02bc C7F87034 		str	r3, [r7, #1136]
+ 388:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_ITEM_END, LINK_ITEM_END_SIZ
+ 1730              		.loc 1 388 0
+ 1731 02c0 D7F87034 		ldr	r3, [r7, #1136]
+ 1732 02c4 C3F58063 		rsb	r3, r3, #1024
+ 1733 02c8 012B     		cmp	r3, #1
+ 1734 02ca 02D8     		bhi	.L107
+ 1735              		.loc 1 388 0 is_stmt 0 discriminator 1
+ 1736 02cc 4FF0FF33 		mov	r3, #-1
+ 1737 02d0 63E1     		b	.L122
+ 1738              	.L107:
+ 1739              		.loc 1 388 0 discriminator 2
+ 1740 02d2 07F15C02 		add	r2, r7, #92
+ 1741 02d6 D7F87034 		ldr	r3, [r7, #1136]
+ 1742 02da 1344     		add	r3, r3, r2
+ 1743 02dc 0222     		movs	r2, #2
+ 1744 02de 9049     		ldr	r1, .L123+8
+ 1745 02e0 1846     		mov	r0, r3
+ 1746 02e2 FFF7FEFF 		bl	memcpy
+ 1747 02e6 D7F87034 		ldr	r3, [r7, #1136]
+ 1748 02ea 0233     		adds	r3, r3, #2
+ 1749 02ec C7F87034 		str	r3, [r7, #1136]
+ 389:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             parentUri.instanceId = uriP->instanceId;
+ 1750              		.loc 1 389 0 is_stmt 1 discriminator 2
+ 1751 02f0 07F10803 		add	r3, r7, #8
+ 1752 02f4 1B68     		ldr	r3, [r3]
+ 1753 02f6 9A88     		ldrh	r2, [r3, #4]
+ 1754 02f8 07F14003 		add	r3, r7, #64
+ 1755 02fc 9A80     		strh	r2, [r3, #4]	@ movhi
+ 390:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             parentUri.flag = LWM2M_URI_FLAG_INSTANCE_ID;
+ 1756              		.loc 1 390 0 discriminator 2
+ 1757 02fe 07F14003 		add	r3, r7, #64
+ 1758 0302 0222     		movs	r2, #2
+ 1759 0304 1A70     		strb	r2, [r3]
+ 391:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (serverP != NULL)
+ 1760              		.loc 1 391 0 discriminator 2
+ 1761 0306 3B1D     		adds	r3, r7, #4
+ 1762 0308 1B68     		ldr	r3, [r3]
+ 1763 030a 002B     		cmp	r3, #0
+ 1764 030c 1DD0     		beq	.L108
+ 392:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             {
+ 393:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 res = prv_serializeAttributes(contextP, &parentUri, serverP, NULL, bufferLink, head
+ 1765              		.loc 1 393 0
+ 1766 030e D7F87034 		ldr	r3, [r7, #1136]
+ 1767 0312 013B     		subs	r3, r3, #1
+ 1768 0314 3A1D     		adds	r2, r7, #4
+ 1769 0316 07F14004 		add	r4, r7, #64
+ 1770 031a 07F10C00 		add	r0, r7, #12
+ 1771 031e 4FF48061 		mov	r1, #1024
+ 1772 0322 0291     		str	r1, [sp, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 39
+
+
+ 1773 0324 0193     		str	r3, [sp, #4]
+ 1774 0326 07F15C03 		add	r3, r7, #92
+ 1775 032a 0093     		str	r3, [sp]
+ 1776 032c 0023     		movs	r3, #0
+ 1777 032e 1268     		ldr	r2, [r2]
+ 1778 0330 2146     		mov	r1, r4
+ 1779 0332 0068     		ldr	r0, [r0]
+ 1780 0334 FFF7FEFF 		bl	prv_serializeAttributes
+ 1781 0338 C7F86C04 		str	r0, [r7, #1132]
+ 394:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 if (res < 0) return -1;    // careful, 0 is valid
+ 1782              		.loc 1 394 0
+ 1783 033c D7F86C34 		ldr	r3, [r7, #1132]
+ 1784 0340 002B     		cmp	r3, #0
+ 1785 0342 05DA     		bge	.L109
+ 1786              		.loc 1 394 0 is_stmt 0 discriminator 1
+ 1787 0344 4FF0FF33 		mov	r3, #-1
+ 1788 0348 27E1     		b	.L122
+ 1789              	.L108:
+ 395:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             }
+ 396:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             else
+ 397:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             {
+ 398:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 res = 0;
+ 1790              		.loc 1 398 0 is_stmt 1
+ 1791 034a 0023     		movs	r3, #0
+ 1792 034c C7F86C34 		str	r3, [r7, #1132]
+ 1793              	.L109:
+ 399:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             }
+ 400:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 1794              		.loc 1 400 0
+ 1795 0350 D7F86C34 		ldr	r3, [r7, #1132]
+ 1796 0354 D7F87024 		ldr	r2, [r7, #1136]
+ 1797 0358 1344     		add	r3, r3, r2
+ 1798 035a C7F87034 		str	r3, [r7, #1136]
+ 1799 035e 91E0     		b	.L99
+ 1800              	.L100:
+ 401:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 402:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         else
+ 403:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         {
+ 404:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_ITEM_START, LINK_ITEM_START
+ 1801              		.loc 1 404 0
+ 1802 0360 D7F87034 		ldr	r3, [r7, #1136]
+ 1803 0364 B3F5806F 		cmp	r3, #1024
+ 1804 0368 02D1     		bne	.L110
+ 1805              		.loc 1 404 0 is_stmt 0 discriminator 1
+ 1806 036a 4FF0FF33 		mov	r3, #-1
+ 1807 036e 14E1     		b	.L122
+ 1808              	.L110:
+ 1809              		.loc 1 404 0 discriminator 2
+ 1810 0370 07F15C02 		add	r2, r7, #92
+ 1811 0374 D7F87034 		ldr	r3, [r7, #1136]
+ 1812 0378 1344     		add	r3, r3, r2
+ 1813 037a 0122     		movs	r2, #1
+ 1814 037c 6649     		ldr	r1, .L123
+ 1815 037e 1846     		mov	r0, r3
+ 1816 0380 FFF7FEFF 		bl	memcpy
+ 1817 0384 D7F87034 		ldr	r3, [r7, #1136]
+ 1818 0388 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 40
+
+
+ 1819 038a C7F87034 		str	r3, [r7, #1136]
+ 405:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_URI_SEPARATOR, LINK_URI_SEP
+ 1820              		.loc 1 405 0 is_stmt 1 discriminator 2
+ 1821 038e D7F87034 		ldr	r3, [r7, #1136]
+ 1822 0392 B3F5806F 		cmp	r3, #1024
+ 1823 0396 02D1     		bne	.L111
+ 1824              		.loc 1 405 0 is_stmt 0 discriminator 1
+ 1825 0398 4FF0FF33 		mov	r3, #-1
+ 1826 039c FDE0     		b	.L122
+ 1827              	.L111:
+ 1828              		.loc 1 405 0 discriminator 2
+ 1829 039e 07F15C02 		add	r2, r7, #92
+ 1830 03a2 D7F87034 		ldr	r3, [r7, #1136]
+ 1831 03a6 1344     		add	r3, r3, r2
+ 1832 03a8 0122     		movs	r2, #1
+ 1833 03aa 5C49     		ldr	r1, .L123+4
+ 1834 03ac 1846     		mov	r0, r3
+ 1835 03ae FFF7FEFF 		bl	memcpy
+ 1836 03b2 D7F87034 		ldr	r3, [r7, #1136]
+ 1837 03b6 0133     		adds	r3, r3, #1
+ 1838 03b8 C7F87034 		str	r3, [r7, #1136]
+ 406:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             res = utils_intToText(uriP->objectId, bufferLink + head, PRV_LINK_BUFFER_SIZE - head);
+ 1839              		.loc 1 406 0 is_stmt 1 discriminator 2
+ 1840 03bc 07F10803 		add	r3, r7, #8
+ 1841 03c0 1B68     		ldr	r3, [r3]
+ 1842 03c2 5B88     		ldrh	r3, [r3, #2]
+ 1843 03c4 98B2     		uxth	r0, r3
+ 1844 03c6 4FF00001 		mov	r1, #0
+ 1845 03ca 07F15C02 		add	r2, r7, #92
+ 1846 03ce D7F87034 		ldr	r3, [r7, #1136]
+ 1847 03d2 1A44     		add	r2, r2, r3
+ 1848 03d4 D7F87034 		ldr	r3, [r7, #1136]
+ 1849 03d8 C3F58063 		rsb	r3, r3, #1024
+ 1850 03dc FFF7FEFF 		bl	utils_intToText
+ 1851 03e0 0346     		mov	r3, r0
+ 1852 03e2 C7F86C34 		str	r3, [r7, #1132]
+ 407:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (res <= 0) return -1;
+ 1853              		.loc 1 407 0 discriminator 2
+ 1854 03e6 D7F86C34 		ldr	r3, [r7, #1132]
+ 1855 03ea 002B     		cmp	r3, #0
+ 1856 03ec 02DC     		bgt	.L112
+ 1857              		.loc 1 407 0 is_stmt 0 discriminator 1
+ 1858 03ee 4FF0FF33 		mov	r3, #-1
+ 1859 03f2 D2E0     		b	.L122
+ 1860              	.L112:
+ 408:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             head += res;
+ 1861              		.loc 1 408 0 is_stmt 1
+ 1862 03f4 D7F86C34 		ldr	r3, [r7, #1132]
+ 1863 03f8 D7F87024 		ldr	r2, [r7, #1136]
+ 1864 03fc 1344     		add	r3, r3, r2
+ 1865 03fe C7F87034 		str	r3, [r7, #1136]
+ 409:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             PRV_CONCAT_STR(bufferLink, PRV_LINK_BUFFER_SIZE, head, LINK_ITEM_END, LINK_ITEM_END_SIZ
+ 1866              		.loc 1 409 0
+ 1867 0402 D7F87034 		ldr	r3, [r7, #1136]
+ 1868 0406 C3F58063 		rsb	r3, r3, #1024
+ 1869 040a 012B     		cmp	r3, #1
+ 1870 040c 02D8     		bhi	.L113
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 41
+
+
+ 1871              		.loc 1 409 0 is_stmt 0 discriminator 1
+ 1872 040e 4FF0FF33 		mov	r3, #-1
+ 1873 0412 C2E0     		b	.L122
+ 1874              	.L113:
+ 1875              		.loc 1 409 0 discriminator 2
+ 1876 0414 07F15C02 		add	r2, r7, #92
+ 1877 0418 D7F87034 		ldr	r3, [r7, #1136]
+ 1878 041c 1344     		add	r3, r3, r2
+ 1879 041e 0222     		movs	r2, #2
+ 1880 0420 3F49     		ldr	r1, .L123+8
+ 1881 0422 1846     		mov	r0, r3
+ 1882 0424 FFF7FEFF 		bl	memcpy
+ 1883 0428 D7F87034 		ldr	r3, [r7, #1136]
+ 1884 042c 0233     		adds	r3, r3, #2
+ 1885 042e C7F87034 		str	r3, [r7, #1136]
+ 410:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 411:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             if (serverP != NULL)
+ 1886              		.loc 1 411 0 is_stmt 1 discriminator 2
+ 1887 0432 3B1D     		adds	r3, r7, #4
+ 1888 0434 1B68     		ldr	r3, [r3]
+ 1889 0436 002B     		cmp	r3, #0
+ 1890 0438 24D0     		beq	.L99
+ 412:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             {
+ 413:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 res = prv_serializeAttributes(contextP, &parentUri, serverP, NULL, bufferLink, head
+ 1891              		.loc 1 413 0
+ 1892 043a D7F87034 		ldr	r3, [r7, #1136]
+ 1893 043e 013B     		subs	r3, r3, #1
+ 1894 0440 3A1D     		adds	r2, r7, #4
+ 1895 0442 07F14004 		add	r4, r7, #64
+ 1896 0446 07F10C00 		add	r0, r7, #12
+ 1897 044a 4FF48061 		mov	r1, #1024
+ 1898 044e 0291     		str	r1, [sp, #8]
+ 1899 0450 0193     		str	r3, [sp, #4]
+ 1900 0452 07F15C03 		add	r3, r7, #92
+ 1901 0456 0093     		str	r3, [sp]
+ 1902 0458 0023     		movs	r3, #0
+ 1903 045a 1268     		ldr	r2, [r2]
+ 1904 045c 2146     		mov	r1, r4
+ 1905 045e 0068     		ldr	r0, [r0]
+ 1906 0460 FFF7FEFF 		bl	prv_serializeAttributes
+ 1907 0464 C7F86C04 		str	r0, [r7, #1132]
+ 414:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 if (res < 0) return -1;    // careful, 0 is valid
+ 1908              		.loc 1 414 0
+ 1909 0468 D7F86C34 		ldr	r3, [r7, #1132]
+ 1910 046c 002B     		cmp	r3, #0
+ 1911 046e 02DA     		bge	.L114
+ 1912              		.loc 1 414 0 is_stmt 0 discriminator 1
+ 1913 0470 4FF0FF33 		mov	r3, #-1
+ 1914 0474 91E0     		b	.L122
+ 1915              	.L114:
+ 415:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****                 head += res;
+ 1916              		.loc 1 415 0 is_stmt 1
+ 1917 0476 D7F86C34 		ldr	r3, [r7, #1132]
+ 1918 047a D7F87024 		ldr	r2, [r7, #1136]
+ 1919 047e 1344     		add	r3, r3, r2
+ 1920 0480 C7F87034 		str	r3, [r7, #1136]
+ 1921              	.L99:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 42
+
+
+ 416:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****             }
+ 417:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         }
+ 418:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 419:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 420:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     baseUriLen = uri_toString(uriP, baseUriStr, URI_MAX_STRING_LEN, NULL);
+ 1922              		.loc 1 420 0
+ 1923 0484 07F14801 		add	r1, r7, #72
+ 1924 0488 07F10800 		add	r0, r7, #8
+ 1925 048c 0023     		movs	r3, #0
+ 1926 048e 1222     		movs	r2, #18
+ 1927 0490 0068     		ldr	r0, [r0]
+ 1928 0492 FFF7FEFF 		bl	uri_toString
+ 1929 0496 C7F85C04 		str	r0, [r7, #1116]
+ 421:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (baseUriLen < 0) return -1;
+ 1930              		.loc 1 421 0
+ 1931 049a D7F85C34 		ldr	r3, [r7, #1116]
+ 1932 049e 002B     		cmp	r3, #0
+ 1933 04a0 02DA     		bge	.L115
+ 1934              		.loc 1 421 0 is_stmt 0 discriminator 1
+ 1935 04a2 4FF0FF33 		mov	r3, #-1
+ 1936 04a6 78E0     		b	.L122
+ 1937              	.L115:
+ 422:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     baseUriLen -= 1;
+ 1938              		.loc 1 422 0 is_stmt 1
+ 1939 04a8 D7F85C34 		ldr	r3, [r7, #1116]
+ 1940 04ac 013B     		subs	r3, r3, #1
+ 1941 04ae C7F85C34 		str	r3, [r7, #1116]
+ 423:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     for (index = 0; index < size && head < PRV_LINK_BUFFER_SIZE; index++)
+ 1942              		.loc 1 424 0
+ 1943 04b2 0023     		movs	r3, #0
+ 1944 04b4 C7F87434 		str	r3, [r7, #1140]
+ 1945 04b8 40E0     		b	.L116
+ 1946              	.L119:
+ 425:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 426:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         res = prv_serializeLinkData(contextP, dataP + index, serverP, paramP, uriP, baseUriStr, bas
+ 1947              		.loc 1 426 0
+ 1948 04ba D7F87434 		ldr	r3, [r7, #1140]
+ 1949 04be 1B01     		lsls	r3, r3, #4
+ 1950 04c0 D7F88824 		ldr	r2, [r7, #1160]
+ 1951 04c4 D518     		adds	r5, r2, r3
+ 1952 04c6 D7F85C34 		ldr	r3, [r7, #1116]
+ 1953 04ca 07F15C01 		add	r1, r7, #92
+ 1954 04ce D7F87024 		ldr	r2, [r7, #1136]
+ 1955 04d2 1144     		add	r1, r1, r2
+ 1956 04d4 D7F87024 		ldr	r2, [r7, #1136]
+ 1957 04d8 C2F58064 		rsb	r4, r2, #1024
+ 1958 04dc 3A1D     		adds	r2, r7, #4
+ 1959 04de 07F10C00 		add	r0, r7, #12
+ 1960 04e2 0494     		str	r4, [sp, #16]
+ 1961 04e4 0391     		str	r1, [sp, #12]
+ 1962 04e6 0293     		str	r3, [sp, #8]
+ 1963 04e8 07F14803 		add	r3, r7, #72
+ 1964 04ec 0193     		str	r3, [sp, #4]
+ 1965 04ee 07F10803 		add	r3, r7, #8
+ 1966 04f2 1B68     		ldr	r3, [r3]
+ 1967 04f4 0093     		str	r3, [sp]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 43
+
+
+ 1968 04f6 D7F86834 		ldr	r3, [r7, #1128]
+ 1969 04fa 1268     		ldr	r2, [r2]
+ 1970 04fc 2946     		mov	r1, r5
+ 1971 04fe 0068     		ldr	r0, [r0]
+ 1972 0500 FFF7FEFF 		bl	prv_serializeLinkData
+ 1973 0504 C7F86C04 		str	r0, [r7, #1132]
+ 427:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (res < 0) return -1;
+ 1974              		.loc 1 427 0
+ 1975 0508 D7F86C34 		ldr	r3, [r7, #1132]
+ 1976 050c 002B     		cmp	r3, #0
+ 1977 050e 09DA     		bge	.L117
+ 1978              		.loc 1 427 0 is_stmt 0 discriminator 1
+ 1979 0510 4FF0FF33 		mov	r3, #-1
+ 1980 0514 41E0     		b	.L122
+ 1981              	.L124:
+ 1982 0516 00BF     		.align	2
+ 1983              	.L123:
+ 1984 0518 24000000 		.word	.LC7
+ 1985 051c 28000000 		.word	.LC8
+ 1986 0520 34000000 		.word	.LC10
+ 1987              	.L117:
+ 428:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head += res;
+ 1988              		.loc 1 428 0 is_stmt 1 discriminator 2
+ 1989 0524 D7F86C34 		ldr	r3, [r7, #1132]
+ 1990 0528 D7F87024 		ldr	r2, [r7, #1136]
+ 1991 052c 1344     		add	r3, r3, r2
+ 1992 052e C7F87034 		str	r3, [r7, #1136]
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 1993              		.loc 1 424 0 discriminator 2
+ 1994 0532 D7F87434 		ldr	r3, [r7, #1140]
+ 1995 0536 0133     		adds	r3, r3, #1
+ 1996 0538 C7F87434 		str	r3, [r7, #1140]
+ 1997              	.L116:
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 1998              		.loc 1 424 0 is_stmt 0 discriminator 1
+ 1999 053c 3B46     		mov	r3, r7
+ 2000 053e D7F87424 		ldr	r2, [r7, #1140]
+ 2001 0542 1B68     		ldr	r3, [r3]
+ 2002 0544 9A42     		cmp	r2, r3
+ 2003 0546 04DA     		bge	.L118
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 2004              		.loc 1 424 0 discriminator 3
+ 2005 0548 D7F87034 		ldr	r3, [r7, #1136]
+ 2006 054c B3F5806F 		cmp	r3, #1024
+ 2007 0550 B3D3     		bcc	.L119
+ 2008              	.L118:
+ 429:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 430:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 431:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     if (head > 0)
+ 2009              		.loc 1 431 0 is_stmt 1
+ 2010 0552 D7F87034 		ldr	r3, [r7, #1136]
+ 2011 0556 002B     		cmp	r3, #0
+ 2012 0558 1DD0     		beq	.L120
+ 432:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     {
+ 433:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         head -= 1;
+ 2013              		.loc 1 433 0
+ 2014 055a D7F87034 		ldr	r3, [r7, #1136]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 44
+
+
+ 2015 055e 013B     		subs	r3, r3, #1
+ 2016 0560 C7F87034 		str	r3, [r7, #1136]
+ 434:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 435:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         *bufferP = (uint8_t *)lwm2m_malloc(head);
+ 2017              		.loc 1 435 0
+ 2018 0564 D7F87004 		ldr	r0, [r7, #1136]
+ 2019 0568 FFF7FEFF 		bl	lwm2m_malloc
+ 2020 056c 0246     		mov	r2, r0
+ 2021 056e D7F88C34 		ldr	r3, [r7, #1164]
+ 2022 0572 1A60     		str	r2, [r3]
+ 436:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         if (*bufferP == NULL) return 0;
+ 2023              		.loc 1 436 0
+ 2024 0574 D7F88C34 		ldr	r3, [r7, #1164]
+ 2025 0578 1B68     		ldr	r3, [r3]
+ 2026 057a 002B     		cmp	r3, #0
+ 2027 057c 01D1     		bne	.L121
+ 2028              		.loc 1 436 0 is_stmt 0 discriminator 1
+ 2029 057e 0023     		movs	r3, #0
+ 2030 0580 0BE0     		b	.L122
+ 2031              	.L121:
+ 437:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****         memcpy(*bufferP, bufferLink, head);
+ 2032              		.loc 1 437 0 is_stmt 1
+ 2033 0582 D7F88C34 		ldr	r3, [r7, #1164]
+ 2034 0586 1B68     		ldr	r3, [r3]
+ 2035 0588 07F15C01 		add	r1, r7, #92
+ 2036 058c D7F87024 		ldr	r2, [r7, #1136]
+ 2037 0590 1846     		mov	r0, r3
+ 2038 0592 FFF7FEFF 		bl	memcpy
+ 2039              	.L120:
+ 438:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     }
+ 439:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** 
+ 440:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c ****     return (int)head;
+ 2040              		.loc 1 440 0
+ 2041 0596 D7F87034 		ldr	r3, [r7, #1136]
+ 2042              	.L122:
+ 441:D:/iot/felix2/components/connectivity/lwm2m/core\discover.c **** }
+ 2043              		.loc 1 441 0 discriminator 2
+ 2044 059a 1846     		mov	r0, r3
+ 2045 059c 07F58F67 		add	r7, r7, #1144
+ 2046              	.LCFI18:
+ 2047              		.cfi_def_cfa_offset 16
+ 2048 05a0 BD46     		mov	sp, r7
+ 2049              	.LCFI19:
+ 2050              		.cfi_def_cfa_register 13
+ 2051              		@ sp needed
+ 2052 05a2 B0BD     		pop	{r4, r5, r7, pc}
+ 2053              		.cfi_endproc
+ 2054              	.LFE137:
+ 2056              		.text
+ 2057              	.Letext0:
+ 2058              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 2059              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 2060              		.file 4 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 2061              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 2062              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 2063              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 2064              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 45
+
+
+ 2065              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_timeval.h"
+ 2066              		.file 10 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 2067              		.file 11 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 2068              		.file 12 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 2069              		.file 13 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 2070              		.file 14 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 2071              		.file 15 "D:/iot/felix2/kernel/include/los_list.h"
+ 2072              		.file 16 "D:/iot/felix2/kernel/include/los_err.h"
+ 2073              		.file 17 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 2074              		.file 18 "D:/iot/felix2/kernel/include/los_tick.h"
+ 2075              		.file 19 "D:/iot/felix2/kernel/include/los_event.h"
+ 2076              		.file 20 "D:/iot/felix2/kernel/include/los_task.h"
+ 2077              		.file 21 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 2078              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 2079              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 2080              		.file 24 "D:/iot/felix2/kernel/include/los_config.h"
+ 2081              		.file 25 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 2082              		.file 26 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 2083              		.file 27 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s 			page 46
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 discover.c
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:18     .text.prv_findAttributes:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:24     .text.prv_findAttributes:00000000 prv_findAttributes
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:126    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:148    .text.prv_serializeAttributes:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:154    .text.prv_serializeAttributes:00000000 prv_serializeAttributes
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:578    .text.prv_serializeAttributes:000002e8 $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:584    .text.prv_serializeAttributes:000002f8 $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:789    .text.prv_serializeAttributes:0000045c $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:810    .text.prv_serializeLinkData:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:816    .text.prv_serializeLinkData:00000000 prv_serializeLinkData
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:850    .text.prv_serializeLinkData:00000024 $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:860    .text.prv_serializeLinkData:0000004c $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1239   .text.prv_serializeLinkData:000002e8 $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1246   .text.prv_serializeLinkData:000002fc $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1402   .text.prv_serializeLinkData:000003f8 $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1407   .text.discover_serialize:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1414   .text.discover_serialize:00000000 discover_serialize
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1984   .text.discover_serialize:00000518 $d
+C:\Users\91458\AppData\Local\Temp\cc1Mnjdd.s:1989   .text.discover_serialize:00000524 $t
+
+UNDEFINED SYMBOLS
+observe_findByUri
+memcpy
+utils_intToText
+utils_floatToText
+memset
+uri_toString
+lwm2m_malloc

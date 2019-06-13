@@ -1,0 +1,1337 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"atiny_socket.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.rodata
+  18              		.align	2
+  19              	.LC0:
+  20 0000 5B534F43 		.ascii	"[SOCKET][%s:%d] malloc failed for socket context\015"
+  20      4B45545D 
+  20      5B25733A 
+  20      25645D20 
+  20      6D616C6C 
+  21 0031 0A00     		.ascii	"\012\000"
+  22 0033 00       		.align	2
+  23              	.LC1:
+  24 0034 5B534F43 		.ascii	"[SOCKET][%s:%d] unkown host or port\015\012\000"
+  24      4B45545D 
+  24      5B25733A 
+  24      25645D20 
+  24      756E6B6F 
+  25              		.section	.text.atiny_net_bind,"ax",%progbits
+  26              		.align	1
+  27              		.global	atiny_net_bind
+  28              		.syntax unified
+  29              		.thumb
+  30              		.thumb_func
+  31              		.fpu fpv4-sp-d16
+  33              	atiny_net_bind:
+  34              	.LFB133:
+  35              		.file 1 "D:/iot/felix2/components/net/sal/atiny_socket.c"
+   1:D:/iot/felix2/components/net/sal\atiny_socket.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * permission.
+  14:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 2
+
+
+  16:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/net/sal\atiny_socket.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/net/sal\atiny_socket.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * ===============================================
+  29:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/net/sal\atiny_socket.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/components/net/sal\atiny_socket.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  35:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include "sal/atiny_socket.h"
+  36:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include "osdepends/atiny_osdep.h"
+  37:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  38:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  39:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX)
+  40:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <sys/types.h>
+  41:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <sys/socket.h>
+  42:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <netinet/in.h>
+  43:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <arpa/inet.h>
+  44:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <sys/time.h>
+  45:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <unistd.h>
+  46:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <fcntl.h>
+  47:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <netdb.h>
+  48:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include <errno.h>
+  49:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_LWIP)
+  50:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include "lwip/sockets.h"
+  51:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include "lwip/netdb.h"
+  52:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include "lwip/errno.h"
+  53:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+  54:D:/iot/felix2/components/net/sal\atiny_socket.c **** #include "at_frame/at_api.h"
+  55:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  56:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+  57:D:/iot/felix2/components/net/sal\atiny_socket.c **** // TODO
+  58:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+  59:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  60:D:/iot/felix2/components/net/sal\atiny_socket.c **** #define SOCKET_DEBUG
+  61:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  62:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(SOCKET_DEBUG)
+  63:D:/iot/felix2/components/net/sal\atiny_socket.c **** #define SOCKET_LOG(fmt, ...) \
+  64:D:/iot/felix2/components/net/sal\atiny_socket.c ****     do \
+  65:D:/iot/felix2/components/net/sal\atiny_socket.c ****     { \
+  66:D:/iot/felix2/components/net/sal\atiny_socket.c ****         (void)atiny_printf("[SOCKET][%s:%d] " fmt "\r\n", \
+  67:D:/iot/felix2/components/net/sal\atiny_socket.c ****         __FUNCTION__, __LINE__, ##__VA_ARGS__); \
+  68:D:/iot/felix2/components/net/sal\atiny_socket.c ****     } while(0)
+  69:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+  70:D:/iot/felix2/components/net/sal\atiny_socket.c **** #define SOCKET_LOG(fmt, ...) ((void)0)
+  71:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+  72:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 3
+
+
+  73:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  74:D:/iot/felix2/components/net/sal\atiny_socket.c **** typedef struct
+  75:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+  76:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int fd;
+  77:D:/iot/felix2/components/net/sal\atiny_socket.c **** } atiny_net_context;
+  78:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  79:D:/iot/felix2/components/net/sal\atiny_socket.c **** void *atiny_net_bind(const char *host, const char *port, int proto)
+  80:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+  36              		.loc 1 80 0
+  37              		.cfi_startproc
+  38              		@ args = 0, pretend = 0, frame = 24
+  39              		@ frame_needed = 1, uses_anonymous_args = 0
+  40 0000 80B5     		push	{r7, lr}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 8
+  43              		.cfi_offset 7, -8
+  44              		.cfi_offset 14, -4
+  45 0002 86B0     		sub	sp, sp, #24
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_offset 32
+  48 0004 00AF     		add	r7, sp, #0
+  49              	.LCFI2:
+  50              		.cfi_def_cfa_register 7
+  51 0006 F860     		str	r0, [r7, #12]
+  52 0008 B960     		str	r1, [r7, #8]
+  53 000a 7A60     		str	r2, [r7, #4]
+  81:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined (WITH_LWIP) || defined (WITH_LINUX)
+  82:D:/iot/felix2/components/net/sal\atiny_socket.c ****     (void)host;
+  83:D:/iot/felix2/components/net/sal\atiny_socket.c ****     (void)port;
+  84:D:/iot/felix2/components/net/sal\atiny_socket.c ****     (void)proto;
+  85:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return NULL;
+  86:D:/iot/felix2/components/net/sal\atiny_socket.c **** /*
+  87:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct sockaddr_in sock_addr;
+  88:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int port_i;
+  89:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int ret = ATINY_NET_ERR;
+  90:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  91:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (NULL == port || (proto != ATINY_PROTO_UDP && proto != ATINY_PROTO_TCP))
+  92:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+  93:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  94:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx = atiny_malloc(sizeof(atiny_net_context));
+  95:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+  96:D:/iot/felix2/components/net/sal\atiny_socket.c ****     sscanf(port , "%d", &port_i);
+  97:D:/iot/felix2/components/net/sal\atiny_socket.c ****     sock_addr.sin_family = AF_INET;
+  98:D:/iot/felix2/components/net/sal\atiny_socket.c ****     sock_addr.sin_port = lwip_htons(port_i);
+  99:D:/iot/felix2/components/net/sal\atiny_socket.c ****     sock_addr.sin_addr.s_addr = (host == NULL ? IPADDR_ANY : inet_addr(host));
+ 100:D:/iot/felix2/components/net/sal\atiny_socket.c ****     sock_addr.sin_len = sizeof(struct sockaddr_in);
+ 101:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 102:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx->fd = socket(AF_INET,
+ 103:D:/iot/felix2/components/net/sal\atiny_socket.c ****         proto == ATINY_PROTO_TCP ? SOCK_STREAM : SOCK_DGRAM,
+ 104:D:/iot/felix2/components/net/sal\atiny_socket.c ****         proto == ATINY_PROTO_TCP ? IPPROTO_TCP : IPPROTO_UDP);
+ 105:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 106:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ctx->fd < 0)
+ 107:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 108:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ret = ATINY_NET_SOCKET_FAILED;
+ 109:D:/iot/felix2/components/net/sal\atiny_socket.c ****         atiny_free(ctx);
+ 110:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 111:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 4
+
+
+ 112:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 113:D:/iot/felix2/components/net/sal\atiny_socket.c **** 	int n = 1;
+ 114:D:/iot/felix2/components/net/sal\atiny_socket.c **** 	if( (ret = setsockopt( ctx->fd, SOL_SOCKET, SO_REUSEADDR,
+ 115:D:/iot/felix2/components/net/sal\atiny_socket.c **** 					(const char *) &n, sizeof( n )) ) != 0 )
+ 116:D:/iot/felix2/components/net/sal\atiny_socket.c **** 	{
+ 117:D:/iot/felix2/components/net/sal\atiny_socket.c **** 		ret = ATINY_NET_SOCKET_FAILED;
+ 118:D:/iot/felix2/components/net/sal\atiny_socket.c **** 		goto exit_failed;
+ 119:D:/iot/felix2/components/net/sal\atiny_socket.c **** 	}
+ 120:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 121:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = bind(ctx->fd, (struct sockaddr*)&sock_addr, sizeof(struct sockaddr));
+ 122:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ret < 0)
+ 123:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 124:D:/iot/felix2/components/net/sal\atiny_socket.c ****        ret = ATINY_NET_BIND_FAILED;
+ 125:D:/iot/felix2/components/net/sal\atiny_socket.c ****        goto exit_failed;
+ 126:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 127:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 128:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (proto == ATINY_PROTO_TCP)
+ 129:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 130:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ret = listen(ctx->fd, 20);
+ 131:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (ret < 0)
+ 132:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 133:D:/iot/felix2/components/net/sal\atiny_socket.c ****             ret = ATINY_NET_LISTEN_FAILED;
+ 134:D:/iot/felix2/components/net/sal\atiny_socket.c ****             goto exit_failed;
+ 135:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 136:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 137:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 138:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return ctx;
+ 139:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 140:D:/iot/felix2/components/net/sal\atiny_socket.c **** exit_failed:
+ 141:D:/iot/felix2/components/net/sal\atiny_socket.c ****        close(ctx->fd);
+ 142:D:/iot/felix2/components/net/sal\atiny_socket.c ****        atiny_free(ctx);
+ 143:D:/iot/felix2/components/net/sal\atiny_socket.c ****        return NULL;
+ 144:D:/iot/felix2/components/net/sal\atiny_socket.c ****        */
+ 145:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 146:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 147:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 148:D:/iot/felix2/components/net/sal\atiny_socket.c ****     atiny_net_context *ctx;
+ 149:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx = atiny_malloc(sizeof(atiny_net_context));
+  54              		.loc 1 149 0
+  55 000c 0420     		movs	r0, #4
+  56 000e FFF7FEFF 		bl	atiny_malloc
+  57 0012 7861     		str	r0, [r7, #20]
+ 150:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (NULL == ctx)
+  58              		.loc 1 150 0
+  59 0014 7B69     		ldr	r3, [r7, #20]
+  60 0016 002B     		cmp	r3, #0
+  61 0018 06D1     		bne	.L2
+ 151:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 152:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	SOCKET_LOG("malloc failed for socket context");
+  62              		.loc 1 152 0
+  63 001a 9822     		movs	r2, #152
+  64 001c 1049     		ldr	r1, .L5
+  65 001e 1148     		ldr	r0, .L5+4
+  66 0020 FFF7FEFF 		bl	atiny_printf
+ 153:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	return NULL;
+  67              		.loc 1 153 0
+  68 0024 0023     		movs	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 5
+
+
+  69 0026 16E0     		b	.L3
+  70              	.L2:
+ 154:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 155:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 156:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx->fd = at_api_bind(host, port, proto);
+  71              		.loc 1 156 0
+  72 0028 7A68     		ldr	r2, [r7, #4]
+  73 002a B968     		ldr	r1, [r7, #8]
+  74 002c F868     		ldr	r0, [r7, #12]
+  75 002e FFF7FEFF 		bl	at_api_bind
+  76 0032 0246     		mov	r2, r0
+  77 0034 7B69     		ldr	r3, [r7, #20]
+  78 0036 1A60     		str	r2, [r3]
+ 157:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ctx->fd < 0)
+  79              		.loc 1 157 0
+  80 0038 7B69     		ldr	r3, [r7, #20]
+  81 003a 1B68     		ldr	r3, [r3]
+  82 003c 002B     		cmp	r3, #0
+  83 003e 09DA     		bge	.L4
+ 158:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 159:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	SOCKET_LOG("unkown host or port");
+  84              		.loc 1 159 0
+  85 0040 9F22     		movs	r2, #159
+  86 0042 0749     		ldr	r1, .L5
+  87 0044 0848     		ldr	r0, .L5+8
+  88 0046 FFF7FEFF 		bl	atiny_printf
+ 160:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	atiny_free(ctx);
+  89              		.loc 1 160 0
+  90 004a 7869     		ldr	r0, [r7, #20]
+  91 004c FFF7FEFF 		bl	atiny_free
+ 161:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	ctx = NULL;
+  92              		.loc 1 161 0
+  93 0050 0023     		movs	r3, #0
+  94 0052 7B61     		str	r3, [r7, #20]
+  95              	.L4:
+ 162:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 163:D:/iot/felix2/components/net/sal\atiny_socket.c **** 		return ctx;
+  96              		.loc 1 163 0
+  97 0054 7B69     		ldr	r3, [r7, #20]
+  98              	.L3:
+ 164:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 165:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 166:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+  99              		.loc 1 166 0
+ 100 0056 1846     		mov	r0, r3
+ 101 0058 1837     		adds	r7, r7, #24
+ 102              	.LCFI3:
+ 103              		.cfi_def_cfa_offset 8
+ 104 005a BD46     		mov	sp, r7
+ 105              	.LCFI4:
+ 106              		.cfi_def_cfa_register 13
+ 107              		@ sp needed
+ 108 005c 80BD     		pop	{r7, pc}
+ 109              	.L6:
+ 110 005e 00BF     		.align	2
+ 111              	.L5:
+ 112 0060 00000000 		.word	__FUNCTION__.10010
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 6
+
+
+ 113 0064 00000000 		.word	.LC0
+ 114 0068 34000000 		.word	.LC1
+ 115              		.cfi_endproc
+ 116              	.LFE133:
+ 118              		.section	.text.atiny_net_accept,"ax",%progbits
+ 119              		.align	1
+ 120              		.global	atiny_net_accept
+ 121              		.syntax unified
+ 122              		.thumb
+ 123              		.thumb_func
+ 124              		.fpu fpv4-sp-d16
+ 126              	atiny_net_accept:
+ 127              	.LFB134:
+ 167:D:/iot/felix2/components/net/sal\atiny_socket.c **** int atiny_net_accept( void *bind_ctx, void *client_ctx, void *client_ip, size_t buf_size, size_t *i
+ 168:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 128              		.loc 1 168 0
+ 129              		.cfi_startproc
+ 130              		@ args = 4, pretend = 0, frame = 16
+ 131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 133 0000 80B4     		push	{r7}
+ 134              	.LCFI5:
+ 135              		.cfi_def_cfa_offset 4
+ 136              		.cfi_offset 7, -4
+ 137 0002 85B0     		sub	sp, sp, #20
+ 138              	.LCFI6:
+ 139              		.cfi_def_cfa_offset 24
+ 140 0004 00AF     		add	r7, sp, #0
+ 141              	.LCFI7:
+ 142              		.cfi_def_cfa_register 7
+ 143 0006 F860     		str	r0, [r7, #12]
+ 144 0008 B960     		str	r1, [r7, #8]
+ 145 000a 7A60     		str	r2, [r7, #4]
+ 146 000c 3B60     		str	r3, [r7]
+ 169:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined (WITH_LWIP) || defined (WITH_LINUX)
+ 170:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int bind_fd = ((atiny_net_context*)bind_ctx)->fd;
+ 171:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int client_fd = ((atiny_net_context*)client_ctx)->fd;
+ 172:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int type;
+ 173:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int ret = ATINY_NET_ERR;
+ 174:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 175:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif LWIP_IPV6
+ 176:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct sockaddr_in6 client_addr;
+ 177:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 178:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct sockaddr_in client_addr;
+ 179:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 180:D:/iot/felix2/components/net/sal\atiny_socket.c ****     socklen_t type_len, client_addr_len;
+ 181:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 182:D:/iot/felix2/components/net/sal\atiny_socket.c ****     type_len = sizeof(type);
+ 183:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (getsockopt(bind_fd, SOL_SOCKET, SO_TYPE, (void*)&type, &type_len) != 0 ||
+ 184:D:/iot/felix2/components/net/sal\atiny_socket.c ****         (type != SOCK_STREAM && type != SOCK_DGRAM))
+ 185:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 186:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return ATINY_NET_ACCEPT_FAILED;
+ 187:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 188:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 189:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif LWIP_IPV6
+ 190:D:/iot/felix2/components/net/sal\atiny_socket.c ****     client_addr_len = sizeof(struct sockaddr_in6);
+ 191:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 7
+
+
+ 192:D:/iot/felix2/components/net/sal\atiny_socket.c ****     client_addr_len = sizeof(struct sockaddr_in);
+ 193:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 194:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (type == SOCK_STREAM)
+ 195:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 196:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ret = client_fd = accept(bind_fd, (struct sockaddr*)&client_addr, &client_addr_len);
+ 197:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 198:D:/iot/felix2/components/net/sal\atiny_socket.c ****     else
+ 199:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 200:D:/iot/felix2/components/net/sal\atiny_socket.c ****         //udp
+ 201:D:/iot/felix2/components/net/sal\atiny_socket.c ****         char buf[1] = {0};
+ 202:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ret = recvfrom(bind_fd, buf, sizeof(buf), MSG_PEEK, (struct sockaddr*)&client_addr, &client
+ 203:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 204:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 205:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ret < 0)
+ 206:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return ATINY_NET_ACCEPT_FAILED;
+ 207:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (type != SOCK_STREAM)
+ 208:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 209:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 210:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif LWIP_IPV6
+ 211:D:/iot/felix2/components/net/sal\atiny_socket.c ****         struct sockaddr_in6  local_addr;
+ 212:D:/iot/felix2/components/net/sal\atiny_socket.c ****         socklen_t n = sizeof(struct sockaddr_in6);
+ 213:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 214:D:/iot/felix2/components/net/sal\atiny_socket.c ****         struct sockaddr_in  local_addr;
+ 215:D:/iot/felix2/components/net/sal\atiny_socket.c ****         socklen_t n = sizeof(struct sockaddr_in);
+ 216:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 217:D:/iot/felix2/components/net/sal\atiny_socket.c ****         char port_s[6] = {0};
+ 218:D:/iot/felix2/components/net/sal\atiny_socket.c ****         int one = 1; 
+ 219:D:/iot/felix2/components/net/sal\atiny_socket.c ****         
+ 220:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ((atiny_net_context*)client_ctx)->fd = client_fd = bind_fd;
+ 221:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ((atiny_net_context*)bind_ctx)->fd = bind_fd = -1;
+ 222:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 223:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (connect(client_fd, (struct sockaddr *)&client_addr, client_addr_len) != 0)
+ 224:D:/iot/felix2/components/net/sal\atiny_socket.c ****             return ATINY_NET_ACCEPT_FAILED;
+ 225:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 226:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ret = getsockname(client_fd, (struct sockaddr*)&local_addr, &n);
+ 227:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 228:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif LWIP_IPV6
+ 229:D:/iot/felix2/components/net/sal\atiny_socket.c ****         snprintf(port_s, sizeof(port_s), "%d", ntohs(local_addr.sin6_port));
+ 230:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ((atiny_net_context*)bind_ctx)->fd = socket(local_addr.sin6_family, SOCK_DGRAM, IPPROTO_UDP
+ 231:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 232:D:/iot/felix2/components/net/sal\atiny_socket.c ****         snprintf(port_s, sizeof(port_s), "%d", ntohs(local_addr.sin_port));
+ 233:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ((atiny_net_context*)bind_ctx)->fd = socket(local_addr.sin_family, SOCK_DGRAM, IPPROTO_UDP)
+ 234:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif 
+ 235:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if( (ret = setsockopt( ((atiny_net_context*)bind_ctx)->fd, SOL_SOCKET, SO_REUSEADDR,
+ 236:D:/iot/felix2/components/net/sal\atiny_socket.c **** 					(const char *) &one, sizeof( one )) ) != 0 )
+ 237:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	{
+ 238:D:/iot/felix2/components/net/sal\atiny_socket.c ****     		ret = ATINY_NET_SOCKET_FAILED;
+ 239:D:/iot/felix2/components/net/sal\atiny_socket.c ****     	}
+ 240:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 241:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (ret != 0)
+ 242:D:/iot/felix2/components/net/sal\atiny_socket.c ****             return ret;
+ 243:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 244:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 245:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (client_ip != NULL)
+ 246:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 247:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if LWIP_IPV4 && LWIP_IPV6
+ 248:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif LWIP_IPV6
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 8
+
+
+ 249:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if( client_addr.sin6_family == AF_INET6 )
+ 250:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 251:D:/iot/felix2/components/net/sal\atiny_socket.c ****             struct sockaddr_in6 *addr = (struct sockaddr_in6 *) &client_addr;
+ 252:D:/iot/felix2/components/net/sal\atiny_socket.c ****             *ip_len = sizeof( addr->sin6_addr.s6_addr );
+ 253:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 254:D:/iot/felix2/components/net/sal\atiny_socket.c ****             if( buf_size < *ip_len )
+ 255:D:/iot/felix2/components/net/sal\atiny_socket.c ****                 return( ATINY_NET_BUF_SMALL_FAILED );
+ 256:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 257:D:/iot/felix2/components/net/sal\atiny_socket.c ****             memcpy( client_ip, &addr->sin6_addr.s6_addr, *ip_len );
+ 258:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 259:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 260:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if( client_addr.sin_family == AF_INET )
+ 261:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 262:D:/iot/felix2/components/net/sal\atiny_socket.c ****             struct sockaddr_in *addr = (struct sockaddr_in *) &client_addr;
+ 263:D:/iot/felix2/components/net/sal\atiny_socket.c ****             *ip_len = sizeof( addr->sin_addr.s_addr );
+ 264:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 265:D:/iot/felix2/components/net/sal\atiny_socket.c ****             if( buf_size < *ip_len )
+ 266:D:/iot/felix2/components/net/sal\atiny_socket.c ****                 return( ATINY_NET_BUF_SMALL_FAILED );
+ 267:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 268:D:/iot/felix2/components/net/sal\atiny_socket.c ****             memcpy( client_ip, &addr->sin_addr.s_addr, *ip_len );
+ 269:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 270:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 271:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 272:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 273:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ((atiny_net_context*)client_ctx)->fd = ((atiny_net_context*)bind_ctx)->fd;
+ 147              		.loc 1 273 0
+ 148 000e FB68     		ldr	r3, [r7, #12]
+ 149 0010 1A68     		ldr	r2, [r3]
+ 150 0012 BB68     		ldr	r3, [r7, #8]
+ 151 0014 1A60     		str	r2, [r3]
+ 274:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 275:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return 0;
+ 152              		.loc 1 275 0
+ 153 0016 0023     		movs	r3, #0
+ 276:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 154              		.loc 1 276 0
+ 155 0018 1846     		mov	r0, r3
+ 156 001a 1437     		adds	r7, r7, #20
+ 157              	.LCFI8:
+ 158              		.cfi_def_cfa_offset 4
+ 159 001c BD46     		mov	sp, r7
+ 160              	.LCFI9:
+ 161              		.cfi_def_cfa_register 13
+ 162              		@ sp needed
+ 163 001e 5DF8047B 		ldr	r7, [sp], #4
+ 164              	.LCFI10:
+ 165              		.cfi_restore 7
+ 166              		.cfi_def_cfa_offset 0
+ 167 0022 7047     		bx	lr
+ 168              		.cfi_endproc
+ 169              	.LFE134:
+ 171              		.section	.rodata
+ 172 005a 0000     		.align	2
+ 173              	.LC2:
+ 174 005c 5B534F43 		.ascii	"[SOCKET][%s:%d] ilegal incoming parameters,(%p,%p,%"
+ 174      4B45545D 
+ 174      5B25733A 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 9
+
+
+ 174      25645D20 
+ 174      696C6567 
+ 175 008f 64290D0A 		.ascii	"d)\015\012\000"
+ 175      00
+ 176              		.section	.text.atiny_net_connect,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	atiny_net_connect
+ 179              		.syntax unified
+ 180              		.thumb
+ 181              		.thumb_func
+ 182              		.fpu fpv4-sp-d16
+ 184              	atiny_net_connect:
+ 185              	.LFB135:
+ 277:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 278:D:/iot/felix2/components/net/sal\atiny_socket.c **** void *atiny_net_connect(const char *host, const char *port, int proto)
+ 279:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 186              		.loc 1 279 0
+ 187              		.cfi_startproc
+ 188              		@ args = 0, pretend = 0, frame = 24
+ 189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 190 0000 80B5     		push	{r7, lr}
+ 191              	.LCFI11:
+ 192              		.cfi_def_cfa_offset 8
+ 193              		.cfi_offset 7, -8
+ 194              		.cfi_offset 14, -4
+ 195 0002 88B0     		sub	sp, sp, #32
+ 196              	.LCFI12:
+ 197              		.cfi_def_cfa_offset 40
+ 198 0004 02AF     		add	r7, sp, #8
+ 199              	.LCFI13:
+ 200              		.cfi_def_cfa 7, 32
+ 201 0006 F860     		str	r0, [r7, #12]
+ 202 0008 B960     		str	r1, [r7, #8]
+ 203 000a 7A60     		str	r2, [r7, #4]
+ 280:D:/iot/felix2/components/net/sal\atiny_socket.c ****     atiny_net_context *ctx = NULL;
+ 204              		.loc 1 280 0
+ 205 000c 0023     		movs	r3, #0
+ 206 000e 7B61     		str	r3, [r7, #20]
+ 281:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 282:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int flags;
+ 283:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int ret;
+ 284:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct addrinfo hints;
+ 285:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct addrinfo *addr_list;
+ 286:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct addrinfo *cur;
+ 287:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 288:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 289:D:/iot/felix2/components/net/sal\atiny_socket.c ****     //if (NULL == host || NULL == port ||
+ 290:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (NULL == port ||
+ 207              		.loc 1 290 0
+ 208 0010 BB68     		ldr	r3, [r7, #8]
+ 209 0012 002B     		cmp	r3, #0
+ 210 0014 05D0     		beq	.L10
+ 211              		.loc 1 290 0 is_stmt 0 discriminator 1
+ 212 0016 7B68     		ldr	r3, [r7, #4]
+ 213 0018 012B     		cmp	r3, #1
+ 214 001a 0FD0     		beq	.L11
+ 291:D:/iot/felix2/components/net/sal\atiny_socket.c ****             (proto != ATINY_PROTO_UDP && proto != ATINY_PROTO_TCP))
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 10
+
+
+ 215              		.loc 1 291 0 is_stmt 1
+ 216 001c 7B68     		ldr	r3, [r7, #4]
+ 217 001e 002B     		cmp	r3, #0
+ 218 0020 0CD0     		beq	.L11
+ 219              	.L10:
+ 292:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 293:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("ilegal incoming parameters,(%p,%p,%d)",host,port,proto);
+ 220              		.loc 1 293 0
+ 221 0022 7B68     		ldr	r3, [r7, #4]
+ 222 0024 0193     		str	r3, [sp, #4]
+ 223 0026 BB68     		ldr	r3, [r7, #8]
+ 224 0028 0093     		str	r3, [sp]
+ 225 002a FB68     		ldr	r3, [r7, #12]
+ 226 002c 40F22512 		movw	r2, #293
+ 227 0030 1849     		ldr	r1, .L15
+ 228 0032 1948     		ldr	r0, .L15+4
+ 229 0034 FFF7FEFF 		bl	atiny_printf
+ 294:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 230              		.loc 1 294 0
+ 231 0038 0023     		movs	r3, #0
+ 232 003a 26E0     		b	.L12
+ 233              	.L11:
+ 295:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 296:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 297:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 298:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 299:D:/iot/felix2/components/net/sal\atiny_socket.c ****     /* Do name resolution with both IPv6 and IPv4 */
+ 300:D:/iot/felix2/components/net/sal\atiny_socket.c ****     memset(&hints, 0, sizeof(hints));
+ 301:D:/iot/felix2/components/net/sal\atiny_socket.c ****     hints.ai_family = AF_UNSPEC;
+ 302:D:/iot/felix2/components/net/sal\atiny_socket.c ****     hints.ai_socktype = proto == ATINY_PROTO_UDP ? SOCK_DGRAM : SOCK_STREAM;
+ 303:D:/iot/felix2/components/net/sal\atiny_socket.c ****     hints.ai_protocol = proto == ATINY_PROTO_UDP ? IPPROTO_UDP : IPPROTO_TCP;
+ 304:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 305:D:/iot/felix2/components/net/sal\atiny_socket.c ****     SOCKET_LOG("try to do name resolution now...");
+ 306:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 307:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if ((ret = getaddrinfo(host, port, &hints, &addr_list)) != 0)
+ 308:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 309:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("getaddrinfo failed: 0x%x", ret);
+ 310:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 311:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 312:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 313:D:/iot/felix2/components/net/sal\atiny_socket.c ****     SOCKET_LOG("do name resolution succeed");
+ 314:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 315:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx = atiny_malloc(sizeof(atiny_net_context));
+ 316:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 317:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (NULL == ctx)
+ 318:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 319:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("malloc failed for socket context");
+ 320:D:/iot/felix2/components/net/sal\atiny_socket.c ****         freeaddrinfo(addr_list);
+ 321:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 322:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 323:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 324:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx->fd = -1;
+ 325:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 326:D:/iot/felix2/components/net/sal\atiny_socket.c ****     /* Try the sockaddrs until a connection succeeds */
+ 327:D:/iot/felix2/components/net/sal\atiny_socket.c ****     for (cur = addr_list; cur != NULL; cur = cur->ai_next)
+ 328:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 329:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ctx->fd = socket(cur->ai_family, cur->ai_socktype, cur->ai_protocol);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 11
+
+
+ 330:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 331:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (ctx->fd < 0)
+ 332:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 333:D:/iot/felix2/components/net/sal\atiny_socket.c ****             continue;
+ 334:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 335:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 336:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (proto == ATINY_PROTO_UDP)
+ 337:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 338:D:/iot/felix2/components/net/sal\atiny_socket.c ****             flags = fcntl(ctx->fd, F_GETFL, 0);
+ 339:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 340:D:/iot/felix2/components/net/sal\atiny_socket.c ****             if (flags < 0 || fcntl(ctx->fd, F_SETFL, flags | O_NONBLOCK) < 0)
+ 341:D:/iot/felix2/components/net/sal\atiny_socket.c ****             {
+ 342:D:/iot/felix2/components/net/sal\atiny_socket.c ****                 close(ctx->fd);
+ 343:D:/iot/felix2/components/net/sal\atiny_socket.c ****                 ctx->fd = -1;
+ 344:D:/iot/felix2/components/net/sal\atiny_socket.c ****                 continue;
+ 345:D:/iot/felix2/components/net/sal\atiny_socket.c ****             }
+ 346:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 347:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 348:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (connect(ctx->fd, cur->ai_addr, cur->ai_addrlen) == 0)
+ 349:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 350:D:/iot/felix2/components/net/sal\atiny_socket.c ****             break;
+ 351:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 352:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 353:D:/iot/felix2/components/net/sal\atiny_socket.c ****         close(ctx->fd);
+ 354:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ctx->fd = -1;
+ 355:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 356:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 357:D:/iot/felix2/components/net/sal\atiny_socket.c ****     freeaddrinfo(addr_list);
+ 358:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 359:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ctx->fd < 0)
+ 360:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 361:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("unkown host or port");
+ 362:D:/iot/felix2/components/net/sal\atiny_socket.c ****         atiny_free(ctx);
+ 363:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 364:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 365:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 366:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (proto == ATINY_PROTO_UDP)
+ 367:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 368:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("UDP create socket and bind to server finished");
+ 369:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 370:D:/iot/felix2/components/net/sal\atiny_socket.c ****     else /* proto == ATINY_PROTO_TCP */
+ 371:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 372:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("TCP connect to server succeed");
+ 373:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 374:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 375:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx = atiny_malloc(sizeof(atiny_net_context));
+ 234              		.loc 1 375 0
+ 235 003c 0420     		movs	r0, #4
+ 236 003e FFF7FEFF 		bl	atiny_malloc
+ 237 0042 7861     		str	r0, [r7, #20]
+ 376:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (NULL == ctx)
+ 238              		.loc 1 376 0
+ 239 0044 7B69     		ldr	r3, [r7, #20]
+ 240 0046 002B     		cmp	r3, #0
+ 241 0048 07D1     		bne	.L13
+ 377:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 378:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("malloc failed for socket context");
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 12
+
+
+ 242              		.loc 1 378 0
+ 243 004a 4FF4BD72 		mov	r2, #378
+ 244 004e 1149     		ldr	r1, .L15
+ 245 0050 1248     		ldr	r0, .L15+8
+ 246 0052 FFF7FEFF 		bl	atiny_printf
+ 379:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 247              		.loc 1 379 0
+ 248 0056 0023     		movs	r3, #0
+ 249 0058 17E0     		b	.L12
+ 250              	.L13:
+ 380:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 381:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 382:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx->fd = at_api_connect(host, port, proto);
+ 251              		.loc 1 382 0
+ 252 005a 7A68     		ldr	r2, [r7, #4]
+ 253 005c B968     		ldr	r1, [r7, #8]
+ 254 005e F868     		ldr	r0, [r7, #12]
+ 255 0060 FFF7FEFF 		bl	at_api_connect
+ 256 0064 0246     		mov	r2, r0
+ 257 0066 7B69     		ldr	r3, [r7, #20]
+ 258 0068 1A60     		str	r2, [r3]
+ 383:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ctx->fd < 0)
+ 259              		.loc 1 383 0
+ 260 006a 7B69     		ldr	r3, [r7, #20]
+ 261 006c 1B68     		ldr	r3, [r3]
+ 262 006e 002B     		cmp	r3, #0
+ 263 0070 0ADA     		bge	.L14
+ 384:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 385:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("unkown host or port");
+ 264              		.loc 1 385 0
+ 265 0072 40F28112 		movw	r2, #385
+ 266 0076 0749     		ldr	r1, .L15
+ 267 0078 0948     		ldr	r0, .L15+12
+ 268 007a FFF7FEFF 		bl	atiny_printf
+ 386:D:/iot/felix2/components/net/sal\atiny_socket.c ****         atiny_free(ctx);
+ 269              		.loc 1 386 0
+ 270 007e 7869     		ldr	r0, [r7, #20]
+ 271 0080 FFF7FEFF 		bl	atiny_free
+ 387:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ctx = NULL;
+ 272              		.loc 1 387 0
+ 273 0084 0023     		movs	r3, #0
+ 274 0086 7B61     		str	r3, [r7, #20]
+ 275              	.L14:
+ 388:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 389:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_WIZNET)
+ 390:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx = atiny_malloc(sizeof(atiny_net_context));
+ 391:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (NULL == ctx)
+ 392:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 393:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("malloc failed for socket context");
+ 394:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return NULL;
+ 395:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 396:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 397:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ctx->fd = wiznet_connect(host, port, proto);
+ 398:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ctx->fd < 0)
+ 399:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 400:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("unkown host or port");
+ 401:D:/iot/felix2/components/net/sal\atiny_socket.c ****         atiny_free(ctx);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 13
+
+
+ 402:D:/iot/felix2/components/net/sal\atiny_socket.c ****         ctx = NULL;
+ 403:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 404:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 405:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 406:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return ctx;
+ 276              		.loc 1 406 0
+ 277 0088 7B69     		ldr	r3, [r7, #20]
+ 278              	.L12:
+ 407:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 279              		.loc 1 407 0
+ 280 008a 1846     		mov	r0, r3
+ 281 008c 1837     		adds	r7, r7, #24
+ 282              	.LCFI14:
+ 283              		.cfi_def_cfa_offset 8
+ 284 008e BD46     		mov	sp, r7
+ 285              	.LCFI15:
+ 286              		.cfi_def_cfa_register 13
+ 287              		@ sp needed
+ 288 0090 80BD     		pop	{r7, pc}
+ 289              	.L16:
+ 290 0092 00BF     		.align	2
+ 291              	.L15:
+ 292 0094 00000000 		.word	__FUNCTION__.10024
+ 293 0098 5C000000 		.word	.LC2
+ 294 009c 00000000 		.word	.LC0
+ 295 00a0 34000000 		.word	.LC1
+ 296              		.cfi_endproc
+ 297              	.LFE135:
+ 299              		.section	.text.atiny_net_recv,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	atiny_net_recv
+ 302              		.syntax unified
+ 303              		.thumb
+ 304              		.thumb_func
+ 305              		.fpu fpv4-sp-d16
+ 307              	atiny_net_recv:
+ 308              	.LFB136:
+ 408:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 409:D:/iot/felix2/components/net/sal\atiny_socket.c **** int atiny_net_recv(void *ctx, unsigned char *buf, size_t len)
+ 410:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 309              		.loc 1 410 0
+ 310              		.cfi_startproc
+ 311              		@ args = 0, pretend = 0, frame = 24
+ 312              		@ frame_needed = 1, uses_anonymous_args = 0
+ 313 0000 80B5     		push	{r7, lr}
+ 314              	.LCFI16:
+ 315              		.cfi_def_cfa_offset 8
+ 316              		.cfi_offset 7, -8
+ 317              		.cfi_offset 14, -4
+ 318 0002 86B0     		sub	sp, sp, #24
+ 319              	.LCFI17:
+ 320              		.cfi_def_cfa_offset 32
+ 321 0004 00AF     		add	r7, sp, #0
+ 322              	.LCFI18:
+ 323              		.cfi_def_cfa_register 7
+ 324 0006 F860     		str	r0, [r7, #12]
+ 325 0008 B960     		str	r1, [r7, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 14
+
+
+ 326 000a 7A60     		str	r2, [r7, #4]
+ 411:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int ret = -1;
+ 327              		.loc 1 411 0
+ 328 000c 4FF0FF33 		mov	r3, #-1
+ 329 0010 7B61     		str	r3, [r7, #20]
+ 412:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int fd = ((atiny_net_context *)ctx)->fd;
+ 330              		.loc 1 412 0
+ 331 0012 FB68     		ldr	r3, [r7, #12]
+ 332 0014 1B68     		ldr	r3, [r3]
+ 333 0016 3B61     		str	r3, [r7, #16]
+ 413:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 414:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = recv(fd, buf, len, 0);
+ 415:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 416:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = at_api_recv(fd, buf, len);
+ 334              		.loc 1 416 0
+ 335 0018 7A68     		ldr	r2, [r7, #4]
+ 336 001a B968     		ldr	r1, [r7, #8]
+ 337 001c 3869     		ldr	r0, [r7, #16]
+ 338 001e FFF7FEFF 		bl	at_api_recv
+ 339 0022 7861     		str	r0, [r7, #20]
+ 417:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_WIZNET)
+ 418:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = wiznet_recv(fd, buf, len);
+ 419:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 420:D:/iot/felix2/components/net/sal\atiny_socket.c ****     (void)fd; //clear unuse warning
+ 421:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 422:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 423:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 424:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ret < 0)
+ 425:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 426:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (errno == EAGAIN || errno == EWOULDBLOCK || errno == EINTR)
+ 427:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 428:D:/iot/felix2/components/net/sal\atiny_socket.c ****             SOCKET_LOG("no data available for now");
+ 429:D:/iot/felix2/components/net/sal\atiny_socket.c ****             return 0;
+ 430:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 431:D:/iot/felix2/components/net/sal\atiny_socket.c ****         else
+ 432:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 433:D:/iot/felix2/components/net/sal\atiny_socket.c ****             SOCKET_LOG("error accured when recv: 0x%x", errno);
+ 434:D:/iot/felix2/components/net/sal\atiny_socket.c ****             return -1;
+ 435:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 436:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 437:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 438:D:/iot/felix2/components/net/sal\atiny_socket.c ****     else if (ret == 0)
+ 439:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 440:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("socket was closed by peer");
+ 441:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return -1;
+ 442:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 443:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 444:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return ret;
+ 340              		.loc 1 444 0
+ 341 0024 7B69     		ldr	r3, [r7, #20]
+ 445:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 342              		.loc 1 445 0
+ 343 0026 1846     		mov	r0, r3
+ 344 0028 1837     		adds	r7, r7, #24
+ 345              	.LCFI19:
+ 346              		.cfi_def_cfa_offset 8
+ 347 002a BD46     		mov	sp, r7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 15
+
+
+ 348              	.LCFI20:
+ 349              		.cfi_def_cfa_register 13
+ 350              		@ sp needed
+ 351 002c 80BD     		pop	{r7, pc}
+ 352              		.cfi_endproc
+ 353              	.LFE136:
+ 355              		.section	.text.atiny_net_recv_timeout,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	atiny_net_recv_timeout
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 361              		.fpu fpv4-sp-d16
+ 363              	atiny_net_recv_timeout:
+ 364              	.LFB137:
+ 446:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 447:D:/iot/felix2/components/net/sal\atiny_socket.c **** int atiny_net_recv_timeout(void *ctx, unsigned char *buf, size_t len,
+ 448:D:/iot/felix2/components/net/sal\atiny_socket.c ****                            uint32_t timeout)
+ 449:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 365              		.loc 1 449 0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 24
+ 368              		@ frame_needed = 1, uses_anonymous_args = 0
+ 369 0000 80B5     		push	{r7, lr}
+ 370              	.LCFI21:
+ 371              		.cfi_def_cfa_offset 8
+ 372              		.cfi_offset 7, -8
+ 373              		.cfi_offset 14, -4
+ 374 0002 88B0     		sub	sp, sp, #32
+ 375              	.LCFI22:
+ 376              		.cfi_def_cfa_offset 40
+ 377 0004 02AF     		add	r7, sp, #8
+ 378              	.LCFI23:
+ 379              		.cfi_def_cfa 7, 32
+ 380 0006 F860     		str	r0, [r7, #12]
+ 381 0008 B960     		str	r1, [r7, #8]
+ 382 000a 7A60     		str	r2, [r7, #4]
+ 383 000c 3B60     		str	r3, [r7]
+ 450:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int ret = -1;
+ 384              		.loc 1 450 0
+ 385 000e 4FF0FF33 		mov	r3, #-1
+ 386 0012 7B61     		str	r3, [r7, #20]
+ 451:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 452:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct timeval tv;
+ 453:D:/iot/felix2/components/net/sal\atiny_socket.c ****     fd_set read_fds;
+ 454:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 455:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 456:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int fd = ((atiny_net_context *)ctx)->fd;
+ 387              		.loc 1 456 0
+ 388 0014 FB68     		ldr	r3, [r7, #12]
+ 389 0016 1B68     		ldr	r3, [r3]
+ 390 0018 3B61     		str	r3, [r7, #16]
+ 457:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 458:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 459:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (fd < 0)
+ 460:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 461:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("ilegal socket(%d)", fd);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 16
+
+
+ 462:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return ATINY_NET_ERR;
+ 463:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 464:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 465:D:/iot/felix2/components/net/sal\atiny_socket.c ****     FD_ZERO(&read_fds);
+ 466:D:/iot/felix2/components/net/sal\atiny_socket.c ****     FD_SET(fd, &read_fds);
+ 467:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 468:D:/iot/felix2/components/net/sal\atiny_socket.c ****     tv.tv_sec  = timeout / 1000;
+ 469:D:/iot/felix2/components/net/sal\atiny_socket.c ****     tv.tv_usec = (timeout % 1000) * 1000;
+ 470:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 471:D:/iot/felix2/components/net/sal\atiny_socket.c ****    ret = select(fd + 1, &read_fds, NULL, NULL, &tv);
+ 472:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 473:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ret == 0)
+ 474:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 475:D:/iot/felix2/components/net/sal\atiny_socket.c ****        // SOCKET_LOG("recv timeout");
+ 476:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return ATINY_NET_TIMEOUT;
+ 477:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 478:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 479:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if(ret < 0)
+ 480:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 481:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("select error ret=%d,err 0x%x", ret, errno);
+ 482:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return ATINY_NET_ERR;
+ 483:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 484:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 485:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = atiny_net_recv(ctx, buf, len);
+ 486:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 487:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 488:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = at_api_recv_timeout(fd, buf, len, NULL,NULL,timeout);
+ 391              		.loc 1 488 0
+ 392 001a 3B68     		ldr	r3, [r7]
+ 393 001c 0193     		str	r3, [sp, #4]
+ 394 001e 0023     		movs	r3, #0
+ 395 0020 0093     		str	r3, [sp]
+ 396 0022 0023     		movs	r3, #0
+ 397 0024 7A68     		ldr	r2, [r7, #4]
+ 398 0026 B968     		ldr	r1, [r7, #8]
+ 399 0028 3869     		ldr	r0, [r7, #16]
+ 400 002a FFF7FEFF 		bl	at_api_recv_timeout
+ 401 002e 7861     		str	r0, [r7, #20]
+ 489:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_WIZNET)
+ 490:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = wiznet_recv_timeout(fd, buf, len, timeout);
+ 491:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 492:D:/iot/felix2/components/net/sal\atiny_socket.c ****     (void)fd; //clear unuse warning
+ 493:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 494:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return ret;
+ 402              		.loc 1 494 0
+ 403 0030 7B69     		ldr	r3, [r7, #20]
+ 495:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 404              		.loc 1 495 0
+ 405 0032 1846     		mov	r0, r3
+ 406 0034 1837     		adds	r7, r7, #24
+ 407              	.LCFI24:
+ 408              		.cfi_def_cfa_offset 8
+ 409 0036 BD46     		mov	sp, r7
+ 410              	.LCFI25:
+ 411              		.cfi_def_cfa_register 13
+ 412              		@ sp needed
+ 413 0038 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 17
+
+
+ 414              		.cfi_endproc
+ 415              	.LFE137:
+ 417              		.section	.rodata
+ 418              		.align	2
+ 419              	.LC3:
+ 420 0094 5B534F43 		.ascii	"[SOCKET][%s:%d] ilegal socket(%d)\015\012\000"
+ 420      4B45545D 
+ 420      5B25733A 
+ 420      25645D20 
+ 420      696C6567 
+ 421              		.section	.text.atiny_net_send,"ax",%progbits
+ 422              		.align	1
+ 423              		.global	atiny_net_send
+ 424              		.syntax unified
+ 425              		.thumb
+ 426              		.thumb_func
+ 427              		.fpu fpv4-sp-d16
+ 429              	atiny_net_send:
+ 430              	.LFB138:
+ 496:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 497:D:/iot/felix2/components/net/sal\atiny_socket.c **** int atiny_net_send(void *ctx, const unsigned char *buf, size_t len)
+ 498:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 431              		.loc 1 498 0
+ 432              		.cfi_startproc
+ 433              		@ args = 0, pretend = 0, frame = 24
+ 434              		@ frame_needed = 1, uses_anonymous_args = 0
+ 435 0000 80B5     		push	{r7, lr}
+ 436              	.LCFI26:
+ 437              		.cfi_def_cfa_offset 8
+ 438              		.cfi_offset 7, -8
+ 439              		.cfi_offset 14, -4
+ 440 0002 86B0     		sub	sp, sp, #24
+ 441              	.LCFI27:
+ 442              		.cfi_def_cfa_offset 32
+ 443 0004 00AF     		add	r7, sp, #0
+ 444              	.LCFI28:
+ 445              		.cfi_def_cfa_register 7
+ 446 0006 F860     		str	r0, [r7, #12]
+ 447 0008 B960     		str	r1, [r7, #8]
+ 448 000a 7A60     		str	r2, [r7, #4]
+ 499:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int ret = -1;
+ 449              		.loc 1 499 0
+ 450 000c 4FF0FF33 		mov	r3, #-1
+ 451 0010 7B61     		str	r3, [r7, #20]
+ 500:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int fd = ((atiny_net_context *)ctx)->fd;
+ 452              		.loc 1 500 0
+ 453 0012 FB68     		ldr	r3, [r7, #12]
+ 454 0014 1B68     		ldr	r3, [r3]
+ 455 0016 3B61     		str	r3, [r7, #16]
+ 501:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 502:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (fd < 0)
+ 456              		.loc 1 502 0
+ 457 0018 3B69     		ldr	r3, [r7, #16]
+ 458 001a 002B     		cmp	r3, #0
+ 459 001c 09DA     		bge	.L22
+ 503:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 504:D:/iot/felix2/components/net/sal\atiny_socket.c ****         SOCKET_LOG("ilegal socket(%d)", fd);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 18
+
+
+ 460              		.loc 1 504 0
+ 461 001e 3B69     		ldr	r3, [r7, #16]
+ 462 0020 4FF4FC72 		mov	r2, #504
+ 463 0024 0849     		ldr	r1, .L24
+ 464 0026 0948     		ldr	r0, .L24+4
+ 465 0028 FFF7FEFF 		bl	atiny_printf
+ 505:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return -1;
+ 466              		.loc 1 505 0
+ 467 002c 4FF0FF33 		mov	r3, #-1
+ 468 0030 06E0     		b	.L23
+ 469              	.L22:
+ 506:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 507:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 508:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 509:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = send(fd, buf, len, 0);
+ 510:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 511:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = at_api_send(fd, buf, len);
+ 470              		.loc 1 511 0
+ 471 0032 7A68     		ldr	r2, [r7, #4]
+ 472 0034 B968     		ldr	r1, [r7, #8]
+ 473 0036 3869     		ldr	r0, [r7, #16]
+ 474 0038 FFF7FEFF 		bl	at_api_send
+ 475 003c 7861     		str	r0, [r7, #20]
+ 512:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_WIZNET)
+ 513:D:/iot/felix2/components/net/sal\atiny_socket.c ****     ret = wiznet_send(fd, buf, len);
+ 514:D:/iot/felix2/components/net/sal\atiny_socket.c **** #else
+ 515:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 516:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 517:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 518:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (ret < 0)
+ 519:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 520:D:/iot/felix2/components/net/sal\atiny_socket.c ****         /* no data available for now */
+ 521:D:/iot/felix2/components/net/sal\atiny_socket.c ****         if (errno == EAGAIN || errno == EWOULDBLOCK || errno == EINTR)
+ 522:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 523:D:/iot/felix2/components/net/sal\atiny_socket.c ****             return 0;
+ 524:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 525:D:/iot/felix2/components/net/sal\atiny_socket.c ****         else
+ 526:D:/iot/felix2/components/net/sal\atiny_socket.c ****         {
+ 527:D:/iot/felix2/components/net/sal\atiny_socket.c ****             SOCKET_LOG("error accured when send: 0x%x", errno);
+ 528:D:/iot/felix2/components/net/sal\atiny_socket.c ****             return -1;
+ 529:D:/iot/felix2/components/net/sal\atiny_socket.c ****         }
+ 530:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 531:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 532:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 533:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return ret;
+ 476              		.loc 1 533 0
+ 477 003e 7B69     		ldr	r3, [r7, #20]
+ 478              	.L23:
+ 534:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 479              		.loc 1 534 0
+ 480 0040 1846     		mov	r0, r3
+ 481 0042 1837     		adds	r7, r7, #24
+ 482              	.LCFI29:
+ 483              		.cfi_def_cfa_offset 8
+ 484 0044 BD46     		mov	sp, r7
+ 485              	.LCFI30:
+ 486              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 19
+
+
+ 487              		@ sp needed
+ 488 0046 80BD     		pop	{r7, pc}
+ 489              	.L25:
+ 490              		.align	2
+ 491              	.L24:
+ 492 0048 00000000 		.word	__FUNCTION__.10047
+ 493 004c 94000000 		.word	.LC3
+ 494              		.cfi_endproc
+ 495              	.LFE138:
+ 497              		.section	.text.atiny_net_close,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	atiny_net_close
+ 500              		.syntax unified
+ 501              		.thumb
+ 502              		.thumb_func
+ 503              		.fpu fpv4-sp-d16
+ 505              	atiny_net_close:
+ 506              	.LFB139:
+ 535:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 536:D:/iot/felix2/components/net/sal\atiny_socket.c **** void atiny_net_close(void *ctx)
+ 537:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 507              		.loc 1 537 0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 16
+ 510              		@ frame_needed = 1, uses_anonymous_args = 0
+ 511 0000 80B5     		push	{r7, lr}
+ 512              	.LCFI31:
+ 513              		.cfi_def_cfa_offset 8
+ 514              		.cfi_offset 7, -8
+ 515              		.cfi_offset 14, -4
+ 516 0002 84B0     		sub	sp, sp, #16
+ 517              	.LCFI32:
+ 518              		.cfi_def_cfa_offset 24
+ 519 0004 00AF     		add	r7, sp, #0
+ 520              	.LCFI33:
+ 521              		.cfi_def_cfa_register 7
+ 522 0006 7860     		str	r0, [r7, #4]
+ 538:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int fd = ((atiny_net_context *)ctx)->fd;
+ 523              		.loc 1 538 0
+ 524 0008 7B68     		ldr	r3, [r7, #4]
+ 525 000a 1B68     		ldr	r3, [r3]
+ 526 000c FB60     		str	r3, [r7, #12]
+ 539:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 540:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (fd >= 0)
+ 527              		.loc 1 540 0
+ 528 000e FB68     		ldr	r3, [r7, #12]
+ 529 0010 002B     		cmp	r3, #0
+ 530 0012 02DB     		blt	.L27
+ 541:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 542:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 543:D:/iot/felix2/components/net/sal\atiny_socket.c ****         close(fd);
+ 544:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 545:D:/iot/felix2/components/net/sal\atiny_socket.c ****         at_api_close(fd);
+ 531              		.loc 1 545 0
+ 532 0014 F868     		ldr	r0, [r7, #12]
+ 533 0016 FFF7FEFF 		bl	at_api_close
+ 534              	.L27:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 20
+
+
+ 546:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_WIZNET)
+ 547:D:/iot/felix2/components/net/sal\atiny_socket.c ****         wiznet_close(fd);
+ 548:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 549:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 550:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 551:D:/iot/felix2/components/net/sal\atiny_socket.c ****     atiny_free(ctx);
+ 535              		.loc 1 551 0
+ 536 001a 7868     		ldr	r0, [r7, #4]
+ 537 001c FFF7FEFF 		bl	atiny_free
+ 552:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 538              		.loc 1 552 0
+ 539 0020 00BF     		nop
+ 540 0022 1037     		adds	r7, r7, #16
+ 541              	.LCFI34:
+ 542              		.cfi_def_cfa_offset 8
+ 543 0024 BD46     		mov	sp, r7
+ 544              	.LCFI35:
+ 545              		.cfi_def_cfa_register 13
+ 546              		@ sp needed
+ 547 0026 80BD     		pop	{r7, pc}
+ 548              		.cfi_endproc
+ 549              	.LFE139:
+ 551              		.section	.text.atiny_net_send_timeout,"ax",%progbits
+ 552              		.align	1
+ 553              		.global	atiny_net_send_timeout
+ 554              		.syntax unified
+ 555              		.thumb
+ 556              		.thumb_func
+ 557              		.fpu fpv4-sp-d16
+ 559              	atiny_net_send_timeout:
+ 560              	.LFB140:
+ 553:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 554:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 555:D:/iot/felix2/components/net/sal\atiny_socket.c **** static int atiny_net_write_sock(void *ctx, const unsigned char *buffer, int len, uint32_t timeout_m
+ 556:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 557:D:/iot/felix2/components/net/sal\atiny_socket.c ****     int fd;
+ 558:D:/iot/felix2/components/net/sal\atiny_socket.c ****     struct timeval interval = {timeout_ms / 1000, (timeout_ms % 1000) * 1000};
+ 559:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 560:D:/iot/felix2/components/net/sal\atiny_socket.c ****     fd = ((atiny_net_context *)ctx)->fd;
+ 561:D:/iot/felix2/components/net/sal\atiny_socket.c ****     if (interval.tv_sec < 0 || (interval.tv_sec == 0 && interval.tv_usec <= 0))
+ 562:D:/iot/felix2/components/net/sal\atiny_socket.c ****     {
+ 563:D:/iot/felix2/components/net/sal\atiny_socket.c ****         interval.tv_sec = 0;
+ 564:D:/iot/felix2/components/net/sal\atiny_socket.c ****         interval.tv_usec = 100;
+ 565:D:/iot/felix2/components/net/sal\atiny_socket.c ****     }
+ 566:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 567:D:/iot/felix2/components/net/sal\atiny_socket.c ****     setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char *)&interval, sizeof(struct timeval));
+ 568:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return write(fd, buffer, len);
+ 569:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 570:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 571:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 572:D:/iot/felix2/components/net/sal\atiny_socket.c **** int atiny_net_send_timeout(void *ctx, const unsigned char *buf, size_t len,
+ 573:D:/iot/felix2/components/net/sal\atiny_socket.c ****                           uint32_t timeout)
+ 574:D:/iot/felix2/components/net/sal\atiny_socket.c **** {
+ 561              		.loc 1 574 0
+ 562              		.cfi_startproc
+ 563              		@ args = 0, pretend = 0, frame = 24
+ 564              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 21
+
+
+ 565 0000 80B5     		push	{r7, lr}
+ 566              	.LCFI36:
+ 567              		.cfi_def_cfa_offset 8
+ 568              		.cfi_offset 7, -8
+ 569              		.cfi_offset 14, -4
+ 570 0002 86B0     		sub	sp, sp, #24
+ 571              	.LCFI37:
+ 572              		.cfi_def_cfa_offset 32
+ 573 0004 00AF     		add	r7, sp, #0
+ 574              	.LCFI38:
+ 575              		.cfi_def_cfa_register 7
+ 576 0006 F860     		str	r0, [r7, #12]
+ 577 0008 B960     		str	r1, [r7, #8]
+ 578 000a 7A60     		str	r2, [r7, #4]
+ 579 000c 3B60     		str	r3, [r7]
+ 575:D:/iot/felix2/components/net/sal\atiny_socket.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+ 576:D:/iot/felix2/components/net/sal\atiny_socket.c ****     return atiny_net_write_sock(ctx, buf, len, timeout);
+ 577:D:/iot/felix2/components/net/sal\atiny_socket.c **** #elif defined(WITH_AT_FRAMEWORK)
+ 578:D:/iot/felix2/components/net/sal\atiny_socket.c ****         int fd;
+ 579:D:/iot/felix2/components/net/sal\atiny_socket.c ****         fd = ((atiny_net_context *)ctx)->fd;
+ 580              		.loc 1 579 0
+ 581 000e FB68     		ldr	r3, [r7, #12]
+ 582 0010 1B68     		ldr	r3, [r3]
+ 583 0012 7B61     		str	r3, [r7, #20]
+ 580:D:/iot/felix2/components/net/sal\atiny_socket.c ****         return at_api_send(fd , buf, (uint32_t)len);
+ 584              		.loc 1 580 0
+ 585 0014 7A68     		ldr	r2, [r7, #4]
+ 586 0016 B968     		ldr	r1, [r7, #8]
+ 587 0018 7869     		ldr	r0, [r7, #20]
+ 588 001a FFF7FEFF 		bl	at_api_send
+ 589 001e 0346     		mov	r3, r0
+ 581:D:/iot/felix2/components/net/sal\atiny_socket.c **** #endif
+ 582:D:/iot/felix2/components/net/sal\atiny_socket.c **** 
+ 583:D:/iot/felix2/components/net/sal\atiny_socket.c **** }
+ 590              		.loc 1 583 0
+ 591 0020 1846     		mov	r0, r3
+ 592 0022 1837     		adds	r7, r7, #24
+ 593              	.LCFI39:
+ 594              		.cfi_def_cfa_offset 8
+ 595 0024 BD46     		mov	sp, r7
+ 596              	.LCFI40:
+ 597              		.cfi_def_cfa_register 13
+ 598              		@ sp needed
+ 599 0026 80BD     		pop	{r7, pc}
+ 600              		.cfi_endproc
+ 601              	.LFE140:
+ 603              		.section	.rodata.__FUNCTION__.10010,"a",%progbits
+ 604              		.align	2
+ 607              	__FUNCTION__.10010:
+ 608 0000 6174696E 		.ascii	"atiny_net_bind\000"
+ 608      795F6E65 
+ 608      745F6269 
+ 608      6E6400
+ 609              		.section	.rodata.__FUNCTION__.10024,"a",%progbits
+ 610              		.align	2
+ 613              	__FUNCTION__.10024:
+ 614 0000 6174696E 		.ascii	"atiny_net_connect\000"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 22
+
+
+ 614      795F6E65 
+ 614      745F636F 
+ 614      6E6E6563 
+ 614      7400
+ 615              		.section	.rodata.__FUNCTION__.10047,"a",%progbits
+ 616              		.align	2
+ 619              	__FUNCTION__.10047:
+ 620 0000 6174696E 		.ascii	"atiny_net_send\000"
+ 620      795F6E65 
+ 620      745F7365 
+ 620      6E6400
+ 621              		.text
+ 622              	.Letext0:
+ 623              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 624              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 625              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 626              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 627              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 628              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 629              		.file 8 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 630              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 631              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 632              		.file 11 "D:/iot/felix2/kernel/include/los_list.h"
+ 633              		.file 12 "D:/iot/felix2/kernel/include/los_err.h"
+ 634              		.file 13 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 635              		.file 14 "D:/iot/felix2/kernel/include/los_tick.h"
+ 636              		.file 15 "D:/iot/felix2/kernel/include/los_event.h"
+ 637              		.file 16 "D:/iot/felix2/kernel/include/los_task.h"
+ 638              		.file 17 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 639              		.file 18 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 640              		.file 19 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 641              		.file 20 "D:/iot/felix2/kernel/include/los_config.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cczF9M0z.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 atiny_socket.c
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:18     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:26     .text.atiny_net_bind:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:33     .text.atiny_net_bind:00000000 atiny_net_bind
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:112    .text.atiny_net_bind:00000060 $d
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:607    .rodata.__FUNCTION__.10010:00000000 __FUNCTION__.10010
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:119    .text.atiny_net_accept:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:126    .text.atiny_net_accept:00000000 atiny_net_accept
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:177    .text.atiny_net_connect:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:184    .text.atiny_net_connect:00000000 atiny_net_connect
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:292    .text.atiny_net_connect:00000094 $d
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:613    .rodata.__FUNCTION__.10024:00000000 __FUNCTION__.10024
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:300    .text.atiny_net_recv:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:307    .text.atiny_net_recv:00000000 atiny_net_recv
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:356    .text.atiny_net_recv_timeout:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:363    .text.atiny_net_recv_timeout:00000000 atiny_net_recv_timeout
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:422    .text.atiny_net_send:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:429    .text.atiny_net_send:00000000 atiny_net_send
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:492    .text.atiny_net_send:00000048 $d
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:619    .rodata.__FUNCTION__.10047:00000000 __FUNCTION__.10047
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:498    .text.atiny_net_close:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:505    .text.atiny_net_close:00000000 atiny_net_close
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:552    .text.atiny_net_send_timeout:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:559    .text.atiny_net_send_timeout:00000000 atiny_net_send_timeout
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:604    .rodata.__FUNCTION__.10010:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:610    .rodata.__FUNCTION__.10024:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cczF9M0z.s:616    .rodata.__FUNCTION__.10047:00000000 $d
+
+UNDEFINED SYMBOLS
+atiny_malloc
+atiny_printf
+at_api_bind
+atiny_free
+at_api_connect
+at_api_recv
+at_api_recv_timeout
+at_api_send
+at_api_close

@@ -1,0 +1,1872 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"los_mux.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.LOS_ListInit,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	LOS_ListInit:
+  25              	.LFB123:
+  26              		.file 1 "D:/iot/felix2/kernel/include/los_list.h"
+   1:D:/iot/felix2/kernel/include\los_list.h **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/kernel/include\los_list.h ****  * Copyright (c) <2013-2015>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/kernel/include\los_list.h ****  * All rights reserved.
+   4:D:/iot/felix2/kernel/include\los_list.h ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/kernel/include\los_list.h ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/kernel/include\los_list.h ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/kernel/include\los_list.h ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/kernel/include\los_list.h ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/kernel/include\los_list.h ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/kernel/include\los_list.h ****  * provided with the distribution.
+  11:D:/iot/felix2/kernel/include\los_list.h ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/kernel/include\los_list.h ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/kernel/include\los_list.h ****  * permission.
+  14:D:/iot/felix2/kernel/include\los_list.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/kernel/include\los_list.h ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/kernel/include\los_list.h ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/kernel/include\los_list.h ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/kernel/include\los_list.h ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/kernel/include\los_list.h ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/kernel/include\los_list.h ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/kernel/include\los_list.h ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/kernel/include\los_list.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/kernel/include\los_list.h ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/kernel/include\los_list.h ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/kernel/include\los_list.h ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/kernel/include\los_list.h **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/kernel/include\los_list.h ****  * Notice of Export Control Law
+  28:D:/iot/felix2/kernel/include\los_list.h ****  * ===============================================
+  29:D:/iot/felix2/kernel/include\los_list.h ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/kernel/include\los_list.h ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/kernel/include\los_list.h ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/kernel/include\los_list.h ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 2
+
+
+  33:D:/iot/felix2/kernel/include\los_list.h ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/kernel/include\los_list.h **** 
+  35:D:/iot/felix2/kernel/include\los_list.h ****  /** @defgroup los_list Doubly linked list
+  36:D:/iot/felix2/kernel/include\los_list.h ****  * @ingroup kernel
+  37:D:/iot/felix2/kernel/include\los_list.h ****  */
+  38:D:/iot/felix2/kernel/include\los_list.h **** 
+  39:D:/iot/felix2/kernel/include\los_list.h **** #ifndef _LOS_LIST_H
+  40:D:/iot/felix2/kernel/include\los_list.h **** #define _LOS_LIST_H
+  41:D:/iot/felix2/kernel/include\los_list.h **** 
+  42:D:/iot/felix2/kernel/include\los_list.h **** #include "los_typedef.h"
+  43:D:/iot/felix2/kernel/include\los_list.h **** 
+  44:D:/iot/felix2/kernel/include\los_list.h **** #ifdef __cplusplus
+  45:D:/iot/felix2/kernel/include\los_list.h **** #if __cplusplus
+  46:D:/iot/felix2/kernel/include\los_list.h **** extern "C" {
+  47:D:/iot/felix2/kernel/include\los_list.h **** #endif /* __cplusplus */
+  48:D:/iot/felix2/kernel/include\los_list.h **** #endif /* __cplusplus */
+  49:D:/iot/felix2/kernel/include\los_list.h **** 
+  50:D:/iot/felix2/kernel/include\los_list.h **** 
+  51:D:/iot/felix2/kernel/include\los_list.h **** /**
+  52:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+  53:D:/iot/felix2/kernel/include\los_list.h ****  *Structure of a node in a doubly linked list.
+  54:D:/iot/felix2/kernel/include\los_list.h ****  */
+  55:D:/iot/felix2/kernel/include\los_list.h **** typedef struct LOS_DL_LIST
+  56:D:/iot/felix2/kernel/include\los_list.h **** {
+  57:D:/iot/felix2/kernel/include\los_list.h ****     struct LOS_DL_LIST *pstPrev;            /**< Current node's pointer to the previous node*/
+  58:D:/iot/felix2/kernel/include\los_list.h ****     struct LOS_DL_LIST *pstNext;            /**< Current node's pointer to the next node*/
+  59:D:/iot/felix2/kernel/include\los_list.h **** } LOS_DL_LIST;
+  60:D:/iot/felix2/kernel/include\los_list.h **** 
+  61:D:/iot/felix2/kernel/include\los_list.h **** /**
+  62:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+  63:D:/iot/felix2/kernel/include\los_list.h ****  *@brief Initialize a doubly linked list.
+  64:D:/iot/felix2/kernel/include\los_list.h ****  *
+  65:D:/iot/felix2/kernel/include\los_list.h ****  *@par Description:
+  66:D:/iot/felix2/kernel/include\los_list.h ****  *This API is used to initialize a doubly linked list.
+  67:D:/iot/felix2/kernel/include\los_list.h ****  *@attention
+  68:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+  69:D:/iot/felix2/kernel/include\los_list.h ****  *<li>The parameter passed in should be ensured to be a legal pointer.</li>
+  70:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+  71:D:/iot/felix2/kernel/include\los_list.h ****  *
+  72:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstList    [IN] Node in a doubly linked list.
+  73:D:/iot/felix2/kernel/include\los_list.h ****  *
+  74:D:/iot/felix2/kernel/include\los_list.h ****  *@retval None.
+  75:D:/iot/felix2/kernel/include\los_list.h ****  *@par Dependency:
+  76:D:/iot/felix2/kernel/include\los_list.h ****  *<ul><li>los_list.h: the header file that contains the API declaration.</li></ul>
+  77:D:/iot/felix2/kernel/include\los_list.h ****  *@see
+  78:D:/iot/felix2/kernel/include\los_list.h ****  *@since Huawei LiteOS V100R001C00
+  79:D:/iot/felix2/kernel/include\los_list.h ****  */
+  80:D:/iot/felix2/kernel/include\los_list.h **** LITE_OS_SEC_ALW_INLINE STATIC_INLINE VOID LOS_ListInit(LOS_DL_LIST *pstList)
+  81:D:/iot/felix2/kernel/include\los_list.h **** {
+  27              		.loc 1 81 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 3
+
+
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  82:D:/iot/felix2/kernel/include\los_list.h ****     pstList->pstNext = pstList;
+  43              		.loc 1 82 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 7A68     		ldr	r2, [r7, #4]
+  46 000c 5A60     		str	r2, [r3, #4]
+  83:D:/iot/felix2/kernel/include\los_list.h ****     pstList->pstPrev = pstList;
+  47              		.loc 1 83 0
+  48 000e 7B68     		ldr	r3, [r7, #4]
+  49 0010 7A68     		ldr	r2, [r7, #4]
+  50 0012 1A60     		str	r2, [r3]
+  84:D:/iot/felix2/kernel/include\los_list.h **** }
+  51              		.loc 1 84 0
+  52 0014 00BF     		nop
+  53 0016 0C37     		adds	r7, r7, #12
+  54              	.LCFI3:
+  55              		.cfi_def_cfa_offset 4
+  56 0018 BD46     		mov	sp, r7
+  57              	.LCFI4:
+  58              		.cfi_def_cfa_register 13
+  59              		@ sp needed
+  60 001a 5DF8047B 		ldr	r7, [sp], #4
+  61              	.LCFI5:
+  62              		.cfi_restore 7
+  63              		.cfi_def_cfa_offset 0
+  64 001e 7047     		bx	lr
+  65              		.cfi_endproc
+  66              	.LFE123:
+  68              		.section	.text.LOS_ListAdd,"ax",%progbits
+  69              		.align	1
+  70              		.syntax unified
+  71              		.thumb
+  72              		.thumb_func
+  73              		.fpu fpv4-sp-d16
+  75              	LOS_ListAdd:
+  76              	.LFB124:
+  85:D:/iot/felix2/kernel/include\los_list.h **** 
+  86:D:/iot/felix2/kernel/include\los_list.h **** /**
+  87:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+  88:D:/iot/felix2/kernel/include\los_list.h ****  *@brief Point to the next node pointed to by the current node.
+  89:D:/iot/felix2/kernel/include\los_list.h ****  *
+  90:D:/iot/felix2/kernel/include\los_list.h ****  *@par Description:
+  91:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+  92:D:/iot/felix2/kernel/include\los_list.h ****  *<li>This API is used to point to the next node pointed to by the current node.</li>
+  93:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+  94:D:/iot/felix2/kernel/include\los_list.h ****  *@attention
+  95:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+  96:D:/iot/felix2/kernel/include\los_list.h ****  *<li>None.</li>
+  97:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+  98:D:/iot/felix2/kernel/include\los_list.h ****  *
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 4
+
+
+  99:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstObject  [IN] Node in the doubly linked list.
+ 100:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 101:D:/iot/felix2/kernel/include\los_list.h ****  *@retval None.
+ 102:D:/iot/felix2/kernel/include\los_list.h ****  *@par Dependency:
+ 103:D:/iot/felix2/kernel/include\los_list.h ****  *<ul><li>los_list.h: the header file that contains the API declaration.</li></ul>
+ 104:D:/iot/felix2/kernel/include\los_list.h ****  *@see
+ 105:D:/iot/felix2/kernel/include\los_list.h ****  *@since Huawei LiteOS V100R001C00
+ 106:D:/iot/felix2/kernel/include\los_list.h ****  */
+ 107:D:/iot/felix2/kernel/include\los_list.h **** #define LOS_DL_LIST_FIRST(pstObject) ((pstObject)->pstNext)
+ 108:D:/iot/felix2/kernel/include\los_list.h **** 
+ 109:D:/iot/felix2/kernel/include\los_list.h **** /**
+ 110:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+ 111:D:/iot/felix2/kernel/include\los_list.h ****  *@brief Insert a new node to a doubly linked list.
+ 112:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 113:D:/iot/felix2/kernel/include\los_list.h ****  *@par Description:
+ 114:D:/iot/felix2/kernel/include\los_list.h ****  *This API is used to insert a new node to a doubly linked list.
+ 115:D:/iot/felix2/kernel/include\los_list.h ****  *@attention
+ 116:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+ 117:D:/iot/felix2/kernel/include\los_list.h ****  *<li>The parameters passed in should be ensured to be legal pointers.</li>
+ 118:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+ 119:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 120:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstList    [IN]   Doubly linked list where the new node is inserted.
+ 121:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstNode    [IN]   New node to be inserted.
+ 122:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 123:D:/iot/felix2/kernel/include\los_list.h ****  *@retval None
+ 124:D:/iot/felix2/kernel/include\los_list.h ****  *@par Dependency:
+ 125:D:/iot/felix2/kernel/include\los_list.h ****  *<ul><li>los_list.h: the header file that contains the API declaration.</li></ul>
+ 126:D:/iot/felix2/kernel/include\los_list.h ****  *@see LOS_ListDelete
+ 127:D:/iot/felix2/kernel/include\los_list.h ****  *@since Huawei LiteOS V100R001C00
+ 128:D:/iot/felix2/kernel/include\los_list.h ****  */
+ 129:D:/iot/felix2/kernel/include\los_list.h **** LITE_OS_SEC_ALW_INLINE STATIC_INLINE VOID LOS_ListAdd(LOS_DL_LIST *pstList, LOS_DL_LIST *pstNode)
+ 130:D:/iot/felix2/kernel/include\los_list.h **** {
+  77              		.loc 1 130 0
+  78              		.cfi_startproc
+  79              		@ args = 0, pretend = 0, frame = 8
+  80              		@ frame_needed = 1, uses_anonymous_args = 0
+  81              		@ link register save eliminated.
+  82 0000 80B4     		push	{r7}
+  83              	.LCFI6:
+  84              		.cfi_def_cfa_offset 4
+  85              		.cfi_offset 7, -4
+  86 0002 83B0     		sub	sp, sp, #12
+  87              	.LCFI7:
+  88              		.cfi_def_cfa_offset 16
+  89 0004 00AF     		add	r7, sp, #0
+  90              	.LCFI8:
+  91              		.cfi_def_cfa_register 7
+  92 0006 7860     		str	r0, [r7, #4]
+  93 0008 3960     		str	r1, [r7]
+ 131:D:/iot/felix2/kernel/include\los_list.h ****     pstNode->pstNext = pstList->pstNext;
+  94              		.loc 1 131 0
+  95 000a 7B68     		ldr	r3, [r7, #4]
+  96 000c 5A68     		ldr	r2, [r3, #4]
+  97 000e 3B68     		ldr	r3, [r7]
+  98 0010 5A60     		str	r2, [r3, #4]
+ 132:D:/iot/felix2/kernel/include\los_list.h ****     pstNode->pstPrev = pstList;
+  99              		.loc 1 132 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 5
+
+
+ 100 0012 3B68     		ldr	r3, [r7]
+ 101 0014 7A68     		ldr	r2, [r7, #4]
+ 102 0016 1A60     		str	r2, [r3]
+ 133:D:/iot/felix2/kernel/include\los_list.h ****     pstList->pstNext->pstPrev = pstNode;
+ 103              		.loc 1 133 0
+ 104 0018 7B68     		ldr	r3, [r7, #4]
+ 105 001a 5B68     		ldr	r3, [r3, #4]
+ 106 001c 3A68     		ldr	r2, [r7]
+ 107 001e 1A60     		str	r2, [r3]
+ 134:D:/iot/felix2/kernel/include\los_list.h ****     pstList->pstNext = pstNode;
+ 108              		.loc 1 134 0
+ 109 0020 7B68     		ldr	r3, [r7, #4]
+ 110 0022 3A68     		ldr	r2, [r7]
+ 111 0024 5A60     		str	r2, [r3, #4]
+ 135:D:/iot/felix2/kernel/include\los_list.h **** }
+ 112              		.loc 1 135 0
+ 113 0026 00BF     		nop
+ 114 0028 0C37     		adds	r7, r7, #12
+ 115              	.LCFI9:
+ 116              		.cfi_def_cfa_offset 4
+ 117 002a BD46     		mov	sp, r7
+ 118              	.LCFI10:
+ 119              		.cfi_def_cfa_register 13
+ 120              		@ sp needed
+ 121 002c 5DF8047B 		ldr	r7, [sp], #4
+ 122              	.LCFI11:
+ 123              		.cfi_restore 7
+ 124              		.cfi_def_cfa_offset 0
+ 125 0030 7047     		bx	lr
+ 126              		.cfi_endproc
+ 127              	.LFE124:
+ 129              		.section	.text.LOS_ListTailInsert,"ax",%progbits
+ 130              		.align	1
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.fpu fpv4-sp-d16
+ 136              	LOS_ListTailInsert:
+ 137              	.LFB125:
+ 136:D:/iot/felix2/kernel/include\los_list.h **** 
+ 137:D:/iot/felix2/kernel/include\los_list.h **** /**
+ 138:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+ 139:D:/iot/felix2/kernel/include\los_list.h ****  *@brief Insert a node to the tail of a doubly linked list.
+ 140:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 141:D:/iot/felix2/kernel/include\los_list.h ****  *@par Description:
+ 142:D:/iot/felix2/kernel/include\los_list.h ****  *This API is used to insert a new node to the tail of a doubly linked list.
+ 143:D:/iot/felix2/kernel/include\los_list.h ****  *@attention
+ 144:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+ 145:D:/iot/felix2/kernel/include\los_list.h ****  *<li>The parameters passed in should be ensured to be legal pointers.</li>
+ 146:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+ 147:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 148:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstList     [IN] Doubly linked list where the new node is inserted.
+ 149:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstNode     [IN] New node to be inserted.
+ 150:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 151:D:/iot/felix2/kernel/include\los_list.h ****  *@retval None.
+ 152:D:/iot/felix2/kernel/include\los_list.h ****  *@par Dependency:
+ 153:D:/iot/felix2/kernel/include\los_list.h ****  *<ul><li>los_list.h: the header file that contains the API declaration.</li></ul>
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 6
+
+
+ 154:D:/iot/felix2/kernel/include\los_list.h ****  *@see LOS_ListAdd | LOS_ListHeadInsert
+ 155:D:/iot/felix2/kernel/include\los_list.h ****  *@since Huawei LiteOS V100R001C00
+ 156:D:/iot/felix2/kernel/include\los_list.h ****  */
+ 157:D:/iot/felix2/kernel/include\los_list.h **** LITE_OS_SEC_ALW_INLINE STATIC_INLINE VOID LOS_ListTailInsert(LOS_DL_LIST *pstList, LOS_DL_LIST *pst
+ 158:D:/iot/felix2/kernel/include\los_list.h **** {
+ 138              		.loc 1 158 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 8
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142 0000 80B5     		push	{r7, lr}
+ 143              	.LCFI12:
+ 144              		.cfi_def_cfa_offset 8
+ 145              		.cfi_offset 7, -8
+ 146              		.cfi_offset 14, -4
+ 147 0002 82B0     		sub	sp, sp, #8
+ 148              	.LCFI13:
+ 149              		.cfi_def_cfa_offset 16
+ 150 0004 00AF     		add	r7, sp, #0
+ 151              	.LCFI14:
+ 152              		.cfi_def_cfa_register 7
+ 153 0006 7860     		str	r0, [r7, #4]
+ 154 0008 3960     		str	r1, [r7]
+ 159:D:/iot/felix2/kernel/include\los_list.h ****     LOS_ListAdd(pstList->pstPrev, pstNode);
+ 155              		.loc 1 159 0
+ 156 000a 7B68     		ldr	r3, [r7, #4]
+ 157 000c 1B68     		ldr	r3, [r3]
+ 158 000e 3968     		ldr	r1, [r7]
+ 159 0010 1846     		mov	r0, r3
+ 160 0012 FFF7FEFF 		bl	LOS_ListAdd
+ 160:D:/iot/felix2/kernel/include\los_list.h **** }
+ 161              		.loc 1 160 0
+ 162 0016 00BF     		nop
+ 163 0018 0837     		adds	r7, r7, #8
+ 164              	.LCFI15:
+ 165              		.cfi_def_cfa_offset 8
+ 166 001a BD46     		mov	sp, r7
+ 167              	.LCFI16:
+ 168              		.cfi_def_cfa_register 13
+ 169              		@ sp needed
+ 170 001c 80BD     		pop	{r7, pc}
+ 171              		.cfi_endproc
+ 172              	.LFE125:
+ 174              		.section	.text.LOS_ListDelete,"ax",%progbits
+ 175              		.align	1
+ 176              		.syntax unified
+ 177              		.thumb
+ 178              		.thumb_func
+ 179              		.fpu fpv4-sp-d16
+ 181              	LOS_ListDelete:
+ 182              	.LFB126:
+ 161:D:/iot/felix2/kernel/include\los_list.h **** 
+ 162:D:/iot/felix2/kernel/include\los_list.h **** /**
+ 163:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+ 164:D:/iot/felix2/kernel/include\los_list.h ****  *@brief Delete a specified node from a doubly linked list.
+ 165:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 166:D:/iot/felix2/kernel/include\los_list.h ****  *@par Description:
+ 167:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 7
+
+
+ 168:D:/iot/felix2/kernel/include\los_list.h ****  *<li>This API is used to delete a specified node from a doubly linked list.</li>
+ 169:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+ 170:D:/iot/felix2/kernel/include\los_list.h ****  *@attention
+ 171:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+ 172:D:/iot/felix2/kernel/include\los_list.h ****  *<li>The parameter passed in should be ensured to be a legal pointer.</li>
+ 173:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+ 174:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 175:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstNode    [IN] Node to be deleted.
+ 176:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 177:D:/iot/felix2/kernel/include\los_list.h ****  *@retval None.
+ 178:D:/iot/felix2/kernel/include\los_list.h ****  *@par Dependency:
+ 179:D:/iot/felix2/kernel/include\los_list.h ****  *<ul><li>los_list.h: the header file that contains the API declaration.</li></ul>
+ 180:D:/iot/felix2/kernel/include\los_list.h ****  *@see LOS_ListAdd
+ 181:D:/iot/felix2/kernel/include\los_list.h ****  *@since Huawei LiteOS V100R001C00
+ 182:D:/iot/felix2/kernel/include\los_list.h ****  */
+ 183:D:/iot/felix2/kernel/include\los_list.h **** LITE_OS_SEC_ALW_INLINE STATIC_INLINE VOID LOS_ListDelete(LOS_DL_LIST *pstNode)
+ 184:D:/iot/felix2/kernel/include\los_list.h **** {
+ 183              		.loc 1 184 0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 8
+ 186              		@ frame_needed = 1, uses_anonymous_args = 0
+ 187              		@ link register save eliminated.
+ 188 0000 80B4     		push	{r7}
+ 189              	.LCFI17:
+ 190              		.cfi_def_cfa_offset 4
+ 191              		.cfi_offset 7, -4
+ 192 0002 83B0     		sub	sp, sp, #12
+ 193              	.LCFI18:
+ 194              		.cfi_def_cfa_offset 16
+ 195 0004 00AF     		add	r7, sp, #0
+ 196              	.LCFI19:
+ 197              		.cfi_def_cfa_register 7
+ 198 0006 7860     		str	r0, [r7, #4]
+ 185:D:/iot/felix2/kernel/include\los_list.h ****     pstNode->pstNext->pstPrev = pstNode->pstPrev;
+ 199              		.loc 1 185 0
+ 200 0008 7B68     		ldr	r3, [r7, #4]
+ 201 000a 5B68     		ldr	r3, [r3, #4]
+ 202 000c 7A68     		ldr	r2, [r7, #4]
+ 203 000e 1268     		ldr	r2, [r2]
+ 204 0010 1A60     		str	r2, [r3]
+ 186:D:/iot/felix2/kernel/include\los_list.h ****     pstNode->pstPrev->pstNext = pstNode->pstNext;
+ 205              		.loc 1 186 0
+ 206 0012 7B68     		ldr	r3, [r7, #4]
+ 207 0014 1B68     		ldr	r3, [r3]
+ 208 0016 7A68     		ldr	r2, [r7, #4]
+ 209 0018 5268     		ldr	r2, [r2, #4]
+ 210 001a 5A60     		str	r2, [r3, #4]
+ 187:D:/iot/felix2/kernel/include\los_list.h ****     pstNode->pstNext = (LOS_DL_LIST *)NULL;
+ 211              		.loc 1 187 0
+ 212 001c 7B68     		ldr	r3, [r7, #4]
+ 213 001e 0022     		movs	r2, #0
+ 214 0020 5A60     		str	r2, [r3, #4]
+ 188:D:/iot/felix2/kernel/include\los_list.h ****     pstNode->pstPrev = (LOS_DL_LIST *)NULL;
+ 215              		.loc 1 188 0
+ 216 0022 7B68     		ldr	r3, [r7, #4]
+ 217 0024 0022     		movs	r2, #0
+ 218 0026 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 8
+
+
+ 189:D:/iot/felix2/kernel/include\los_list.h **** }
+ 219              		.loc 1 189 0
+ 220 0028 00BF     		nop
+ 221 002a 0C37     		adds	r7, r7, #12
+ 222              	.LCFI20:
+ 223              		.cfi_def_cfa_offset 4
+ 224 002c BD46     		mov	sp, r7
+ 225              	.LCFI21:
+ 226              		.cfi_def_cfa_register 13
+ 227              		@ sp needed
+ 228 002e 5DF8047B 		ldr	r7, [sp], #4
+ 229              	.LCFI22:
+ 230              		.cfi_restore 7
+ 231              		.cfi_def_cfa_offset 0
+ 232 0032 7047     		bx	lr
+ 233              		.cfi_endproc
+ 234              	.LFE126:
+ 236              		.section	.text.LOS_ListEmpty,"ax",%progbits
+ 237              		.align	1
+ 238              		.syntax unified
+ 239              		.thumb
+ 240              		.thumb_func
+ 241              		.fpu fpv4-sp-d16
+ 243              	LOS_ListEmpty:
+ 244              	.LFB127:
+ 190:D:/iot/felix2/kernel/include\los_list.h **** 
+ 191:D:/iot/felix2/kernel/include\los_list.h **** /**
+ 192:D:/iot/felix2/kernel/include\los_list.h ****  *@ingroup los_list
+ 193:D:/iot/felix2/kernel/include\los_list.h ****  *@brief Identify whether a specified doubly linked list is empty.
+ 194:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 195:D:/iot/felix2/kernel/include\los_list.h ****  *@par Description:
+ 196:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+ 197:D:/iot/felix2/kernel/include\los_list.h ****  *<li>This API is used to return whether a doubly linked list is empty.</li>
+ 198:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+ 199:D:/iot/felix2/kernel/include\los_list.h ****  *@attention
+ 200:D:/iot/felix2/kernel/include\los_list.h ****  *<ul>
+ 201:D:/iot/felix2/kernel/include\los_list.h ****  *<li>The parameter passed in should be ensured to be a legal pointer.</li>
+ 202:D:/iot/felix2/kernel/include\los_list.h ****  *</ul>
+ 203:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 204:D:/iot/felix2/kernel/include\los_list.h ****  *@param pstList  [IN] Doubly linked list.
+ 205:D:/iot/felix2/kernel/include\los_list.h ****  *
+ 206:D:/iot/felix2/kernel/include\los_list.h ****  *@retval TRUE The doubly linked list is empty.
+ 207:D:/iot/felix2/kernel/include\los_list.h ****  *@retval FALSE The doubly linked list is not empty.
+ 208:D:/iot/felix2/kernel/include\los_list.h ****  *@par Dependency:
+ 209:D:/iot/felix2/kernel/include\los_list.h ****  *<ul><li>los_list.h: the header file that contains the API declaration.</li></ul>
+ 210:D:/iot/felix2/kernel/include\los_list.h ****  *@see
+ 211:D:/iot/felix2/kernel/include\los_list.h ****  *@since Huawei LiteOS V100R001C00
+ 212:D:/iot/felix2/kernel/include\los_list.h ****  */
+ 213:D:/iot/felix2/kernel/include\los_list.h **** LITE_OS_SEC_ALW_INLINE STATIC_INLINE BOOL LOS_ListEmpty(LOS_DL_LIST *pstNode)
+ 214:D:/iot/felix2/kernel/include\los_list.h **** {
+ 245              		.loc 1 214 0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 8
+ 248              		@ frame_needed = 1, uses_anonymous_args = 0
+ 249              		@ link register save eliminated.
+ 250 0000 80B4     		push	{r7}
+ 251              	.LCFI23:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 9
+
+
+ 252              		.cfi_def_cfa_offset 4
+ 253              		.cfi_offset 7, -4
+ 254 0002 83B0     		sub	sp, sp, #12
+ 255              	.LCFI24:
+ 256              		.cfi_def_cfa_offset 16
+ 257 0004 00AF     		add	r7, sp, #0
+ 258              	.LCFI25:
+ 259              		.cfi_def_cfa_register 7
+ 260 0006 7860     		str	r0, [r7, #4]
+ 215:D:/iot/felix2/kernel/include\los_list.h ****     return (BOOL)(pstNode->pstNext == pstNode);
+ 261              		.loc 1 215 0
+ 262 0008 7B68     		ldr	r3, [r7, #4]
+ 263 000a 5B68     		ldr	r3, [r3, #4]
+ 264 000c 7A68     		ldr	r2, [r7, #4]
+ 265 000e 9A42     		cmp	r2, r3
+ 266 0010 0CBF     		ite	eq
+ 267 0012 0123     		moveq	r3, #1
+ 268 0014 0023     		movne	r3, #0
+ 269 0016 DBB2     		uxtb	r3, r3
+ 216:D:/iot/felix2/kernel/include\los_list.h **** }
+ 270              		.loc 1 216 0
+ 271 0018 1846     		mov	r0, r3
+ 272 001a 0C37     		adds	r7, r7, #12
+ 273              	.LCFI26:
+ 274              		.cfi_def_cfa_offset 4
+ 275 001c BD46     		mov	sp, r7
+ 276              	.LCFI27:
+ 277              		.cfi_def_cfa_register 13
+ 278              		@ sp needed
+ 279 001e 5DF8047B 		ldr	r7, [sp], #4
+ 280              	.LCFI28:
+ 281              		.cfi_restore 7
+ 282              		.cfi_def_cfa_offset 0
+ 283 0022 7047     		bx	lr
+ 284              		.cfi_endproc
+ 285              	.LFE127:
+ 287              		.comm	g_pstAllMux,4,4
+ 288              		.comm	g_stUnusedMuxList,8,4
+ 289              		.section	.text.osMuxInit,"ax",%progbits
+ 290              		.align	1
+ 291              		.global	osMuxInit
+ 292              		.syntax unified
+ 293              		.thumb
+ 294              		.thumb_func
+ 295              		.fpu fpv4-sp-d16
+ 297              	osMuxInit:
+ 298              	.LFB133:
+ 299              		.file 2 "D:/iot/felix2/kernel/base/ipc/los_mux.c"
+   1:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * Copyright (c) <2013-2015>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * All rights reserved.
+   4:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 10
+
+
+  10:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * provided with the distribution.
+  11:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * permission.
+  14:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * ===============================================
+  29:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  35:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_mux.inc"
+  36:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_err.ph"
+  37:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_memory.ph"
+  38:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_priqueue.ph"
+  39:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_task.ph"
+  40:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #if (LOSCFG_PLATFORM_EXC == YES)
+  41:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_exc.h"
+  42:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #endif
+  43:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #include "los_hw.h"
+  44:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  45:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #ifdef __cplusplus
+  46:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #if __cplusplus
+  47:D:/iot/felix2/kernel/base/ipc\los_mux.c **** extern "C"{
+  48:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #endif
+  49:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #endif /* __cplusplus */
+  50:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  51:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  52:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #if (LOSCFG_BASE_IPC_MUX == YES)
+  53:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  54:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_BSS MUX_CB_S             *g_pstAllMux;
+  55:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_BSS LOS_DL_LIST          g_stUnusedMuxList;
+  56:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  57:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  58:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*****************************************************************************
+  59:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Funtion	     : osMuxInit,
+  60:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Description  : Initializes the mutex,
+  61:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Input        : None
+  62:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Output       : None
+  63:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Return       : LOS_OK on success ,or error code on failure
+  64:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *****************************************************************************/
+  65:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_TEXT_INIT UINT32 osMuxInit(VOID)
+  66:D:/iot/felix2/kernel/base/ipc\los_mux.c **** {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 11
+
+
+ 300              		.loc 2 66 0
+ 301              		.cfi_startproc
+ 302              		@ args = 0, pretend = 0, frame = 8
+ 303              		@ frame_needed = 1, uses_anonymous_args = 0
+ 304 0000 80B5     		push	{r7, lr}
+ 305              	.LCFI29:
+ 306              		.cfi_def_cfa_offset 8
+ 307              		.cfi_offset 7, -8
+ 308              		.cfi_offset 14, -4
+ 309 0002 82B0     		sub	sp, sp, #8
+ 310              	.LCFI30:
+ 311              		.cfi_def_cfa_offset 16
+ 312 0004 00AF     		add	r7, sp, #0
+ 313              	.LCFI31:
+ 314              		.cfi_def_cfa_register 7
+  67:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     MUX_CB_S *pstMuxNode;
+  68:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32   uwIndex;
+  69:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  70:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_ListInit(&g_stUnusedMuxList);
+ 315              		.loc 2 70 0
+ 316 0006 1B48     		ldr	r0, .L12
+ 317 0008 FFF7FEFF 		bl	LOS_ListInit
+  71:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  72:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (LOSCFG_BASE_IPC_MUX_LIMIT == 0)   /*lint !e506*/
+  73:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+  74:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_ERRNO_MUX_MAXNUM_ZERO;
+  75:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+  76:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  77:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     g_pstAllMux = (MUX_CB_S *)LOS_MemAlloc(m_aucSysMem0, (LOSCFG_BASE_IPC_MUX_LIMIT * sizeof(MUX_CB
+ 318              		.loc 2 77 0
+ 319 000c 1A4B     		ldr	r3, .L12+4
+ 320 000e 1B68     		ldr	r3, [r3]
+ 321 0010 4FF4F071 		mov	r1, #480
+ 322 0014 1846     		mov	r0, r3
+ 323 0016 FFF7FEFF 		bl	LOS_MemAlloc
+ 324 001a 0246     		mov	r2, r0
+ 325 001c 174B     		ldr	r3, .L12+8
+ 326 001e 1A60     		str	r2, [r3]
+  78:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (NULL == g_pstAllMux)
+ 327              		.loc 2 78 0
+ 328 0020 164B     		ldr	r3, .L12+8
+ 329 0022 1B68     		ldr	r3, [r3]
+ 330 0024 002B     		cmp	r3, #0
+ 331 0026 01D1     		bne	.L8
+  79:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+  80:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_ERRNO_MUX_NO_MEMORY;
+ 332              		.loc 2 80 0
+ 333 0028 154B     		ldr	r3, .L12+12
+ 334 002a 1EE0     		b	.L9
+ 335              	.L8:
+  81:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+  82:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  83:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     for (uwIndex = 0; uwIndex < LOSCFG_BASE_IPC_MUX_LIMIT; uwIndex++)
+ 336              		.loc 2 83 0
+ 337 002c 0023     		movs	r3, #0
+ 338 002e 7B60     		str	r3, [r7, #4]
+ 339 0030 17E0     		b	.L10
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 12
+
+
+ 340              	.L11:
+  84:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+  85:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxNode              = ((MUX_CB_S *)g_pstAllMux) + uwIndex;
+ 341              		.loc 2 85 0 discriminator 3
+ 342 0032 124B     		ldr	r3, .L12+8
+ 343 0034 1968     		ldr	r1, [r3]
+ 344 0036 7A68     		ldr	r2, [r7, #4]
+ 345 0038 1346     		mov	r3, r2
+ 346 003a 5B00     		lsls	r3, r3, #1
+ 347 003c 1344     		add	r3, r3, r2
+ 348 003e DB00     		lsls	r3, r3, #3
+ 349 0040 0B44     		add	r3, r3, r1
+ 350 0042 3B60     		str	r3, [r7]
+  86:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxNode->ucMuxID     = uwIndex;
+ 351              		.loc 2 86 0 discriminator 3
+ 352 0044 3B68     		ldr	r3, [r7]
+ 353 0046 7A68     		ldr	r2, [r7, #4]
+ 354 0048 5A60     		str	r2, [r3, #4]
+  87:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxNode->ucMuxStat   = OS_MUX_UNUSED;
+ 355              		.loc 2 87 0 discriminator 3
+ 356 004a 3B68     		ldr	r3, [r7]
+ 357 004c 0022     		movs	r2, #0
+ 358 004e 1A70     		strb	r2, [r3]
+  88:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_ListTailInsert(&g_stUnusedMuxList, &pstMuxNode->stMuxList);
+ 359              		.loc 2 88 0 discriminator 3
+ 360 0050 3B68     		ldr	r3, [r7]
+ 361 0052 0833     		adds	r3, r3, #8
+ 362 0054 1946     		mov	r1, r3
+ 363 0056 0748     		ldr	r0, .L12
+ 364 0058 FFF7FEFF 		bl	LOS_ListTailInsert
+  83:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 365              		.loc 2 83 0 discriminator 3
+ 366 005c 7B68     		ldr	r3, [r7, #4]
+ 367 005e 0133     		adds	r3, r3, #1
+ 368 0060 7B60     		str	r3, [r7, #4]
+ 369              	.L10:
+  83:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 370              		.loc 2 83 0 is_stmt 0 discriminator 1
+ 371 0062 7B68     		ldr	r3, [r7, #4]
+ 372 0064 132B     		cmp	r3, #19
+ 373 0066 E4D9     		bls	.L11
+  89:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+  90:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     return LOS_OK;
+ 374              		.loc 2 90 0 is_stmt 1
+ 375 0068 0023     		movs	r3, #0
+ 376              	.L9:
+  91:D:/iot/felix2/kernel/base/ipc\los_mux.c **** }
+ 377              		.loc 2 91 0
+ 378 006a 1846     		mov	r0, r3
+ 379 006c 0837     		adds	r7, r7, #8
+ 380              	.LCFI32:
+ 381              		.cfi_def_cfa_offset 8
+ 382 006e BD46     		mov	sp, r7
+ 383              	.LCFI33:
+ 384              		.cfi_def_cfa_register 13
+ 385              		@ sp needed
+ 386 0070 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 13
+
+
+ 387              	.L13:
+ 388 0072 00BF     		.align	2
+ 389              	.L12:
+ 390 0074 00000000 		.word	g_stUnusedMuxList
+ 391 0078 00000000 		.word	m_aucSysMem0
+ 392 007c 00000000 		.word	g_pstAllMux
+ 393 0080 001D0002 		.word	33561856
+ 394              		.cfi_endproc
+ 395              	.LFE133:
+ 397              		.section	.rodata
+ 398              		.align	2
+ 399              	.LC0:
+ 400 0000 6F735F75 		.ascii	"os_unspecific_file\000"
+ 400      6E737065 
+ 400      63696669 
+ 400      635F6669 
+ 400      6C6500
+ 401              		.section	.text.LOS_MuxCreate,"ax",%progbits
+ 402              		.align	1
+ 403              		.global	LOS_MuxCreate
+ 404              		.syntax unified
+ 405              		.thumb
+ 406              		.thumb_func
+ 407              		.fpu fpv4-sp-d16
+ 409              	LOS_MuxCreate:
+ 410              	.LFB134:
+  92:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+  93:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*****************************************************************************
+  94:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Function     : LOS_MuxCreate
+  95:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Description  : Create a mutex,
+  96:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Input        : None
+  97:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Output       : puwMuxHandle ------ Mutex operation handle
+  98:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Return       : LOS_OK on success ,or error code on failure
+  99:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *****************************************************************************/
+ 100:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_TEXT_INIT  UINT32  LOS_MuxCreate (UINT32 *puwMuxHandle)
+ 101:D:/iot/felix2/kernel/base/ipc\los_mux.c **** {
+ 411              		.loc 2 101 0
+ 412              		.cfi_startproc
+ 413              		@ args = 0, pretend = 0, frame = 32
+ 414              		@ frame_needed = 1, uses_anonymous_args = 0
+ 415 0000 80B5     		push	{r7, lr}
+ 416              	.LCFI34:
+ 417              		.cfi_def_cfa_offset 8
+ 418              		.cfi_offset 7, -8
+ 419              		.cfi_offset 14, -4
+ 420 0002 8AB0     		sub	sp, sp, #40
+ 421              	.LCFI35:
+ 422              		.cfi_def_cfa_offset 48
+ 423 0004 02AF     		add	r7, sp, #8
+ 424              	.LCFI36:
+ 425              		.cfi_def_cfa 7, 40
+ 426 0006 7860     		str	r0, [r7, #4]
+ 102:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32      uwIntSave;
+ 103:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     MUX_CB_S    *pstMuxCreated;
+ 104:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_DL_LIST *pstUnusedMux;
+ 105:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32      uwErrNo;
+ 106:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32      uwErrLine;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 14
+
+
+ 107:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 108:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (NULL == puwMuxHandle)
+ 427              		.loc 2 108 0
+ 428 0008 7B68     		ldr	r3, [r7, #4]
+ 429 000a 002B     		cmp	r3, #0
+ 430 000c 01D1     		bne	.L15
+ 109:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 110:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_ERRNO_MUX_PTR_NULL;
+ 431              		.loc 2 110 0
+ 432 000e 214B     		ldr	r3, .L19
+ 433 0010 3CE0     		b	.L16
+ 434              	.L15:
+ 111:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 112:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 113:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     uwIntSave = LOS_IntLock();
+ 435              		.loc 2 113 0
+ 436 0012 FFF7FEFF 		bl	LOS_IntLock
+ 437 0016 F861     		str	r0, [r7, #28]
+ 114:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (LOS_ListEmpty(&g_stUnusedMuxList))
+ 438              		.loc 2 114 0
+ 439 0018 1F48     		ldr	r0, .L19+4
+ 440 001a FFF7FEFF 		bl	LOS_ListEmpty
+ 441 001e 0346     		mov	r3, r0
+ 442 0020 002B     		cmp	r3, #0
+ 443 0022 11D0     		beq	.L17
+ 115:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 116:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 444              		.loc 2 116 0
+ 445 0024 F869     		ldr	r0, [r7, #28]
+ 446 0026 FFF7FEFF 		bl	LOS_IntRestore
+ 117:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_GOTO_ERR_HANDLER(LOS_ERRNO_MUX_ALL_BUSY);
+ 447              		.loc 2 117 0
+ 448 002a 1C4B     		ldr	r3, .L19+8
+ 449 002c 3B61     		str	r3, [r7, #16]
+ 450 002e 1C4B     		ldr	r3, .L19+12
+ 451 0030 FB60     		str	r3, [r7, #12]
+ 452 0032 00BF     		nop
+ 453              	.L18:
+ 118:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 119:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 120:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstUnusedMux                = LOS_DL_LIST_FIRST(&(g_stUnusedMuxList));
+ 121:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_ListDelete(pstUnusedMux);
+ 122:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated               = (GET_MUX_LIST(pstUnusedMux)); /*lint !e413*/
+ 123:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->usMuxCount   = 0;
+ 124:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->ucMuxStat    = OS_MUX_USED;
+ 125:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->usPriority   = 0;
+ 126:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->pstOwner     = (LOS_TASK_CB *)NULL;
+ 127:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_ListInit(&pstMuxCreated->stMuxList);
+ 128:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     *puwMuxHandle               = (UINT32)pstMuxCreated->ucMuxID;
+ 129:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_IntRestore(uwIntSave);
+ 130:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     return LOS_OK;
+ 131:D:/iot/felix2/kernel/base/ipc\los_mux.c **** ErrHandler:
+ 132:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     OS_RETURN_ERROR_P2(uwErrLine, uwErrNo);
+ 454              		.loc 2 132 0
+ 455 0034 0023     		movs	r3, #0
+ 456 0036 0093     		str	r3, [sp]
+ 457 0038 0023     		movs	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 15
+
+
+ 458 003a 3A69     		ldr	r2, [r7, #16]
+ 459 003c F968     		ldr	r1, [r7, #12]
+ 460 003e 1948     		ldr	r0, .L19+16
+ 461 0040 FFF7FEFF 		bl	LOS_ErrHandle
+ 462 0044 3B69     		ldr	r3, [r7, #16]
+ 463 0046 21E0     		b	.L16
+ 464              	.L17:
+ 120:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_ListDelete(pstUnusedMux);
+ 465              		.loc 2 120 0
+ 466 0048 134B     		ldr	r3, .L19+4
+ 467 004a 5B68     		ldr	r3, [r3, #4]
+ 468 004c BB61     		str	r3, [r7, #24]
+ 121:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated               = (GET_MUX_LIST(pstUnusedMux)); /*lint !e413*/
+ 469              		.loc 2 121 0
+ 470 004e B869     		ldr	r0, [r7, #24]
+ 471 0050 FFF7FEFF 		bl	LOS_ListDelete
+ 122:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->usMuxCount   = 0;
+ 472              		.loc 2 122 0
+ 473 0054 BB69     		ldr	r3, [r7, #24]
+ 474 0056 083B     		subs	r3, r3, #8
+ 475 0058 7B61     		str	r3, [r7, #20]
+ 123:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->ucMuxStat    = OS_MUX_USED;
+ 476              		.loc 2 123 0
+ 477 005a 7B69     		ldr	r3, [r7, #20]
+ 478 005c 0022     		movs	r2, #0
+ 479 005e 5A80     		strh	r2, [r3, #2]	@ movhi
+ 124:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->usPriority   = 0;
+ 480              		.loc 2 124 0
+ 481 0060 7B69     		ldr	r3, [r7, #20]
+ 482 0062 0122     		movs	r2, #1
+ 483 0064 1A70     		strb	r2, [r3]
+ 125:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxCreated->pstOwner     = (LOS_TASK_CB *)NULL;
+ 484              		.loc 2 125 0
+ 485 0066 7B69     		ldr	r3, [r7, #20]
+ 486 0068 0022     		movs	r2, #0
+ 487 006a 9A82     		strh	r2, [r3, #20]	@ movhi
+ 126:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_ListInit(&pstMuxCreated->stMuxList);
+ 488              		.loc 2 126 0
+ 489 006c 7B69     		ldr	r3, [r7, #20]
+ 490 006e 0022     		movs	r2, #0
+ 491 0070 1A61     		str	r2, [r3, #16]
+ 127:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     *puwMuxHandle               = (UINT32)pstMuxCreated->ucMuxID;
+ 492              		.loc 2 127 0
+ 493 0072 7B69     		ldr	r3, [r7, #20]
+ 494 0074 0833     		adds	r3, r3, #8
+ 495 0076 1846     		mov	r0, r3
+ 496 0078 FFF7FEFF 		bl	LOS_ListInit
+ 128:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_IntRestore(uwIntSave);
+ 497              		.loc 2 128 0
+ 498 007c 7B69     		ldr	r3, [r7, #20]
+ 499 007e 5A68     		ldr	r2, [r3, #4]
+ 500 0080 7B68     		ldr	r3, [r7, #4]
+ 501 0082 1A60     		str	r2, [r3]
+ 129:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     return LOS_OK;
+ 502              		.loc 2 129 0
+ 503 0084 F869     		ldr	r0, [r7, #28]
+ 504 0086 FFF7FEFF 		bl	LOS_IntRestore
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 16
+
+
+ 130:D:/iot/felix2/kernel/base/ipc\los_mux.c **** ErrHandler:
+ 505              		.loc 2 130 0
+ 506 008a 0023     		movs	r3, #0
+ 507              	.L16:
+ 133:D:/iot/felix2/kernel/base/ipc\los_mux.c **** }
+ 508              		.loc 2 133 0
+ 509 008c 1846     		mov	r0, r3
+ 510 008e 2037     		adds	r7, r7, #32
+ 511              	.LCFI37:
+ 512              		.cfi_def_cfa_offset 8
+ 513 0090 BD46     		mov	sp, r7
+ 514              	.LCFI38:
+ 515              		.cfi_def_cfa_register 13
+ 516              		@ sp needed
+ 517 0092 80BD     		pop	{r7, pc}
+ 518              	.L20:
+ 519              		.align	2
+ 520              	.L19:
+ 521 0094 021D0002 		.word	33561858
+ 522 0098 00000000 		.word	g_stUnusedMuxList
+ 523 009c 031D0002 		.word	33561859
+ 524 00a0 F8C3B2A1 		.word	-1582119944
+ 525 00a4 00000000 		.word	.LC0
+ 526              		.cfi_endproc
+ 527              	.LFE134:
+ 529              		.section	.text.LOS_MuxDelete,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	LOS_MuxDelete
+ 532              		.syntax unified
+ 533              		.thumb
+ 534              		.thumb_func
+ 535              		.fpu fpv4-sp-d16
+ 537              	LOS_MuxDelete:
+ 538              	.LFB135:
+ 134:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 135:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*****************************************************************************
+ 136:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Function     : LOS_MuxDelete
+ 137:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Description  : Delete a mutex,
+ 138:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Input        : uwMuxHandle------Mutex operation handle
+ 139:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Output       : None
+ 140:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Return       : LOS_OK on success ,or error code on failure
+ 141:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *****************************************************************************/
+ 142:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_TEXT_INIT UINT32 LOS_MuxDelete(UINT32 uwMuxHandle)
+ 143:D:/iot/felix2/kernel/base/ipc\los_mux.c **** {
+ 539              		.loc 2 143 0
+ 540              		.cfi_startproc
+ 541              		@ args = 0, pretend = 0, frame = 24
+ 542              		@ frame_needed = 1, uses_anonymous_args = 0
+ 543 0000 80B5     		push	{r7, lr}
+ 544              	.LCFI39:
+ 545              		.cfi_def_cfa_offset 8
+ 546              		.cfi_offset 7, -8
+ 547              		.cfi_offset 14, -4
+ 548 0002 88B0     		sub	sp, sp, #32
+ 549              	.LCFI40:
+ 550              		.cfi_def_cfa_offset 40
+ 551 0004 02AF     		add	r7, sp, #8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 17
+
+
+ 552              	.LCFI41:
+ 553              		.cfi_def_cfa 7, 32
+ 554 0006 7860     		str	r0, [r7, #4]
+ 144:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32    uwIntSave;
+ 145:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     MUX_CB_S *pstMuxDeleted;
+ 146:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32   uwErrNo;
+ 147:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32   uwErrLine;
+ 148:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 149:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (uwMuxHandle >= (UINT32)LOSCFG_BASE_IPC_MUX_LIMIT)
+ 555              		.loc 2 149 0
+ 556 0008 7B68     		ldr	r3, [r7, #4]
+ 557 000a 132B     		cmp	r3, #19
+ 558 000c 04D9     		bls	.L22
+ 150:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 151:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_GOTO_ERR_HANDLER(LOS_ERRNO_MUX_INVALID);
+ 559              		.loc 2 151 0
+ 560 000e 264B     		ldr	r3, .L28
+ 561 0010 7B61     		str	r3, [r7, #20]
+ 562 0012 264B     		ldr	r3, .L28+4
+ 563 0014 3B61     		str	r3, [r7, #16]
+ 564 0016 39E0     		b	.L23
+ 565              	.L22:
+ 152:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 153:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 154:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxDeleted = GET_MUX(uwMuxHandle);
+ 566              		.loc 2 154 0
+ 567 0018 254B     		ldr	r3, .L28+8
+ 568 001a 1968     		ldr	r1, [r3]
+ 569 001c 7A68     		ldr	r2, [r7, #4]
+ 570 001e 1346     		mov	r3, r2
+ 571 0020 5B00     		lsls	r3, r3, #1
+ 572 0022 1344     		add	r3, r3, r2
+ 573 0024 DB00     		lsls	r3, r3, #3
+ 574 0026 0B44     		add	r3, r3, r1
+ 575 0028 FB60     		str	r3, [r7, #12]
+ 155:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     uwIntSave = LOS_IntLock();
+ 576              		.loc 2 155 0
+ 577 002a FFF7FEFF 		bl	LOS_IntLock
+ 578 002e B860     		str	r0, [r7, #8]
+ 156:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (OS_MUX_UNUSED == pstMuxDeleted->ucMuxStat)
+ 579              		.loc 2 156 0
+ 580 0030 FB68     		ldr	r3, [r7, #12]
+ 581 0032 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 582 0034 002B     		cmp	r3, #0
+ 583 0036 07D1     		bne	.L24
+ 157:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 158:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 584              		.loc 2 158 0
+ 585 0038 B868     		ldr	r0, [r7, #8]
+ 586 003a FFF7FEFF 		bl	LOS_IntRestore
+ 159:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_GOTO_ERR_HANDLER(LOS_ERRNO_MUX_INVALID);
+ 587              		.loc 2 159 0
+ 588 003e 1A4B     		ldr	r3, .L28
+ 589 0040 7B61     		str	r3, [r7, #20]
+ 590 0042 1A4B     		ldr	r3, .L28+4
+ 591 0044 3B61     		str	r3, [r7, #16]
+ 592 0046 21E0     		b	.L23
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 18
+
+
+ 593              	.L24:
+ 160:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 161:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 162:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (!LOS_ListEmpty(&pstMuxDeleted->stMuxList) || pstMuxDeleted->usMuxCount)
+ 594              		.loc 2 162 0
+ 595 0048 FB68     		ldr	r3, [r7, #12]
+ 596 004a 0833     		adds	r3, r3, #8
+ 597 004c 1846     		mov	r0, r3
+ 598 004e FFF7FEFF 		bl	LOS_ListEmpty
+ 599 0052 0346     		mov	r3, r0
+ 600 0054 002B     		cmp	r3, #0
+ 601 0056 03D0     		beq	.L25
+ 602              		.loc 2 162 0 is_stmt 0 discriminator 1
+ 603 0058 FB68     		ldr	r3, [r7, #12]
+ 604 005a 5B88     		ldrh	r3, [r3, #2]
+ 605 005c 002B     		cmp	r3, #0
+ 606 005e 07D0     		beq	.L26
+ 607              	.L25:
+ 163:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 164:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 608              		.loc 2 164 0 is_stmt 1
+ 609 0060 B868     		ldr	r0, [r7, #8]
+ 610 0062 FFF7FEFF 		bl	LOS_IntRestore
+ 165:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_GOTO_ERR_HANDLER(LOS_ERRNO_MUX_PENDED);
+ 611              		.loc 2 165 0
+ 612 0066 134B     		ldr	r3, .L28+12
+ 613 0068 7B61     		str	r3, [r7, #20]
+ 614 006a 104B     		ldr	r3, .L28+4
+ 615 006c 3B61     		str	r3, [r7, #16]
+ 616 006e 0DE0     		b	.L23
+ 617              	.L26:
+ 166:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 167:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 168:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_ListAdd(&g_stUnusedMuxList, &pstMuxDeleted->stMuxList);
+ 618              		.loc 2 168 0
+ 619 0070 FB68     		ldr	r3, [r7, #12]
+ 620 0072 0833     		adds	r3, r3, #8
+ 621 0074 1946     		mov	r1, r3
+ 622 0076 1048     		ldr	r0, .L28+16
+ 623 0078 FFF7FEFF 		bl	LOS_ListAdd
+ 169:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxDeleted->ucMuxStat = OS_MUX_UNUSED;
+ 624              		.loc 2 169 0
+ 625 007c FB68     		ldr	r3, [r7, #12]
+ 626 007e 0022     		movs	r2, #0
+ 627 0080 1A70     		strb	r2, [r3]
+ 170:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 171:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_IntRestore(uwIntSave);
+ 628              		.loc 2 171 0
+ 629 0082 B868     		ldr	r0, [r7, #8]
+ 630 0084 FFF7FEFF 		bl	LOS_IntRestore
+ 172:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 173:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     return LOS_OK;
+ 631              		.loc 2 173 0
+ 632 0088 0023     		movs	r3, #0
+ 633 008a 08E0     		b	.L27
+ 634              	.L23:
+ 174:D:/iot/felix2/kernel/base/ipc\los_mux.c **** ErrHandler:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 19
+
+
+ 175:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     OS_RETURN_ERROR_P2(uwErrLine, uwErrNo);
+ 635              		.loc 2 175 0
+ 636 008c 0023     		movs	r3, #0
+ 637 008e 0093     		str	r3, [sp]
+ 638 0090 0023     		movs	r3, #0
+ 639 0092 7A69     		ldr	r2, [r7, #20]
+ 640 0094 3969     		ldr	r1, [r7, #16]
+ 641 0096 0948     		ldr	r0, .L28+20
+ 642 0098 FFF7FEFF 		bl	LOS_ErrHandle
+ 643 009c 7B69     		ldr	r3, [r7, #20]
+ 644              	.L27:
+ 176:D:/iot/felix2/kernel/base/ipc\los_mux.c **** }
+ 645              		.loc 2 176 0
+ 646 009e 1846     		mov	r0, r3
+ 647 00a0 1837     		adds	r7, r7, #24
+ 648              	.LCFI42:
+ 649              		.cfi_def_cfa_offset 8
+ 650 00a2 BD46     		mov	sp, r7
+ 651              	.LCFI43:
+ 652              		.cfi_def_cfa_register 13
+ 653              		@ sp needed
+ 654 00a4 80BD     		pop	{r7, pc}
+ 655              	.L29:
+ 656 00a6 00BF     		.align	2
+ 657              	.L28:
+ 658 00a8 011D0002 		.word	33561857
+ 659 00ac F8C3B2A1 		.word	-1582119944
+ 660 00b0 00000000 		.word	g_pstAllMux
+ 661 00b4 091D0002 		.word	33561865
+ 662 00b8 00000000 		.word	g_stUnusedMuxList
+ 663 00bc 00000000 		.word	.LC0
+ 664              		.cfi_endproc
+ 665              	.LFE135:
+ 667              		.section	.rodata
+ 668 0013 00       		.align	2
+ 669              	.LC1:
+ 670 0014 5B455252 		.ascii	"[ERR] \000"
+ 670      5D2000
+ 671 001b 00       		.align	2
+ 672              	.LC2:
+ 673 001c 2121214C 		.ascii	"!!!LOS_ERRNO_MUX_PEND_IN_LOCK!!!\000"
+ 673      4F535F45 
+ 673      52524E4F 
+ 673      5F4D5558 
+ 673      5F50454E 
+ 674              		.section	.text.LOS_MuxPend,"ax",%progbits
+ 675              		.align	1
+ 676              		.global	LOS_MuxPend
+ 677              		.syntax unified
+ 678              		.thumb
+ 679              		.thumb_func
+ 680              		.fpu fpv4-sp-d16
+ 682              	LOS_MuxPend:
+ 683              	.LFB136:
+ 177:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 178:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*****************************************************************************
+ 179:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Function     : LOS_MuxPend
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 20
+
+
+ 180:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Description  : Specify the mutex P operation,
+ 181:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Input        : uwMuxHandle ------ Mutex operation handleone,
+ 182:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  		       uwTimeOut  ------- waiting time,
+ 183:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Output       : None
+ 184:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Return       : LOS_OK on success ,or error code on failure
+ 185:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *****************************************************************************/
+ 186:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_TEXT UINT32 LOS_MuxPend(UINT32 uwMuxHandle, UINT32 uwTimeout)
+ 187:D:/iot/felix2/kernel/base/ipc\los_mux.c **** {
+ 684              		.loc 2 187 0
+ 685              		.cfi_startproc
+ 686              		@ args = 0, pretend = 0, frame = 24
+ 687              		@ frame_needed = 1, uses_anonymous_args = 0
+ 688 0000 80B5     		push	{r7, lr}
+ 689              	.LCFI44:
+ 690              		.cfi_def_cfa_offset 8
+ 691              		.cfi_offset 7, -8
+ 692              		.cfi_offset 14, -4
+ 693 0002 88B0     		sub	sp, sp, #32
+ 694              	.LCFI45:
+ 695              		.cfi_def_cfa_offset 40
+ 696 0004 02AF     		add	r7, sp, #8
+ 697              	.LCFI46:
+ 698              		.cfi_def_cfa 7, 32
+ 699 0006 7860     		str	r0, [r7, #4]
+ 700 0008 3960     		str	r1, [r7]
+ 188:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32     uwIntSave;
+ 189:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     MUX_CB_S  *pstMuxPended;
+ 190:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32     uwRetErr;
+ 191:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_TASK_CB  *pstRunTsk;
+ 192:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 193:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (uwMuxHandle >= (UINT32)LOSCFG_BASE_IPC_MUX_LIMIT)
+ 701              		.loc 2 193 0
+ 702 000a 7B68     		ldr	r3, [r7, #4]
+ 703 000c 132B     		cmp	r3, #19
+ 704 000e 09D9     		bls	.L31
+ 194:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 195:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_RETURN_ERROR(LOS_ERRNO_MUX_INVALID);
+ 705              		.loc 2 195 0
+ 706 0010 0023     		movs	r3, #0
+ 707 0012 0093     		str	r3, [sp]
+ 708 0014 0023     		movs	r3, #0
+ 709 0016 594A     		ldr	r2, .L43
+ 710 0018 5949     		ldr	r1, .L43+4
+ 711 001a 5A48     		ldr	r0, .L43+8
+ 712 001c FFF7FEFF 		bl	LOS_ErrHandle
+ 713 0020 564B     		ldr	r3, .L43
+ 714 0022 A7E0     		b	.L32
+ 715              	.L31:
+ 196:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 197:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 198:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstMuxPended = GET_MUX(uwMuxHandle);
+ 716              		.loc 2 198 0
+ 717 0024 584B     		ldr	r3, .L43+12
+ 718 0026 1968     		ldr	r1, [r3]
+ 719 0028 7A68     		ldr	r2, [r7, #4]
+ 720 002a 1346     		mov	r3, r2
+ 721 002c 5B00     		lsls	r3, r3, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 21
+
+
+ 722 002e 1344     		add	r3, r3, r2
+ 723 0030 DB00     		lsls	r3, r3, #3
+ 724 0032 0B44     		add	r3, r3, r1
+ 725 0034 3B61     		str	r3, [r7, #16]
+ 199:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     uwIntSave = LOS_IntLock();
+ 726              		.loc 2 199 0
+ 727 0036 FFF7FEFF 		bl	LOS_IntLock
+ 728 003a F860     		str	r0, [r7, #12]
+ 200:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (OS_MUX_UNUSED == pstMuxPended->ucMuxStat)
+ 729              		.loc 2 200 0
+ 730 003c 3B69     		ldr	r3, [r7, #16]
+ 731 003e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 732 0040 002B     		cmp	r3, #0
+ 733 0042 0CD1     		bne	.L33
+ 201:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 202:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 734              		.loc 2 202 0
+ 735 0044 F868     		ldr	r0, [r7, #12]
+ 736 0046 FFF7FEFF 		bl	LOS_IntRestore
+ 203:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_RETURN_ERROR(LOS_ERRNO_MUX_INVALID);
+ 737              		.loc 2 203 0
+ 738 004a 0023     		movs	r3, #0
+ 739 004c 0093     		str	r3, [sp]
+ 740 004e 0023     		movs	r3, #0
+ 741 0050 4A4A     		ldr	r2, .L43
+ 742 0052 4B49     		ldr	r1, .L43+4
+ 743 0054 4B48     		ldr	r0, .L43+8
+ 744 0056 FFF7FEFF 		bl	LOS_ErrHandle
+ 745 005a 484B     		ldr	r3, .L43
+ 746 005c 8AE0     		b	.L32
+ 747              	.L33:
+ 204:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 205:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 206:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (OS_INT_ACTIVE)
+ 748              		.loc 2 206 0
+ 749 005e FFF7FEFF 		bl	osIntNumGet
+ 750 0062 0346     		mov	r3, r0
+ 751 0064 002B     		cmp	r3, #0
+ 752 0066 04D0     		beq	.L34
+ 207:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 208:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 753              		.loc 2 208 0
+ 754 0068 F868     		ldr	r0, [r7, #12]
+ 755 006a FFF7FEFF 		bl	LOS_IntRestore
+ 209:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_ERRNO_MUX_PEND_INTERR;
+ 756              		.loc 2 209 0
+ 757 006e 474B     		ldr	r3, .L43+16
+ 758 0070 80E0     		b	.L32
+ 759              	.L34:
+ 210:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 211:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 212:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstRunTsk = (LOS_TASK_CB *)g_stLosTask.pstRunTask;
+ 760              		.loc 2 212 0
+ 761 0072 474B     		ldr	r3, .L43+20
+ 762 0074 1B68     		ldr	r3, [r3]
+ 763 0076 BB60     		str	r3, [r7, #8]
+ 213:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (pstMuxPended->usMuxCount == 0)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 22
+
+
+ 764              		.loc 2 213 0
+ 765 0078 3B69     		ldr	r3, [r7, #16]
+ 766 007a 5B88     		ldrh	r3, [r3, #2]
+ 767 007c 002B     		cmp	r3, #0
+ 768 007e 11D1     		bne	.L35
+ 214:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 215:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPended->usMuxCount++;
+ 769              		.loc 2 215 0
+ 770 0080 3B69     		ldr	r3, [r7, #16]
+ 771 0082 5B88     		ldrh	r3, [r3, #2]
+ 772 0084 0133     		adds	r3, r3, #1
+ 773 0086 9AB2     		uxth	r2, r3
+ 774 0088 3B69     		ldr	r3, [r7, #16]
+ 775 008a 5A80     		strh	r2, [r3, #2]	@ movhi
+ 216:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPended->pstOwner = pstRunTsk;
+ 776              		.loc 2 216 0
+ 777 008c 3B69     		ldr	r3, [r7, #16]
+ 778 008e BA68     		ldr	r2, [r7, #8]
+ 779 0090 1A61     		str	r2, [r3, #16]
+ 217:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPended->usPriority = pstRunTsk->usPriority;
+ 780              		.loc 2 217 0
+ 781 0092 BB68     		ldr	r3, [r7, #8]
+ 782 0094 DA88     		ldrh	r2, [r3, #6]
+ 783 0096 3B69     		ldr	r3, [r7, #16]
+ 784 0098 9A82     		strh	r2, [r3, #20]	@ movhi
+ 218:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 785              		.loc 2 218 0
+ 786 009a F868     		ldr	r0, [r7, #12]
+ 787 009c FFF7FEFF 		bl	LOS_IntRestore
+ 219:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_OK;
+ 788              		.loc 2 219 0
+ 789 00a0 0023     		movs	r3, #0
+ 790 00a2 67E0     		b	.L32
+ 791              	.L35:
+ 220:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 221:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 222:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (pstMuxPended->pstOwner == pstRunTsk)
+ 792              		.loc 2 222 0
+ 793 00a4 3B69     		ldr	r3, [r7, #16]
+ 794 00a6 1B69     		ldr	r3, [r3, #16]
+ 795 00a8 BA68     		ldr	r2, [r7, #8]
+ 796 00aa 9A42     		cmp	r2, r3
+ 797 00ac 0AD1     		bne	.L36
+ 223:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 224:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPended->usMuxCount++;
+ 798              		.loc 2 224 0
+ 799 00ae 3B69     		ldr	r3, [r7, #16]
+ 800 00b0 5B88     		ldrh	r3, [r3, #2]
+ 801 00b2 0133     		adds	r3, r3, #1
+ 802 00b4 9AB2     		uxth	r2, r3
+ 803 00b6 3B69     		ldr	r3, [r7, #16]
+ 804 00b8 5A80     		strh	r2, [r3, #2]	@ movhi
+ 225:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 805              		.loc 2 225 0
+ 806 00ba F868     		ldr	r0, [r7, #12]
+ 807 00bc FFF7FEFF 		bl	LOS_IntRestore
+ 226:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_OK;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 23
+
+
+ 808              		.loc 2 226 0
+ 809 00c0 0023     		movs	r3, #0
+ 810 00c2 57E0     		b	.L32
+ 811              	.L36:
+ 227:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 228:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 229:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (!uwTimeout)
+ 812              		.loc 2 229 0
+ 813 00c4 3B68     		ldr	r3, [r7]
+ 814 00c6 002B     		cmp	r3, #0
+ 815 00c8 04D1     		bne	.L37
+ 230:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 231:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 816              		.loc 2 231 0
+ 817 00ca F868     		ldr	r0, [r7, #12]
+ 818 00cc FFF7FEFF 		bl	LOS_IntRestore
+ 232:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_ERRNO_MUX_UNAVAILABLE;
+ 819              		.loc 2 232 0
+ 820 00d0 304B     		ldr	r3, .L43+24
+ 821 00d2 4FE0     		b	.L32
+ 822              	.L37:
+ 233:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 234:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 235:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (g_usLosTaskLock)
+ 823              		.loc 2 235 0
+ 824 00d4 304B     		ldr	r3, .L43+28
+ 825 00d6 1B88     		ldrh	r3, [r3]
+ 826 00d8 002B     		cmp	r3, #0
+ 827 00da 0CD0     		beq	.L38
+ 236:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 237:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         uwRetErr = LOS_ERRNO_MUX_PEND_IN_LOCK;
+ 828              		.loc 2 237 0
+ 829 00dc 2F4B     		ldr	r3, .L43+32
+ 830 00de 7B61     		str	r3, [r7, #20]
+ 238:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         PRINT_ERR("!!!LOS_ERRNO_MUX_PEND_IN_LOCK!!!\n");
+ 831              		.loc 2 238 0
+ 832 00e0 2F48     		ldr	r0, .L43+36
+ 833 00e2 FFF7FEFF 		bl	printf
+ 834 00e6 2F48     		ldr	r0, .L43+40
+ 835 00e8 FFF7FEFF 		bl	puts
+ 239:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #if (LOSCFG_PLATFORM_EXC == YES)
+ 240:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         osBackTrace();
+ 241:D:/iot/felix2/kernel/base/ipc\los_mux.c **** #endif
+ 242:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         goto errre_uniMuxPend;
+ 836              		.loc 2 242 0
+ 837 00ec 00BF     		nop
+ 838              	.L39:
+ 243:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 244:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 245:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstRunTsk->pTaskMux = (VOID *)pstMuxPended;
+ 246:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 247:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (pstMuxPended->pstOwner->usPriority > pstRunTsk->usPriority)
+ 248:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 249:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         osTaskPriModify(pstMuxPended->pstOwner, pstRunTsk->usPriority);
+ 250:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 251:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 252:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     osTaskWait(&pstMuxPended->stMuxList, OS_TASK_STATUS_PEND, uwTimeout);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 24
+
+
+ 253:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 254:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     (VOID)LOS_IntRestore(uwIntSave);
+ 255:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_Schedule();
+ 256:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 257:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (pstRunTsk->usTaskStatus & OS_TASK_STATUS_TIMEOUT)
+ 258:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 259:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         uwIntSave = LOS_IntLock();
+ 260:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstRunTsk->usTaskStatus &= (~OS_TASK_STATUS_TIMEOUT);
+ 261:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         (VOID)LOS_IntRestore(uwIntSave);
+ 262:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         uwRetErr = LOS_ERRNO_MUX_TIMEOUT;
+ 263:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         goto error_uniMuxPend;
+ 264:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 265:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 266:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     return LOS_OK;
+ 267:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 268:D:/iot/felix2/kernel/base/ipc\los_mux.c **** errre_uniMuxPend:
+ 269:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     (VOID)LOS_IntRestore(uwIntSave);
+ 839              		.loc 2 269 0
+ 840 00ee F868     		ldr	r0, [r7, #12]
+ 841 00f0 FFF7FEFF 		bl	LOS_IntRestore
+ 842 00f4 35E0     		b	.L42
+ 843              	.L38:
+ 245:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 844              		.loc 2 245 0
+ 845 00f6 BB68     		ldr	r3, [r7, #8]
+ 846 00f8 3A69     		ldr	r2, [r7, #16]
+ 847 00fa DA61     		str	r2, [r3, #28]
+ 247:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 848              		.loc 2 247 0
+ 849 00fc 3B69     		ldr	r3, [r7, #16]
+ 850 00fe 1B69     		ldr	r3, [r3, #16]
+ 851 0100 DA88     		ldrh	r2, [r3, #6]
+ 852 0102 BB68     		ldr	r3, [r7, #8]
+ 853 0104 DB88     		ldrh	r3, [r3, #6]
+ 854 0106 9A42     		cmp	r2, r3
+ 855 0108 07D9     		bls	.L40
+ 249:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 856              		.loc 2 249 0
+ 857 010a 3B69     		ldr	r3, [r7, #16]
+ 858 010c 1A69     		ldr	r2, [r3, #16]
+ 859 010e BB68     		ldr	r3, [r7, #8]
+ 860 0110 DB88     		ldrh	r3, [r3, #6]
+ 861 0112 1946     		mov	r1, r3
+ 862 0114 1046     		mov	r0, r2
+ 863 0116 FFF7FEFF 		bl	osTaskPriModify
+ 864              	.L40:
+ 252:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 865              		.loc 2 252 0
+ 866 011a 3B69     		ldr	r3, [r7, #16]
+ 867 011c 0833     		adds	r3, r3, #8
+ 868 011e 3A68     		ldr	r2, [r7]
+ 869 0120 0821     		movs	r1, #8
+ 870 0122 1846     		mov	r0, r3
+ 871 0124 FFF7FEFF 		bl	osTaskWait
+ 254:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_Schedule();
+ 872              		.loc 2 254 0
+ 873 0128 F868     		ldr	r0, [r7, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 25
+
+
+ 874 012a FFF7FEFF 		bl	LOS_IntRestore
+ 255:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 875              		.loc 2 255 0
+ 876 012e FFF7FEFF 		bl	LOS_Schedule
+ 257:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 877              		.loc 2 257 0
+ 878 0132 BB68     		ldr	r3, [r7, #8]
+ 879 0134 9B88     		ldrh	r3, [r3, #4]
+ 880 0136 03F04003 		and	r3, r3, #64
+ 881 013a 002B     		cmp	r3, #0
+ 882 013c 0FD0     		beq	.L41
+ 259:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstRunTsk->usTaskStatus &= (~OS_TASK_STATUS_TIMEOUT);
+ 883              		.loc 2 259 0
+ 884 013e FFF7FEFF 		bl	LOS_IntLock
+ 885 0142 F860     		str	r0, [r7, #12]
+ 260:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         (VOID)LOS_IntRestore(uwIntSave);
+ 886              		.loc 2 260 0
+ 887 0144 BB68     		ldr	r3, [r7, #8]
+ 888 0146 9B88     		ldrh	r3, [r3, #4]
+ 889 0148 23F04003 		bic	r3, r3, #64
+ 890 014c 9AB2     		uxth	r2, r3
+ 891 014e BB68     		ldr	r3, [r7, #8]
+ 892 0150 9A80     		strh	r2, [r3, #4]	@ movhi
+ 261:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         uwRetErr = LOS_ERRNO_MUX_TIMEOUT;
+ 893              		.loc 2 261 0
+ 894 0152 F868     		ldr	r0, [r7, #12]
+ 895 0154 FFF7FEFF 		bl	LOS_IntRestore
+ 262:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         goto error_uniMuxPend;
+ 896              		.loc 2 262 0
+ 897 0158 134B     		ldr	r3, .L43+44
+ 898 015a 7B61     		str	r3, [r7, #20]
+ 263:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 899              		.loc 2 263 0
+ 900 015c 01E0     		b	.L42
+ 901              	.L41:
+ 266:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 902              		.loc 2 266 0
+ 903 015e 0023     		movs	r3, #0
+ 904 0160 08E0     		b	.L32
+ 905              	.L42:
+ 270:D:/iot/felix2/kernel/base/ipc\los_mux.c **** error_uniMuxPend:
+ 271:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     OS_RETURN_ERROR(uwRetErr);
+ 906              		.loc 2 271 0
+ 907 0162 0023     		movs	r3, #0
+ 908 0164 0093     		str	r3, [sp]
+ 909 0166 0023     		movs	r3, #0
+ 910 0168 7A69     		ldr	r2, [r7, #20]
+ 911 016a 0549     		ldr	r1, .L43+4
+ 912 016c 0548     		ldr	r0, .L43+8
+ 913 016e FFF7FEFF 		bl	LOS_ErrHandle
+ 914 0172 7B69     		ldr	r3, [r7, #20]
+ 915              	.L32:
+ 272:D:/iot/felix2/kernel/base/ipc\los_mux.c **** }
+ 916              		.loc 2 272 0
+ 917 0174 1846     		mov	r0, r3
+ 918 0176 1837     		adds	r7, r7, #24
+ 919              	.LCFI47:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 26
+
+
+ 920              		.cfi_def_cfa_offset 8
+ 921 0178 BD46     		mov	sp, r7
+ 922              	.LCFI48:
+ 923              		.cfi_def_cfa_register 13
+ 924              		@ sp needed
+ 925 017a 80BD     		pop	{r7, pc}
+ 926              	.L44:
+ 927              		.align	2
+ 928              	.L43:
+ 929 017c 011D0002 		.word	33561857
+ 930 0180 F8C3B2A1 		.word	-1582119944
+ 931 0184 00000000 		.word	.LC0
+ 932 0188 00000000 		.word	g_pstAllMux
+ 933 018c 051D0002 		.word	33561861
+ 934 0190 00000000 		.word	g_stLosTask
+ 935 0194 041D0002 		.word	33561860
+ 936 0198 00000000 		.word	g_usLosTaskLock
+ 937 019c 061D0002 		.word	33561862
+ 938 01a0 14000000 		.word	.LC1
+ 939 01a4 1C000000 		.word	.LC2
+ 940 01a8 071D0002 		.word	33561863
+ 941              		.cfi_endproc
+ 942              	.LFE136:
+ 944              		.section	.text.LOS_MuxPost,"ax",%progbits
+ 945              		.align	1
+ 946              		.global	LOS_MuxPost
+ 947              		.syntax unified
+ 948              		.thumb
+ 949              		.thumb_func
+ 950              		.fpu fpv4-sp-d16
+ 952              	LOS_MuxPost:
+ 953              	.LFB137:
+ 273:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 274:D:/iot/felix2/kernel/base/ipc\los_mux.c **** /*****************************************************************************
+ 275:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Function     : LOS_MuxPost
+ 276:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Description  : Specify the mutex V operation,
+ 277:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Input        : uwMuxHandle ------ Mutex operation handle,
+ 278:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Output       : None
+ 279:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  Return       : LOS_OK on success ,or error code on failure
+ 280:D:/iot/felix2/kernel/base/ipc\los_mux.c ****  *****************************************************************************/
+ 281:D:/iot/felix2/kernel/base/ipc\los_mux.c **** LITE_OS_SEC_TEXT UINT32 LOS_MuxPost(UINT32 uwMuxHandle)
+ 282:D:/iot/felix2/kernel/base/ipc\los_mux.c **** {
+ 954              		.loc 2 282 0
+ 955              		.cfi_startproc
+ 956              		@ args = 0, pretend = 0, frame = 24
+ 957              		@ frame_needed = 1, uses_anonymous_args = 0
+ 958 0000 80B5     		push	{r7, lr}
+ 959              	.LCFI49:
+ 960              		.cfi_def_cfa_offset 8
+ 961              		.cfi_offset 7, -8
+ 962              		.cfi_offset 14, -4
+ 963 0002 88B0     		sub	sp, sp, #32
+ 964              	.LCFI50:
+ 965              		.cfi_def_cfa_offset 40
+ 966 0004 02AF     		add	r7, sp, #8
+ 967              	.LCFI51:
+ 968              		.cfi_def_cfa 7, 32
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 27
+
+
+ 969 0006 7860     		str	r0, [r7, #4]
+ 283:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     UINT32      uwIntSave;
+ 284:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     MUX_CB_S    *pstMuxPosted = GET_MUX(uwMuxHandle);
+ 970              		.loc 2 284 0
+ 971 0008 404B     		ldr	r3, .L55
+ 972 000a 1968     		ldr	r1, [r3]
+ 973 000c 7A68     		ldr	r2, [r7, #4]
+ 974 000e 1346     		mov	r3, r2
+ 975 0010 5B00     		lsls	r3, r3, #1
+ 976 0012 1344     		add	r3, r3, r2
+ 977 0014 DB00     		lsls	r3, r3, #3
+ 978 0016 0B44     		add	r3, r3, r1
+ 979 0018 7B61     		str	r3, [r7, #20]
+ 285:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_TASK_CB *pstResumedTask;
+ 286:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     LOS_TASK_CB *pstRunTsk;
+ 287:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 288:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     uwIntSave = LOS_IntLock();
+ 980              		.loc 2 288 0
+ 981 001a FFF7FEFF 		bl	LOS_IntLock
+ 982 001e 3861     		str	r0, [r7, #16]
+ 289:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 290:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if ((uwMuxHandle >= (UINT32)LOSCFG_BASE_IPC_MUX_LIMIT) ||
+ 983              		.loc 2 290 0
+ 984 0020 7B68     		ldr	r3, [r7, #4]
+ 985 0022 132B     		cmp	r3, #19
+ 986 0024 03D8     		bhi	.L46
+ 291:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         (OS_MUX_UNUSED == pstMuxPosted->ucMuxStat))
+ 987              		.loc 2 291 0 discriminator 1
+ 988 0026 7B69     		ldr	r3, [r7, #20]
+ 989 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 290:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         (OS_MUX_UNUSED == pstMuxPosted->ucMuxStat))
+ 990              		.loc 2 290 0 discriminator 1
+ 991 002a 002B     		cmp	r3, #0
+ 992 002c 0CD1     		bne	.L47
+ 993              	.L46:
+ 292:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 293:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 994              		.loc 2 293 0
+ 995 002e 3869     		ldr	r0, [r7, #16]
+ 996 0030 FFF7FEFF 		bl	LOS_IntRestore
+ 294:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_RETURN_ERROR(LOS_ERRNO_MUX_INVALID);
+ 997              		.loc 2 294 0
+ 998 0034 0023     		movs	r3, #0
+ 999 0036 0093     		str	r3, [sp]
+ 1000 0038 0023     		movs	r3, #0
+ 1001 003a 354A     		ldr	r2, .L55+4
+ 1002 003c 3549     		ldr	r1, .L55+8
+ 1003 003e 3648     		ldr	r0, .L55+12
+ 1004 0040 FFF7FEFF 		bl	LOS_ErrHandle
+ 1005 0044 324B     		ldr	r3, .L55+4
+ 1006 0046 5DE0     		b	.L48
+ 1007              	.L47:
+ 295:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 296:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 297:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     pstRunTsk = (LOS_TASK_CB *)g_stLosTask.pstRunTask;
+ 1008              		.loc 2 297 0
+ 1009 0048 344B     		ldr	r3, .L55+16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 28
+
+
+ 1010 004a 1B68     		ldr	r3, [r3]
+ 1011 004c FB60     		str	r3, [r7, #12]
+ 298:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if ((pstMuxPosted->usMuxCount == 0) || (pstMuxPosted->pstOwner != pstRunTsk))
+ 1012              		.loc 2 298 0
+ 1013 004e 7B69     		ldr	r3, [r7, #20]
+ 1014 0050 5B88     		ldrh	r3, [r3, #2]
+ 1015 0052 002B     		cmp	r3, #0
+ 1016 0054 04D0     		beq	.L49
+ 1017              		.loc 2 298 0 is_stmt 0 discriminator 1
+ 1018 0056 7B69     		ldr	r3, [r7, #20]
+ 1019 0058 1B69     		ldr	r3, [r3, #16]
+ 1020 005a FA68     		ldr	r2, [r7, #12]
+ 1021 005c 9A42     		cmp	r2, r3
+ 1022 005e 0CD0     		beq	.L50
+ 1023              	.L49:
+ 299:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 300:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 1024              		.loc 2 300 0 is_stmt 1
+ 1025 0060 3869     		ldr	r0, [r7, #16]
+ 1026 0062 FFF7FEFF 		bl	LOS_IntRestore
+ 301:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         OS_RETURN_ERROR(LOS_ERRNO_MUX_INVALID);
+ 1027              		.loc 2 301 0
+ 1028 0066 0023     		movs	r3, #0
+ 1029 0068 0093     		str	r3, [sp]
+ 1030 006a 0023     		movs	r3, #0
+ 1031 006c 284A     		ldr	r2, .L55+4
+ 1032 006e 2949     		ldr	r1, .L55+8
+ 1033 0070 2948     		ldr	r0, .L55+12
+ 1034 0072 FFF7FEFF 		bl	LOS_ErrHandle
+ 1035 0076 264B     		ldr	r3, .L55+4
+ 1036 0078 44E0     		b	.L48
+ 1037              	.L50:
+ 302:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 303:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 304:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (--(pstMuxPosted->usMuxCount) != 0)
+ 1038              		.loc 2 304 0
+ 1039 007a 7B69     		ldr	r3, [r7, #20]
+ 1040 007c 5B88     		ldrh	r3, [r3, #2]
+ 1041 007e 013B     		subs	r3, r3, #1
+ 1042 0080 9AB2     		uxth	r2, r3
+ 1043 0082 7B69     		ldr	r3, [r7, #20]
+ 1044 0084 5A80     		strh	r2, [r3, #2]	@ movhi
+ 1045 0086 7B69     		ldr	r3, [r7, #20]
+ 1046 0088 5B88     		ldrh	r3, [r3, #2]
+ 1047 008a 002B     		cmp	r3, #0
+ 1048 008c 04D0     		beq	.L51
+ 305:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 306:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_IntRestore(uwIntSave);
+ 1049              		.loc 2 306 0
+ 1050 008e 3869     		ldr	r0, [r7, #16]
+ 1051 0090 FFF7FEFF 		bl	LOS_IntRestore
+ 307:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         return LOS_OK;
+ 1052              		.loc 2 307 0
+ 1053 0094 0023     		movs	r3, #0
+ 1054 0096 35E0     		b	.L48
+ 1055              	.L51:
+ 308:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 29
+
+
+ 309:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 310:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if ((pstMuxPosted->pstOwner->usPriority) != pstMuxPosted->usPriority)
+ 1056              		.loc 2 310 0
+ 1057 0098 7B69     		ldr	r3, [r7, #20]
+ 1058 009a 1B69     		ldr	r3, [r3, #16]
+ 1059 009c DA88     		ldrh	r2, [r3, #6]
+ 1060 009e 7B69     		ldr	r3, [r7, #20]
+ 1061 00a0 9B8A     		ldrh	r3, [r3, #20]
+ 1062 00a2 9A42     		cmp	r2, r3
+ 1063 00a4 07D0     		beq	.L52
+ 311:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 312:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         osTaskPriModify(pstMuxPosted->pstOwner, pstMuxPosted->usPriority);
+ 1064              		.loc 2 312 0
+ 1065 00a6 7B69     		ldr	r3, [r7, #20]
+ 1066 00a8 1A69     		ldr	r2, [r3, #16]
+ 1067 00aa 7B69     		ldr	r3, [r7, #20]
+ 1068 00ac 9B8A     		ldrh	r3, [r3, #20]
+ 1069 00ae 1946     		mov	r1, r3
+ 1070 00b0 1046     		mov	r0, r2
+ 1071 00b2 FFF7FEFF 		bl	osTaskPriModify
+ 1072              	.L52:
+ 313:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 314:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 315:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     if (!LOS_ListEmpty(&pstMuxPosted->stMuxList))
+ 1073              		.loc 2 315 0
+ 1074 00b6 7B69     		ldr	r3, [r7, #20]
+ 1075 00b8 0833     		adds	r3, r3, #8
+ 1076 00ba 1846     		mov	r0, r3
+ 1077 00bc FFF7FEFF 		bl	LOS_ListEmpty
+ 1078 00c0 0346     		mov	r3, r0
+ 1079 00c2 002B     		cmp	r3, #0
+ 1080 00c4 1AD1     		bne	.L53
+ 316:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 317:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstResumedTask = OS_TCB_FROM_PENDLIST(LOS_DL_LIST_FIRST(&(pstMuxPosted->stMuxList))); /*lin
+ 1081              		.loc 2 317 0
+ 1082 00c6 7B69     		ldr	r3, [r7, #20]
+ 1083 00c8 DB68     		ldr	r3, [r3, #12]
+ 1084 00ca 283B     		subs	r3, r3, #40
+ 1085 00cc BB60     		str	r3, [r7, #8]
+ 318:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 319:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPosted->usMuxCount    = 1;
+ 1086              		.loc 2 319 0
+ 1087 00ce 7B69     		ldr	r3, [r7, #20]
+ 1088 00d0 0122     		movs	r2, #1
+ 1089 00d2 5A80     		strh	r2, [r3, #2]	@ movhi
+ 320:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPosted->pstOwner      = pstResumedTask;
+ 1090              		.loc 2 320 0
+ 1091 00d4 7B69     		ldr	r3, [r7, #20]
+ 1092 00d6 BA68     		ldr	r2, [r7, #8]
+ 1093 00d8 1A61     		str	r2, [r3, #16]
+ 321:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstMuxPosted->usPriority    = pstResumedTask->usPriority;
+ 1094              		.loc 2 321 0
+ 1095 00da BB68     		ldr	r3, [r7, #8]
+ 1096 00dc DA88     		ldrh	r2, [r3, #6]
+ 1097 00de 7B69     		ldr	r3, [r7, #20]
+ 1098 00e0 9A82     		strh	r2, [r3, #20]	@ movhi
+ 322:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         pstResumedTask->pTaskMux    = NULL;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 30
+
+
+ 1099              		.loc 2 322 0
+ 1100 00e2 BB68     		ldr	r3, [r7, #8]
+ 1101 00e4 0022     		movs	r2, #0
+ 1102 00e6 DA61     		str	r2, [r3, #28]
+ 323:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 324:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         osTaskWake(pstResumedTask, OS_TASK_STATUS_PEND);
+ 1103              		.loc 2 324 0
+ 1104 00e8 0821     		movs	r1, #8
+ 1105 00ea B868     		ldr	r0, [r7, #8]
+ 1106 00ec FFF7FEFF 		bl	osTaskWake
+ 325:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 326:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         (VOID)LOS_IntRestore(uwIntSave);
+ 1107              		.loc 2 326 0
+ 1108 00f0 3869     		ldr	r0, [r7, #16]
+ 1109 00f2 FFF7FEFF 		bl	LOS_IntRestore
+ 327:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         LOS_Schedule();
+ 1110              		.loc 2 327 0
+ 1111 00f6 FFF7FEFF 		bl	LOS_Schedule
+ 1112 00fa 02E0     		b	.L54
+ 1113              	.L53:
+ 328:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 329:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     else
+ 330:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     {
+ 331:D:/iot/felix2/kernel/base/ipc\los_mux.c ****         (VOID)LOS_IntRestore(uwIntSave);
+ 1114              		.loc 2 331 0
+ 1115 00fc 3869     		ldr	r0, [r7, #16]
+ 1116 00fe FFF7FEFF 		bl	LOS_IntRestore
+ 1117              	.L54:
+ 332:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     }
+ 333:D:/iot/felix2/kernel/base/ipc\los_mux.c **** 
+ 334:D:/iot/felix2/kernel/base/ipc\los_mux.c ****     return LOS_OK;
+ 1118              		.loc 2 334 0
+ 1119 0102 0023     		movs	r3, #0
+ 1120              	.L48:
+ 335:D:/iot/felix2/kernel/base/ipc\los_mux.c **** }
+ 1121              		.loc 2 335 0
+ 1122 0104 1846     		mov	r0, r3
+ 1123 0106 1837     		adds	r7, r7, #24
+ 1124              	.LCFI52:
+ 1125              		.cfi_def_cfa_offset 8
+ 1126 0108 BD46     		mov	sp, r7
+ 1127              	.LCFI53:
+ 1128              		.cfi_def_cfa_register 13
+ 1129              		@ sp needed
+ 1130 010a 80BD     		pop	{r7, pc}
+ 1131              	.L56:
+ 1132              		.align	2
+ 1133              	.L55:
+ 1134 010c 00000000 		.word	g_pstAllMux
+ 1135 0110 011D0002 		.word	33561857
+ 1136 0114 F8C3B2A1 		.word	-1582119944
+ 1137 0118 00000000 		.word	.LC0
+ 1138 011c 00000000 		.word	g_stLosTask
+ 1139              		.cfi_endproc
+ 1140              	.LFE137:
+ 1142              		.text
+ 1143              	.Letext0:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 31
+
+
+ 1144              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1145              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1146              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1147              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1148              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1149              		.file 8 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1150              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1151              		.file 10 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1152              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1153              		.file 12 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1154              		.file 13 "D:/iot/felix2/kernel/include/los_event.h"
+ 1155              		.file 14 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1156              		.file 15 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1157              		.file 16 "D:/iot/felix2/kernel/include/los_config.h"
+ 1158              		.file 17 "D:/iot/felix2/kernel/include/los_err.h"
+ 1159              		.file 18 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1160              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 1161              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1162              		.file 21 "D:/iot/felix2/kernel/base/include/los_mux.ph"
+ 1163              		.file 22 "D:/iot/felix2/kernel/include/los_memory.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 los_mux.c
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:18     .text.LOS_ListInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:24     .text.LOS_ListInit:00000000 LOS_ListInit
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:69     .text.LOS_ListAdd:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:75     .text.LOS_ListAdd:00000000 LOS_ListAdd
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:130    .text.LOS_ListTailInsert:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:136    .text.LOS_ListTailInsert:00000000 LOS_ListTailInsert
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:175    .text.LOS_ListDelete:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:181    .text.LOS_ListDelete:00000000 LOS_ListDelete
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:237    .text.LOS_ListEmpty:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:243    .text.LOS_ListEmpty:00000000 LOS_ListEmpty
+                            *COM*:00000004 g_pstAllMux
+                            *COM*:00000008 g_stUnusedMuxList
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:290    .text.osMuxInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:297    .text.osMuxInit:00000000 osMuxInit
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:390    .text.osMuxInit:00000074 $d
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:398    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:402    .text.LOS_MuxCreate:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:409    .text.LOS_MuxCreate:00000000 LOS_MuxCreate
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:521    .text.LOS_MuxCreate:00000094 $d
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:530    .text.LOS_MuxDelete:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:537    .text.LOS_MuxDelete:00000000 LOS_MuxDelete
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:658    .text.LOS_MuxDelete:000000a8 $d
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:675    .text.LOS_MuxPend:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:682    .text.LOS_MuxPend:00000000 LOS_MuxPend
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:929    .text.LOS_MuxPend:0000017c $d
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:945    .text.LOS_MuxPost:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:952    .text.LOS_MuxPost:00000000 LOS_MuxPost
+C:\Users\91458\AppData\Local\Temp\cci7rCNZ.s:1134   .text.LOS_MuxPost:0000010c $d
+
+UNDEFINED SYMBOLS
+LOS_MemAlloc
+m_aucSysMem0
+LOS_IntLock
+LOS_IntRestore
+LOS_ErrHandle
+osIntNumGet
+printf
+puts
+osTaskPriModify
+osTaskWait
+LOS_Schedule
+g_stLosTask
+g_usLosTaskLock
+osTaskWake

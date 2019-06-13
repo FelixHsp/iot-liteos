@@ -1,0 +1,66 @@
+{
+    "openFiles": [
+        {
+            "file": {
+                "name": "agent_tiny_demo.c",
+                "size": 7016,
+                "path": "demos\\agenttiny_lwm2m\\agent_tiny_demo.c",
+                "fileExtension": ".c",
+                "isFolder": false,
+                "isOpen": false,
+                "level": 4,
+                "parentPath": "D:\\iot\\felix2\\demos\\agenttiny_lwm2m"
+            },
+            "currentShow": false,
+            "isPreview": false,
+            "isChange": false
+        },
+        {
+            "file": {
+                "name": "stm32l4xx_it.c",
+                "size": 7389,
+                "path": "targets\\Cloud_STM32L431_BearPi\\Src\\stm32l4xx_it.c",
+                "fileExtension": ".c",
+                "isFolder": false,
+                "isOpen": false,
+                "level": 5,
+                "parentPath": "D:\\iot\\felix2\\targets\\Cloud_STM32L431_BearPi\\Src"
+            },
+            "currentShow": false,
+            "isPreview": false,
+            "isChange": false
+        },
+        {
+            "file": {
+                "name": "config.mk",
+                "size": 2780,
+                "path": "targets\\Cloud_STM32L431_BearPi\\GCC\\config.mk",
+                "fileExtension": ".mk",
+                "isFolder": false,
+                "isOpen": false,
+                "level": 5,
+                "parentPath": "D:\\iot\\felix2\\targets\\Cloud_STM32L431_BearPi\\GCC"
+            },
+            "currentShow": false,
+            "isPreview": false,
+            "isChange": false
+        },
+        {
+            "file": {
+                "name": "esp8266.h",
+                "size": 3323,
+                "path": "components\\net\\at_device\\wifi_esp8266\\esp8266.h",
+                "fileExtension": ".h",
+                "isFolder": false,
+                "isOpen": false,
+                "level": 6,
+                "parentPath": "D:\\iot\\felix2\\components\\net\\at_device\\wifi_esp8266"
+            },
+            "currentShow": false,
+            "isPreview": false,
+            "isChange": false
+        }
+    ],
+    "previewName": "components\\net\\at_device\\wifi_esp8266\\esp8266.h",
+    "currentShowName": "targets\\Cloud_STM32L431_BearPi\\GCC\\config.mk"
+}

@@ -1,0 +1,2591 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"object_device.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.prv_check_time_offset,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	prv_check_time_offset:
+  25              	.LFB142:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m/object_device.c"
+   1:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  35:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *
+  37:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *
+  42:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *
+  47:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    domedambrosio - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    Fabien Fleutot - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    Axel Lorente - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *    Pascal Rieux - Please refer to git log
+  54:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *
+  55:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  *******************************************************************************/
+  56:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  57:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** /*
+  58:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  Copyright (c) 2013, 2014 Intel Corporation
+  59:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  60:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  Redistribution and use in source and binary forms, with or without modification,
+  61:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  are permitted provided that the following conditions are met:
+  62:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  63:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****      * Redistributions of source code must retain the above copyright notice,
+  64:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****        this list of conditions and the following disclaimer.
+  65:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****      * Redistributions in binary form must reproduce the above copyright notice,
+  66:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****        this list of conditions and the following disclaimer in the documentation
+  67:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****        and/or other materials provided with the distribution.
+  68:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****      * Neither the name of Intel Corporation nor the names of its contributors
+  69:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****        may be used to endorse or promote products derived from this software
+  70:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****        without specific prior written permission.
+  71:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  72:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  73:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  74:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  75:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  76:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  77:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  78:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  79:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  80:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  81:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  THE POSSIBILITY OF SUCH DAMAGE.
+  82:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  83:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  David Navarro <david.navarro@intel.com>
+  84:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  85:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** */
+  86:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  87:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** /*
+  88:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * This object is single instance only, and is mandatory to all LWM2M device as it describe the obj
+  89:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  * manufacturer, model, etc...
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 3
+
+
+  90:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****  */
+  91:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  92:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #include "object_comm.h"
+  93:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  94:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define PRV_OFFSET_MAXLEN   7 //+HH:MM\0 at max
+  95:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define PRV_TIMEZONE_MAXLEN 25
+  96:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define MAX_STRING_LEN  64
+  97:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+  98:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** // Resource Id's:
+  99:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_MANUFACTURER          0
+ 100:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_MODEL_NUMBER          1
+ 101:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_SERIAL_NUMBER         2
+ 102:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_FIRMWARE_VERSION      3
+ 103:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_M_REBOOT                4
+ 104:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_FACTORY_RESET         5
+ 105:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_AVL_POWER_SOURCES     6
+ 106:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_POWER_SOURCE_VOLTAGE  7
+ 107:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_POWER_SOURCE_CURRENT  8
+ 108:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_BATTERY_LEVEL         9
+ 109:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_MEMORY_FREE           10
+ 110:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_M_ERROR_CODE            11
+ 111:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_RESET_ERROR_CODE      12
+ 112:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_CURRENT_TIME          13
+ 113:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_UTC_OFFSET            14
+ 114:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_TIMEZONE              15
+ 115:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_M_BINDING_MODES         16
+ 116:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** // since TS 20141126-C:
+ 117:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_DEVICE_TYPE           17
+ 118:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_HARDWARE_VERSION      18
+ 119:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_SOFTWARE_VERSION      19
+ 120:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_BATTERY_STATUS        20
+ 121:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #define RES_O_MEMORY_TOTAL          21
+ 122:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 123:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** // basic check that the time offset value is at ISO 8601 format
+ 124:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** // bug: +12:30 is considered a valid value by this function
+ 125:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** static int prv_check_time_offset(char *buffer,
+ 126:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                  int length)
+ 127:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+  27              		.loc 1 127 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 85B0     		sub	sp, sp, #20
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 24
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43 0008 3960     		str	r1, [r7]
+ 128:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int min_index;
+ 129:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 4
+
+
+ 130:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (length != 3 && length != 5 && length != 6) return 0;
+  44              		.loc 1 130 0
+  45 000a 3B68     		ldr	r3, [r7]
+  46 000c 032B     		cmp	r3, #3
+  47 000e 07D0     		beq	.L2
+  48              		.loc 1 130 0 is_stmt 0 discriminator 1
+  49 0010 3B68     		ldr	r3, [r7]
+  50 0012 052B     		cmp	r3, #5
+  51 0014 04D0     		beq	.L2
+  52              		.loc 1 130 0 discriminator 2
+  53 0016 3B68     		ldr	r3, [r7]
+  54 0018 062B     		cmp	r3, #6
+  55 001a 01D0     		beq	.L2
+  56              		.loc 1 130 0 discriminator 3
+  57 001c 0023     		movs	r3, #0
+  58 001e 65E0     		b	.L3
+  59              	.L2:
+ 131:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (buffer[0] != '-' && buffer[0] != '+') return 0;
+  60              		.loc 1 131 0 is_stmt 1
+  61 0020 7B68     		ldr	r3, [r7, #4]
+  62 0022 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  63 0024 2D2B     		cmp	r3, #45
+  64 0026 05D0     		beq	.L4
+  65              		.loc 1 131 0 is_stmt 0 discriminator 1
+  66 0028 7B68     		ldr	r3, [r7, #4]
+  67 002a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  68 002c 2B2B     		cmp	r3, #43
+  69 002e 01D0     		beq	.L4
+  70              		.loc 1 131 0 discriminator 2
+  71 0030 0023     		movs	r3, #0
+  72 0032 5BE0     		b	.L3
+  73              	.L4:
+ 132:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     switch (buffer[1])
+  74              		.loc 1 132 0 is_stmt 1
+  75 0034 7B68     		ldr	r3, [r7, #4]
+  76 0036 0133     		adds	r3, r3, #1
+  77 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  78 003a 302B     		cmp	r3, #48
+  79 003c 02D0     		beq	.L6
+  80 003e 312B     		cmp	r3, #49
+  81 0040 0CD0     		beq	.L7
+  82 0042 17E0     		b	.L23
+  83              	.L6:
+ 133:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 134:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case '0':
+ 135:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (buffer[2] < '0' || buffer[2] > '9') return 0;
+  84              		.loc 1 135 0
+  85 0044 7B68     		ldr	r3, [r7, #4]
+  86 0046 0233     		adds	r3, r3, #2
+  87 0048 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  88 004a 2F2B     		cmp	r3, #47
+  89 004c 04D9     		bls	.L8
+  90              		.loc 1 135 0 is_stmt 0 discriminator 2
+  91 004e 7B68     		ldr	r3, [r7, #4]
+  92 0050 0233     		adds	r3, r3, #2
+  93 0052 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  94 0054 392B     		cmp	r3, #57
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 5
+
+
+  95 0056 0FD9     		bls	.L25
+  96              	.L8:
+  97              		.loc 1 135 0 discriminator 3
+  98 0058 0023     		movs	r3, #0
+  99 005a 47E0     		b	.L3
+ 100              	.L7:
+ 136:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         break;
+ 137:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case '1':
+ 138:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (buffer[2] < '0' || buffer[2] > '2') return 0;
+ 101              		.loc 1 138 0 is_stmt 1
+ 102 005c 7B68     		ldr	r3, [r7, #4]
+ 103 005e 0233     		adds	r3, r3, #2
+ 104 0060 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 105 0062 2F2B     		cmp	r3, #47
+ 106 0064 04D9     		bls	.L11
+ 107              		.loc 1 138 0 is_stmt 0 discriminator 2
+ 108 0066 7B68     		ldr	r3, [r7, #4]
+ 109 0068 0233     		adds	r3, r3, #2
+ 110 006a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 111 006c 322B     		cmp	r3, #50
+ 112 006e 05D9     		bls	.L26
+ 113              	.L11:
+ 114              		.loc 1 138 0 discriminator 3
+ 115 0070 0023     		movs	r3, #0
+ 116 0072 3BE0     		b	.L3
+ 117              	.L23:
+ 139:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         break;
+ 140:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     default:
+ 141:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return 0;
+ 118              		.loc 1 141 0 is_stmt 1
+ 119 0074 0023     		movs	r3, #0
+ 120 0076 39E0     		b	.L3
+ 121              	.L25:
+ 136:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         break;
+ 122              		.loc 1 136 0
+ 123 0078 00BF     		nop
+ 124 007a 00E0     		b	.L10
+ 125              	.L26:
+ 139:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         break;
+ 126              		.loc 1 139 0
+ 127 007c 00BF     		nop
+ 128              	.L10:
+ 142:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 143:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     switch (length)
+ 129              		.loc 1 143 0
+ 130 007e 3B68     		ldr	r3, [r7]
+ 131 0080 052B     		cmp	r3, #5
+ 132 0082 05D0     		beq	.L14
+ 133 0084 062B     		cmp	r3, #6
+ 134 0086 06D0     		beq	.L15
+ 135 0088 032B     		cmp	r3, #3
+ 136 008a 0ED1     		bne	.L24
+ 144:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 145:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case 3:
+ 146:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return 1;
+ 137              		.loc 1 146 0
+ 138 008c 0123     		movs	r3, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 6
+
+
+ 139 008e 2DE0     		b	.L3
+ 140              	.L14:
+ 147:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case 5:
+ 148:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         min_index = 3;
+ 141              		.loc 1 148 0
+ 142 0090 0323     		movs	r3, #3
+ 143 0092 FB60     		str	r3, [r7, #12]
+ 149:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         break;
+ 144              		.loc 1 149 0
+ 145 0094 0BE0     		b	.L17
+ 146              	.L15:
+ 150:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case 6:
+ 151:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (buffer[3] != ':') return 0;
+ 147              		.loc 1 151 0
+ 148 0096 7B68     		ldr	r3, [r7, #4]
+ 149 0098 0333     		adds	r3, r3, #3
+ 150 009a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 151 009c 3A2B     		cmp	r3, #58
+ 152 009e 01D0     		beq	.L18
+ 153              		.loc 1 151 0 is_stmt 0 discriminator 1
+ 154 00a0 0023     		movs	r3, #0
+ 155 00a2 23E0     		b	.L3
+ 156              	.L18:
+ 152:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         min_index = 4;
+ 157              		.loc 1 152 0 is_stmt 1
+ 158 00a4 0423     		movs	r3, #4
+ 159 00a6 FB60     		str	r3, [r7, #12]
+ 153:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         break;
+ 160              		.loc 1 153 0
+ 161 00a8 01E0     		b	.L17
+ 162              	.L24:
+ 154:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     default:
+ 155:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         // never happen
+ 156:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return 0;
+ 163              		.loc 1 156 0
+ 164 00aa 0023     		movs	r3, #0
+ 165 00ac 1EE0     		b	.L3
+ 166              	.L17:
+ 157:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 158:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (buffer[min_index] < '0' || buffer[min_index] > '5') return 0;
+ 167              		.loc 1 158 0
+ 168 00ae FB68     		ldr	r3, [r7, #12]
+ 169 00b0 7A68     		ldr	r2, [r7, #4]
+ 170 00b2 1344     		add	r3, r3, r2
+ 171 00b4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 172 00b6 2F2B     		cmp	r3, #47
+ 173 00b8 05D9     		bls	.L19
+ 174              		.loc 1 158 0 is_stmt 0 discriminator 2
+ 175 00ba FB68     		ldr	r3, [r7, #12]
+ 176 00bc 7A68     		ldr	r2, [r7, #4]
+ 177 00be 1344     		add	r3, r3, r2
+ 178 00c0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 179 00c2 352B     		cmp	r3, #53
+ 180 00c4 01D9     		bls	.L20
+ 181              	.L19:
+ 182              		.loc 1 158 0 discriminator 3
+ 183 00c6 0023     		movs	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 7
+
+
+ 184 00c8 10E0     		b	.L3
+ 185              	.L20:
+ 159:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (buffer[min_index + 1] < '0' || buffer[min_index + 1] > '9') return 0;
+ 186              		.loc 1 159 0 is_stmt 1
+ 187 00ca FB68     		ldr	r3, [r7, #12]
+ 188 00cc 0133     		adds	r3, r3, #1
+ 189 00ce 7A68     		ldr	r2, [r7, #4]
+ 190 00d0 1344     		add	r3, r3, r2
+ 191 00d2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 192 00d4 2F2B     		cmp	r3, #47
+ 193 00d6 06D9     		bls	.L21
+ 194              		.loc 1 159 0 is_stmt 0 discriminator 2
+ 195 00d8 FB68     		ldr	r3, [r7, #12]
+ 196 00da 0133     		adds	r3, r3, #1
+ 197 00dc 7A68     		ldr	r2, [r7, #4]
+ 198 00de 1344     		add	r3, r3, r2
+ 199 00e0 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 200 00e2 392B     		cmp	r3, #57
+ 201 00e4 01D9     		bls	.L22
+ 202              	.L21:
+ 203              		.loc 1 159 0 discriminator 3
+ 204 00e6 0023     		movs	r3, #0
+ 205 00e8 00E0     		b	.L3
+ 206              	.L22:
+ 160:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 161:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     return 1;
+ 207              		.loc 1 161 0 is_stmt 1
+ 208 00ea 0123     		movs	r3, #1
+ 209              	.L3:
+ 162:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 210              		.loc 1 162 0
+ 211 00ec 1846     		mov	r0, r3
+ 212 00ee 1437     		adds	r7, r7, #20
+ 213              	.LCFI3:
+ 214              		.cfi_def_cfa_offset 4
+ 215 00f0 BD46     		mov	sp, r7
+ 216              	.LCFI4:
+ 217              		.cfi_def_cfa_register 13
+ 218              		@ sp needed
+ 219 00f2 5DF8047B 		ldr	r7, [sp], #4
+ 220              	.LCFI5:
+ 221              		.cfi_restore 7
+ 222              		.cfi_def_cfa_offset 0
+ 223 00f6 7047     		bx	lr
+ 224              		.cfi_endproc
+ 225              	.LFE142:
+ 227              		.section	.text.prv_set_value,"ax",%progbits
+ 228              		.align	1
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu fpv4-sp-d16
+ 234              	prv_set_value:
+ 235              	.LFB143:
+ 163:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 164:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** static uint8_t prv_set_value(lwm2m_data_t *dataP)
+ 165:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 8
+
+
+ 236              		.loc 1 165 0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 152
+ 239              		@ frame_needed = 1, uses_anonymous_args = 0
+ 240 0000 90B5     		push	{r4, r7, lr}
+ 241              	.LCFI6:
+ 242              		.cfi_def_cfa_offset 12
+ 243              		.cfi_offset 4, -12
+ 244              		.cfi_offset 7, -8
+ 245              		.cfi_offset 14, -4
+ 246 0002 A7B0     		sub	sp, sp, #156
+ 247              	.LCFI7:
+ 248              		.cfi_def_cfa_offset 168
+ 249 0004 00AF     		add	r7, sp, #0
+ 250              	.LCFI8:
+ 251              		.cfi_def_cfa_register 7
+ 252 0006 7860     		str	r0, [r7, #4]
+ 166:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     char str[MAX_STRING_LEN + 1] = {0};
+ 253              		.loc 1 166 0
+ 254 0008 07F14C03 		add	r3, r7, #76
+ 255 000c 4122     		movs	r2, #65
+ 256 000e 0021     		movs	r1, #0
+ 257 0010 1846     		mov	r0, r3
+ 258 0012 FFF7FEFF 		bl	memset
+ 167:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int64_t current_time;
+ 168:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     char UTC_offset[PRV_OFFSET_MAXLEN];
+ 169:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     char timezone[PRV_TIMEZONE_MAXLEN];
+ 170:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     lwm2m_data_t *subTlvP;
+ 171:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int power;
+ 172:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int voltage;
+ 173:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int battery_level;
+ 174:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int free_memory;
+ 175:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int err;
+ 176:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int result;
+ 177:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // a simple switch structure is used to respond at the specified resource asked
+ 178:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     switch (dataP->id)
+ 259              		.loc 1 178 0
+ 260 0016 7B68     		ldr	r3, [r7, #4]
+ 261 0018 5B88     		ldrh	r3, [r3, #2]
+ 262 001a 102B     		cmp	r3, #16
+ 263 001c 00F2E381 		bhi	.L28
+ 264 0020 01A2     		adr	r2, .L30
+ 265 0022 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 266 0026 00BF     		.p2align 2
+ 267              	.L30:
+ 268 0028 6D000000 		.word	.L29+1
+ 269 002c 9B000000 		.word	.L31+1
+ 270 0030 C9000000 		.word	.L32+1
+ 271 0034 F7000000 		.word	.L33+1
+ 272 0038 25010000 		.word	.L34+1
+ 273 003c 29010000 		.word	.L35+1
+ 274 0040 2D010000 		.word	.L36+1
+ 275 0044 93010000 		.word	.L37+1
+ 276 0048 F9010000 		.word	.L38+1
+ 277 004c 5F020000 		.word	.L39+1
+ 278 0050 91020000 		.word	.L40+1
+ 279 0054 C3020000 		.word	.L41+1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 9
+
+
+ 280 0058 29030000 		.word	.L42+1
+ 281 005c 2D030000 		.word	.L43+1
+ 282 0060 5D030000 		.word	.L44+1
+ 283 0064 8B030000 		.word	.L45+1
+ 284 0068 B9030000 		.word	.L46+1
+ 285              		.p2align 1
+ 286              	.L29:
+ 179:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 180:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_MANUFACTURER:
+ 181:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_MANUFACTURER, str, MAX_STRING_LEN);
+ 287              		.loc 1 181 0
+ 288 006c 07F14C03 		add	r3, r7, #76
+ 289 0070 4022     		movs	r2, #64
+ 290 0072 1946     		mov	r1, r3
+ 291 0074 0020     		movs	r0, #0
+ 292 0076 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 293 007a C7F89400 		str	r0, [r7, #148]
+ 182:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 294              		.loc 1 182 0
+ 295 007e D7F89430 		ldr	r3, [r7, #148]
+ 296 0082 002B     		cmp	r3, #0
+ 297 0084 07D1     		bne	.L47
+ 183:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 184:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(str, dataP);
+ 298              		.loc 1 184 0
+ 299 0086 07F14C03 		add	r3, r7, #76
+ 300 008a 7968     		ldr	r1, [r7, #4]
+ 301 008c 1846     		mov	r0, r3
+ 302 008e FFF7FEFF 		bl	lwm2m_data_encode_string
+ 185:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 303              		.loc 1 185 0
+ 304 0092 4523     		movs	r3, #69
+ 305 0094 A8E1     		b	.L66
+ 306              	.L47:
+ 186:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 187:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 188:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 189:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 307              		.loc 1 189 0
+ 308 0096 8023     		movs	r3, #128
+ 309 0098 A6E1     		b	.L66
+ 310              	.L31:
+ 190:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 191:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 192:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_MODEL_NUMBER:
+ 193:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_MODEL_NUMBER, str, MAX_STRING_LEN);
+ 311              		.loc 1 193 0
+ 312 009a 07F14C03 		add	r3, r7, #76
+ 313 009e 4022     		movs	r2, #64
+ 314 00a0 1946     		mov	r1, r3
+ 315 00a2 0120     		movs	r0, #1
+ 316 00a4 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 317 00a8 C7F89400 		str	r0, [r7, #148]
+ 194:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 318              		.loc 1 194 0
+ 319 00ac D7F89430 		ldr	r3, [r7, #148]
+ 320 00b0 002B     		cmp	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 10
+
+
+ 321 00b2 07D1     		bne	.L49
+ 195:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 196:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(str, dataP);
+ 322              		.loc 1 196 0
+ 323 00b4 07F14C03 		add	r3, r7, #76
+ 324 00b8 7968     		ldr	r1, [r7, #4]
+ 325 00ba 1846     		mov	r0, r3
+ 326 00bc FFF7FEFF 		bl	lwm2m_data_encode_string
+ 197:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 327              		.loc 1 197 0
+ 328 00c0 4523     		movs	r3, #69
+ 329 00c2 91E1     		b	.L66
+ 330              	.L49:
+ 198:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 199:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 200:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 201:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 331              		.loc 1 201 0
+ 332 00c4 8023     		movs	r3, #128
+ 333 00c6 8FE1     		b	.L66
+ 334              	.L32:
+ 202:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 203:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 204:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_SERIAL_NUMBER:
+ 205:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_SERIAL_NUMBER, str, MAX_STRING_LEN);
+ 335              		.loc 1 205 0
+ 336 00c8 07F14C03 		add	r3, r7, #76
+ 337 00cc 4022     		movs	r2, #64
+ 338 00ce 1946     		mov	r1, r3
+ 339 00d0 0220     		movs	r0, #2
+ 340 00d2 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 341 00d6 C7F89400 		str	r0, [r7, #148]
+ 206:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 342              		.loc 1 206 0
+ 343 00da D7F89430 		ldr	r3, [r7, #148]
+ 344 00de 002B     		cmp	r3, #0
+ 345 00e0 07D1     		bne	.L50
+ 207:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 208:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(str, dataP);
+ 346              		.loc 1 208 0
+ 347 00e2 07F14C03 		add	r3, r7, #76
+ 348 00e6 7968     		ldr	r1, [r7, #4]
+ 349 00e8 1846     		mov	r0, r3
+ 350 00ea FFF7FEFF 		bl	lwm2m_data_encode_string
+ 209:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 351              		.loc 1 209 0
+ 352 00ee 4523     		movs	r3, #69
+ 353 00f0 7AE1     		b	.L66
+ 354              	.L50:
+ 210:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 211:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 212:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 213:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 355              		.loc 1 213 0
+ 356 00f2 8023     		movs	r3, #128
+ 357 00f4 78E1     		b	.L66
+ 358              	.L33:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 11
+
+
+ 214:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 215:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 216:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_FIRMWARE_VERSION:
+ 217:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_FIRMWARE_VER, str, MAX_STRING_LEN);
+ 359              		.loc 1 217 0
+ 360 00f6 07F14C03 		add	r3, r7, #76
+ 361 00fa 4022     		movs	r2, #64
+ 362 00fc 1946     		mov	r1, r3
+ 363 00fe 0320     		movs	r0, #3
+ 364 0100 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 365 0104 C7F89400 		str	r0, [r7, #148]
+ 218:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 366              		.loc 1 218 0
+ 367 0108 D7F89430 		ldr	r3, [r7, #148]
+ 368 010c 002B     		cmp	r3, #0
+ 369 010e 07D1     		bne	.L51
+ 219:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 220:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(str, dataP);
+ 370              		.loc 1 220 0
+ 371 0110 07F14C03 		add	r3, r7, #76
+ 372 0114 7968     		ldr	r1, [r7, #4]
+ 373 0116 1846     		mov	r0, r3
+ 374 0118 FFF7FEFF 		bl	lwm2m_data_encode_string
+ 221:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 375              		.loc 1 221 0
+ 376 011c 4523     		movs	r3, #69
+ 377 011e 63E1     		b	.L66
+ 378              	.L51:
+ 222:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 223:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 224:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 225:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 379              		.loc 1 225 0
+ 380 0120 8023     		movs	r3, #128
+ 381 0122 61E1     		b	.L66
+ 382              	.L34:
+ 226:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 227:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 228:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_M_REBOOT:
+ 229:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_405_METHOD_NOT_ALLOWED;
+ 383              		.loc 1 229 0
+ 384 0124 8523     		movs	r3, #133
+ 385 0126 5FE1     		b	.L66
+ 386              	.L35:
+ 230:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 231:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_FACTORY_RESET:
+ 232:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_405_METHOD_NOT_ALLOWED;
+ 387              		.loc 1 232 0
+ 388 0128 8523     		movs	r3, #133
+ 389 012a 5DE1     		b	.L66
+ 390              	.L36:
+ 233:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 234:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_AVL_POWER_SOURCES:
+ 235:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 236:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP = lwm2m_data_new(1);
+ 391              		.loc 1 236 0
+ 392 012c 0120     		movs	r0, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 12
+
+
+ 393 012e FFF7FEFF 		bl	lwm2m_data_new
+ 394 0132 C7F89000 		str	r0, [r7, #144]
+ 237:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (subTlvP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 395              		.loc 1 237 0
+ 396 0136 D7F89030 		ldr	r3, [r7, #144]
+ 397 013a 002B     		cmp	r3, #0
+ 398 013c 01D1     		bne	.L52
+ 399              		.loc 1 237 0 is_stmt 0 discriminator 1
+ 400 013e A023     		movs	r3, #160
+ 401 0140 52E1     		b	.L66
+ 402              	.L52:
+ 238:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP[0].id = 0;
+ 403              		.loc 1 238 0 is_stmt 1
+ 404 0142 D7F89030 		ldr	r3, [r7, #144]
+ 405 0146 0022     		movs	r2, #0
+ 406 0148 5A80     		strh	r2, [r3, #2]	@ movhi
+ 239:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_POWER_SOURCE, (char *)&power, sizeof(int));
+ 407              		.loc 1 239 0
+ 408 014a 07F11803 		add	r3, r7, #24
+ 409 014e 0422     		movs	r2, #4
+ 410 0150 1946     		mov	r1, r3
+ 411 0152 0620     		movs	r0, #6
+ 412 0154 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 413 0158 C7F89400 		str	r0, [r7, #148]
+ 240:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 414              		.loc 1 240 0
+ 415 015c D7F89430 		ldr	r3, [r7, #148]
+ 416 0160 002B     		cmp	r3, #0
+ 417 0162 10D1     		bne	.L53
+ 241:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 242:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(power, subTlvP);
+ 418              		.loc 1 242 0
+ 419 0164 BB69     		ldr	r3, [r7, #24]
+ 420 0166 4FEAE374 		asr	r4, r3, #31
+ 421 016a D7F89020 		ldr	r2, [r7, #144]
+ 422 016e 1846     		mov	r0, r3
+ 423 0170 2146     		mov	r1, r4
+ 424 0172 FFF7FEFF 		bl	lwm2m_data_encode_int
+ 243:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_instances(subTlvP, 1, dataP);
+ 425              		.loc 1 243 0
+ 426 0176 7A68     		ldr	r2, [r7, #4]
+ 427 0178 0121     		movs	r1, #1
+ 428 017a D7F89000 		ldr	r0, [r7, #144]
+ 429 017e FFF7FEFF 		bl	lwm2m_data_encode_instances
+ 244:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 430              		.loc 1 244 0
+ 431 0182 4523     		movs	r3, #69
+ 432 0184 30E1     		b	.L66
+ 433              	.L53:
+ 245:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 246:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 247:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 248:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_free(subTlvP);
+ 434              		.loc 1 248 0
+ 435 0186 D7F89000 		ldr	r0, [r7, #144]
+ 436 018a FFF7FEFF 		bl	lwm2m_free
+ 249:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 13
+
+
+ 437              		.loc 1 249 0
+ 438 018e 8023     		movs	r3, #128
+ 439 0190 2AE1     		b	.L66
+ 440              	.L37:
+ 250:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 251:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 252:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 253:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_POWER_SOURCE_VOLTAGE:
+ 254:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 255:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP = lwm2m_data_new(1);
+ 441              		.loc 1 255 0
+ 442 0192 0120     		movs	r0, #1
+ 443 0194 FFF7FEFF 		bl	lwm2m_data_new
+ 444 0198 C7F89000 		str	r0, [r7, #144]
+ 256:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (subTlvP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 445              		.loc 1 256 0
+ 446 019c D7F89030 		ldr	r3, [r7, #144]
+ 447 01a0 002B     		cmp	r3, #0
+ 448 01a2 01D1     		bne	.L54
+ 449              		.loc 1 256 0 is_stmt 0 discriminator 1
+ 450 01a4 A023     		movs	r3, #160
+ 451 01a6 1FE1     		b	.L66
+ 452              	.L54:
+ 257:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP[0].id = 0;
+ 453              		.loc 1 257 0 is_stmt 1
+ 454 01a8 D7F89030 		ldr	r3, [r7, #144]
+ 455 01ac 0022     		movs	r2, #0
+ 456 01ae 5A80     		strh	r2, [r3, #2]	@ movhi
+ 258:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_SOURCE_VOLTAGE, (char *)&voltage, sizeof(int));
+ 457              		.loc 1 258 0
+ 458 01b0 07F11403 		add	r3, r7, #20
+ 459 01b4 0422     		movs	r2, #4
+ 460 01b6 1946     		mov	r1, r3
+ 461 01b8 0720     		movs	r0, #7
+ 462 01ba FFF7FEFF 		bl	atiny_cmd_ioctl
+ 463 01be C7F89400 		str	r0, [r7, #148]
+ 259:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 464              		.loc 1 259 0
+ 465 01c2 D7F89430 		ldr	r3, [r7, #148]
+ 466 01c6 002B     		cmp	r3, #0
+ 467 01c8 10D1     		bne	.L55
+ 260:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 261:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(voltage, subTlvP);
+ 468              		.loc 1 261 0
+ 469 01ca 7B69     		ldr	r3, [r7, #20]
+ 470 01cc 4FEAE374 		asr	r4, r3, #31
+ 471 01d0 D7F89020 		ldr	r2, [r7, #144]
+ 472 01d4 1846     		mov	r0, r3
+ 473 01d6 2146     		mov	r1, r4
+ 474 01d8 FFF7FEFF 		bl	lwm2m_data_encode_int
+ 262:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_instances(subTlvP, 1, dataP);
+ 475              		.loc 1 262 0
+ 476 01dc 7A68     		ldr	r2, [r7, #4]
+ 477 01de 0121     		movs	r1, #1
+ 478 01e0 D7F89000 		ldr	r0, [r7, #144]
+ 479 01e4 FFF7FEFF 		bl	lwm2m_data_encode_instances
+ 263:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 14
+
+
+ 480              		.loc 1 263 0
+ 481 01e8 4523     		movs	r3, #69
+ 482 01ea FDE0     		b	.L66
+ 483              	.L55:
+ 264:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 265:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 266:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 267:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_free(subTlvP);
+ 484              		.loc 1 267 0
+ 485 01ec D7F89000 		ldr	r0, [r7, #144]
+ 486 01f0 FFF7FEFF 		bl	lwm2m_free
+ 268:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 487              		.loc 1 268 0
+ 488 01f4 8023     		movs	r3, #128
+ 489 01f6 F7E0     		b	.L66
+ 490              	.L38:
+ 269:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 270:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 271:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 272:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_POWER_SOURCE_CURRENT:
+ 273:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 274:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP = lwm2m_data_new(1);
+ 491              		.loc 1 274 0
+ 492 01f8 0120     		movs	r0, #1
+ 493 01fa FFF7FEFF 		bl	lwm2m_data_new
+ 494 01fe C7F89000 		str	r0, [r7, #144]
+ 275:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (subTlvP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 495              		.loc 1 275 0
+ 496 0202 D7F89030 		ldr	r3, [r7, #144]
+ 497 0206 002B     		cmp	r3, #0
+ 498 0208 01D1     		bne	.L56
+ 499              		.loc 1 275 0 is_stmt 0 discriminator 1
+ 500 020a A023     		movs	r3, #160
+ 501 020c ECE0     		b	.L66
+ 502              	.L56:
+ 276:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP[0].id = 0;
+ 503              		.loc 1 276 0 is_stmt 1
+ 504 020e D7F89030 		ldr	r3, [r7, #144]
+ 505 0212 0022     		movs	r2, #0
+ 506 0214 5A80     		strh	r2, [r3, #2]	@ movhi
+ 277:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_POWER_CURRENT, (char *)&power, sizeof(int));
+ 507              		.loc 1 277 0
+ 508 0216 07F11803 		add	r3, r7, #24
+ 509 021a 0422     		movs	r2, #4
+ 510 021c 1946     		mov	r1, r3
+ 511 021e 0820     		movs	r0, #8
+ 512 0220 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 513 0224 C7F89400 		str	r0, [r7, #148]
+ 278:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 514              		.loc 1 278 0
+ 515 0228 D7F89430 		ldr	r3, [r7, #148]
+ 516 022c 002B     		cmp	r3, #0
+ 517 022e 10D1     		bne	.L57
+ 279:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 280:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(power, &subTlvP[0]);
+ 518              		.loc 1 280 0
+ 519 0230 BB69     		ldr	r3, [r7, #24]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 15
+
+
+ 520 0232 4FEAE374 		asr	r4, r3, #31
+ 521 0236 D7F89020 		ldr	r2, [r7, #144]
+ 522 023a 1846     		mov	r0, r3
+ 523 023c 2146     		mov	r1, r4
+ 524 023e FFF7FEFF 		bl	lwm2m_data_encode_int
+ 281:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_instances(subTlvP, 1, dataP);
+ 525              		.loc 1 281 0
+ 526 0242 7A68     		ldr	r2, [r7, #4]
+ 527 0244 0121     		movs	r1, #1
+ 528 0246 D7F89000 		ldr	r0, [r7, #144]
+ 529 024a FFF7FEFF 		bl	lwm2m_data_encode_instances
+ 282:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 530              		.loc 1 282 0
+ 531 024e 4523     		movs	r3, #69
+ 532 0250 CAE0     		b	.L66
+ 533              	.L57:
+ 283:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 284:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 285:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 286:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_free(subTlvP);
+ 534              		.loc 1 286 0
+ 535 0252 D7F89000 		ldr	r0, [r7, #144]
+ 536 0256 FFF7FEFF 		bl	lwm2m_free
+ 287:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 537              		.loc 1 287 0
+ 538 025a 8023     		movs	r3, #128
+ 539 025c C4E0     		b	.L66
+ 540              	.L39:
+ 288:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 289:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 290:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 291:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_BATTERY_LEVEL:
+ 292:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 293:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_BATERRY_LEVEL, (char *)&battery_level, sizeof(int));
+ 541              		.loc 1 293 0
+ 542 025e 07F11003 		add	r3, r7, #16
+ 543 0262 0422     		movs	r2, #4
+ 544 0264 1946     		mov	r1, r3
+ 545 0266 0920     		movs	r0, #9
+ 546 0268 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 547 026c C7F89400 		str	r0, [r7, #148]
+ 294:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 548              		.loc 1 294 0
+ 549 0270 D7F89430 		ldr	r3, [r7, #148]
+ 550 0274 002B     		cmp	r3, #0
+ 551 0276 09D1     		bne	.L58
+ 295:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 296:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(battery_level, dataP);
+ 552              		.loc 1 296 0
+ 553 0278 3B69     		ldr	r3, [r7, #16]
+ 554 027a 4FEAE374 		asr	r4, r3, #31
+ 555 027e 7A68     		ldr	r2, [r7, #4]
+ 556 0280 1846     		mov	r0, r3
+ 557 0282 2146     		mov	r1, r4
+ 558 0284 FFF7FEFF 		bl	lwm2m_data_encode_int
+ 297:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 559              		.loc 1 297 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 16
+
+
+ 560 0288 4523     		movs	r3, #69
+ 561 028a ADE0     		b	.L66
+ 562              	.L58:
+ 298:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 299:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 300:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 301:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 563              		.loc 1 301 0
+ 564 028c 8023     		movs	r3, #128
+ 565 028e ABE0     		b	.L66
+ 566              	.L40:
+ 302:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 303:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 304:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 305:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_MEMORY_FREE:
+ 306:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 307:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_MEMORY_FREE, (char *)&free_memory, sizeof(int));
+ 567              		.loc 1 307 0
+ 568 0290 07F10C03 		add	r3, r7, #12
+ 569 0294 0422     		movs	r2, #4
+ 570 0296 1946     		mov	r1, r3
+ 571 0298 0A20     		movs	r0, #10
+ 572 029a FFF7FEFF 		bl	atiny_cmd_ioctl
+ 573 029e C7F89400 		str	r0, [r7, #148]
+ 308:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 574              		.loc 1 308 0
+ 575 02a2 D7F89430 		ldr	r3, [r7, #148]
+ 576 02a6 002B     		cmp	r3, #0
+ 577 02a8 09D1     		bne	.L59
+ 309:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 310:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(free_memory, dataP);
+ 578              		.loc 1 310 0
+ 579 02aa FB68     		ldr	r3, [r7, #12]
+ 580 02ac 4FEAE374 		asr	r4, r3, #31
+ 581 02b0 7A68     		ldr	r2, [r7, #4]
+ 582 02b2 1846     		mov	r0, r3
+ 583 02b4 2146     		mov	r1, r4
+ 584 02b6 FFF7FEFF 		bl	lwm2m_data_encode_int
+ 311:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 585              		.loc 1 311 0
+ 586 02ba 4523     		movs	r3, #69
+ 587 02bc 94E0     		b	.L66
+ 588              	.L59:
+ 312:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 313:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 314:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 315:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 589              		.loc 1 315 0
+ 590 02be 8023     		movs	r3, #128
+ 591 02c0 92E0     		b	.L66
+ 592              	.L41:
+ 316:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 317:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 318:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 319:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_M_ERROR_CODE:
+ 320:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 321:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP = lwm2m_data_new(1);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 17
+
+
+ 593              		.loc 1 321 0
+ 594 02c2 0120     		movs	r0, #1
+ 595 02c4 FFF7FEFF 		bl	lwm2m_data_new
+ 596 02c8 C7F89000 		str	r0, [r7, #144]
+ 322:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (subTlvP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 597              		.loc 1 322 0
+ 598 02cc D7F89030 		ldr	r3, [r7, #144]
+ 599 02d0 002B     		cmp	r3, #0
+ 600 02d2 01D1     		bne	.L60
+ 601              		.loc 1 322 0 is_stmt 0 discriminator 1
+ 602 02d4 A023     		movs	r3, #160
+ 603 02d6 87E0     		b	.L66
+ 604              	.L60:
+ 323:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         subTlvP[0].id = 0;
+ 605              		.loc 1 323 0 is_stmt 1
+ 606 02d8 D7F89030 		ldr	r3, [r7, #144]
+ 607 02dc 0022     		movs	r2, #0
+ 608 02de 5A80     		strh	r2, [r3, #2]	@ movhi
+ 324:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_DEV_ERR, (char *)&err, sizeof(int));
+ 609              		.loc 1 324 0
+ 610 02e0 07F10803 		add	r3, r7, #8
+ 611 02e4 0422     		movs	r2, #4
+ 612 02e6 1946     		mov	r1, r3
+ 613 02e8 0B20     		movs	r0, #11
+ 614 02ea FFF7FEFF 		bl	atiny_cmd_ioctl
+ 615 02ee C7F89400 		str	r0, [r7, #148]
+ 325:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 616              		.loc 1 325 0
+ 617 02f2 D7F89430 		ldr	r3, [r7, #148]
+ 618 02f6 002B     		cmp	r3, #0
+ 619 02f8 10D1     		bne	.L61
+ 326:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 327:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(err, subTlvP);
+ 620              		.loc 1 327 0
+ 621 02fa BB68     		ldr	r3, [r7, #8]
+ 622 02fc 4FEAE374 		asr	r4, r3, #31
+ 623 0300 D7F89020 		ldr	r2, [r7, #144]
+ 624 0304 1846     		mov	r0, r3
+ 625 0306 2146     		mov	r1, r4
+ 626 0308 FFF7FEFF 		bl	lwm2m_data_encode_int
+ 328:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_instances(subTlvP, 1, dataP);
+ 627              		.loc 1 328 0
+ 628 030c 7A68     		ldr	r2, [r7, #4]
+ 629 030e 0121     		movs	r1, #1
+ 630 0310 D7F89000 		ldr	r0, [r7, #144]
+ 631 0314 FFF7FEFF 		bl	lwm2m_data_encode_instances
+ 329:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 632              		.loc 1 329 0
+ 633 0318 4523     		movs	r3, #69
+ 634 031a 65E0     		b	.L66
+ 635              	.L61:
+ 330:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 331:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 332:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 333:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_free(subTlvP);
+ 636              		.loc 1 333 0
+ 637 031c D7F89000 		ldr	r0, [r7, #144]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 18
+
+
+ 638 0320 FFF7FEFF 		bl	lwm2m_free
+ 334:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 639              		.loc 1 334 0
+ 640 0324 8023     		movs	r3, #128
+ 641 0326 5FE0     		b	.L66
+ 642              	.L42:
+ 335:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 336:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 337:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_RESET_ERROR_CODE:
+ 338:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_405_METHOD_NOT_ALLOWED;
+ 643              		.loc 1 338 0
+ 644 0328 8523     		movs	r3, #133
+ 645 032a 5DE0     		b	.L66
+ 646              	.L43:
+ 339:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 340:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_CURRENT_TIME:
+ 341:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_CURRENT_TIME, (char *)&current_time, sizeof(int64_t));
+ 647              		.loc 1 341 0
+ 648 032c 07F14003 		add	r3, r7, #64
+ 649 0330 0822     		movs	r2, #8
+ 650 0332 1946     		mov	r1, r3
+ 651 0334 0D20     		movs	r0, #13
+ 652 0336 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 653 033a C7F89400 		str	r0, [r7, #148]
+ 342:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 654              		.loc 1 342 0
+ 655 033e D7F89430 		ldr	r3, [r7, #148]
+ 656 0342 002B     		cmp	r3, #0
+ 657 0344 08D1     		bne	.L62
+ 343:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 344:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_int(current_time, dataP);
+ 658              		.loc 1 344 0
+ 659 0346 D7E91034 		ldrd	r3, [r7, #64]
+ 660 034a 7A68     		ldr	r2, [r7, #4]
+ 661 034c 1846     		mov	r0, r3
+ 662 034e 2146     		mov	r1, r4
+ 663 0350 FFF7FEFF 		bl	lwm2m_data_encode_int
+ 345:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 664              		.loc 1 345 0
+ 665 0354 4523     		movs	r3, #69
+ 666 0356 47E0     		b	.L66
+ 667              	.L62:
+ 346:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 347:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 348:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 349:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 668              		.loc 1 349 0
+ 669 0358 8023     		movs	r3, #128
+ 670 035a 45E0     		b	.L66
+ 671              	.L44:
+ 350:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 351:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 352:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_UTC_OFFSET:
+ 353:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_UTC_OFFSET, UTC_offset, PRV_OFFSET_MAXLEN);
+ 672              		.loc 1 353 0
+ 673 035c 07F13803 		add	r3, r7, #56
+ 674 0360 0722     		movs	r2, #7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 19
+
+
+ 675 0362 1946     		mov	r1, r3
+ 676 0364 0F20     		movs	r0, #15
+ 677 0366 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 678 036a C7F89400 		str	r0, [r7, #148]
+ 354:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 679              		.loc 1 354 0
+ 680 036e D7F89430 		ldr	r3, [r7, #148]
+ 681 0372 002B     		cmp	r3, #0
+ 682 0374 07D1     		bne	.L63
+ 355:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 356:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(UTC_offset, dataP);
+ 683              		.loc 1 356 0
+ 684 0376 07F13803 		add	r3, r7, #56
+ 685 037a 7968     		ldr	r1, [r7, #4]
+ 686 037c 1846     		mov	r0, r3
+ 687 037e FFF7FEFF 		bl	lwm2m_data_encode_string
+ 357:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 688              		.loc 1 357 0
+ 689 0382 4523     		movs	r3, #69
+ 690 0384 30E0     		b	.L66
+ 691              	.L63:
+ 358:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 359:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 360:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 361:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 692              		.loc 1 361 0
+ 693 0386 8023     		movs	r3, #128
+ 694 0388 2EE0     		b	.L66
+ 695              	.L45:
+ 362:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 363:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 364:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_TIMEZONE:
+ 365:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_TIMEZONE, timezone, PRV_TIMEZONE_MAXLEN);
+ 696              		.loc 1 365 0
+ 697 038a 07F11C03 		add	r3, r7, #28
+ 698 038e 1922     		movs	r2, #25
+ 699 0390 1946     		mov	r1, r3
+ 700 0392 1120     		movs	r0, #17
+ 701 0394 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 702 0398 C7F89400 		str	r0, [r7, #148]
+ 366:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 703              		.loc 1 366 0
+ 704 039c D7F89430 		ldr	r3, [r7, #148]
+ 705 03a0 002B     		cmp	r3, #0
+ 706 03a2 07D1     		bne	.L64
+ 367:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 368:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(timezone, dataP);
+ 707              		.loc 1 368 0
+ 708 03a4 07F11C03 		add	r3, r7, #28
+ 709 03a8 7968     		ldr	r1, [r7, #4]
+ 710 03aa 1846     		mov	r0, r3
+ 711 03ac FFF7FEFF 		bl	lwm2m_data_encode_string
+ 369:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 712              		.loc 1 369 0
+ 713 03b0 4523     		movs	r3, #69
+ 714 03b2 19E0     		b	.L66
+ 715              	.L64:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 20
+
+
+ 370:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 371:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 372:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 373:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 716              		.loc 1 373 0
+ 717 03b4 8023     		movs	r3, #128
+ 718 03b6 17E0     		b	.L66
+ 719              	.L46:
+ 374:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 375:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 376:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_M_BINDING_MODES:
+ 377:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_GET_BINDING_MODES, str, MAX_STRING_LEN);
+ 720              		.loc 1 377 0
+ 721 03b8 07F14C03 		add	r3, r7, #76
+ 722 03bc 4022     		movs	r2, #64
+ 723 03be 1946     		mov	r1, r3
+ 724 03c0 1320     		movs	r0, #19
+ 725 03c2 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 726 03c6 C7F89400 		str	r0, [r7, #148]
+ 378:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 727              		.loc 1 378 0
+ 728 03ca D7F89430 		ldr	r3, [r7, #148]
+ 729 03ce 002B     		cmp	r3, #0
+ 730 03d0 07D1     		bne	.L65
+ 379:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 380:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_data_encode_string(str, dataP);
+ 731              		.loc 1 380 0
+ 732 03d2 07F14C03 		add	r3, r7, #76
+ 733 03d6 7968     		ldr	r1, [r7, #4]
+ 734 03d8 1846     		mov	r0, r3
+ 735 03da FFF7FEFF 		bl	lwm2m_data_encode_string
+ 381:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_205_CONTENT;
+ 736              		.loc 1 381 0
+ 737 03de 4523     		movs	r3, #69
+ 738 03e0 02E0     		b	.L66
+ 739              	.L65:
+ 382:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 383:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 384:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 385:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_400_BAD_REQUEST;
+ 740              		.loc 1 385 0
+ 741 03e2 8023     		movs	r3, #128
+ 742 03e4 00E0     		b	.L66
+ 743              	.L28:
+ 386:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 387:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     default:
+ 388:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_404_NOT_FOUND;
+ 744              		.loc 1 388 0
+ 745 03e6 8423     		movs	r3, #132
+ 746              	.L66:
+ 389:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 390:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 747              		.loc 1 390 0 discriminator 1
+ 748 03e8 1846     		mov	r0, r3
+ 749 03ea 9C37     		adds	r7, r7, #156
+ 750              	.LCFI9:
+ 751              		.cfi_def_cfa_offset 12
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 21
+
+
+ 752 03ec BD46     		mov	sp, r7
+ 753              	.LCFI10:
+ 754              		.cfi_def_cfa_register 13
+ 755              		@ sp needed
+ 756 03ee 90BD     		pop	{r4, r7, pc}
+ 757              		.cfi_endproc
+ 758              	.LFE143:
+ 760              		.section	.rodata
+ 761              		.align	2
+ 762              	.LC0:
+ 763 0000 0000     		.short	0
+ 764 0002 0100     		.short	1
+ 765 0004 0200     		.short	2
+ 766 0006 0300     		.short	3
+ 767 0008 0600     		.short	6
+ 768 000a 0700     		.short	7
+ 769 000c 0800     		.short	8
+ 770 000e 0900     		.short	9
+ 771 0010 0A00     		.short	10
+ 772 0012 0B00     		.short	11
+ 773 0014 0D00     		.short	13
+ 774 0016 0E00     		.short	14
+ 775 0018 0F00     		.short	15
+ 776 001a 1000     		.short	16
+ 777              		.section	.text.prv_device_read,"ax",%progbits
+ 778              		.align	1
+ 779              		.syntax unified
+ 780              		.thumb
+ 781              		.thumb_func
+ 782              		.fpu fpv4-sp-d16
+ 784              	prv_device_read:
+ 785              	.LFB144:
+ 391:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 392:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** static uint8_t prv_device_read(uint16_t instanceId,
+ 393:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                int *numDataP,
+ 394:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                lwm2m_data_t **dataArrayP,
+ 395:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                lwm2m_data_cfg_t *dataCfg,
+ 396:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                lwm2m_object_t *objectP)
+ 397:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 786              		.loc 1 397 0
+ 787              		.cfi_startproc
+ 788              		@ args = 4, pretend = 0, frame = 56
+ 789              		@ frame_needed = 1, uses_anonymous_args = 0
+ 790 0000 B0B5     		push	{r4, r5, r7, lr}
+ 791              	.LCFI11:
+ 792              		.cfi_def_cfa_offset 16
+ 793              		.cfi_offset 4, -16
+ 794              		.cfi_offset 5, -12
+ 795              		.cfi_offset 7, -8
+ 796              		.cfi_offset 14, -4
+ 797 0002 8EB0     		sub	sp, sp, #56
+ 798              	.LCFI12:
+ 799              		.cfi_def_cfa_offset 72
+ 800 0004 00AF     		add	r7, sp, #0
+ 801              	.LCFI13:
+ 802              		.cfi_def_cfa_register 7
+ 803 0006 B960     		str	r1, [r7, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 22
+
+
+ 804 0008 7A60     		str	r2, [r7, #4]
+ 805 000a 3B60     		str	r3, [r7]
+ 806 000c 0346     		mov	r3, r0	@ movhi
+ 807 000e FB81     		strh	r3, [r7, #14]	@ movhi
+ 398:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     uint8_t result;
+ 399:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int i;
+ 400:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 401:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // this is a single instance object
+ 402:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (instanceId != 0)
+ 808              		.loc 1 402 0
+ 809 0010 FB89     		ldrh	r3, [r7, #14]
+ 810 0012 002B     		cmp	r3, #0
+ 811 0014 01D0     		beq	.L68
+ 403:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 404:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_404_NOT_FOUND;
+ 812              		.loc 1 404 0
+ 813 0016 8423     		movs	r3, #132
+ 814 0018 50E0     		b	.L69
+ 815              	.L68:
+ 405:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 406:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 407:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // is the server asking for the full object ?
+ 408:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (*numDataP == 0)
+ 816              		.loc 1 408 0
+ 817 001a BB68     		ldr	r3, [r7, #8]
+ 818 001c 1B68     		ldr	r3, [r3]
+ 819 001e 002B     		cmp	r3, #0
+ 820 0020 31D1     		bne	.L70
+ 821              	.LBB2:
+ 409:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 410:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         uint16_t resList[] =
+ 822              		.loc 1 410 0
+ 823 0022 284B     		ldr	r3, .L76
+ 824 0024 07F11004 		add	r4, r7, #16
+ 825 0028 1D46     		mov	r5, r3
+ 826 002a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 827 002c 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 828 002e 95E80700 		ldm	r5, {r0, r1, r2}
+ 829 0032 84E80700 		stm	r4, {r0, r1, r2}
+ 411:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 412:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_MANUFACTURER,
+ 413:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_MODEL_NUMBER,
+ 414:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_SERIAL_NUMBER,
+ 415:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_FIRMWARE_VERSION,
+ 416:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             //E: RES_M_REBOOT,
+ 417:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             //E: RES_O_FACTORY_RESET,
+ 418:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_AVL_POWER_SOURCES,
+ 419:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_POWER_SOURCE_VOLTAGE,
+ 420:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_POWER_SOURCE_CURRENT,
+ 421:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_BATTERY_LEVEL,
+ 422:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_MEMORY_FREE,
+ 423:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_M_ERROR_CODE,
+ 424:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             //E: RES_O_RESET_ERROR_CODE,
+ 425:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_CURRENT_TIME,
+ 426:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_UTC_OFFSET,
+ 427:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_TIMEZONE,
+ 428:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_M_BINDING_MODES
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 23
+
+
+ 429:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         };
+ 430:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         int nbRes = sizeof(resList) / sizeof(uint16_t);
+ 830              		.loc 1 430 0
+ 831 0036 0E23     		movs	r3, #14
+ 832 0038 3B63     		str	r3, [r7, #48]
+ 431:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 432:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         *dataArrayP = lwm2m_data_new(nbRes);
+ 833              		.loc 1 432 0
+ 834 003a 386B     		ldr	r0, [r7, #48]
+ 835 003c FFF7FEFF 		bl	lwm2m_data_new
+ 836 0040 0246     		mov	r2, r0
+ 837 0042 7B68     		ldr	r3, [r7, #4]
+ 838 0044 1A60     		str	r2, [r3]
+ 433:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (*dataArrayP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 839              		.loc 1 433 0
+ 840 0046 7B68     		ldr	r3, [r7, #4]
+ 841 0048 1B68     		ldr	r3, [r3]
+ 842 004a 002B     		cmp	r3, #0
+ 843 004c 01D1     		bne	.L71
+ 844              		.loc 1 433 0 is_stmt 0 discriminator 1
+ 845 004e A023     		movs	r3, #160
+ 846 0050 34E0     		b	.L69
+ 847              	.L71:
+ 434:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         *numDataP = nbRes;
+ 848              		.loc 1 434 0 is_stmt 1
+ 849 0052 BB68     		ldr	r3, [r7, #8]
+ 850 0054 3A6B     		ldr	r2, [r7, #48]
+ 851 0056 1A60     		str	r2, [r3]
+ 435:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0 ; i < nbRes ; i++)
+ 852              		.loc 1 435 0
+ 853 0058 0023     		movs	r3, #0
+ 854 005a 7B63     		str	r3, [r7, #52]
+ 855 005c 0FE0     		b	.L72
+ 856              	.L73:
+ 436:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 437:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             (*dataArrayP)[i].id = resList[i];
+ 857              		.loc 1 437 0 discriminator 3
+ 858 005e 7B68     		ldr	r3, [r7, #4]
+ 859 0060 1A68     		ldr	r2, [r3]
+ 860 0062 7B6B     		ldr	r3, [r7, #52]
+ 861 0064 1B01     		lsls	r3, r3, #4
+ 862 0066 1A44     		add	r2, r2, r3
+ 863 0068 7B6B     		ldr	r3, [r7, #52]
+ 864 006a 5B00     		lsls	r3, r3, #1
+ 865 006c 07F13801 		add	r1, r7, #56
+ 866 0070 0B44     		add	r3, r3, r1
+ 867 0072 33F8283C 		ldrh	r3, [r3, #-40]
+ 868 0076 5380     		strh	r3, [r2, #2]	@ movhi
+ 435:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0 ; i < nbRes ; i++)
+ 869              		.loc 1 435 0 discriminator 3
+ 870 0078 7B6B     		ldr	r3, [r7, #52]
+ 871 007a 0133     		adds	r3, r3, #1
+ 872 007c 7B63     		str	r3, [r7, #52]
+ 873              	.L72:
+ 435:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0 ; i < nbRes ; i++)
+ 874              		.loc 1 435 0 is_stmt 0 discriminator 1
+ 875 007e 7A6B     		ldr	r2, [r7, #52]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 24
+
+
+ 876 0080 3B6B     		ldr	r3, [r7, #48]
+ 877 0082 9A42     		cmp	r2, r3
+ 878 0084 EBDB     		blt	.L73
+ 879              	.L70:
+ 880              	.LBE2:
+ 438:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 439:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 440:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 441:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     i = 0;
+ 881              		.loc 1 441 0 is_stmt 1
+ 882 0086 0023     		movs	r3, #0
+ 883 0088 7B63     		str	r3, [r7, #52]
+ 884              	.L75:
+ 442:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     do
+ 443:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 444:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = prv_set_value((*dataArrayP) + i);
+ 885              		.loc 1 444 0 discriminator 2
+ 886 008a 7B68     		ldr	r3, [r7, #4]
+ 887 008c 1A68     		ldr	r2, [r3]
+ 888 008e 7B6B     		ldr	r3, [r7, #52]
+ 889 0090 1B01     		lsls	r3, r3, #4
+ 890 0092 1344     		add	r3, r3, r2
+ 891 0094 1846     		mov	r0, r3
+ 892 0096 FFF7FEFF 		bl	prv_set_value
+ 893 009a 0346     		mov	r3, r0
+ 894 009c 87F82F30 		strb	r3, [r7, #47]
+ 445:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         i++;
+ 895              		.loc 1 445 0 discriminator 2
+ 896 00a0 7B6B     		ldr	r3, [r7, #52]
+ 897 00a2 0133     		adds	r3, r3, #1
+ 898 00a4 7B63     		str	r3, [r7, #52]
+ 446:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 447:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     while (i < *numDataP && result == COAP_205_CONTENT);
+ 899              		.loc 1 447 0 discriminator 2
+ 900 00a6 BB68     		ldr	r3, [r7, #8]
+ 901 00a8 1B68     		ldr	r3, [r3]
+ 902 00aa 7A6B     		ldr	r2, [r7, #52]
+ 903 00ac 9A42     		cmp	r2, r3
+ 904 00ae 03DA     		bge	.L74
+ 905              		.loc 1 447 0 is_stmt 0 discriminator 1
+ 906 00b0 97F82F30 		ldrb	r3, [r7, #47]	@ zero_extendqisi2
+ 907 00b4 452B     		cmp	r3, #69
+ 908 00b6 E8D0     		beq	.L75
+ 909              	.L74:
+ 448:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 449:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     return result;
+ 910              		.loc 1 449 0 is_stmt 1
+ 911 00b8 97F82F30 		ldrb	r3, [r7, #47]	@ zero_extendqisi2
+ 912              	.L69:
+ 450:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 913              		.loc 1 450 0
+ 914 00bc 1846     		mov	r0, r3
+ 915 00be 3837     		adds	r7, r7, #56
+ 916              	.LCFI14:
+ 917              		.cfi_def_cfa_offset 16
+ 918 00c0 BD46     		mov	sp, r7
+ 919              	.LCFI15:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 25
+
+
+ 920              		.cfi_def_cfa_register 13
+ 921              		@ sp needed
+ 922 00c2 B0BD     		pop	{r4, r5, r7, pc}
+ 923              	.L77:
+ 924              		.align	2
+ 925              	.L76:
+ 926 00c4 00000000 		.word	.LC0
+ 927              		.cfi_endproc
+ 928              	.LFE144:
+ 930              		.section	.rodata
+ 931              		.align	2
+ 932              	.LC1:
+ 933 001c 0000     		.short	0
+ 934 001e 0100     		.short	1
+ 935 0020 0200     		.short	2
+ 936 0022 0300     		.short	3
+ 937 0024 0400     		.short	4
+ 938 0026 0500     		.short	5
+ 939 0028 0600     		.short	6
+ 940 002a 0700     		.short	7
+ 941 002c 0800     		.short	8
+ 942 002e 0900     		.short	9
+ 943 0030 0A00     		.short	10
+ 944 0032 0B00     		.short	11
+ 945 0034 0C00     		.short	12
+ 946 0036 0D00     		.short	13
+ 947 0038 0E00     		.short	14
+ 948 003a 0F00     		.short	15
+ 949 003c 1000     		.short	16
+ 950              		.section	.text.prv_device_discover,"ax",%progbits
+ 951              		.align	1
+ 952              		.syntax unified
+ 953              		.thumb
+ 954              		.thumb_func
+ 955              		.fpu fpv4-sp-d16
+ 957              	prv_device_discover:
+ 958              	.LFB145:
+ 451:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 452:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** static uint8_t prv_device_discover(uint16_t instanceId,
+ 453:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                    int *numDataP,
+ 454:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                    lwm2m_data_t **dataArrayP,
+ 455:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                    lwm2m_object_t *objectP)
+ 456:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 959              		.loc 1 456 0
+ 960              		.cfi_startproc
+ 961              		@ args = 0, pretend = 0, frame = 64
+ 962              		@ frame_needed = 1, uses_anonymous_args = 0
+ 963 0000 B0B5     		push	{r4, r5, r7, lr}
+ 964              	.LCFI16:
+ 965              		.cfi_def_cfa_offset 16
+ 966              		.cfi_offset 4, -16
+ 967              		.cfi_offset 5, -12
+ 968              		.cfi_offset 7, -8
+ 969              		.cfi_offset 14, -4
+ 970 0002 90B0     		sub	sp, sp, #64
+ 971              	.LCFI17:
+ 972              		.cfi_def_cfa_offset 80
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 26
+
+
+ 973 0004 00AF     		add	r7, sp, #0
+ 974              	.LCFI18:
+ 975              		.cfi_def_cfa_register 7
+ 976 0006 B960     		str	r1, [r7, #8]
+ 977 0008 7A60     		str	r2, [r7, #4]
+ 978 000a 3B60     		str	r3, [r7]
+ 979 000c 0346     		mov	r3, r0	@ movhi
+ 980 000e FB81     		strh	r3, [r7, #14]	@ movhi
+ 457:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     uint8_t result;
+ 458:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int i;
+ 459:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 460:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // this is a single instance object
+ 461:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (instanceId != 0)
+ 981              		.loc 1 461 0
+ 982 0010 FB89     		ldrh	r3, [r7, #14]
+ 983 0012 002B     		cmp	r3, #0
+ 984 0014 01D0     		beq	.L79
+ 462:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 463:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_404_NOT_FOUND;
+ 985              		.loc 1 463 0
+ 986 0016 8423     		movs	r3, #132
+ 987 0018 58E0     		b	.L80
+ 988              	.L79:
+ 464:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 465:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 466:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     result = COAP_205_CONTENT;
+ 989              		.loc 1 466 0
+ 990 001a 4523     		movs	r3, #69
+ 991 001c 87F83F30 		strb	r3, [r7, #63]
+ 467:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 468:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // is the server asking for the full object ?
+ 469:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (*numDataP == 0)
+ 992              		.loc 1 469 0
+ 993 0020 BB68     		ldr	r3, [r7, #8]
+ 994 0022 1B68     		ldr	r3, [r3]
+ 995 0024 002B     		cmp	r3, #0
+ 996 0026 32D1     		bne	.L81
+ 997              	.LBB3:
+ 470:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 471:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         uint16_t resList[] =
+ 998              		.loc 1 471 0
+ 999 0028 2A4B     		ldr	r3, .L92
+ 1000 002a 07F11004 		add	r4, r7, #16
+ 1001 002e 1D46     		mov	r5, r3
+ 1002 0030 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1003 0032 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 1004 0034 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1005 0036 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 1006 0038 2B68     		ldr	r3, [r5]
+ 1007 003a 2380     		strh	r3, [r4]	@ movhi
+ 472:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 473:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_MANUFACTURER,
+ 474:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_MODEL_NUMBER,
+ 475:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_SERIAL_NUMBER,
+ 476:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_FIRMWARE_VERSION,
+ 477:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_M_REBOOT,
+ 478:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_FACTORY_RESET,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 27
+
+
+ 479:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_AVL_POWER_SOURCES,
+ 480:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_POWER_SOURCE_VOLTAGE,
+ 481:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_POWER_SOURCE_CURRENT,
+ 482:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_BATTERY_LEVEL,
+ 483:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_MEMORY_FREE,
+ 484:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_M_ERROR_CODE,
+ 485:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_RESET_ERROR_CODE,
+ 486:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_CURRENT_TIME,
+ 487:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_UTC_OFFSET,
+ 488:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_O_TIMEZONE,
+ 489:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             RES_M_BINDING_MODES
+ 490:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         };
+ 491:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         int nbRes = sizeof(resList) / sizeof(uint16_t);
+ 1008              		.loc 1 491 0
+ 1009 003c 1123     		movs	r3, #17
+ 1010 003e 7B63     		str	r3, [r7, #52]
+ 492:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 493:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         *dataArrayP = lwm2m_data_new(nbRes);
+ 1011              		.loc 1 493 0
+ 1012 0040 786B     		ldr	r0, [r7, #52]
+ 1013 0042 FFF7FEFF 		bl	lwm2m_data_new
+ 1014 0046 0246     		mov	r2, r0
+ 1015 0048 7B68     		ldr	r3, [r7, #4]
+ 1016 004a 1A60     		str	r2, [r3]
+ 494:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (*dataArrayP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 1017              		.loc 1 494 0
+ 1018 004c 7B68     		ldr	r3, [r7, #4]
+ 1019 004e 1B68     		ldr	r3, [r3]
+ 1020 0050 002B     		cmp	r3, #0
+ 1021 0052 01D1     		bne	.L82
+ 1022              		.loc 1 494 0 is_stmt 0 discriminator 1
+ 1023 0054 A023     		movs	r3, #160
+ 1024 0056 39E0     		b	.L80
+ 1025              	.L82:
+ 495:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         *numDataP = nbRes;
+ 1026              		.loc 1 495 0 is_stmt 1
+ 1027 0058 BB68     		ldr	r3, [r7, #8]
+ 1028 005a 7A6B     		ldr	r2, [r7, #52]
+ 1029 005c 1A60     		str	r2, [r3]
+ 496:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0; i < nbRes; i++)
+ 1030              		.loc 1 496 0
+ 1031 005e 0023     		movs	r3, #0
+ 1032 0060 BB63     		str	r3, [r7, #56]
+ 1033 0062 0FE0     		b	.L83
+ 1034              	.L84:
+ 497:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 498:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             (*dataArrayP)[i].id = resList[i];
+ 1035              		.loc 1 498 0 discriminator 3
+ 1036 0064 7B68     		ldr	r3, [r7, #4]
+ 1037 0066 1A68     		ldr	r2, [r3]
+ 1038 0068 BB6B     		ldr	r3, [r7, #56]
+ 1039 006a 1B01     		lsls	r3, r3, #4
+ 1040 006c 1A44     		add	r2, r2, r3
+ 1041 006e BB6B     		ldr	r3, [r7, #56]
+ 1042 0070 5B00     		lsls	r3, r3, #1
+ 1043 0072 07F14001 		add	r1, r7, #64
+ 1044 0076 0B44     		add	r3, r3, r1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 28
+
+
+ 1045 0078 33F8303C 		ldrh	r3, [r3, #-48]
+ 1046 007c 5380     		strh	r3, [r2, #2]	@ movhi
+ 496:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0; i < nbRes; i++)
+ 1047              		.loc 1 496 0 discriminator 3
+ 1048 007e BB6B     		ldr	r3, [r7, #56]
+ 1049 0080 0133     		adds	r3, r3, #1
+ 1050 0082 BB63     		str	r3, [r7, #56]
+ 1051              	.L83:
+ 496:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0; i < nbRes; i++)
+ 1052              		.loc 1 496 0 is_stmt 0 discriminator 1
+ 1053 0084 BA6B     		ldr	r2, [r7, #56]
+ 1054 0086 7B6B     		ldr	r3, [r7, #52]
+ 1055 0088 9A42     		cmp	r2, r3
+ 1056 008a EBDB     		blt	.L84
+ 1057 008c 1CE0     		b	.L85
+ 1058              	.L81:
+ 1059              	.LBE3:
+ 499:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 500:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 501:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     else
+ 502:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 503:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         for (i = 0; i < *numDataP && result == COAP_205_CONTENT; i++)
+ 1060              		.loc 1 503 0 is_stmt 1
+ 1061 008e 0023     		movs	r3, #0
+ 1062 0090 BB63     		str	r3, [r7, #56]
+ 1063 0092 10E0     		b	.L86
+ 1064              	.L90:
+ 504:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 505:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             switch ((*dataArrayP)[i].id)
+ 1065              		.loc 1 505 0
+ 1066 0094 7B68     		ldr	r3, [r7, #4]
+ 1067 0096 1A68     		ldr	r2, [r3]
+ 1068 0098 BB6B     		ldr	r3, [r7, #56]
+ 1069 009a 1B01     		lsls	r3, r3, #4
+ 1070 009c 1344     		add	r3, r3, r2
+ 1071 009e 5B88     		ldrh	r3, [r3, #2]
+ 1072 00a0 0033     		adds	r3, r3, #0
+ 1073 00a2 102B     		cmp	r3, #16
+ 1074 00a4 03D9     		bls	.L91
+ 506:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 507:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_MANUFACTURER:
+ 508:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_MODEL_NUMBER:
+ 509:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_SERIAL_NUMBER:
+ 510:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_FIRMWARE_VERSION:
+ 511:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_M_REBOOT:
+ 512:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_FACTORY_RESET:
+ 513:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_AVL_POWER_SOURCES:
+ 514:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_POWER_SOURCE_VOLTAGE:
+ 515:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_POWER_SOURCE_CURRENT:
+ 516:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_BATTERY_LEVEL:
+ 517:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_MEMORY_FREE:
+ 518:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_M_ERROR_CODE:
+ 519:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_RESET_ERROR_CODE:
+ 520:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_CURRENT_TIME:
+ 521:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_UTC_OFFSET:
+ 522:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_O_TIMEZONE:
+ 523:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             case RES_M_BINDING_MODES:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 29
+
+
+ 524:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 break;
+ 525:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             default:
+ 526:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 result = COAP_404_NOT_FOUND;
+ 1075              		.loc 1 526 0
+ 1076 00a6 8423     		movs	r3, #132
+ 1077 00a8 87F83F30 		strb	r3, [r7, #63]
+ 1078 00ac 00E0     		b	.L89
+ 1079              	.L91:
+ 524:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             default:
+ 1080              		.loc 1 524 0
+ 1081 00ae 00BF     		nop
+ 1082              	.L89:
+ 503:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 1083              		.loc 1 503 0 discriminator 2
+ 1084 00b0 BB6B     		ldr	r3, [r7, #56]
+ 1085 00b2 0133     		adds	r3, r3, #1
+ 1086 00b4 BB63     		str	r3, [r7, #56]
+ 1087              	.L86:
+ 503:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 1088              		.loc 1 503 0 is_stmt 0 discriminator 1
+ 1089 00b6 BB68     		ldr	r3, [r7, #8]
+ 1090 00b8 1B68     		ldr	r3, [r3]
+ 1091 00ba BA6B     		ldr	r2, [r7, #56]
+ 1092 00bc 9A42     		cmp	r2, r3
+ 1093 00be 03DA     		bge	.L85
+ 503:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 1094              		.loc 1 503 0 discriminator 3
+ 1095 00c0 97F83F30 		ldrb	r3, [r7, #63]	@ zero_extendqisi2
+ 1096 00c4 452B     		cmp	r3, #69
+ 1097 00c6 E5D0     		beq	.L90
+ 1098              	.L85:
+ 527:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 528:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 529:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 530:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 531:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     return result;
+ 1099              		.loc 1 531 0 is_stmt 1
+ 1100 00c8 97F83F30 		ldrb	r3, [r7, #63]	@ zero_extendqisi2
+ 1101              	.L80:
+ 532:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 1102              		.loc 1 532 0
+ 1103 00cc 1846     		mov	r0, r3
+ 1104 00ce 4037     		adds	r7, r7, #64
+ 1105              	.LCFI19:
+ 1106              		.cfi_def_cfa_offset 16
+ 1107 00d0 BD46     		mov	sp, r7
+ 1108              	.LCFI20:
+ 1109              		.cfi_def_cfa_register 13
+ 1110              		@ sp needed
+ 1111 00d2 B0BD     		pop	{r4, r5, r7, pc}
+ 1112              	.L93:
+ 1113              		.align	2
+ 1114              	.L92:
+ 1115 00d4 1C000000 		.word	.LC1
+ 1116              		.cfi_endproc
+ 1117              	.LFE145:
+ 1119              		.section	.text.prv_device_write,"ax",%progbits
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 30
+
+
+ 1120              		.align	1
+ 1121              		.syntax unified
+ 1122              		.thumb
+ 1123              		.thumb_func
+ 1124              		.fpu fpv4-sp-d16
+ 1126              	prv_device_write:
+ 1127              	.LFB146:
+ 533:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 534:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** static uint8_t prv_device_write(uint16_t instanceId,
+ 535:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                 int numData,
+ 536:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                 lwm2m_data_t *dataArray,
+ 537:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                 lwm2m_object_t *objectP)
+ 538:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 1128              		.loc 1 538 0
+ 1129              		.cfi_startproc
+ 1130              		@ args = 0, pretend = 0, frame = 32
+ 1131              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1132 0000 80B5     		push	{r7, lr}
+ 1133              	.LCFI21:
+ 1134              		.cfi_def_cfa_offset 8
+ 1135              		.cfi_offset 7, -8
+ 1136              		.cfi_offset 14, -4
+ 1137 0002 88B0     		sub	sp, sp, #32
+ 1138              	.LCFI22:
+ 1139              		.cfi_def_cfa_offset 40
+ 1140 0004 00AF     		add	r7, sp, #0
+ 1141              	.LCFI23:
+ 1142              		.cfi_def_cfa_register 7
+ 1143 0006 B960     		str	r1, [r7, #8]
+ 1144 0008 7A60     		str	r2, [r7, #4]
+ 1145 000a 3B60     		str	r3, [r7]
+ 1146 000c 0346     		mov	r3, r0	@ movhi
+ 1147 000e FB81     		strh	r3, [r7, #14]	@ movhi
+ 539:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int i;
+ 540:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     uint8_t result;
+ 541:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int64_t current_time;
+ 542:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 543:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // this is a single instance object
+ 544:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (instanceId != 0)
+ 1148              		.loc 1 544 0
+ 1149 0010 FB89     		ldrh	r3, [r7, #14]
+ 1150 0012 002B     		cmp	r3, #0
+ 1151 0014 01D0     		beq	.L95
+ 545:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 546:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_404_NOT_FOUND;
+ 1152              		.loc 1 546 0
+ 1153 0016 8423     		movs	r3, #132
+ 1154 0018 7AE0     		b	.L109
+ 1155              	.L95:
+ 547:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 548:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 549:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     i = 0;
+ 1156              		.loc 1 549 0
+ 1157 001a 0023     		movs	r3, #0
+ 1158 001c FB61     		str	r3, [r7, #28]
+ 1159              	.L108:
+ 550:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 31
+
+
+ 551:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     do
+ 552:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 553:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         switch (dataArray[i].id)
+ 1160              		.loc 1 553 0
+ 1161 001e FB69     		ldr	r3, [r7, #28]
+ 1162 0020 1B01     		lsls	r3, r3, #4
+ 1163 0022 7A68     		ldr	r2, [r7, #4]
+ 1164 0024 1344     		add	r3, r3, r2
+ 1165 0026 5B88     		ldrh	r3, [r3, #2]
+ 1166 0028 0E2B     		cmp	r3, #14
+ 1167 002a 23D0     		beq	.L98
+ 1168 002c 0F2B     		cmp	r3, #15
+ 1169 002e 4BD0     		beq	.L99
+ 1170 0030 0D2B     		cmp	r3, #13
+ 1171 0032 60D1     		bne	.L110
+ 554:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 555:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         case RES_O_CURRENT_TIME:
+ 556:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             if (1 == lwm2m_data_decode_int(dataArray + i, &current_time))
+ 1172              		.loc 1 556 0
+ 1173 0034 FB69     		ldr	r3, [r7, #28]
+ 1174 0036 1B01     		lsls	r3, r3, #4
+ 1175 0038 7A68     		ldr	r2, [r7, #4]
+ 1176 003a 1344     		add	r3, r3, r2
+ 1177 003c 07F11002 		add	r2, r7, #16
+ 1178 0040 1146     		mov	r1, r2
+ 1179 0042 1846     		mov	r0, r3
+ 1180 0044 FFF7FEFF 		bl	lwm2m_data_decode_int
+ 1181 0048 0346     		mov	r3, r0
+ 1182 004a 012B     		cmp	r3, #1
+ 1183 004c 0FD1     		bne	.L101
+ 557:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 558:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 result = atiny_cmd_ioctl(ATINY_SET_CURRENT_TIME, (char *)&current_time, sizeof(int6
+ 1184              		.loc 1 558 0
+ 1185 004e 07F11003 		add	r3, r7, #16
+ 1186 0052 0822     		movs	r2, #8
+ 1187 0054 1946     		mov	r1, r3
+ 1188 0056 0E20     		movs	r0, #14
+ 1189 0058 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 1190 005c 0346     		mov	r3, r0
+ 1191 005e FB76     		strb	r3, [r7, #27]
+ 559:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 if(result == ATINY_OK)
+ 1192              		.loc 1 559 0
+ 1193 0060 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 1194 0062 002B     		cmp	r3, #0
+ 1195 0064 01D1     		bne	.L102
+ 560:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 {
+ 561:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                     return COAP_204_CHANGED;
+ 1196              		.loc 1 561 0
+ 1197 0066 4423     		movs	r3, #68
+ 1198 0068 52E0     		b	.L109
+ 1199              	.L102:
+ 562:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 }
+ 563:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 else
+ 564:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 {
+ 565:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                     return COAP_400_BAD_REQUEST;
+ 1200              		.loc 1 565 0
+ 1201 006a 8023     		movs	r3, #128
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 32
+
+
+ 1202 006c 50E0     		b	.L109
+ 1203              	.L101:
+ 566:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 }
+ 567:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 568:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             else
+ 569:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 570:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 result = COAP_400_BAD_REQUEST;
+ 1204              		.loc 1 570 0
+ 1205 006e 8023     		movs	r3, #128
+ 1206 0070 FB76     		strb	r3, [r7, #27]
+ 571:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 572:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             break;
+ 1207              		.loc 1 572 0
+ 1208 0072 42E0     		b	.L103
+ 1209              	.L98:
+ 573:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 574:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         case RES_O_UTC_OFFSET:
+ 575:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             if (1 == prv_check_time_offset((char *)dataArray[i].value.asBuffer.buffer, dataArray[i]
+ 1210              		.loc 1 575 0
+ 1211 0074 FB69     		ldr	r3, [r7, #28]
+ 1212 0076 1B01     		lsls	r3, r3, #4
+ 1213 0078 7A68     		ldr	r2, [r7, #4]
+ 1214 007a 1344     		add	r3, r3, r2
+ 1215 007c D868     		ldr	r0, [r3, #12]
+ 1216 007e FB69     		ldr	r3, [r7, #28]
+ 1217 0080 1B01     		lsls	r3, r3, #4
+ 1218 0082 7A68     		ldr	r2, [r7, #4]
+ 1219 0084 1344     		add	r3, r3, r2
+ 1220 0086 9B68     		ldr	r3, [r3, #8]
+ 1221 0088 1946     		mov	r1, r3
+ 1222 008a FFF7FEFF 		bl	prv_check_time_offset
+ 1223 008e 0346     		mov	r3, r0
+ 1224 0090 012B     		cmp	r3, #1
+ 1225 0092 16D1     		bne	.L104
+ 576:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 577:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 result = atiny_cmd_ioctl(ATINY_SET_UTC_OFFSET, (char *)dataArray[i].value.asBuffer.
+ 1226              		.loc 1 577 0
+ 1227 0094 FB69     		ldr	r3, [r7, #28]
+ 1228 0096 1B01     		lsls	r3, r3, #4
+ 1229 0098 7A68     		ldr	r2, [r7, #4]
+ 1230 009a 1344     		add	r3, r3, r2
+ 1231 009c D968     		ldr	r1, [r3, #12]
+ 1232 009e FB69     		ldr	r3, [r7, #28]
+ 1233 00a0 1B01     		lsls	r3, r3, #4
+ 1234 00a2 7A68     		ldr	r2, [r7, #4]
+ 1235 00a4 1344     		add	r3, r3, r2
+ 1236 00a6 9B68     		ldr	r3, [r3, #8]
+ 1237 00a8 1A46     		mov	r2, r3
+ 1238 00aa 1020     		movs	r0, #16
+ 1239 00ac FFF7FEFF 		bl	atiny_cmd_ioctl
+ 1240 00b0 0346     		mov	r3, r0
+ 1241 00b2 FB76     		strb	r3, [r7, #27]
+ 578:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 if(result == ATINY_OK)
+ 1242              		.loc 1 578 0
+ 1243 00b4 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 1244 00b6 002B     		cmp	r3, #0
+ 1245 00b8 01D1     		bne	.L105
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 33
+
+
+ 579:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 {
+ 580:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                     return COAP_204_CHANGED;
+ 1246              		.loc 1 580 0
+ 1247 00ba 4423     		movs	r3, #68
+ 1248 00bc 28E0     		b	.L109
+ 1249              	.L105:
+ 581:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 }
+ 582:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 else
+ 583:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 {
+ 584:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                     return COAP_400_BAD_REQUEST;
+ 1250              		.loc 1 584 0
+ 1251 00be 8023     		movs	r3, #128
+ 1252 00c0 26E0     		b	.L109
+ 1253              	.L104:
+ 585:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 }
+ 586:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 587:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             else
+ 588:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 589:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 result = COAP_400_BAD_REQUEST;
+ 1254              		.loc 1 589 0
+ 1255 00c2 8023     		movs	r3, #128
+ 1256 00c4 FB76     		strb	r3, [r7, #27]
+ 590:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 591:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             break;
+ 1257              		.loc 1 591 0
+ 1258 00c6 18E0     		b	.L103
+ 1259              	.L99:
+ 592:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 593:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         case RES_O_TIMEZONE:
+ 594:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             result = atiny_cmd_ioctl(ATINY_SET_TIMEZONE, (char *)dataArray[i].value.asBuffer.buffer
+ 1260              		.loc 1 594 0
+ 1261 00c8 FB69     		ldr	r3, [r7, #28]
+ 1262 00ca 1B01     		lsls	r3, r3, #4
+ 1263 00cc 7A68     		ldr	r2, [r7, #4]
+ 1264 00ce 1344     		add	r3, r3, r2
+ 1265 00d0 D968     		ldr	r1, [r3, #12]
+ 1266 00d2 FB69     		ldr	r3, [r7, #28]
+ 1267 00d4 1B01     		lsls	r3, r3, #4
+ 1268 00d6 7A68     		ldr	r2, [r7, #4]
+ 1269 00d8 1344     		add	r3, r3, r2
+ 1270 00da 9B68     		ldr	r3, [r3, #8]
+ 1271 00dc 1A46     		mov	r2, r3
+ 1272 00de 1220     		movs	r0, #18
+ 1273 00e0 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 1274 00e4 0346     		mov	r3, r0
+ 1275 00e6 FB76     		strb	r3, [r7, #27]
+ 595:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             if(result == ATINY_OK)
+ 1276              		.loc 1 595 0
+ 1277 00e8 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 1278 00ea 002B     		cmp	r3, #0
+ 1279 00ec 01D1     		bne	.L106
+ 596:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 597:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 return COAP_204_CHANGED;
+ 1280              		.loc 1 597 0
+ 1281 00ee 4423     		movs	r3, #68
+ 1282 00f0 0EE0     		b	.L109
+ 1283              	.L106:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 34
+
+
+ 598:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 599:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             else
+ 600:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             {
+ 601:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                 return COAP_400_BAD_REQUEST;
+ 1284              		.loc 1 601 0
+ 1285 00f2 8023     		movs	r3, #128
+ 1286 00f4 0CE0     		b	.L109
+ 1287              	.L110:
+ 602:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             }
+ 603:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         //break;
+ 604:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 605:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         default:
+ 606:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             result = COAP_405_METHOD_NOT_ALLOWED;
+ 1288              		.loc 1 606 0
+ 1289 00f6 8523     		movs	r3, #133
+ 1290 00f8 FB76     		strb	r3, [r7, #27]
+ 1291              	.L103:
+ 607:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 608:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 609:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         i++;
+ 1292              		.loc 1 609 0
+ 1293 00fa FB69     		ldr	r3, [r7, #28]
+ 1294 00fc 0133     		adds	r3, r3, #1
+ 1295 00fe FB61     		str	r3, [r7, #28]
+ 610:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 611:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     while (i < numData && result == COAP_204_CHANGED);
+ 1296              		.loc 1 611 0
+ 1297 0100 FA69     		ldr	r2, [r7, #28]
+ 1298 0102 BB68     		ldr	r3, [r7, #8]
+ 1299 0104 9A42     		cmp	r2, r3
+ 1300 0106 02DA     		bge	.L107
+ 1301              		.loc 1 611 0 is_stmt 0 discriminator 1
+ 1302 0108 FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 1303 010a 442B     		cmp	r3, #68
+ 1304 010c 87D0     		beq	.L108
+ 1305              	.L107:
+ 612:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 613:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     return result;
+ 1306              		.loc 1 613 0 is_stmt 1
+ 1307 010e FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+ 1308              	.L109:
+ 614:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 1309              		.loc 1 614 0 discriminator 1
+ 1310 0110 1846     		mov	r0, r3
+ 1311 0112 2037     		adds	r7, r7, #32
+ 1312              	.LCFI24:
+ 1313              		.cfi_def_cfa_offset 8
+ 1314 0114 BD46     		mov	sp, r7
+ 1315              	.LCFI25:
+ 1316              		.cfi_def_cfa_register 13
+ 1317              		@ sp needed
+ 1318 0116 80BD     		pop	{r7, pc}
+ 1319              		.cfi_endproc
+ 1320              	.LFE146:
+ 1322              		.section	.text.prv_device_execute,"ax",%progbits
+ 1323              		.align	1
+ 1324              		.syntax unified
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 35
+
+
+ 1325              		.thumb
+ 1326              		.thumb_func
+ 1327              		.fpu fpv4-sp-d16
+ 1329              	prv_device_execute:
+ 1330              	.LFB147:
+ 615:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 616:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** static uint8_t prv_device_execute(uint16_t instanceId,
+ 617:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                   uint16_t resourceId,
+ 618:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                   uint8_t *buffer,
+ 619:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                   int length,
+ 620:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****                                   lwm2m_object_t *objectP)
+ 621:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 1331              		.loc 1 621 0
+ 1332              		.cfi_startproc
+ 1333              		@ args = 4, pretend = 0, frame = 24
+ 1334              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1335 0000 80B5     		push	{r7, lr}
+ 1336              	.LCFI26:
+ 1337              		.cfi_def_cfa_offset 8
+ 1338              		.cfi_offset 7, -8
+ 1339              		.cfi_offset 14, -4
+ 1340 0002 86B0     		sub	sp, sp, #24
+ 1341              	.LCFI27:
+ 1342              		.cfi_def_cfa_offset 32
+ 1343 0004 00AF     		add	r7, sp, #0
+ 1344              	.LCFI28:
+ 1345              		.cfi_def_cfa_register 7
+ 1346 0006 BA60     		str	r2, [r7, #8]
+ 1347 0008 7B60     		str	r3, [r7, #4]
+ 1348 000a 0346     		mov	r3, r0	@ movhi
+ 1349 000c FB81     		strh	r3, [r7, #14]	@ movhi
+ 1350 000e 0B46     		mov	r3, r1	@ movhi
+ 1351 0010 BB81     		strh	r3, [r7, #12]	@ movhi
+ 622:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     int result;
+ 623:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     // this is a single instance object
+ 624:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (instanceId != 0)
+ 1352              		.loc 1 624 0
+ 1353 0012 FB89     		ldrh	r3, [r7, #14]
+ 1354 0014 002B     		cmp	r3, #0
+ 1355 0016 01D0     		beq	.L112
+ 625:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 626:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_404_NOT_FOUND;
+ 1356              		.loc 1 626 0
+ 1357 0018 8423     		movs	r3, #132
+ 1358 001a 2BE0     		b	.L113
+ 1359              	.L112:
+ 627:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 628:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 629:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (length != 0) return COAP_400_BAD_REQUEST;
+ 1360              		.loc 1 629 0
+ 1361 001c 7B68     		ldr	r3, [r7, #4]
+ 1362 001e 002B     		cmp	r3, #0
+ 1363 0020 01D0     		beq	.L114
+ 1364              		.loc 1 629 0 is_stmt 0 discriminator 1
+ 1365 0022 8023     		movs	r3, #128
+ 1366 0024 26E0     		b	.L113
+ 1367              	.L114:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 36
+
+
+ 630:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 631:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     switch (resourceId)
+ 1368              		.loc 1 631 0 is_stmt 1
+ 1369 0026 BB89     		ldrh	r3, [r7, #12]
+ 1370 0028 052B     		cmp	r3, #5
+ 1371 002a 08D0     		beq	.L116
+ 1372 002c 0C2B     		cmp	r3, #12
+ 1373 002e 13D0     		beq	.L117
+ 1374 0030 042B     		cmp	r3, #4
+ 1375 0032 1ED1     		bne	.L121
+ 632:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 633:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_M_REBOOT:
+ 634:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         g_reboot = 1;
+ 1376              		.loc 1 634 0
+ 1377 0034 114B     		ldr	r3, .L122
+ 1378 0036 0122     		movs	r2, #1
+ 1379 0038 1A60     		str	r2, [r3]
+ 635:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_204_CHANGED;
+ 1380              		.loc 1 635 0
+ 1381 003a 4423     		movs	r3, #68
+ 1382 003c 1AE0     		b	.L113
+ 1383              	.L116:
+ 636:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_FACTORY_RESET:
+ 637:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_DO_FACTORY_RESET, NULL, 0);
+ 1384              		.loc 1 637 0
+ 1385 003e 0022     		movs	r2, #0
+ 1386 0040 0021     		movs	r1, #0
+ 1387 0042 0520     		movs	r0, #5
+ 1388 0044 FFF7FEFF 		bl	atiny_cmd_ioctl
+ 1389 0048 7861     		str	r0, [r7, #20]
+ 638:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 1390              		.loc 1 638 0
+ 1391 004a 7B69     		ldr	r3, [r7, #20]
+ 1392 004c 002B     		cmp	r3, #0
+ 1393 004e 01D1     		bne	.L119
+ 639:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 640:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_204_CHANGED;
+ 1394              		.loc 1 640 0
+ 1395 0050 4423     		movs	r3, #68
+ 1396 0052 0FE0     		b	.L113
+ 1397              	.L119:
+ 641:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 642:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 643:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 644:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_503_SERVICE_UNAVAILABLE;
+ 1398              		.loc 1 644 0
+ 1399 0054 A323     		movs	r3, #163
+ 1400 0056 0DE0     		b	.L113
+ 1401              	.L117:
+ 645:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 646:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     case RES_O_RESET_ERROR_CODE:
+ 647:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         result = atiny_cmd_ioctl(ATINY_DO_RESET_DEV_ERR, NULL, 0);
+ 1402              		.loc 1 647 0
+ 1403 0058 0022     		movs	r2, #0
+ 1404 005a 0021     		movs	r1, #0
+ 1405 005c 0C20     		movs	r0, #12
+ 1406 005e FFF7FEFF 		bl	atiny_cmd_ioctl
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 37
+
+
+ 1407 0062 7861     		str	r0, [r7, #20]
+ 648:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if(result == ATINY_OK)
+ 1408              		.loc 1 648 0
+ 1409 0064 7B69     		ldr	r3, [r7, #20]
+ 1410 0066 002B     		cmp	r3, #0
+ 1411 0068 01D1     		bne	.L120
+ 649:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 650:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_204_CHANGED;
+ 1412              		.loc 1 650 0
+ 1413 006a 4423     		movs	r3, #68
+ 1414 006c 02E0     		b	.L113
+ 1415              	.L120:
+ 651:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 652:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 653:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 654:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return COAP_503_SERVICE_UNAVAILABLE;
+ 1416              		.loc 1 654 0
+ 1417 006e A323     		movs	r3, #163
+ 1418 0070 00E0     		b	.L113
+ 1419              	.L121:
+ 655:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 656:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     default:
+ 657:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         return COAP_405_METHOD_NOT_ALLOWED;
+ 1420              		.loc 1 657 0
+ 1421 0072 8523     		movs	r3, #133
+ 1422              	.L113:
+ 658:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 659:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 1423              		.loc 1 659 0
+ 1424 0074 1846     		mov	r0, r3
+ 1425 0076 1837     		adds	r7, r7, #24
+ 1426              	.LCFI29:
+ 1427              		.cfi_def_cfa_offset 8
+ 1428 0078 BD46     		mov	sp, r7
+ 1429              	.LCFI30:
+ 1430              		.cfi_def_cfa_register 13
+ 1431              		@ sp needed
+ 1432 007a 80BD     		pop	{r7, pc}
+ 1433              	.L123:
+ 1434              		.align	2
+ 1435              	.L122:
+ 1436 007c 00000000 		.word	g_reboot
+ 1437              		.cfi_endproc
+ 1438              	.LFE147:
+ 1440              		.section	.text.display_device_object,"ax",%progbits
+ 1441              		.align	1
+ 1442              		.global	display_device_object
+ 1443              		.syntax unified
+ 1444              		.thumb
+ 1445              		.thumb_func
+ 1446              		.fpu fpv4-sp-d16
+ 1448              	display_device_object:
+ 1449              	.LFB148:
+ 660:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 661:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** void display_device_object(lwm2m_object_t *object)
+ 662:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 1450              		.loc 1 662 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 38
+
+
+ 1451              		.cfi_startproc
+ 1452              		@ args = 0, pretend = 0, frame = 8
+ 1453              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1454              		@ link register save eliminated.
+ 1455 0000 80B4     		push	{r7}
+ 1456              	.LCFI31:
+ 1457              		.cfi_def_cfa_offset 4
+ 1458              		.cfi_offset 7, -4
+ 1459 0002 83B0     		sub	sp, sp, #12
+ 1460              	.LCFI32:
+ 1461              		.cfi_def_cfa_offset 16
+ 1462 0004 00AF     		add	r7, sp, #0
+ 1463              	.LCFI33:
+ 1464              		.cfi_def_cfa_register 7
+ 1465 0006 7860     		str	r0, [r7, #4]
+ 663:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #ifdef WITH_LOGS
+ 664:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 665:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** #endif
+ 666:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 1466              		.loc 1 666 0
+ 1467 0008 00BF     		nop
+ 1468 000a 0C37     		adds	r7, r7, #12
+ 1469              	.LCFI34:
+ 1470              		.cfi_def_cfa_offset 4
+ 1471 000c BD46     		mov	sp, r7
+ 1472              	.LCFI35:
+ 1473              		.cfi_def_cfa_register 13
+ 1474              		@ sp needed
+ 1475 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1476              	.LCFI36:
+ 1477              		.cfi_restore 7
+ 1478              		.cfi_def_cfa_offset 0
+ 1479 0012 7047     		bx	lr
+ 1480              		.cfi_endproc
+ 1481              	.LFE148:
+ 1483              		.section	.text.get_object_device,"ax",%progbits
+ 1484              		.align	1
+ 1485              		.global	get_object_device
+ 1486              		.syntax unified
+ 1487              		.thumb
+ 1488              		.thumb_func
+ 1489              		.fpu fpv4-sp-d16
+ 1491              	get_object_device:
+ 1492              	.LFB149:
+ 667:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 668:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 669:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** lwm2m_object_t *get_object_device(atiny_param_t *atiny_params, const char *manufacturer)
+ 670:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 1493              		.loc 1 670 0
+ 1494              		.cfi_startproc
+ 1495              		@ args = 0, pretend = 0, frame = 16
+ 1496              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1497 0000 80B5     		push	{r7, lr}
+ 1498              	.LCFI37:
+ 1499              		.cfi_def_cfa_offset 8
+ 1500              		.cfi_offset 7, -8
+ 1501              		.cfi_offset 14, -4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 39
+
+
+ 1502 0002 84B0     		sub	sp, sp, #16
+ 1503              	.LCFI38:
+ 1504              		.cfi_def_cfa_offset 24
+ 1505 0004 00AF     		add	r7, sp, #0
+ 1506              	.LCFI39:
+ 1507              		.cfi_def_cfa_register 7
+ 1508 0006 7860     		str	r0, [r7, #4]
+ 1509 0008 3960     		str	r1, [r7]
+ 671:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     /*
+ 672:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****      * The get_object_device function create the object itself and return a pointer to the structur
+ 673:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****      */
+ 674:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     lwm2m_object_t *deviceObj;
+ 675:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 676:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     deviceObj = (lwm2m_object_t *)lwm2m_malloc(sizeof(lwm2m_object_t));
+ 1510              		.loc 1 676 0
+ 1511 000a 2C20     		movs	r0, #44
+ 1512 000c FFF7FEFF 		bl	lwm2m_malloc
+ 1513 0010 F860     		str	r0, [r7, #12]
+ 677:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 678:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (NULL != deviceObj)
+ 1514              		.loc 1 678 0
+ 1515 0012 FB68     		ldr	r3, [r7, #12]
+ 1516 0014 002B     		cmp	r3, #0
+ 1517 0016 2AD0     		beq	.L126
+ 679:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 680:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         memset(deviceObj, 0, sizeof(lwm2m_object_t));
+ 1518              		.loc 1 680 0
+ 1519 0018 2C22     		movs	r2, #44
+ 1520 001a 0021     		movs	r1, #0
+ 1521 001c F868     		ldr	r0, [r7, #12]
+ 1522 001e FFF7FEFF 		bl	memset
+ 681:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 682:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         /*
+ 683:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          * It assigns his unique ID
+ 684:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          * The 3 is the standard ID for the mandatory object "Object device".
+ 685:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          */
+ 686:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         deviceObj->objID = LWM2M_DEVICE_OBJECT_ID;
+ 1523              		.loc 1 686 0
+ 1524 0022 FB68     		ldr	r3, [r7, #12]
+ 1525 0024 0322     		movs	r2, #3
+ 1526 0026 9A80     		strh	r2, [r3, #4]	@ movhi
+ 687:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 688:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         /*
+ 689:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          * and its unique instance
+ 690:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          *
+ 691:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          */
+ 692:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         deviceObj->instanceList = (lwm2m_list_t *)lwm2m_malloc(sizeof(lwm2m_list_t));
+ 1527              		.loc 1 692 0
+ 1528 0028 0820     		movs	r0, #8
+ 1529 002a FFF7FEFF 		bl	lwm2m_malloc
+ 1530 002e 0246     		mov	r2, r0
+ 1531 0030 FB68     		ldr	r3, [r7, #12]
+ 1532 0032 9A60     		str	r2, [r3, #8]
+ 693:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         if (NULL != deviceObj->instanceList)
+ 1533              		.loc 1 693 0
+ 1534 0034 FB68     		ldr	r3, [r7, #12]
+ 1535 0036 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 40
+
+
+ 1536 0038 002B     		cmp	r3, #0
+ 1537 003a 13D0     		beq	.L127
+ 694:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 695:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             memset(deviceObj->instanceList, 0, sizeof(lwm2m_list_t));
+ 1538              		.loc 1 695 0
+ 1539 003c FB68     		ldr	r3, [r7, #12]
+ 1540 003e 9B68     		ldr	r3, [r3, #8]
+ 1541 0040 0822     		movs	r2, #8
+ 1542 0042 0021     		movs	r1, #0
+ 1543 0044 1846     		mov	r0, r3
+ 1544 0046 FFF7FEFF 		bl	memset
+ 696:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 697:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         else
+ 698:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         {
+ 699:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             lwm2m_free(deviceObj);
+ 700:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return NULL;
+ 701:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 702:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 703:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         /*
+ 704:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          * And the private function that will access the object.
+ 705:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          * Those function will be called when a read/write/execute query is made by the server. In 
+ 706:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          * know the resources of the object, only the server does.
+ 707:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****          */
+ 708:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         deviceObj->readFunc     = prv_device_read;
+ 1545              		.loc 1 708 0
+ 1546 004a FB68     		ldr	r3, [r7, #12]
+ 1547 004c 0A4A     		ldr	r2, .L130
+ 1548 004e DA60     		str	r2, [r3, #12]
+ 709:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         deviceObj->discoverFunc = prv_device_discover;
+ 1549              		.loc 1 709 0
+ 1550 0050 FB68     		ldr	r3, [r7, #12]
+ 1551 0052 0A4A     		ldr	r2, .L130+4
+ 1552 0054 5A62     		str	r2, [r3, #36]
+ 710:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         deviceObj->writeFunc    = prv_device_write;
+ 1553              		.loc 1 710 0
+ 1554 0056 FB68     		ldr	r3, [r7, #12]
+ 1555 0058 094A     		ldr	r2, .L130+8
+ 1556 005a 1A61     		str	r2, [r3, #16]
+ 711:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         deviceObj->executeFunc  = prv_device_execute;
+ 1557              		.loc 1 711 0
+ 1558 005c FB68     		ldr	r3, [r7, #12]
+ 1559 005e 094A     		ldr	r2, .L130+12
+ 1560 0060 5A61     		str	r2, [r3, #20]
+ 1561 0062 04E0     		b	.L126
+ 1562              	.L127:
+ 699:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****             return NULL;
+ 1563              		.loc 1 699 0
+ 1564 0064 F868     		ldr	r0, [r7, #12]
+ 1565 0066 FFF7FEFF 		bl	lwm2m_free
+ 700:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         }
+ 1566              		.loc 1 700 0
+ 1567 006a 0023     		movs	r3, #0
+ 1568 006c 00E0     		b	.L129
+ 1569              	.L126:
+ 712:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 713:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 714:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     return deviceObj;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 41
+
+
+ 1570              		.loc 1 714 0
+ 1571 006e FB68     		ldr	r3, [r7, #12]
+ 1572              	.L129:
+ 715:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 1573              		.loc 1 715 0
+ 1574 0070 1846     		mov	r0, r3
+ 1575 0072 1037     		adds	r7, r7, #16
+ 1576              	.LCFI40:
+ 1577              		.cfi_def_cfa_offset 8
+ 1578 0074 BD46     		mov	sp, r7
+ 1579              	.LCFI41:
+ 1580              		.cfi_def_cfa_register 13
+ 1581              		@ sp needed
+ 1582 0076 80BD     		pop	{r7, pc}
+ 1583              	.L131:
+ 1584              		.align	2
+ 1585              	.L130:
+ 1586 0078 00000000 		.word	prv_device_read
+ 1587 007c 00000000 		.word	prv_device_discover
+ 1588 0080 00000000 		.word	prv_device_write
+ 1589 0084 00000000 		.word	prv_device_execute
+ 1590              		.cfi_endproc
+ 1591              	.LFE149:
+ 1593              		.section	.text.free_object_device,"ax",%progbits
+ 1594              		.align	1
+ 1595              		.global	free_object_device
+ 1596              		.syntax unified
+ 1597              		.thumb
+ 1598              		.thumb_func
+ 1599              		.fpu fpv4-sp-d16
+ 1601              	free_object_device:
+ 1602              	.LFB150:
+ 716:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 717:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** void free_object_device(lwm2m_object_t *objectP)
+ 718:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** {
+ 1603              		.loc 1 718 0
+ 1604              		.cfi_startproc
+ 1605              		@ args = 0, pretend = 0, frame = 8
+ 1606              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1607 0000 80B5     		push	{r7, lr}
+ 1608              	.LCFI42:
+ 1609              		.cfi_def_cfa_offset 8
+ 1610              		.cfi_offset 7, -8
+ 1611              		.cfi_offset 14, -4
+ 1612 0002 82B0     		sub	sp, sp, #8
+ 1613              	.LCFI43:
+ 1614              		.cfi_def_cfa_offset 16
+ 1615 0004 00AF     		add	r7, sp, #0
+ 1616              	.LCFI44:
+ 1617              		.cfi_def_cfa_register 7
+ 1618 0006 7860     		str	r0, [r7, #4]
+ 719:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (NULL != objectP->userData)
+ 1619              		.loc 1 719 0
+ 1620 0008 7B68     		ldr	r3, [r7, #4]
+ 1621 000a 9B6A     		ldr	r3, [r3, #40]
+ 1622 000c 002B     		cmp	r3, #0
+ 1623 000e 07D0     		beq	.L133
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 42
+
+
+ 720:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 721:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         lwm2m_free(objectP->userData);
+ 1624              		.loc 1 721 0
+ 1625 0010 7B68     		ldr	r3, [r7, #4]
+ 1626 0012 9B6A     		ldr	r3, [r3, #40]
+ 1627 0014 1846     		mov	r0, r3
+ 1628 0016 FFF7FEFF 		bl	lwm2m_free
+ 722:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         objectP->userData = NULL;
+ 1629              		.loc 1 722 0
+ 1630 001a 7B68     		ldr	r3, [r7, #4]
+ 1631 001c 0022     		movs	r2, #0
+ 1632 001e 9A62     		str	r2, [r3, #40]
+ 1633              	.L133:
+ 723:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 724:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     if (NULL != objectP->instanceList)
+ 1634              		.loc 1 724 0
+ 1635 0020 7B68     		ldr	r3, [r7, #4]
+ 1636 0022 9B68     		ldr	r3, [r3, #8]
+ 1637 0024 002B     		cmp	r3, #0
+ 1638 0026 07D0     		beq	.L134
+ 725:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     {
+ 726:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         lwm2m_list_free(objectP->instanceList);
+ 1639              		.loc 1 726 0
+ 1640 0028 7B68     		ldr	r3, [r7, #4]
+ 1641 002a 9B68     		ldr	r3, [r3, #8]
+ 1642 002c 1846     		mov	r0, r3
+ 1643 002e FFF7FEFF 		bl	lwm2m_list_free
+ 727:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****         objectP->instanceList = NULL;
+ 1644              		.loc 1 727 0
+ 1645 0032 7B68     		ldr	r3, [r7, #4]
+ 1646 0034 0022     		movs	r2, #0
+ 1647 0036 9A60     		str	r2, [r3, #8]
+ 1648              	.L134:
+ 728:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     }
+ 729:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** 
+ 730:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c ****     lwm2m_free(objectP);
+ 1649              		.loc 1 730 0
+ 1650 0038 7868     		ldr	r0, [r7, #4]
+ 1651 003a FFF7FEFF 		bl	lwm2m_free
+ 731:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_device.c **** }
+ 1652              		.loc 1 731 0
+ 1653 003e 00BF     		nop
+ 1654 0040 0837     		adds	r7, r7, #8
+ 1655              	.LCFI45:
+ 1656              		.cfi_def_cfa_offset 8
+ 1657 0042 BD46     		mov	sp, r7
+ 1658              	.LCFI46:
+ 1659              		.cfi_def_cfa_register 13
+ 1660              		@ sp needed
+ 1661 0044 80BD     		pop	{r7, pc}
+ 1662              		.cfi_endproc
+ 1663              	.LFE150:
+ 1665              		.text
+ 1666              	.Letext0:
+ 1667              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1668              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1669              		.file 4 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 43
+
+
+ 1670              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1671              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1672              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1673              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1674              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 1675              		.file 10 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 1676              		.file 11 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1677              		.file 12 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1678              		.file 13 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1679              		.file 14 "D:/iot/felix2/kernel/include/los_list.h"
+ 1680              		.file 15 "D:/iot/felix2/kernel/include/los_err.h"
+ 1681              		.file 16 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1682              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1683              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 1684              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 1685              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1686              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1687              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1688              		.file 23 "D:/iot/felix2/kernel/include/los_config.h"
+ 1689              		.file 24 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 1690              		.file 25 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 1691              		.file 26 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 1692              		.file 27 "D:/iot/felix2/include/atiny_error.h"
+ 1693              		.file 28 "D:/iot/felix2/include/atiny_lwm2m/agenttiny.h"
+ 1694              		.file 29 "D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m/object_comm.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccReXHKt.s 			page 44
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 object_device.c
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:18     .text.prv_check_time_offset:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:24     .text.prv_check_time_offset:00000000 prv_check_time_offset
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:228    .text.prv_set_value:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:234    .text.prv_set_value:00000000 prv_set_value
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:268    .text.prv_set_value:00000028 $d
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:285    .text.prv_set_value:0000006c $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:761    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:778    .text.prv_device_read:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:784    .text.prv_device_read:00000000 prv_device_read
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:926    .text.prv_device_read:000000c4 $d
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:951    .text.prv_device_discover:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:957    .text.prv_device_discover:00000000 prv_device_discover
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1115   .text.prv_device_discover:000000d4 $d
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1120   .text.prv_device_write:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1126   .text.prv_device_write:00000000 prv_device_write
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1323   .text.prv_device_execute:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1329   .text.prv_device_execute:00000000 prv_device_execute
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1436   .text.prv_device_execute:0000007c $d
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1441   .text.display_device_object:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1448   .text.display_device_object:00000000 display_device_object
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1484   .text.get_object_device:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1491   .text.get_object_device:00000000 get_object_device
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1586   .text.get_object_device:00000078 $d
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1594   .text.free_object_device:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccReXHKt.s:1601   .text.free_object_device:00000000 free_object_device
+
+UNDEFINED SYMBOLS
+memset
+atiny_cmd_ioctl
+lwm2m_data_encode_string
+lwm2m_data_new
+lwm2m_data_encode_int
+lwm2m_data_encode_instances
+lwm2m_free
+lwm2m_data_decode_int
+g_reboot
+lwm2m_malloc
+lwm2m_list_free

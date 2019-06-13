@@ -1,0 +1,1933 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32l4xx_hal_rng.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.HAL_RNG_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_RNG_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	HAL_RNG_Init:
+  26              	.LFB133:
+  27              		.file 1 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_h
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   ******************************************************************************
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @file    stm32l4xx_hal_rng.c
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @author  MCD Application Team
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief   RNG HAL module driver.
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          This file provides firmware functions to manage the following 
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          functionalities of the Random Number Generator (RNG) peripheral:
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *           + Initialization/de-initialization functions
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *           + Peripheral Control functions 
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *           + Peripheral State functions
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   @verbatim
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   ==============================================================================
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****                      ##### How to use this driver #####
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   ==============================================================================
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   [..]
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       The RNG HAL driver can be used as follows:
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (#) Enable the RNG controller clock using __HAL_RCC_RNG_CLK_ENABLE() macro 
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****           in HAL_RNG_MspInit().
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (#) Activate the RNG peripheral using HAL_RNG_Init() function.
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (#) Wait until the 32-bit Random Number Generator contains a valid 
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****           random data using (polling/interrupt) mode.   
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (#) Get the 32 bit random number using HAL_RNG_GenerateRandomNumber() function.
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     ##### Callback registration #####
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     ==================================
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     The compilation define USE_HAL_RNG_REGISTER_CALLBACKS when set to 1
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     allows the user to configure dynamically the driver callbacks.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 2
+
+
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     Use Function @ref HAL_RNG_RegisterCallback() to register a user callback.
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     Function @ref HAL_RNG_RegisterCallback() allows to register following callbacks:
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     (+) ErrorCallback             : RNG Error Callback.
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     (+) MspInitCallback           : RNG MspInit.
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     (+) MspDeInitCallback         : RNG MspDeInit.
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     This function takes as parameters the HAL peripheral handle, the Callback ID
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     and a pointer to the user callback function.
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     Use function @ref HAL_RNG_UnRegisterCallback() to reset a callback to the default
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     weak (surcharged) function.
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     @ref HAL_RNG_UnRegisterCallback() takes as parameters the HAL peripheral handle,
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     and the Callback ID.
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     This function allows to reset following callbacks:
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     (+) ErrorCallback             : RNG Error Callback.
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     (+) MspInitCallback           : RNG MspInit.
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     (+) MspDeInitCallback         : RNG MspDeInit.
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     For specific callback ReadyDataCallback, use dedicated register callbacks:   
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     respectively @ref HAL_RNG_RegisterReadyDataCallback() , @ref HAL_RNG_UnRegisterReadyDataCallbac
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     By default, after the @ref HAL_RNG_Init() and when the state is HAL_RNG_STATE_RESET
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     all callbacks are set to the corresponding weak (surcharged) functions:
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     example @ref HAL_RNG_ErrorCallback().
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     Exception done for MspInit and MspDeInit functions that are respectively
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     reset to the legacy weak (surcharged) functions in the @ref HAL_RNG_Init()
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     and @ref HAL_RNG_DeInit() only when these callbacks are null (not registered beforehand).
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     If not, MspInit or MspDeInit are not null, the @ref HAL_RNG_Init() and @ref HAL_RNG_DeInit()
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     keep and use the user MspInit/MspDeInit callbacks (registered beforehand).
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     Callbacks can be registered/unregistered in HAL_RNG_STATE_READY state only.
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     Exception done MspInit/MspDeInit that can be registered/unregistered
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     in HAL_RNG_STATE_READY or HAL_RNG_STATE_RESET state, thus registered (user)
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     MspInit/DeInit callbacks can be used during the Init/DeInit.
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     In that case first register the MspInit/MspDeInit user callbacks
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     using @ref HAL_RNG_RegisterCallback() before calling @ref HAL_RNG_DeInit()
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     or @ref HAL_RNG_Init() function.
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     When The compilation define USE_HAL_RNG_REGISTER_CALLBACKS is set to 0 or
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     not defined, the callback registration feature is not available
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     and weak (surcharged) callbacks are used.
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   @endverbatim
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   ******************************************************************************
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @attention
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * are permitted provided that the following conditions are met:
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 3
+
+
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *      this list of conditions and the following disclaimer.
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *      this list of conditions and the following disclaimer in the documentation
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *      and/or other materials provided with the distribution.
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *      may be used to endorse or promote products derived from this software
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *      without specific prior written permission.
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   ******************************************************************************
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */ 
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Includes ------------------------------------------------------------------*/
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #include "stm32l4xx_hal.h"
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @addtogroup STM32L4xx_HAL_Driver
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @defgroup RNG RNG
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief RNG HAL module driver.
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #ifdef HAL_RNG_MODULE_ENABLED
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Private types -------------------------------------------------------------*/
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Private defines -----------------------------------------------------------*/
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @defgroup RNG_Private_Constants RNG_Private_Constants
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #define RNG_TIMEOUT_VALUE     2
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @}
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */ 
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Private macros ------------------------------------------------------------*/
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Private variables ---------------------------------------------------------*/
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Private function prototypes -----------------------------------------------*/
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Private functions ---------------------------------------------------------*/
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /* Exported functions --------------------------------------------------------*/
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @addtogroup RNG_Exported_Functions
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 4
+
+
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @addtogroup RNG_Exported_Functions_Group1
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  *  @brief   Initialization and de-initialization functions
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  *
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** @verbatim
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  ===============================================================================
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****           ##### Initialization and de-initialization functions #####
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  ===============================================================================
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]  This section provides functions allowing to:
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Initialize the RNG according to the specified parameters 
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****           in the RNG_InitTypeDef and create the associated handle
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) DeInitialize the RNG peripheral
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Initialize the RNG MSP (MCU Specific Package)
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) DeInitialize the RNG MSP 
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** @endverbatim
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Initialize the RNG peripheral and initialize the associated handle.
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_Init(RNG_HandleTypeDef *hrng)
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** { 
+  28              		.loc 1 171 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Check the RNG handle allocation */
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng == NULL)
+  44              		.loc 1 173 0
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 002B     		cmp	r3, #0
+  47 000c 01D1     		bne	.L2
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     return HAL_ERROR;
+  48              		.loc 1 175 0
+  49 000e 0123     		movs	r3, #1
+  50 0010 1CE0     		b	.L3
+  51              	.L2:
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   assert_param(IS_RNG_ALL_INSTANCE(hrng->Instance));
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 5
+
+
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if defined(RNG_CR_CED)
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   assert_param(IS_RNG_CED(hrng->Init.ClockErrorDetection));
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* defined(RNG_CR_CED) */
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if (USE_HAL_RNG_REGISTER_CALLBACKS == 1)
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng->State == HAL_RNG_STATE_RESET)
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Allocate lock resource and initialize it */
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->Lock = HAL_UNLOCKED;
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ReadyDataCallback  = HAL_RNG_ReadyDataCallback;  /* Legacy weak ReadyDataCallback  */
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCallback      = HAL_RNG_ErrorCallback;      /* Legacy weak ErrorCallback      */
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     if(hrng->MspInitCallback == NULL)
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspInitCallback = HAL_RNG_MspInit; /* Legacy weak MspInit  */
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     }
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Init the low level hardware */
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->MspInitCallback(hrng);
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #else
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng->State == HAL_RNG_STATE_RESET)
+  52              		.loc 1 201 0
+  53 0012 7B68     		ldr	r3, [r7, #4]
+  54 0014 5B79     		ldrb	r3, [r3, #5]
+  55 0016 DBB2     		uxtb	r3, r3
+  56 0018 002B     		cmp	r3, #0
+  57 001a 05D1     		bne	.L4
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {  
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Allocate lock resource and initialize it */
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->Lock = HAL_UNLOCKED;
+  58              		.loc 1 204 0
+  59 001c 7B68     		ldr	r3, [r7, #4]
+  60 001e 0022     		movs	r2, #0
+  61 0020 1A71     		strb	r2, [r3, #4]
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Init the low level hardware */
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     HAL_RNG_MspInit(hrng);
+  62              		.loc 1 207 0
+  63 0022 7868     		ldr	r0, [r7, #4]
+  64 0024 FFF7FEFF 		bl	HAL_RNG_MspInit
+  65              	.L4:
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* USE_HAL_RNG_REGISTER_CALLBACKS */
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Change RNG peripheral state */
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->State = HAL_RNG_STATE_BUSY;
+  66              		.loc 1 212 0
+  67 0028 7B68     		ldr	r3, [r7, #4]
+  68 002a 0222     		movs	r2, #2
+  69 002c 5A71     		strb	r2, [r3, #5]
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if defined(RNG_CR_CED)
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Clock Error Detection configuration */
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   MODIFY_REG(hrng->Instance->CR, RNG_CR_CED, hrng->Init.ClockErrorDetection);
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* defined(RNG_CR_CED) */
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 6
+
+
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Enable the RNG Peripheral */
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_RNG_ENABLE(hrng);
+  70              		.loc 1 220 0
+  71 002e 7B68     		ldr	r3, [r7, #4]
+  72 0030 1B68     		ldr	r3, [r3]
+  73 0032 1A68     		ldr	r2, [r3]
+  74 0034 7B68     		ldr	r3, [r7, #4]
+  75 0036 1B68     		ldr	r3, [r3]
+  76 0038 42F00402 		orr	r2, r2, #4
+  77 003c 1A60     		str	r2, [r3]
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Initialize the RNG state */
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->State = HAL_RNG_STATE_READY;
+  78              		.loc 1 223 0
+  79 003e 7B68     		ldr	r3, [r7, #4]
+  80 0040 0122     		movs	r2, #1
+  81 0042 5A71     		strb	r2, [r3, #5]
+ 224:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Initialise the error code */
+ 226:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->ErrorCode = HAL_RNG_ERROR_NONE;
+  82              		.loc 1 226 0
+  83 0044 7B68     		ldr	r3, [r7, #4]
+  84 0046 0022     		movs	r2, #0
+  85 0048 9A60     		str	r2, [r3, #8]
+ 227:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 228:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Return function status */
+ 229:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return HAL_OK;
+  86              		.loc 1 229 0
+  87 004a 0023     		movs	r3, #0
+  88              	.L3:
+ 230:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+  89              		.loc 1 230 0
+  90 004c 1846     		mov	r0, r3
+  91 004e 0837     		adds	r7, r7, #8
+  92              	.LCFI3:
+  93              		.cfi_def_cfa_offset 8
+  94 0050 BD46     		mov	sp, r7
+  95              	.LCFI4:
+  96              		.cfi_def_cfa_register 13
+  97              		@ sp needed
+  98 0052 80BD     		pop	{r7, pc}
+  99              		.cfi_endproc
+ 100              	.LFE133:
+ 102              		.section	.text.HAL_RNG_DeInit,"ax",%progbits
+ 103              		.align	1
+ 104              		.global	HAL_RNG_DeInit
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 108              		.fpu fpv4-sp-d16
+ 110              	HAL_RNG_DeInit:
+ 111              	.LFB134:
+ 231:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 232:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 233:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  DeInitialize the RNG peripheral. 
+ 234:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 7
+
+
+ 235:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 236:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 237:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_DeInit(RNG_HandleTypeDef *hrng)
+ 238:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** { 
+ 112              		.loc 1 238 0
+ 113              		.cfi_startproc
+ 114              		@ args = 0, pretend = 0, frame = 8
+ 115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 116 0000 80B5     		push	{r7, lr}
+ 117              	.LCFI5:
+ 118              		.cfi_def_cfa_offset 8
+ 119              		.cfi_offset 7, -8
+ 120              		.cfi_offset 14, -4
+ 121 0002 82B0     		sub	sp, sp, #8
+ 122              	.LCFI6:
+ 123              		.cfi_def_cfa_offset 16
+ 124 0004 00AF     		add	r7, sp, #0
+ 125              	.LCFI7:
+ 126              		.cfi_def_cfa_register 7
+ 127 0006 7860     		str	r0, [r7, #4]
+ 239:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Check the RNG handle allocation */
+ 240:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng == NULL)
+ 128              		.loc 1 240 0
+ 129 0008 7B68     		ldr	r3, [r7, #4]
+ 130 000a 002B     		cmp	r3, #0
+ 131 000c 01D1     		bne	.L6
+ 241:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 242:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     return HAL_ERROR;
+ 132              		.loc 1 242 0
+ 133 000e 0123     		movs	r3, #1
+ 134 0010 1CE0     		b	.L7
+ 135              	.L6:
+ 243:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 244:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 245:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if defined(RNG_CR_CED)
+ 246:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Clear Clock Error Detection bit */
+ 247:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   CLEAR_BIT(hrng->Instance->CR, RNG_CR_CED);
+ 248:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* defined(RNG_CR_CED) */
+ 249:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 250:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Disable the RNG Peripheral */
+ 251:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   CLEAR_BIT(hrng->Instance->CR, RNG_CR_IE | RNG_CR_RNGEN);
+ 136              		.loc 1 251 0
+ 137 0012 7B68     		ldr	r3, [r7, #4]
+ 138 0014 1B68     		ldr	r3, [r3]
+ 139 0016 1A68     		ldr	r2, [r3]
+ 140 0018 7B68     		ldr	r3, [r7, #4]
+ 141 001a 1B68     		ldr	r3, [r3]
+ 142 001c 22F00C02 		bic	r2, r2, #12
+ 143 0020 1A60     		str	r2, [r3]
+ 252:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 253:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Clear RNG interrupt status flags */
+ 254:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   CLEAR_BIT(hrng->Instance->SR, RNG_SR_CEIS | RNG_SR_SEIS);
+ 144              		.loc 1 254 0
+ 145 0022 7B68     		ldr	r3, [r7, #4]
+ 146 0024 1B68     		ldr	r3, [r3]
+ 147 0026 5A68     		ldr	r2, [r3, #4]
+ 148 0028 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 8
+
+
+ 149 002a 1B68     		ldr	r3, [r3]
+ 150 002c 22F06002 		bic	r2, r2, #96
+ 151 0030 5A60     		str	r2, [r3, #4]
+ 255:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 256:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if (USE_HAL_RNG_REGISTER_CALLBACKS == 1)
+ 257:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng->MspDeInitCallback == NULL)
+ 258:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 259:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->MspDeInitCallback = HAL_RNG_MspDeInit; /* Legacy weak MspDeInit  */
+ 260:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 261:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 262:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* DeInit the low level hardware */
+ 263:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->MspDeInitCallback(hrng);
+ 264:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #else
+ 265:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* DeInit the low level hardware */
+ 266:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   HAL_RNG_MspDeInit(hrng);
+ 152              		.loc 1 266 0
+ 153 0032 7868     		ldr	r0, [r7, #4]
+ 154 0034 FFF7FEFF 		bl	HAL_RNG_MspDeInit
+ 267:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* USE_HAL_RNG_REGISTER_CALLBACKS */
+ 268:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 269:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Update the RNG state */
+ 270:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->State = HAL_RNG_STATE_RESET; 
+ 155              		.loc 1 270 0
+ 156 0038 7B68     		ldr	r3, [r7, #4]
+ 157 003a 0022     		movs	r2, #0
+ 158 003c 5A71     		strb	r2, [r3, #5]
+ 271:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 272:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Initialise the error code */
+ 273:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->ErrorCode = HAL_RNG_ERROR_NONE;
+ 159              		.loc 1 273 0
+ 160 003e 7B68     		ldr	r3, [r7, #4]
+ 161 0040 0022     		movs	r2, #0
+ 162 0042 9A60     		str	r2, [r3, #8]
+ 274:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 275:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Release Lock */
+ 276:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_UNLOCK(hrng);
+ 163              		.loc 1 276 0
+ 164 0044 7B68     		ldr	r3, [r7, #4]
+ 165 0046 0022     		movs	r2, #0
+ 166 0048 1A71     		strb	r2, [r3, #4]
+ 277:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 278:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Return the function status */
+ 279:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return HAL_OK;
+ 167              		.loc 1 279 0
+ 168 004a 0023     		movs	r3, #0
+ 169              	.L7:
+ 280:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 170              		.loc 1 280 0
+ 171 004c 1846     		mov	r0, r3
+ 172 004e 0837     		adds	r7, r7, #8
+ 173              	.LCFI8:
+ 174              		.cfi_def_cfa_offset 8
+ 175 0050 BD46     		mov	sp, r7
+ 176              	.LCFI9:
+ 177              		.cfi_def_cfa_register 13
+ 178              		@ sp needed
+ 179 0052 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 9
+
+
+ 180              		.cfi_endproc
+ 181              	.LFE134:
+ 183              		.section	.text.HAL_RNG_MspInit,"ax",%progbits
+ 184              		.align	1
+ 185              		.weak	HAL_RNG_MspInit
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 189              		.fpu fpv4-sp-d16
+ 191              	HAL_RNG_MspInit:
+ 192              	.LFB135:
+ 281:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 282:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 283:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Initialize the RNG MSP.
+ 284:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 285:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval None
+ 286:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 287:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** __weak void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
+ 288:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 193              		.loc 1 288 0
+ 194              		.cfi_startproc
+ 195              		@ args = 0, pretend = 0, frame = 8
+ 196              		@ frame_needed = 1, uses_anonymous_args = 0
+ 197              		@ link register save eliminated.
+ 198 0000 80B4     		push	{r7}
+ 199              	.LCFI10:
+ 200              		.cfi_def_cfa_offset 4
+ 201              		.cfi_offset 7, -4
+ 202 0002 83B0     		sub	sp, sp, #12
+ 203              	.LCFI11:
+ 204              		.cfi_def_cfa_offset 16
+ 205 0004 00AF     		add	r7, sp, #0
+ 206              	.LCFI12:
+ 207              		.cfi_def_cfa_register 7
+ 208 0006 7860     		str	r0, [r7, #4]
+ 289:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Prevent unused argument(s) compilation warning */
+ 290:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   UNUSED(hrng);
+ 291:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 292:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+ 293:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****             function HAL_RNG_MspInit must be implemented in the user file.
+ 294:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****    */
+ 295:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 209              		.loc 1 295 0
+ 210 0008 00BF     		nop
+ 211 000a 0C37     		adds	r7, r7, #12
+ 212              	.LCFI13:
+ 213              		.cfi_def_cfa_offset 4
+ 214 000c BD46     		mov	sp, r7
+ 215              	.LCFI14:
+ 216              		.cfi_def_cfa_register 13
+ 217              		@ sp needed
+ 218 000e 5DF8047B 		ldr	r7, [sp], #4
+ 219              	.LCFI15:
+ 220              		.cfi_restore 7
+ 221              		.cfi_def_cfa_offset 0
+ 222 0012 7047     		bx	lr
+ 223              		.cfi_endproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 10
+
+
+ 224              	.LFE135:
+ 226              		.section	.text.HAL_RNG_MspDeInit,"ax",%progbits
+ 227              		.align	1
+ 228              		.weak	HAL_RNG_MspDeInit
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu fpv4-sp-d16
+ 234              	HAL_RNG_MspDeInit:
+ 235              	.LFB136:
+ 296:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 297:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 298:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  DeInitialize the RNG MSP.
+ 299:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 300:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval None
+ 301:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 302:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** __weak void HAL_RNG_MspDeInit(RNG_HandleTypeDef *hrng)
+ 303:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 236              		.loc 1 303 0
+ 237              		.cfi_startproc
+ 238              		@ args = 0, pretend = 0, frame = 8
+ 239              		@ frame_needed = 1, uses_anonymous_args = 0
+ 240              		@ link register save eliminated.
+ 241 0000 80B4     		push	{r7}
+ 242              	.LCFI16:
+ 243              		.cfi_def_cfa_offset 4
+ 244              		.cfi_offset 7, -4
+ 245 0002 83B0     		sub	sp, sp, #12
+ 246              	.LCFI17:
+ 247              		.cfi_def_cfa_offset 16
+ 248 0004 00AF     		add	r7, sp, #0
+ 249              	.LCFI18:
+ 250              		.cfi_def_cfa_register 7
+ 251 0006 7860     		str	r0, [r7, #4]
+ 304:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Prevent unused argument(s) compilation warning */
+ 305:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   UNUSED(hrng);
+ 306:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 307:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+ 308:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****             function HAL_RNG_MspDeInit must be implemented in the user file.
+ 309:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****    */
+ 310:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 252              		.loc 1 310 0
+ 253 0008 00BF     		nop
+ 254 000a 0C37     		adds	r7, r7, #12
+ 255              	.LCFI19:
+ 256              		.cfi_def_cfa_offset 4
+ 257 000c BD46     		mov	sp, r7
+ 258              	.LCFI20:
+ 259              		.cfi_def_cfa_register 13
+ 260              		@ sp needed
+ 261 000e 5DF8047B 		ldr	r7, [sp], #4
+ 262              	.LCFI21:
+ 263              		.cfi_restore 7
+ 264              		.cfi_def_cfa_offset 0
+ 265 0012 7047     		bx	lr
+ 266              		.cfi_endproc
+ 267              	.LFE136:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 11
+
+
+ 269              		.section	.text.HAL_RNG_GenerateRandomNumber,"ax",%progbits
+ 270              		.align	1
+ 271              		.global	HAL_RNG_GenerateRandomNumber
+ 272              		.syntax unified
+ 273              		.thumb
+ 274              		.thumb_func
+ 275              		.fpu fpv4-sp-d16
+ 277              	HAL_RNG_GenerateRandomNumber:
+ 278              	.LFB137:
+ 311:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 312:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if (USE_HAL_RNG_REGISTER_CALLBACKS == 1)
+ 313:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 314:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Register a User RNG Callback
+ 315:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         To be used instead of the weak predefined callback
+ 316:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng RNG handle
+ 317:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  CallbackID ID of the callback to be registered
+ 318:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         This parameter can be one of the following values:
+ 319:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          @arg @ref HAL_RNG_ERROR_CB_ID Error callback ID
+ 320:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          @arg @ref HAL_RNG_MSPINIT_CB_ID MspInit callback ID
+ 321:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          @arg @ref HAL_RNG_MSPDEINIT_CB_ID MspDeInit callback ID
+ 322:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  pCallback pointer to the Callback function
+ 323:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 324:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 325:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_RegisterCallback(RNG_HandleTypeDef *hrng, HAL_RNG_CallbackIDTypeDef Callb
+ 326:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 327:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 328:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 329:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(pCallback == NULL)
+ 330:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 331:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Update the error code */
+ 332:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 333:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     return HAL_ERROR;
+ 334:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 335:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process locked */
+ 336:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng);
+ 337:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 338:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(HAL_RNG_STATE_READY == hrng->State)
+ 339:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 340:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     switch (CallbackID)
+ 341:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 342:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_ERROR_CB_ID :
+ 343:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ErrorCallback = pCallback;
+ 344:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 345:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 346:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPINIT_CB_ID :
+ 347:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspInitCallback = pCallback;
+ 348:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 349:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 350:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPDEINIT_CB_ID :
+ 351:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspDeInitCallback = pCallback;
+ 352:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 353:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 354:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     default :
+ 355:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Update the error code */
+ 356:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 357:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****      /* Return error status */
+ 358:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       status =  HAL_ERROR;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 12
+
+
+ 359:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 360:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     }
+ 361:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 362:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else if(HAL_RNG_STATE_RESET == hrng->State)
+ 363:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 364:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     switch (CallbackID)
+ 365:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 366:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPINIT_CB_ID :
+ 367:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspInitCallback = pCallback;
+ 368:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 369:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 370:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPDEINIT_CB_ID :
+ 371:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspDeInitCallback = pCallback;
+ 372:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 373:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 374:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     default :
+ 375:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Update the error code */
+ 376:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 377:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****      /* Return error status */
+ 378:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       status =  HAL_ERROR;
+ 379:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 380:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     }
+ 381:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 382:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 383:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 384:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Update the error code */
+ 385:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 386:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Return error status */
+ 387:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     status =  HAL_ERROR;
+ 388:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 389:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 390:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Release Lock */
+ 391:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_UNLOCK(hrng);
+ 392:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return status;
+ 393:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 394:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 395:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 396:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Unregister an RNG Callback
+ 397:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         RNG callabck is redirected to the weak predefined callback
+ 398:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng RNG handle
+ 399:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  CallbackID ID of the callback to be unregistered
+ 400:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         This parameter can be one of the following values:
+ 401:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          @arg @ref HAL_RNG_ERROR_CB_ID Error callback ID
+ 402:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          @arg @ref HAL_RNG_MSPINIT_CB_ID MspInit callback ID
+ 403:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *          @arg @ref HAL_RNG_MSPDEINIT_CB_ID MspDeInit callback ID
+ 404:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 405:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 406:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_UnRegisterCallback(RNG_HandleTypeDef *hrng, HAL_RNG_CallbackIDTypeDef Cal
+ 407:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 408:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef status = HAL_OK;
+ 409:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 410:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process locked */
+ 411:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng);
+ 412:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 413:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(HAL_RNG_STATE_READY == hrng->State)
+ 414:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 415:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     switch (CallbackID)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 13
+
+
+ 416:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 417:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_ERROR_CB_ID :
+ 418:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ErrorCallback = HAL_RNG_ErrorCallback;          /* Legacy weak ErrorCallback  */
+ 419:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 420:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 421:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPINIT_CB_ID :
+ 422:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspInitCallback = HAL_RNG_MspInit;              /* Legacy weak MspInit  */
+ 423:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 424:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 425:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPDEINIT_CB_ID :
+ 426:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspDeInitCallback = HAL_RNG_MspDeInit;          /* Legacy weak MspDeInit  */
+ 427:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 428:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 429:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     default :
+ 430:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Update the error code */
+ 431:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 432:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****      /* Return error status */
+ 433:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       status =  HAL_ERROR;
+ 434:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 435:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     }
+ 436:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 437:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else if(HAL_RNG_STATE_RESET == hrng->State)
+ 438:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 439:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     switch (CallbackID)
+ 440:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 441:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPINIT_CB_ID :
+ 442:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspInitCallback = HAL_RNG_MspInit;              /* Legacy weak MspInit  */
+ 443:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 444:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 445:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     case HAL_RNG_MSPDEINIT_CB_ID :
+ 446:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->MspDeInitCallback = HAL_RNG_MspDeInit;          /* Legacy weak MspInit  */
+ 447:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 448:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 449:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     default :
+ 450:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Update the error code */
+ 451:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 452:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****      /* Return error status */
+ 453:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       status =  HAL_ERROR;
+ 454:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       break;
+ 455:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     }
+ 456:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 457:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 458:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 459:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Update the error code */
+ 460:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 461:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Return error status */
+ 462:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     status =  HAL_ERROR;
+ 463:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 464:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 465:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Release Lock */
+ 466:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_UNLOCK(hrng);
+ 467:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return status;
+ 468:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 469:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 470:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 471:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Register Data Ready RNG Callback
+ 472:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         To be used instead of the weak HAL_RNG_ReadyDataCallback() predefined callback
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 14
+
+
+ 473:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng RNG handle
+ 474:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  pCallback pointer to the Data Ready Callback function
+ 475:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 476:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 477:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_RegisterReadyDataCallback(RNG_HandleTypeDef *hrng, pRNG_ReadyDataCallback
+ 478:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 479:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 480:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 481:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(pCallback == NULL)
+ 482:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 483:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Update the error code */
+ 484:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 485:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     return HAL_ERROR;
+ 486:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 487:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process locked */
+ 488:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng);
+ 489:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 490:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(HAL_RNG_STATE_READY == hrng->State)
+ 491:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 492:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ReadyDataCallback = pCallback;
+ 493:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 494:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 495:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 496:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Update the error code */
+ 497:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 498:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Return error status */
+ 499:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     status =  HAL_ERROR;
+ 500:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 501:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 502:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Release Lock */
+ 503:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_UNLOCK(hrng);
+ 504:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return status;
+ 505:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 506:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 507:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 508:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  UnRegister the Data Ready RNG Callback
+ 509:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         Data Ready RNG Callback is redirected to the weak HAL_RNG_ReadyDataCallback() predefine
+ 510:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng RNG handle
+ 511:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 512:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 513:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_UnRegisterReadyDataCallback(RNG_HandleTypeDef *hrng)
+ 514:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 515:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 516:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 517:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process locked */
+ 518:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng);
+ 519:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 520:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(HAL_RNG_STATE_READY == hrng->State)
+ 521:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 522:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ReadyDataCallback = HAL_RNG_ReadyDataCallback; /* Legacy weak ReadyDataCallback  */
+ 523:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 524:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 525:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 526:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Update the error code */
+ 527:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCode |= HAL_RNG_ERROR_INVALID_CALLBACK;
+ 528:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Return error status */
+ 529:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     status =  HAL_ERROR;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 15
+
+
+ 530:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 531:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 532:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Release Lock */
+ 533:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_UNLOCK(hrng);
+ 534:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return status;
+ 535:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 536:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 537:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* USE_HAL_RNG_REGISTER_CALLBACKS */
+ 538:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 539:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 540:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @}
+ 541:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 542:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 543:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @addtogroup RNG_Exported_Functions_Group2
+ 544:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  *  @brief    Management functions. 
+ 545:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  *
+ 546:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** @verbatim   
+ 547:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  ===============================================================================
+ 548:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****                       ##### Peripheral Control functions #####
+ 549:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  ===============================================================================  
+ 550:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]  This section provides functions allowing to:
+ 551:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Get the 32 bit Random number
+ 552:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Get the 32 bit Random number with interrupt enabled
+ 553:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Handle RNG interrupt request 
+ 554:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 555:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** @endverbatim
+ 556:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 557:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 558:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 559:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 560:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Generate a 32-bit random number.
+ 561:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @note   Each time the random number data is read the RNG_FLAG_DRDY flag 
+ 562:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         is automatically cleared.
+ 563:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 564:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  random32bit: pointer to generated random number variable if successful.
+ 565:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 566:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 567:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 568:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_GenerateRandomNumber(RNG_HandleTypeDef *hrng, uint32_t *random32bit)
+ 569:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 279              		.loc 1 569 0
+ 280              		.cfi_startproc
+ 281              		@ args = 0, pretend = 0, frame = 16
+ 282              		@ frame_needed = 1, uses_anonymous_args = 0
+ 283 0000 80B5     		push	{r7, lr}
+ 284              	.LCFI22:
+ 285              		.cfi_def_cfa_offset 8
+ 286              		.cfi_offset 7, -8
+ 287              		.cfi_offset 14, -4
+ 288 0002 84B0     		sub	sp, sp, #16
+ 289              	.LCFI23:
+ 290              		.cfi_def_cfa_offset 24
+ 291 0004 00AF     		add	r7, sp, #0
+ 292              	.LCFI24:
+ 293              		.cfi_def_cfa_register 7
+ 294 0006 7860     		str	r0, [r7, #4]
+ 295 0008 3960     		str	r1, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 16
+
+
+ 570:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   uint32_t tickstart = 0;    
+ 296              		.loc 1 570 0
+ 297 000a 0023     		movs	r3, #0
+ 298 000c BB60     		str	r3, [r7, #8]
+ 571:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 299              		.loc 1 571 0
+ 300 000e 0023     		movs	r3, #0
+ 301 0010 FB73     		strb	r3, [r7, #15]
+ 572:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 573:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process Locked */
+ 574:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng); 
+ 302              		.loc 1 574 0
+ 303 0012 7B68     		ldr	r3, [r7, #4]
+ 304 0014 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 305 0016 012B     		cmp	r3, #1
+ 306 0018 01D1     		bne	.L11
+ 307              		.loc 1 574 0 is_stmt 0 discriminator 1
+ 308 001a 0223     		movs	r3, #2
+ 309 001c 37E0     		b	.L12
+ 310              	.L11:
+ 311              		.loc 1 574 0 discriminator 2
+ 312 001e 7B68     		ldr	r3, [r7, #4]
+ 313 0020 0122     		movs	r2, #1
+ 314 0022 1A71     		strb	r2, [r3, #4]
+ 575:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 576:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Check RNS peripheral state */
+ 577:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng->State == HAL_RNG_STATE_READY)
+ 315              		.loc 1 577 0 is_stmt 1 discriminator 2
+ 316 0024 7B68     		ldr	r3, [r7, #4]
+ 317 0026 5B79     		ldrb	r3, [r3, #5]
+ 318 0028 DBB2     		uxtb	r3, r3
+ 319 002a 012B     		cmp	r3, #1
+ 320 002c 29D1     		bne	.L13
+ 578:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 579:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Change RNG peripheral state */  
+ 580:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->State = HAL_RNG_STATE_BUSY;  
+ 321              		.loc 1 580 0
+ 322 002e 7B68     		ldr	r3, [r7, #4]
+ 323 0030 0222     		movs	r2, #2
+ 324 0032 5A71     		strb	r2, [r3, #5]
+ 581:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 582:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Get tick */
+ 583:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     tickstart = HAL_GetTick();
+ 325              		.loc 1 583 0
+ 326 0034 FFF7FEFF 		bl	HAL_GetTick
+ 327 0038 B860     		str	r0, [r7, #8]
+ 584:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 585:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Check if data register contains valid random data */
+ 586:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     while(__HAL_RNG_GET_FLAG(hrng, RNG_FLAG_DRDY) == RESET)
+ 328              		.loc 1 586 0
+ 329 003a 0EE0     		b	.L14
+ 330              	.L15:
+ 587:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 588:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       if((HAL_GetTick() - tickstart ) > RNG_TIMEOUT_VALUE)
+ 331              		.loc 1 588 0
+ 332 003c FFF7FEFF 		bl	HAL_GetTick
+ 333 0040 0246     		mov	r2, r0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 17
+
+
+ 334 0042 BB68     		ldr	r3, [r7, #8]
+ 335 0044 D31A     		subs	r3, r2, r3
+ 336 0046 022B     		cmp	r3, #2
+ 337 0048 07D9     		bls	.L14
+ 589:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       {    
+ 590:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****         hrng->State = HAL_RNG_STATE_ERROR;
+ 338              		.loc 1 590 0
+ 339 004a 7B68     		ldr	r3, [r7, #4]
+ 340 004c 0422     		movs	r2, #4
+ 341 004e 5A71     		strb	r2, [r3, #5]
+ 591:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 592:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****         /* Process Unlocked */
+ 593:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****         __HAL_UNLOCK(hrng);
+ 342              		.loc 1 593 0
+ 343 0050 7B68     		ldr	r3, [r7, #4]
+ 344 0052 0022     		movs	r2, #0
+ 345 0054 1A71     		strb	r2, [r3, #4]
+ 594:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       
+ 595:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****         return HAL_TIMEOUT;
+ 346              		.loc 1 595 0
+ 347 0056 0323     		movs	r3, #3
+ 348 0058 19E0     		b	.L12
+ 349              	.L14:
+ 586:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 350              		.loc 1 586 0
+ 351 005a 7B68     		ldr	r3, [r7, #4]
+ 352 005c 1B68     		ldr	r3, [r3]
+ 353 005e 5B68     		ldr	r3, [r3, #4]
+ 354 0060 03F00103 		and	r3, r3, #1
+ 355 0064 012B     		cmp	r3, #1
+ 356 0066 E9D1     		bne	.L15
+ 596:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       } 
+ 597:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     }
+ 598:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 599:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Get a 32bit Random number */
+ 600:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->RandomNumber = hrng->Instance->DR;
+ 357              		.loc 1 600 0
+ 358 0068 7B68     		ldr	r3, [r7, #4]
+ 359 006a 1B68     		ldr	r3, [r3]
+ 360 006c 9A68     		ldr	r2, [r3, #8]
+ 361 006e 7B68     		ldr	r3, [r7, #4]
+ 362 0070 DA60     		str	r2, [r3, #12]
+ 601:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     *random32bit = hrng->RandomNumber;
+ 363              		.loc 1 601 0
+ 364 0072 7B68     		ldr	r3, [r7, #4]
+ 365 0074 DA68     		ldr	r2, [r3, #12]
+ 366 0076 3B68     		ldr	r3, [r7]
+ 367 0078 1A60     		str	r2, [r3]
+ 602:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 603:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->State = HAL_RNG_STATE_READY;
+ 368              		.loc 1 603 0
+ 369 007a 7B68     		ldr	r3, [r7, #4]
+ 370 007c 0122     		movs	r2, #1
+ 371 007e 5A71     		strb	r2, [r3, #5]
+ 372 0080 01E0     		b	.L16
+ 373              	.L13:
+ 604:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 18
+
+
+ 605:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 606:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 607:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     status = HAL_ERROR;
+ 374              		.loc 1 607 0
+ 375 0082 0123     		movs	r3, #1
+ 376 0084 FB73     		strb	r3, [r7, #15]
+ 377              	.L16:
+ 608:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 609:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 610:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process Unlocked */
+ 611:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_UNLOCK(hrng);
+ 378              		.loc 1 611 0
+ 379 0086 7B68     		ldr	r3, [r7, #4]
+ 380 0088 0022     		movs	r2, #0
+ 381 008a 1A71     		strb	r2, [r3, #4]
+ 612:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 613:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return status;
+ 382              		.loc 1 613 0
+ 383 008c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 384              	.L12:
+ 614:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 385              		.loc 1 614 0
+ 386 008e 1846     		mov	r0, r3
+ 387 0090 1037     		adds	r7, r7, #16
+ 388              	.LCFI25:
+ 389              		.cfi_def_cfa_offset 8
+ 390 0092 BD46     		mov	sp, r7
+ 391              	.LCFI26:
+ 392              		.cfi_def_cfa_register 13
+ 393              		@ sp needed
+ 394 0094 80BD     		pop	{r7, pc}
+ 395              		.cfi_endproc
+ 396              	.LFE137:
+ 398              		.section	.text.HAL_RNG_GenerateRandomNumber_IT,"ax",%progbits
+ 399              		.align	1
+ 400              		.global	HAL_RNG_GenerateRandomNumber_IT
+ 401              		.syntax unified
+ 402              		.thumb
+ 403              		.thumb_func
+ 404              		.fpu fpv4-sp-d16
+ 406              	HAL_RNG_GenerateRandomNumber_IT:
+ 407              	.LFB138:
+ 615:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 616:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 617:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Generate a 32-bit random number in interrupt mode.
+ 618:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 619:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL status
+ 620:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 621:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_StatusTypeDef HAL_RNG_GenerateRandomNumber_IT(RNG_HandleTypeDef *hrng)
+ 622:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 408              		.loc 1 622 0
+ 409              		.cfi_startproc
+ 410              		@ args = 0, pretend = 0, frame = 16
+ 411              		@ frame_needed = 1, uses_anonymous_args = 0
+ 412              		@ link register save eliminated.
+ 413 0000 80B4     		push	{r7}
+ 414              	.LCFI27:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 19
+
+
+ 415              		.cfi_def_cfa_offset 4
+ 416              		.cfi_offset 7, -4
+ 417 0002 85B0     		sub	sp, sp, #20
+ 418              	.LCFI28:
+ 419              		.cfi_def_cfa_offset 24
+ 420 0004 00AF     		add	r7, sp, #0
+ 421              	.LCFI29:
+ 422              		.cfi_def_cfa_register 7
+ 423 0006 7860     		str	r0, [r7, #4]
+ 623:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 424              		.loc 1 623 0
+ 425 0008 0023     		movs	r3, #0
+ 426 000a FB73     		strb	r3, [r7, #15]
+ 624:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 625:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process Locked */
+ 626:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng);
+ 427              		.loc 1 626 0
+ 428 000c 7B68     		ldr	r3, [r7, #4]
+ 429 000e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 430 0010 012B     		cmp	r3, #1
+ 431 0012 01D1     		bne	.L18
+ 432              		.loc 1 626 0 is_stmt 0 discriminator 1
+ 433 0014 0223     		movs	r3, #2
+ 434 0016 1CE0     		b	.L19
+ 435              	.L18:
+ 436              		.loc 1 626 0 discriminator 2
+ 437 0018 7B68     		ldr	r3, [r7, #4]
+ 438 001a 0122     		movs	r2, #1
+ 439 001c 1A71     		strb	r2, [r3, #4]
+ 627:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 628:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Check RNG peripheral state */
+ 629:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(hrng->State == HAL_RNG_STATE_READY)
+ 440              		.loc 1 629 0 is_stmt 1 discriminator 2
+ 441 001e 7B68     		ldr	r3, [r7, #4]
+ 442 0020 5B79     		ldrb	r3, [r3, #5]
+ 443 0022 DBB2     		uxtb	r3, r3
+ 444 0024 012B     		cmp	r3, #1
+ 445 0026 0ED1     		bne	.L20
+ 630:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 631:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Change RNG peripheral state */  
+ 632:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->State = HAL_RNG_STATE_BUSY;  
+ 446              		.loc 1 632 0
+ 447 0028 7B68     		ldr	r3, [r7, #4]
+ 448 002a 0222     		movs	r2, #2
+ 449 002c 5A71     		strb	r2, [r3, #5]
+ 633:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 634:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Process Unlocked */
+ 635:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     __HAL_UNLOCK(hrng);
+ 450              		.loc 1 635 0
+ 451 002e 7B68     		ldr	r3, [r7, #4]
+ 452 0030 0022     		movs	r2, #0
+ 453 0032 1A71     		strb	r2, [r3, #4]
+ 636:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     
+ 637:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Enable the RNG Interrupts: Data Ready, Clock error, Seed error */ 
+ 638:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     __HAL_RNG_ENABLE_IT(hrng);
+ 454              		.loc 1 638 0
+ 455 0034 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 20
+
+
+ 456 0036 1B68     		ldr	r3, [r3]
+ 457 0038 1A68     		ldr	r2, [r3]
+ 458 003a 7B68     		ldr	r3, [r7, #4]
+ 459 003c 1B68     		ldr	r3, [r3]
+ 460 003e 42F00802 		orr	r2, r2, #8
+ 461 0042 1A60     		str	r2, [r3]
+ 462 0044 04E0     		b	.L21
+ 463              	.L20:
+ 639:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 640:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 641:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 642:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Process Unlocked */
+ 643:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     __HAL_UNLOCK(hrng);
+ 464              		.loc 1 643 0
+ 465 0046 7B68     		ldr	r3, [r7, #4]
+ 466 0048 0022     		movs	r2, #0
+ 467 004a 1A71     		strb	r2, [r3, #4]
+ 644:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     
+ 645:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     status = HAL_ERROR;
+ 468              		.loc 1 645 0
+ 469 004c 0123     		movs	r3, #1
+ 470 004e FB73     		strb	r3, [r7, #15]
+ 471              	.L21:
+ 646:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 647:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 648:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return status;
+ 472              		.loc 1 648 0
+ 473 0050 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 474              	.L19:
+ 649:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 475              		.loc 1 649 0
+ 476 0052 1846     		mov	r0, r3
+ 477 0054 1437     		adds	r7, r7, #20
+ 478              	.LCFI30:
+ 479              		.cfi_def_cfa_offset 4
+ 480 0056 BD46     		mov	sp, r7
+ 481              	.LCFI31:
+ 482              		.cfi_def_cfa_register 13
+ 483              		@ sp needed
+ 484 0058 5DF8047B 		ldr	r7, [sp], #4
+ 485              	.LCFI32:
+ 486              		.cfi_restore 7
+ 487              		.cfi_def_cfa_offset 0
+ 488 005c 7047     		bx	lr
+ 489              		.cfi_endproc
+ 490              	.LFE138:
+ 492              		.section	.text.HAL_RNG_IRQHandler,"ax",%progbits
+ 493              		.align	1
+ 494              		.global	HAL_RNG_IRQHandler
+ 495              		.syntax unified
+ 496              		.thumb
+ 497              		.thumb_func
+ 498              		.fpu fpv4-sp-d16
+ 500              	HAL_RNG_IRQHandler:
+ 501              	.LFB139:
+ 650:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 651:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 21
+
+
+ 652:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Handle RNG interrupt request.
+ 653:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @note   In the case of a clock error, the RNG is no more able to generate 
+ 654:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         random numbers because the PLL48CLK clock is not correct. User has 
+ 655:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         to check that the clock controller is correctly configured to provide
+ 656:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         the RNG clock and clear the CEIS bit using __HAL_RNG_CLEAR_IT(). 
+ 657:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         The clock error has no impact on the previously generated 
+ 658:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         random numbers, and the RNG_DR register contents can be used.
+ 659:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @note   In the case of a seed error, the generation of random numbers is 
+ 660:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         interrupted as long as the SECS bit is '1'. If a number is 
+ 661:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         available in the RNG_DR register, it must not be used because it may 
+ 662:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         not have enough entropy. In this case, it is recommended to clear the 
+ 663:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         SEIS bit using __HAL_RNG_CLEAR_IT(), then disable and enable 
+ 664:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *         the RNG peripheral to reinitialize and restart the RNG.
+ 665:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @note   RNG ErrorCallback() API is called once whether SEIS or CEIS are set.
+ 666:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 667:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval None
+ 668:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 669:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 670:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** void HAL_RNG_IRQHandler(RNG_HandleTypeDef *hrng)
+ 671:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 502              		.loc 1 671 0
+ 503              		.cfi_startproc
+ 504              		@ args = 0, pretend = 0, frame = 8
+ 505              		@ frame_needed = 1, uses_anonymous_args = 0
+ 506 0000 80B5     		push	{r7, lr}
+ 507              	.LCFI33:
+ 508              		.cfi_def_cfa_offset 8
+ 509              		.cfi_offset 7, -8
+ 510              		.cfi_offset 14, -4
+ 511 0002 82B0     		sub	sp, sp, #8
+ 512              	.LCFI34:
+ 513              		.cfi_def_cfa_offset 16
+ 514 0004 00AF     		add	r7, sp, #0
+ 515              	.LCFI35:
+ 516              		.cfi_def_cfa_register 7
+ 517 0006 7860     		str	r0, [r7, #4]
+ 672:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* RNG clock error interrupt occurred */
+ 673:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if((__HAL_RNG_GET_IT(hrng, RNG_IT_CEI) != RESET) ||  (__HAL_RNG_GET_IT(hrng, RNG_IT_SEI) != RESET
+ 518              		.loc 1 673 0
+ 519 0008 7B68     		ldr	r3, [r7, #4]
+ 520 000a 1B68     		ldr	r3, [r3]
+ 521 000c 5B68     		ldr	r3, [r3, #4]
+ 522 000e 03F02003 		and	r3, r3, #32
+ 523 0012 202B     		cmp	r3, #32
+ 524 0014 06D0     		beq	.L23
+ 525              		.loc 1 673 0 is_stmt 0 discriminator 1
+ 526 0016 7B68     		ldr	r3, [r7, #4]
+ 527 0018 1B68     		ldr	r3, [r3]
+ 528 001a 5B68     		ldr	r3, [r3, #4]
+ 529 001c 03F04003 		and	r3, r3, #64
+ 530 0020 402B     		cmp	r3, #64
+ 531 0022 0AD1     		bne	.L24
+ 532              	.L23:
+ 674:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   { 
+ 675:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Change RNG peripheral state */
+ 676:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->State = HAL_RNG_STATE_ERROR;
+ 533              		.loc 1 676 0 is_stmt 1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 22
+
+
+ 534 0024 7B68     		ldr	r3, [r7, #4]
+ 535 0026 0422     		movs	r2, #4
+ 536 0028 5A71     		strb	r2, [r3, #5]
+ 677:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 678:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if (USE_HAL_RNG_REGISTER_CALLBACKS == 1)
+ 679:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Call registered Error callback */
+ 680:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->ErrorCallback(hrng);
+ 681:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #else
+ 682:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Call legacy weak Error callback */
+ 683:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     HAL_RNG_ErrorCallback(hrng);
+ 537              		.loc 1 683 0
+ 538 002a 7868     		ldr	r0, [r7, #4]
+ 539 002c FFF7FEFF 		bl	HAL_RNG_ErrorCallback
+ 684:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* USE_HAL_RNG_REGISTER_CALLBACKS */
+ 685:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     
+ 686:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Clear the clock error flag */
+ 687:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     __HAL_RNG_CLEAR_IT(hrng, RNG_IT_CEI|RNG_IT_SEI);
+ 540              		.loc 1 687 0
+ 541 0030 7B68     		ldr	r3, [r7, #4]
+ 542 0032 1B68     		ldr	r3, [r3]
+ 543 0034 6FF06002 		mvn	r2, #96
+ 544 0038 5A60     		str	r2, [r3, #4]
+ 545              	.L24:
+ 688:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     
+ 689:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 690:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 691:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Check RNG data ready interrupt occurred */    
+ 692:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(__HAL_RNG_GET_IT(hrng, RNG_IT_DRDY) != RESET)
+ 546              		.loc 1 692 0
+ 547 003a 7B68     		ldr	r3, [r7, #4]
+ 548 003c 1B68     		ldr	r3, [r3]
+ 549 003e 5B68     		ldr	r3, [r3, #4]
+ 550 0040 03F00103 		and	r3, r3, #1
+ 551 0044 012B     		cmp	r3, #1
+ 552 0046 1AD1     		bne	.L26
+ 693:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 694:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Generate random number once, so disable the IT */
+ 695:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     __HAL_RNG_DISABLE_IT(hrng);
+ 553              		.loc 1 695 0
+ 554 0048 7B68     		ldr	r3, [r7, #4]
+ 555 004a 1B68     		ldr	r3, [r3]
+ 556 004c 1A68     		ldr	r2, [r3]
+ 557 004e 7B68     		ldr	r3, [r7, #4]
+ 558 0050 1B68     		ldr	r3, [r3]
+ 559 0052 22F00802 		bic	r2, r2, #8
+ 560 0056 1A60     		str	r2, [r3]
+ 696:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     
+ 697:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     /* Get the 32bit Random number (DRDY flag automatically cleared) */ 
+ 698:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     hrng->RandomNumber = hrng->Instance->DR;
+ 561              		.loc 1 698 0
+ 562 0058 7B68     		ldr	r3, [r7, #4]
+ 563 005a 1B68     		ldr	r3, [r3]
+ 564 005c 9A68     		ldr	r2, [r3, #8]
+ 565 005e 7B68     		ldr	r3, [r7, #4]
+ 566 0060 DA60     		str	r2, [r3, #12]
+ 699:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     
+ 700:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     if(hrng->State != HAL_RNG_STATE_ERROR)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 23
+
+
+ 567              		.loc 1 700 0
+ 568 0062 7B68     		ldr	r3, [r7, #4]
+ 569 0064 5B79     		ldrb	r3, [r3, #5]
+ 570 0066 DBB2     		uxtb	r3, r3
+ 571 0068 042B     		cmp	r3, #4
+ 572 006a 08D0     		beq	.L26
+ 701:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     {
+ 702:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Change RNG peripheral state */
+ 703:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->State = HAL_RNG_STATE_READY; 
+ 573              		.loc 1 703 0
+ 574 006c 7B68     		ldr	r3, [r7, #4]
+ 575 006e 0122     		movs	r2, #1
+ 576 0070 5A71     		strb	r2, [r3, #5]
+ 704:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       
+ 705:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #if (USE_HAL_RNG_REGISTER_CALLBACKS == 1)
+ 706:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Call registered Data Ready callback */
+ 707:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       hrng->ReadyDataCallback(hrng, hrng->RandomNumber);
+ 708:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #else
+ 709:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       /* Call legacy weak Data Ready callback */ 
+ 710:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       HAL_RNG_ReadyDataCallback(hrng, hrng->RandomNumber);
+ 577              		.loc 1 710 0
+ 578 0072 7B68     		ldr	r3, [r7, #4]
+ 579 0074 DB68     		ldr	r3, [r3, #12]
+ 580 0076 1946     		mov	r1, r3
+ 581 0078 7868     		ldr	r0, [r7, #4]
+ 582 007a FFF7FEFF 		bl	HAL_RNG_ReadyDataCallback
+ 583              	.L26:
+ 711:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** #endif /* USE_HAL_RNG_REGISTER_CALLBACKS */
+ 712:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     } 
+ 713:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 714:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** } 
+ 584              		.loc 1 714 0
+ 585 007e 00BF     		nop
+ 586 0080 0837     		adds	r7, r7, #8
+ 587              	.LCFI36:
+ 588              		.cfi_def_cfa_offset 8
+ 589 0082 BD46     		mov	sp, r7
+ 590              	.LCFI37:
+ 591              		.cfi_def_cfa_register 13
+ 592              		@ sp needed
+ 593 0084 80BD     		pop	{r7, pc}
+ 594              		.cfi_endproc
+ 595              	.LFE139:
+ 597              		.section	.text.HAL_RNG_GetRandomNumber,"ax",%progbits
+ 598              		.align	1
+ 599              		.global	HAL_RNG_GetRandomNumber
+ 600              		.syntax unified
+ 601              		.thumb
+ 602              		.thumb_func
+ 603              		.fpu fpv4-sp-d16
+ 605              	HAL_RNG_GetRandomNumber:
+ 606              	.LFB140:
+ 715:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 716:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 717:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Return generated random number in polling mode (Obsolete).
+ 718:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @note   Use HAL_RNG_GenerateRandomNumber() API instead.
+ 719:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure that contains
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 24
+
+
+ 720:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   *                the configuration information for RNG.
+ 721:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval random value
+ 722:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 723:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** uint32_t HAL_RNG_GetRandomNumber(RNG_HandleTypeDef *hrng)
+ 724:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 607              		.loc 1 724 0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 8
+ 610              		@ frame_needed = 1, uses_anonymous_args = 0
+ 611 0000 80B5     		push	{r7, lr}
+ 612              	.LCFI38:
+ 613              		.cfi_def_cfa_offset 8
+ 614              		.cfi_offset 7, -8
+ 615              		.cfi_offset 14, -4
+ 616 0002 82B0     		sub	sp, sp, #8
+ 617              	.LCFI39:
+ 618              		.cfi_def_cfa_offset 16
+ 619 0004 00AF     		add	r7, sp, #0
+ 620              	.LCFI40:
+ 621              		.cfi_def_cfa_register 7
+ 622 0006 7860     		str	r0, [r7, #4]
+ 725:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   if(HAL_RNG_GenerateRandomNumber(hrng, &(hrng->RandomNumber)) == HAL_OK)
+ 623              		.loc 1 725 0
+ 624 0008 7B68     		ldr	r3, [r7, #4]
+ 625 000a 0C33     		adds	r3, r3, #12
+ 626 000c 1946     		mov	r1, r3
+ 627 000e 7868     		ldr	r0, [r7, #4]
+ 628 0010 FFF7FEFF 		bl	HAL_RNG_GenerateRandomNumber
+ 629 0014 0346     		mov	r3, r0
+ 630 0016 002B     		cmp	r3, #0
+ 631 0018 02D1     		bne	.L28
+ 726:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 727:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     return hrng->RandomNumber; 
+ 632              		.loc 1 727 0
+ 633 001a 7B68     		ldr	r3, [r7, #4]
+ 634 001c DB68     		ldr	r3, [r3, #12]
+ 635 001e 00E0     		b	.L29
+ 636              	.L28:
+ 728:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 729:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   else
+ 730:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   {
+ 731:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     return 0;
+ 637              		.loc 1 731 0
+ 638 0020 0023     		movs	r3, #0
+ 639              	.L29:
+ 732:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   }
+ 733:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 640              		.loc 1 733 0
+ 641 0022 1846     		mov	r0, r3
+ 642 0024 0837     		adds	r7, r7, #8
+ 643              	.LCFI41:
+ 644              		.cfi_def_cfa_offset 8
+ 645 0026 BD46     		mov	sp, r7
+ 646              	.LCFI42:
+ 647              		.cfi_def_cfa_register 13
+ 648              		@ sp needed
+ 649 0028 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 25
+
+
+ 650              		.cfi_endproc
+ 651              	.LFE140:
+ 653              		.section	.text.HAL_RNG_GetRandomNumber_IT,"ax",%progbits
+ 654              		.align	1
+ 655              		.global	HAL_RNG_GetRandomNumber_IT
+ 656              		.syntax unified
+ 657              		.thumb
+ 658              		.thumb_func
+ 659              		.fpu fpv4-sp-d16
+ 661              	HAL_RNG_GetRandomNumber_IT:
+ 662              	.LFB141:
+ 734:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 735:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 736:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 737:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Return a 32-bit random number with interrupt enabled (Obsolete).
+ 738:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @note   Use HAL_RNG_GenerateRandomNumber_IT() API instead.
+ 739:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: RNG handle
+ 740:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval 32-bit random number
+ 741:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 742:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** uint32_t HAL_RNG_GetRandomNumber_IT(RNG_HandleTypeDef *hrng)
+ 743:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 663              		.loc 1 743 0
+ 664              		.cfi_startproc
+ 665              		@ args = 0, pretend = 0, frame = 16
+ 666              		@ frame_needed = 1, uses_anonymous_args = 0
+ 667              		@ link register save eliminated.
+ 668 0000 80B4     		push	{r7}
+ 669              	.LCFI43:
+ 670              		.cfi_def_cfa_offset 4
+ 671              		.cfi_offset 7, -4
+ 672 0002 85B0     		sub	sp, sp, #20
+ 673              	.LCFI44:
+ 674              		.cfi_def_cfa_offset 24
+ 675 0004 00AF     		add	r7, sp, #0
+ 676              	.LCFI45:
+ 677              		.cfi_def_cfa_register 7
+ 678 0006 7860     		str	r0, [r7, #4]
+ 744:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   uint32_t random32bit = 0;
+ 679              		.loc 1 744 0
+ 680 0008 0023     		movs	r3, #0
+ 681 000a FB60     		str	r3, [r7, #12]
+ 745:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 746:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Process locked */
+ 747:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_LOCK(hrng);
+ 682              		.loc 1 747 0
+ 683 000c 7B68     		ldr	r3, [r7, #4]
+ 684 000e 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 685 0010 012B     		cmp	r3, #1
+ 686 0012 01D1     		bne	.L31
+ 687              		.loc 1 747 0 is_stmt 0 discriminator 1
+ 688 0014 0223     		movs	r3, #2
+ 689 0016 12E0     		b	.L32
+ 690              	.L31:
+ 691              		.loc 1 747 0 discriminator 2
+ 692 0018 7B68     		ldr	r3, [r7, #4]
+ 693 001a 0122     		movs	r2, #1
+ 694 001c 1A71     		strb	r2, [r3, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 26
+
+
+ 748:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 749:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Change RNG peripheral state */  
+ 750:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   hrng->State = HAL_RNG_STATE_BUSY;  
+ 695              		.loc 1 750 0 is_stmt 1 discriminator 2
+ 696 001e 7B68     		ldr	r3, [r7, #4]
+ 697 0020 0222     		movs	r2, #2
+ 698 0022 5A71     		strb	r2, [r3, #5]
+ 751:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 752:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Get a 32bit Random number */ 
+ 753:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   random32bit = hrng->Instance->DR;
+ 699              		.loc 1 753 0 discriminator 2
+ 700 0024 7B68     		ldr	r3, [r7, #4]
+ 701 0026 1B68     		ldr	r3, [r3]
+ 702 0028 9B68     		ldr	r3, [r3, #8]
+ 703 002a FB60     		str	r3, [r7, #12]
+ 754:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 755:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Enable the RNG Interrupts: Data Ready, Clock error, Seed error */ 
+ 756:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   __HAL_RNG_ENABLE_IT(hrng); 
+ 704              		.loc 1 756 0 discriminator 2
+ 705 002c 7B68     		ldr	r3, [r7, #4]
+ 706 002e 1B68     		ldr	r3, [r3]
+ 707 0030 1A68     		ldr	r2, [r3]
+ 708 0032 7B68     		ldr	r3, [r7, #4]
+ 709 0034 1B68     		ldr	r3, [r3]
+ 710 0036 42F00802 		orr	r2, r2, #8
+ 711 003a 1A60     		str	r2, [r3]
+ 757:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   
+ 758:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Return the 32 bit random number */   
+ 759:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return random32bit;
+ 712              		.loc 1 759 0 discriminator 2
+ 713 003c FB68     		ldr	r3, [r7, #12]
+ 714              	.L32:
+ 760:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 715              		.loc 1 760 0
+ 716 003e 1846     		mov	r0, r3
+ 717 0040 1437     		adds	r7, r7, #20
+ 718              	.LCFI46:
+ 719              		.cfi_def_cfa_offset 4
+ 720 0042 BD46     		mov	sp, r7
+ 721              	.LCFI47:
+ 722              		.cfi_def_cfa_register 13
+ 723              		@ sp needed
+ 724 0044 5DF8047B 		ldr	r7, [sp], #4
+ 725              	.LCFI48:
+ 726              		.cfi_restore 7
+ 727              		.cfi_def_cfa_offset 0
+ 728 0048 7047     		bx	lr
+ 729              		.cfi_endproc
+ 730              	.LFE141:
+ 732              		.section	.text.HAL_RNG_ReadLastRandomNumber,"ax",%progbits
+ 733              		.align	1
+ 734              		.global	HAL_RNG_ReadLastRandomNumber
+ 735              		.syntax unified
+ 736              		.thumb
+ 737              		.thumb_func
+ 738              		.fpu fpv4-sp-d16
+ 740              	HAL_RNG_ReadLastRandomNumber:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 27
+
+
+ 741              	.LFB142:
+ 761:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 762:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 763:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 764:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 765:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Read latest generated random number. 
+ 766:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 767:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval random value
+ 768:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 769:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** uint32_t HAL_RNG_ReadLastRandomNumber(RNG_HandleTypeDef *hrng)
+ 770:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 742              		.loc 1 770 0
+ 743              		.cfi_startproc
+ 744              		@ args = 0, pretend = 0, frame = 8
+ 745              		@ frame_needed = 1, uses_anonymous_args = 0
+ 746              		@ link register save eliminated.
+ 747 0000 80B4     		push	{r7}
+ 748              	.LCFI49:
+ 749              		.cfi_def_cfa_offset 4
+ 750              		.cfi_offset 7, -4
+ 751 0002 83B0     		sub	sp, sp, #12
+ 752              	.LCFI50:
+ 753              		.cfi_def_cfa_offset 16
+ 754 0004 00AF     		add	r7, sp, #0
+ 755              	.LCFI51:
+ 756              		.cfi_def_cfa_register 7
+ 757 0006 7860     		str	r0, [r7, #4]
+ 771:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return(hrng->RandomNumber);
+ 758              		.loc 1 771 0
+ 759 0008 7B68     		ldr	r3, [r7, #4]
+ 760 000a DB68     		ldr	r3, [r3, #12]
+ 772:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 761              		.loc 1 772 0
+ 762 000c 1846     		mov	r0, r3
+ 763 000e 0C37     		adds	r7, r7, #12
+ 764              	.LCFI52:
+ 765              		.cfi_def_cfa_offset 4
+ 766 0010 BD46     		mov	sp, r7
+ 767              	.LCFI53:
+ 768              		.cfi_def_cfa_register 13
+ 769              		@ sp needed
+ 770 0012 5DF8047B 		ldr	r7, [sp], #4
+ 771              	.LCFI54:
+ 772              		.cfi_restore 7
+ 773              		.cfi_def_cfa_offset 0
+ 774 0016 7047     		bx	lr
+ 775              		.cfi_endproc
+ 776              	.LFE142:
+ 778              		.section	.text.HAL_RNG_ReadyDataCallback,"ax",%progbits
+ 779              		.align	1
+ 780              		.weak	HAL_RNG_ReadyDataCallback
+ 781              		.syntax unified
+ 782              		.thumb
+ 783              		.thumb_func
+ 784              		.fpu fpv4-sp-d16
+ 786              	HAL_RNG_ReadyDataCallback:
+ 787              	.LFB143:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 28
+
+
+ 773:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 774:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 775:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Data Ready callback in non-blocking mode. 
+ 776:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 777:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  random32bit: generated random value
+ 778:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval None
+ 779:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 780:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** __weak void HAL_RNG_ReadyDataCallback(RNG_HandleTypeDef *hrng, uint32_t random32bit)
+ 781:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 788              		.loc 1 781 0
+ 789              		.cfi_startproc
+ 790              		@ args = 0, pretend = 0, frame = 8
+ 791              		@ frame_needed = 1, uses_anonymous_args = 0
+ 792              		@ link register save eliminated.
+ 793 0000 80B4     		push	{r7}
+ 794              	.LCFI55:
+ 795              		.cfi_def_cfa_offset 4
+ 796              		.cfi_offset 7, -4
+ 797 0002 83B0     		sub	sp, sp, #12
+ 798              	.LCFI56:
+ 799              		.cfi_def_cfa_offset 16
+ 800 0004 00AF     		add	r7, sp, #0
+ 801              	.LCFI57:
+ 802              		.cfi_def_cfa_register 7
+ 803 0006 7860     		str	r0, [r7, #4]
+ 804 0008 3960     		str	r1, [r7]
+ 782:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Prevent unused argument(s) compilation warning */
+ 783:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   UNUSED(hrng);
+ 784:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   UNUSED(random32bit);
+ 785:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 786:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+ 787:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****             function HAL_RNG_ReadyDataCallback must be implemented in the user file.
+ 788:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****    */
+ 789:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 805              		.loc 1 789 0
+ 806 000a 00BF     		nop
+ 807 000c 0C37     		adds	r7, r7, #12
+ 808              	.LCFI58:
+ 809              		.cfi_def_cfa_offset 4
+ 810 000e BD46     		mov	sp, r7
+ 811              	.LCFI59:
+ 812              		.cfi_def_cfa_register 13
+ 813              		@ sp needed
+ 814 0010 5DF8047B 		ldr	r7, [sp], #4
+ 815              	.LCFI60:
+ 816              		.cfi_restore 7
+ 817              		.cfi_def_cfa_offset 0
+ 818 0014 7047     		bx	lr
+ 819              		.cfi_endproc
+ 820              	.LFE143:
+ 822              		.section	.text.HAL_RNG_ErrorCallback,"ax",%progbits
+ 823              		.align	1
+ 824              		.weak	HAL_RNG_ErrorCallback
+ 825              		.syntax unified
+ 826              		.thumb
+ 827              		.thumb_func
+ 828              		.fpu fpv4-sp-d16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 29
+
+
+ 830              	HAL_RNG_ErrorCallback:
+ 831              	.LFB144:
+ 790:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 791:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 792:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  RNG error callback.
+ 793:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 794:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval None
+ 795:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 796:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** __weak void HAL_RNG_ErrorCallback(RNG_HandleTypeDef *hrng)
+ 797:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 832              		.loc 1 797 0
+ 833              		.cfi_startproc
+ 834              		@ args = 0, pretend = 0, frame = 8
+ 835              		@ frame_needed = 1, uses_anonymous_args = 0
+ 836              		@ link register save eliminated.
+ 837 0000 80B4     		push	{r7}
+ 838              	.LCFI61:
+ 839              		.cfi_def_cfa_offset 4
+ 840              		.cfi_offset 7, -4
+ 841 0002 83B0     		sub	sp, sp, #12
+ 842              	.LCFI62:
+ 843              		.cfi_def_cfa_offset 16
+ 844 0004 00AF     		add	r7, sp, #0
+ 845              	.LCFI63:
+ 846              		.cfi_def_cfa_register 7
+ 847 0006 7860     		str	r0, [r7, #4]
+ 798:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Prevent unused argument(s) compilation warning */
+ 799:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   UNUSED(hrng);
+ 800:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 801:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* NOTE : This function should not be modified. When the callback is needed,
+ 802:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****             function HAL_RNG_ErrorCallback must be implemented in the user file.
+ 803:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****    */
+ 804:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 848              		.loc 1 804 0
+ 849 0008 00BF     		nop
+ 850 000a 0C37     		adds	r7, r7, #12
+ 851              	.LCFI64:
+ 852              		.cfi_def_cfa_offset 4
+ 853 000c BD46     		mov	sp, r7
+ 854              	.LCFI65:
+ 855              		.cfi_def_cfa_register 13
+ 856              		@ sp needed
+ 857 000e 5DF8047B 		ldr	r7, [sp], #4
+ 858              	.LCFI66:
+ 859              		.cfi_restore 7
+ 860              		.cfi_def_cfa_offset 0
+ 861 0012 7047     		bx	lr
+ 862              		.cfi_endproc
+ 863              	.LFE144:
+ 865              		.section	.text.HAL_RNG_GetState,"ax",%progbits
+ 866              		.align	1
+ 867              		.global	HAL_RNG_GetState
+ 868              		.syntax unified
+ 869              		.thumb
+ 870              		.thumb_func
+ 871              		.fpu fpv4-sp-d16
+ 873              	HAL_RNG_GetState:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 30
+
+
+ 874              	.LFB145:
+ 805:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  
+ 806:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 807:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @}
+ 808:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 809:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 810:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /** @addtogroup RNG_Exported_Functions_Group3
+ 811:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  *  @brief    Peripheral State functions. 
+ 812:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  *
+ 813:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** @verbatim   
+ 814:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  ===============================================================================
+ 815:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****                 ##### Peripheral State and Error functions #####
+ 816:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****  ===============================================================================  
+ 817:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     [..]
+ 818:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****     This subsection permits to :
+ 819:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Return in run-time the status of the peripheral.
+ 820:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****       (+) Return the RNG handle error code
+ 821:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 822:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** @endverbatim
+ 823:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @{
+ 824:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 825:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 826:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 827:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Return the RNG handle state.
+ 828:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 829:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval HAL state
+ 830:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   */
+ 831:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** HAL_RNG_StateTypeDef HAL_RNG_GetState(RNG_HandleTypeDef *hrng)
+ 832:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 875              		.loc 1 832 0
+ 876              		.cfi_startproc
+ 877              		@ args = 0, pretend = 0, frame = 8
+ 878              		@ frame_needed = 1, uses_anonymous_args = 0
+ 879              		@ link register save eliminated.
+ 880 0000 80B4     		push	{r7}
+ 881              	.LCFI67:
+ 882              		.cfi_def_cfa_offset 4
+ 883              		.cfi_offset 7, -4
+ 884 0002 83B0     		sub	sp, sp, #12
+ 885              	.LCFI68:
+ 886              		.cfi_def_cfa_offset 16
+ 887 0004 00AF     		add	r7, sp, #0
+ 888              	.LCFI69:
+ 889              		.cfi_def_cfa_register 7
+ 890 0006 7860     		str	r0, [r7, #4]
+ 833:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Return RNG handle state */
+ 834:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return hrng->State;
+ 891              		.loc 1 834 0
+ 892 0008 7B68     		ldr	r3, [r7, #4]
+ 893 000a 5B79     		ldrb	r3, [r3, #5]
+ 894 000c DBB2     		uxtb	r3, r3
+ 835:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 895              		.loc 1 835 0
+ 896 000e 1846     		mov	r0, r3
+ 897 0010 0C37     		adds	r7, r7, #12
+ 898              	.LCFI70:
+ 899              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 31
+
+
+ 900 0012 BD46     		mov	sp, r7
+ 901              	.LCFI71:
+ 902              		.cfi_def_cfa_register 13
+ 903              		@ sp needed
+ 904 0014 5DF8047B 		ldr	r7, [sp], #4
+ 905              	.LCFI72:
+ 906              		.cfi_restore 7
+ 907              		.cfi_def_cfa_offset 0
+ 908 0018 7047     		bx	lr
+ 909              		.cfi_endproc
+ 910              	.LFE145:
+ 912              		.section	.text.HAL_RNG_GetError,"ax",%progbits
+ 913              		.align	1
+ 914              		.global	HAL_RNG_GetError
+ 915              		.syntax unified
+ 916              		.thumb
+ 917              		.thumb_func
+ 918              		.fpu fpv4-sp-d16
+ 920              	HAL_RNG_GetError:
+ 921              	.LFB146:
+ 836:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** 
+ 837:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** /**
+ 838:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @brief  Return the RNG handle error code.
+ 839:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @param  hrng: pointer to a RNG_HandleTypeDef structure.
+ 840:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   * @retval RNG Error Code
+ 841:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** */
+ 842:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** uint32_t HAL_RNG_GetError(RNG_HandleTypeDef *hrng)
+ 843:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** {
+ 922              		.loc 1 843 0
+ 923              		.cfi_startproc
+ 924              		@ args = 0, pretend = 0, frame = 8
+ 925              		@ frame_needed = 1, uses_anonymous_args = 0
+ 926              		@ link register save eliminated.
+ 927 0000 80B4     		push	{r7}
+ 928              	.LCFI73:
+ 929              		.cfi_def_cfa_offset 4
+ 930              		.cfi_offset 7, -4
+ 931 0002 83B0     		sub	sp, sp, #12
+ 932              	.LCFI74:
+ 933              		.cfi_def_cfa_offset 16
+ 934 0004 00AF     		add	r7, sp, #0
+ 935              	.LCFI75:
+ 936              		.cfi_def_cfa_register 7
+ 937 0006 7860     		str	r0, [r7, #4]
+ 844:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   /* Return RNG Error Code */
+ 845:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c ****   return hrng->ErrorCode;
+ 938              		.loc 1 845 0
+ 939 0008 7B68     		ldr	r3, [r7, #4]
+ 940 000a 9B68     		ldr	r3, [r3, #8]
+ 846:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal_rng.c **** }
+ 941              		.loc 1 846 0
+ 942 000c 1846     		mov	r0, r3
+ 943 000e 0C37     		adds	r7, r7, #12
+ 944              	.LCFI76:
+ 945              		.cfi_def_cfa_offset 4
+ 946 0010 BD46     		mov	sp, r7
+ 947              	.LCFI77:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 32
+
+
+ 948              		.cfi_def_cfa_register 13
+ 949              		@ sp needed
+ 950 0012 5DF8047B 		ldr	r7, [sp], #4
+ 951              	.LCFI78:
+ 952              		.cfi_restore 7
+ 953              		.cfi_def_cfa_offset 0
+ 954 0016 7047     		bx	lr
+ 955              		.cfi_endproc
+ 956              	.LFE146:
+ 958              		.text
+ 959              	.Letext0:
+ 960              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 961              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 962              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 963              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 964              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 965              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 966              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 967              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 968              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 969              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 970              		.file 12 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 971              		.file 13 "D:/iot/felix2/kernel/include/los_config.h"
+ 972              		.file 14 "D:/iot/felix2/kernel/include/los_list.h"
+ 973              		.file 15 "D:/iot/felix2/kernel/include/los_err.h"
+ 974              		.file 16 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 975              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 976              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 977              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 978              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 979              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 980              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l4xx.h"
+ 981              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 982              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRFFerV.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32l4xx_hal_rng.c
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:18     .text.HAL_RNG_Init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:25     .text.HAL_RNG_Init:00000000 HAL_RNG_Init
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:191    .text.HAL_RNG_MspInit:00000000 HAL_RNG_MspInit
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:103    .text.HAL_RNG_DeInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:110    .text.HAL_RNG_DeInit:00000000 HAL_RNG_DeInit
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:234    .text.HAL_RNG_MspDeInit:00000000 HAL_RNG_MspDeInit
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:184    .text.HAL_RNG_MspInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:227    .text.HAL_RNG_MspDeInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:270    .text.HAL_RNG_GenerateRandomNumber:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:277    .text.HAL_RNG_GenerateRandomNumber:00000000 HAL_RNG_GenerateRandomNumber
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:399    .text.HAL_RNG_GenerateRandomNumber_IT:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:406    .text.HAL_RNG_GenerateRandomNumber_IT:00000000 HAL_RNG_GenerateRandomNumber_IT
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:493    .text.HAL_RNG_IRQHandler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:500    .text.HAL_RNG_IRQHandler:00000000 HAL_RNG_IRQHandler
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:830    .text.HAL_RNG_ErrorCallback:00000000 HAL_RNG_ErrorCallback
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:786    .text.HAL_RNG_ReadyDataCallback:00000000 HAL_RNG_ReadyDataCallback
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:598    .text.HAL_RNG_GetRandomNumber:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:605    .text.HAL_RNG_GetRandomNumber:00000000 HAL_RNG_GetRandomNumber
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:654    .text.HAL_RNG_GetRandomNumber_IT:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:661    .text.HAL_RNG_GetRandomNumber_IT:00000000 HAL_RNG_GetRandomNumber_IT
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:733    .text.HAL_RNG_ReadLastRandomNumber:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:740    .text.HAL_RNG_ReadLastRandomNumber:00000000 HAL_RNG_ReadLastRandomNumber
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:779    .text.HAL_RNG_ReadyDataCallback:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:823    .text.HAL_RNG_ErrorCallback:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:866    .text.HAL_RNG_GetState:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:873    .text.HAL_RNG_GetState:00000000 HAL_RNG_GetState
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:913    .text.HAL_RNG_GetError:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRFFerV.s:920    .text.HAL_RNG_GetError:00000000 HAL_RNG_GetError
+
+UNDEFINED SYMBOLS
+HAL_GetTick

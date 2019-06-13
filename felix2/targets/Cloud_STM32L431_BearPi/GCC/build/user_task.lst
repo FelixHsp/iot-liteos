@@ -1,0 +1,490 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"user_task.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.bss.g_atiny_tskHandle,"aw",%nobits
+  18              		.align	2
+  21              	g_atiny_tskHandle:
+  22 0000 00000000 		.space	4
+  23              		.section	.bss.g_fs_tskHandle,"aw",%nobits
+  24              		.align	2
+  27              	g_fs_tskHandle:
+  28 0000 00000000 		.space	4
+  29              		.section	.text.atiny_task_entry,"ax",%progbits
+  30              		.align	1
+  31              		.global	atiny_task_entry
+  32              		.syntax unified
+  33              		.thumb
+  34              		.thumb_func
+  35              		.fpu fpv4-sp-d16
+  37              	atiny_task_entry:
+  38              	.LFB134:
+  39              		.file 1 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src/user_task.c"
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * All rights reserved.
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * provided with the distribution.
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * permission.
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 2
+
+
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * ===============================================
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "sys_init.h"
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #ifdef CONFIG_FEATURE_FOTA
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "ota_port.h"
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "nb_iot/los_nb_api.h"
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "at_frame/at_api.h"
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "at_device/bc95.h"
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #ifdef WITH_MQTT
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "flash_adaptor.h"
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "agenttiny_mqtt/agent_tiny_demo.h"
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #else
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #include "agenttiny_lwm2m/agent_tiny_demo.h"
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** static UINT32 g_atiny_tskHandle;
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** static UINT32 g_fs_tskHandle;
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** void atiny_task_entry(void)
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** {
+  40              		.loc 1 59 0
+  41              		.cfi_startproc
+  42              		@ args = 0, pretend = 0, frame = 0
+  43              		@ frame_needed = 1, uses_anonymous_args = 0
+  44 0000 80B5     		push	{r7, lr}
+  45              	.LCFI0:
+  46              		.cfi_def_cfa_offset 8
+  47              		.cfi_offset 7, -8
+  48              		.cfi_offset 14, -4
+  49 0002 00AF     		add	r7, sp, #0
+  50              	.LCFI1:
+  51              		.cfi_def_cfa_register 7
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern void agent_tiny_entry();
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #if defined(WITH_LINUX) || defined(WITH_LWIP)
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     hieth_hw_init();
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     net_init();
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #elif defined(WITH_AT_FRAMEWORK)
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #if defined(USE_ESP8266)
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern at_adaptor_api esp8266_interface;
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     printf("\r\n=============agent_tiny_entry  USE_ESP8266============================\n");
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 3
+
+
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     at_api_register(&esp8266_interface);
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #elif defined(USE_EMTC_BG36)
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern at_adaptor_api emtc_bg36_interface;
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     printf("\r\n=============agent_tiny_entry  USE_EMTC_BG36============================\n");
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     at_api_register(&emtc_bg36_interface);
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #elif defined(USE_SIM900A)
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern at_adaptor_api sim900a_interface;
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     printf("\r\n=============agent_tiny_entry  USE_SIM900A============================\n");
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     at_api_register(&sim900a_interface);
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 		
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 		#elif defined(USE_M26)
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern at_adaptor_api m26_interface;
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     printf("\r\n=============agent_tiny_entry  USE_M26============================\n");
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     at_api_register(&m26_interface);
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #elif defined(USE_NB_NEUL95)
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern at_adaptor_api bc95_interface;
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     printf("\r\n=============agent_tiny_entry  USE_NB_NEUL95============================\n");
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     los_nb_init((const int8_t *)"49.4.85.232",(const int8_t *)"5683",NULL);
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     los_nb_notify("\r\n+NSONMI:",strlen("\r\n+NSONMI:"),NULL,nb_cmd_match);
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     at_api_register(&bc95_interface);
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #elif defined(USE_NB_NEUL95_NO_ATINY)
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     demo_nbiot_only();
+  52              		.loc 1 94 0
+  53 0004 FFF7FEFF 		bl	demo_nbiot_only
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #else
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #endif
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #else
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #ifdef WITH_MQTT
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     flash_adaptor_init();
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     {
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****         demo_param_s demo_param = {.init = NULL,
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****                                    .write_flash_info = flash_adaptor_write_mqtt_info,
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****                                    .read_flash_info = flash_adaptor_read_mqtt_info};
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****         agent_tiny_demo_init(&demo_param);
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     }
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #if !defined(USE_NB_NEUL95_NO_ATINY)
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #ifdef CONFIG_FEATURE_FOTA
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     hal_init_ota();
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     agent_tiny_entry();
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** }
+  54              		.loc 1 119 0
+  55 0008 00BF     		nop
+  56 000a 80BD     		pop	{r7, pc}
+  57              		.cfi_endproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 4
+
+
+  58              	.LFE134:
+  60              		.section	.rodata
+  61              		.align	2
+  62              	.LC0:
+  63 0000 6167656E 		.ascii	"agenttiny_task\000"
+  63      7474696E 
+  63      795F7461 
+  63      736B00
+  64              		.section	.text.creat_agenttiny_task,"ax",%progbits
+  65              		.align	1
+  66              		.global	creat_agenttiny_task
+  67              		.syntax unified
+  68              		.thumb
+  69              		.thumb_func
+  70              		.fpu fpv4-sp-d16
+  72              	creat_agenttiny_task:
+  73              	.LFB135:
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** UINT32 creat_agenttiny_task(VOID)
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** {
+  74              		.loc 1 123 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 32
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78 0000 80B5     		push	{r7, lr}
+  79              	.LCFI2:
+  80              		.cfi_def_cfa_offset 8
+  81              		.cfi_offset 7, -8
+  82              		.cfi_offset 14, -4
+  83 0002 88B0     		sub	sp, sp, #32
+  84              	.LCFI3:
+  85              		.cfi_def_cfa_offset 40
+  86 0004 00AF     		add	r7, sp, #0
+  87              	.LCFI4:
+  88              		.cfi_def_cfa_register 7
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     UINT32 uwRet = LOS_OK;
+  89              		.loc 1 124 0
+  90 0006 0023     		movs	r3, #0
+  91 0008 FB61     		str	r3, [r7, #28]
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     TSK_INIT_PARAM_S task_init_param;
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.usTaskPrio = 2;
+  92              		.loc 1 127 0
+  93 000a 0223     		movs	r3, #2
+  94 000c 3B81     		strh	r3, [r7, #8]	@ movhi
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.pcName = "agenttiny_task";
+  95              		.loc 1 128 0
+  96 000e 0B4B     		ldr	r3, .L6
+  97 0010 7B61     		str	r3, [r7, #20]
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)atiny_task_entry;
+  98              		.loc 1 129 0
+  99 0012 0B4B     		ldr	r3, .L6+4
+ 100 0014 7B60     		str	r3, [r7, #4]
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #if defined(CONFIG_FEATURE_FOTA) || defined(WITH_MQTT)
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.uwStackSize = 0x1800; /* fota use mbedtls bignum to verify signature  consuming
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 5
+
+
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #else
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.uwStackSize = 0x1800;
+ 101              		.loc 1 134 0
+ 102 0016 4FF4C053 		mov	r3, #6144
+ 103 001a 3B61     		str	r3, [r7, #16]
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     uwRet = LOS_TaskCreate(&g_atiny_tskHandle, &task_init_param);
+ 104              		.loc 1 137 0
+ 105 001c 3B1D     		adds	r3, r7, #4
+ 106 001e 1946     		mov	r1, r3
+ 107 0020 0848     		ldr	r0, .L6+8
+ 108 0022 FFF7FEFF 		bl	LOS_TaskCreate
+ 109 0026 F861     		str	r0, [r7, #28]
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     if(LOS_OK != uwRet)
+ 110              		.loc 1 138 0
+ 111 0028 FB69     		ldr	r3, [r7, #28]
+ 112 002a 002B     		cmp	r3, #0
+ 113 002c 01D0     		beq	.L3
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     {
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****         return uwRet;
+ 114              		.loc 1 140 0
+ 115 002e FB69     		ldr	r3, [r7, #28]
+ 116 0030 00E0     		b	.L5
+ 117              	.L3:
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     }
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     return uwRet;
+ 118              		.loc 1 142 0
+ 119 0032 FB69     		ldr	r3, [r7, #28]
+ 120              	.L5:
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** }
+ 121              		.loc 1 143 0 discriminator 1
+ 122 0034 1846     		mov	r0, r3
+ 123 0036 2037     		adds	r7, r7, #32
+ 124              	.LCFI5:
+ 125              		.cfi_def_cfa_offset 8
+ 126 0038 BD46     		mov	sp, r7
+ 127              	.LCFI6:
+ 128              		.cfi_def_cfa_register 13
+ 129              		@ sp needed
+ 130 003a 80BD     		pop	{r7, pc}
+ 131              	.L7:
+ 132              		.align	2
+ 133              	.L6:
+ 134 003c 00000000 		.word	.LC0
+ 135 0040 00000000 		.word	atiny_task_entry
+ 136 0044 00000000 		.word	g_atiny_tskHandle
+ 137              		.cfi_endproc
+ 138              	.LFE135:
+ 140              		.section	.text.create_work_tasks,"ax",%progbits
+ 141              		.align	1
+ 142              		.global	create_work_tasks
+ 143              		.syntax unified
+ 144              		.thumb
+ 145              		.thumb_func
+ 146              		.fpu fpv4-sp-d16
+ 148              	create_work_tasks:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 6
+
+
+ 149              	.LFB136:
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //UINT32 creat_fs_task(void)
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //{
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    UINT32 uwRet = LOS_OK;
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    TSK_INIT_PARAM_S task_init_param;
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    task_init_param.usTaskPrio = 2;
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    task_init_param.pcName = "main_task";
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    extern void fs_demo(void);
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)fs_demo;
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    task_init_param.uwStackSize = 0x1000;
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    uwRet = LOS_TaskCreate(&g_fs_tskHandle, &task_init_param);
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    if(LOS_OK != uwRet)
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    {
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //        return uwRet;
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    }
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //    return uwRet;
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** //}
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #if defined(WITH_DTLS) && defined(SUPPORT_DTLS_SRV)
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** static UINT32 g_dtls_server_tskHandle;
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** uint32_t create_dtls_server_task()
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** {
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     uint32_t uwRet = LOS_OK;
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     TSK_INIT_PARAM_S task_init_param;
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.usTaskPrio = 3;
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.pcName = "dtls_server_task";
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern void dtls_server_task(void);
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)dtls_server_task;
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_init_param.uwStackSize = 0x1000;
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     uwRet = LOS_TaskCreate(&g_dtls_server_tskHandle, &task_init_param);
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     if(LOS_OK != uwRet)
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     {
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****         return uwRet;
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     }
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     return uwRet;
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** }
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** UINT32 create_work_tasks(VOID)
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** {
+ 150              		.loc 1 194 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 8
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 7
+
+
+ 155              	.LCFI7:
+ 156              		.cfi_def_cfa_offset 8
+ 157              		.cfi_offset 7, -8
+ 158              		.cfi_offset 14, -4
+ 159 0002 82B0     		sub	sp, sp, #8
+ 160              	.LCFI8:
+ 161              		.cfi_def_cfa_offset 16
+ 162 0004 00AF     		add	r7, sp, #0
+ 163              	.LCFI9:
+ 164              		.cfi_def_cfa_register 7
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     UINT32 uwRet = LOS_OK;
+ 165              		.loc 1 195 0
+ 166 0006 0023     		movs	r3, #0
+ 167 0008 7B60     		str	r3, [r7, #4]
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     uwRet = creat_agenttiny_task();
+ 168              		.loc 1 197 0
+ 169 000a FFF7FEFF 		bl	creat_agenttiny_task
+ 170 000e 7860     		str	r0, [r7, #4]
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     if (uwRet != LOS_OK)
+ 171              		.loc 1 198 0
+ 172 0010 7B68     		ldr	r3, [r7, #4]
+ 173 0012 002B     		cmp	r3, #0
+ 174 0014 01D0     		beq	.L9
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     {
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     	return LOS_NOK;
+ 175              		.loc 1 200 0
+ 176 0016 0123     		movs	r3, #1
+ 177 0018 00E0     		b	.L10
+ 178              	.L9:
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     }
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #if defined(USE_PPPOS)
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     #include "osport.h"
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern void uart_init(void);  //this uart used for the pppos interface
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     uart_init();
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     extern VOID *main_ppp(UINT32  args);
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     task_create("main_ppp", main_ppp, 0x1500, NULL, NULL, 2);
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #if defined(WITH_DTLS) && defined(SUPPORT_DTLS_SRV)
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     uwRet = create_dtls_server_task()
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     if (uwRet != LOS_OK)
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     {
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     	return LOS_NOK;
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     }
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** #endif
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c ****     return uwRet;
+ 179              		.loc 1 221 0
+ 180 001a 7B68     		ldr	r3, [r7, #4]
+ 181              	.L10:
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** 
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\user_task.c **** }
+ 182              		.loc 1 223 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 8
+
+
+ 183 001c 1846     		mov	r0, r3
+ 184 001e 0837     		adds	r7, r7, #8
+ 185              	.LCFI10:
+ 186              		.cfi_def_cfa_offset 8
+ 187 0020 BD46     		mov	sp, r7
+ 188              	.LCFI11:
+ 189              		.cfi_def_cfa_register 13
+ 190              		@ sp needed
+ 191 0022 80BD     		pop	{r7, pc}
+ 192              		.cfi_endproc
+ 193              	.LFE136:
+ 195              		.text
+ 196              	.Letext0:
+ 197              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 198              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 199              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 200              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 201              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 202              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 203              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 204              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 205              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 206              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 207              		.file 12 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 208              		.file 13 "D:/iot/felix2/kernel/include/los_list.h"
+ 209              		.file 14 "D:/iot/felix2/kernel/include/los_err.h"
+ 210              		.file 15 "D:/iot/felix2/kernel/include/los_tick.h"
+ 211              		.file 16 "D:/iot/felix2/kernel/include/los_event.h"
+ 212              		.file 17 "D:/iot/felix2/kernel/include/los_task.h"
+ 213              		.file 18 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 214              		.file 19 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 215              		.file 20 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 216              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 217              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 218              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 219              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 220              		.file 25 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 221              		.file 26 "D:/iot/felix2/kernel/include/los_config.h"
+ 222              		.file 27 "D:/iot/felix2/kernel/include/los_memory.h"
+ 223              		.file 28 "D:/iot/felix2/kernel/base/include/los_queue.ph"
+ 224              		.file 29 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 225              		.file 30 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/usart.h"
+ 226              		.file 31 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/i2c.h"
+ 227              		.file 32 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/spi.h"
+ 228              		.file 33 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Hardware/LCD/lcd.h"
+ 229              		.file 34 "D:/iot/felix2/include/at_frame/at_main.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc4oT45p.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 user_task.c
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:18     .bss.g_atiny_tskHandle:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:21     .bss.g_atiny_tskHandle:00000000 g_atiny_tskHandle
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:24     .bss.g_fs_tskHandle:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:27     .bss.g_fs_tskHandle:00000000 g_fs_tskHandle
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:30     .text.atiny_task_entry:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:37     .text.atiny_task_entry:00000000 atiny_task_entry
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:61     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:65     .text.creat_agenttiny_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:72     .text.creat_agenttiny_task:00000000 creat_agenttiny_task
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:134    .text.creat_agenttiny_task:0000003c $d
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:141    .text.create_work_tasks:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc4oT45p.s:148    .text.create_work_tasks:00000000 create_work_tasks
+
+UNDEFINED SYMBOLS
+demo_nbiot_only
+LOS_TaskCreate

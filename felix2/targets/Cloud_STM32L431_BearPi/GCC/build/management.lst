@@ -1,0 +1,2473 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"management.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.dm_isUriOpaqueHandle,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	dm_isUriOpaqueHandle:
+  25              	.LFB133:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/core/internals.h"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * permission.
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    Fabien Fleutot - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    Toby Jaffey - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    Pascal Rieux - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *    Scott Bertin - Please refer to git log
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  *******************************************************************************/
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** /*
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  Copyright (c) 2013, 2014 Intel Corporation
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  Redistribution and use in source and binary forms, with or without modification,
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  are permitted provided that the following conditions are met:
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****      * Redistributions of source code must retain the above copyright notice,
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****        this list of conditions and the following disclaimer.
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****      * Redistributions in binary form must reproduce the above copyright notice,
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****        this list of conditions and the following disclaimer in the documentation
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****        and/or other materials provided with the distribution.
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****      * Neither the name of Intel Corporation nor the names of its contributors
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****        may be used to endorse or promote products derived from this software
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****        without specific prior written permission.
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  THE POSSIBILITY OF SUCH DAMAGE.
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****  David Navarro <david.navarro@intel.com>
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** */
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #ifndef _LWM2M_INTERNALS_H_
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define _LWM2M_INTERNALS_H_
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include "liblwm2m.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 3
+
+
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <stdlib.h>
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <string.h>
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <stdio.h>
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <ctype.h>
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <stdint.h>
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <stddef.h>
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <stdbool.h>
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include "er-coap-13/er-coap-13.h"
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include "connection.h"
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #ifdef LWM2M_WITH_LOGS
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #include <inttypes.h>
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LOG(STR) (void)lwm2m_printf("[%d][%s:%d] " STR "\r\n", (uint32_t)lwm2m_gettime(), __func__ 
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LOG_ARG(FMT, ...) (void)lwm2m_printf("[%d][%s:%d] " FMT "\r\n", (uint32_t)lwm2m_gettime(), 
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LOG_URI(URI)                                                                \
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** {                                                                                   \
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     if ((URI) == NULL) (void)lwm2m_printf("[%s:%d] NULL\r\n", __func__ , __LINE__);     \
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     else                                                                            \
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     {                                                                               \
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****         (void)lwm2m_printf("[%s:%d] /%d", __func__ , __LINE__ , (URI)->objectId);       \
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****         if (LWM2M_URI_IS_SET_INSTANCE(URI)) (void)lwm2m_printf("/%d", (URI)->instanceId); \
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****         if (LWM2M_URI_IS_SET_RESOURCE(URI)) (void)lwm2m_printf("/%d", (URI)->resourceId); \
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****         (void)lwm2m_printf("\r\n");                                                       \
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     }                                                                               \
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** }
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define UNUSEX(x)
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define STR_STATUS(S)                                           \
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_DEREGISTERED ? "STATE_DEREGISTERED" :             \
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REG_PENDING ? "STATE_REG_PENDING" :               \
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REGISTERED ? "STATE_REGISTERED" :                 \
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REG_FAILED ? "STATE_REG_FAILED" :                 \
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REG_UPDATE_PENDING ? "STATE_REG_UPDATE_PENDING" : \
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REG_UPDATE_NEEDED ? "STATE_REG_UPDATE_NEEDED" :   \
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REG_FULL_UPDATE_NEEDED ? "STATE_REG_FULL_UPDATE_NEEDED" :   \
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_DEREG_PENDING ? "STATE_DEREG_PENDING" :           \
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_HOLD_OFF ? "STATE_BS_HOLD_OFF" :               \
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_INITIATED ? "STATE_BS_INITIATED" :             \
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_PENDING ? "STATE_BS_PENDING" :                 \
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_FINISHED ? "STATE_BS_FINISHED" :               \
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_FINISHING ? "STATE_BS_FINISHING" :             \
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_FAILING ? "STATE_BS_FAILING" :                 \
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BS_FAILED ? "STATE_BS_FAILED" :                   \
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** "Unknown")))))))))))))))
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define STR_MEDIA_TYPE(M)                                \
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((M) == LWM2M_CONTENT_TEXT ? "LWM2M_CONTENT_TEXT" :      \
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((M) == LWM2M_CONTENT_LINK ? "LWM2M_CONTENT_LINK" :      \
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((M) == LWM2M_CONTENT_OPAQUE ? "LWM2M_CONTENT_OPAQUE" :  \
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((M) == LWM2M_CONTENT_TLV ? "LWM2M_CONTENT_TLV" :        \
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((M) == LWM2M_CONTENT_JSON ? "LWM2M_CONTENT_JSON" :      \
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** "Unknown")))))
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define STR_STATE(S)                                \
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_INITIAL ? "STATE_INITIAL" :      \
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BOOTSTRAP_REQUIRED ? "STATE_BOOTSTRAP_REQUIRED" :      \
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_BOOTSTRAPPING ? "STATE_BOOTSTRAPPING" :  \
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 4
+
+
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REGISTER_REQUIRED ? "STATE_REGISTER_REQUIRED" :        \
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_REGISTERING ? "STATE_REGISTERING" :      \
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** ((S) == STATE_READY ? "STATE_READY" :      \
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** "Unknown"))))))
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #else
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define UNUSEX(x) (x)=(x)
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LOG_ARG(FMT, ...)
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LOG(STR)
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LOG_URI(URI)
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #endif
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_DEFAULT_LIFETIME  86400
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #ifdef LWM2M_SUPPORT_JSON
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_LWM2M_RESOURCE_TYPE     ">;rt=\"oma.lwm2m\";ct=11543,"
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_LWM2M_RESOURCE_TYPE_LEN 25
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #else
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_LWM2M_RESOURCE_TYPE     ">;rt=\"oma.lwm2m\","
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_LWM2M_RESOURCE_TYPE_LEN 17
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #endif
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_START           "<"
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_DEFAULT_PATH    "/"
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_OBJECT_MIN_LEN  5   // "</n>,"
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_PATH_END        ">,"
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_PATH_SEPARATOR  "/"
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_OBJECT_PATH             "<%s/%hu>,"
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_OBJECT_INSTANCE_PATH    "<%s/%hu/%hu>,"
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define URI_REGISTRATION_SEGMENT        "rd"
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define URI_REGISTRATION_SEGMENT_LEN    2
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define URI_BOOTSTRAP_SEGMENT           "bs"
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define URI_BOOTSTRAP_SEGMENT_LEN       2
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_STARTER       "?"
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_NAME          "ep="
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_NAME_LEN      3       // strlen("ep=")
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_SMS           "sms="
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_SMS_LEN       4
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_LIFETIME      "lt="
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_LIFETIME_LEN  3
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_VERSION       "lwm2m="
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_VERSION_LEN   6
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_BINDING       "b="
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_BINDING_LEN   2
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_DELIMITER     "&"
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_VERSION      "1.0"
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_VERSION_LEN  3
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_VERSION_FULL      QUERY_VERSION LWM2M_VERSION
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define QUERY_VERSION_FULL_LEN  QUERY_VERSION_LEN+LWM2M_VERSION_LEN
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_URI_START       '<'
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_URI_END         '>'
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_DELIMITER       ','
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 5
+
+
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_SEPARATOR  ';'
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_EQUALS     '='
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_TYPE_KEY           "rt"
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_TYPE_KEY_LEN       2
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_TYPE_VALUE         "\"oma.lwm2m\""
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_TYPE_VALUE_LEN     11
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_CONTENT_KEY        "ct"
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_CONTENT_KEY_LEN    2
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_CONTENT_JSON       "11543"   // Temporary value
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define REG_ATTR_CONTENT_JSON_LEN   5
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_SERVER_ID_STR       "ep="
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_SERVER_ID_LEN       3
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_MIN_PERIOD_STR      "pmin="
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_MIN_PERIOD_LEN      5
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_MAX_PERIOD_STR      "pmax="
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_MAX_PERIOD_LEN      5
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_GREATER_THAN_STR    "gt="
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_GREATER_THAN_LEN    3
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_LESS_THAN_STR       "lt="
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_LESS_THAN_LEN       3
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_STEP_STR            "st="
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_STEP_LEN            3
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_DIMENSION_STR       "dim="
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_DIMENSION_LEN       4
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define URI_MAX_STRING_LEN    18      // /65535/65535/65535
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define _PRV_64BIT_BUFFER_SIZE 8
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_START             "<"
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_START_SIZE        1
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_END               ">,"
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_END_SIZE          2
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_DIM_START         ">;dim="
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_DIM_START_SIZE    6
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_ATTR_END          ","
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ITEM_ATTR_END_SIZE     1
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_URI_SEPARATOR          "/"
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_URI_SEPARATOR_SIZE     1
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ATTR_SEPARATOR         ";"
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LINK_ATTR_SEPARATOR_SIZE    1
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define ATTR_FLAG_NUMERIC (uint8_t)(LWM2M_ATTR_FLAG_LESS_THAN | LWM2M_ATTR_FLAG_GREATER_THAN | LWM2
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_URI_FLAG_DM           (uint8_t)0x00
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_URI_FLAG_DELETE_ALL   (uint8_t)0x10
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_URI_FLAG_REGISTRATION (uint8_t)0x20
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_URI_FLAG_BOOTSTRAP    (uint8_t)0x40
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_URI_MASK_TYPE (uint8_t)0x70
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #define LWM2M_URI_MASK_ID   (uint8_t)0x07
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** typedef struct
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** {
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     uint16_t clientID;
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     lwm2m_uri_t uri;
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     lwm2m_result_callback_t callback;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 6
+
+
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     void * userData;
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** } dm_data_t;
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** typedef enum
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** {
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     URI_DEPTH_OBJECT,
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     URI_DEPTH_OBJECT_INSTANCE,
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     URI_DEPTH_RESOURCE,
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     URI_DEPTH_RESOURCE_INSTANCE
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** } uri_depth_t;
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #ifdef LWM2M_BOOTSTRAP_SERVER_MODE
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** typedef struct
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** {
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     bool        isUri;
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     lwm2m_uri_t uri;
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     lwm2m_bootstrap_callback_t callback;
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     void *      userData;
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** } bs_data_t;
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #endif
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in uri.c
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_uri_t * uri_decode(char * altPath, multi_option_t *uriPath);
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int uri_getNumber(uint8_t * uriString, size_t uriLength);
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int uri_toString(lwm2m_uri_t * uriP, uint8_t * buffer, size_t bufferLen, uri_depth_t * depthP);
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in objects.c
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_readData(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, int * sizeP, lwm2m_data_t *
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_read(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_media_type_t * formatP, u
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_write(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_media_type_t format, uin
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_create(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_media_type_t format, ui
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_execute(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, uint8_t * buffer, size_t len
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_delete(lwm2m_context_t * contextP, lwm2m_uri_t * uriP);
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_discover(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_server_t * serverP, u
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_checkReadable(lwm2m_context_t * contextP, lwm2m_uri_t * uriP);
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_checkNumeric(lwm2m_context_t * contextP, lwm2m_uri_t * uriP);
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** bool object_isInstanceNew(lwm2m_context_t * contextP, uint16_t objectId, uint16_t instanceId);
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int object_getRegisterPayloadBufferLength(lwm2m_context_t * contextP);
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int object_getRegisterPayload(lwm2m_context_t * contextP, uint8_t * buffer, size_t length);
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int object_getServers(lwm2m_context_t * contextP, bool checkOnly);
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_createInstance(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_data_t * dataP)
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t object_writeInstance(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_data_t * dataP);
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in transaction.c
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_transaction_t * transaction_new(void * sessionH, unsigned char method, char * altPath, lwm2m_
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int transaction_send(lwm2m_context_t * contextP, lwm2m_transaction_t * transacP);
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void transaction_free(lwm2m_transaction_t * transacP);
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void transaction_remove(lwm2m_context_t * contextP, lwm2m_transaction_t * transacP);
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** bool transaction_handleResponse(lwm2m_context_t * contextP, void * fromSessionH, coap_packet_t * me
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void transaction_step(lwm2m_context_t * contextP, time_t currentTime, time_t * timeoutP);
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in management.c
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t dm_handleRequest(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_server_t * serverP, 
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in observe.c
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t observe_handleRequest(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_server_t * serv
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void observe_cancel(lwm2m_context_t * contextP, uint16_t mid, void * fromSessionH);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 7
+
+
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t observe_setParameters(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_server_t * serv
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void observe_step(lwm2m_context_t * contextP, time_t currentTime, time_t * timeoutP);
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void observe_clear(lwm2m_context_t * contextP, lwm2m_uri_t * uriP);
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** //bool observe_handleNotify(lwm2m_context_t * contextP, void * fromSessionH, coap_packet_t * messag
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void observe_remove(lwm2m_observation_t * observationP);
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_observed_t * observe_findByUri(lwm2m_context_t * contextP, lwm2m_uri_t * uriP);
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in registration.c
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** //uint8_t registration_handleRequest(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, void * fromSes
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void registration_deregister(lwm2m_context_t * contextP, lwm2m_server_t * serverP);
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void registration_freeClient(lwm2m_client_t * clientP);
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t registration_start(lwm2m_context_t * contextP);
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void registration_step(lwm2m_context_t * contextP, time_t currentTime, time_t * timeoutP);
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_status_t registration_getStatus(lwm2m_context_t * contextP);
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void registration_reset(lwm2m_context_t * contextP, lwm2m_server_t * serverP);
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in packet.c
+ 335:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t message_send(lwm2m_context_t * contextP, coap_packet_t * message, void * sessionH);
+ 336:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 337:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in bootstrap.c
+ 338:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void bootstrap_step(lwm2m_context_t * contextP, uint32_t currentTime, time_t* timeoutP);
+ 339:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t bootstrap_handleCommand(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_server_t * se
+ 340:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t bootstrap_handleDeleteAll(lwm2m_context_t * context, void * fromSessionH);
+ 341:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t bootstrap_handleFinish(lwm2m_context_t * context, void * fromSessionH);
+ 342:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t bootstrap_handleRequest(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, void * fromSessionH
+ 343:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void bootstrap_start(lwm2m_context_t * contextP);
+ 344:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_status_t bootstrap_getStatus(lwm2m_context_t * contextP);
+ 345:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** bool bootstrap_isBsServerIpValid(const lwm2m_context_t *contextP);
+ 346:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 347:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 348:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in tlv.c
+ 349:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int tlv_parse(uint8_t * buffer, size_t bufferLen, lwm2m_data_t ** dataP);
+ 350:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int tlv_serialize(bool isResourceInstance, int size, lwm2m_data_t * dataP, uint8_t ** bufferP);
+ 351:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 352:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in json.c
+ 353:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #ifdef LWM2M_SUPPORT_JSON
+ 354:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int json_parse(lwm2m_uri_t * uriP, uint8_t * buffer, size_t bufferLen, lwm2m_data_t ** dataP);
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int json_serialize(lwm2m_uri_t * uriP, int size, lwm2m_data_t * tlvP, uint8_t ** bufferP);
+ 356:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #endif
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 358:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in discover.c
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int discover_serialize(lwm2m_context_t * contextP, lwm2m_uri_t * uriP, lwm2m_server_t * serverP, in
+ 360:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in block1.c
+ 362:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** uint8_t coap_block1_handler(lwm2m_block1_data_t ** block1Data, uint16_t mid, uint8_t * buffer, size
+ 363:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void free_block1_buffer(lwm2m_block1_data_t * block1Data);
+ 364:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** 
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** // defined in utils.c
+ 366:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_data_type_t utils_depthToDatatype(uri_depth_t depth);
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_binding_t utils_stringToBinding(uint8_t *buffer, size_t length);
+ 368:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_media_type_t utils_convertMediaType(coap_content_type_t type);
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int utils_isAltPathValid(const char * altPath);
+ 370:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int utils_stringCopy(char * buffer, size_t length, const char * str);
+ 371:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** size_t utils_intToText(int64_t data, uint8_t * string, size_t length);
+ 372:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** size_t utils_floatToText(double data, uint8_t * string, size_t length);
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int utils_textToInt(uint8_t * buffer, int length, int64_t * dataP);
+ 374:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** int utils_textToFloat(uint8_t * buffer, int length, double * dataP);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 8
+
+
+ 375:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** void utils_copyValue(void * dst, const void * src, size_t len);
+ 376:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** size_t utils_base64GetSize(size_t dataLen);
+ 377:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** size_t utils_base64Encode(uint8_t * dataP, size_t dataLen, uint8_t * bufferP, size_t bufferLen);
+ 378:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #ifdef LWM2M_CLIENT_MODE
+ 379:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_server_t * utils_findServer(lwm2m_context_t * contextP, void * fromSessionH);
+ 380:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** lwm2m_server_t * utils_findBootstrapServer(lwm2m_context_t * contextP, void * fromSessionH);
+ 381:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** #endif
+ 382:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** static inline int dm_isUriOpaqueHandle(const lwm2m_uri_t * uriP)
+ 383:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** {
+  27              		.loc 1 383 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 8
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+ 384:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h ****     return (19 == uriP->objectId);
+  43              		.loc 1 384 0
+  44 0008 7B68     		ldr	r3, [r7, #4]
+  45 000a 5B88     		ldrh	r3, [r3, #2]
+  46 000c 132B     		cmp	r3, #19
+  47 000e 0CBF     		ite	eq
+  48 0010 0123     		moveq	r3, #1
+  49 0012 0023     		movne	r3, #0
+  50 0014 DBB2     		uxtb	r3, r3
+ 385:D:/iot/felix2/components/connectivity/lwm2m/core\internals.h **** }
+  51              		.loc 1 385 0
+  52 0016 1846     		mov	r0, r3
+  53 0018 0C37     		adds	r7, r7, #12
+  54              	.LCFI3:
+  55              		.cfi_def_cfa_offset 4
+  56 001a BD46     		mov	sp, r7
+  57              	.LCFI4:
+  58              		.cfi_def_cfa_register 13
+  59              		@ sp needed
+  60 001c 5DF8047B 		ldr	r7, [sp], #4
+  61              	.LCFI5:
+  62              		.cfi_restore 7
+  63              		.cfi_def_cfa_offset 0
+  64 0020 7047     		bx	lr
+  65              		.cfi_endproc
+  66              	.LFE133:
+  68              		.section	.rodata
+  69              		.align	2
+  70              	.LC0:
+  71 0000 706D696E 		.ascii	"pmin=\000"
+  71      3D00
+  72 0006 0000     		.align	2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 9
+
+
+  73              	.LC1:
+  74 0008 706D6178 		.ascii	"pmax=\000"
+  74      3D00
+  75 000e 0000     		.align	2
+  76              	.LC2:
+  77 0010 67743D00 		.ascii	"gt=\000"
+  78              		.align	2
+  79              	.LC3:
+  80 0014 6C743D00 		.ascii	"lt=\000"
+  81              		.align	2
+  82              	.LC4:
+  83 0018 73743D00 		.ascii	"st=\000"
+  84              		.global	__aeabi_dcmplt
+  85              		.section	.text.prv_readAttributes,"ax",%progbits
+  86              		.align	1
+  87              		.syntax unified
+  88              		.thumb
+  89              		.thumb_func
+  90              		.fpu fpv4-sp-d16
+  92              	prv_readAttributes:
+  93              	.LFB142:
+  94              		.file 2 "D:/iot/felix2/components/connectivity/lwm2m/core/management.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** /*******************************************************************************
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 10
+
+
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    domedambrosio - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    Toby Jaffey - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *    Pascal Rieux - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  *******************************************************************************/
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** /*
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  Copyright (c) 2013, 2014 Intel Corporation
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  Redistribution and use in source and binary forms, with or without modification,
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  are permitted provided that the following conditions are met:
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****      * Redistributions of source code must retain the above copyright notice,
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****        this list of conditions and the following disclaimer.
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****      * Redistributions in binary form must reproduce the above copyright notice,
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****        this list of conditions and the following disclaimer in the documentation
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****        and/or other materials provided with the distribution.
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****      * Neither the name of Intel Corporation nor the names of its contributors
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****        may be used to endorse or promote products derived from this software
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****        without specific prior written permission.
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  THE POSSIBILITY OF SUCH DAMAGE.
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****  David Navarro <david.navarro@intel.com>
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** */
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** #include "internals.h"
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** #include "object_comm.h"
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** #include <stdio.h>
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** #ifdef LWM2M_CLIENT_MODE
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** static int prv_readAttributes(multi_option_t *query,
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                               lwm2m_attributes_t *attrP)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 11
+
+
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** {
+  95              		.loc 2 93 0
+  96              		.cfi_startproc
+  97              		@ args = 0, pretend = 0, frame = 24
+  98              		@ frame_needed = 1, uses_anonymous_args = 0
+  99 0000 90B5     		push	{r4, r7, lr}
+ 100              	.LCFI6:
+ 101              		.cfi_def_cfa_offset 12
+ 102              		.cfi_offset 4, -12
+ 103              		.cfi_offset 7, -8
+ 104              		.cfi_offset 14, -4
+ 105 0002 87B0     		sub	sp, sp, #28
+ 106              	.LCFI7:
+ 107              		.cfi_def_cfa_offset 40
+ 108 0004 00AF     		add	r7, sp, #0
+ 109              	.LCFI8:
+ 110              		.cfi_def_cfa_register 7
+ 111 0006 7860     		str	r0, [r7, #4]
+ 112 0008 3960     		str	r1, [r7]
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     int64_t intValue;
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     double floatValue;
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     memset(attrP, 0, sizeof(lwm2m_attributes_t));
+ 113              		.loc 2 97 0
+ 114 000a 2822     		movs	r2, #40
+ 115 000c 0021     		movs	r1, #0
+ 116 000e 3868     		ldr	r0, [r7]
+ 117 0010 FFF7FEFF 		bl	memset
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     while (query != NULL)
+ 118              		.loc 2 99 0
+ 119 0014 17E2     		b	.L4
+ 120              	.L46:
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         if (lwm2m_strncmp((char *)query->data, ATTR_MIN_PERIOD_STR, ATTR_MIN_PERIOD_LEN) == 0)
+ 121              		.loc 2 101 0
+ 122 0016 7B68     		ldr	r3, [r7, #4]
+ 123 0018 9B68     		ldr	r3, [r3, #8]
+ 124 001a 0522     		movs	r2, #5
+ 125 001c A549     		ldr	r1, .L50
+ 126 001e 1846     		mov	r0, r3
+ 127 0020 FFF7FEFF 		bl	lwm2m_strncmp
+ 128 0024 0346     		mov	r3, r0
+ 129 0026 002B     		cmp	r3, #0
+ 130 0028 3AD1     		bne	.L5
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_MIN_PERIOD)) return -1;
+ 131              		.loc 2 103 0
+ 132 002a 3B68     		ldr	r3, [r7]
+ 133 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 134 002e 3B68     		ldr	r3, [r7]
+ 135 0030 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 136 0032 1343     		orrs	r3, r3, r2
+ 137 0034 DBB2     		uxtb	r3, r3
+ 138 0036 03F00103 		and	r3, r3, #1
+ 139 003a 002B     		cmp	r3, #0
+ 140 003c 02D0     		beq	.L6
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 12
+
+
+ 141              		.loc 2 103 0 is_stmt 0 discriminator 1
+ 142 003e 4FF0FF33 		mov	r3, #-1
+ 143 0042 05E2     		b	.L47
+ 144              	.L6:
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len == ATTR_MIN_PERIOD_LEN) return -1;
+ 145              		.loc 2 104 0 is_stmt 1
+ 146 0044 7B68     		ldr	r3, [r7, #4]
+ 147 0046 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 148 0048 052B     		cmp	r3, #5
+ 149 004a 02D1     		bne	.L8
+ 150              		.loc 2 104 0 is_stmt 0 discriminator 1
+ 151 004c 4FF0FF33 		mov	r3, #-1
+ 152 0050 FEE1     		b	.L47
+ 153              	.L8:
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (1 != utils_textToInt(query->data + ATTR_MIN_PERIOD_LEN, query->len - ATTR_MIN_PERIO
+ 154              		.loc 2 106 0 is_stmt 1
+ 155 0052 7B68     		ldr	r3, [r7, #4]
+ 156 0054 9B68     		ldr	r3, [r3, #8]
+ 157 0056 581D     		adds	r0, r3, #5
+ 158 0058 7B68     		ldr	r3, [r7, #4]
+ 159 005a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 160 005c 053B     		subs	r3, r3, #5
+ 161 005e 07F11002 		add	r2, r7, #16
+ 162 0062 1946     		mov	r1, r3
+ 163 0064 FFF7FEFF 		bl	utils_textToInt
+ 164 0068 0346     		mov	r3, r0
+ 165 006a 012B     		cmp	r3, #1
+ 166 006c 02D0     		beq	.L9
+ 167              		.loc 2 106 0 is_stmt 0 discriminator 1
+ 168 006e 4FF0FF33 		mov	r3, #-1
+ 169 0072 EDE1     		b	.L47
+ 170              	.L9:
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (intValue < 0) return -1;
+ 171              		.loc 2 107 0 is_stmt 1
+ 172 0074 D7E90434 		ldrd	r3, [r7, #16]
+ 173 0078 002B     		cmp	r3, #0
+ 174 007a 74F10003 		sbcs	r3, r4, #0
+ 175 007e 02DA     		bge	.L10
+ 176              		.loc 2 107 0 is_stmt 0 discriminator 1
+ 177 0080 4FF0FF33 		mov	r3, #-1
+ 178 0084 E4E1     		b	.L47
+ 179              	.L10:
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toSet |= LWM2M_ATTR_FLAG_MIN_PERIOD;
+ 180              		.loc 2 109 0 is_stmt 1
+ 181 0086 3B68     		ldr	r3, [r7]
+ 182 0088 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 183 008a 43F00103 		orr	r3, r3, #1
+ 184 008e DAB2     		uxtb	r2, r3
+ 185 0090 3B68     		ldr	r3, [r7]
+ 186 0092 1A70     		strb	r2, [r3]
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->minPeriod = intValue;
+ 187              		.loc 2 110 0
+ 188 0094 D7E90434 		ldrd	r3, [r7, #16]
+ 189 0098 1A46     		mov	r2, r3
+ 190 009a 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 13
+
+
+ 191 009c 5A60     		str	r2, [r3, #4]
+ 192 009e CFE1     		b	.L11
+ 193              	.L5:
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_MIN_PERIOD_STR, ATTR_MIN_PERIOD_LEN - 1) =
+ 194              		.loc 2 112 0
+ 195 00a0 7B68     		ldr	r3, [r7, #4]
+ 196 00a2 9B68     		ldr	r3, [r3, #8]
+ 197 00a4 0422     		movs	r2, #4
+ 198 00a6 8349     		ldr	r1, .L50
+ 199 00a8 1846     		mov	r0, r3
+ 200 00aa FFF7FEFF 		bl	lwm2m_strncmp
+ 201 00ae 0346     		mov	r3, r0
+ 202 00b0 002B     		cmp	r3, #0
+ 203 00b2 1BD1     		bne	.L12
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_MIN_PERIOD)) return -1;
+ 204              		.loc 2 114 0
+ 205 00b4 3B68     		ldr	r3, [r7]
+ 206 00b6 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 207 00b8 3B68     		ldr	r3, [r7]
+ 208 00ba 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 209 00bc 1343     		orrs	r3, r3, r2
+ 210 00be DBB2     		uxtb	r3, r3
+ 211 00c0 03F00103 		and	r3, r3, #1
+ 212 00c4 002B     		cmp	r3, #0
+ 213 00c6 02D0     		beq	.L13
+ 214              		.loc 2 114 0 is_stmt 0 discriminator 1
+ 215 00c8 4FF0FF33 		mov	r3, #-1
+ 216 00cc C0E1     		b	.L47
+ 217              	.L13:
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len != ATTR_MIN_PERIOD_LEN - 1) return -1;
+ 218              		.loc 2 115 0 is_stmt 1
+ 219 00ce 7B68     		ldr	r3, [r7, #4]
+ 220 00d0 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 221 00d2 042B     		cmp	r3, #4
+ 222 00d4 02D0     		beq	.L14
+ 223              		.loc 2 115 0 is_stmt 0 discriminator 1
+ 224 00d6 4FF0FF33 		mov	r3, #-1
+ 225 00da B9E1     		b	.L47
+ 226              	.L14:
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toClear |= LWM2M_ATTR_FLAG_MIN_PERIOD;
+ 227              		.loc 2 117 0 is_stmt 1
+ 228 00dc 3B68     		ldr	r3, [r7]
+ 229 00de 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 230 00e0 43F00103 		orr	r3, r3, #1
+ 231 00e4 DAB2     		uxtb	r2, r3
+ 232 00e6 3B68     		ldr	r3, [r7]
+ 233 00e8 5A70     		strb	r2, [r3, #1]
+ 234 00ea A9E1     		b	.L11
+ 235              	.L12:
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_MAX_PERIOD_STR, ATTR_MAX_PERIOD_LEN) == 0)
+ 236              		.loc 2 119 0
+ 237 00ec 7B68     		ldr	r3, [r7, #4]
+ 238 00ee 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 14
+
+
+ 239 00f0 0522     		movs	r2, #5
+ 240 00f2 7149     		ldr	r1, .L50+4
+ 241 00f4 1846     		mov	r0, r3
+ 242 00f6 FFF7FEFF 		bl	lwm2m_strncmp
+ 243 00fa 0346     		mov	r3, r0
+ 244 00fc 002B     		cmp	r3, #0
+ 245 00fe 3AD1     		bne	.L15
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_MAX_PERIOD)) return -1;
+ 246              		.loc 2 121 0
+ 247 0100 3B68     		ldr	r3, [r7]
+ 248 0102 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 249 0104 3B68     		ldr	r3, [r7]
+ 250 0106 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 251 0108 1343     		orrs	r3, r3, r2
+ 252 010a DBB2     		uxtb	r3, r3
+ 253 010c 03F00203 		and	r3, r3, #2
+ 254 0110 002B     		cmp	r3, #0
+ 255 0112 02D0     		beq	.L16
+ 256              		.loc 2 121 0 is_stmt 0 discriminator 1
+ 257 0114 4FF0FF33 		mov	r3, #-1
+ 258 0118 9AE1     		b	.L47
+ 259              	.L16:
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len == ATTR_MAX_PERIOD_LEN) return -1;
+ 260              		.loc 2 122 0 is_stmt 1
+ 261 011a 7B68     		ldr	r3, [r7, #4]
+ 262 011c 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 263 011e 052B     		cmp	r3, #5
+ 264 0120 02D1     		bne	.L17
+ 265              		.loc 2 122 0 is_stmt 0 discriminator 1
+ 266 0122 4FF0FF33 		mov	r3, #-1
+ 267 0126 93E1     		b	.L47
+ 268              	.L17:
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (1 != utils_textToInt(query->data + ATTR_MAX_PERIOD_LEN, query->len - ATTR_MAX_PERIO
+ 269              		.loc 2 124 0 is_stmt 1
+ 270 0128 7B68     		ldr	r3, [r7, #4]
+ 271 012a 9B68     		ldr	r3, [r3, #8]
+ 272 012c 581D     		adds	r0, r3, #5
+ 273 012e 7B68     		ldr	r3, [r7, #4]
+ 274 0130 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 275 0132 053B     		subs	r3, r3, #5
+ 276 0134 07F11002 		add	r2, r7, #16
+ 277 0138 1946     		mov	r1, r3
+ 278 013a FFF7FEFF 		bl	utils_textToInt
+ 279 013e 0346     		mov	r3, r0
+ 280 0140 012B     		cmp	r3, #1
+ 281 0142 02D0     		beq	.L18
+ 282              		.loc 2 124 0 is_stmt 0 discriminator 1
+ 283 0144 4FF0FF33 		mov	r3, #-1
+ 284 0148 82E1     		b	.L47
+ 285              	.L18:
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (intValue < 0) return -1;
+ 286              		.loc 2 125 0 is_stmt 1
+ 287 014a D7E90434 		ldrd	r3, [r7, #16]
+ 288 014e 002B     		cmp	r3, #0
+ 289 0150 74F10003 		sbcs	r3, r4, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 15
+
+
+ 290 0154 02DA     		bge	.L19
+ 291              		.loc 2 125 0 is_stmt 0 discriminator 1
+ 292 0156 4FF0FF33 		mov	r3, #-1
+ 293 015a 79E1     		b	.L47
+ 294              	.L19:
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toSet |= LWM2M_ATTR_FLAG_MAX_PERIOD;
+ 295              		.loc 2 127 0 is_stmt 1
+ 296 015c 3B68     		ldr	r3, [r7]
+ 297 015e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 298 0160 43F00203 		orr	r3, r3, #2
+ 299 0164 DAB2     		uxtb	r2, r3
+ 300 0166 3B68     		ldr	r3, [r7]
+ 301 0168 1A70     		strb	r2, [r3]
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->maxPeriod = intValue;
+ 302              		.loc 2 128 0
+ 303 016a D7E90434 		ldrd	r3, [r7, #16]
+ 304 016e 1A46     		mov	r2, r3
+ 305 0170 3B68     		ldr	r3, [r7]
+ 306 0172 9A60     		str	r2, [r3, #8]
+ 307 0174 64E1     		b	.L11
+ 308              	.L15:
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_MAX_PERIOD_STR, ATTR_MAX_PERIOD_LEN - 1) =
+ 309              		.loc 2 130 0
+ 310 0176 7B68     		ldr	r3, [r7, #4]
+ 311 0178 9B68     		ldr	r3, [r3, #8]
+ 312 017a 0422     		movs	r2, #4
+ 313 017c 4E49     		ldr	r1, .L50+4
+ 314 017e 1846     		mov	r0, r3
+ 315 0180 FFF7FEFF 		bl	lwm2m_strncmp
+ 316 0184 0346     		mov	r3, r0
+ 317 0186 002B     		cmp	r3, #0
+ 318 0188 1BD1     		bne	.L20
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_MAX_PERIOD)) return -1;
+ 319              		.loc 2 132 0
+ 320 018a 3B68     		ldr	r3, [r7]
+ 321 018c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 322 018e 3B68     		ldr	r3, [r7]
+ 323 0190 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 324 0192 1343     		orrs	r3, r3, r2
+ 325 0194 DBB2     		uxtb	r3, r3
+ 326 0196 03F00203 		and	r3, r3, #2
+ 327 019a 002B     		cmp	r3, #0
+ 328 019c 02D0     		beq	.L21
+ 329              		.loc 2 132 0 is_stmt 0 discriminator 1
+ 330 019e 4FF0FF33 		mov	r3, #-1
+ 331 01a2 55E1     		b	.L47
+ 332              	.L21:
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len != ATTR_MAX_PERIOD_LEN - 1) return -1;
+ 333              		.loc 2 133 0 is_stmt 1
+ 334 01a4 7B68     		ldr	r3, [r7, #4]
+ 335 01a6 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 336 01a8 042B     		cmp	r3, #4
+ 337 01aa 02D0     		beq	.L22
+ 338              		.loc 2 133 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 16
+
+
+ 339 01ac 4FF0FF33 		mov	r3, #-1
+ 340 01b0 4EE1     		b	.L47
+ 341              	.L22:
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toClear |= LWM2M_ATTR_FLAG_MAX_PERIOD;
+ 342              		.loc 2 135 0 is_stmt 1
+ 343 01b2 3B68     		ldr	r3, [r7]
+ 344 01b4 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 345 01b6 43F00203 		orr	r3, r3, #2
+ 346 01ba DAB2     		uxtb	r2, r3
+ 347 01bc 3B68     		ldr	r3, [r7]
+ 348 01be 5A70     		strb	r2, [r3, #1]
+ 349 01c0 3EE1     		b	.L11
+ 350              	.L20:
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_GREATER_THAN_STR, ATTR_GREATER_THAN_LEN) =
+ 351              		.loc 2 137 0
+ 352 01c2 7B68     		ldr	r3, [r7, #4]
+ 353 01c4 9B68     		ldr	r3, [r3, #8]
+ 354 01c6 0322     		movs	r2, #3
+ 355 01c8 3C49     		ldr	r1, .L50+8
+ 356 01ca 1846     		mov	r0, r3
+ 357 01cc FFF7FEFF 		bl	lwm2m_strncmp
+ 358 01d0 0346     		mov	r3, r0
+ 359 01d2 002B     		cmp	r3, #0
+ 360 01d4 31D1     		bne	.L23
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_GREATER_THAN)) return -1;
+ 361              		.loc 2 139 0
+ 362 01d6 3B68     		ldr	r3, [r7]
+ 363 01d8 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 364 01da 3B68     		ldr	r3, [r7]
+ 365 01dc 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 366 01de 1343     		orrs	r3, r3, r2
+ 367 01e0 DBB2     		uxtb	r3, r3
+ 368 01e2 03F00403 		and	r3, r3, #4
+ 369 01e6 002B     		cmp	r3, #0
+ 370 01e8 02D0     		beq	.L24
+ 371              		.loc 2 139 0 is_stmt 0 discriminator 1
+ 372 01ea 4FF0FF33 		mov	r3, #-1
+ 373 01ee 2FE1     		b	.L47
+ 374              	.L24:
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len == ATTR_GREATER_THAN_LEN) return -1;
+ 375              		.loc 2 140 0 is_stmt 1
+ 376 01f0 7B68     		ldr	r3, [r7, #4]
+ 377 01f2 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 378 01f4 032B     		cmp	r3, #3
+ 379 01f6 02D1     		bne	.L25
+ 380              		.loc 2 140 0 is_stmt 0 discriminator 1
+ 381 01f8 4FF0FF33 		mov	r3, #-1
+ 382 01fc 28E1     		b	.L47
+ 383              	.L25:
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (1 != utils_textToFloat(query->data + ATTR_GREATER_THAN_LEN, query->len - ATTR_GREAT
+ 384              		.loc 2 142 0 is_stmt 1
+ 385 01fe 7B68     		ldr	r3, [r7, #4]
+ 386 0200 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 17
+
+
+ 387 0202 D81C     		adds	r0, r3, #3
+ 388 0204 7B68     		ldr	r3, [r7, #4]
+ 389 0206 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 390 0208 033B     		subs	r3, r3, #3
+ 391 020a 07F10802 		add	r2, r7, #8
+ 392 020e 1946     		mov	r1, r3
+ 393 0210 FFF7FEFF 		bl	utils_textToFloat
+ 394 0214 0346     		mov	r3, r0
+ 395 0216 012B     		cmp	r3, #1
+ 396 0218 02D0     		beq	.L26
+ 397              		.loc 2 142 0 is_stmt 0 discriminator 1
+ 398 021a 4FF0FF33 		mov	r3, #-1
+ 399 021e 17E1     		b	.L47
+ 400              	.L26:
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toSet |= LWM2M_ATTR_FLAG_GREATER_THAN;
+ 401              		.loc 2 144 0 is_stmt 1
+ 402 0220 3B68     		ldr	r3, [r7]
+ 403 0222 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 404 0224 43F00403 		orr	r3, r3, #4
+ 405 0228 DAB2     		uxtb	r2, r3
+ 406 022a 3B68     		ldr	r3, [r7]
+ 407 022c 1A70     		strb	r2, [r3]
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->greaterThan = floatValue;
+ 408              		.loc 2 145 0
+ 409 022e D7E90234 		ldrd	r3, [r7, #8]
+ 410 0232 3A68     		ldr	r2, [r7]
+ 411 0234 C2E90434 		strd	r3, [r2, #16]
+ 412 0238 02E1     		b	.L11
+ 413              	.L23:
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_GREATER_THAN_STR, ATTR_GREATER_THAN_LEN - 
+ 414              		.loc 2 147 0
+ 415 023a 7B68     		ldr	r3, [r7, #4]
+ 416 023c 9B68     		ldr	r3, [r3, #8]
+ 417 023e 0222     		movs	r2, #2
+ 418 0240 1E49     		ldr	r1, .L50+8
+ 419 0242 1846     		mov	r0, r3
+ 420 0244 FFF7FEFF 		bl	lwm2m_strncmp
+ 421 0248 0346     		mov	r3, r0
+ 422 024a 002B     		cmp	r3, #0
+ 423 024c 1BD1     		bne	.L27
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_GREATER_THAN)) return -1;
+ 424              		.loc 2 149 0
+ 425 024e 3B68     		ldr	r3, [r7]
+ 426 0250 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 427 0252 3B68     		ldr	r3, [r7]
+ 428 0254 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 429 0256 1343     		orrs	r3, r3, r2
+ 430 0258 DBB2     		uxtb	r3, r3
+ 431 025a 03F00403 		and	r3, r3, #4
+ 432 025e 002B     		cmp	r3, #0
+ 433 0260 02D0     		beq	.L28
+ 434              		.loc 2 149 0 is_stmt 0 discriminator 1
+ 435 0262 4FF0FF33 		mov	r3, #-1
+ 436 0266 F3E0     		b	.L47
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 18
+
+
+ 437              	.L28:
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len != ATTR_GREATER_THAN_LEN - 1) return -1;
+ 438              		.loc 2 150 0 is_stmt 1
+ 439 0268 7B68     		ldr	r3, [r7, #4]
+ 440 026a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 441 026c 022B     		cmp	r3, #2
+ 442 026e 02D0     		beq	.L29
+ 443              		.loc 2 150 0 is_stmt 0 discriminator 1
+ 444 0270 4FF0FF33 		mov	r3, #-1
+ 445 0274 ECE0     		b	.L47
+ 446              	.L29:
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toClear |= LWM2M_ATTR_FLAG_GREATER_THAN;
+ 447              		.loc 2 152 0 is_stmt 1
+ 448 0276 3B68     		ldr	r3, [r7]
+ 449 0278 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 450 027a 43F00403 		orr	r3, r3, #4
+ 451 027e DAB2     		uxtb	r2, r3
+ 452 0280 3B68     		ldr	r3, [r7]
+ 453 0282 5A70     		strb	r2, [r3, #1]
+ 454 0284 DCE0     		b	.L11
+ 455              	.L27:
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_LESS_THAN_STR, ATTR_LESS_THAN_LEN) == 0)
+ 456              		.loc 2 154 0
+ 457 0286 7B68     		ldr	r3, [r7, #4]
+ 458 0288 9B68     		ldr	r3, [r3, #8]
+ 459 028a 0322     		movs	r2, #3
+ 460 028c 0C49     		ldr	r1, .L50+12
+ 461 028e 1846     		mov	r0, r3
+ 462 0290 FFF7FEFF 		bl	lwm2m_strncmp
+ 463 0294 0346     		mov	r3, r0
+ 464 0296 002B     		cmp	r3, #0
+ 465 0298 39D1     		bne	.L30
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_LESS_THAN)) return -1;
+ 466              		.loc 2 156 0
+ 467 029a 3B68     		ldr	r3, [r7]
+ 468 029c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 469 029e 3B68     		ldr	r3, [r7]
+ 470 02a0 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 471 02a2 1343     		orrs	r3, r3, r2
+ 472 02a4 DBB2     		uxtb	r3, r3
+ 473 02a6 03F00803 		and	r3, r3, #8
+ 474 02aa 002B     		cmp	r3, #0
+ 475 02ac 0AD0     		beq	.L31
+ 476              		.loc 2 156 0 is_stmt 0 discriminator 1
+ 477 02ae 4FF0FF33 		mov	r3, #-1
+ 478 02b2 CDE0     		b	.L47
+ 479              	.L51:
+ 480              		.align	2
+ 481              	.L50:
+ 482 02b4 00000000 		.word	.LC0
+ 483 02b8 08000000 		.word	.LC1
+ 484 02bc 10000000 		.word	.LC2
+ 485 02c0 14000000 		.word	.LC3
+ 486              	.L31:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 19
+
+
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len == ATTR_LESS_THAN_LEN) return -1;
+ 487              		.loc 2 157 0 is_stmt 1
+ 488 02c4 7B68     		ldr	r3, [r7, #4]
+ 489 02c6 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 490 02c8 032B     		cmp	r3, #3
+ 491 02ca 02D1     		bne	.L32
+ 492              		.loc 2 157 0 is_stmt 0 discriminator 1
+ 493 02cc 4FF0FF33 		mov	r3, #-1
+ 494 02d0 BEE0     		b	.L47
+ 495              	.L32:
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (1 != utils_textToFloat(query->data + ATTR_LESS_THAN_LEN, query->len - ATTR_LESS_THA
+ 496              		.loc 2 159 0 is_stmt 1
+ 497 02d2 7B68     		ldr	r3, [r7, #4]
+ 498 02d4 9B68     		ldr	r3, [r3, #8]
+ 499 02d6 D81C     		adds	r0, r3, #3
+ 500 02d8 7B68     		ldr	r3, [r7, #4]
+ 501 02da 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 502 02dc 033B     		subs	r3, r3, #3
+ 503 02de 07F10802 		add	r2, r7, #8
+ 504 02e2 1946     		mov	r1, r3
+ 505 02e4 FFF7FEFF 		bl	utils_textToFloat
+ 506 02e8 0346     		mov	r3, r0
+ 507 02ea 012B     		cmp	r3, #1
+ 508 02ec 02D0     		beq	.L33
+ 509              		.loc 2 159 0 is_stmt 0 discriminator 1
+ 510 02ee 4FF0FF33 		mov	r3, #-1
+ 511 02f2 ADE0     		b	.L47
+ 512              	.L33:
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toSet |= LWM2M_ATTR_FLAG_LESS_THAN;
+ 513              		.loc 2 161 0 is_stmt 1
+ 514 02f4 3B68     		ldr	r3, [r7]
+ 515 02f6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 516 02f8 43F00803 		orr	r3, r3, #8
+ 517 02fc DAB2     		uxtb	r2, r3
+ 518 02fe 3B68     		ldr	r3, [r7]
+ 519 0300 1A70     		strb	r2, [r3]
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->lessThan = floatValue;
+ 520              		.loc 2 162 0
+ 521 0302 D7E90234 		ldrd	r3, [r7, #8]
+ 522 0306 3A68     		ldr	r2, [r7]
+ 523 0308 C2E90634 		strd	r3, [r2, #24]
+ 524 030c 98E0     		b	.L11
+ 525              	.L30:
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_LESS_THAN_STR, ATTR_LESS_THAN_LEN - 1) == 
+ 526              		.loc 2 164 0
+ 527 030e 7B68     		ldr	r3, [r7, #4]
+ 528 0310 9B68     		ldr	r3, [r3, #8]
+ 529 0312 0222     		movs	r2, #2
+ 530 0314 5049     		ldr	r1, .L52
+ 531 0316 1846     		mov	r0, r3
+ 532 0318 FFF7FEFF 		bl	lwm2m_strncmp
+ 533 031c 0346     		mov	r3, r0
+ 534 031e 002B     		cmp	r3, #0
+ 535 0320 1BD1     		bne	.L34
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 20
+
+
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_LESS_THAN)) return -1;
+ 536              		.loc 2 166 0
+ 537 0322 3B68     		ldr	r3, [r7]
+ 538 0324 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 539 0326 3B68     		ldr	r3, [r7]
+ 540 0328 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 541 032a 1343     		orrs	r3, r3, r2
+ 542 032c DBB2     		uxtb	r3, r3
+ 543 032e 03F00803 		and	r3, r3, #8
+ 544 0332 002B     		cmp	r3, #0
+ 545 0334 02D0     		beq	.L35
+ 546              		.loc 2 166 0 is_stmt 0 discriminator 1
+ 547 0336 4FF0FF33 		mov	r3, #-1
+ 548 033a 89E0     		b	.L47
+ 549              	.L35:
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len != ATTR_LESS_THAN_LEN - 1) return -1;
+ 550              		.loc 2 167 0 is_stmt 1
+ 551 033c 7B68     		ldr	r3, [r7, #4]
+ 552 033e 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 553 0340 022B     		cmp	r3, #2
+ 554 0342 02D0     		beq	.L36
+ 555              		.loc 2 167 0 is_stmt 0 discriminator 1
+ 556 0344 4FF0FF33 		mov	r3, #-1
+ 557 0348 82E0     		b	.L47
+ 558              	.L36:
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toClear |= LWM2M_ATTR_FLAG_LESS_THAN;
+ 559              		.loc 2 169 0 is_stmt 1
+ 560 034a 3B68     		ldr	r3, [r7]
+ 561 034c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 562 034e 43F00803 		orr	r3, r3, #8
+ 563 0352 DAB2     		uxtb	r2, r3
+ 564 0354 3B68     		ldr	r3, [r7]
+ 565 0356 5A70     		strb	r2, [r3, #1]
+ 566 0358 72E0     		b	.L11
+ 567              	.L34:
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_STEP_STR, ATTR_STEP_LEN) == 0)
+ 568              		.loc 2 171 0
+ 569 035a 7B68     		ldr	r3, [r7, #4]
+ 570 035c 9B68     		ldr	r3, [r3, #8]
+ 571 035e 0322     		movs	r2, #3
+ 572 0360 3E49     		ldr	r1, .L52+4
+ 573 0362 1846     		mov	r0, r3
+ 574 0364 FFF7FEFF 		bl	lwm2m_strncmp
+ 575 0368 0346     		mov	r3, r0
+ 576 036a 002B     		cmp	r3, #0
+ 577 036c 3FD1     		bne	.L37
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_STEP)) return -1;
+ 578              		.loc 2 173 0
+ 579 036e 3B68     		ldr	r3, [r7]
+ 580 0370 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 581 0372 3B68     		ldr	r3, [r7]
+ 582 0374 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 583 0376 1343     		orrs	r3, r3, r2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 21
+
+
+ 584 0378 DBB2     		uxtb	r3, r3
+ 585 037a 03F01003 		and	r3, r3, #16
+ 586 037e 002B     		cmp	r3, #0
+ 587 0380 02D0     		beq	.L38
+ 588              		.loc 2 173 0 is_stmt 0 discriminator 1
+ 589 0382 4FF0FF33 		mov	r3, #-1
+ 590 0386 63E0     		b	.L47
+ 591              	.L38:
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len == ATTR_STEP_LEN) return -1;
+ 592              		.loc 2 174 0 is_stmt 1
+ 593 0388 7B68     		ldr	r3, [r7, #4]
+ 594 038a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 595 038c 032B     		cmp	r3, #3
+ 596 038e 02D1     		bne	.L39
+ 597              		.loc 2 174 0 is_stmt 0 discriminator 1
+ 598 0390 4FF0FF33 		mov	r3, #-1
+ 599 0394 5CE0     		b	.L47
+ 600              	.L39:
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (1 != utils_textToFloat(query->data + ATTR_STEP_LEN, query->len - ATTR_STEP_LEN, &fl
+ 601              		.loc 2 176 0 is_stmt 1
+ 602 0396 7B68     		ldr	r3, [r7, #4]
+ 603 0398 9B68     		ldr	r3, [r3, #8]
+ 604 039a D81C     		adds	r0, r3, #3
+ 605 039c 7B68     		ldr	r3, [r7, #4]
+ 606 039e 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 607 03a0 033B     		subs	r3, r3, #3
+ 608 03a2 07F10802 		add	r2, r7, #8
+ 609 03a6 1946     		mov	r1, r3
+ 610 03a8 FFF7FEFF 		bl	utils_textToFloat
+ 611 03ac 0346     		mov	r3, r0
+ 612 03ae 012B     		cmp	r3, #1
+ 613 03b0 02D0     		beq	.L40
+ 614              		.loc 2 176 0 is_stmt 0 discriminator 1
+ 615 03b2 4FF0FF33 		mov	r3, #-1
+ 616 03b6 4BE0     		b	.L47
+ 617              	.L40:
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (floatValue < 0) return -1;
+ 618              		.loc 2 177 0 is_stmt 1
+ 619 03b8 D7E90201 		ldrd	r0, [r7, #8]
+ 620 03bc 4FF00002 		mov	r2, #0
+ 621 03c0 4FF00003 		mov	r3, #0
+ 622 03c4 FFF7FEFF 		bl	__aeabi_dcmplt
+ 623              	.LVL0:
+ 624 03c8 0346     		mov	r3, r0
+ 625 03ca 002B     		cmp	r3, #0
+ 626 03cc 02D0     		beq	.L49
+ 627              		.loc 2 177 0 is_stmt 0 discriminator 1
+ 628 03ce 4FF0FF33 		mov	r3, #-1
+ 629 03d2 3DE0     		b	.L47
+ 630              	.L49:
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toSet |= LWM2M_ATTR_FLAG_STEP;
+ 631              		.loc 2 179 0 is_stmt 1
+ 632 03d4 3B68     		ldr	r3, [r7]
+ 633 03d6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 634 03d8 43F01003 		orr	r3, r3, #16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 22
+
+
+ 635 03dc DAB2     		uxtb	r2, r3
+ 636 03de 3B68     		ldr	r3, [r7]
+ 637 03e0 1A70     		strb	r2, [r3]
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->step = floatValue;
+ 638              		.loc 2 180 0
+ 639 03e2 D7E90234 		ldrd	r3, [r7, #8]
+ 640 03e6 3A68     		ldr	r2, [r7]
+ 641 03e8 C2E90834 		strd	r3, [r2, #32]
+ 642 03ec 28E0     		b	.L11
+ 643              	.L37:
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (lwm2m_strncmp((char *)query->data, ATTR_STEP_STR, ATTR_STEP_LEN - 1) == 0)
+ 644              		.loc 2 182 0
+ 645 03ee 7B68     		ldr	r3, [r7, #4]
+ 646 03f0 9B68     		ldr	r3, [r3, #8]
+ 647 03f2 0222     		movs	r2, #2
+ 648 03f4 1949     		ldr	r1, .L52+4
+ 649 03f6 1846     		mov	r0, r3
+ 650 03f8 FFF7FEFF 		bl	lwm2m_strncmp
+ 651 03fc 0346     		mov	r3, r0
+ 652 03fe 002B     		cmp	r3, #0
+ 653 0400 1BD1     		bne	.L43
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != ((attrP->toSet | attrP->toClear) & LWM2M_ATTR_FLAG_STEP)) return -1;
+ 654              		.loc 2 184 0
+ 655 0402 3B68     		ldr	r3, [r7]
+ 656 0404 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 657 0406 3B68     		ldr	r3, [r7]
+ 658 0408 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 659 040a 1343     		orrs	r3, r3, r2
+ 660 040c DBB2     		uxtb	r3, r3
+ 661 040e 03F01003 		and	r3, r3, #16
+ 662 0412 002B     		cmp	r3, #0
+ 663 0414 02D0     		beq	.L44
+ 664              		.loc 2 184 0 is_stmt 0 discriminator 1
+ 665 0416 4FF0FF33 		mov	r3, #-1
+ 666 041a 19E0     		b	.L47
+ 667              	.L44:
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (query->len != ATTR_STEP_LEN - 1) return -1;
+ 668              		.loc 2 185 0 is_stmt 1
+ 669 041c 7B68     		ldr	r3, [r7, #4]
+ 670 041e 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 671 0420 022B     		cmp	r3, #2
+ 672 0422 02D0     		beq	.L45
+ 673              		.loc 2 185 0 is_stmt 0 discriminator 1
+ 674 0424 4FF0FF33 		mov	r3, #-1
+ 675 0428 12E0     		b	.L47
+ 676              	.L45:
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             attrP->toClear |= LWM2M_ATTR_FLAG_STEP;
+ 677              		.loc 2 187 0 is_stmt 1
+ 678 042a 3B68     		ldr	r3, [r7]
+ 679 042c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 680 042e 43F01003 		orr	r3, r3, #16
+ 681 0432 DAB2     		uxtb	r2, r3
+ 682 0434 3B68     		ldr	r3, [r7]
+ 683 0436 5A70     		strb	r2, [r3, #1]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 23
+
+
+ 684 0438 02E0     		b	.L11
+ 685              	.L43:
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else return -1;
+ 686              		.loc 2 189 0
+ 687 043a 4FF0FF33 		mov	r3, #-1
+ 688 043e 07E0     		b	.L47
+ 689              	.L11:
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         query = query->next;
+ 690              		.loc 2 191 0
+ 691 0440 7B68     		ldr	r3, [r7, #4]
+ 692 0442 1B68     		ldr	r3, [r3]
+ 693 0444 7B60     		str	r3, [r7, #4]
+ 694              	.L4:
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 695              		.loc 2 99 0
+ 696 0446 7B68     		ldr	r3, [r7, #4]
+ 697 0448 002B     		cmp	r3, #0
+ 698 044a 7FF4E4AD 		bne	.L46
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     return 0;
+ 699              		.loc 2 194 0
+ 700 044e 0023     		movs	r3, #0
+ 701              	.L47:
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** }
+ 702              		.loc 2 195 0 discriminator 1
+ 703 0450 1846     		mov	r0, r3
+ 704 0452 1C37     		adds	r7, r7, #28
+ 705              	.LCFI9:
+ 706              		.cfi_def_cfa_offset 12
+ 707 0454 BD46     		mov	sp, r7
+ 708              	.LCFI10:
+ 709              		.cfi_def_cfa_register 13
+ 710              		@ sp needed
+ 711 0456 90BD     		pop	{r4, r7, pc}
+ 712              	.L53:
+ 713              		.align	2
+ 714              	.L52:
+ 715 0458 14000000 		.word	.LC3
+ 716 045c 18000000 		.word	.LC4
+ 717              		.cfi_endproc
+ 718              	.LFE142:
+ 720              		.section	.rodata
+ 721              		.align	2
+ 722              	.LC5:
+ 723 001c 2F25642F 		.ascii	"/%d/%d\000"
+ 723      256400
+ 724              		.section	.text.dm_handleRequest,"ax",%progbits
+ 725              		.align	1
+ 726              		.global	dm_handleRequest
+ 727              		.syntax unified
+ 728              		.thumb
+ 729              		.thumb_func
+ 730              		.fpu fpv4-sp-d16
+ 732              	dm_handleRequest:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 24
+
+
+ 733              	.LFB143:
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** uint8_t dm_handleRequest(lwm2m_context_t *contextP,
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                          lwm2m_uri_t *uriP,
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                          lwm2m_server_t *serverP,
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                          coap_packet_t *message,
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                          coap_packet_t *response)
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** {
+ 734              		.loc 2 202 0
+ 735              		.cfi_startproc
+ 736              		@ args = 4, pretend = 0, frame = 104
+ 737              		@ frame_needed = 1, uses_anonymous_args = 0
+ 738 0000 80B5     		push	{r7, lr}
+ 739              	.LCFI11:
+ 740              		.cfi_def_cfa_offset 8
+ 741              		.cfi_offset 7, -8
+ 742              		.cfi_offset 14, -4
+ 743 0002 9EB0     		sub	sp, sp, #120
+ 744              	.LCFI12:
+ 745              		.cfi_def_cfa_offset 128
+ 746 0004 04AF     		add	r7, sp, #16
+ 747              	.LCFI13:
+ 748              		.cfi_def_cfa 7, 112
+ 749 0006 F860     		str	r0, [r7, #12]
+ 750 0008 B960     		str	r1, [r7, #8]
+ 751 000a 7A60     		str	r2, [r7, #4]
+ 752 000c 3B60     		str	r3, [r7]
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     uint8_t result;
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     lwm2m_media_type_t format;
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     LOG_ARG("Code: %02X, server status: %s", message->code, STR_STATUS(serverP->status));
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     LOG_URI(uriP);
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     if (IS_OPTION(message, COAP_OPTION_CONTENT_TYPE))
+ 753              		.loc 2 209 0
+ 754 000e 3B68     		ldr	r3, [r7]
+ 755 0010 DB7A     		ldrb	r3, [r3, #11]	@ zero_extendqisi2
+ 756 0012 03F01003 		and	r3, r3, #16
+ 757 0016 002B     		cmp	r3, #0
+ 758 0018 08D0     		beq	.L55
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         format = utils_convertMediaType(message->content_type);
+ 759              		.loc 2 211 0
+ 760 001a 3B68     		ldr	r3, [r7]
+ 761 001c 1B8A     		ldrh	r3, [r3, #16]
+ 762 001e 1846     		mov	r0, r3
+ 763 0020 FFF7FEFF 		bl	utils_convertMediaType
+ 764 0024 0346     		mov	r3, r0
+ 765 0026 A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 766 002a 0BE0     		b	.L56
+ 767              	.L55:
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     else
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         format = (dm_isUriOpaqueHandle(uriP) ? LWM2M_CONTENT_OPAQUE : LWM2M_CONTENT_TLV);
+ 768              		.loc 2 215 0
+ 769 002c B868     		ldr	r0, [r7, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 25
+
+
+ 770 002e FFF7FEFF 		bl	dm_isUriOpaqueHandle
+ 771 0032 0346     		mov	r3, r0
+ 772 0034 002B     		cmp	r3, #0
+ 773 0036 01D0     		beq	.L57
+ 774              		.loc 2 215 0 is_stmt 0 discriminator 1
+ 775 0038 2A23     		movs	r3, #42
+ 776 003a 01E0     		b	.L58
+ 777              	.L57:
+ 778              		.loc 2 215 0 discriminator 2
+ 779 003c 42F61653 		movw	r3, #11542
+ 780              	.L58:
+ 781              		.loc 2 215 0 discriminator 4
+ 782 0040 A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 783              	.L56:
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     if (uriP->objectId == LWM2M_SECURITY_OBJECT_ID)
+ 784              		.loc 2 219 0 is_stmt 1
+ 785 0044 BB68     		ldr	r3, [r7, #8]
+ 786 0046 5B88     		ldrh	r3, [r3, #2]
+ 787 0048 002B     		cmp	r3, #0
+ 788 004a 01D1     		bne	.L59
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         return COAP_404_NOT_FOUND;
+ 789              		.loc 2 221 0
+ 790 004c 8423     		movs	r3, #132
+ 791 004e 67E2     		b	.L106
+ 792              	.L59:
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     if (serverP->status != STATE_REGISTERED
+ 793              		.loc 2 224 0
+ 794 0050 7B68     		ldr	r3, [r7, #4]
+ 795 0052 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 796 0056 022B     		cmp	r3, #2
+ 797 0058 10D0     		beq	.L61
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             && serverP->status != STATE_REG_UPDATE_NEEDED
+ 798              		.loc 2 225 0
+ 799 005a 7B68     		ldr	r3, [r7, #4]
+ 800 005c 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 801 0060 052B     		cmp	r3, #5
+ 802 0062 0BD0     		beq	.L61
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             && serverP->status != STATE_REG_FULL_UPDATE_NEEDED
+ 803              		.loc 2 226 0
+ 804 0064 7B68     		ldr	r3, [r7, #4]
+ 805 0066 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 806 006a 062B     		cmp	r3, #6
+ 807 006c 06D0     		beq	.L61
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             && serverP->status != STATE_REG_UPDATE_PENDING)
+ 808              		.loc 2 227 0
+ 809 006e 7B68     		ldr	r3, [r7, #4]
+ 810 0070 93F82030 		ldrb	r3, [r3, #32]	@ zero_extendqisi2
+ 811 0074 042B     		cmp	r3, #4
+ 812 0076 01D0     		beq	.L61
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         return COAP_IGNORE;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 26
+
+
+ 813              		.loc 2 229 0
+ 814 0078 0123     		movs	r3, #1
+ 815 007a 51E2     		b	.L106
+ 816              	.L61:
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     switch (message->code)
+ 817              		.loc 2 232 0
+ 818 007c 3B68     		ldr	r3, [r7]
+ 819 007e 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 820 0080 013B     		subs	r3, r3, #1
+ 821 0082 032B     		cmp	r3, #3
+ 822 0084 00F24382 		bhi	.L62
+ 823 0088 01A2     		adr	r2, .L64
+ 824 008a 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 825 008e 00BF     		.p2align 2
+ 826              	.L64:
+ 827 0090 A1000000 		.word	.L63+1
+ 828 0094 A5020000 		.word	.L65+1
+ 829 0098 EF030000 		.word	.L66+1
+ 830 009c AB040000 		.word	.L67+1
+ 831              		.p2align 1
+ 832              	.L63:
+ 833              	.LBB2:
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     case COAP_GET:
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         uint8_t *buffer = NULL;
+ 834              		.loc 2 236 0
+ 835 00a0 0023     		movs	r3, #0
+ 836 00a2 BB65     		str	r3, [r7, #88]
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         size_t length = 0;
+ 837              		.loc 2 237 0
+ 838 00a4 0023     		movs	r3, #0
+ 839 00a6 7B65     		str	r3, [r7, #84]
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         int res;
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         if (IS_OPTION(message, COAP_OPTION_OBSERVE))
+ 840              		.loc 2 240 0
+ 841 00a8 3B68     		ldr	r3, [r7]
+ 842 00aa 9B7A     		ldrb	r3, [r3, #10]	@ zero_extendqisi2
+ 843 00ac 03F04003 		and	r3, r3, #64
+ 844 00b0 002B     		cmp	r3, #0
+ 845 00b2 7CD0     		beq	.L68
+ 846              	.LBB3:
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             lwm2m_data_t *dataP = NULL;
+ 847              		.loc 2 242 0
+ 848 00b4 0023     		movs	r3, #0
+ 849 00b6 3B65     		str	r3, [r7, #80]
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             int size = 0;
+ 850              		.loc 2 243 0
+ 851 00b8 0023     		movs	r3, #0
+ 852 00ba FB64     		str	r3, [r7, #76]
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_OBSERVE, serverP->shortID)) != C
+ 853              		.loc 2 245 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 27
+
+
+ 854 00bc 7B68     		ldr	r3, [r7, #4]
+ 855 00be DB88     		ldrh	r3, [r3, #6]
+ 856 00c0 0022     		movs	r2, #0
+ 857 00c2 B968     		ldr	r1, [r7, #8]
+ 858 00c4 F868     		ldr	r0, [r7, #12]
+ 859 00c6 FFF7FEFF 		bl	acc_auth_operate
+ 860 00ca 0346     		mov	r3, r0
+ 861 00cc 87F86730 		strb	r3, [r7, #103]
+ 862 00d0 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 863 00d4 002B     		cmp	r3, #0
+ 864 00d6 02D0     		beq	.L69
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 865              		.loc 2 247 0
+ 866 00d8 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 867 00dc 20E2     		b	.L106
+ 868              	.L69:
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_readData(contextP, uriP, &size, &dataP, NULL, serverP->shortID);
+ 869              		.loc 2 250 0
+ 870 00de 7B68     		ldr	r3, [r7, #4]
+ 871 00e0 DB88     		ldrh	r3, [r3, #6]
+ 872 00e2 07F15001 		add	r1, r7, #80
+ 873 00e6 07F14C02 		add	r2, r7, #76
+ 874 00ea 0193     		str	r3, [sp, #4]
+ 875 00ec 0023     		movs	r3, #0
+ 876 00ee 0093     		str	r3, [sp]
+ 877 00f0 0B46     		mov	r3, r1
+ 878 00f2 B968     		ldr	r1, [r7, #8]
+ 879 00f4 F868     		ldr	r0, [r7, #12]
+ 880 00f6 FFF7FEFF 		bl	object_readData
+ 881 00fa 0346     		mov	r3, r0
+ 882 00fc 87F86730 		strb	r3, [r7, #103]
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (COAP_205_CONTENT == result)
+ 883              		.loc 2 251 0
+ 884 0100 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 885 0104 452B     		cmp	r3, #69
+ 886 0106 40F0B780 		bne	.L77
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 result = observe_handleRequest(contextP, uriP, serverP, size, dataP, message, respo
+ 887              		.loc 2 253 0
+ 888 010a F96C     		ldr	r1, [r7, #76]
+ 889 010c 3B6D     		ldr	r3, [r7, #80]
+ 890 010e 3A6F     		ldr	r2, [r7, #112]
+ 891 0110 0292     		str	r2, [sp, #8]
+ 892 0112 3A68     		ldr	r2, [r7]
+ 893 0114 0192     		str	r2, [sp, #4]
+ 894 0116 0093     		str	r3, [sp]
+ 895 0118 0B46     		mov	r3, r1
+ 896 011a 7A68     		ldr	r2, [r7, #4]
+ 897 011c B968     		ldr	r1, [r7, #8]
+ 898 011e F868     		ldr	r0, [r7, #12]
+ 899 0120 FFF7FEFF 		bl	observe_handleRequest
+ 900 0124 0346     		mov	r3, r0
+ 901 0126 87F86730 		strb	r3, [r7, #103]
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 if (COAP_205_CONTENT == result)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 28
+
+
+ 902              		.loc 2 254 0
+ 903 012a 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 904 012e 452B     		cmp	r3, #69
+ 905 0130 36D1     		bne	.L72
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 {
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     if (IS_OPTION(message, COAP_OPTION_ACCEPT))
+ 906              		.loc 2 256 0
+ 907 0132 3B68     		ldr	r3, [r7]
+ 908 0134 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 909 0136 03F00203 		and	r3, r3, #2
+ 910 013a 002B     		cmp	r3, #0
+ 911 013c 09D0     		beq	.L73
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     {
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         format = utils_convertMediaType((coap_content_type_t)message->accept[0]);
+ 912              		.loc 2 258 0
+ 913 013e 3B68     		ldr	r3, [r7]
+ 914 0140 B3F85630 		ldrh	r3, [r3, #86]
+ 915 0144 1846     		mov	r0, r3
+ 916 0146 FFF7FEFF 		bl	utils_convertMediaType
+ 917 014a 0346     		mov	r3, r0
+ 918 014c A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 919 0150 03E0     		b	.L74
+ 920              	.L73:
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     }
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     else
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     {
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         format = LWM2M_CONTENT_TLV;
+ 921              		.loc 2 262 0
+ 922 0152 42F61653 		movw	r3, #11542
+ 923 0156 A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 924              	.L74:
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     }
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     if(dm_isUriOpaqueHandle(uriP))
+ 925              		.loc 2 265 0
+ 926 015a B868     		ldr	r0, [r7, #8]
+ 927 015c FFF7FEFF 		bl	dm_isUriOpaqueHandle
+ 928 0160 0346     		mov	r3, r0
+ 929 0162 002B     		cmp	r3, #0
+ 930 0164 07D0     		beq	.L75
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     {
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         buffer = NULL;
+ 931              		.loc 2 267 0
+ 932 0166 0023     		movs	r3, #0
+ 933 0168 BB65     		str	r3, [r7, #88]
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         length = 0;
+ 934              		.loc 2 268 0
+ 935 016a 0023     		movs	r3, #0
+ 936 016c 7B65     		str	r3, [r7, #84]
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         format = LWM2M_CONTENT_OPAQUE;
+ 937              		.loc 2 269 0
+ 938 016e 2A23     		movs	r3, #42
+ 939 0170 A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 940 0174 14E0     		b	.L72
+ 941              	.L75:
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     }
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     else
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 29
+
+
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     {
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         res = lwm2m_data_serialize(uriP, size, dataP, &format, &buffer);
+ 942              		.loc 2 273 0
+ 943 0176 F96C     		ldr	r1, [r7, #76]
+ 944 0178 3A6D     		ldr	r2, [r7, #80]
+ 945 017a 07F15E00 		add	r0, r7, #94
+ 946 017e 07F15803 		add	r3, r7, #88
+ 947 0182 0093     		str	r3, [sp]
+ 948 0184 0346     		mov	r3, r0
+ 949 0186 B868     		ldr	r0, [r7, #8]
+ 950 0188 FFF7FEFF 		bl	lwm2m_data_serialize
+ 951 018c 3866     		str	r0, [r7, #96]
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         if (res < 0)
+ 952              		.loc 2 274 0
+ 953 018e 3B6E     		ldr	r3, [r7, #96]
+ 954 0190 002B     		cmp	r3, #0
+ 955 0192 03DA     		bge	.L76
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         {
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                             result = COAP_500_INTERNAL_SERVER_ERROR;
+ 956              		.loc 2 276 0
+ 957 0194 A023     		movs	r3, #160
+ 958 0196 87F86730 		strb	r3, [r7, #103]
+ 959 019a 01E0     		b	.L72
+ 960              	.L76:
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         }
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         else
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         {
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                             length = (size_t)res;
+ 961              		.loc 2 280 0
+ 962 019c 3B6E     		ldr	r3, [r7, #96]
+ 963 019e 7B65     		str	r3, [r7, #84]
+ 964              	.L72:
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                             LOG_ARG("Observe Request[/%d/%d/%d]: %.*s\n", uriP->objectId, uriP->ins
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                         }
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     }
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 }
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 lwm2m_data_free(size, dataP);
+ 965              		.loc 2 285 0
+ 966 01a0 FB6C     		ldr	r3, [r7, #76]
+ 967 01a2 3A6D     		ldr	r2, [r7, #80]
+ 968 01a4 1146     		mov	r1, r2
+ 969 01a6 1846     		mov	r0, r3
+ 970 01a8 FFF7FEFF 		bl	lwm2m_data_free
+ 971 01ac 64E0     		b	.L77
+ 972              	.L68:
+ 973              	.LBE3:
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (IS_OPTION(message, COAP_OPTION_ACCEPT)
+ 974              		.loc 2 288 0
+ 975 01ae 3B68     		ldr	r3, [r7]
+ 976 01b0 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 977 01b2 03F00203 		and	r3, r3, #2
+ 978 01b6 002B     		cmp	r3, #0
+ 979 01b8 2CD0     		beq	.L78
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                  && message->accept_num == 1
+ 980              		.loc 2 289 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 30
+
+
+ 981 01ba 3B68     		ldr	r3, [r7]
+ 982 01bc 93F85530 		ldrb	r3, [r3, #85]	@ zero_extendqisi2
+ 983 01c0 012B     		cmp	r3, #1
+ 984 01c2 27D1     		bne	.L78
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                  && message->accept[0] == APPLICATION_LINK_FORMAT)
+ 985              		.loc 2 290 0
+ 986 01c4 3B68     		ldr	r3, [r7]
+ 987 01c6 B3F85630 		ldrh	r3, [r3, #86]
+ 988 01ca 282B     		cmp	r3, #40
+ 989 01cc 22D1     		bne	.L78
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_DISCOVER, serverP->shortID)) != 
+ 990              		.loc 2 292 0
+ 991 01ce 7B68     		ldr	r3, [r7, #4]
+ 992 01d0 DB88     		ldrh	r3, [r3, #6]
+ 993 01d2 0522     		movs	r2, #5
+ 994 01d4 B968     		ldr	r1, [r7, #8]
+ 995 01d6 F868     		ldr	r0, [r7, #12]
+ 996 01d8 FFF7FEFF 		bl	acc_auth_operate
+ 997 01dc 0346     		mov	r3, r0
+ 998 01de 87F86730 		strb	r3, [r7, #103]
+ 999 01e2 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1000 01e6 002B     		cmp	r3, #0
+ 1001 01e8 02D0     		beq	.L79
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 1002              		.loc 2 294 0
+ 1003 01ea 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1004 01ee 97E1     		b	.L106
+ 1005              	.L79:
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             format = LWM2M_CONTENT_LINK;
+ 1006              		.loc 2 296 0
+ 1007 01f0 2823     		movs	r3, #40
+ 1008 01f2 A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_discover(contextP, uriP, serverP, &buffer, &length);
+ 1009              		.loc 2 297 0
+ 1010 01f6 07F15802 		add	r2, r7, #88
+ 1011 01fa 07F15403 		add	r3, r7, #84
+ 1012 01fe 0093     		str	r3, [sp]
+ 1013 0200 1346     		mov	r3, r2
+ 1014 0202 7A68     		ldr	r2, [r7, #4]
+ 1015 0204 B968     		ldr	r1, [r7, #8]
+ 1016 0206 F868     		ldr	r0, [r7, #12]
+ 1017 0208 FFF7FEFF 		bl	object_discover
+ 1018 020c 0346     		mov	r3, r0
+ 1019 020e 87F86730 		strb	r3, [r7, #103]
+ 1020 0212 31E0     		b	.L77
+ 1021              	.L78:
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_READ, serverP->shortID)) != COAP
+ 1022              		.loc 2 301 0
+ 1023 0214 7B68     		ldr	r3, [r7, #4]
+ 1024 0216 DB88     		ldrh	r3, [r3, #6]
+ 1025 0218 0022     		movs	r2, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 31
+
+
+ 1026 021a B968     		ldr	r1, [r7, #8]
+ 1027 021c F868     		ldr	r0, [r7, #12]
+ 1028 021e FFF7FEFF 		bl	acc_auth_operate
+ 1029 0222 0346     		mov	r3, r0
+ 1030 0224 87F86730 		strb	r3, [r7, #103]
+ 1031 0228 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1032 022c 002B     		cmp	r3, #0
+ 1033 022e 02D0     		beq	.L80
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 1034              		.loc 2 303 0
+ 1035 0230 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1036 0234 74E1     		b	.L106
+ 1037              	.L80:
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (IS_OPTION(message, COAP_OPTION_ACCEPT))
+ 1038              		.loc 2 305 0
+ 1039 0236 3B68     		ldr	r3, [r7]
+ 1040 0238 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 1041 023a 03F00203 		and	r3, r3, #2
+ 1042 023e 002B     		cmp	r3, #0
+ 1043 0240 08D0     		beq	.L81
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 format = utils_convertMediaType((coap_content_type_t)message->accept[0]);
+ 1044              		.loc 2 307 0
+ 1045 0242 3B68     		ldr	r3, [r7]
+ 1046 0244 B3F85630 		ldrh	r3, [r3, #86]
+ 1047 0248 1846     		mov	r0, r3
+ 1048 024a FFF7FEFF 		bl	utils_convertMediaType
+ 1049 024e 0346     		mov	r3, r0
+ 1050 0250 A7F85E30 		strh	r3, [r7, #94]	@ movhi
+ 1051              	.L81:
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_read(contextP, uriP, &format, &buffer, &length, serverP->shortID);
+ 1052              		.loc 2 310 0
+ 1053 0254 7B68     		ldr	r3, [r7, #4]
+ 1054 0256 DB88     		ldrh	r3, [r3, #6]
+ 1055 0258 07F15801 		add	r1, r7, #88
+ 1056 025c 07F15E02 		add	r2, r7, #94
+ 1057 0260 0193     		str	r3, [sp, #4]
+ 1058 0262 07F15403 		add	r3, r7, #84
+ 1059 0266 0093     		str	r3, [sp]
+ 1060 0268 0B46     		mov	r3, r1
+ 1061 026a B968     		ldr	r1, [r7, #8]
+ 1062 026c F868     		ldr	r0, [r7, #12]
+ 1063 026e FFF7FEFF 		bl	object_read
+ 1064 0272 0346     		mov	r3, r0
+ 1065 0274 87F86730 		strb	r3, [r7, #103]
+ 1066              	.L77:
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         if (COAP_205_CONTENT == result)
+ 1067              		.loc 2 312 0
+ 1068 0278 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1069 027c 452B     		cmp	r3, #69
+ 1070 027e 0CD1     		bne	.L82
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 32
+
+
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             coap_set_header_content_type(response, format);
+ 1071              		.loc 2 314 0
+ 1072 0280 B7F85E30 		ldrh	r3, [r7, #94]
+ 1073 0284 1946     		mov	r1, r3
+ 1074 0286 386F     		ldr	r0, [r7, #112]
+ 1075 0288 FFF7FEFF 		bl	coap_set_header_content_type
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             coap_set_payload(response, buffer, length);
+ 1076              		.loc 2 315 0
+ 1077 028c BB6D     		ldr	r3, [r7, #88]
+ 1078 028e 7A6D     		ldr	r2, [r7, #84]
+ 1079 0290 1946     		mov	r1, r3
+ 1080 0292 386F     		ldr	r0, [r7, #112]
+ 1081 0294 FFF7FEFF 		bl	coap_set_payload
+ 1082              	.LBE2:
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             // lwm2m_handle_packet will free buffer
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             lwm2m_free(buffer);
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     break;
+ 1083              		.loc 2 323 0
+ 1084 0298 40E1     		b	.L84
+ 1085              	.L82:
+ 1086              	.LBB4:
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 1087              		.loc 2 320 0
+ 1088 029a BB6D     		ldr	r3, [r7, #88]
+ 1089 029c 1846     		mov	r0, r3
+ 1090 029e FFF7FEFF 		bl	lwm2m_free
+ 1091              	.LBE4:
+ 1092              		.loc 2 323 0
+ 1093 02a2 3BE1     		b	.L84
+ 1094              	.L65:
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     case COAP_POST:
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         if (!LWM2M_URI_IS_SET_INSTANCE(uriP))
+ 1095              		.loc 2 327 0
+ 1096 02a4 BB68     		ldr	r3, [r7, #8]
+ 1097 02a6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1098 02a8 03F00203 		and	r3, r3, #2
+ 1099 02ac 002B     		cmp	r3, #0
+ 1100 02ae 56D1     		bne	.L85
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_CREATE, serverP->shortID)) != CO
+ 1101              		.loc 2 329 0
+ 1102 02b0 7B68     		ldr	r3, [r7, #4]
+ 1103 02b2 DB88     		ldrh	r3, [r3, #6]
+ 1104 02b4 0422     		movs	r2, #4
+ 1105 02b6 B968     		ldr	r1, [r7, #8]
+ 1106 02b8 F868     		ldr	r0, [r7, #12]
+ 1107 02ba FFF7FEFF 		bl	acc_auth_operate
+ 1108 02be 0346     		mov	r3, r0
+ 1109 02c0 87F86730 		strb	r3, [r7, #103]
+ 1110 02c4 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 33
+
+
+ 1111 02c8 002B     		cmp	r3, #0
+ 1112 02ca 02D0     		beq	.L86
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 1113              		.loc 2 331 0
+ 1114 02cc 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1115 02d0 26E1     		b	.L106
+ 1116              	.L86:
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_create(contextP, uriP, format, message->payload, message->payload_len);
+ 1117              		.loc 2 333 0
+ 1118 02d2 B7F85E20 		ldrh	r2, [r7, #94]
+ 1119 02d6 3B68     		ldr	r3, [r7]
+ 1120 02d8 D3F88810 		ldr	r1, [r3, #136]
+ 1121 02dc 3B68     		ldr	r3, [r7]
+ 1122 02de B3F88630 		ldrh	r3, [r3, #134]
+ 1123 02e2 0093     		str	r3, [sp]
+ 1124 02e4 0B46     		mov	r3, r1
+ 1125 02e6 B968     		ldr	r1, [r7, #8]
+ 1126 02e8 F868     		ldr	r0, [r7, #12]
+ 1127 02ea FFF7FEFF 		bl	object_create
+ 1128 02ee 0346     		mov	r3, r0
+ 1129 02f0 87F86730 		strb	r3, [r7, #103]
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (result == COAP_201_CREATED)
+ 1130              		.loc 2 334 0
+ 1131 02f4 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1132 02f8 412B     		cmp	r3, #65
+ 1133 02fa 40F00C81 		bne	.L107
+ 1134              	.LBB5:
+ 335:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 336:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 //longest uri is /65535/65535 = 12 + 1 (null) chars
+ 337:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 char location_path[13] = "";
+ 1135              		.loc 2 337 0
+ 1136 02fe 0023     		movs	r3, #0
+ 1137 0300 FB63     		str	r3, [r7, #60]
+ 1138 0302 07F14003 		add	r3, r7, #64
+ 1139 0306 0022     		movs	r2, #0
+ 1140 0308 1A60     		str	r2, [r3]
+ 1141 030a 5A60     		str	r2, [r3, #4]
+ 1142 030c 1A72     		strb	r2, [r3, #8]
+ 338:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 //instanceId expected
+ 339:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 if ((uriP->flag & LWM2M_URI_FLAG_INSTANCE_ID) == 0)
+ 1143              		.loc 2 339 0
+ 1144 030e BB68     		ldr	r3, [r7, #8]
+ 1145 0310 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1146 0312 03F00203 		and	r3, r3, #2
+ 1147 0316 002B     		cmp	r3, #0
+ 1148 0318 03D1     		bne	.L88
+ 340:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 {
+ 341:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     result = COAP_500_INTERNAL_SERVER_ERROR;
+ 1149              		.loc 2 341 0
+ 1150 031a A023     		movs	r3, #160
+ 1151 031c 87F86730 		strb	r3, [r7, #103]
+ 342:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     break;
+ 1152              		.loc 2 342 0
+ 1153 0320 FCE0     		b	.L84
+ 1154              	.L88:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 34
+
+
+ 343:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 }
+ 344:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 345:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 if (sprintf(location_path, "/%d/%d", uriP->objectId, uriP->instanceId) < 0)
+ 1155              		.loc 2 345 0
+ 1156 0322 BB68     		ldr	r3, [r7, #8]
+ 1157 0324 5B88     		ldrh	r3, [r3, #2]
+ 1158 0326 1A46     		mov	r2, r3
+ 1159 0328 BB68     		ldr	r3, [r7, #8]
+ 1160 032a 9B88     		ldrh	r3, [r3, #4]
+ 1161 032c 07F13C00 		add	r0, r7, #60
+ 1162 0330 7D49     		ldr	r1, .L109
+ 1163 0332 FFF7FEFF 		bl	sprintf
+ 1164 0336 0346     		mov	r3, r0
+ 1165 0338 002B     		cmp	r3, #0
+ 1166 033a 04DA     		bge	.L90
+ 346:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 {
+ 347:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     result = COAP_500_INTERNAL_SERVER_ERROR;
+ 1167              		.loc 2 347 0
+ 1168 033c A023     		movs	r3, #160
+ 1169 033e 87F86730 		strb	r3, [r7, #103]
+ 348:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                     break;
+ 1170              		.loc 2 348 0
+ 1171 0342 00BF     		nop
+ 1172 0344 EAE0     		b	.L84
+ 1173              	.L90:
+ 349:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 }
+ 350:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 coap_set_header_location_path(response, location_path);
+ 1174              		.loc 2 350 0
+ 1175 0346 07F13C03 		add	r3, r7, #60
+ 1176 034a 1946     		mov	r1, r3
+ 1177 034c 386F     		ldr	r0, [r7, #112]
+ 1178 034e FFF7FEFF 		bl	coap_set_header_location_path
+ 351:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 352:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 lwm2m_update_registration(contextP, 0, true);
+ 1179              		.loc 2 352 0
+ 1180 0352 0122     		movs	r2, #1
+ 1181 0354 0021     		movs	r1, #0
+ 1182 0356 F868     		ldr	r0, [r7, #12]
+ 1183 0358 FFF7FEFF 		bl	lwm2m_update_registration
+ 1184              	.LBE5:
+ 353:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 354:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (!LWM2M_URI_IS_SET_RESOURCE(uriP))
+ 356:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_WRITE, serverP->shortID)) != COA
+ 358:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 360:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_write(contextP, uriP, format, message->payload, message->payload_len);
+ 362:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 363:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else
+ 364:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_EXCUTE, serverP->shortID)) != CO
+ 366:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 368:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_execute(contextP, uriP, message->payload, message->payload_len);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 35
+
+
+ 370:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 371:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 372:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     break;
+ 1185              		.loc 2 373 0
+ 1186 035c DBE0     		b	.L107
+ 1187              	.L85:
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 1188              		.loc 2 355 0
+ 1189 035e BB68     		ldr	r3, [r7, #8]
+ 1190 0360 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1191 0362 03F00103 		and	r3, r3, #1
+ 1192 0366 002B     		cmp	r3, #0
+ 1193 0368 22D1     		bne	.L92
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 1194              		.loc 2 357 0
+ 1195 036a 7B68     		ldr	r3, [r7, #4]
+ 1196 036c DB88     		ldrh	r3, [r3, #6]
+ 1197 036e 0122     		movs	r2, #1
+ 1198 0370 B968     		ldr	r1, [r7, #8]
+ 1199 0372 F868     		ldr	r0, [r7, #12]
+ 1200 0374 FFF7FEFF 		bl	acc_auth_operate
+ 1201 0378 0346     		mov	r3, r0
+ 1202 037a 87F86730 		strb	r3, [r7, #103]
+ 1203 037e 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1204 0382 002B     		cmp	r3, #0
+ 1205 0384 02D0     		beq	.L93
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 1206              		.loc 2 359 0
+ 1207 0386 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1208 038a C9E0     		b	.L106
+ 1209              	.L93:
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 1210              		.loc 2 361 0
+ 1211 038c B7F85E20 		ldrh	r2, [r7, #94]
+ 1212 0390 3B68     		ldr	r3, [r7]
+ 1213 0392 D3F88810 		ldr	r1, [r3, #136]
+ 1214 0396 3B68     		ldr	r3, [r7]
+ 1215 0398 B3F88630 		ldrh	r3, [r3, #134]
+ 1216 039c 0093     		str	r3, [sp]
+ 1217 039e 0B46     		mov	r3, r1
+ 1218 03a0 B968     		ldr	r1, [r7, #8]
+ 1219 03a2 F868     		ldr	r0, [r7, #12]
+ 1220 03a4 FFF7FEFF 		bl	object_write
+ 1221 03a8 0346     		mov	r3, r0
+ 1222 03aa 87F86730 		strb	r3, [r7, #103]
+ 1223              		.loc 2 373 0
+ 1224 03ae B2E0     		b	.L107
+ 1225              	.L92:
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 1226              		.loc 2 365 0
+ 1227 03b0 7B68     		ldr	r3, [r7, #4]
+ 1228 03b2 DB88     		ldrh	r3, [r3, #6]
+ 1229 03b4 0222     		movs	r2, #2
+ 1230 03b6 B968     		ldr	r1, [r7, #8]
+ 1231 03b8 F868     		ldr	r0, [r7, #12]
+ 1232 03ba FFF7FEFF 		bl	acc_auth_operate
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 36
+
+
+ 1233 03be 0346     		mov	r3, r0
+ 1234 03c0 87F86730 		strb	r3, [r7, #103]
+ 1235 03c4 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1236 03c8 002B     		cmp	r3, #0
+ 1237 03ca 02D0     		beq	.L94
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 1238              		.loc 2 367 0
+ 1239 03cc 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1240 03d0 A6E0     		b	.L106
+ 1241              	.L94:
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 1242              		.loc 2 369 0
+ 1243 03d2 3B68     		ldr	r3, [r7]
+ 1244 03d4 D3F88820 		ldr	r2, [r3, #136]
+ 1245 03d8 3B68     		ldr	r3, [r7]
+ 1246 03da B3F88630 		ldrh	r3, [r3, #134]
+ 1247 03de B968     		ldr	r1, [r7, #8]
+ 1248 03e0 F868     		ldr	r0, [r7, #12]
+ 1249 03e2 FFF7FEFF 		bl	object_execute
+ 1250 03e6 0346     		mov	r3, r0
+ 1251 03e8 87F86730 		strb	r3, [r7, #103]
+ 1252              		.loc 2 373 0
+ 1253 03ec 93E0     		b	.L107
+ 1254              	.L66:
+ 374:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 375:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     case COAP_PUT:
+ 376:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 377:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         if (IS_OPTION(message, COAP_OPTION_URI_QUERY))
+ 1255              		.loc 2 377 0
+ 1256 03ee 3B68     		ldr	r3, [r7]
+ 1257 03f0 DB7A     		ldrb	r3, [r3, #11]	@ zero_extendqisi2
+ 1258 03f2 5BB2     		sxtb	r3, r3
+ 1259 03f4 002B     		cmp	r3, #0
+ 1260 03f6 2BDA     		bge	.L95
+ 1261              	.LBB6:
+ 378:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 379:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             lwm2m_attributes_t attr;
+ 380:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 381:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_WRITE_ATTR, serverP->shortID)) !
+ 1262              		.loc 2 381 0
+ 1263 03f8 7B68     		ldr	r3, [r7, #4]
+ 1264 03fa DB88     		ldrh	r3, [r3, #6]
+ 1265 03fc 0022     		movs	r2, #0
+ 1266 03fe B968     		ldr	r1, [r7, #8]
+ 1267 0400 F868     		ldr	r0, [r7, #12]
+ 1268 0402 FFF7FEFF 		bl	acc_auth_operate
+ 1269 0406 0346     		mov	r3, r0
+ 1270 0408 87F86730 		strb	r3, [r7, #103]
+ 1271 040c 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1272 0410 002B     		cmp	r3, #0
+ 1273 0412 02D0     		beq	.L96
+ 382:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 383:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 1274              		.loc 2 383 0
+ 1275 0414 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1276 0418 82E0     		b	.L106
+ 1277              	.L96:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 37
+
+
+ 384:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 385:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (0 != prv_readAttributes(message->uri_query, &attr))
+ 1278              		.loc 2 385 0
+ 1279 041a 3B68     		ldr	r3, [r7]
+ 1280 041c D3F88030 		ldr	r3, [r3, #128]
+ 1281 0420 07F11002 		add	r2, r7, #16
+ 1282 0424 1146     		mov	r1, r2
+ 1283 0426 1846     		mov	r0, r3
+ 1284 0428 FFF7FEFF 		bl	prv_readAttributes
+ 1285 042c 0346     		mov	r3, r0
+ 1286 042e 002B     		cmp	r3, #0
+ 1287 0430 03D0     		beq	.L97
+ 386:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 387:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 result = COAP_400_BAD_REQUEST;
+ 1288              		.loc 2 387 0
+ 1289 0432 8023     		movs	r3, #128
+ 1290 0434 87F86730 		strb	r3, [r7, #103]
+ 1291              	.LBE6:
+ 388:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 389:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             else
+ 390:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 391:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 result = observe_setParameters(contextP, uriP, serverP, &attr);
+ 392:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 393:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 394:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else if (LWM2M_URI_IS_SET_INSTANCE(uriP))
+ 395:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 396:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_WRITE, serverP->shortID)) != COA
+ 397:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 398:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 399:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 400:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_write(contextP, uriP, format, message->payload, message->payload_len);
+ 401:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 402:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else
+ 403:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 404:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = COAP_400_BAD_REQUEST;
+ 405:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 406:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 407:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     break;
+ 1292              		.loc 2 407 0
+ 1293 0438 70E0     		b	.L84
+ 1294              	.L97:
+ 1295              	.LBB7:
+ 391:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 1296              		.loc 2 391 0
+ 1297 043a 07F11003 		add	r3, r7, #16
+ 1298 043e 7A68     		ldr	r2, [r7, #4]
+ 1299 0440 B968     		ldr	r1, [r7, #8]
+ 1300 0442 F868     		ldr	r0, [r7, #12]
+ 1301 0444 FFF7FEFF 		bl	observe_setParameters
+ 1302 0448 0346     		mov	r3, r0
+ 1303 044a 87F86730 		strb	r3, [r7, #103]
+ 1304              	.LBE7:
+ 1305              		.loc 2 407 0
+ 1306 044e 65E0     		b	.L84
+ 1307              	.L95:
+ 394:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 1308              		.loc 2 394 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 38
+
+
+ 1309 0450 BB68     		ldr	r3, [r7, #8]
+ 1310 0452 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1311 0454 03F00203 		and	r3, r3, #2
+ 1312 0458 002B     		cmp	r3, #0
+ 1313 045a 22D0     		beq	.L100
+ 396:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 1314              		.loc 2 396 0
+ 1315 045c 7B68     		ldr	r3, [r7, #4]
+ 1316 045e DB88     		ldrh	r3, [r3, #6]
+ 1317 0460 0122     		movs	r2, #1
+ 1318 0462 B968     		ldr	r1, [r7, #8]
+ 1319 0464 F868     		ldr	r0, [r7, #12]
+ 1320 0466 FFF7FEFF 		bl	acc_auth_operate
+ 1321 046a 0346     		mov	r3, r0
+ 1322 046c 87F86730 		strb	r3, [r7, #103]
+ 1323 0470 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1324 0474 002B     		cmp	r3, #0
+ 1325 0476 02D0     		beq	.L101
+ 398:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 1326              		.loc 2 398 0
+ 1327 0478 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1328 047c 50E0     		b	.L106
+ 1329              	.L101:
+ 400:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 1330              		.loc 2 400 0
+ 1331 047e B7F85E20 		ldrh	r2, [r7, #94]
+ 1332 0482 3B68     		ldr	r3, [r7]
+ 1333 0484 D3F88810 		ldr	r1, [r3, #136]
+ 1334 0488 3B68     		ldr	r3, [r7]
+ 1335 048a B3F88630 		ldrh	r3, [r3, #134]
+ 1336 048e 0093     		str	r3, [sp]
+ 1337 0490 0B46     		mov	r3, r1
+ 1338 0492 B968     		ldr	r1, [r7, #8]
+ 1339 0494 F868     		ldr	r0, [r7, #12]
+ 1340 0496 FFF7FEFF 		bl	object_write
+ 1341 049a 0346     		mov	r3, r0
+ 1342 049c 87F86730 		strb	r3, [r7, #103]
+ 1343              		.loc 2 407 0
+ 1344 04a0 3CE0     		b	.L84
+ 1345              	.L100:
+ 404:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 1346              		.loc 2 404 0
+ 1347 04a2 8023     		movs	r3, #128
+ 1348 04a4 87F86730 		strb	r3, [r7, #103]
+ 1349              		.loc 2 407 0
+ 1350 04a8 38E0     		b	.L84
+ 1351              	.L67:
+ 408:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 409:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     case COAP_DELETE:
+ 410:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     {
+ 411:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         if (!LWM2M_URI_IS_SET_INSTANCE(uriP) || LWM2M_URI_IS_SET_RESOURCE(uriP))
+ 1352              		.loc 2 411 0
+ 1353 04aa BB68     		ldr	r3, [r7, #8]
+ 1354 04ac 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1355 04ae 03F00203 		and	r3, r3, #2
+ 1356 04b2 002B     		cmp	r3, #0
+ 1357 04b4 05D0     		beq	.L102
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 39
+
+
+ 1358              		.loc 2 411 0 is_stmt 0 discriminator 1
+ 1359 04b6 BB68     		ldr	r3, [r7, #8]
+ 1360 04b8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1361 04ba 03F00103 		and	r3, r3, #1
+ 1362 04be 002B     		cmp	r3, #0
+ 1363 04c0 03D0     		beq	.L103
+ 1364              	.L102:
+ 412:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 413:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = COAP_400_BAD_REQUEST;
+ 1365              		.loc 2 413 0 is_stmt 1
+ 1366 04c2 8023     		movs	r3, #128
+ 1367 04c4 87F86730 		strb	r3, [r7, #103]
+ 414:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 415:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         else
+ 416:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         {
+ 417:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if ((result = acc_auth_operate(contextP, uriP, OBJ_ACC_DELETE, serverP->shortID)) != CO
+ 418:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 419:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 return result;
+ 420:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 421:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             result = object_delete(contextP, uriP);
+ 422:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (result == COAP_202_DELETED)
+ 423:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****                 lwm2m_update_registration(contextP, 0, true);
+ 425:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 426:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         }
+ 427:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 428:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     break;
+ 1368              		.loc 2 428 0
+ 1369 04c8 27E0     		b	.L108
+ 1370              	.L103:
+ 417:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 1371              		.loc 2 417 0
+ 1372 04ca 7B68     		ldr	r3, [r7, #4]
+ 1373 04cc DB88     		ldrh	r3, [r3, #6]
+ 1374 04ce 0322     		movs	r2, #3
+ 1375 04d0 B968     		ldr	r1, [r7, #8]
+ 1376 04d2 F868     		ldr	r0, [r7, #12]
+ 1377 04d4 FFF7FEFF 		bl	acc_auth_operate
+ 1378 04d8 0346     		mov	r3, r0
+ 1379 04da 87F86730 		strb	r3, [r7, #103]
+ 1380 04de 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1381 04e2 002B     		cmp	r3, #0
+ 1382 04e4 02D0     		beq	.L105
+ 419:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 1383              		.loc 2 419 0
+ 1384 04e6 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1385 04ea 19E0     		b	.L106
+ 1386              	.L105:
+ 421:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             if (result == COAP_202_DELETED)
+ 1387              		.loc 2 421 0
+ 1388 04ec B968     		ldr	r1, [r7, #8]
+ 1389 04ee F868     		ldr	r0, [r7, #12]
+ 1390 04f0 FFF7FEFF 		bl	object_delete
+ 1391 04f4 0346     		mov	r3, r0
+ 1392 04f6 87F86730 		strb	r3, [r7, #103]
+ 422:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             {
+ 1393              		.loc 2 422 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 40
+
+
+ 1394 04fa 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1395 04fe 422B     		cmp	r3, #66
+ 1396 0500 0BD1     		bne	.L108
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****             }
+ 1397              		.loc 2 424 0
+ 1398 0502 0122     		movs	r2, #1
+ 1399 0504 0021     		movs	r1, #0
+ 1400 0506 F868     		ldr	r0, [r7, #12]
+ 1401 0508 FFF7FEFF 		bl	lwm2m_update_registration
+ 1402              		.loc 2 428 0
+ 1403 050c 05E0     		b	.L108
+ 1404              	.L62:
+ 429:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 430:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     default:
+ 431:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         result = COAP_400_BAD_REQUEST;
+ 1405              		.loc 2 431 0
+ 1406 050e 8023     		movs	r3, #128
+ 1407 0510 87F86730 		strb	r3, [r7, #103]
+ 432:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****         break;
+ 1408              		.loc 2 432 0
+ 1409 0514 02E0     		b	.L84
+ 1410              	.L107:
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 1411              		.loc 2 373 0
+ 1412 0516 00BF     		nop
+ 1413 0518 00E0     		b	.L84
+ 1414              	.L108:
+ 428:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 1415              		.loc 2 428 0
+ 1416 051a 00BF     		nop
+ 1417              	.L84:
+ 433:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     }
+ 434:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** 
+ 435:D:/iot/felix2/components/connectivity/lwm2m/core\management.c ****     return result;
+ 1418              		.loc 2 435 0
+ 1419 051c 97F86730 		ldrb	r3, [r7, #103]	@ zero_extendqisi2
+ 1420              	.L106:
+ 436:D:/iot/felix2/components/connectivity/lwm2m/core\management.c **** }
+ 1421              		.loc 2 436 0 discriminator 6
+ 1422 0520 1846     		mov	r0, r3
+ 1423 0522 6837     		adds	r7, r7, #104
+ 1424              	.LCFI14:
+ 1425              		.cfi_def_cfa_offset 8
+ 1426 0524 BD46     		mov	sp, r7
+ 1427              	.LCFI15:
+ 1428              		.cfi_def_cfa_register 13
+ 1429              		@ sp needed
+ 1430 0526 80BD     		pop	{r7, pc}
+ 1431              	.L110:
+ 1432              		.align	2
+ 1433              	.L109:
+ 1434 0528 1C000000 		.word	.LC5
+ 1435              		.cfi_endproc
+ 1436              	.LFE143:
+ 1438              		.text
+ 1439              	.Letext0:
+ 1440              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 41
+
+
+ 1441              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1442              		.file 5 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 1443              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1444              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1445              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1446              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1447              		.file 10 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_timeval.h"
+ 1448              		.file 11 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 1449              		.file 12 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 1450              		.file 13 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1451              		.file 14 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1452              		.file 15 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1453              		.file 16 "D:/iot/felix2/kernel/include/los_list.h"
+ 1454              		.file 17 "D:/iot/felix2/kernel/include/los_err.h"
+ 1455              		.file 18 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1456              		.file 19 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1457              		.file 20 "D:/iot/felix2/kernel/include/los_event.h"
+ 1458              		.file 21 "D:/iot/felix2/kernel/include/los_task.h"
+ 1459              		.file 22 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1460              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1461              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1462              		.file 25 "D:/iot/felix2/kernel/include/los_config.h"
+ 1463              		.file 26 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 1464              		.file 27 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 1465              		.file 28 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 1466              		.file 29 "D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m/object_comm.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s 			page 42
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 management.c
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:18     .text.dm_isUriOpaqueHandle:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:24     .text.dm_isUriOpaqueHandle:00000000 dm_isUriOpaqueHandle
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:69     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:86     .text.prv_readAttributes:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:92     .text.prv_readAttributes:00000000 prv_readAttributes
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:482    .text.prv_readAttributes:000002b4 $d
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:488    .text.prv_readAttributes:000002c4 $t
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:715    .text.prv_readAttributes:00000458 $d
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:725    .text.dm_handleRequest:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:732    .text.dm_handleRequest:00000000 dm_handleRequest
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:827    .text.dm_handleRequest:00000090 $d
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:831    .text.dm_handleRequest:000000a0 $t
+C:\Users\91458\AppData\Local\Temp\cc3B5VCI.s:1434   .text.dm_handleRequest:00000528 $d
+
+UNDEFINED SYMBOLS
+__aeabi_dcmplt
+memset
+lwm2m_strncmp
+utils_textToInt
+utils_textToFloat
+utils_convertMediaType
+acc_auth_operate
+object_readData
+observe_handleRequest
+lwm2m_data_serialize
+lwm2m_data_free
+object_discover
+object_read
+coap_set_header_content_type
+coap_set_payload
+lwm2m_free
+object_create
+sprintf
+coap_set_header_location_path
+lwm2m_update_registration
+object_write
+object_execute
+observe_setParameters
+object_delete

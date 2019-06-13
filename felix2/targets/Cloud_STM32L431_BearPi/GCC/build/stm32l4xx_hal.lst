@@ -1,0 +1,2425 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32l4xx_hal.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	uwTick,4,4
+  18              		.section	.text.HAL_Init,"ax",%progbits
+  19              		.align	1
+  20              		.global	HAL_Init
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	HAL_Init:
+  27              	.LFB133:
+  28              		.file 1 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_h
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   ******************************************************************************
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @file    stm32l4xx_hal.c
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @author  MCD Application Team
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief   HAL module driver.
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *          This is the common part of the HAL initialization
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   @verbatim
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   ==============================================================================
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                      ##### How to use this driver #####
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   ==============================================================================
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     [..]
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     The common HAL driver contains a set of generic and common APIs that can be
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     used by the PPP peripheral drivers and the user to start using the HAL.
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     [..]
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     The HAL contains two APIs' categories:
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****          (+) Common HAL APIs
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****          (+) Services HAL APIs
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   @endverbatim
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   ******************************************************************************
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @attention
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * are permitted provided that the following conditions are met:
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *      this list of conditions and the following disclaimer.
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 2
+
+
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *      this list of conditions and the following disclaimer in the documentation
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *      and/or other materials provided with the distribution.
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *      may be used to endorse or promote products derived from this software
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *      without specific prior written permission.
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   ******************************************************************************
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Includes ------------------------------------------------------------------*/
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #include "stm32l4xx_hal.h"
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @addtogroup STM32L4xx_HAL_Driver
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @defgroup HAL HAL
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief HAL module driver
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #ifdef HAL_MODULE_ENABLED
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Private typedef -----------------------------------------------------------*/
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Private define ------------------------------------------------------------*/
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  * @brief STM32L4xx HAL Driver version number
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    */
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define __STM32L4xx_HAL_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define __STM32L4xx_HAL_VERSION_SUB1   (0x08) /*!< [23:16] sub1 version */
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define __STM32L4xx_HAL_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define __STM32L4xx_HAL_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define __STM32L4xx_HAL_VERSION         ((__STM32L4xx_HAL_VERSION_MAIN << 24)\
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                                         |(__STM32L4xx_HAL_VERSION_SUB1 << 16)\
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                                         |(__STM32L4xx_HAL_VERSION_SUB2 << 8 )\
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                                         |(__STM32L4xx_HAL_VERSION_RC))
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #if defined(VREFBUF)
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define VREFBUF_TIMEOUT_VALUE     (uint32_t)10   /* 10 ms (to be confirmed) */
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #endif /* VREFBUF */
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* ------------ SYSCFG registers bit address in the alias region ------------ */
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define SYSCFG_OFFSET             (SYSCFG_BASE - PERIPH_BASE)
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* ---  MEMRMP Register ---*/
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Alias word address of FB_MODE bit */
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define MEMRMP_OFFSET             SYSCFG_OFFSET
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 3
+
+
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define FB_MODE_BitNumber         ((uint8_t)0x8)
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define FB_MODE_BB                (PERIPH_BB_BASE + (MEMRMP_OFFSET * 32) + (FB_MODE_BitNumber * 4))
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* --- SCSR Register ---*/
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Alias word address of SRAM2ER bit */
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define SCSR_OFFSET              (SYSCFG_OFFSET + 0x18)
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define BRER_BitNumber           ((uint8_t)0x0)
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #define SCSR_SRAM2ER_BB          (PERIPH_BB_BASE + (SCSR_OFFSET * 32) + (BRER_BitNumber * 4))
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Private macro -------------------------------------------------------------*/
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Private variables ---------------------------------------------------------*/
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __IO uint32_t uwTick;
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Private function prototypes -----------------------------------------------*/
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /* Exported functions --------------------------------------------------------*/
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @defgroup HAL_Exported_Functions HAL Exported Functions
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @defgroup HAL_Exported_Functions_Group1 Initialization and de-initialization Functions
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *  @brief    Initialization and de-initialization functions
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @verbatim
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****               ##### Initialization and de-initialization functions #####
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     [..]  This section provides functions allowing to:
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Initialize the Flash interface the NVIC allocation and initial time base
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****           clock configuration.
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) De-initialize common part of the HAL.
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Configure the time base source to have 1ms time base with a dedicated
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****           Tick interrupt priority.
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****         (++) SysTick timer is used by default as source of time base, but user
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              can eventually implement his proper time base source (a general purpose
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              timer for example or other time source), keeping in mind that Time base
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              handled in milliseconds basis.
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****         (++) Time base configuration function (HAL_InitTick ()) is called automatically
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              at the beginning of the program after reset by HAL_Init() or at any time
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              when clock is configured, by HAL_RCC_ClockConfig().
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****         (++) Source of time base is configured  to generate interrupts at regular
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              time intervals. Care must be taken if HAL_Delay() is called from a
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              peripheral ISR process, the Tick interrupt line must have higher priority
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****             (numerically lower) than the peripheral interrupt. Otherwise the caller
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****             ISR process will be blocked.
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****        (++) functions affecting time base configurations are declared as __weak
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****              to make  override possible  in case of other  implementations in user file.
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @endverbatim
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Configure the Flash prefetch, the Instruction and Data caches,
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         the time base source, NVIC and any required global low level hardware 
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         by calling the HAL_MspInit() callback function to be optionally defined in user file 
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         stm32l4xx_hal_msp.c.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 4
+
+
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   HAL_Init() function is called at the beginning of program after reset and before 
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         the clock configuration.
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *             
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   In the default implementation the System Timer (Systick) is used as source of time base
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         The Systick configuration is based on MSI clock, as MSI is the clock
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         used after a system Reset and the NVIC configuration is set to Priority group 4.
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         Once done, time base tick starts incrementing: the tick variable counter is incremented
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         each 1ms in the SysTick_Handler() interrupt handler.
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval HAL status
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** HAL_StatusTypeDef HAL_Init(void)
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+  29              		.loc 1 158 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Configure Flash prefetch, Instruction cache, Data cache */
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Default configuration at reset is:                      */
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* - Prefetch disabled                                     */
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* - Instruction cache enabled                             */
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* - Data cache enabled                                    */
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #if (INSTRUCTION_CACHE_ENABLE == 0)
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    __HAL_FLASH_INSTRUCTION_CACHE_DISABLE();
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #endif /* INSTRUCTION_CACHE_ENABLE */
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #if (DATA_CACHE_ENABLE == 0)
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    __HAL_FLASH_DATA_CACHE_DISABLE();
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #endif /* DATA_CACHE_ENABLE */
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #if (PREFETCH_ENABLE != 0)
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #endif /* PREFETCH_ENABLE */
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Set Interrupt Group Priority */
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+  41              		.loc 1 177 0
+  42 0004 0320     		movs	r0, #3
+  43 0006 FFF7FEFF 		bl	HAL_NVIC_SetPriorityGrouping
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Use SysTick as time base source and configure 1ms tick (default clock after Reset is MSI) */
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   HAL_InitTick(TICK_INT_PRIORITY);
+  44              		.loc 1 180 0
+  45 000a 0020     		movs	r0, #0
+  46 000c FFF7FEFF 		bl	HAL_InitTick
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Init the low level hardware */
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   HAL_MspInit();
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 5
+
+
+  47              		.loc 1 183 0
+  48 0010 FFF7FEFF 		bl	HAL_MspInit
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Return function status */
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   return HAL_OK;
+  49              		.loc 1 186 0
+  50 0014 0023     		movs	r3, #0
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+  51              		.loc 1 187 0
+  52 0016 1846     		mov	r0, r3
+  53 0018 80BD     		pop	{r7, pc}
+  54              		.cfi_endproc
+  55              	.LFE133:
+  57              		.section	.text.HAL_DeInit,"ax",%progbits
+  58              		.align	1
+  59              		.global	HAL_DeInit
+  60              		.syntax unified
+  61              		.thumb
+  62              		.thumb_func
+  63              		.fpu fpv4-sp-d16
+  65              	HAL_DeInit:
+  66              	.LFB134:
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief De-initialize common part of the HAL and stop the source of time base.
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note This function is optional.
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval HAL status
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** HAL_StatusTypeDef HAL_DeInit(void)
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+  67              		.loc 1 195 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 1, uses_anonymous_args = 0
+  71 0000 80B5     		push	{r7, lr}
+  72              	.LCFI2:
+  73              		.cfi_def_cfa_offset 8
+  74              		.cfi_offset 7, -8
+  75              		.cfi_offset 14, -4
+  76 0002 00AF     		add	r7, sp, #0
+  77              	.LCFI3:
+  78              		.cfi_def_cfa_register 7
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Reset of all peripherals */
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_APB1_FORCE_RESET();
+  79              		.loc 1 197 0
+  80 0004 134B     		ldr	r3, .L5
+  81 0006 4FF0FF32 		mov	r2, #-1
+  82 000a 9A63     		str	r2, [r3, #56]
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_APB1_RELEASE_RESET();
+  83              		.loc 1 198 0
+  84 000c 114B     		ldr	r3, .L5
+  85 000e 0022     		movs	r2, #0
+  86 0010 9A63     		str	r2, [r3, #56]
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_APB2_FORCE_RESET();
+  87              		.loc 1 200 0
+  88 0012 104B     		ldr	r3, .L5
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 6
+
+
+  89 0014 4FF0FF32 		mov	r2, #-1
+  90 0018 1A64     		str	r2, [r3, #64]
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_APB2_RELEASE_RESET();
+  91              		.loc 1 201 0
+  92 001a 0E4B     		ldr	r3, .L5
+  93 001c 0022     		movs	r2, #0
+  94 001e 1A64     		str	r2, [r3, #64]
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_AHB1_FORCE_RESET();
+  95              		.loc 1 203 0
+  96 0020 0C4B     		ldr	r3, .L5
+  97 0022 4FF0FF32 		mov	r2, #-1
+  98 0026 9A62     		str	r2, [r3, #40]
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_AHB1_RELEASE_RESET();
+  99              		.loc 1 204 0
+ 100 0028 0A4B     		ldr	r3, .L5
+ 101 002a 0022     		movs	r2, #0
+ 102 002c 9A62     		str	r2, [r3, #40]
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_AHB2_FORCE_RESET();
+ 103              		.loc 1 206 0
+ 104 002e 094B     		ldr	r3, .L5
+ 105 0030 4FF0FF32 		mov	r2, #-1
+ 106 0034 DA62     		str	r2, [r3, #44]
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_AHB2_RELEASE_RESET();
+ 107              		.loc 1 207 0
+ 108 0036 074B     		ldr	r3, .L5
+ 109 0038 0022     		movs	r2, #0
+ 110 003a DA62     		str	r2, [r3, #44]
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_AHB3_FORCE_RESET();
+ 111              		.loc 1 209 0
+ 112 003c 054B     		ldr	r3, .L5
+ 113 003e 4FF0FF32 		mov	r2, #-1
+ 114 0042 1A63     		str	r2, [r3, #48]
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   __HAL_RCC_AHB3_RELEASE_RESET();
+ 115              		.loc 1 210 0
+ 116 0044 034B     		ldr	r3, .L5
+ 117 0046 0022     		movs	r2, #0
+ 118 0048 1A63     		str	r2, [r3, #48]
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* De-Init the low level hardware */
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   HAL_MspDeInit();
+ 119              		.loc 1 213 0
+ 120 004a FFF7FEFF 		bl	HAL_MspDeInit
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Return function status */
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   return HAL_OK;
+ 121              		.loc 1 216 0
+ 122 004e 0023     		movs	r3, #0
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 123              		.loc 1 217 0
+ 124 0050 1846     		mov	r0, r3
+ 125 0052 80BD     		pop	{r7, pc}
+ 126              	.L6:
+ 127              		.align	2
+ 128              	.L5:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 7
+
+
+ 129 0054 00100240 		.word	1073876992
+ 130              		.cfi_endproc
+ 131              	.LFE134:
+ 133              		.section	.text.HAL_MspInit,"ax",%progbits
+ 134              		.align	1
+ 135              		.weak	HAL_MspInit
+ 136              		.syntax unified
+ 137              		.thumb
+ 138              		.thumb_func
+ 139              		.fpu fpv4-sp-d16
+ 141              	HAL_MspInit:
+ 142              	.LFB135:
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Initialize the MSP.
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak void HAL_MspInit(void)
+ 224:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 143              		.loc 1 224 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 0
+ 146              		@ frame_needed = 1, uses_anonymous_args = 0
+ 147              		@ link register save eliminated.
+ 148 0000 80B4     		push	{r7}
+ 149              	.LCFI4:
+ 150              		.cfi_def_cfa_offset 4
+ 151              		.cfi_offset 7, -4
+ 152 0002 00AF     		add	r7, sp, #0
+ 153              	.LCFI5:
+ 154              		.cfi_def_cfa_register 7
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 226:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****             the HAL_MspInit could be implemented in the user file
+ 227:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    */
+ 228:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 155              		.loc 1 228 0
+ 156 0004 00BF     		nop
+ 157 0006 BD46     		mov	sp, r7
+ 158              	.LCFI6:
+ 159              		.cfi_def_cfa_register 13
+ 160              		@ sp needed
+ 161 0008 5DF8047B 		ldr	r7, [sp], #4
+ 162              	.LCFI7:
+ 163              		.cfi_restore 7
+ 164              		.cfi_def_cfa_offset 0
+ 165 000c 7047     		bx	lr
+ 166              		.cfi_endproc
+ 167              	.LFE135:
+ 169              		.section	.text.HAL_MspDeInit,"ax",%progbits
+ 170              		.align	1
+ 171              		.weak	HAL_MspDeInit
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.fpu fpv4-sp-d16
+ 177              	HAL_MspDeInit:
+ 178              	.LFB136:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 8
+
+
+ 229:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 230:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 231:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  DeInitialize the MSP.
+ 232:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 233:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 234:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak void HAL_MspDeInit(void)
+ 235:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 179              		.loc 1 235 0
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 0
+ 182              		@ frame_needed = 1, uses_anonymous_args = 0
+ 183              		@ link register save eliminated.
+ 184 0000 80B4     		push	{r7}
+ 185              	.LCFI8:
+ 186              		.cfi_def_cfa_offset 4
+ 187              		.cfi_offset 7, -4
+ 188 0002 00AF     		add	r7, sp, #0
+ 189              	.LCFI9:
+ 190              		.cfi_def_cfa_register 7
+ 236:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 237:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****             the HAL_MspDeInit could be implemented in the user file
+ 238:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    */
+ 239:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 191              		.loc 1 239 0
+ 192 0004 00BF     		nop
+ 193 0006 BD46     		mov	sp, r7
+ 194              	.LCFI10:
+ 195              		.cfi_def_cfa_register 13
+ 196              		@ sp needed
+ 197 0008 5DF8047B 		ldr	r7, [sp], #4
+ 198              	.LCFI11:
+ 199              		.cfi_restore 7
+ 200              		.cfi_def_cfa_offset 0
+ 201 000c 7047     		bx	lr
+ 202              		.cfi_endproc
+ 203              	.LFE136:
+ 205              		.section	.text.HAL_InitTick,"ax",%progbits
+ 206              		.align	1
+ 207              		.weak	HAL_InitTick
+ 208              		.syntax unified
+ 209              		.thumb
+ 210              		.thumb_func
+ 211              		.fpu fpv4-sp-d16
+ 213              	HAL_InitTick:
+ 214              	.LFB137:
+ 240:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 241:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 242:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief This function configures the source of the time base:
+ 243:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *        The time source is configured to have 1ms time base with a dedicated
+ 244:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *        Tick interrupt priority.
+ 245:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note This function is called  automatically at the beginning of program after
+ 246:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       reset by HAL_Init() or at any time when clock is reconfigured  by HAL_RCC_ClockConfig().
+ 247:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note In the default implementation, SysTick timer is the source of time base.
+ 248:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       It is used to generate interrupts at regular time intervals.
+ 249:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       Care must be taken if HAL_Delay() is called from a peripheral ISR process,
+ 250:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       The SysTick interrupt must have higher priority (numerically lower)
+ 251:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 9
+
+
+ 252:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       The function is declared as __weak  to be overwritten  in case of other
+ 253:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       implementation  in user file.
+ 254:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @param TickPriority  Tick interrupt priority.
+ 255:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval HAL status
+ 256:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 257:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
+ 258:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 215              		.loc 1 258 0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 8
+ 218              		@ frame_needed = 1, uses_anonymous_args = 0
+ 219 0000 80B5     		push	{r7, lr}
+ 220              	.LCFI12:
+ 221              		.cfi_def_cfa_offset 8
+ 222              		.cfi_offset 7, -8
+ 223              		.cfi_offset 14, -4
+ 224 0002 82B0     		sub	sp, sp, #8
+ 225              	.LCFI13:
+ 226              		.cfi_def_cfa_offset 16
+ 227 0004 00AF     		add	r7, sp, #0
+ 228              	.LCFI14:
+ 229              		.cfi_def_cfa_register 7
+ 230 0006 7860     		str	r0, [r7, #4]
+ 259:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /*Configure the SysTick to have interrupt in 1ms time basis*/
+ 260:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   HAL_SYSTICK_Config(SystemCoreClock/1000);
+ 231              		.loc 1 260 0
+ 232 0008 094B     		ldr	r3, .L11
+ 233 000a 1B68     		ldr	r3, [r3]
+ 234 000c 094A     		ldr	r2, .L11+4
+ 235 000e A2FB0323 		umull	r2, r3, r2, r3
+ 236 0012 9B09     		lsrs	r3, r3, #6
+ 237 0014 1846     		mov	r0, r3
+ 238 0016 FFF7FEFF 		bl	HAL_SYSTICK_Config
+ 261:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 262:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /*Configure the SysTick IRQ priority */
+ 263:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   HAL_NVIC_SetPriority(SysTick_IRQn, TickPriority ,0);
+ 239              		.loc 1 263 0
+ 240 001a 0022     		movs	r2, #0
+ 241 001c 7968     		ldr	r1, [r7, #4]
+ 242 001e 4FF0FF30 		mov	r0, #-1
+ 243 0022 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 264:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 265:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Return function status */
+ 266:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   return HAL_OK;
+ 244              		.loc 1 266 0
+ 245 0026 0023     		movs	r3, #0
+ 267:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 246              		.loc 1 267 0
+ 247 0028 1846     		mov	r0, r3
+ 248 002a 0837     		adds	r7, r7, #8
+ 249              	.LCFI15:
+ 250              		.cfi_def_cfa_offset 8
+ 251 002c BD46     		mov	sp, r7
+ 252              	.LCFI16:
+ 253              		.cfi_def_cfa_register 13
+ 254              		@ sp needed
+ 255 002e 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 10
+
+
+ 256              	.L12:
+ 257              		.align	2
+ 258              	.L11:
+ 259 0030 00000000 		.word	SystemCoreClock
+ 260 0034 D34D6210 		.word	274877907
+ 261              		.cfi_endproc
+ 262              	.LFE137:
+ 264              		.section	.text.HAL_IncTick,"ax",%progbits
+ 265              		.align	1
+ 266              		.weak	HAL_IncTick
+ 267              		.syntax unified
+ 268              		.thumb
+ 269              		.thumb_func
+ 270              		.fpu fpv4-sp-d16
+ 272              	HAL_IncTick:
+ 273              	.LFB138:
+ 268:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 269:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 270:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @}
+ 271:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 272:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 273:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @defgroup HAL_Exported_Functions_Group2 HAL Control functions
+ 274:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *  @brief    HAL Control functions
+ 275:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *
+ 276:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @verbatim
+ 277:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 278:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                       ##### HAL Control functions #####
+ 279:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 280:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     [..]  This section provides functions allowing to:
+ 281:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Provide a tick value in millisecond
+ 282:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Provide a blocking delay in millisecond
+ 283:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Suspend the time base source interrupt
+ 284:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Resume the time base source interrupt
+ 285:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Get the HAL API driver version
+ 286:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Get the device identifier
+ 287:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Get the device revision identifier
+ 288:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 289:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @endverbatim
+ 290:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+ 291:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 292:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 293:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 294:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief This function is called to increment a global variable "uwTick"
+ 295:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *        used as application time base.
+ 296:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note In the default implementation, this variable is incremented each 1ms
+ 297:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       in SysTick ISR.
+ 298:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  * @note This function is declared as __weak to be overwritten in case of other
+ 299:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *      implementations in user file.
+ 300:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 301:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 302:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak void HAL_IncTick(void)
+ 303:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 274              		.loc 1 303 0
+ 275              		.cfi_startproc
+ 276              		@ args = 0, pretend = 0, frame = 0
+ 277              		@ frame_needed = 1, uses_anonymous_args = 0
+ 278              		@ link register save eliminated.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 11
+
+
+ 279 0000 80B4     		push	{r7}
+ 280              	.LCFI17:
+ 281              		.cfi_def_cfa_offset 4
+ 282              		.cfi_offset 7, -4
+ 283 0002 00AF     		add	r7, sp, #0
+ 284              	.LCFI18:
+ 285              		.cfi_def_cfa_register 7
+ 304:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   uwTick++;
+ 286              		.loc 1 304 0
+ 287 0004 044B     		ldr	r3, .L14
+ 288 0006 1B68     		ldr	r3, [r3]
+ 289 0008 0133     		adds	r3, r3, #1
+ 290 000a 034A     		ldr	r2, .L14
+ 291 000c 1360     		str	r3, [r2]
+ 305:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 292              		.loc 1 305 0
+ 293 000e 00BF     		nop
+ 294 0010 BD46     		mov	sp, r7
+ 295              	.LCFI19:
+ 296              		.cfi_def_cfa_register 13
+ 297              		@ sp needed
+ 298 0012 5DF8047B 		ldr	r7, [sp], #4
+ 299              	.LCFI20:
+ 300              		.cfi_restore 7
+ 301              		.cfi_def_cfa_offset 0
+ 302 0016 7047     		bx	lr
+ 303              	.L15:
+ 304              		.align	2
+ 305              	.L14:
+ 306 0018 00000000 		.word	uwTick
+ 307              		.cfi_endproc
+ 308              	.LFE138:
+ 310              		.section	.text.HAL_GetTick,"ax",%progbits
+ 311              		.align	1
+ 312              		.weak	HAL_GetTick
+ 313              		.syntax unified
+ 314              		.thumb
+ 315              		.thumb_func
+ 316              		.fpu fpv4-sp-d16
+ 318              	HAL_GetTick:
+ 319              	.LFB139:
+ 306:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 307:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 308:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief Provide a tick value in millisecond.
+ 309:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 310:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       implementations in user file.
+ 311:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval tick value
+ 312:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 313:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak uint32_t HAL_GetTick(void)
+ 314:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 320              		.loc 1 314 0
+ 321              		.cfi_startproc
+ 322              		@ args = 0, pretend = 0, frame = 0
+ 323              		@ frame_needed = 1, uses_anonymous_args = 0
+ 324              		@ link register save eliminated.
+ 325 0000 80B4     		push	{r7}
+ 326              	.LCFI21:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 12
+
+
+ 327              		.cfi_def_cfa_offset 4
+ 328              		.cfi_offset 7, -4
+ 329 0002 00AF     		add	r7, sp, #0
+ 330              	.LCFI22:
+ 331              		.cfi_def_cfa_register 7
+ 315:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   return uwTick;
+ 332              		.loc 1 315 0
+ 333 0004 034B     		ldr	r3, .L18
+ 334 0006 1B68     		ldr	r3, [r3]
+ 316:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 335              		.loc 1 316 0
+ 336 0008 1846     		mov	r0, r3
+ 337 000a BD46     		mov	sp, r7
+ 338              	.LCFI23:
+ 339              		.cfi_def_cfa_register 13
+ 340              		@ sp needed
+ 341 000c 5DF8047B 		ldr	r7, [sp], #4
+ 342              	.LCFI24:
+ 343              		.cfi_restore 7
+ 344              		.cfi_def_cfa_offset 0
+ 345 0010 7047     		bx	lr
+ 346              	.L19:
+ 347 0012 00BF     		.align	2
+ 348              	.L18:
+ 349 0014 00000000 		.word	uwTick
+ 350              		.cfi_endproc
+ 351              	.LFE139:
+ 353              		.section	.text.HAL_Delay,"ax",%progbits
+ 354              		.align	1
+ 355              		.weak	HAL_Delay
+ 356              		.syntax unified
+ 357              		.thumb
+ 358              		.thumb_func
+ 359              		.fpu fpv4-sp-d16
+ 361              	HAL_Delay:
+ 362              	.LFB140:
+ 317:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 318:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 319:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief This function provides minimum delay (in milliseconds) based 
+ 320:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *        on variable incremented. 
+ 321:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note In the default implementation , SysTick timer is the source of time base.
+ 322:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       It is used to generate interrupts at regular time intervals where uwTick
+ 323:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       is incremented.
+ 324:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 325:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       implementations in user file.
+ 326:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @param Delay  specifies the delay time length, in milliseconds.
+ 327:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 328:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 329:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak void HAL_Delay(uint32_t Delay)
+ 330:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 363              		.loc 1 330 0
+ 364              		.cfi_startproc
+ 365              		@ args = 0, pretend = 0, frame = 16
+ 366              		@ frame_needed = 1, uses_anonymous_args = 0
+ 367 0000 80B5     		push	{r7, lr}
+ 368              	.LCFI25:
+ 369              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 13
+
+
+ 370              		.cfi_offset 7, -8
+ 371              		.cfi_offset 14, -4
+ 372 0002 84B0     		sub	sp, sp, #16
+ 373              	.LCFI26:
+ 374              		.cfi_def_cfa_offset 24
+ 375 0004 00AF     		add	r7, sp, #0
+ 376              	.LCFI27:
+ 377              		.cfi_def_cfa_register 7
+ 378 0006 7860     		str	r0, [r7, #4]
+ 331:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   uint32_t tickstart = HAL_GetTick();
+ 379              		.loc 1 331 0
+ 380 0008 FFF7FEFF 		bl	HAL_GetTick
+ 381 000c B860     		str	r0, [r7, #8]
+ 332:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   uint32_t wait = Delay;
+ 382              		.loc 1 332 0
+ 383 000e 7B68     		ldr	r3, [r7, #4]
+ 384 0010 FB60     		str	r3, [r7, #12]
+ 333:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 334:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Add a period to guaranty minimum wait */
+ 335:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   if (wait < HAL_MAX_DELAY)
+ 385              		.loc 1 335 0
+ 386 0012 FB68     		ldr	r3, [r7, #12]
+ 387 0014 B3F1FF3F 		cmp	r3, #-1
+ 388 0018 02D0     		beq	.L23
+ 336:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   {
+ 337:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     wait++;
+ 389              		.loc 1 337 0
+ 390 001a FB68     		ldr	r3, [r7, #12]
+ 391 001c 0133     		adds	r3, r3, #1
+ 392 001e FB60     		str	r3, [r7, #12]
+ 393              	.L23:
+ 338:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   } 
+ 339:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 340:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   while((HAL_GetTick() - tickstart) < wait)
+ 394              		.loc 1 340 0
+ 395 0020 00BF     		nop
+ 396              	.L22:
+ 397              		.loc 1 340 0 is_stmt 0 discriminator 1
+ 398 0022 FFF7FEFF 		bl	HAL_GetTick
+ 399 0026 0246     		mov	r2, r0
+ 400 0028 BB68     		ldr	r3, [r7, #8]
+ 401 002a D31A     		subs	r3, r2, r3
+ 402 002c FA68     		ldr	r2, [r7, #12]
+ 403 002e 9A42     		cmp	r2, r3
+ 404 0030 F7D8     		bhi	.L22
+ 341:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   {
+ 342:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   }
+ 343:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 405              		.loc 1 343 0 is_stmt 1
+ 406 0032 00BF     		nop
+ 407 0034 1037     		adds	r7, r7, #16
+ 408              	.LCFI28:
+ 409              		.cfi_def_cfa_offset 8
+ 410 0036 BD46     		mov	sp, r7
+ 411              	.LCFI29:
+ 412              		.cfi_def_cfa_register 13
+ 413              		@ sp needed
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 14
+
+
+ 414 0038 80BD     		pop	{r7, pc}
+ 415              		.cfi_endproc
+ 416              	.LFE140:
+ 418              		.section	.text.HAL_SuspendTick,"ax",%progbits
+ 419              		.align	1
+ 420              		.weak	HAL_SuspendTick
+ 421              		.syntax unified
+ 422              		.thumb
+ 423              		.thumb_func
+ 424              		.fpu fpv4-sp-d16
+ 426              	HAL_SuspendTick:
+ 427              	.LFB141:
+ 344:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 345:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 346:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief Suspend Tick increment.
+ 347:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note In the default implementation , SysTick timer is the source of time base. It is
+ 348:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       used to generate interrupts at regular time intervals. Once HAL_SuspendTick()
+ 349:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       is called, the SysTick interrupt will be disabled and so Tick increment
+ 350:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       is suspended.
+ 351:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 352:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       implementations in user file.
+ 353:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 354:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 355:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak void HAL_SuspendTick(void)
+ 356:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 428              		.loc 1 356 0
+ 429              		.cfi_startproc
+ 430              		@ args = 0, pretend = 0, frame = 0
+ 431              		@ frame_needed = 1, uses_anonymous_args = 0
+ 432              		@ link register save eliminated.
+ 433 0000 80B4     		push	{r7}
+ 434              	.LCFI30:
+ 435              		.cfi_def_cfa_offset 4
+ 436              		.cfi_offset 7, -4
+ 437 0002 00AF     		add	r7, sp, #0
+ 438              	.LCFI31:
+ 439              		.cfi_def_cfa_register 7
+ 357:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Disable SysTick Interrupt */
+ 358:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
+ 440              		.loc 1 358 0
+ 441 0004 054B     		ldr	r3, .L25
+ 442 0006 1B68     		ldr	r3, [r3]
+ 443 0008 044A     		ldr	r2, .L25
+ 444 000a 23F00203 		bic	r3, r3, #2
+ 445 000e 1360     		str	r3, [r2]
+ 359:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 446              		.loc 1 359 0
+ 447 0010 00BF     		nop
+ 448 0012 BD46     		mov	sp, r7
+ 449              	.LCFI32:
+ 450              		.cfi_def_cfa_register 13
+ 451              		@ sp needed
+ 452 0014 5DF8047B 		ldr	r7, [sp], #4
+ 453              	.LCFI33:
+ 454              		.cfi_restore 7
+ 455              		.cfi_def_cfa_offset 0
+ 456 0018 7047     		bx	lr
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 15
+
+
+ 457              	.L26:
+ 458 001a 00BF     		.align	2
+ 459              	.L25:
+ 460 001c 10E000E0 		.word	-536813552
+ 461              		.cfi_endproc
+ 462              	.LFE141:
+ 464              		.section	.text.HAL_ResumeTick,"ax",%progbits
+ 465              		.align	1
+ 466              		.weak	HAL_ResumeTick
+ 467              		.syntax unified
+ 468              		.thumb
+ 469              		.thumb_func
+ 470              		.fpu fpv4-sp-d16
+ 472              	HAL_ResumeTick:
+ 473              	.LFB142:
+ 360:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 361:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 362:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief Resume Tick increment.
+ 363:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note In the default implementation , SysTick timer is the source of time base. It is
+ 364:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       used to generate interrupts at regular time intervals. Once HAL_ResumeTick()
+ 365:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       is called, the SysTick interrupt will be enabled and so Tick increment
+ 366:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       is resumed.
+ 367:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 368:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *       implementations in user file.
+ 369:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 370:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 371:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** __weak void HAL_ResumeTick(void)
+ 372:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 474              		.loc 1 372 0
+ 475              		.cfi_startproc
+ 476              		@ args = 0, pretend = 0, frame = 0
+ 477              		@ frame_needed = 1, uses_anonymous_args = 0
+ 478              		@ link register save eliminated.
+ 479 0000 80B4     		push	{r7}
+ 480              	.LCFI34:
+ 481              		.cfi_def_cfa_offset 4
+ 482              		.cfi_offset 7, -4
+ 483 0002 00AF     		add	r7, sp, #0
+ 484              	.LCFI35:
+ 485              		.cfi_def_cfa_register 7
+ 373:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Enable SysTick Interrupt */
+ 374:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SysTick->CTRL  |= SysTick_CTRL_TICKINT_Msk;
+ 486              		.loc 1 374 0
+ 487 0004 054B     		ldr	r3, .L28
+ 488 0006 1B68     		ldr	r3, [r3]
+ 489 0008 044A     		ldr	r2, .L28
+ 490 000a 43F00203 		orr	r3, r3, #2
+ 491 000e 1360     		str	r3, [r2]
+ 375:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 492              		.loc 1 375 0
+ 493 0010 00BF     		nop
+ 494 0012 BD46     		mov	sp, r7
+ 495              	.LCFI36:
+ 496              		.cfi_def_cfa_register 13
+ 497              		@ sp needed
+ 498 0014 5DF8047B 		ldr	r7, [sp], #4
+ 499              	.LCFI37:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 16
+
+
+ 500              		.cfi_restore 7
+ 501              		.cfi_def_cfa_offset 0
+ 502 0018 7047     		bx	lr
+ 503              	.L29:
+ 504 001a 00BF     		.align	2
+ 505              	.L28:
+ 506 001c 10E000E0 		.word	-536813552
+ 507              		.cfi_endproc
+ 508              	.LFE142:
+ 510              		.section	.text.HAL_GetHalVersion,"ax",%progbits
+ 511              		.align	1
+ 512              		.global	HAL_GetHalVersion
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 516              		.fpu fpv4-sp-d16
+ 518              	HAL_GetHalVersion:
+ 519              	.LFB143:
+ 376:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 377:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 378:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Return the HAL revision.
+ 379:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval version : 0xXYZR (8bits for each decimal, R for RC)
+ 380:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 381:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** uint32_t HAL_GetHalVersion(void)
+ 382:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 520              		.loc 1 382 0
+ 521              		.cfi_startproc
+ 522              		@ args = 0, pretend = 0, frame = 0
+ 523              		@ frame_needed = 1, uses_anonymous_args = 0
+ 524              		@ link register save eliminated.
+ 525 0000 80B4     		push	{r7}
+ 526              	.LCFI38:
+ 527              		.cfi_def_cfa_offset 4
+ 528              		.cfi_offset 7, -4
+ 529 0002 00AF     		add	r7, sp, #0
+ 530              	.LCFI39:
+ 531              		.cfi_def_cfa_register 7
+ 383:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  return __STM32L4xx_HAL_VERSION;
+ 532              		.loc 1 383 0
+ 533 0004 024B     		ldr	r3, .L32
+ 384:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 534              		.loc 1 384 0
+ 535 0006 1846     		mov	r0, r3
+ 536 0008 BD46     		mov	sp, r7
+ 537              	.LCFI40:
+ 538              		.cfi_def_cfa_register 13
+ 539              		@ sp needed
+ 540 000a 5DF8047B 		ldr	r7, [sp], #4
+ 541              	.LCFI41:
+ 542              		.cfi_restore 7
+ 543              		.cfi_def_cfa_offset 0
+ 544 000e 7047     		bx	lr
+ 545              	.L33:
+ 546              		.align	2
+ 547              	.L32:
+ 548 0010 00030801 		.word	17302272
+ 549              		.cfi_endproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 17
+
+
+ 550              	.LFE143:
+ 552              		.section	.text.HAL_GetREVID,"ax",%progbits
+ 553              		.align	1
+ 554              		.global	HAL_GetREVID
+ 555              		.syntax unified
+ 556              		.thumb
+ 557              		.thumb_func
+ 558              		.fpu fpv4-sp-d16
+ 560              	HAL_GetREVID:
+ 561              	.LFB144:
+ 385:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 386:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 387:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Return the device revision identifier.
+ 388:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval Device revision identifier
+ 389:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 390:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** uint32_t HAL_GetREVID(void)
+ 391:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 562              		.loc 1 391 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 1, uses_anonymous_args = 0
+ 566              		@ link register save eliminated.
+ 567 0000 80B4     		push	{r7}
+ 568              	.LCFI42:
+ 569              		.cfi_def_cfa_offset 4
+ 570              		.cfi_offset 7, -4
+ 571 0002 00AF     		add	r7, sp, #0
+ 572              	.LCFI43:
+ 573              		.cfi_def_cfa_register 7
+ 392:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    return((DBGMCU->IDCODE & DBGMCU_IDCODE_REV_ID) >> 16);
+ 574              		.loc 1 392 0
+ 575 0004 044B     		ldr	r3, .L36
+ 576 0006 1B68     		ldr	r3, [r3]
+ 577 0008 1B0C     		lsrs	r3, r3, #16
+ 578 000a 9BB2     		uxth	r3, r3
+ 393:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 579              		.loc 1 393 0
+ 580 000c 1846     		mov	r0, r3
+ 581 000e BD46     		mov	sp, r7
+ 582              	.LCFI44:
+ 583              		.cfi_def_cfa_register 13
+ 584              		@ sp needed
+ 585 0010 5DF8047B 		ldr	r7, [sp], #4
+ 586              	.LCFI45:
+ 587              		.cfi_restore 7
+ 588              		.cfi_def_cfa_offset 0
+ 589 0014 7047     		bx	lr
+ 590              	.L37:
+ 591 0016 00BF     		.align	2
+ 592              	.L36:
+ 593 0018 002004E0 		.word	-536600576
+ 594              		.cfi_endproc
+ 595              	.LFE144:
+ 597              		.section	.text.HAL_GetDEVID,"ax",%progbits
+ 598              		.align	1
+ 599              		.global	HAL_GetDEVID
+ 600              		.syntax unified
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 18
+
+
+ 601              		.thumb
+ 602              		.thumb_func
+ 603              		.fpu fpv4-sp-d16
+ 605              	HAL_GetDEVID:
+ 606              	.LFB145:
+ 394:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 395:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 396:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Return the device identifier.
+ 397:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval Device identifier
+ 398:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 399:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** uint32_t HAL_GetDEVID(void)
+ 400:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 607              		.loc 1 400 0
+ 608              		.cfi_startproc
+ 609              		@ args = 0, pretend = 0, frame = 0
+ 610              		@ frame_needed = 1, uses_anonymous_args = 0
+ 611              		@ link register save eliminated.
+ 612 0000 80B4     		push	{r7}
+ 613              	.LCFI46:
+ 614              		.cfi_def_cfa_offset 4
+ 615              		.cfi_offset 7, -4
+ 616 0002 00AF     		add	r7, sp, #0
+ 617              	.LCFI47:
+ 618              		.cfi_def_cfa_register 7
+ 401:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    return(DBGMCU->IDCODE & DBGMCU_IDCODE_DEV_ID);
+ 619              		.loc 1 401 0
+ 620 0004 044B     		ldr	r3, .L40
+ 621 0006 1B68     		ldr	r3, [r3]
+ 622 0008 C3F30B03 		ubfx	r3, r3, #0, #12
+ 402:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 623              		.loc 1 402 0
+ 624 000c 1846     		mov	r0, r3
+ 625 000e BD46     		mov	sp, r7
+ 626              	.LCFI48:
+ 627              		.cfi_def_cfa_register 13
+ 628              		@ sp needed
+ 629 0010 5DF8047B 		ldr	r7, [sp], #4
+ 630              	.LCFI49:
+ 631              		.cfi_restore 7
+ 632              		.cfi_def_cfa_offset 0
+ 633 0014 7047     		bx	lr
+ 634              	.L41:
+ 635 0016 00BF     		.align	2
+ 636              	.L40:
+ 637 0018 002004E0 		.word	-536600576
+ 638              		.cfi_endproc
+ 639              	.LFE145:
+ 641              		.section	.text.HAL_GetUIDw0,"ax",%progbits
+ 642              		.align	1
+ 643              		.global	HAL_GetUIDw0
+ 644              		.syntax unified
+ 645              		.thumb
+ 646              		.thumb_func
+ 647              		.fpu fpv4-sp-d16
+ 649              	HAL_GetUIDw0:
+ 650              	.LFB146:
+ 403:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 19
+
+
+ 404:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 405:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Return the first word of the unique device identifier (UID based on 96 bits)
+ 406:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval Device identifier
+ 407:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 408:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** uint32_t HAL_GetUIDw0(void)
+ 409:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 651              		.loc 1 409 0
+ 652              		.cfi_startproc
+ 653              		@ args = 0, pretend = 0, frame = 0
+ 654              		@ frame_needed = 1, uses_anonymous_args = 0
+ 655              		@ link register save eliminated.
+ 656 0000 80B4     		push	{r7}
+ 657              	.LCFI50:
+ 658              		.cfi_def_cfa_offset 4
+ 659              		.cfi_offset 7, -4
+ 660 0002 00AF     		add	r7, sp, #0
+ 661              	.LCFI51:
+ 662              		.cfi_def_cfa_register 7
+ 410:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    return(READ_REG(*((uint32_t *)UID_BASE)));
+ 663              		.loc 1 410 0
+ 664 0004 034B     		ldr	r3, .L44
+ 665 0006 1B68     		ldr	r3, [r3]
+ 411:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 666              		.loc 1 411 0
+ 667 0008 1846     		mov	r0, r3
+ 668 000a BD46     		mov	sp, r7
+ 669              	.LCFI52:
+ 670              		.cfi_def_cfa_register 13
+ 671              		@ sp needed
+ 672 000c 5DF8047B 		ldr	r7, [sp], #4
+ 673              	.LCFI53:
+ 674              		.cfi_restore 7
+ 675              		.cfi_def_cfa_offset 0
+ 676 0010 7047     		bx	lr
+ 677              	.L45:
+ 678 0012 00BF     		.align	2
+ 679              	.L44:
+ 680 0014 9075FF1F 		.word	536835472
+ 681              		.cfi_endproc
+ 682              	.LFE146:
+ 684              		.section	.text.HAL_GetUIDw1,"ax",%progbits
+ 685              		.align	1
+ 686              		.global	HAL_GetUIDw1
+ 687              		.syntax unified
+ 688              		.thumb
+ 689              		.thumb_func
+ 690              		.fpu fpv4-sp-d16
+ 692              	HAL_GetUIDw1:
+ 693              	.LFB147:
+ 412:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 413:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 414:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Return the second word of the unique device identifier (UID based on 96 bits)
+ 415:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval Device identifier
+ 416:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 417:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** uint32_t HAL_GetUIDw1(void)
+ 418:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 694              		.loc 1 418 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 20
+
+
+ 695              		.cfi_startproc
+ 696              		@ args = 0, pretend = 0, frame = 0
+ 697              		@ frame_needed = 1, uses_anonymous_args = 0
+ 698              		@ link register save eliminated.
+ 699 0000 80B4     		push	{r7}
+ 700              	.LCFI54:
+ 701              		.cfi_def_cfa_offset 4
+ 702              		.cfi_offset 7, -4
+ 703 0002 00AF     		add	r7, sp, #0
+ 704              	.LCFI55:
+ 705              		.cfi_def_cfa_register 7
+ 419:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    return(READ_REG(*((uint32_t *)(UID_BASE + 4U))));
+ 706              		.loc 1 419 0
+ 707 0004 034B     		ldr	r3, .L48
+ 708 0006 1B68     		ldr	r3, [r3]
+ 420:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 709              		.loc 1 420 0
+ 710 0008 1846     		mov	r0, r3
+ 711 000a BD46     		mov	sp, r7
+ 712              	.LCFI56:
+ 713              		.cfi_def_cfa_register 13
+ 714              		@ sp needed
+ 715 000c 5DF8047B 		ldr	r7, [sp], #4
+ 716              	.LCFI57:
+ 717              		.cfi_restore 7
+ 718              		.cfi_def_cfa_offset 0
+ 719 0010 7047     		bx	lr
+ 720              	.L49:
+ 721 0012 00BF     		.align	2
+ 722              	.L48:
+ 723 0014 9475FF1F 		.word	536835476
+ 724              		.cfi_endproc
+ 725              	.LFE147:
+ 727              		.section	.text.HAL_GetUIDw2,"ax",%progbits
+ 728              		.align	1
+ 729              		.global	HAL_GetUIDw2
+ 730              		.syntax unified
+ 731              		.thumb
+ 732              		.thumb_func
+ 733              		.fpu fpv4-sp-d16
+ 735              	HAL_GetUIDw2:
+ 736              	.LFB148:
+ 421:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 422:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 423:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Return the third word of the unique device identifier (UID based on 96 bits)
+ 424:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval Device identifier
+ 425:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 426:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** uint32_t HAL_GetUIDw2(void)
+ 427:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 737              		.loc 1 427 0
+ 738              		.cfi_startproc
+ 739              		@ args = 0, pretend = 0, frame = 0
+ 740              		@ frame_needed = 1, uses_anonymous_args = 0
+ 741              		@ link register save eliminated.
+ 742 0000 80B4     		push	{r7}
+ 743              	.LCFI58:
+ 744              		.cfi_def_cfa_offset 4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 21
+
+
+ 745              		.cfi_offset 7, -4
+ 746 0002 00AF     		add	r7, sp, #0
+ 747              	.LCFI59:
+ 748              		.cfi_def_cfa_register 7
+ 428:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****    return(READ_REG(*((uint32_t *)(UID_BASE + 8U))));
+ 749              		.loc 1 428 0
+ 750 0004 034B     		ldr	r3, .L52
+ 751 0006 1B68     		ldr	r3, [r3]
+ 429:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 752              		.loc 1 429 0
+ 753 0008 1846     		mov	r0, r3
+ 754 000a BD46     		mov	sp, r7
+ 755              	.LCFI60:
+ 756              		.cfi_def_cfa_register 13
+ 757              		@ sp needed
+ 758 000c 5DF8047B 		ldr	r7, [sp], #4
+ 759              	.LCFI61:
+ 760              		.cfi_restore 7
+ 761              		.cfi_def_cfa_offset 0
+ 762 0010 7047     		bx	lr
+ 763              	.L53:
+ 764 0012 00BF     		.align	2
+ 765              	.L52:
+ 766 0014 9875FF1F 		.word	536835480
+ 767              		.cfi_endproc
+ 768              	.LFE148:
+ 770              		.section	.text.HAL_DBGMCU_EnableDBGSleepMode,"ax",%progbits
+ 771              		.align	1
+ 772              		.global	HAL_DBGMCU_EnableDBGSleepMode
+ 773              		.syntax unified
+ 774              		.thumb
+ 775              		.thumb_func
+ 776              		.fpu fpv4-sp-d16
+ 778              	HAL_DBGMCU_EnableDBGSleepMode:
+ 779              	.LFB149:
+ 430:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 431:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 432:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @}
+ 433:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 434:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 435:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @defgroup HAL_Exported_Functions_Group3 HAL Debug functions
+ 436:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *  @brief    HAL Debug functions
+ 437:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *
+ 438:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @verbatim
+ 439:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 440:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                       ##### HAL Debug functions #####
+ 441:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 442:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     [..]  This section provides functions allowing to:
+ 443:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Enable/Disable Debug module during SLEEP mode
+ 444:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Enable/Disable Debug module during STOP0/STOP1/STOP2 modes
+ 445:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Enable/Disable Debug module during STANDBY mode
+ 446:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 447:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @endverbatim
+ 448:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+ 449:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 450:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 451:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 22
+
+
+ 452:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Enable the Debug Module during SLEEP mode.
+ 453:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 454:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 455:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_DBGMCU_EnableDBGSleepMode(void)
+ 456:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 780              		.loc 1 456 0
+ 781              		.cfi_startproc
+ 782              		@ args = 0, pretend = 0, frame = 0
+ 783              		@ frame_needed = 1, uses_anonymous_args = 0
+ 784              		@ link register save eliminated.
+ 785 0000 80B4     		push	{r7}
+ 786              	.LCFI62:
+ 787              		.cfi_def_cfa_offset 4
+ 788              		.cfi_offset 7, -4
+ 789 0002 00AF     		add	r7, sp, #0
+ 790              	.LCFI63:
+ 791              		.cfi_def_cfa_register 7
+ 457:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_SLEEP);
+ 792              		.loc 1 457 0
+ 793 0004 054B     		ldr	r3, .L55
+ 794 0006 5B68     		ldr	r3, [r3, #4]
+ 795 0008 044A     		ldr	r2, .L55
+ 796 000a 43F00103 		orr	r3, r3, #1
+ 797 000e 5360     		str	r3, [r2, #4]
+ 458:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 798              		.loc 1 458 0
+ 799 0010 00BF     		nop
+ 800 0012 BD46     		mov	sp, r7
+ 801              	.LCFI64:
+ 802              		.cfi_def_cfa_register 13
+ 803              		@ sp needed
+ 804 0014 5DF8047B 		ldr	r7, [sp], #4
+ 805              	.LCFI65:
+ 806              		.cfi_restore 7
+ 807              		.cfi_def_cfa_offset 0
+ 808 0018 7047     		bx	lr
+ 809              	.L56:
+ 810 001a 00BF     		.align	2
+ 811              	.L55:
+ 812 001c 002004E0 		.word	-536600576
+ 813              		.cfi_endproc
+ 814              	.LFE149:
+ 816              		.section	.text.HAL_DBGMCU_DisableDBGSleepMode,"ax",%progbits
+ 817              		.align	1
+ 818              		.global	HAL_DBGMCU_DisableDBGSleepMode
+ 819              		.syntax unified
+ 820              		.thumb
+ 821              		.thumb_func
+ 822              		.fpu fpv4-sp-d16
+ 824              	HAL_DBGMCU_DisableDBGSleepMode:
+ 825              	.LFB150:
+ 459:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 460:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 461:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Disable the Debug Module during SLEEP mode.
+ 462:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 463:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 464:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_DBGMCU_DisableDBGSleepMode(void)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 23
+
+
+ 465:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 826              		.loc 1 465 0
+ 827              		.cfi_startproc
+ 828              		@ args = 0, pretend = 0, frame = 0
+ 829              		@ frame_needed = 1, uses_anonymous_args = 0
+ 830              		@ link register save eliminated.
+ 831 0000 80B4     		push	{r7}
+ 832              	.LCFI66:
+ 833              		.cfi_def_cfa_offset 4
+ 834              		.cfi_offset 7, -4
+ 835 0002 00AF     		add	r7, sp, #0
+ 836              	.LCFI67:
+ 837              		.cfi_def_cfa_register 7
+ 466:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   CLEAR_BIT(DBGMCU->CR, DBGMCU_CR_DBG_SLEEP);
+ 838              		.loc 1 466 0
+ 839 0004 054B     		ldr	r3, .L58
+ 840 0006 5B68     		ldr	r3, [r3, #4]
+ 841 0008 044A     		ldr	r2, .L58
+ 842 000a 23F00103 		bic	r3, r3, #1
+ 843 000e 5360     		str	r3, [r2, #4]
+ 467:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 844              		.loc 1 467 0
+ 845 0010 00BF     		nop
+ 846 0012 BD46     		mov	sp, r7
+ 847              	.LCFI68:
+ 848              		.cfi_def_cfa_register 13
+ 849              		@ sp needed
+ 850 0014 5DF8047B 		ldr	r7, [sp], #4
+ 851              	.LCFI69:
+ 852              		.cfi_restore 7
+ 853              		.cfi_def_cfa_offset 0
+ 854 0018 7047     		bx	lr
+ 855              	.L59:
+ 856 001a 00BF     		.align	2
+ 857              	.L58:
+ 858 001c 002004E0 		.word	-536600576
+ 859              		.cfi_endproc
+ 860              	.LFE150:
+ 862              		.section	.text.HAL_DBGMCU_EnableDBGStopMode,"ax",%progbits
+ 863              		.align	1
+ 864              		.global	HAL_DBGMCU_EnableDBGStopMode
+ 865              		.syntax unified
+ 866              		.thumb
+ 867              		.thumb_func
+ 868              		.fpu fpv4-sp-d16
+ 870              	HAL_DBGMCU_EnableDBGStopMode:
+ 871              	.LFB151:
+ 468:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 469:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 470:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Enable the Debug Module during STOP0/STOP1/STOP2 modes.
+ 471:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 472:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 473:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_DBGMCU_EnableDBGStopMode(void)
+ 474:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 872              		.loc 1 474 0
+ 873              		.cfi_startproc
+ 874              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 24
+
+
+ 875              		@ frame_needed = 1, uses_anonymous_args = 0
+ 876              		@ link register save eliminated.
+ 877 0000 80B4     		push	{r7}
+ 878              	.LCFI70:
+ 879              		.cfi_def_cfa_offset 4
+ 880              		.cfi_offset 7, -4
+ 881 0002 00AF     		add	r7, sp, #0
+ 882              	.LCFI71:
+ 883              		.cfi_def_cfa_register 7
+ 475:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STOP);
+ 884              		.loc 1 475 0
+ 885 0004 054B     		ldr	r3, .L61
+ 886 0006 5B68     		ldr	r3, [r3, #4]
+ 887 0008 044A     		ldr	r2, .L61
+ 888 000a 43F00203 		orr	r3, r3, #2
+ 889 000e 5360     		str	r3, [r2, #4]
+ 476:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 890              		.loc 1 476 0
+ 891 0010 00BF     		nop
+ 892 0012 BD46     		mov	sp, r7
+ 893              	.LCFI72:
+ 894              		.cfi_def_cfa_register 13
+ 895              		@ sp needed
+ 896 0014 5DF8047B 		ldr	r7, [sp], #4
+ 897              	.LCFI73:
+ 898              		.cfi_restore 7
+ 899              		.cfi_def_cfa_offset 0
+ 900 0018 7047     		bx	lr
+ 901              	.L62:
+ 902 001a 00BF     		.align	2
+ 903              	.L61:
+ 904 001c 002004E0 		.word	-536600576
+ 905              		.cfi_endproc
+ 906              	.LFE151:
+ 908              		.section	.text.HAL_DBGMCU_DisableDBGStopMode,"ax",%progbits
+ 909              		.align	1
+ 910              		.global	HAL_DBGMCU_DisableDBGStopMode
+ 911              		.syntax unified
+ 912              		.thumb
+ 913              		.thumb_func
+ 914              		.fpu fpv4-sp-d16
+ 916              	HAL_DBGMCU_DisableDBGStopMode:
+ 917              	.LFB152:
+ 477:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 478:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 479:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Disable the Debug Module during STOP0/STOP1/STOP2 modes.
+ 480:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 481:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 482:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_DBGMCU_DisableDBGStopMode(void)
+ 483:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 918              		.loc 1 483 0
+ 919              		.cfi_startproc
+ 920              		@ args = 0, pretend = 0, frame = 0
+ 921              		@ frame_needed = 1, uses_anonymous_args = 0
+ 922              		@ link register save eliminated.
+ 923 0000 80B4     		push	{r7}
+ 924              	.LCFI74:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 25
+
+
+ 925              		.cfi_def_cfa_offset 4
+ 926              		.cfi_offset 7, -4
+ 927 0002 00AF     		add	r7, sp, #0
+ 928              	.LCFI75:
+ 929              		.cfi_def_cfa_register 7
+ 484:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   CLEAR_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STOP);
+ 930              		.loc 1 484 0
+ 931 0004 054B     		ldr	r3, .L64
+ 932 0006 5B68     		ldr	r3, [r3, #4]
+ 933 0008 044A     		ldr	r2, .L64
+ 934 000a 23F00203 		bic	r3, r3, #2
+ 935 000e 5360     		str	r3, [r2, #4]
+ 485:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 936              		.loc 1 485 0
+ 937 0010 00BF     		nop
+ 938 0012 BD46     		mov	sp, r7
+ 939              	.LCFI76:
+ 940              		.cfi_def_cfa_register 13
+ 941              		@ sp needed
+ 942 0014 5DF8047B 		ldr	r7, [sp], #4
+ 943              	.LCFI77:
+ 944              		.cfi_restore 7
+ 945              		.cfi_def_cfa_offset 0
+ 946 0018 7047     		bx	lr
+ 947              	.L65:
+ 948 001a 00BF     		.align	2
+ 949              	.L64:
+ 950 001c 002004E0 		.word	-536600576
+ 951              		.cfi_endproc
+ 952              	.LFE152:
+ 954              		.section	.text.HAL_DBGMCU_EnableDBGStandbyMode,"ax",%progbits
+ 955              		.align	1
+ 956              		.global	HAL_DBGMCU_EnableDBGStandbyMode
+ 957              		.syntax unified
+ 958              		.thumb
+ 959              		.thumb_func
+ 960              		.fpu fpv4-sp-d16
+ 962              	HAL_DBGMCU_EnableDBGStandbyMode:
+ 963              	.LFB153:
+ 486:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 487:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 488:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Enable the Debug Module during STANDBY mode.
+ 489:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 490:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 491:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_DBGMCU_EnableDBGStandbyMode(void)
+ 492:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 964              		.loc 1 492 0
+ 965              		.cfi_startproc
+ 966              		@ args = 0, pretend = 0, frame = 0
+ 967              		@ frame_needed = 1, uses_anonymous_args = 0
+ 968              		@ link register save eliminated.
+ 969 0000 80B4     		push	{r7}
+ 970              	.LCFI78:
+ 971              		.cfi_def_cfa_offset 4
+ 972              		.cfi_offset 7, -4
+ 973 0002 00AF     		add	r7, sp, #0
+ 974              	.LCFI79:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 26
+
+
+ 975              		.cfi_def_cfa_register 7
+ 493:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STANDBY);
+ 976              		.loc 1 493 0
+ 977 0004 054B     		ldr	r3, .L67
+ 978 0006 5B68     		ldr	r3, [r3, #4]
+ 979 0008 044A     		ldr	r2, .L67
+ 980 000a 43F00403 		orr	r3, r3, #4
+ 981 000e 5360     		str	r3, [r2, #4]
+ 494:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 982              		.loc 1 494 0
+ 983 0010 00BF     		nop
+ 984 0012 BD46     		mov	sp, r7
+ 985              	.LCFI80:
+ 986              		.cfi_def_cfa_register 13
+ 987              		@ sp needed
+ 988 0014 5DF8047B 		ldr	r7, [sp], #4
+ 989              	.LCFI81:
+ 990              		.cfi_restore 7
+ 991              		.cfi_def_cfa_offset 0
+ 992 0018 7047     		bx	lr
+ 993              	.L68:
+ 994 001a 00BF     		.align	2
+ 995              	.L67:
+ 996 001c 002004E0 		.word	-536600576
+ 997              		.cfi_endproc
+ 998              	.LFE153:
+ 1000              		.section	.text.HAL_DBGMCU_DisableDBGStandbyMode,"ax",%progbits
+ 1001              		.align	1
+ 1002              		.global	HAL_DBGMCU_DisableDBGStandbyMode
+ 1003              		.syntax unified
+ 1004              		.thumb
+ 1005              		.thumb_func
+ 1006              		.fpu fpv4-sp-d16
+ 1008              	HAL_DBGMCU_DisableDBGStandbyMode:
+ 1009              	.LFB154:
+ 495:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 496:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 497:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Disable the Debug Module during STANDBY mode.
+ 498:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 499:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 500:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_DBGMCU_DisableDBGStandbyMode(void)
+ 501:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1010              		.loc 1 501 0
+ 1011              		.cfi_startproc
+ 1012              		@ args = 0, pretend = 0, frame = 0
+ 1013              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1014              		@ link register save eliminated.
+ 1015 0000 80B4     		push	{r7}
+ 1016              	.LCFI82:
+ 1017              		.cfi_def_cfa_offset 4
+ 1018              		.cfi_offset 7, -4
+ 1019 0002 00AF     		add	r7, sp, #0
+ 1020              	.LCFI83:
+ 1021              		.cfi_def_cfa_register 7
+ 502:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   CLEAR_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STANDBY);
+ 1022              		.loc 1 502 0
+ 1023 0004 054B     		ldr	r3, .L70
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 27
+
+
+ 1024 0006 5B68     		ldr	r3, [r3, #4]
+ 1025 0008 044A     		ldr	r2, .L70
+ 1026 000a 23F00403 		bic	r3, r3, #4
+ 1027 000e 5360     		str	r3, [r2, #4]
+ 503:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1028              		.loc 1 503 0
+ 1029 0010 00BF     		nop
+ 1030 0012 BD46     		mov	sp, r7
+ 1031              	.LCFI84:
+ 1032              		.cfi_def_cfa_register 13
+ 1033              		@ sp needed
+ 1034 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1035              	.LCFI85:
+ 1036              		.cfi_restore 7
+ 1037              		.cfi_def_cfa_offset 0
+ 1038 0018 7047     		bx	lr
+ 1039              	.L71:
+ 1040 001a 00BF     		.align	2
+ 1041              	.L70:
+ 1042 001c 002004E0 		.word	-536600576
+ 1043              		.cfi_endproc
+ 1044              	.LFE154:
+ 1046              		.section	.text.HAL_SYSCFG_SRAM2Erase,"ax",%progbits
+ 1047              		.align	1
+ 1048              		.global	HAL_SYSCFG_SRAM2Erase
+ 1049              		.syntax unified
+ 1050              		.thumb
+ 1051              		.thumb_func
+ 1052              		.fpu fpv4-sp-d16
+ 1054              	HAL_SYSCFG_SRAM2Erase:
+ 1055              	.LFB155:
+ 504:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 505:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 506:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @}
+ 507:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 508:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 509:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /** @defgroup HAL_Exported_Functions_Group4 HAL SYSCFG configuration functions
+ 510:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *  @brief    HAL SYSCFG configuration functions
+ 511:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  *
+ 512:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @verbatim
+ 513:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 514:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****                       ##### HAL SYSCFG configuration functions #####
+ 515:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****  ===============================================================================
+ 516:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     [..]  This section provides functions allowing to:
+ 517:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Start a hardware SRAM2 erase operation
+ 518:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Enable/Disable the Internal FLASH Bank Swapping
+ 519:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Configure the Voltage reference buffer
+ 520:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Enable/Disable the Voltage reference buffer
+ 521:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       (+) Enable/Disable the I/O analog switch voltage booster
+ 522:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 523:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** @endverbatim
+ 524:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @{
+ 525:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 526:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 527:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 528:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Start a hardware SRAM2 erase operation.
+ 529:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   As long as SRAM2 is not erased the SRAM2ER bit will be set.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 28
+
+
+ 530:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         This bit is automatically reset at the end of the SRAM2 erase operation.
+ 531:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 532:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 533:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_SRAM2Erase(void)
+ 534:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1056              		.loc 1 534 0
+ 1057              		.cfi_startproc
+ 1058              		@ args = 0, pretend = 0, frame = 0
+ 1059              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1060              		@ link register save eliminated.
+ 1061 0000 80B4     		push	{r7}
+ 1062              	.LCFI86:
+ 1063              		.cfi_def_cfa_offset 4
+ 1064              		.cfi_offset 7, -4
+ 1065 0002 00AF     		add	r7, sp, #0
+ 1066              	.LCFI87:
+ 1067              		.cfi_def_cfa_register 7
+ 535:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* unlock the write protection of the SRAM2ER bit */
+ 536:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SYSCFG->SKR = 0xCA;
+ 1068              		.loc 1 536 0
+ 1069 0004 064B     		ldr	r3, .L73
+ 1070 0006 CA22     		movs	r2, #202
+ 1071 0008 5A62     		str	r2, [r3, #36]
+ 537:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SYSCFG->SKR = 0x53;
+ 1072              		.loc 1 537 0
+ 1073 000a 054B     		ldr	r3, .L73
+ 1074 000c 5322     		movs	r2, #83
+ 1075 000e 5A62     		str	r2, [r3, #36]
+ 538:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Starts a hardware SRAM2 erase operation*/
+ 539:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *(__IO uint32_t *) SCSR_SRAM2ER_BB = (uint8_t)0x00000001;
+ 1076              		.loc 1 539 0
+ 1077 0010 044B     		ldr	r3, .L73+4
+ 1078 0012 0122     		movs	r2, #1
+ 1079 0014 1A60     		str	r2, [r3]
+ 540:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1080              		.loc 1 540 0
+ 1081 0016 00BF     		nop
+ 1082 0018 BD46     		mov	sp, r7
+ 1083              	.LCFI88:
+ 1084              		.cfi_def_cfa_register 13
+ 1085              		@ sp needed
+ 1086 001a 5DF8047B 		ldr	r7, [sp], #4
+ 1087              	.LCFI89:
+ 1088              		.cfi_restore 7
+ 1089              		.cfi_def_cfa_offset 0
+ 1090 001e 7047     		bx	lr
+ 1091              	.L74:
+ 1092              		.align	2
+ 1093              	.L73:
+ 1094 0020 00000140 		.word	1073807360
+ 1095 0024 00032042 		.word	1109394176
+ 1096              		.cfi_endproc
+ 1097              	.LFE155:
+ 1099              		.section	.text.HAL_SYSCFG_EnableMemorySwappingBank,"ax",%progbits
+ 1100              		.align	1
+ 1101              		.global	HAL_SYSCFG_EnableMemorySwappingBank
+ 1102              		.syntax unified
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 29
+
+
+ 1103              		.thumb
+ 1104              		.thumb_func
+ 1105              		.fpu fpv4-sp-d16
+ 1107              	HAL_SYSCFG_EnableMemorySwappingBank:
+ 1108              	.LFB156:
+ 541:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 542:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 543:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Enable the Internal FLASH Bank Swapping.
+ 544:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 545:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   This function can be used only for STM32L4xx devices.
+ 546:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 547:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   Flash Bank2 mapped at 0x08000000 (and aliased @0x00000000)
+ 548:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         and Flash Bank1 mapped at 0x08100000 (and aliased at 0x00100000)
+ 549:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 550:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 551:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 552:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_EnableMemorySwappingBank(void)
+ 553:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1109              		.loc 1 553 0
+ 1110              		.cfi_startproc
+ 1111              		@ args = 0, pretend = 0, frame = 0
+ 1112              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1113              		@ link register save eliminated.
+ 1114 0000 80B4     		push	{r7}
+ 1115              	.LCFI90:
+ 1116              		.cfi_def_cfa_offset 4
+ 1117              		.cfi_offset 7, -4
+ 1118 0002 00AF     		add	r7, sp, #0
+ 1119              	.LCFI91:
+ 1120              		.cfi_def_cfa_register 7
+ 554:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *(__IO uint32_t *)FB_MODE_BB = (uint32_t)ENABLE;
+ 1121              		.loc 1 554 0
+ 1122 0004 034B     		ldr	r3, .L76
+ 1123 0006 0122     		movs	r2, #1
+ 1124 0008 1A60     		str	r2, [r3]
+ 555:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1125              		.loc 1 555 0
+ 1126 000a 00BF     		nop
+ 1127 000c BD46     		mov	sp, r7
+ 1128              	.LCFI92:
+ 1129              		.cfi_def_cfa_register 13
+ 1130              		@ sp needed
+ 1131 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1132              	.LCFI93:
+ 1133              		.cfi_restore 7
+ 1134              		.cfi_def_cfa_offset 0
+ 1135 0012 7047     		bx	lr
+ 1136              	.L77:
+ 1137              		.align	2
+ 1138              	.L76:
+ 1139 0014 20002042 		.word	1109393440
+ 1140              		.cfi_endproc
+ 1141              	.LFE156:
+ 1143              		.section	.text.HAL_SYSCFG_DisableMemorySwappingBank,"ax",%progbits
+ 1144              		.align	1
+ 1145              		.global	HAL_SYSCFG_DisableMemorySwappingBank
+ 1146              		.syntax unified
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 30
+
+
+ 1147              		.thumb
+ 1148              		.thumb_func
+ 1149              		.fpu fpv4-sp-d16
+ 1151              	HAL_SYSCFG_DisableMemorySwappingBank:
+ 1152              	.LFB157:
+ 556:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 557:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 558:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Disable the Internal FLASH Bank Swapping.
+ 559:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 560:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   This function can be used only for STM32L4xx devices.
+ 561:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 562:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @note   The default state : Flash Bank1 mapped at 0x08000000 (and aliased @0x0000 0000)
+ 563:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *         and Flash Bank2 mapped at 0x08100000 (and aliased at 0x00100000)
+ 564:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 565:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 566:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 567:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_DisableMemorySwappingBank(void)
+ 568:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1153              		.loc 1 568 0
+ 1154              		.cfi_startproc
+ 1155              		@ args = 0, pretend = 0, frame = 0
+ 1156              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1157              		@ link register save eliminated.
+ 1158 0000 80B4     		push	{r7}
+ 1159              	.LCFI94:
+ 1160              		.cfi_def_cfa_offset 4
+ 1161              		.cfi_offset 7, -4
+ 1162 0002 00AF     		add	r7, sp, #0
+ 1163              	.LCFI95:
+ 1164              		.cfi_def_cfa_register 7
+ 569:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 570:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *(__IO uint32_t *)FB_MODE_BB = (uint32_t)DISABLE;
+ 1165              		.loc 1 570 0
+ 1166 0004 034B     		ldr	r3, .L79
+ 1167 0006 0022     		movs	r2, #0
+ 1168 0008 1A60     		str	r2, [r3]
+ 571:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1169              		.loc 1 571 0
+ 1170 000a 00BF     		nop
+ 1171 000c BD46     		mov	sp, r7
+ 1172              	.LCFI96:
+ 1173              		.cfi_def_cfa_register 13
+ 1174              		@ sp needed
+ 1175 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1176              	.LCFI97:
+ 1177              		.cfi_restore 7
+ 1178              		.cfi_def_cfa_offset 0
+ 1179 0012 7047     		bx	lr
+ 1180              	.L80:
+ 1181              		.align	2
+ 1182              	.L79:
+ 1183 0014 20002042 		.word	1109393440
+ 1184              		.cfi_endproc
+ 1185              	.LFE157:
+ 1187              		.section	.text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig,"ax",%progbits
+ 1188              		.align	1
+ 1189              		.global	HAL_SYSCFG_VREFBUF_VoltageScalingConfig
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 31
+
+
+ 1190              		.syntax unified
+ 1191              		.thumb
+ 1192              		.thumb_func
+ 1193              		.fpu fpv4-sp-d16
+ 1195              	HAL_SYSCFG_VREFBUF_VoltageScalingConfig:
+ 1196              	.LFB158:
+ 572:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 573:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #if defined(VREFBUF)
+ 574:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 575:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief Configure the internal voltage reference buffer voltage scale.
+ 576:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @param VoltageScaling  specifies the output voltage to achieve
+ 577:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *          This parameter can be one of the following values:
+ 578:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *            @arg SYSCFG_VREFBUF_VOLTAGE_SCALE0: VREF_OUT1 around 2.048 V. 
+ 579:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *                                                This requires VDDA equal to or higher than 2.4 V
+ 580:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *            @arg SYSCFG_VREFBUF_VOLTAGE_SCALE1: VREF_OUT2 around 2.5 V. 
+ 581:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *                                                This requires VDDA equal to or higher than 2.8 V
+ 582:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 583:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 584:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_VREFBUF_VoltageScalingConfig(uint32_t VoltageScaling)
+ 585:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1197              		.loc 1 585 0
+ 1198              		.cfi_startproc
+ 1199              		@ args = 0, pretend = 0, frame = 8
+ 1200              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1201              		@ link register save eliminated.
+ 1202 0000 80B4     		push	{r7}
+ 1203              	.LCFI98:
+ 1204              		.cfi_def_cfa_offset 4
+ 1205              		.cfi_offset 7, -4
+ 1206 0002 83B0     		sub	sp, sp, #12
+ 1207              	.LCFI99:
+ 1208              		.cfi_def_cfa_offset 16
+ 1209 0004 00AF     		add	r7, sp, #0
+ 1210              	.LCFI100:
+ 1211              		.cfi_def_cfa_register 7
+ 1212 0006 7860     		str	r0, [r7, #4]
+ 586:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Check the parameters */
+ 587:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   assert_param(IS_SYSCFG_VREFBUF_VOLTAGE_SCALE(VoltageScaling));
+ 588:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   
+ 589:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   MODIFY_REG(VREFBUF->CSR, VREFBUF_CSR_VRS, VoltageScaling);
+ 1213              		.loc 1 589 0
+ 1214 0008 064B     		ldr	r3, .L82
+ 1215 000a 1B68     		ldr	r3, [r3]
+ 1216 000c 23F00402 		bic	r2, r3, #4
+ 1217 0010 0449     		ldr	r1, .L82
+ 1218 0012 7B68     		ldr	r3, [r7, #4]
+ 1219 0014 1343     		orrs	r3, r3, r2
+ 1220 0016 0B60     		str	r3, [r1]
+ 590:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1221              		.loc 1 590 0
+ 1222 0018 00BF     		nop
+ 1223 001a 0C37     		adds	r7, r7, #12
+ 1224              	.LCFI101:
+ 1225              		.cfi_def_cfa_offset 4
+ 1226 001c BD46     		mov	sp, r7
+ 1227              	.LCFI102:
+ 1228              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 32
+
+
+ 1229              		@ sp needed
+ 1230 001e 5DF8047B 		ldr	r7, [sp], #4
+ 1231              	.LCFI103:
+ 1232              		.cfi_restore 7
+ 1233              		.cfi_def_cfa_offset 0
+ 1234 0022 7047     		bx	lr
+ 1235              	.L83:
+ 1236              		.align	2
+ 1237              	.L82:
+ 1238 0024 30000140 		.word	1073807408
+ 1239              		.cfi_endproc
+ 1240              	.LFE158:
+ 1242              		.section	.text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig,"ax",%progbits
+ 1243              		.align	1
+ 1244              		.global	HAL_SYSCFG_VREFBUF_HighImpedanceConfig
+ 1245              		.syntax unified
+ 1246              		.thumb
+ 1247              		.thumb_func
+ 1248              		.fpu fpv4-sp-d16
+ 1250              	HAL_SYSCFG_VREFBUF_HighImpedanceConfig:
+ 1251              	.LFB159:
+ 591:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 592:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 593:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief Configure the internal voltage reference buffer high impedance mode.
+ 594:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @param Mode  specifies the high impedance mode
+ 595:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *          This parameter can be one of the following values:
+ 596:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *            @arg SYSCFG_VREFBUF_HIGH_IMPEDANCE_DISABLE: VREF+ pin is internally connect to VREFI
+ 597:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *            @arg SYSCFG_VREFBUF_HIGH_IMPEDANCE_ENABLE: VREF+ pin is high impedance.
+ 598:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 599:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 600:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_VREFBUF_HighImpedanceConfig(uint32_t Mode)
+ 601:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1252              		.loc 1 601 0
+ 1253              		.cfi_startproc
+ 1254              		@ args = 0, pretend = 0, frame = 8
+ 1255              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1256              		@ link register save eliminated.
+ 1257 0000 80B4     		push	{r7}
+ 1258              	.LCFI104:
+ 1259              		.cfi_def_cfa_offset 4
+ 1260              		.cfi_offset 7, -4
+ 1261 0002 83B0     		sub	sp, sp, #12
+ 1262              	.LCFI105:
+ 1263              		.cfi_def_cfa_offset 16
+ 1264 0004 00AF     		add	r7, sp, #0
+ 1265              	.LCFI106:
+ 1266              		.cfi_def_cfa_register 7
+ 1267 0006 7860     		str	r0, [r7, #4]
+ 602:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Check the parameters */
+ 603:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   assert_param(IS_SYSCFG_VREFBUF_HIGH_IMPEDANCE(Mode));
+ 604:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   
+ 605:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   MODIFY_REG(VREFBUF->CSR, VREFBUF_CSR_HIZ, Mode);
+ 1268              		.loc 1 605 0
+ 1269 0008 064B     		ldr	r3, .L85
+ 1270 000a 1B68     		ldr	r3, [r3]
+ 1271 000c 23F00202 		bic	r2, r3, #2
+ 1272 0010 0449     		ldr	r1, .L85
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 33
+
+
+ 1273 0012 7B68     		ldr	r3, [r7, #4]
+ 1274 0014 1343     		orrs	r3, r3, r2
+ 1275 0016 0B60     		str	r3, [r1]
+ 606:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1276              		.loc 1 606 0
+ 1277 0018 00BF     		nop
+ 1278 001a 0C37     		adds	r7, r7, #12
+ 1279              	.LCFI107:
+ 1280              		.cfi_def_cfa_offset 4
+ 1281 001c BD46     		mov	sp, r7
+ 1282              	.LCFI108:
+ 1283              		.cfi_def_cfa_register 13
+ 1284              		@ sp needed
+ 1285 001e 5DF8047B 		ldr	r7, [sp], #4
+ 1286              	.LCFI109:
+ 1287              		.cfi_restore 7
+ 1288              		.cfi_def_cfa_offset 0
+ 1289 0022 7047     		bx	lr
+ 1290              	.L86:
+ 1291              		.align	2
+ 1292              	.L85:
+ 1293 0024 30000140 		.word	1073807408
+ 1294              		.cfi_endproc
+ 1295              	.LFE159:
+ 1297              		.section	.text.HAL_SYSCFG_VREFBUF_TrimmingConfig,"ax",%progbits
+ 1298              		.align	1
+ 1299              		.global	HAL_SYSCFG_VREFBUF_TrimmingConfig
+ 1300              		.syntax unified
+ 1301              		.thumb
+ 1302              		.thumb_func
+ 1303              		.fpu fpv4-sp-d16
+ 1305              	HAL_SYSCFG_VREFBUF_TrimmingConfig:
+ 1306              	.LFB160:
+ 607:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 608:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 609:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Tune the Internal Voltage Reference buffer (VREFBUF).
+ 610:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 611:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 612:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_VREFBUF_TrimmingConfig(uint32_t TrimmingValue)
+ 613:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1307              		.loc 1 613 0
+ 1308              		.cfi_startproc
+ 1309              		@ args = 0, pretend = 0, frame = 8
+ 1310              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1311              		@ link register save eliminated.
+ 1312 0000 80B4     		push	{r7}
+ 1313              	.LCFI110:
+ 1314              		.cfi_def_cfa_offset 4
+ 1315              		.cfi_offset 7, -4
+ 1316 0002 83B0     		sub	sp, sp, #12
+ 1317              	.LCFI111:
+ 1318              		.cfi_def_cfa_offset 16
+ 1319 0004 00AF     		add	r7, sp, #0
+ 1320              	.LCFI112:
+ 1321              		.cfi_def_cfa_register 7
+ 1322 0006 7860     		str	r0, [r7, #4]
+ 614:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Check the parameters */
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 34
+
+
+ 615:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   assert_param(IS_SYSCFG_VREFBUF_TRIMMING(TrimmingValue));
+ 616:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   
+ 617:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   MODIFY_REG(VREFBUF->CCR, VREFBUF_CCR_TRIM, TrimmingValue);
+ 1323              		.loc 1 617 0
+ 1324 0008 064B     		ldr	r3, .L88
+ 1325 000a 5B68     		ldr	r3, [r3, #4]
+ 1326 000c 23F03F02 		bic	r2, r3, #63
+ 1327 0010 0449     		ldr	r1, .L88
+ 1328 0012 7B68     		ldr	r3, [r7, #4]
+ 1329 0014 1343     		orrs	r3, r3, r2
+ 1330 0016 4B60     		str	r3, [r1, #4]
+ 618:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1331              		.loc 1 618 0
+ 1332 0018 00BF     		nop
+ 1333 001a 0C37     		adds	r7, r7, #12
+ 1334              	.LCFI113:
+ 1335              		.cfi_def_cfa_offset 4
+ 1336 001c BD46     		mov	sp, r7
+ 1337              	.LCFI114:
+ 1338              		.cfi_def_cfa_register 13
+ 1339              		@ sp needed
+ 1340 001e 5DF8047B 		ldr	r7, [sp], #4
+ 1341              	.LCFI115:
+ 1342              		.cfi_restore 7
+ 1343              		.cfi_def_cfa_offset 0
+ 1344 0022 7047     		bx	lr
+ 1345              	.L89:
+ 1346              		.align	2
+ 1347              	.L88:
+ 1348 0024 30000140 		.word	1073807408
+ 1349              		.cfi_endproc
+ 1350              	.LFE160:
+ 1352              		.section	.text.HAL_SYSCFG_EnableVREFBUF,"ax",%progbits
+ 1353              		.align	1
+ 1354              		.global	HAL_SYSCFG_EnableVREFBUF
+ 1355              		.syntax unified
+ 1356              		.thumb
+ 1357              		.thumb_func
+ 1358              		.fpu fpv4-sp-d16
+ 1360              	HAL_SYSCFG_EnableVREFBUF:
+ 1361              	.LFB161:
+ 619:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 620:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 621:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Enable the Internal Voltage Reference buffer (VREFBUF).
+ 622:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval HAL_OK/HAL_TIMEOUT
+ 623:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 624:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** HAL_StatusTypeDef HAL_SYSCFG_EnableVREFBUF(void)
+ 625:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1362              		.loc 1 625 0
+ 1363              		.cfi_startproc
+ 1364              		@ args = 0, pretend = 0, frame = 8
+ 1365              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1366 0000 80B5     		push	{r7, lr}
+ 1367              	.LCFI116:
+ 1368              		.cfi_def_cfa_offset 8
+ 1369              		.cfi_offset 7, -8
+ 1370              		.cfi_offset 14, -4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 35
+
+
+ 1371 0002 82B0     		sub	sp, sp, #8
+ 1372              	.LCFI117:
+ 1373              		.cfi_def_cfa_offset 16
+ 1374 0004 00AF     		add	r7, sp, #0
+ 1375              	.LCFI118:
+ 1376              		.cfi_def_cfa_register 7
+ 626:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   uint32_t  tickstart = 0;
+ 1377              		.loc 1 626 0
+ 1378 0006 0023     		movs	r3, #0
+ 1379 0008 7B60     		str	r3, [r7, #4]
+ 627:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   
+ 628:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SET_BIT(VREFBUF->CSR, VREFBUF_CSR_ENVR);
+ 1380              		.loc 1 628 0
+ 1381 000a 0F4B     		ldr	r3, .L94
+ 1382 000c 1B68     		ldr	r3, [r3]
+ 1383 000e 0E4A     		ldr	r2, .L94
+ 1384 0010 43F00103 		orr	r3, r3, #1
+ 1385 0014 1360     		str	r3, [r2]
+ 629:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   
+ 630:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Get Start Tick*/
+ 631:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   tickstart = HAL_GetTick();
+ 1386              		.loc 1 631 0
+ 1387 0016 FFF7FEFF 		bl	HAL_GetTick
+ 1388 001a 7860     		str	r0, [r7, #4]
+ 632:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 633:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   /* Wait for VRR bit  */
+ 634:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   while(READ_BIT(VREFBUF->CSR, VREFBUF_CSR_VRR) == RESET)
+ 1389              		.loc 1 634 0
+ 1390 001c 08E0     		b	.L91
+ 1391              	.L93:
+ 635:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   {
+ 636:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     if((HAL_GetTick() - tickstart) > VREFBUF_TIMEOUT_VALUE)
+ 1392              		.loc 1 636 0
+ 1393 001e FFF7FEFF 		bl	HAL_GetTick
+ 1394 0022 0246     		mov	r2, r0
+ 1395 0024 7B68     		ldr	r3, [r7, #4]
+ 1396 0026 D31A     		subs	r3, r2, r3
+ 1397 0028 0A2B     		cmp	r3, #10
+ 1398 002a 01D9     		bls	.L91
+ 637:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     {
+ 638:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****       return HAL_TIMEOUT;
+ 1399              		.loc 1 638 0
+ 1400 002c 0323     		movs	r3, #3
+ 1401 002e 06E0     		b	.L92
+ 1402              	.L91:
+ 634:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   {
+ 1403              		.loc 1 634 0
+ 1404 0030 054B     		ldr	r3, .L94
+ 1405 0032 1B68     		ldr	r3, [r3]
+ 1406 0034 03F00803 		and	r3, r3, #8
+ 1407 0038 002B     		cmp	r3, #0
+ 1408 003a F0D0     		beq	.L93
+ 639:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****     }
+ 640:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   }
+ 641:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   
+ 642:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   return HAL_OK;
+ 1409              		.loc 1 642 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 36
+
+
+ 1410 003c 0023     		movs	r3, #0
+ 1411              	.L92:
+ 643:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1412              		.loc 1 643 0
+ 1413 003e 1846     		mov	r0, r3
+ 1414 0040 0837     		adds	r7, r7, #8
+ 1415              	.LCFI119:
+ 1416              		.cfi_def_cfa_offset 8
+ 1417 0042 BD46     		mov	sp, r7
+ 1418              	.LCFI120:
+ 1419              		.cfi_def_cfa_register 13
+ 1420              		@ sp needed
+ 1421 0044 80BD     		pop	{r7, pc}
+ 1422              	.L95:
+ 1423 0046 00BF     		.align	2
+ 1424              	.L94:
+ 1425 0048 30000140 		.word	1073807408
+ 1426              		.cfi_endproc
+ 1427              	.LFE161:
+ 1429              		.section	.text.HAL_SYSCFG_DisableVREFBUF,"ax",%progbits
+ 1430              		.align	1
+ 1431              		.global	HAL_SYSCFG_DisableVREFBUF
+ 1432              		.syntax unified
+ 1433              		.thumb
+ 1434              		.thumb_func
+ 1435              		.fpu fpv4-sp-d16
+ 1437              	HAL_SYSCFG_DisableVREFBUF:
+ 1438              	.LFB162:
+ 644:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 645:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 646:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Disable the Internal Voltage Reference buffer (VREFBUF).
+ 647:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 648:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 649:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 650:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_DisableVREFBUF(void)
+ 651:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1439              		.loc 1 651 0
+ 1440              		.cfi_startproc
+ 1441              		@ args = 0, pretend = 0, frame = 0
+ 1442              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1443              		@ link register save eliminated.
+ 1444 0000 80B4     		push	{r7}
+ 1445              	.LCFI121:
+ 1446              		.cfi_def_cfa_offset 4
+ 1447              		.cfi_offset 7, -4
+ 1448 0002 00AF     		add	r7, sp, #0
+ 1449              	.LCFI122:
+ 1450              		.cfi_def_cfa_register 7
+ 652:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   CLEAR_BIT(VREFBUF->CSR, VREFBUF_CSR_ENVR);
+ 1451              		.loc 1 652 0
+ 1452 0004 054B     		ldr	r3, .L97
+ 1453 0006 1B68     		ldr	r3, [r3]
+ 1454 0008 044A     		ldr	r2, .L97
+ 1455 000a 23F00103 		bic	r3, r3, #1
+ 1456 000e 1360     		str	r3, [r2]
+ 653:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1457              		.loc 1 653 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 37
+
+
+ 1458 0010 00BF     		nop
+ 1459 0012 BD46     		mov	sp, r7
+ 1460              	.LCFI123:
+ 1461              		.cfi_def_cfa_register 13
+ 1462              		@ sp needed
+ 1463 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1464              	.LCFI124:
+ 1465              		.cfi_restore 7
+ 1466              		.cfi_def_cfa_offset 0
+ 1467 0018 7047     		bx	lr
+ 1468              	.L98:
+ 1469 001a 00BF     		.align	2
+ 1470              	.L97:
+ 1471 001c 30000140 		.word	1073807408
+ 1472              		.cfi_endproc
+ 1473              	.LFE162:
+ 1475              		.section	.text.HAL_SYSCFG_EnableIOAnalogSwitchBooster,"ax",%progbits
+ 1476              		.align	1
+ 1477              		.global	HAL_SYSCFG_EnableIOAnalogSwitchBooster
+ 1478              		.syntax unified
+ 1479              		.thumb
+ 1480              		.thumb_func
+ 1481              		.fpu fpv4-sp-d16
+ 1483              	HAL_SYSCFG_EnableIOAnalogSwitchBooster:
+ 1484              	.LFB163:
+ 654:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** #endif /* VREFBUF */
+ 655:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 656:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 657:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Enable the I/O analog switch voltage booster
+ 658:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 659:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 660:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 661:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_EnableIOAnalogSwitchBooster(void)
+ 662:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1485              		.loc 1 662 0
+ 1486              		.cfi_startproc
+ 1487              		@ args = 0, pretend = 0, frame = 0
+ 1488              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1489              		@ link register save eliminated.
+ 1490 0000 80B4     		push	{r7}
+ 1491              	.LCFI125:
+ 1492              		.cfi_def_cfa_offset 4
+ 1493              		.cfi_offset 7, -4
+ 1494 0002 00AF     		add	r7, sp, #0
+ 1495              	.LCFI126:
+ 1496              		.cfi_def_cfa_register 7
+ 663:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   SET_BIT(SYSCFG->CFGR1, SYSCFG_CFGR1_BOOSTEN);
+ 1497              		.loc 1 663 0
+ 1498 0004 054B     		ldr	r3, .L100
+ 1499 0006 5B68     		ldr	r3, [r3, #4]
+ 1500 0008 044A     		ldr	r2, .L100
+ 1501 000a 43F48073 		orr	r3, r3, #256
+ 1502 000e 5360     		str	r3, [r2, #4]
+ 664:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1503              		.loc 1 664 0
+ 1504 0010 00BF     		nop
+ 1505 0012 BD46     		mov	sp, r7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 38
+
+
+ 1506              	.LCFI127:
+ 1507              		.cfi_def_cfa_register 13
+ 1508              		@ sp needed
+ 1509 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1510              	.LCFI128:
+ 1511              		.cfi_restore 7
+ 1512              		.cfi_def_cfa_offset 0
+ 1513 0018 7047     		bx	lr
+ 1514              	.L101:
+ 1515 001a 00BF     		.align	2
+ 1516              	.L100:
+ 1517 001c 00000140 		.word	1073807360
+ 1518              		.cfi_endproc
+ 1519              	.LFE163:
+ 1521              		.section	.text.HAL_SYSCFG_DisableIOAnalogSwitchBooster,"ax",%progbits
+ 1522              		.align	1
+ 1523              		.global	HAL_SYSCFG_DisableIOAnalogSwitchBooster
+ 1524              		.syntax unified
+ 1525              		.thumb
+ 1526              		.thumb_func
+ 1527              		.fpu fpv4-sp-d16
+ 1529              	HAL_SYSCFG_DisableIOAnalogSwitchBooster:
+ 1530              	.LFB164:
+ 665:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** 
+ 666:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** /**
+ 667:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @brief  Disable the I/O analog switch voltage booster
+ 668:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   *
+ 669:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   * @retval None
+ 670:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   */
+ 671:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** void HAL_SYSCFG_DisableIOAnalogSwitchBooster(void)
+ 672:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** {
+ 1531              		.loc 1 672 0
+ 1532              		.cfi_startproc
+ 1533              		@ args = 0, pretend = 0, frame = 0
+ 1534              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1535              		@ link register save eliminated.
+ 1536 0000 80B4     		push	{r7}
+ 1537              	.LCFI129:
+ 1538              		.cfi_def_cfa_offset 4
+ 1539              		.cfi_offset 7, -4
+ 1540 0002 00AF     		add	r7, sp, #0
+ 1541              	.LCFI130:
+ 1542              		.cfi_def_cfa_register 7
+ 673:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c ****   CLEAR_BIT(SYSCFG->CFGR1, SYSCFG_CFGR1_BOOSTEN);
+ 1543              		.loc 1 673 0
+ 1544 0004 054B     		ldr	r3, .L103
+ 1545 0006 5B68     		ldr	r3, [r3, #4]
+ 1546 0008 044A     		ldr	r2, .L103
+ 1547 000a 23F48073 		bic	r3, r3, #256
+ 1548 000e 5360     		str	r3, [r2, #4]
+ 674:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Src\stm32l4xx_hal.c **** }
+ 1549              		.loc 1 674 0
+ 1550 0010 00BF     		nop
+ 1551 0012 BD46     		mov	sp, r7
+ 1552              	.LCFI131:
+ 1553              		.cfi_def_cfa_register 13
+ 1554              		@ sp needed
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 39
+
+
+ 1555 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1556              	.LCFI132:
+ 1557              		.cfi_restore 7
+ 1558              		.cfi_def_cfa_offset 0
+ 1559 0018 7047     		bx	lr
+ 1560              	.L104:
+ 1561 001a 00BF     		.align	2
+ 1562              	.L103:
+ 1563 001c 00000140 		.word	1073807360
+ 1564              		.cfi_endproc
+ 1565              	.LFE164:
+ 1567              		.text
+ 1568              	.Letext0:
+ 1569              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1570              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1571              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1572              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1573              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1574              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1575              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1576              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1577              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1578              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 1579              		.file 12 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l4xx.h"
+ 1580              		.file 13 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1581              		.file 14 "D:/iot/felix2/kernel/include/los_config.h"
+ 1582              		.file 15 "D:/iot/felix2/kernel/include/los_list.h"
+ 1583              		.file 16 "D:/iot/felix2/kernel/include/los_err.h"
+ 1584              		.file 17 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1585              		.file 18 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1586              		.file 19 "D:/iot/felix2/kernel/include/los_event.h"
+ 1587              		.file 20 "D:/iot/felix2/kernel/include/los_task.h"
+ 1588              		.file 21 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1589              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1590              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 40
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32l4xx_hal.c
+                            *COM*:00000004 uwTick
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:19     .text.HAL_Init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:26     .text.HAL_Init:00000000 HAL_Init
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:213    .text.HAL_InitTick:00000000 HAL_InitTick
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:141    .text.HAL_MspInit:00000000 HAL_MspInit
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:58     .text.HAL_DeInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:65     .text.HAL_DeInit:00000000 HAL_DeInit
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:177    .text.HAL_MspDeInit:00000000 HAL_MspDeInit
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:129    .text.HAL_DeInit:00000054 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:134    .text.HAL_MspInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:170    .text.HAL_MspDeInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:206    .text.HAL_InitTick:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:259    .text.HAL_InitTick:00000030 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:265    .text.HAL_IncTick:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:272    .text.HAL_IncTick:00000000 HAL_IncTick
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:306    .text.HAL_IncTick:00000018 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:311    .text.HAL_GetTick:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:318    .text.HAL_GetTick:00000000 HAL_GetTick
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:349    .text.HAL_GetTick:00000014 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:354    .text.HAL_Delay:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:361    .text.HAL_Delay:00000000 HAL_Delay
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:419    .text.HAL_SuspendTick:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:426    .text.HAL_SuspendTick:00000000 HAL_SuspendTick
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:460    .text.HAL_SuspendTick:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:465    .text.HAL_ResumeTick:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:472    .text.HAL_ResumeTick:00000000 HAL_ResumeTick
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:506    .text.HAL_ResumeTick:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:511    .text.HAL_GetHalVersion:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:518    .text.HAL_GetHalVersion:00000000 HAL_GetHalVersion
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:548    .text.HAL_GetHalVersion:00000010 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:553    .text.HAL_GetREVID:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:560    .text.HAL_GetREVID:00000000 HAL_GetREVID
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:593    .text.HAL_GetREVID:00000018 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:598    .text.HAL_GetDEVID:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:605    .text.HAL_GetDEVID:00000000 HAL_GetDEVID
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:637    .text.HAL_GetDEVID:00000018 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:642    .text.HAL_GetUIDw0:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:649    .text.HAL_GetUIDw0:00000000 HAL_GetUIDw0
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:680    .text.HAL_GetUIDw0:00000014 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:685    .text.HAL_GetUIDw1:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:692    .text.HAL_GetUIDw1:00000000 HAL_GetUIDw1
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:723    .text.HAL_GetUIDw1:00000014 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:728    .text.HAL_GetUIDw2:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:735    .text.HAL_GetUIDw2:00000000 HAL_GetUIDw2
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:766    .text.HAL_GetUIDw2:00000014 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:771    .text.HAL_DBGMCU_EnableDBGSleepMode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:778    .text.HAL_DBGMCU_EnableDBGSleepMode:00000000 HAL_DBGMCU_EnableDBGSleepMode
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:812    .text.HAL_DBGMCU_EnableDBGSleepMode:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:817    .text.HAL_DBGMCU_DisableDBGSleepMode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:824    .text.HAL_DBGMCU_DisableDBGSleepMode:00000000 HAL_DBGMCU_DisableDBGSleepMode
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:858    .text.HAL_DBGMCU_DisableDBGSleepMode:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:863    .text.HAL_DBGMCU_EnableDBGStopMode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:870    .text.HAL_DBGMCU_EnableDBGStopMode:00000000 HAL_DBGMCU_EnableDBGStopMode
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:904    .text.HAL_DBGMCU_EnableDBGStopMode:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:909    .text.HAL_DBGMCU_DisableDBGStopMode:00000000 $t
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cctuhGVj.s 			page 41
+
+
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:916    .text.HAL_DBGMCU_DisableDBGStopMode:00000000 HAL_DBGMCU_DisableDBGStopMode
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:950    .text.HAL_DBGMCU_DisableDBGStopMode:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:955    .text.HAL_DBGMCU_EnableDBGStandbyMode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:962    .text.HAL_DBGMCU_EnableDBGStandbyMode:00000000 HAL_DBGMCU_EnableDBGStandbyMode
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:996    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1001   .text.HAL_DBGMCU_DisableDBGStandbyMode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1008   .text.HAL_DBGMCU_DisableDBGStandbyMode:00000000 HAL_DBGMCU_DisableDBGStandbyMode
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1042   .text.HAL_DBGMCU_DisableDBGStandbyMode:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1047   .text.HAL_SYSCFG_SRAM2Erase:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1054   .text.HAL_SYSCFG_SRAM2Erase:00000000 HAL_SYSCFG_SRAM2Erase
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1094   .text.HAL_SYSCFG_SRAM2Erase:00000020 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1100   .text.HAL_SYSCFG_EnableMemorySwappingBank:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1107   .text.HAL_SYSCFG_EnableMemorySwappingBank:00000000 HAL_SYSCFG_EnableMemorySwappingBank
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1139   .text.HAL_SYSCFG_EnableMemorySwappingBank:00000014 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1144   .text.HAL_SYSCFG_DisableMemorySwappingBank:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1151   .text.HAL_SYSCFG_DisableMemorySwappingBank:00000000 HAL_SYSCFG_DisableMemorySwappingBank
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1183   .text.HAL_SYSCFG_DisableMemorySwappingBank:00000014 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1188   .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1195   .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:00000000 HAL_SYSCFG_VREFBUF_VoltageScalingConfig
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1238   .text.HAL_SYSCFG_VREFBUF_VoltageScalingConfig:00000024 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1243   .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1250   .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:00000000 HAL_SYSCFG_VREFBUF_HighImpedanceConfig
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1293   .text.HAL_SYSCFG_VREFBUF_HighImpedanceConfig:00000024 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1298   .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1305   .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:00000000 HAL_SYSCFG_VREFBUF_TrimmingConfig
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1348   .text.HAL_SYSCFG_VREFBUF_TrimmingConfig:00000024 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1353   .text.HAL_SYSCFG_EnableVREFBUF:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1360   .text.HAL_SYSCFG_EnableVREFBUF:00000000 HAL_SYSCFG_EnableVREFBUF
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1425   .text.HAL_SYSCFG_EnableVREFBUF:00000048 $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1430   .text.HAL_SYSCFG_DisableVREFBUF:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1437   .text.HAL_SYSCFG_DisableVREFBUF:00000000 HAL_SYSCFG_DisableVREFBUF
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1471   .text.HAL_SYSCFG_DisableVREFBUF:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1476   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1483   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:00000000 HAL_SYSCFG_EnableIOAnalogSwitchBooster
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1517   .text.HAL_SYSCFG_EnableIOAnalogSwitchBooster:0000001c $d
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1522   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1529   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:00000000 HAL_SYSCFG_DisableIOAnalogSwitchBooster
+C:\Users\91458\AppData\Local\Temp\cctuhGVj.s:1563   .text.HAL_SYSCFG_DisableIOAnalogSwitchBooster:0000001c $d
+
+UNDEFINED SYMBOLS
+HAL_NVIC_SetPriorityGrouping
+HAL_SYSTICK_Config
+HAL_NVIC_SetPriority
+SystemCoreClock

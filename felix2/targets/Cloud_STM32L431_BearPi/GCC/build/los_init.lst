@@ -1,0 +1,736 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"los_init.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	m_aucSysMem0,4,4
+  18              		.section	.text.osEnableFPU,"ax",%progbits
+  19              		.align	1
+  20              		.global	osEnableFPU
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	osEnableFPU:
+  27              	.LFB133:
+  28              		.file 1 "D:/iot/felix2/kernel/los_init.c"
+   1:D:/iot/felix2/kernel\los_init.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/kernel\los_init.c ****  * Copyright (c) <2013-2015>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/kernel\los_init.c ****  * All rights reserved.
+   4:D:/iot/felix2/kernel\los_init.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/kernel\los_init.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/kernel\los_init.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/kernel\los_init.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/kernel\los_init.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/kernel\los_init.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/kernel\los_init.c ****  * provided with the distribution.
+  11:D:/iot/felix2/kernel\los_init.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/kernel\los_init.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/kernel\los_init.c ****  * permission.
+  14:D:/iot/felix2/kernel\los_init.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/kernel\los_init.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/kernel\los_init.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/kernel\los_init.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/kernel\los_init.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/kernel\los_init.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/kernel\los_init.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/kernel\los_init.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/kernel\los_init.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/kernel\los_init.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/kernel\los_init.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/kernel\los_init.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/kernel\los_init.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/kernel\los_init.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/kernel\los_init.c ****  * ===============================================
+  29:D:/iot/felix2/kernel\los_init.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/kernel\los_init.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 2
+
+
+  31:D:/iot/felix2/kernel\los_init.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/kernel\los_init.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/kernel\los_init.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/kernel\los_init.c **** #include "los_sys.h"
+  35:D:/iot/felix2/kernel\los_init.c **** #include "los_tick.h"
+  36:D:/iot/felix2/kernel\los_init.c **** #include "los_task.ph"
+  37:D:/iot/felix2/kernel\los_init.c **** #include "los_config.h"
+  38:D:/iot/felix2/kernel\los_init.c **** 
+  39:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_PLATFORM_EXC == YES)
+  40:D:/iot/felix2/kernel\los_init.c **** #include "los_exc.ph"
+  41:D:/iot/felix2/kernel\los_init.c **** #endif
+  42:D:/iot/felix2/kernel\los_init.c **** 
+  43:D:/iot/felix2/kernel\los_init.c **** #ifdef __cplusplus
+  44:D:/iot/felix2/kernel\los_init.c **** #if __cplusplus
+  45:D:/iot/felix2/kernel\los_init.c **** extern "C" {
+  46:D:/iot/felix2/kernel\los_init.c **** #endif /* __cpluscplus */
+  47:D:/iot/felix2/kernel\los_init.c **** #endif /* __cpluscplus */
+  48:D:/iot/felix2/kernel\los_init.c **** 
+  49:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_BSS UINT8* m_aucSysMem0;
+  50:D:/iot/felix2/kernel\los_init.c **** 
+  51:D:/iot/felix2/kernel\los_init.c **** #if ((LOSCFG_PLATFORM_EXC == YES) && (LOSCFG_SAVE_EXC_INFO == YES))
+  52:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_BSS UINT8 m_aucTaskArray[MAX_EXC_MEM_SIZE];
+  53:D:/iot/felix2/kernel\los_init.c **** #endif
+  54:D:/iot/felix2/kernel\los_init.c **** 
+  55:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_TEXT_INIT void osEnableFPU(void)
+  56:D:/iot/felix2/kernel\los_init.c **** {
+  29              		.loc 1 56 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 80B4     		push	{r7}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 4
+  37              		.cfi_offset 7, -4
+  38 0002 00AF     		add	r7, sp, #0
+  39              	.LCFI1:
+  40              		.cfi_def_cfa_register 7
+  57:D:/iot/felix2/kernel\los_init.c ****     *(volatile UINT32 *)0xE000ED88 |= ((3UL << 20)|(3UL << 22));
+  41              		.loc 1 57 0
+  42 0004 054B     		ldr	r3, .L2
+  43 0006 1B68     		ldr	r3, [r3]
+  44 0008 044A     		ldr	r2, .L2
+  45 000a 43F47003 		orr	r3, r3, #15728640
+  46 000e 1360     		str	r3, [r2]
+  58:D:/iot/felix2/kernel\los_init.c **** }
+  47              		.loc 1 58 0
+  48 0010 00BF     		nop
+  49 0012 BD46     		mov	sp, r7
+  50              	.LCFI2:
+  51              		.cfi_def_cfa_register 13
+  52              		@ sp needed
+  53 0014 5DF8047B 		ldr	r7, [sp], #4
+  54              	.LCFI3:
+  55              		.cfi_restore 7
+  56              		.cfi_def_cfa_offset 0
+  57 0018 7047     		bx	lr
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 3
+
+
+  58              	.L3:
+  59 001a 00BF     		.align	2
+  60              	.L2:
+  61 001c 88ED00E0 		.word	-536810104
+  62              		.cfi_endproc
+  63              	.LFE133:
+  65              		.section	.text.LOS_Reboot,"ax",%progbits
+  66              		.align	1
+  67              		.global	LOS_Reboot
+  68              		.syntax unified
+  69              		.thumb
+  70              		.thumb_func
+  71              		.fpu fpv4-sp-d16
+  73              	LOS_Reboot:
+  74              	.LFB134:
+  59:D:/iot/felix2/kernel\los_init.c **** 
+  60:D:/iot/felix2/kernel\los_init.c **** /*****************************************************************************
+  61:D:/iot/felix2/kernel\los_init.c ****  Function    : LOS_Reboot
+  62:D:/iot/felix2/kernel\los_init.c ****  Description : system exception, die in here, wait for watchdog.
+  63:D:/iot/felix2/kernel\los_init.c ****  Input       : None
+  64:D:/iot/felix2/kernel\los_init.c ****  Output      : None
+  65:D:/iot/felix2/kernel\los_init.c ****  Return      : None
+  66:D:/iot/felix2/kernel\los_init.c ****  *****************************************************************************/
+  67:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_TEXT_INIT VOID LOS_Reboot(VOID)
+  68:D:/iot/felix2/kernel\los_init.c **** {
+  75              		.loc 1 68 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 1, uses_anonymous_args = 0
+  79 0000 80B5     		push	{r7, lr}
+  80              	.LCFI4:
+  81              		.cfi_def_cfa_offset 8
+  82              		.cfi_offset 7, -8
+  83              		.cfi_offset 14, -4
+  84 0002 00AF     		add	r7, sp, #0
+  85              	.LCFI5:
+  86              		.cfi_def_cfa_register 7
+  69:D:/iot/felix2/kernel\los_init.c ****     (VOID) LOS_IntLock();
+  87              		.loc 1 69 0
+  88 0004 FFF7FEFF 		bl	LOS_IntLock
+  89              	.L5:
+  70:D:/iot/felix2/kernel\los_init.c ****     while (1)
+  90              		.loc 1 70 0 discriminator 1
+  91 0008 FEE7     		b	.L5
+  92              		.cfi_endproc
+  93              	.LFE134:
+  95              		.section	.text.osRegister,"ax",%progbits
+  96              		.align	1
+  97              		.syntax unified
+  98              		.thumb
+  99              		.thumb_func
+ 100              		.fpu fpv4-sp-d16
+ 102              	osRegister:
+ 103              	.LFB135:
+  71:D:/iot/felix2/kernel\los_init.c ****     {
+  72:D:/iot/felix2/kernel\los_init.c ****     }
+  73:D:/iot/felix2/kernel\los_init.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 4
+
+
+  74:D:/iot/felix2/kernel\los_init.c **** /*****************************************************************************
+  75:D:/iot/felix2/kernel\los_init.c ****  Function    : osRegister
+  76:D:/iot/felix2/kernel\los_init.c ****  Description : Configuring the maximum number of tasks
+  77:D:/iot/felix2/kernel\los_init.c ****  Input       : None
+  78:D:/iot/felix2/kernel\los_init.c ****  Output      : None
+  79:D:/iot/felix2/kernel\los_init.c ****  Return      : None
+  80:D:/iot/felix2/kernel\los_init.c ****  *****************************************************************************/
+  81:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_TEXT_INIT static VOID osRegister(VOID)
+  82:D:/iot/felix2/kernel\los_init.c **** {
+ 104              		.loc 1 82 0
+ 105              		.cfi_startproc
+ 106              		@ args = 0, pretend = 0, frame = 0
+ 107              		@ frame_needed = 1, uses_anonymous_args = 0
+ 108              		@ link register save eliminated.
+ 109 0000 80B4     		push	{r7}
+ 110              	.LCFI6:
+ 111              		.cfi_def_cfa_offset 4
+ 112              		.cfi_offset 7, -4
+ 113 0002 00AF     		add	r7, sp, #0
+ 114              	.LCFI7:
+ 115              		.cfi_def_cfa_register 7
+  83:D:/iot/felix2/kernel\los_init.c ****     g_uwTskMaxNum = LOSCFG_BASE_CORE_TSK_LIMIT + 1; /* Reserved 1 for IDLE */
+ 116              		.loc 1 83 0
+ 117 0004 034B     		ldr	r3, .L8
+ 118 0006 1022     		movs	r2, #16
+ 119 0008 1A60     		str	r2, [r3]
+  84:D:/iot/felix2/kernel\los_init.c **** 
+  85:D:/iot/felix2/kernel\los_init.c ****     return;
+ 120              		.loc 1 85 0
+ 121 000a 00BF     		nop
+  86:D:/iot/felix2/kernel\los_init.c **** }
+ 122              		.loc 1 86 0
+ 123 000c BD46     		mov	sp, r7
+ 124              	.LCFI8:
+ 125              		.cfi_def_cfa_register 13
+ 126              		@ sp needed
+ 127 000e 5DF8047B 		ldr	r7, [sp], #4
+ 128              	.LCFI9:
+ 129              		.cfi_restore 7
+ 130              		.cfi_def_cfa_offset 0
+ 131 0012 7047     		bx	lr
+ 132              	.L9:
+ 133              		.align	2
+ 134              	.L8:
+ 135 0014 00000000 		.word	g_uwTskMaxNum
+ 136              		.cfi_endproc
+ 137              	.LFE135:
+ 139              		.section	.rodata
+ 140              		.align	2
+ 141              	.LC0:
+ 142 0000 5B455252 		.ascii	"[ERR] \000"
+ 142      5D2000
+ 143 0007 00       		.align	2
+ 144              	.LC1:
+ 145 0008 6F735469 		.ascii	"osTickStart error\000"
+ 145      636B5374 
+ 145      61727420 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 5
+
+
+ 145      6572726F 
+ 145      7200
+ 146              		.section	.text.LOS_Start,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	LOS_Start
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.fpu fpv4-sp-d16
+ 154              	LOS_Start:
+ 155              	.LFB136:
+  87:D:/iot/felix2/kernel\los_init.c **** 
+  88:D:/iot/felix2/kernel\los_init.c **** /*****************************************************************************
+  89:D:/iot/felix2/kernel\los_init.c ****  Function    : LOS_Start
+  90:D:/iot/felix2/kernel\los_init.c ****  Description : Task start function
+  91:D:/iot/felix2/kernel\los_init.c ****  Input       : None
+  92:D:/iot/felix2/kernel\los_init.c ****  Output      : None
+  93:D:/iot/felix2/kernel\los_init.c ****  Return      : LOS_OK on success or error code on failure
+  94:D:/iot/felix2/kernel\los_init.c ****  *****************************************************************************/
+  95:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_TEXT_INIT UINT32 LOS_Start(VOID)
+  96:D:/iot/felix2/kernel\los_init.c **** {
+ 156              		.loc 1 96 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 8
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160 0000 80B5     		push	{r7, lr}
+ 161              	.LCFI10:
+ 162              		.cfi_def_cfa_offset 8
+ 163              		.cfi_offset 7, -8
+ 164              		.cfi_offset 14, -4
+ 165 0002 82B0     		sub	sp, sp, #8
+ 166              	.LCFI11:
+ 167              		.cfi_def_cfa_offset 16
+ 168 0004 00AF     		add	r7, sp, #0
+ 169              	.LCFI12:
+ 170              		.cfi_def_cfa_register 7
+  97:D:/iot/felix2/kernel\los_init.c ****     UINT32 uwRet;
+  98:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_CORE_TICK_HW_TIME == NO)
+  99:D:/iot/felix2/kernel\los_init.c ****     uwRet = osTickStart();
+ 171              		.loc 1 99 0
+ 172 0006 FFF7FEFF 		bl	osTickStart
+ 173 000a 7860     		str	r0, [r7, #4]
+ 100:D:/iot/felix2/kernel\los_init.c **** 
+ 101:D:/iot/felix2/kernel\los_init.c ****     if (uwRet != LOS_OK)
+ 174              		.loc 1 101 0
+ 175 000c 7B68     		ldr	r3, [r7, #4]
+ 176 000e 002B     		cmp	r3, #0
+ 177 0010 07D0     		beq	.L11
+ 102:D:/iot/felix2/kernel\los_init.c ****     {
+ 103:D:/iot/felix2/kernel\los_init.c ****         PRINT_ERR("osTickStart error\n");
+ 178              		.loc 1 103 0
+ 179 0012 0748     		ldr	r0, .L13
+ 180 0014 FFF7FEFF 		bl	printf
+ 181 0018 0648     		ldr	r0, .L13+4
+ 182 001a FFF7FEFF 		bl	puts
+ 104:D:/iot/felix2/kernel\los_init.c ****         return uwRet;
+ 183              		.loc 1 104 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 6
+
+
+ 184 001e 7B68     		ldr	r3, [r7, #4]
+ 185 0020 02E0     		b	.L12
+ 186              	.L11:
+ 105:D:/iot/felix2/kernel\los_init.c ****     }
+ 106:D:/iot/felix2/kernel\los_init.c **** #else
+ 107:D:/iot/felix2/kernel\los_init.c ****     extern int os_timer_init(void);
+ 108:D:/iot/felix2/kernel\los_init.c ****     uwRet = os_timer_init();
+ 109:D:/iot/felix2/kernel\los_init.c ****     if (uwRet != LOS_OK)
+ 110:D:/iot/felix2/kernel\los_init.c ****     {
+ 111:D:/iot/felix2/kernel\los_init.c ****         PRINT_ERR("os_timer_init error\n");
+ 112:D:/iot/felix2/kernel\los_init.c ****         return uwRet;
+ 113:D:/iot/felix2/kernel\los_init.c ****     }
+ 114:D:/iot/felix2/kernel\los_init.c **** #endif
+ 115:D:/iot/felix2/kernel\los_init.c **** 
+ 116:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_LIB_LIBC_NEWLIB_REENT == YES)
+ 117:D:/iot/felix2/kernel\los_init.c ****     extern VOID osTaskSwitchImpurePtr(VOID);
+ 118:D:/iot/felix2/kernel\los_init.c ****     osTaskSwitchImpurePtr();
+ 119:D:/iot/felix2/kernel\los_init.c **** #endif
+ 120:D:/iot/felix2/kernel\los_init.c **** 
+ 121:D:/iot/felix2/kernel\los_init.c ****     LOS_StartToRun();
+ 187              		.loc 1 121 0
+ 188 0022 FFF7FEFF 		bl	LOS_StartToRun
+ 122:D:/iot/felix2/kernel\los_init.c **** 
+ 123:D:/iot/felix2/kernel\los_init.c ****     return uwRet;
+ 189              		.loc 1 123 0
+ 190 0026 7B68     		ldr	r3, [r7, #4]
+ 191              	.L12:
+ 124:D:/iot/felix2/kernel\los_init.c **** }
+ 192              		.loc 1 124 0
+ 193 0028 1846     		mov	r0, r3
+ 194 002a 0837     		adds	r7, r7, #8
+ 195              	.LCFI13:
+ 196              		.cfi_def_cfa_offset 8
+ 197 002c BD46     		mov	sp, r7
+ 198              	.LCFI14:
+ 199              		.cfi_def_cfa_register 13
+ 200              		@ sp needed
+ 201 002e 80BD     		pop	{r7, pc}
+ 202              	.L14:
+ 203              		.align	2
+ 204              	.L13:
+ 205 0030 00000000 		.word	.LC0
+ 206 0034 08000000 		.word	.LC1
+ 207              		.cfi_endproc
+ 208              	.LFE136:
+ 210              		.section	.rodata
+ 211 001a 0000     		.align	2
+ 212              	.LC2:
+ 213 001c 6F734D65 		.ascii	"osMemSystemInit error %d\012\000"
+ 213      6D537973 
+ 213      74656D49 
+ 213      6E697420 
+ 213      6572726F 
+ 214 0036 0000     		.align	2
+ 215              	.LC3:
+ 216 0038 6F735461 		.ascii	"osTaskInit error\000"
+ 216      736B496E 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 7
+
+
+ 216      69742065 
+ 216      72726F72 
+ 216      00
+ 217 0049 000000   		.align	2
+ 218              	.LC4:
+ 219 004c 6F735175 		.ascii	"osQueueInit error\000"
+ 219      65756549 
+ 219      6E697420 
+ 219      6572726F 
+ 219      7200
+ 220 005e 0000     		.align	2
+ 221              	.LC5:
+ 222 0060 6F735377 		.ascii	"osSwTmrInit error\000"
+ 222      546D7249 
+ 222      6E697420 
+ 222      6572726F 
+ 222      7200
+ 223              		.section	.text.LOS_KernelInit,"ax",%progbits
+ 224              		.align	1
+ 225              		.global	LOS_KernelInit
+ 226              		.syntax unified
+ 227              		.thumb
+ 228              		.thumb_func
+ 229              		.fpu fpv4-sp-d16
+ 231              	LOS_KernelInit:
+ 232              	.LFB137:
+ 125:D:/iot/felix2/kernel\los_init.c **** 
+ 126:D:/iot/felix2/kernel\los_init.c **** /*****************************************************************************
+ 127:D:/iot/felix2/kernel\los_init.c ****  Function    : LOS_KernelInit
+ 128:D:/iot/felix2/kernel\los_init.c ****  Description : System kernel initialization function, configure all system modules
+ 129:D:/iot/felix2/kernel\los_init.c ****  Input       : None
+ 130:D:/iot/felix2/kernel\los_init.c ****  Output      : None
+ 131:D:/iot/felix2/kernel\los_init.c ****  Return      : LOS_OK on success or error code on failure
+ 132:D:/iot/felix2/kernel\los_init.c ****  *****************************************************************************/
+ 133:D:/iot/felix2/kernel\los_init.c **** LITE_OS_SEC_TEXT_INIT UINT32 LOS_KernelInit(VOID)
+ 134:D:/iot/felix2/kernel\los_init.c **** {
+ 233              		.loc 1 134 0
+ 234              		.cfi_startproc
+ 235              		@ args = 0, pretend = 0, frame = 8
+ 236              		@ frame_needed = 1, uses_anonymous_args = 0
+ 237 0000 80B5     		push	{r7, lr}
+ 238              	.LCFI15:
+ 239              		.cfi_def_cfa_offset 8
+ 240              		.cfi_offset 7, -8
+ 241              		.cfi_offset 14, -4
+ 242 0002 82B0     		sub	sp, sp, #8
+ 243              	.LCFI16:
+ 244              		.cfi_def_cfa_offset 16
+ 245 0004 00AF     		add	r7, sp, #0
+ 246              	.LCFI17:
+ 247              		.cfi_def_cfa_register 7
+ 135:D:/iot/felix2/kernel\los_init.c ****     UINT32 uwRet;
+ 136:D:/iot/felix2/kernel\los_init.c **** 
+ 137:D:/iot/felix2/kernel\los_init.c ****     osRegister();
+ 248              		.loc 1 137 0
+ 249 0006 FFF7FEFF 		bl	osRegister
+ 138:D:/iot/felix2/kernel\los_init.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 8
+
+
+ 139:D:/iot/felix2/kernel\los_init.c ****     m_aucSysMem0 = OS_SYS_MEM_ADDR;
+ 250              		.loc 1 139 0
+ 251 000a 2F4B     		ldr	r3, .L24
+ 252 000c 2F4A     		ldr	r2, .L24+4
+ 253 000e 1A60     		str	r2, [r3]
+ 140:D:/iot/felix2/kernel\los_init.c ****     uwRet = osMemSystemInit();
+ 254              		.loc 1 140 0
+ 255 0010 FFF7FEFF 		bl	osMemSystemInit
+ 256 0014 7860     		str	r0, [r7, #4]
+ 141:D:/iot/felix2/kernel\los_init.c ****     if (uwRet != LOS_OK)
+ 257              		.loc 1 141 0
+ 258 0016 7B68     		ldr	r3, [r7, #4]
+ 259 0018 002B     		cmp	r3, #0
+ 260 001a 08D0     		beq	.L16
+ 142:D:/iot/felix2/kernel\los_init.c ****     {
+ 143:D:/iot/felix2/kernel\los_init.c ****         PRINT_ERR("osMemSystemInit error %d\n", uwRet);/*lint !e515*/
+ 261              		.loc 1 143 0
+ 262 001c 2C48     		ldr	r0, .L24+8
+ 263 001e FFF7FEFF 		bl	printf
+ 264 0022 7968     		ldr	r1, [r7, #4]
+ 265 0024 2B48     		ldr	r0, .L24+12
+ 266 0026 FFF7FEFF 		bl	printf
+ 144:D:/iot/felix2/kernel\los_init.c ****         return uwRet;
+ 267              		.loc 1 144 0
+ 268 002a 7B68     		ldr	r3, [r7, #4]
+ 269 002c 48E0     		b	.L17
+ 270              	.L16:
+ 145:D:/iot/felix2/kernel\los_init.c ****     }
+ 146:D:/iot/felix2/kernel\los_init.c **** 
+ 147:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_PLATFORM_HWI == YES)
+ 148:D:/iot/felix2/kernel\los_init.c ****     {
+ 149:D:/iot/felix2/kernel\los_init.c ****         osHwiInit();
+ 271              		.loc 1 149 0
+ 272 002e FFF7FEFF 		bl	osHwiInit
+ 150:D:/iot/felix2/kernel\los_init.c ****     }
+ 151:D:/iot/felix2/kernel\los_init.c **** #endif
+ 152:D:/iot/felix2/kernel\los_init.c **** 
+ 153:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_PLATFORM_EXC == YES)
+ 154:D:/iot/felix2/kernel\los_init.c ****     {
+ 155:D:/iot/felix2/kernel\los_init.c ****         osExcInit(MAX_EXC_MEM_SIZE);
+ 156:D:/iot/felix2/kernel\los_init.c ****     }
+ 157:D:/iot/felix2/kernel\los_init.c **** #endif
+ 158:D:/iot/felix2/kernel\los_init.c **** 
+ 159:D:/iot/felix2/kernel\los_init.c ****     uwRet =osTaskInit();
+ 273              		.loc 1 159 0
+ 274 0032 FFF7FEFF 		bl	osTaskInit
+ 275 0036 7860     		str	r0, [r7, #4]
+ 160:D:/iot/felix2/kernel\los_init.c ****     if (uwRet != LOS_OK)
+ 276              		.loc 1 160 0
+ 277 0038 7B68     		ldr	r3, [r7, #4]
+ 278 003a 002B     		cmp	r3, #0
+ 279 003c 07D0     		beq	.L18
+ 161:D:/iot/felix2/kernel\los_init.c ****     {
+ 162:D:/iot/felix2/kernel\los_init.c ****         PRINT_ERR("osTaskInit error\n");
+ 280              		.loc 1 162 0
+ 281 003e 2448     		ldr	r0, .L24+8
+ 282 0040 FFF7FEFF 		bl	printf
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 9
+
+
+ 283 0044 2448     		ldr	r0, .L24+16
+ 284 0046 FFF7FEFF 		bl	puts
+ 163:D:/iot/felix2/kernel\los_init.c ****         return uwRet;
+ 285              		.loc 1 163 0
+ 286 004a 7B68     		ldr	r3, [r7, #4]
+ 287 004c 38E0     		b	.L17
+ 288              	.L18:
+ 164:D:/iot/felix2/kernel\los_init.c ****     }
+ 165:D:/iot/felix2/kernel\los_init.c **** 
+ 166:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_CORE_TSK_MONITOR == YES)
+ 167:D:/iot/felix2/kernel\los_init.c ****     {
+ 168:D:/iot/felix2/kernel\los_init.c ****         osTaskMonInit();
+ 289              		.loc 1 168 0
+ 290 004e FFF7FEFF 		bl	osTaskMonInit
+ 169:D:/iot/felix2/kernel\los_init.c ****     }
+ 170:D:/iot/felix2/kernel\los_init.c **** #endif
+ 171:D:/iot/felix2/kernel\los_init.c **** 
+ 172:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_CORE_CPUP == YES)
+ 173:D:/iot/felix2/kernel\los_init.c ****     {
+ 174:D:/iot/felix2/kernel\los_init.c ****         uwRet = osCpupInit();
+ 175:D:/iot/felix2/kernel\los_init.c ****         if (uwRet != LOS_OK)
+ 176:D:/iot/felix2/kernel\los_init.c ****         {
+ 177:D:/iot/felix2/kernel\los_init.c ****             PRINT_ERR("osCpupInit error\n");
+ 178:D:/iot/felix2/kernel\los_init.c ****             return uwRet;
+ 179:D:/iot/felix2/kernel\los_init.c ****         }
+ 180:D:/iot/felix2/kernel\los_init.c ****     }
+ 181:D:/iot/felix2/kernel\los_init.c **** #endif
+ 182:D:/iot/felix2/kernel\los_init.c **** 
+ 183:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_IPC_SEM == YES)
+ 184:D:/iot/felix2/kernel\los_init.c ****     {
+ 185:D:/iot/felix2/kernel\los_init.c ****         uwRet = osSemInit();
+ 291              		.loc 1 185 0
+ 292 0052 FFF7FEFF 		bl	osSemInit
+ 293 0056 7860     		str	r0, [r7, #4]
+ 186:D:/iot/felix2/kernel\los_init.c ****         if (uwRet != LOS_OK)
+ 294              		.loc 1 186 0
+ 295 0058 7B68     		ldr	r3, [r7, #4]
+ 296 005a 002B     		cmp	r3, #0
+ 297 005c 01D0     		beq	.L19
+ 187:D:/iot/felix2/kernel\los_init.c ****         {
+ 188:D:/iot/felix2/kernel\los_init.c ****             return uwRet;
+ 298              		.loc 1 188 0
+ 299 005e 7B68     		ldr	r3, [r7, #4]
+ 300 0060 2EE0     		b	.L17
+ 301              	.L19:
+ 189:D:/iot/felix2/kernel\los_init.c ****         }
+ 190:D:/iot/felix2/kernel\los_init.c ****     }
+ 191:D:/iot/felix2/kernel\los_init.c **** #endif
+ 192:D:/iot/felix2/kernel\los_init.c **** 
+ 193:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_IPC_MUX == YES)
+ 194:D:/iot/felix2/kernel\los_init.c ****     {
+ 195:D:/iot/felix2/kernel\los_init.c ****         uwRet = osMuxInit();
+ 302              		.loc 1 195 0
+ 303 0062 FFF7FEFF 		bl	osMuxInit
+ 304 0066 7860     		str	r0, [r7, #4]
+ 196:D:/iot/felix2/kernel\los_init.c ****         if (uwRet != LOS_OK)
+ 305              		.loc 1 196 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 10
+
+
+ 306 0068 7B68     		ldr	r3, [r7, #4]
+ 307 006a 002B     		cmp	r3, #0
+ 308 006c 01D0     		beq	.L20
+ 197:D:/iot/felix2/kernel\los_init.c ****         {
+ 198:D:/iot/felix2/kernel\los_init.c ****             return uwRet;
+ 309              		.loc 1 198 0
+ 310 006e 7B68     		ldr	r3, [r7, #4]
+ 311 0070 26E0     		b	.L17
+ 312              	.L20:
+ 199:D:/iot/felix2/kernel\los_init.c ****         }
+ 200:D:/iot/felix2/kernel\los_init.c ****     }
+ 201:D:/iot/felix2/kernel\los_init.c **** #endif
+ 202:D:/iot/felix2/kernel\los_init.c **** 
+ 203:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_IPC_QUEUE == YES)
+ 204:D:/iot/felix2/kernel\los_init.c ****     {
+ 205:D:/iot/felix2/kernel\los_init.c ****         uwRet = osQueueInit();
+ 313              		.loc 1 205 0
+ 314 0072 FFF7FEFF 		bl	osQueueInit
+ 315 0076 7860     		str	r0, [r7, #4]
+ 206:D:/iot/felix2/kernel\los_init.c ****         if (uwRet != LOS_OK)
+ 316              		.loc 1 206 0
+ 317 0078 7B68     		ldr	r3, [r7, #4]
+ 318 007a 002B     		cmp	r3, #0
+ 319 007c 07D0     		beq	.L21
+ 207:D:/iot/felix2/kernel\los_init.c ****         {
+ 208:D:/iot/felix2/kernel\los_init.c ****             PRINT_ERR("osQueueInit error\n");
+ 320              		.loc 1 208 0
+ 321 007e 1448     		ldr	r0, .L24+8
+ 322 0080 FFF7FEFF 		bl	printf
+ 323 0084 1548     		ldr	r0, .L24+20
+ 324 0086 FFF7FEFF 		bl	puts
+ 209:D:/iot/felix2/kernel\los_init.c ****             return uwRet;
+ 325              		.loc 1 209 0
+ 326 008a 7B68     		ldr	r3, [r7, #4]
+ 327 008c 18E0     		b	.L17
+ 328              	.L21:
+ 210:D:/iot/felix2/kernel\los_init.c ****         }
+ 211:D:/iot/felix2/kernel\los_init.c ****     }
+ 212:D:/iot/felix2/kernel\los_init.c **** #endif
+ 213:D:/iot/felix2/kernel\los_init.c **** 
+ 214:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_BASE_CORE_SWTMR == YES)
+ 215:D:/iot/felix2/kernel\los_init.c ****     {
+ 216:D:/iot/felix2/kernel\los_init.c ****         uwRet = osSwTmrInit();
+ 329              		.loc 1 216 0
+ 330 008e FFF7FEFF 		bl	osSwTmrInit
+ 331 0092 7860     		str	r0, [r7, #4]
+ 217:D:/iot/felix2/kernel\los_init.c ****         if (uwRet != LOS_OK)
+ 332              		.loc 1 217 0
+ 333 0094 7B68     		ldr	r3, [r7, #4]
+ 334 0096 002B     		cmp	r3, #0
+ 335 0098 07D0     		beq	.L22
+ 218:D:/iot/felix2/kernel\los_init.c ****         {
+ 219:D:/iot/felix2/kernel\los_init.c ****             PRINT_ERR("osSwTmrInit error\n");
+ 336              		.loc 1 219 0
+ 337 009a 0D48     		ldr	r0, .L24+8
+ 338 009c FFF7FEFF 		bl	printf
+ 339 00a0 0F48     		ldr	r0, .L24+24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 11
+
+
+ 340 00a2 FFF7FEFF 		bl	puts
+ 220:D:/iot/felix2/kernel\los_init.c ****             return uwRet;
+ 341              		.loc 1 220 0
+ 342 00a6 7B68     		ldr	r3, [r7, #4]
+ 343 00a8 0AE0     		b	.L17
+ 344              	.L22:
+ 221:D:/iot/felix2/kernel\los_init.c ****         }
+ 222:D:/iot/felix2/kernel\los_init.c ****     }
+ 223:D:/iot/felix2/kernel\los_init.c **** #endif
+ 224:D:/iot/felix2/kernel\los_init.c **** 
+ 225:D:/iot/felix2/kernel\los_init.c ****     #if(LOSCFG_BASE_CORE_TIMESLICE == YES)
+ 226:D:/iot/felix2/kernel\los_init.c ****     osTimesliceInit();
+ 345              		.loc 1 226 0
+ 346 00aa FFF7FEFF 		bl	osTimesliceInit
+ 227:D:/iot/felix2/kernel\los_init.c ****     #endif
+ 228:D:/iot/felix2/kernel\los_init.c **** 
+ 229:D:/iot/felix2/kernel\los_init.c ****     uwRet = osIdleTaskCreate();
+ 347              		.loc 1 229 0
+ 348 00ae FFF7FEFF 		bl	osIdleTaskCreate
+ 349 00b2 7860     		str	r0, [r7, #4]
+ 230:D:/iot/felix2/kernel\los_init.c ****     if (uwRet != LOS_OK)
+ 350              		.loc 1 230 0
+ 351 00b4 7B68     		ldr	r3, [r7, #4]
+ 352 00b6 002B     		cmp	r3, #0
+ 353 00b8 01D0     		beq	.L23
+ 231:D:/iot/felix2/kernel\los_init.c ****     {
+ 232:D:/iot/felix2/kernel\los_init.c ****         return uwRet;
+ 354              		.loc 1 232 0
+ 355 00ba 7B68     		ldr	r3, [r7, #4]
+ 356 00bc 00E0     		b	.L17
+ 357              	.L23:
+ 233:D:/iot/felix2/kernel\los_init.c ****     }
+ 234:D:/iot/felix2/kernel\los_init.c **** 
+ 235:D:/iot/felix2/kernel\los_init.c **** #if (LOSCFG_TEST == YES)
+ 236:D:/iot/felix2/kernel\los_init.c ****     uwRet = los_TestInit();
+ 237:D:/iot/felix2/kernel\los_init.c ****     if (uwRet != LOS_OK)
+ 238:D:/iot/felix2/kernel\los_init.c ****     {
+ 239:D:/iot/felix2/kernel\los_init.c ****         PRINT_ERR("los_TestInit error\n");
+ 240:D:/iot/felix2/kernel\los_init.c ****         return uwRet;
+ 241:D:/iot/felix2/kernel\los_init.c ****     }
+ 242:D:/iot/felix2/kernel\los_init.c **** #endif
+ 243:D:/iot/felix2/kernel\los_init.c **** 
+ 244:D:/iot/felix2/kernel\los_init.c ****     return LOS_OK;
+ 358              		.loc 1 244 0
+ 359 00be 0023     		movs	r3, #0
+ 360              	.L17:
+ 245:D:/iot/felix2/kernel\los_init.c **** }
+ 361              		.loc 1 245 0
+ 362 00c0 1846     		mov	r0, r3
+ 363 00c2 0837     		adds	r7, r7, #8
+ 364              	.LCFI18:
+ 365              		.cfi_def_cfa_offset 8
+ 366 00c4 BD46     		mov	sp, r7
+ 367              	.LCFI19:
+ 368              		.cfi_def_cfa_register 13
+ 369              		@ sp needed
+ 370 00c6 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 12
+
+
+ 371              	.L25:
+ 372              		.align	2
+ 373              	.L24:
+ 374 00c8 00000000 		.word	m_aucSysMem0
+ 375 00cc 00000000 		.word	__los_heap_addr_start__
+ 376 00d0 00000000 		.word	.LC0
+ 377 00d4 1C000000 		.word	.LC2
+ 378 00d8 38000000 		.word	.LC3
+ 379 00dc 4C000000 		.word	.LC4
+ 380 00e0 60000000 		.word	.LC5
+ 381              		.cfi_endproc
+ 382              	.LFE137:
+ 384              		.text
+ 385              	.Letext0:
+ 386              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 387              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 388              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 389              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 390              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 391              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 392              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 393              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 394              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 395              		.file 11 "D:/iot/felix2/kernel/include/los_list.h"
+ 396              		.file 12 "D:/iot/felix2/kernel/include/los_err.h"
+ 397              		.file 13 "D:/iot/felix2/kernel/include/los_tick.h"
+ 398              		.file 14 "D:/iot/felix2/kernel/include/los_event.h"
+ 399              		.file 15 "D:/iot/felix2/kernel/include/los_task.h"
+ 400              		.file 16 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 401              		.file 17 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 402              		.file 18 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 403              		.file 19 "D:/iot/felix2/kernel/include/los_config.h"
+ 404              		.file 20 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 los_init.c
+                            *COM*:00000004 m_aucSysMem0
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:19     .text.osEnableFPU:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:26     .text.osEnableFPU:00000000 osEnableFPU
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:61     .text.osEnableFPU:0000001c $d
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:66     .text.LOS_Reboot:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:73     .text.LOS_Reboot:00000000 LOS_Reboot
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:96     .text.osRegister:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:102    .text.osRegister:00000000 osRegister
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:135    .text.osRegister:00000014 $d
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:140    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:147    .text.LOS_Start:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:154    .text.LOS_Start:00000000 LOS_Start
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:205    .text.LOS_Start:00000030 $d
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:224    .text.LOS_KernelInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:231    .text.LOS_KernelInit:00000000 LOS_KernelInit
+C:\Users\91458\AppData\Local\Temp\ccLc4kM8.s:374    .text.LOS_KernelInit:000000c8 $d
+
+UNDEFINED SYMBOLS
+LOS_IntLock
+g_uwTskMaxNum
+osTickStart
+printf
+puts
+LOS_StartToRun
+osMemSystemInit
+osHwiInit
+osTaskInit
+osTaskMonInit
+osSemInit
+osMuxInit
+osQueueInit
+osSwTmrInit
+osTimesliceInit
+osIdleTaskCreate
+__los_heap_addr_start__

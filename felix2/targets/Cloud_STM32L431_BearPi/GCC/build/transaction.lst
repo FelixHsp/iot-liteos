@@ -1,0 +1,1982 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"transaction.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.prv_checkFinished,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	prv_checkFinished:
+  25              	.LFB134:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/core/transaction.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    Simon Bernard - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    Toby Jaffey - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    Pascal Rieux - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *******************************************************************************/
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /*
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  Copyright (c) 2013, 2014 Intel Corporation
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  Redistribution and use in source and binary forms, with or without modification,
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  are permitted provided that the following conditions are met:
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****      * Redistributions of source code must retain the above copyright notice,
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****        this list of conditions and the following disclaimer.
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****      * Redistributions in binary form must reproduce the above copyright notice,
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****        this list of conditions and the following disclaimer in the documentation
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****        and/or other materials provided with the distribution.
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****      * Neither the name of Intel Corporation nor the names of its contributors
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****        may be used to endorse or promote products derived from this software
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****        without specific prior written permission.
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  THE POSSIBILITY OF SUCH DAMAGE.
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  David Navarro <david.navarro@intel.com>
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** */
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /*
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** Contains code snippets which are:
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Copyright (c) 2013, Institute for Pervasive Computing, ETH Zurich
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 3
+
+
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * All rights reserved.
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Redistribution and use in source and binary forms, with or without
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * modification, are permitted provided that the following conditions
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * are met:
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * 1. Redistributions of source code must retain the above copyright
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    notice, this list of conditions and the following disclaimer.
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * 2. Redistributions in binary form must reproduce the above copyright
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    notice, this list of conditions and the following disclaimer in the
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    documentation and/or other materials provided with the distribution.
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * 3. Neither the name of the Institute nor the names of its contributors
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    may be used to endorse or promote products derived from this software
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *    without specific prior written permission.
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * SUCH DAMAGE.
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** */
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /************************************************************************
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  Function for communications transactions.
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  Basic specification: rfc7252
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  Transaction implements processing of piggybacked and separate response communication
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  dialogs specified in section 2.2 of the above specification.
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  The caller registers a callback function, which is called, when either the result is
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  received or a timeout occurs.
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  Supported dialogs:
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  Requests (GET - DELETE):
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  - CON with mid, without token => regular finished with corresponding ACK.MID
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  - CON with mid, with token => regular finished with corresponding ACK.MID and response containi
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *                  the token. Supports both versions, with piggybacked ACK and separate ACK/respon
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *                  Though the ACK.MID may be lost in the separate version, a matching response may
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *                  finish the transaction even without the ACK.MID.
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  - NON without token => no transaction, no result expected!
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  - NON with token => regular finished with response containing the token.
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  Responses (COAP_201_CREATED - ?):
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  *  - CON with mid => regular finished with corresponding ACK.MID
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  */
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** #include "internals.h"
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** //#include "pdu.h"
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** #include "commandline.h"
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** /*
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 4
+
+
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * Modulo mask (+1 and +0.5 for rounding) for a random number to get the tick number for the random
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  * retransmission time between COAP_RESPONSE_TIMEOUT and COAP_RESPONSE_TIMEOUT*COAP_RESPONSE_RANDOM
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****  */
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** #define COAP_RESPONSE_TIMEOUT_TICKS         (CLOCK_SECOND * COAP_RESPONSE_TIMEOUT)
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** #define COAP_RESPONSE_TIMEOUT_BACKOFF_MASK  ((CLOCK_SECOND * COAP_RESPONSE_TIMEOUT * (COAP_RESPONSE
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** static int prv_checkFinished(lwm2m_transaction_t *transacP,
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                              coap_packet_t *receivedMessage)
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+  27              		.loc 1 155 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 86B0     		sub	sp, sp, #24
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 32
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 7860     		str	r0, [r7, #4]
+  43 0008 3960     		str	r1, [r7]
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     int len;
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     const uint8_t *token;
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     coap_packet_t *transactionMessage = transacP->message;
+  44              		.loc 1 158 0
+  45 000a 7B68     		ldr	r3, [r7, #4]
+  46 000c 9B6A     		ldr	r3, [r3, #40]
+  47 000e 3B61     		str	r3, [r7, #16]
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (COAP_DELETE < transactionMessage->code)
+  48              		.loc 1 160 0
+  49 0010 3B69     		ldr	r3, [r7, #16]
+  50 0012 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+  51 0014 042B     		cmp	r3, #4
+  52 0016 07D9     		bls	.L2
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         // response
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         return transacP->ack_received ? 1 : 0;
+  53              		.loc 1 163 0
+  54 0018 7B68     		ldr	r3, [r7, #4]
+  55 001a 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+  56 001c 002B     		cmp	r3, #0
+  57 001e 14BF     		ite	ne
+  58 0020 0123     		movne	r3, #1
+  59 0022 0023     		moveq	r3, #0
+  60 0024 DBB2     		uxtb	r3, r3
+  61 0026 41E0     		b	.L10
+  62              	.L2:
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (!IS_OPTION(transactionMessage, COAP_OPTION_TOKEN))
+  63              		.loc 1 165 0
+  64 0028 3B69     		ldr	r3, [r7, #16]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 5
+
+
+  65 002a 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+  66 002c 03F00803 		and	r3, r3, #8
+  67 0030 002B     		cmp	r3, #0
+  68 0032 07D1     		bne	.L4
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         // request without token
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         return transacP->ack_received ? 1 : 0;
+  69              		.loc 1 168 0
+  70 0034 7B68     		ldr	r3, [r7, #4]
+  71 0036 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+  72 0038 002B     		cmp	r3, #0
+  73 003a 14BF     		ite	ne
+  74 003c 0123     		movne	r3, #1
+  75 003e 0023     		moveq	r3, #0
+  76 0040 DBB2     		uxtb	r3, r3
+  77 0042 33E0     		b	.L10
+  78              	.L4:
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     len = coap_get_header_token(receivedMessage, &token);
+  79              		.loc 1 171 0
+  80 0044 07F10803 		add	r3, r7, #8
+  81 0048 1946     		mov	r1, r3
+  82 004a 3868     		ldr	r0, [r7]
+  83 004c FFF7FEFF 		bl	coap_get_header_token
+  84 0050 F860     		str	r0, [r7, #12]
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (transactionMessage->token_len == len)
+  85              		.loc 1 172 0
+  86 0052 3B69     		ldr	r3, [r7, #16]
+  87 0054 93F84C30 		ldrb	r3, [r3, #76]	@ zero_extendqisi2
+  88 0058 1A46     		mov	r2, r3
+  89 005a FB68     		ldr	r3, [r7, #12]
+  90 005c 9342     		cmp	r3, r2
+  91 005e 0BD1     		bne	.L5
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (memcmp(transactionMessage->token, token, len) == 0) return 1;
+  92              		.loc 1 174 0
+  93 0060 3B69     		ldr	r3, [r7, #16]
+  94 0062 4D33     		adds	r3, r3, #77
+  95 0064 B968     		ldr	r1, [r7, #8]
+  96 0066 FA68     		ldr	r2, [r7, #12]
+  97 0068 1846     		mov	r0, r3
+  98 006a FFF7FEFF 		bl	memcmp
+  99 006e 0346     		mov	r3, r0
+ 100 0070 002B     		cmp	r3, #0
+ 101 0072 01D1     		bne	.L5
+ 102              		.loc 1 174 0 is_stmt 0 discriminator 1
+ 103 0074 0123     		movs	r3, #1
+ 104 0076 19E0     		b	.L10
+ 105              	.L5:
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG_ARG("transactionMessage->token_len is %d, len is %d\n", transactionMessage->token_len, len)
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     int i = 0;
+ 106              		.loc 1 177 0 is_stmt 1
+ 107 0078 0023     		movs	r3, #0
+ 108 007a 7B61     		str	r3, [r7, #20]
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     for(i = 0; i < transactionMessage->token_len; i++ )
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 6
+
+
+ 109              		.loc 1 178 0
+ 110 007c 0023     		movs	r3, #0
+ 111 007e 7B61     		str	r3, [r7, #20]
+ 112 0080 02E0     		b	.L6
+ 113              	.L7:
+ 114              		.loc 1 178 0 is_stmt 0 discriminator 3
+ 115 0082 7B69     		ldr	r3, [r7, #20]
+ 116 0084 0133     		adds	r3, r3, #1
+ 117 0086 7B61     		str	r3, [r7, #20]
+ 118              	.L6:
+ 119              		.loc 1 178 0 discriminator 1
+ 120 0088 3B69     		ldr	r3, [r7, #16]
+ 121 008a 93F84C30 		ldrb	r3, [r3, #76]	@ zero_extendqisi2
+ 122 008e 1A46     		mov	r2, r3
+ 123 0090 7B69     		ldr	r3, [r7, #20]
+ 124 0092 9342     		cmp	r3, r2
+ 125 0094 F5DB     		blt	.L7
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         LOG_ARG("%d\n", transactionMessage->token[i]);
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("\n\n");
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     for(i = 0; i < len; i++)
+ 126              		.loc 1 181 0 is_stmt 1
+ 127 0096 0023     		movs	r3, #0
+ 128 0098 7B61     		str	r3, [r7, #20]
+ 129 009a 02E0     		b	.L8
+ 130              	.L9:
+ 131              		.loc 1 181 0 is_stmt 0 discriminator 3
+ 132 009c 7B69     		ldr	r3, [r7, #20]
+ 133 009e 0133     		adds	r3, r3, #1
+ 134 00a0 7B61     		str	r3, [r7, #20]
+ 135              	.L8:
+ 136              		.loc 1 181 0 discriminator 1
+ 137 00a2 7A69     		ldr	r2, [r7, #20]
+ 138 00a4 FB68     		ldr	r3, [r7, #12]
+ 139 00a6 9A42     		cmp	r2, r3
+ 140 00a8 F8DB     		blt	.L9
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         LOG_ARG("%d\n", token[i]);
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("prv_checkFinished not finish!!!\n");
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     return 0;
+ 141              		.loc 1 184 0 is_stmt 1
+ 142 00aa 0023     		movs	r3, #0
+ 143              	.L10:
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 144              		.loc 1 185 0 discriminator 1
+ 145 00ac 1846     		mov	r0, r3
+ 146 00ae 1837     		adds	r7, r7, #24
+ 147              	.LCFI3:
+ 148              		.cfi_def_cfa_offset 8
+ 149 00b0 BD46     		mov	sp, r7
+ 150              	.LCFI4:
+ 151              		.cfi_def_cfa_register 13
+ 152              		@ sp needed
+ 153 00b2 80BD     		pop	{r7, pc}
+ 154              		.cfi_endproc
+ 155              	.LFE134:
+ 157              		.section	.text.transaction_new,"ax",%progbits
+ 158              		.align	1
+ 159              		.global	transaction_new
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 7
+
+
+ 160              		.syntax unified
+ 161              		.thumb
+ 162              		.thumb_func
+ 163              		.fpu fpv4-sp-d16
+ 165              	transaction_new:
+ 166              	.LFB135:
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** //transaction_new(server->sessionH, COAP_POST, NULL, NULL, contextP->nextMID++, 4, NULL)
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** lwm2m_transaction_t *transaction_new(void *sessionH,
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                      unsigned char method,
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                      char *altPath,
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                      lwm2m_uri_t *uriP,
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                      uint16_t mID,
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                      uint8_t token_len,
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                      uint8_t *token)
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+ 167              		.loc 1 194 0
+ 168              		.cfi_startproc
+ 169              		@ args = 12, pretend = 0, frame = 56
+ 170              		@ frame_needed = 1, uses_anonymous_args = 0
+ 171 0000 90B5     		push	{r4, r7, lr}
+ 172              	.LCFI5:
+ 173              		.cfi_def_cfa_offset 12
+ 174              		.cfi_offset 4, -12
+ 175              		.cfi_offset 7, -8
+ 176              		.cfi_offset 14, -4
+ 177 0002 8FB0     		sub	sp, sp, #60
+ 178              	.LCFI6:
+ 179              		.cfi_def_cfa_offset 72
+ 180 0004 00AF     		add	r7, sp, #0
+ 181              	.LCFI7:
+ 182              		.cfi_def_cfa_register 7
+ 183 0006 F860     		str	r0, [r7, #12]
+ 184 0008 7A60     		str	r2, [r7, #4]
+ 185 000a 3B60     		str	r3, [r7]
+ 186 000c 0B46     		mov	r3, r1
+ 187 000e FB72     		strb	r3, [r7, #11]
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     lwm2m_transaction_t *transacP;
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     int result;
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if(altPath != NULL){
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         LOG_ARG("method: %d, altPath: \"%s\", mID: %d, token_len: %d",
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             method, altPath, mID, token_len);
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     else
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         LOG_ARG("method: %d, altPath: NULL, mID: %d, token_len: %d",
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             method, mID, token_len);  
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG_URI(uriP);
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     // no transactions without peer
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (NULL == sessionH) return NULL;
+ 188              		.loc 1 209 0
+ 189 0010 FB68     		ldr	r3, [r7, #12]
+ 190 0012 002B     		cmp	r3, #0
+ 191 0014 01D1     		bne	.L12
+ 192              		.loc 1 209 0 is_stmt 0 discriminator 1
+ 193 0016 0023     		movs	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 8
+
+
+ 194 0018 0DE1     		b	.L13
+ 195              	.L12:
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transacP = (lwm2m_transaction_t *)lwm2m_malloc(sizeof(lwm2m_transaction_t));
+ 196              		.loc 1 211 0 is_stmt 1
+ 197 001a 4820     		movs	r0, #72
+ 198 001c FFF7FEFF 		bl	lwm2m_malloc
+ 199 0020 3863     		str	r0, [r7, #48]
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (NULL == transacP) return NULL;
+ 200              		.loc 1 213 0
+ 201 0022 3B6B     		ldr	r3, [r7, #48]
+ 202 0024 002B     		cmp	r3, #0
+ 203 0026 01D1     		bne	.L14
+ 204              		.loc 1 213 0 is_stmt 0 discriminator 1
+ 205 0028 0023     		movs	r3, #0
+ 206 002a 04E1     		b	.L13
+ 207              	.L14:
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     memset(transacP, 0, sizeof(lwm2m_transaction_t));
+ 208              		.loc 1 214 0 is_stmt 1
+ 209 002c 4822     		movs	r2, #72
+ 210 002e 0021     		movs	r1, #0
+ 211 0030 386B     		ldr	r0, [r7, #48]
+ 212 0032 FFF7FEFF 		bl	memset
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transacP->message = lwm2m_malloc(sizeof(coap_packet_t));
+ 213              		.loc 1 216 0
+ 214 0036 8C20     		movs	r0, #140
+ 215 0038 FFF7FEFF 		bl	lwm2m_malloc
+ 216 003c 0246     		mov	r2, r0
+ 217 003e 3B6B     		ldr	r3, [r7, #48]
+ 218 0040 9A62     		str	r2, [r3, #40]
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (NULL == transacP->message) goto error;
+ 219              		.loc 1 217 0
+ 220 0042 3B6B     		ldr	r3, [r7, #48]
+ 221 0044 9B6A     		ldr	r3, [r3, #40]
+ 222 0046 002B     		cmp	r3, #0
+ 223 0048 00F0EA80 		beq	.L30
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     coap_init_message(transacP->message, COAP_TYPE_CON, method, mID);
+ 224              		.loc 1 219 0
+ 225 004c 3B6B     		ldr	r3, [r7, #48]
+ 226 004e 986A     		ldr	r0, [r3, #40]
+ 227 0050 B7F84830 		ldrh	r3, [r7, #72]
+ 228 0054 FA7A     		ldrb	r2, [r7, #11]	@ zero_extendqisi2
+ 229 0056 0021     		movs	r1, #0
+ 230 0058 FFF7FEFF 		bl	coap_init_message
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transacP->peerH = sessionH;
+ 231              		.loc 1 221 0
+ 232 005c 3B6B     		ldr	r3, [r7, #48]
+ 233 005e FA68     		ldr	r2, [r7, #12]
+ 234 0060 9A60     		str	r2, [r3, #8]
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transacP->mID = mID;
+ 235              		.loc 1 223 0
+ 236 0062 3B6B     		ldr	r3, [r7, #48]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 9
+
+
+ 237 0064 B7F84820 		ldrh	r2, [r7, #72]	@ movhi
+ 238 0068 9A80     		strh	r2, [r3, #4]	@ movhi
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (altPath != NULL)
+ 239              		.loc 1 225 0
+ 240 006a 7B68     		ldr	r3, [r7, #4]
+ 241 006c 002B     		cmp	r3, #0
+ 242 006e 07D0     		beq	.L17
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         // TODO: Support multi-segment alternative path
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         coap_set_header_uri_path_segment(transacP->message, altPath + 1);
+ 243              		.loc 1 228 0
+ 244 0070 3B6B     		ldr	r3, [r7, #48]
+ 245 0072 9A6A     		ldr	r2, [r3, #40]
+ 246 0074 7B68     		ldr	r3, [r7, #4]
+ 247 0076 0133     		adds	r3, r3, #1
+ 248 0078 1946     		mov	r1, r3
+ 249 007a 1046     		mov	r0, r2
+ 250 007c FFF7FEFF 		bl	coap_set_header_uri_path_segment
+ 251              	.L17:
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (NULL != uriP)
+ 252              		.loc 1 230 0
+ 253 0080 3B68     		ldr	r3, [r7]
+ 254 0082 002B     		cmp	r3, #0
+ 255 0084 71D0     		beq	.L18
+ 256              	.LBB2:
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         char stringID[LWM2M_STRING_ID_MAX_LEN];
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         result = utils_intToText(uriP->objectId, (uint8_t *)stringID, LWM2M_STRING_ID_MAX_LEN);
+ 257              		.loc 1 234 0
+ 258 0086 3B68     		ldr	r3, [r7]
+ 259 0088 5B88     		ldrh	r3, [r3, #2]
+ 260 008a 98B2     		uxth	r0, r3
+ 261 008c 4FF00001 		mov	r1, #0
+ 262 0090 07F11802 		add	r2, r7, #24
+ 263 0094 0623     		movs	r3, #6
+ 264 0096 FFF7FEFF 		bl	utils_intToText
+ 265 009a 0346     		mov	r3, r0
+ 266 009c FB62     		str	r3, [r7, #44]
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (result == 0) goto error;
+ 267              		.loc 1 235 0
+ 268 009e FB6A     		ldr	r3, [r7, #44]
+ 269 00a0 002B     		cmp	r3, #0
+ 270 00a2 00F0BF80 		beq	.L31
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         stringID[result] = 0;
+ 271              		.loc 1 236 0
+ 272 00a6 07F11802 		add	r2, r7, #24
+ 273 00aa FB6A     		ldr	r3, [r7, #44]
+ 274 00ac 1344     		add	r3, r3, r2
+ 275 00ae 0022     		movs	r2, #0
+ 276 00b0 1A70     		strb	r2, [r3]
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         coap_set_header_uri_path_segment(transacP->message, stringID);
+ 277              		.loc 1 237 0
+ 278 00b2 3B6B     		ldr	r3, [r7, #48]
+ 279 00b4 9B6A     		ldr	r3, [r3, #40]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 10
+
+
+ 280 00b6 07F11802 		add	r2, r7, #24
+ 281 00ba 1146     		mov	r1, r2
+ 282 00bc 1846     		mov	r0, r3
+ 283 00be FFF7FEFF 		bl	coap_set_header_uri_path_segment
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (LWM2M_URI_IS_SET_INSTANCE(uriP))
+ 284              		.loc 1 239 0
+ 285 00c2 3B68     		ldr	r3, [r7]
+ 286 00c4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 287 00c6 03F00203 		and	r3, r3, #2
+ 288 00ca 002B     		cmp	r3, #0
+ 289 00cc 1ED0     		beq	.L21
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             result = utils_intToText(uriP->instanceId, (uint8_t *)stringID, LWM2M_STRING_ID_MAX_LEN
+ 290              		.loc 1 241 0
+ 291 00ce 3B68     		ldr	r3, [r7]
+ 292 00d0 9B88     		ldrh	r3, [r3, #4]
+ 293 00d2 98B2     		uxth	r0, r3
+ 294 00d4 4FF00001 		mov	r1, #0
+ 295 00d8 07F11802 		add	r2, r7, #24
+ 296 00dc 0623     		movs	r3, #6
+ 297 00de FFF7FEFF 		bl	utils_intToText
+ 298 00e2 0346     		mov	r3, r0
+ 299 00e4 FB62     		str	r3, [r7, #44]
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (result == 0) goto error;
+ 300              		.loc 1 242 0
+ 301 00e6 FB6A     		ldr	r3, [r7, #44]
+ 302 00e8 002B     		cmp	r3, #0
+ 303 00ea 00F09D80 		beq	.L32
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             stringID[result] = 0;
+ 304              		.loc 1 243 0
+ 305 00ee 07F11802 		add	r2, r7, #24
+ 306 00f2 FB6A     		ldr	r3, [r7, #44]
+ 307 00f4 1344     		add	r3, r3, r2
+ 308 00f6 0022     		movs	r2, #0
+ 309 00f8 1A70     		strb	r2, [r3]
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             coap_set_header_uri_path_segment(transacP->message, stringID);
+ 310              		.loc 1 244 0
+ 311 00fa 3B6B     		ldr	r3, [r7, #48]
+ 312 00fc 9B6A     		ldr	r3, [r3, #40]
+ 313 00fe 07F11802 		add	r2, r7, #24
+ 314 0102 1146     		mov	r1, r2
+ 315 0104 1846     		mov	r0, r3
+ 316 0106 FFF7FEFF 		bl	coap_set_header_uri_path_segment
+ 317 010a 0BE0     		b	.L23
+ 318              	.L21:
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         else
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (LWM2M_URI_IS_SET_RESOURCE(uriP))
+ 319              		.loc 1 248 0
+ 320 010c 3B68     		ldr	r3, [r7]
+ 321 010e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 322 0110 03F00103 		and	r3, r3, #1
+ 323 0114 002B     		cmp	r3, #0
+ 324 0116 05D0     		beq	.L23
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 11
+
+
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 coap_set_header_uri_path_segment(transacP->message, NULL);
+ 325              		.loc 1 250 0
+ 326 0118 3B6B     		ldr	r3, [r7, #48]
+ 327 011a 9B6A     		ldr	r3, [r3, #40]
+ 328 011c 0021     		movs	r1, #0
+ 329 011e 1846     		mov	r0, r3
+ 330 0120 FFF7FEFF 		bl	coap_set_header_uri_path_segment
+ 331              	.L23:
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (LWM2M_URI_IS_SET_RESOURCE(uriP))
+ 332              		.loc 1 253 0
+ 333 0124 3B68     		ldr	r3, [r7]
+ 334 0126 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 335 0128 03F00103 		and	r3, r3, #1
+ 336 012c 002B     		cmp	r3, #0
+ 337 012e 1CD0     		beq	.L18
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             result = utils_intToText(uriP->resourceId, (uint8_t *)stringID, LWM2M_STRING_ID_MAX_LEN
+ 338              		.loc 1 255 0
+ 339 0130 3B68     		ldr	r3, [r7]
+ 340 0132 DB88     		ldrh	r3, [r3, #6]
+ 341 0134 98B2     		uxth	r0, r3
+ 342 0136 4FF00001 		mov	r1, #0
+ 343 013a 07F11802 		add	r2, r7, #24
+ 344 013e 0623     		movs	r3, #6
+ 345 0140 FFF7FEFF 		bl	utils_intToText
+ 346 0144 0346     		mov	r3, r0
+ 347 0146 FB62     		str	r3, [r7, #44]
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (result == 0) goto error;
+ 348              		.loc 1 256 0
+ 349 0148 FB6A     		ldr	r3, [r7, #44]
+ 350 014a 002B     		cmp	r3, #0
+ 351 014c 6ED0     		beq	.L33
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             stringID[result] = 0;
+ 352              		.loc 1 257 0
+ 353 014e 07F11802 		add	r2, r7, #24
+ 354 0152 FB6A     		ldr	r3, [r7, #44]
+ 355 0154 1344     		add	r3, r3, r2
+ 356 0156 0022     		movs	r2, #0
+ 357 0158 1A70     		strb	r2, [r3]
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             coap_set_header_uri_path_segment(transacP->message, stringID);
+ 358              		.loc 1 258 0
+ 359 015a 3B6B     		ldr	r3, [r7, #48]
+ 360 015c 9B6A     		ldr	r3, [r3, #40]
+ 361 015e 07F11802 		add	r2, r7, #24
+ 362 0162 1146     		mov	r1, r2
+ 363 0164 1846     		mov	r0, r3
+ 364 0166 FFF7FEFF 		bl	coap_set_header_uri_path_segment
+ 365              	.L18:
+ 366              	.LBE2:
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (0 < token_len)
+ 367              		.loc 1 261 0
+ 368 016a 97F84C30 		ldrb	r3, [r7, #76]	@ zero_extendqisi2
+ 369 016e 002B     		cmp	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 12
+
+
+ 370 0170 54D0     		beq	.L26
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (NULL != token)
+ 371              		.loc 1 263 0
+ 372 0172 3B6D     		ldr	r3, [r7, #80]
+ 373 0174 002B     		cmp	r3, #0
+ 374 0176 08D0     		beq	.L27
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             coap_set_header_token(transacP->message, token, token_len);
+ 375              		.loc 1 265 0
+ 376 0178 3B6B     		ldr	r3, [r7, #48]
+ 377 017a 9B6A     		ldr	r3, [r3, #40]
+ 378 017c 97F84C20 		ldrb	r2, [r7, #76]	@ zero_extendqisi2
+ 379 0180 396D     		ldr	r1, [r7, #80]
+ 380 0182 1846     		mov	r0, r3
+ 381 0184 FFF7FEFF 		bl	coap_set_header_token
+ 382 0188 48E0     		b	.L26
+ 383              	.L27:
+ 384              	.LBB3:
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         else
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             // generate a token
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             uint8_t temp_token[COAP_TOKEN_LEN];
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             time_t tv_sec = lwm2m_gettime();
+ 385              		.loc 1 271 0
+ 386 018a FFF7FEFF 		bl	lwm2m_gettime
+ 387 018e C7E90801 		strd	r0, [r7, #32]
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             // initialize first 6 bytes, leave the last 2 random
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             temp_token[0] = mID;
+ 388              		.loc 1 274 0
+ 389 0192 B7F84830 		ldrh	r3, [r7, #72]	@ movhi
+ 390 0196 DBB2     		uxtb	r3, r3
+ 391 0198 3B74     		strb	r3, [r7, #16]
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             temp_token[1] = mID >> 8;
+ 392              		.loc 1 275 0
+ 393 019a B7F84830 		ldrh	r3, [r7, #72]
+ 394 019e 1B0A     		lsrs	r3, r3, #8
+ 395 01a0 9BB2     		uxth	r3, r3
+ 396 01a2 DBB2     		uxtb	r3, r3
+ 397 01a4 7B74     		strb	r3, [r7, #17]
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             temp_token[2] = tv_sec;
+ 398              		.loc 1 276 0
+ 399 01a6 97F82030 		ldrb	r3, [r7, #32]	@ zero_extendqisi2
+ 400 01aa BB74     		strb	r3, [r7, #18]
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             temp_token[3] = tv_sec >> 8;
+ 401              		.loc 1 277 0
+ 402 01ac D7E90812 		ldrd	r1, [r7, #32]
+ 403 01b0 4FF00003 		mov	r3, #0
+ 404 01b4 4FF00004 		mov	r4, #0
+ 405 01b8 0B0A     		lsrs	r3, r1, #8
+ 406 01ba 43EA0263 		orr	r3, r3, r2, lsl #24
+ 407 01be 1412     		asrs	r4, r2, #8
+ 408 01c0 DBB2     		uxtb	r3, r3
+ 409 01c2 FB74     		strb	r3, [r7, #19]
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             temp_token[4] = tv_sec >> 16;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 13
+
+
+ 410              		.loc 1 278 0
+ 411 01c4 D7E90812 		ldrd	r1, [r7, #32]
+ 412 01c8 4FF00003 		mov	r3, #0
+ 413 01cc 4FF00004 		mov	r4, #0
+ 414 01d0 0B0C     		lsrs	r3, r1, #16
+ 415 01d2 43EA0243 		orr	r3, r3, r2, lsl #16
+ 416 01d6 1414     		asrs	r4, r2, #16
+ 417 01d8 DBB2     		uxtb	r3, r3
+ 418 01da 3B75     		strb	r3, [r7, #20]
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             temp_token[5] = tv_sec >> 24;
+ 419              		.loc 1 279 0
+ 420 01dc D7E90812 		ldrd	r1, [r7, #32]
+ 421 01e0 4FF00003 		mov	r3, #0
+ 422 01e4 4FF00004 		mov	r4, #0
+ 423 01e8 0B0E     		lsrs	r3, r1, #24
+ 424 01ea 43EA0223 		orr	r3, r3, r2, lsl #8
+ 425 01ee 1416     		asrs	r4, r2, #24
+ 426 01f0 DBB2     		uxtb	r3, r3
+ 427 01f2 7B75     		strb	r3, [r7, #21]
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             // use just the provided amount of bytes
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             coap_set_header_token(transacP->message, temp_token, token_len);
+ 428              		.loc 1 281 0
+ 429 01f4 3B6B     		ldr	r3, [r7, #48]
+ 430 01f6 9B6A     		ldr	r3, [r3, #40]
+ 431 01f8 97F84C20 		ldrb	r2, [r7, #76]	@ zero_extendqisi2
+ 432 01fc 07F11001 		add	r1, r7, #16
+ 433 0200 1846     		mov	r0, r3
+ 434 0202 FFF7FEFF 		bl	coap_set_header_token
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             int i;
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             for(i = 0; i < token_len; i++)
+ 435              		.loc 1 283 0
+ 436 0206 0023     		movs	r3, #0
+ 437 0208 7B63     		str	r3, [r7, #52]
+ 438 020a 02E0     		b	.L28
+ 439              	.L29:
+ 440              		.loc 1 283 0 is_stmt 0 discriminator 3
+ 441 020c 7B6B     		ldr	r3, [r7, #52]
+ 442 020e 0133     		adds	r3, r3, #1
+ 443 0210 7B63     		str	r3, [r7, #52]
+ 444              	.L28:
+ 445              		.loc 1 283 0 discriminator 1
+ 446 0212 97F84C30 		ldrb	r3, [r7, #76]	@ zero_extendqisi2
+ 447 0216 7A6B     		ldr	r2, [r7, #52]
+ 448 0218 9A42     		cmp	r2, r3
+ 449 021a F7DB     		blt	.L29
+ 450              	.L26:
+ 451              	.LBE3:
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 LOG_ARG("send token is %d\n", temp_token[i]);
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("Exiting on success");
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     return transacP;
+ 452              		.loc 1 289 0 is_stmt 1
+ 453 021c 3B6B     		ldr	r3, [r7, #48]
+ 454 021e 0AE0     		b	.L13
+ 455              	.L30:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 14
+
+
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 456              		.loc 1 217 0
+ 457 0220 00BF     		nop
+ 458 0222 04E0     		b	.L16
+ 459              	.L31:
+ 460              	.LBB4:
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         stringID[result] = 0;
+ 461              		.loc 1 235 0
+ 462 0224 00BF     		nop
+ 463 0226 02E0     		b	.L16
+ 464              	.L32:
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             stringID[result] = 0;
+ 465              		.loc 1 242 0
+ 466 0228 00BF     		nop
+ 467 022a 00E0     		b	.L16
+ 468              	.L33:
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             stringID[result] = 0;
+ 469              		.loc 1 256 0
+ 470 022c 00BF     		nop
+ 471              	.L16:
+ 472              	.LBE4:
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** error:
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("Exiting on failure");
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     lwm2m_free(transacP);
+ 473              		.loc 1 293 0
+ 474 022e 386B     		ldr	r0, [r7, #48]
+ 475 0230 FFF7FEFF 		bl	lwm2m_free
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     return NULL;
+ 476              		.loc 1 294 0
+ 477 0234 0023     		movs	r3, #0
+ 478              	.L13:
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 479              		.loc 1 295 0
+ 480 0236 1846     		mov	r0, r3
+ 481 0238 3C37     		adds	r7, r7, #60
+ 482              	.LCFI8:
+ 483              		.cfi_def_cfa_offset 12
+ 484 023a BD46     		mov	sp, r7
+ 485              	.LCFI9:
+ 486              		.cfi_def_cfa_register 13
+ 487              		@ sp needed
+ 488 023c 90BD     		pop	{r4, r7, pc}
+ 489              		.cfi_endproc
+ 490              	.LFE135:
+ 492              		.section	.text.transaction_free,"ax",%progbits
+ 493              		.align	1
+ 494              		.global	transaction_free
+ 495              		.syntax unified
+ 496              		.thumb
+ 497              		.thumb_func
+ 498              		.fpu fpv4-sp-d16
+ 500              	transaction_free:
+ 501              	.LFB136:
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** void transaction_free(lwm2m_transaction_t *transacP)
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 15
+
+
+ 502              		.loc 1 298 0
+ 503              		.cfi_startproc
+ 504              		@ args = 0, pretend = 0, frame = 8
+ 505              		@ frame_needed = 1, uses_anonymous_args = 0
+ 506 0000 80B5     		push	{r7, lr}
+ 507              	.LCFI10:
+ 508              		.cfi_def_cfa_offset 8
+ 509              		.cfi_offset 7, -8
+ 510              		.cfi_offset 14, -4
+ 511 0002 82B0     		sub	sp, sp, #8
+ 512              	.LCFI11:
+ 513              		.cfi_def_cfa_offset 16
+ 514 0004 00AF     		add	r7, sp, #0
+ 515              	.LCFI12:
+ 516              		.cfi_def_cfa_register 7
+ 517 0006 7860     		str	r0, [r7, #4]
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("Entering");
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (transacP->message)
+ 518              		.loc 1 300 0
+ 519 0008 7B68     		ldr	r3, [r7, #4]
+ 520 000a 9B6A     		ldr	r3, [r3, #40]
+ 521 000c 002B     		cmp	r3, #0
+ 522 000e 09D0     		beq	.L35
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         coap_free_header(transacP->message);
+ 523              		.loc 1 302 0
+ 524 0010 7B68     		ldr	r3, [r7, #4]
+ 525 0012 9B6A     		ldr	r3, [r3, #40]
+ 526 0014 1846     		mov	r0, r3
+ 527 0016 FFF7FEFF 		bl	coap_free_header
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         lwm2m_free(transacP->message);
+ 528              		.loc 1 303 0
+ 529 001a 7B68     		ldr	r3, [r7, #4]
+ 530 001c 9B6A     		ldr	r3, [r3, #40]
+ 531 001e 1846     		mov	r0, r3
+ 532 0020 FFF7FEFF 		bl	lwm2m_free
+ 533              	.L35:
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (transacP->buffer) lwm2m_free(transacP->buffer);
+ 534              		.loc 1 306 0
+ 535 0024 7B68     		ldr	r3, [r7, #4]
+ 536 0026 1B6B     		ldr	r3, [r3, #48]
+ 537 0028 002B     		cmp	r3, #0
+ 538 002a 04D0     		beq	.L36
+ 539              		.loc 1 306 0 is_stmt 0 discriminator 1
+ 540 002c 7B68     		ldr	r3, [r7, #4]
+ 541 002e 1B6B     		ldr	r3, [r3, #48]
+ 542 0030 1846     		mov	r0, r3
+ 543 0032 FFF7FEFF 		bl	lwm2m_free
+ 544              	.L36:
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     lwm2m_free(transacP);
+ 545              		.loc 1 307 0 is_stmt 1
+ 546 0036 7868     		ldr	r0, [r7, #4]
+ 547 0038 FFF7FEFF 		bl	lwm2m_free
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 548              		.loc 1 308 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 16
+
+
+ 549 003c 00BF     		nop
+ 550 003e 0837     		adds	r7, r7, #8
+ 551              	.LCFI13:
+ 552              		.cfi_def_cfa_offset 8
+ 553 0040 BD46     		mov	sp, r7
+ 554              	.LCFI14:
+ 555              		.cfi_def_cfa_register 13
+ 556              		@ sp needed
+ 557 0042 80BD     		pop	{r7, pc}
+ 558              		.cfi_endproc
+ 559              	.LFE136:
+ 561              		.section	.text.transaction_remove,"ax",%progbits
+ 562              		.align	1
+ 563              		.global	transaction_remove
+ 564              		.syntax unified
+ 565              		.thumb
+ 566              		.thumb_func
+ 567              		.fpu fpv4-sp-d16
+ 569              	transaction_remove:
+ 570              	.LFB137:
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** void transaction_remove(lwm2m_context_t *contextP,
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         lwm2m_transaction_t *transacP)
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+ 571              		.loc 1 312 0
+ 572              		.cfi_startproc
+ 573              		@ args = 0, pretend = 0, frame = 8
+ 574              		@ frame_needed = 1, uses_anonymous_args = 0
+ 575 0000 80B5     		push	{r7, lr}
+ 576              	.LCFI15:
+ 577              		.cfi_def_cfa_offset 8
+ 578              		.cfi_offset 7, -8
+ 579              		.cfi_offset 14, -4
+ 580 0002 82B0     		sub	sp, sp, #8
+ 581              	.LCFI16:
+ 582              		.cfi_def_cfa_offset 16
+ 583 0004 00AF     		add	r7, sp, #0
+ 584              	.LCFI17:
+ 585              		.cfi_def_cfa_register 7
+ 586 0006 7860     		str	r0, [r7, #4]
+ 587 0008 3960     		str	r1, [r7]
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("Entering");
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     contextP->transactionList = (lwm2m_transaction_t *) LWM2M_LIST_RM(contextP->transactionList, tr
+ 588              		.loc 1 314 0
+ 589 000a 7B68     		ldr	r3, [r7, #4]
+ 590 000c 186B     		ldr	r0, [r3, #48]
+ 591 000e 3B68     		ldr	r3, [r7]
+ 592 0010 9B88     		ldrh	r3, [r3, #4]
+ 593 0012 0022     		movs	r2, #0
+ 594 0014 1946     		mov	r1, r3
+ 595 0016 FFF7FEFF 		bl	lwm2m_list_remove
+ 596 001a 0246     		mov	r2, r0
+ 597 001c 7B68     		ldr	r3, [r7, #4]
+ 598 001e 1A63     		str	r2, [r3, #48]
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transaction_free(transacP);
+ 599              		.loc 1 315 0
+ 600 0020 3868     		ldr	r0, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 17
+
+
+ 601 0022 FFF7FEFF 		bl	transaction_free
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 602              		.loc 1 316 0
+ 603 0026 00BF     		nop
+ 604 0028 0837     		adds	r7, r7, #8
+ 605              	.LCFI18:
+ 606              		.cfi_def_cfa_offset 8
+ 607 002a BD46     		mov	sp, r7
+ 608              	.LCFI19:
+ 609              		.cfi_def_cfa_register 13
+ 610              		@ sp needed
+ 611 002c 80BD     		pop	{r7, pc}
+ 612              		.cfi_endproc
+ 613              	.LFE137:
+ 615              		.section	.text.transaction_handleResponse,"ax",%progbits
+ 616              		.align	1
+ 617              		.global	transaction_handleResponse
+ 618              		.syntax unified
+ 619              		.thumb
+ 620              		.thumb_func
+ 621              		.fpu fpv4-sp-d16
+ 623              	transaction_handleResponse:
+ 624              	.LFB138:
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** bool transaction_handleResponse(lwm2m_context_t *contextP,
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                 void *fromSessionH,
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                 coap_packet_t *message,
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                                 coap_packet_t *response)
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+ 625              		.loc 1 322 0
+ 626              		.cfi_startproc
+ 627              		@ args = 0, pretend = 0, frame = 32
+ 628              		@ frame_needed = 1, uses_anonymous_args = 0
+ 629 0000 2DE99048 		push	{r4, r7, fp, lr}
+ 630              	.LCFI20:
+ 631              		.cfi_def_cfa_offset 16
+ 632              		.cfi_offset 4, -16
+ 633              		.cfi_offset 7, -12
+ 634              		.cfi_offset 11, -8
+ 635              		.cfi_offset 14, -4
+ 636 0004 88B0     		sub	sp, sp, #32
+ 637              	.LCFI21:
+ 638              		.cfi_def_cfa_offset 48
+ 639 0006 00AF     		add	r7, sp, #0
+ 640              	.LCFI22:
+ 641              		.cfi_def_cfa_register 7
+ 642 0008 F860     		str	r0, [r7, #12]
+ 643 000a B960     		str	r1, [r7, #8]
+ 644 000c 7A60     		str	r2, [r7, #4]
+ 645 000e 3B60     		str	r3, [r7]
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     bool found = false;
+ 646              		.loc 1 323 0
+ 647 0010 0023     		movs	r3, #0
+ 648 0012 FB77     		strb	r3, [r7, #31]
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     bool reset = false;
+ 649              		.loc 1 324 0
+ 650 0014 0023     		movs	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 18
+
+
+ 651 0016 BB77     		strb	r3, [r7, #30]
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     lwm2m_transaction_t *transacP;
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG_ARG("Entering,message->code: %d", message->code);
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transacP = contextP->transactionList;
+ 652              		.loc 1 328 0
+ 653 0018 FB68     		ldr	r3, [r7, #12]
+ 654 001a 1B6B     		ldr	r3, [r3, #48]
+ 655 001c BB61     		str	r3, [r7, #24]
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     while (NULL != transacP)
+ 656              		.loc 1 330 0
+ 657 001e A9E0     		b	.L39
+ 658              	.L52:
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (lwm2m_session_is_equal(fromSessionH, transacP->peerH, contextP->userData) == true)
+ 659              		.loc 1 332 0
+ 660 0020 BB69     		ldr	r3, [r7, #24]
+ 661 0022 9968     		ldr	r1, [r3, #8]
+ 662 0024 FB68     		ldr	r3, [r7, #12]
+ 663 0026 5B6B     		ldr	r3, [r3, #52]
+ 664 0028 1A46     		mov	r2, r3
+ 665 002a B868     		ldr	r0, [r7, #8]
+ 666 002c FFF7FEFF 		bl	lwm2m_session_is_equal
+ 667 0030 0346     		mov	r3, r0
+ 668 0032 002B     		cmp	r3, #0
+ 669 0034 00F09B80 		beq	.L40
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (!transacP->ack_received)
+ 670              		.loc 1 334 0
+ 671 0038 BB69     		ldr	r3, [r7, #24]
+ 672 003a 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 673 003c 002B     		cmp	r3, #0
+ 674 003e 19D1     		bne	.L41
+ 335:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 336:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 if ((COAP_TYPE_ACK == message->type) || (COAP_TYPE_RST == message->type))
+ 675              		.loc 1 336 0
+ 676 0040 7B68     		ldr	r3, [r7, #4]
+ 677 0042 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 678 0044 022B     		cmp	r3, #2
+ 679 0046 03D0     		beq	.L42
+ 680              		.loc 1 336 0 is_stmt 0 discriminator 1
+ 681 0048 7B68     		ldr	r3, [r7, #4]
+ 682 004a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 683 004c 032B     		cmp	r3, #3
+ 684 004e 11D1     		bne	.L41
+ 685              	.L42:
+ 337:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 {
+ 338:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     if (transacP->mID == message->mid)
+ 686              		.loc 1 338 0 is_stmt 1
+ 687 0050 BB69     		ldr	r3, [r7, #24]
+ 688 0052 9A88     		ldrh	r2, [r3, #4]
+ 689 0054 7B68     		ldr	r3, [r7, #4]
+ 690 0056 1B89     		ldrh	r3, [r3, #8]
+ 691 0058 9A42     		cmp	r2, r3
+ 692 005a 0BD1     		bne	.L41
+ 339:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 19
+
+
+ 340:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         found = true;
+ 693              		.loc 1 340 0
+ 694 005c 0123     		movs	r3, #1
+ 695 005e FB77     		strb	r3, [r7, #31]
+ 341:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         transacP->ack_received = true;
+ 696              		.loc 1 341 0
+ 697 0060 BB69     		ldr	r3, [r7, #24]
+ 698 0062 0122     		movs	r2, #1
+ 699 0064 1A73     		strb	r2, [r3, #12]
+ 342:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         reset = COAP_TYPE_RST == message->type;
+ 700              		.loc 1 342 0
+ 701 0066 7B68     		ldr	r3, [r7, #4]
+ 702 0068 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 703 006a 032B     		cmp	r3, #3
+ 704 006c 0CBF     		ite	eq
+ 705 006e 0123     		moveq	r3, #1
+ 706 0070 0023     		movne	r3, #0
+ 707 0072 BB77     		strb	r3, [r7, #30]
+ 708              	.L41:
+ 343:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     }
+ 344:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 }
+ 345:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 346:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 347:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (reset || prv_checkFinished(transacP, message))
+ 709              		.loc 1 347 0
+ 710 0074 BB7F     		ldrb	r3, [r7, #30]	@ zero_extendqisi2
+ 711 0076 002B     		cmp	r3, #0
+ 712 0078 06D1     		bne	.L43
+ 713              		.loc 1 347 0 is_stmt 0 discriminator 1
+ 714 007a 7968     		ldr	r1, [r7, #4]
+ 715 007c B869     		ldr	r0, [r7, #24]
+ 716 007e FFF7FEFF 		bl	prv_checkFinished
+ 717 0082 0346     		mov	r3, r0
+ 718 0084 002B     		cmp	r3, #0
+ 719 0086 3DD0     		beq	.L44
+ 720              	.L43:
+ 348:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 349:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 // HACK: If a message is sent from the monitor callback,
+ 350:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 // it will arrive before the registration ACK.
+ 351:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 // So we resend transaction that were denied for authentication reason.
+ 352:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 if (!reset)
+ 721              		.loc 1 352 0 is_stmt 1
+ 722 0088 BB7F     		ldrb	r3, [r7, #30]
+ 723 008a 83F00103 		eor	r3, r3, #1
+ 724 008e DBB2     		uxtb	r3, r3
+ 725 0090 002B     		cmp	r3, #0
+ 726 0092 28D0     		beq	.L45
+ 353:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 {
+ 354:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     if (COAP_TYPE_CON == message->type && NULL != response)
+ 727              		.loc 1 354 0
+ 728 0094 7B68     		ldr	r3, [r7, #4]
+ 729 0096 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 730 0098 002B     		cmp	r3, #0
+ 731 009a 0ED1     		bne	.L46
+ 732              		.loc 1 354 0 is_stmt 0 discriminator 1
+ 733 009c 3B68     		ldr	r3, [r7]
+ 734 009e 002B     		cmp	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 20
+
+
+ 735 00a0 0BD0     		beq	.L46
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     {
+ 356:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         coap_init_message(response, COAP_TYPE_ACK, 0, message->mid);
+ 736              		.loc 1 356 0 is_stmt 1
+ 737 00a2 7B68     		ldr	r3, [r7, #4]
+ 738 00a4 1B89     		ldrh	r3, [r3, #8]
+ 739 00a6 0022     		movs	r2, #0
+ 740 00a8 0221     		movs	r1, #2
+ 741 00aa 3868     		ldr	r0, [r7]
+ 742 00ac FFF7FEFF 		bl	coap_init_message
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         message_send(contextP, response, fromSessionH);
+ 743              		.loc 1 357 0
+ 744 00b0 BA68     		ldr	r2, [r7, #8]
+ 745 00b2 3968     		ldr	r1, [r7]
+ 746 00b4 F868     		ldr	r0, [r7, #12]
+ 747 00b6 FFF7FEFF 		bl	message_send
+ 748              	.L46:
+ 358:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     }
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 360:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     if ((COAP_401_UNAUTHORIZED == message->code) && (COAP_MAX_RETRANSMIT > transacP
+ 749              		.loc 1 360 0
+ 750 00ba 7B68     		ldr	r3, [r7, #4]
+ 751 00bc 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 752 00be 812B     		cmp	r3, #129
+ 753 00c0 11D1     		bne	.L45
+ 754              		.loc 1 360 0 is_stmt 0 discriminator 1
+ 755 00c2 BB69     		ldr	r3, [r7, #24]
+ 756 00c4 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 757 00c6 032B     		cmp	r3, #3
+ 758 00c8 0DD8     		bhi	.L45
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     {
+ 362:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         transacP->ack_received = false;
+ 759              		.loc 1 362 0 is_stmt 1
+ 760 00ca BB69     		ldr	r3, [r7, #24]
+ 761 00cc 0022     		movs	r2, #0
+ 762 00ce 1A73     		strb	r2, [r3, #12]
+ 363:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         transacP->retrans_time += COAP_RESPONSE_TIMEOUT;
+ 763              		.loc 1 363 0
+ 764 00d0 BB69     		ldr	r3, [r7, #24]
+ 765 00d2 D3E90812 		ldrd	r1, [r3, #32]
+ 766 00d6 0B1D     		adds	r3, r1, #4
+ 767 00d8 42F10004 		adc	r4, r2, #0
+ 768 00dc BA69     		ldr	r2, [r7, #24]
+ 769 00de C2E90834 		strd	r3, [r2, #32]
+ 364:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         LOG("timeout in transaction_handleResponse\n");
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                         return true;
+ 770              		.loc 1 365 0
+ 771 00e2 0123     		movs	r3, #1
+ 772 00e4 4BE0     		b	.L47
+ 773              	.L45:
+ 366:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     }
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 }
+ 368:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 if (transacP->callback != NULL)
+ 774              		.loc 1 368 0
+ 775 00e6 BB69     		ldr	r3, [r7, #24]
+ 776 00e8 1B6C     		ldr	r3, [r3, #64]
+ 777 00ea 002B     		cmp	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 21
+
+
+ 778 00ec 04D0     		beq	.L48
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 {
+ 370:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     transacP->callback(transacP, message);
+ 779              		.loc 1 370 0
+ 780 00ee BB69     		ldr	r3, [r7, #24]
+ 781 00f0 1B6C     		ldr	r3, [r3, #64]
+ 782 00f2 7968     		ldr	r1, [r7, #4]
+ 783 00f4 B869     		ldr	r0, [r7, #24]
+ 784 00f6 9847     		blx	r3
+ 785              	.LVL0:
+ 786              	.L48:
+ 371:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 }
+ 372:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 transaction_remove(contextP, transacP);
+ 787              		.loc 1 372 0
+ 788 00f8 B969     		ldr	r1, [r7, #24]
+ 789 00fa F868     		ldr	r0, [r7, #12]
+ 790 00fc FFF7FEFF 		bl	transaction_remove
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 return true;
+ 791              		.loc 1 373 0
+ 792 0100 0123     		movs	r3, #1
+ 793 0102 3CE0     		b	.L47
+ 794              	.L44:
+ 374:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 375:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             // if we found our guy, exit
+ 376:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (found)
+ 795              		.loc 1 376 0
+ 796 0104 FB7F     		ldrb	r3, [r7, #31]	@ zero_extendqisi2
+ 797 0106 002B     		cmp	r3, #0
+ 798 0108 31D0     		beq	.L40
+ 799              	.LBB5:
+ 377:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 378:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 time_t tv_sec = lwm2m_gettime();
+ 800              		.loc 1 378 0
+ 801 010a FFF7FEFF 		bl	lwm2m_gettime
+ 802 010e C7E90401 		strd	r0, [r7, #16]
+ 379:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 if (tv_sec)
+ 803              		.loc 1 379 0
+ 804 0112 D7E90434 		ldrd	r3, [r7, #16]
+ 805 0116 2343     		orrs	r3, r3, r4
+ 806 0118 04D0     		beq	.L49
+ 380:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 {
+ 381:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     transacP->retrans_time = tv_sec;
+ 807              		.loc 1 381 0
+ 808 011a BA69     		ldr	r2, [r7, #24]
+ 809 011c D7E90434 		ldrd	r3, [r7, #16]
+ 810 0120 C2E90834 		strd	r3, [r2, #32]
+ 811              	.L49:
+ 382:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 }
+ 383:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 if (transacP->response_timeout)
+ 812              		.loc 1 383 0
+ 813 0124 BB69     		ldr	r3, [r7, #24]
+ 814 0126 D3E90434 		ldrd	r3, [r3, #16]
+ 815 012a 2343     		orrs	r3, r3, r4
+ 816 012c 0DD0     		beq	.L50
+ 384:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 {
+ 385:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     transacP->retrans_time += transacP->response_timeout;
+ 817              		.loc 1 385 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 22
+
+
+ 818 012e BB69     		ldr	r3, [r7, #24]
+ 819 0130 D3E90812 		ldrd	r1, [r3, #32]
+ 820 0134 BB69     		ldr	r3, [r7, #24]
+ 821 0136 D3E904BC 		ldrd	fp, [r3, #16]
+ 822 013a 1BEB0103 		adds	r3, fp, r1
+ 823 013e 4CEB0204 		adc	r4, ip, r2
+ 824 0142 BA69     		ldr	r2, [r7, #24]
+ 825 0144 C2E90834 		strd	r3, [r2, #32]
+ 826 0148 0FE0     		b	.L51
+ 827              	.L50:
+ 386:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 }
+ 387:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 else
+ 388:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 {
+ 389:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                     transacP->retrans_time += COAP_RESPONSE_TIMEOUT * transacP->retrans_counter;
+ 828              		.loc 1 389 0
+ 829 014a BB69     		ldr	r3, [r7, #24]
+ 830 014c D3E90812 		ldrd	r1, [r3, #32]
+ 831 0150 BB69     		ldr	r3, [r7, #24]
+ 832 0152 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 833 0154 9B00     		lsls	r3, r3, #2
+ 834 0156 9B46     		mov	fp, r3
+ 835 0158 4FEAEB7C 		asr	ip, fp, #31
+ 836 015c 1BEB0103 		adds	r3, fp, r1
+ 837 0160 4CEB0204 		adc	r4, ip, r2
+ 838 0164 BA69     		ldr	r2, [r7, #24]
+ 839 0166 C2E90834 		strd	r3, [r2, #32]
+ 840              	.L51:
+ 390:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 }
+ 391:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 LOG_ARG("only true25,fromSessionH is %p, transacP->peerH is %p\n", fromSessionH, tr
+ 392:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 return true;
+ 841              		.loc 1 392 0
+ 842 016a 0123     		movs	r3, #1
+ 843 016c 07E0     		b	.L47
+ 844              	.L40:
+ 845              	.LBE5:
+ 393:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 394:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 395:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         else
+ 396:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 397:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             LOG_ARG("error25,fromSessionH is %p, transacP->peerH is %p\n", fromSessionH, transacP->
+ 398:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 399:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         transacP = transacP->next;
+ 846              		.loc 1 399 0
+ 847 016e BB69     		ldr	r3, [r7, #24]
+ 848 0170 1B68     		ldr	r3, [r3]
+ 849 0172 BB61     		str	r3, [r7, #24]
+ 850              	.L39:
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 851              		.loc 1 330 0
+ 852 0174 BB69     		ldr	r3, [r7, #24]
+ 853 0176 002B     		cmp	r3, #0
+ 854 0178 7FF452AF 		bne	.L52
+ 400:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 401:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("error25,return false in transaction_handleResponse\n");
+ 402:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     return false;
+ 855              		.loc 1 402 0
+ 856 017c 0023     		movs	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 23
+
+
+ 857              	.L47:
+ 403:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 858              		.loc 1 403 0
+ 859 017e 1846     		mov	r0, r3
+ 860 0180 2037     		adds	r7, r7, #32
+ 861              	.LCFI23:
+ 862              		.cfi_def_cfa_offset 16
+ 863 0182 BD46     		mov	sp, r7
+ 864              	.LCFI24:
+ 865              		.cfi_def_cfa_register 13
+ 866              		@ sp needed
+ 867 0184 BDE89088 		pop	{r4, r7, fp, pc}
+ 868              		.cfi_endproc
+ 869              	.LFE138:
+ 871              		.section	.text.transaction_send,"ax",%progbits
+ 872              		.align	1
+ 873              		.global	transaction_send
+ 874              		.syntax unified
+ 875              		.thumb
+ 876              		.thumb_func
+ 877              		.fpu fpv4-sp-d16
+ 879              	transaction_send:
+ 880              	.LFB139:
+ 404:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** //transacP中对象，除buffer外已经赋值
+ 405:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** int transaction_send(lwm2m_context_t *contextP,
+ 406:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                      lwm2m_transaction_t *transacP)
+ 407:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+ 881              		.loc 1 407 0
+ 882              		.cfi_startproc
+ 883              		@ args = 0, pretend = 0, frame = 40
+ 884              		@ frame_needed = 1, uses_anonymous_args = 0
+ 885 0000 2DE99048 		push	{r4, r7, fp, lr}
+ 886              	.LCFI25:
+ 887              		.cfi_def_cfa_offset 16
+ 888              		.cfi_offset 4, -16
+ 889              		.cfi_offset 7, -12
+ 890              		.cfi_offset 11, -8
+ 891              		.cfi_offset 14, -4
+ 892 0004 8AB0     		sub	sp, sp, #40
+ 893              	.LCFI26:
+ 894              		.cfi_def_cfa_offset 56
+ 895 0006 00AF     		add	r7, sp, #0
+ 896              	.LCFI27:
+ 897              		.cfi_def_cfa_register 7
+ 898 0008 7860     		str	r0, [r7, #4]
+ 899 000a 3960     		str	r1, [r7]
+ 408:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     bool maxRetriesReached = false;
+ 900              		.loc 1 408 0
+ 901 000c 0023     		movs	r3, #0
+ 902 000e 87F82730 		strb	r3, [r7, #39]
+ 409:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     coap_packet_t *message = transacP->message;
+ 903              		.loc 1 409 0
+ 904 0012 3B68     		ldr	r3, [r7]
+ 905 0014 9B6A     		ldr	r3, [r3, #40]
+ 906 0016 FB61     		str	r3, [r7, #28]
+ 410:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     int ret;
+ 411:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 24
+
+
+ 412:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("Entering");
+ 413:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 414:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG_ARG("transaction_send: ver %u, type %u, tkl %u, code %u.%.2u, mid %u, Content type: %d",
+ 415:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             message->version, message->type, message->token_len, message->code >> 5, message->code 
+ 416:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG_ARG("time:%llu", atiny_gettime_ms());
+ 417:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (transacP->buffer == NULL)
+ 907              		.loc 1 417 0
+ 908 0018 3B68     		ldr	r3, [r7]
+ 909 001a 1B6B     		ldr	r3, [r3, #48]
+ 910 001c 002B     		cmp	r3, #0
+ 911 001e 3ED1     		bne	.L54
+ 418:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 419:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         transacP->buffer_len = coap_serialize_get_size(message);
+ 912              		.loc 1 419 0
+ 913 0020 F869     		ldr	r0, [r7, #28]
+ 914 0022 FFF7FEFF 		bl	coap_serialize_get_size
+ 915 0026 0346     		mov	r3, r0
+ 916 0028 9AB2     		uxth	r2, r3
+ 917 002a 3B68     		ldr	r3, [r7]
+ 918 002c 9A85     		strh	r2, [r3, #44]	@ movhi
+ 420:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (transacP->buffer_len == 0)
+ 919              		.loc 1 420 0
+ 920 002e 3B68     		ldr	r3, [r7]
+ 921 0030 9B8D     		ldrh	r3, [r3, #44]
+ 922 0032 002B     		cmp	r3, #0
+ 923 0034 05D1     		bne	.L55
+ 421:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 422:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transaction_remove(contextP, transacP);
+ 924              		.loc 1 422 0
+ 925 0036 3968     		ldr	r1, [r7]
+ 926 0038 7868     		ldr	r0, [r7, #4]
+ 927 003a FFF7FEFF 		bl	transaction_remove
+ 423:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             LOG("remove");
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             return COAP_500_INTERNAL_SERVER_ERROR;
+ 928              		.loc 1 424 0
+ 929 003e A023     		movs	r3, #160
+ 930 0040 ACE0     		b	.L56
+ 931              	.L55:
+ 425:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 426:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 427:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         transacP->buffer = (uint8_t *)lwm2m_malloc(transacP->buffer_len);
+ 932              		.loc 1 427 0
+ 933 0042 3B68     		ldr	r3, [r7]
+ 934 0044 9B8D     		ldrh	r3, [r3, #44]
+ 935 0046 1846     		mov	r0, r3
+ 936 0048 FFF7FEFF 		bl	lwm2m_malloc
+ 937 004c 0246     		mov	r2, r0
+ 938 004e 3B68     		ldr	r3, [r7]
+ 939 0050 1A63     		str	r2, [r3, #48]
+ 428:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (transacP->buffer == NULL)
+ 940              		.loc 1 428 0
+ 941 0052 3B68     		ldr	r3, [r7]
+ 942 0054 1B6B     		ldr	r3, [r3, #48]
+ 943 0056 002B     		cmp	r3, #0
+ 944 0058 05D1     		bne	.L57
+ 429:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 430:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transaction_remove(contextP, transacP);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 25
+
+
+ 945              		.loc 1 430 0
+ 946 005a 3968     		ldr	r1, [r7]
+ 947 005c 7868     		ldr	r0, [r7, #4]
+ 948 005e FFF7FEFF 		bl	transaction_remove
+ 431:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             LOG("remove");
+ 432:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             return COAP_500_INTERNAL_SERVER_ERROR;
+ 949              		.loc 1 432 0
+ 950 0062 A023     		movs	r3, #160
+ 951 0064 9AE0     		b	.L56
+ 952              	.L57:
+ 433:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 434:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 435:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         transacP->buffer_len = coap_serialize_message(message, transacP->buffer);
+ 953              		.loc 1 435 0
+ 954 0066 3B68     		ldr	r3, [r7]
+ 955 0068 1B6B     		ldr	r3, [r3, #48]
+ 956 006a 1946     		mov	r1, r3
+ 957 006c F869     		ldr	r0, [r7, #28]
+ 958 006e FFF7FEFF 		bl	coap_serialize_message
+ 959 0072 0346     		mov	r3, r0
+ 960 0074 9AB2     		uxth	r2, r3
+ 961 0076 3B68     		ldr	r3, [r7]
+ 962 0078 9A85     		strh	r2, [r3, #44]	@ movhi
+ 436:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (transacP->buffer_len == 0)
+ 963              		.loc 1 436 0
+ 964 007a 3B68     		ldr	r3, [r7]
+ 965 007c 9B8D     		ldrh	r3, [r3, #44]
+ 966 007e 002B     		cmp	r3, #0
+ 967 0080 0DD1     		bne	.L54
+ 437:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 438:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             lwm2m_free(transacP->buffer);
+ 968              		.loc 1 438 0
+ 969 0082 3B68     		ldr	r3, [r7]
+ 970 0084 1B6B     		ldr	r3, [r3, #48]
+ 971 0086 1846     		mov	r0, r3
+ 972 0088 FFF7FEFF 		bl	lwm2m_free
+ 439:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transacP->buffer = NULL;
+ 973              		.loc 1 439 0
+ 974 008c 3B68     		ldr	r3, [r7]
+ 975 008e 0022     		movs	r2, #0
+ 976 0090 1A63     		str	r2, [r3, #48]
+ 440:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transaction_remove(contextP, transacP);
+ 977              		.loc 1 440 0
+ 978 0092 3968     		ldr	r1, [r7]
+ 979 0094 7868     		ldr	r0, [r7, #4]
+ 980 0096 FFF7FEFF 		bl	transaction_remove
+ 441:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             LOG("remove");
+ 442:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             return COAP_500_INTERNAL_SERVER_ERROR;
+ 981              		.loc 1 442 0
+ 982 009a A023     		movs	r3, #160
+ 983 009c 7EE0     		b	.L56
+ 984              	.L54:
+ 443:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 444:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 445:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 446:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (!transacP->ack_received)
+ 985              		.loc 1 446 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 26
+
+
+ 986 009e 3B68     		ldr	r3, [r7]
+ 987 00a0 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 988 00a2 002B     		cmp	r3, #0
+ 989 00a4 61D1     		bne	.L58
+ 990              	.LBB6:
+ 447:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 448:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         long unsigned timeout = 0;
+ 991              		.loc 1 448 0
+ 992 00a6 0023     		movs	r3, #0
+ 993 00a8 3B62     		str	r3, [r7, #32]
+ 449:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 450:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (0 == transacP->retrans_counter)
+ 994              		.loc 1 450 0
+ 995 00aa 3B68     		ldr	r3, [r7]
+ 996 00ac 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 997 00ae 002B     		cmp	r3, #0
+ 998 00b0 19D1     		bne	.L59
+ 999              	.LBB7:
+ 451:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 452:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             time_t tv_sec = lwm2m_gettime();
+ 1000              		.loc 1 452 0
+ 1001 00b2 FFF7FEFF 		bl	lwm2m_gettime
+ 1002 00b6 C7E90401 		strd	r0, [r7, #16]
+ 453:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (tv_sec)
+ 1003              		.loc 1 453 0
+ 1004 00ba D7E90434 		ldrd	r3, [r7, #16]
+ 1005 00be 2343     		orrs	r3, r3, r4
+ 1006 00c0 0DD0     		beq	.L60
+ 454:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 455:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 transacP->retrans_time = tv_sec + COAP_RESPONSE_TIMEOUT;
+ 1007              		.loc 1 455 0
+ 1008 00c2 D7E90434 		ldrd	r3, [r7, #16]
+ 1009 00c6 181D     		adds	r0, r3, #4
+ 1010 00c8 44F10001 		adc	r1, r4, #0
+ 1011 00cc 3A68     		ldr	r2, [r7]
+ 1012 00ce C2E90801 		strd	r0, [r2, #32]
+ 456:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 transacP->retrans_counter = 1;
+ 1013              		.loc 1 456 0
+ 1014 00d2 3B68     		ldr	r3, [r7]
+ 1015 00d4 0122     		movs	r2, #1
+ 1016 00d6 1A76     		strb	r2, [r3, #24]
+ 457:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 timeout = 0;
+ 1017              		.loc 1 457 0
+ 1018 00d8 0023     		movs	r3, #0
+ 1019 00da 3B62     		str	r3, [r7, #32]
+ 1020 00dc 11E0     		b	.L62
+ 1021              	.L60:
+ 458:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 459:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             else
+ 460:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 461:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 maxRetriesReached = true;
+ 1022              		.loc 1 461 0
+ 1023 00de 0123     		movs	r3, #1
+ 1024 00e0 87F82730 		strb	r3, [r7, #39]
+ 1025 00e4 0DE0     		b	.L62
+ 1026              	.L59:
+ 1027              	.LBE7:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 27
+
+
+ 462:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 463:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 464:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         else
+ 465:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 466:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if(transacP->retrans_counter <= 4 )
+ 1028              		.loc 1 466 0
+ 1029 00e6 3B68     		ldr	r3, [r7]
+ 1030 00e8 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 1031 00ea 042B     		cmp	r3, #4
+ 1032 00ec 07D8     		bhi	.L63
+ 467:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 timeout = COAP_RESPONSE_TIMEOUT << (transacP->retrans_counter - 1);
+ 1033              		.loc 1 467 0
+ 1034 00ee 3B68     		ldr	r3, [r7]
+ 1035 00f0 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 1036 00f2 013B     		subs	r3, r3, #1
+ 1037 00f4 0422     		movs	r2, #4
+ 1038 00f6 02FA03F3 		lsl	r3, r2, r3
+ 1039 00fa 3B62     		str	r3, [r7, #32]
+ 1040 00fc 01E0     		b	.L62
+ 1041              	.L63:
+ 468:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             else
+ 469:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 timeout = COAP_RESPONSE_TIMEOUT << (4 - 1);
+ 1042              		.loc 1 469 0
+ 1043 00fe 2023     		movs	r3, #32
+ 1044 0100 3B62     		str	r3, [r7, #32]
+ 1045              	.L62:
+ 470:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 471:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 472:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (COAP_MAX_RETRANSMIT + 1 >= transacP->retrans_counter)
+ 1046              		.loc 1 472 0
+ 1047 0102 3B68     		ldr	r3, [r7]
+ 1048 0104 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 1049 0106 052B     		cmp	r3, #5
+ 1050 0108 2CD8     		bhi	.L64
+ 473:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 474:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             ret = lwm2m_buffer_send(transacP->peerH, transacP->buffer, transacP->buffer_len, contex
+ 1051              		.loc 1 474 0
+ 1052 010a 3B68     		ldr	r3, [r7]
+ 1053 010c 9868     		ldr	r0, [r3, #8]
+ 1054 010e 3B68     		ldr	r3, [r7]
+ 1055 0110 196B     		ldr	r1, [r3, #48]
+ 1056 0112 3B68     		ldr	r3, [r7]
+ 1057 0114 9B8D     		ldrh	r3, [r3, #44]
+ 1058 0116 1A46     		mov	r2, r3
+ 1059 0118 7B68     		ldr	r3, [r7, #4]
+ 1060 011a 5B6B     		ldr	r3, [r3, #52]
+ 1061 011c FFF7FEFF 		bl	lwm2m_buffer_send
+ 1062 0120 0346     		mov	r3, r0
+ 1063 0122 FB60     		str	r3, [r7, #12]
+ 475:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             output_buffer(stderr, (uint8_t *)(transacP->buffer), transacP->buffer_len, 0);
+ 1064              		.loc 1 475 0
+ 1065 0124 204B     		ldr	r3, .L68
+ 1066 0126 1B68     		ldr	r3, [r3]
+ 1067 0128 D868     		ldr	r0, [r3, #12]
+ 1068 012a 3B68     		ldr	r3, [r7]
+ 1069 012c 196B     		ldr	r1, [r3, #48]
+ 1070 012e 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 28
+
+
+ 1071 0130 9B8D     		ldrh	r3, [r3, #44]
+ 1072 0132 1A46     		mov	r2, r3
+ 1073 0134 0023     		movs	r3, #0
+ 1074 0136 FFF7FEFF 		bl	output_buffer
+ 476:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transacP->retrans_time += timeout;
+ 1075              		.loc 1 476 0
+ 1076 013a 3B68     		ldr	r3, [r7]
+ 1077 013c D3E90812 		ldrd	r1, [r3, #32]
+ 1078 0140 3B6A     		ldr	r3, [r7, #32]
+ 1079 0142 9B46     		mov	fp, r3
+ 1080 0144 4FF0000C 		mov	ip, #0
+ 1081 0148 1BEB0103 		adds	r3, fp, r1
+ 1082 014c 4CEB0204 		adc	r4, ip, r2
+ 1083 0150 3A68     		ldr	r2, [r7]
+ 1084 0152 C2E90834 		strd	r3, [r2, #32]
+ 477:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             LOG_ARG("send result is %d, retrans_counter:%d", ret, transacP->retrans_counter);
+ 478:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transacP->retrans_counter += 1;
+ 1085              		.loc 1 478 0
+ 1086 0156 3B68     		ldr	r3, [r7]
+ 1087 0158 1B7E     		ldrb	r3, [r3, #24]	@ zero_extendqisi2
+ 1088 015a 0133     		adds	r3, r3, #1
+ 1089 015c DAB2     		uxtb	r2, r3
+ 1090 015e 3B68     		ldr	r3, [r7]
+ 1091 0160 1A76     		strb	r2, [r3, #24]
+ 1092 0162 02E0     		b	.L58
+ 1093              	.L64:
+ 479:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 480:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             UNUSEX(ret);
+ 481:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 482:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         else
+ 483:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 484:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             maxRetriesReached = true;
+ 1094              		.loc 1 484 0
+ 1095 0164 0123     		movs	r3, #1
+ 1096 0166 87F82730 		strb	r3, [r7, #39]
+ 1097              	.L58:
+ 1098              	.LBE6:
+ 485:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 486:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 487:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 488:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     if (transacP->ack_received || maxRetriesReached)
+ 1099              		.loc 1 488 0
+ 1100 016a 3B68     		ldr	r3, [r7]
+ 1101 016c 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 1102 016e 002B     		cmp	r3, #0
+ 1103 0170 03D1     		bne	.L65
+ 1104              		.loc 1 488 0 is_stmt 0 discriminator 1
+ 1105 0172 97F82730 		ldrb	r3, [r7, #39]	@ zero_extendqisi2
+ 1106 0176 002B     		cmp	r3, #0
+ 1107 0178 0FD0     		beq	.L66
+ 1108              	.L65:
+ 489:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 490:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (transacP->callback)
+ 1109              		.loc 1 490 0 is_stmt 1
+ 1110 017a 3B68     		ldr	r3, [r7]
+ 1111 017c 1B6C     		ldr	r3, [r3, #64]
+ 1112 017e 002B     		cmp	r3, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 29
+
+
+ 1113 0180 04D0     		beq	.L67
+ 491:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 492:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             transacP->callback(transacP, NULL);
+ 1114              		.loc 1 492 0
+ 1115 0182 3B68     		ldr	r3, [r7]
+ 1116 0184 1B6C     		ldr	r3, [r3, #64]
+ 1117 0186 0021     		movs	r1, #0
+ 1118 0188 3868     		ldr	r0, [r7]
+ 1119 018a 9847     		blx	r3
+ 1120              	.LVL1:
+ 1121              	.L67:
+ 493:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 494:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         transaction_remove(contextP, transacP);
+ 1122              		.loc 1 494 0
+ 1123 018c 3968     		ldr	r1, [r7]
+ 1124 018e 7868     		ldr	r0, [r7, #4]
+ 1125 0190 FFF7FEFF 		bl	transaction_remove
+ 495:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         LOG_ARG("remove, ACK:%d, timeout: %d", transacP->ack_received, maxRetriesReached);
+ 496:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         return -1;
+ 1126              		.loc 1 496 0
+ 1127 0194 4FF0FF33 		mov	r3, #-1
+ 1128 0198 00E0     		b	.L56
+ 1129              	.L66:
+ 497:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 498:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 499:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     return 0;
+ 1130              		.loc 1 499 0
+ 1131 019a 0023     		movs	r3, #0
+ 1132              	.L56:
+ 500:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 1133              		.loc 1 500 0
+ 1134 019c 1846     		mov	r0, r3
+ 1135 019e 2837     		adds	r7, r7, #40
+ 1136              	.LCFI28:
+ 1137              		.cfi_def_cfa_offset 16
+ 1138 01a0 BD46     		mov	sp, r7
+ 1139              	.LCFI29:
+ 1140              		.cfi_def_cfa_register 13
+ 1141              		@ sp needed
+ 1142 01a2 BDE89088 		pop	{r4, r7, fp, pc}
+ 1143              	.L69:
+ 1144 01a6 00BF     		.align	2
+ 1145              	.L68:
+ 1146 01a8 00000000 		.word	_impure_ptr
+ 1147              		.cfi_endproc
+ 1148              	.LFE139:
+ 1150              		.section	.text.transaction_step,"ax",%progbits
+ 1151              		.align	1
+ 1152              		.global	transaction_step
+ 1153              		.syntax unified
+ 1154              		.thumb
+ 1155              		.thumb_func
+ 1156              		.fpu fpv4-sp-d16
+ 1158              	transaction_step:
+ 1159              	.LFB140:
+ 501:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 502:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** void transaction_step(lwm2m_context_t *contextP,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 30
+
+
+ 503:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                       time_t currentTime,
+ 504:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                       time_t *timeoutP)
+ 505:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** {
+ 1160              		.loc 1 505 0
+ 1161              		.cfi_startproc
+ 1162              		@ args = 4, pretend = 0, frame = 40
+ 1163              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1164 0000 2DE99048 		push	{r4, r7, fp, lr}
+ 1165              	.LCFI30:
+ 1166              		.cfi_def_cfa_offset 16
+ 1167              		.cfi_offset 4, -16
+ 1168              		.cfi_offset 7, -12
+ 1169              		.cfi_offset 11, -8
+ 1170              		.cfi_offset 14, -4
+ 1171 0004 8AB0     		sub	sp, sp, #40
+ 1172              	.LCFI31:
+ 1173              		.cfi_def_cfa_offset 56
+ 1174 0006 00AF     		add	r7, sp, #0
+ 1175              	.LCFI32:
+ 1176              		.cfi_def_cfa_register 7
+ 1177 0008 F860     		str	r0, [r7, #12]
+ 1178 000a C7E90023 		strd	r2, [r7]
+ 506:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     lwm2m_transaction_t *transacP;
+ 507:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 508:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     LOG("Entering");
+ 509:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     transacP = contextP->transactionList;
+ 1179              		.loc 1 509 0
+ 1180 000e FB68     		ldr	r3, [r7, #12]
+ 1181 0010 1B6B     		ldr	r3, [r3, #48]
+ 1182 0012 7B62     		str	r3, [r7, #36]
+ 510:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     while (transacP != NULL)
+ 1183              		.loc 1 510 0
+ 1184 0014 49E0     		b	.L71
+ 1185              	.L78:
+ 1186              	.LBB8:
+ 511:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 512:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         // transaction_send() may remove transaction from the linked list
+ 513:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         lwm2m_transaction_t *nextP = transacP->next;
+ 1187              		.loc 1 513 0
+ 1188 0016 7B6A     		ldr	r3, [r7, #36]
+ 1189 0018 1B68     		ldr	r3, [r3]
+ 1190 001a 7B61     		str	r3, [r7, #20]
+ 514:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         int removed = 0;
+ 1191              		.loc 1 514 0
+ 1192 001c 0023     		movs	r3, #0
+ 1193 001e 3B62     		str	r3, [r7, #32]
+ 515:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 516:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (transacP->retrans_time <= currentTime)
+ 1194              		.loc 1 516 0
+ 1195 0020 7B6A     		ldr	r3, [r7, #36]
+ 1196 0022 D3E90834 		ldrd	r3, [r3, #32]
+ 1197 0026 D7E90012 		ldrd	r1, [r7]
+ 1198 002a 9942     		cmp	r1, r3
+ 1199 002c 72EB0403 		sbcs	r3, r2, r4
+ 1200 0030 04DB     		blt	.L72
+ 517:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 518:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             removed = transaction_send(contextP, transacP);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 31
+
+
+ 1201              		.loc 1 518 0
+ 1202 0032 796A     		ldr	r1, [r7, #36]
+ 1203 0034 F868     		ldr	r0, [r7, #12]
+ 1204 0036 FFF7FEFF 		bl	transaction_send
+ 1205 003a 3862     		str	r0, [r7, #32]
+ 1206              	.L72:
+ 519:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 520:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 521:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         if (0 == removed)
+ 1207              		.loc 1 521 0
+ 1208 003c 3B6A     		ldr	r3, [r7, #32]
+ 1209 003e 002B     		cmp	r3, #0
+ 1210 0040 2AD1     		bne	.L73
+ 1211              	.LBB9:
+ 522:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 523:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             time_t interval;
+ 524:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 525:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (transacP->retrans_time > currentTime)
+ 1212              		.loc 1 525 0
+ 1213 0042 7B6A     		ldr	r3, [r7, #36]
+ 1214 0044 D3E90834 		ldrd	r3, [r3, #32]
+ 1215 0048 D7E90012 		ldrd	r1, [r7]
+ 1216 004c 9942     		cmp	r1, r3
+ 1217 004e 72EB0403 		sbcs	r3, r2, r4
+ 1218 0052 0CDA     		bge	.L74
+ 526:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 527:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 interval = transacP->retrans_time - currentTime;
+ 1219              		.loc 1 527 0
+ 1220 0054 7B6A     		ldr	r3, [r7, #36]
+ 1221 0056 D3E90812 		ldrd	r1, [r3, #32]
+ 1222 005a D7E90034 		ldrd	r3, [r7]
+ 1223 005e C91A     		subs	r1, r1, r3
+ 1224 0060 62EB0402 		sbc	r2, r2, r4
+ 1225 0064 8B46     		mov	fp, r1
+ 1226 0066 9446     		mov	ip, r2
+ 1227 0068 C7E906BC 		strd	fp, [r7, #24]
+ 1228 006c 05E0     		b	.L75
+ 1229              	.L74:
+ 528:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 529:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             else
+ 530:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 531:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 interval = 1;
+ 1230              		.loc 1 531 0
+ 1231 006e 4FF00103 		mov	r3, #1
+ 1232 0072 4FF00004 		mov	r4, #0
+ 1233 0076 C7E90634 		strd	r3, [r7, #24]
+ 1234              	.L75:
+ 532:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 533:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 534:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             if (*timeoutP > interval)
+ 1235              		.loc 1 534 0
+ 1236 007a BB6B     		ldr	r3, [r7, #56]
+ 1237 007c D3E90034 		ldrd	r3, [r3]
+ 1238 0080 D7E90612 		ldrd	r1, [r7, #24]
+ 1239 0084 9942     		cmp	r1, r3
+ 1240 0086 72EB0403 		sbcs	r3, r2, r4
+ 1241 008a 0CDA     		bge	.L77
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 32
+
+
+ 535:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             {
+ 536:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****                 *timeoutP = interval;
+ 1242              		.loc 1 536 0
+ 1243 008c BA6B     		ldr	r2, [r7, #56]
+ 1244 008e D7E90634 		ldrd	r3, [r7, #24]
+ 1245 0092 C2E90034 		strd	r3, [r2]
+ 1246 0096 06E0     		b	.L77
+ 1247              	.L73:
+ 1248              	.LBE9:
+ 537:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             }
+ 538:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 539:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         else
+ 540:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         {
+ 541:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****             *timeoutP = 1;
+ 1249              		.loc 1 541 0
+ 1250 0098 BA6B     		ldr	r2, [r7, #56]
+ 1251 009a 4FF00103 		mov	r3, #1
+ 1252 009e 4FF00004 		mov	r4, #0
+ 1253 00a2 C2E90034 		strd	r3, [r2]
+ 1254              	.L77:
+ 542:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         }
+ 543:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** 
+ 544:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****         transacP = nextP;
+ 1255              		.loc 1 544 0
+ 1256 00a6 7B69     		ldr	r3, [r7, #20]
+ 1257 00a8 7B62     		str	r3, [r7, #36]
+ 1258              	.L71:
+ 1259              	.LBE8:
+ 510:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     {
+ 1260              		.loc 1 510 0
+ 1261 00aa 7B6A     		ldr	r3, [r7, #36]
+ 1262 00ac 002B     		cmp	r3, #0
+ 1263 00ae B2D1     		bne	.L78
+ 545:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c ****     }
+ 546:D:/iot/felix2/components/connectivity/lwm2m/core\transaction.c **** }
+ 1264              		.loc 1 546 0
+ 1265 00b0 00BF     		nop
+ 1266 00b2 2837     		adds	r7, r7, #40
+ 1267              	.LCFI33:
+ 1268              		.cfi_def_cfa_offset 16
+ 1269 00b4 BD46     		mov	sp, r7
+ 1270              	.LCFI34:
+ 1271              		.cfi_def_cfa_register 13
+ 1272              		@ sp needed
+ 1273 00b6 BDE89088 		pop	{r4, r7, fp, pc}
+ 1274              		.cfi_endproc
+ 1275              	.LFE140:
+ 1277              		.text
+ 1278              	.Letext0:
+ 1279              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1280              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1281              		.file 4 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 1282              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1283              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1284              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1285              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1286              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_timeval.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 33
+
+
+ 1287              		.file 10 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 1288              		.file 11 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 1289              		.file 12 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1290              		.file 13 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1291              		.file 14 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1292              		.file 15 "D:/iot/felix2/kernel/include/los_list.h"
+ 1293              		.file 16 "D:/iot/felix2/kernel/include/los_err.h"
+ 1294              		.file 17 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1295              		.file 18 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1296              		.file 19 "D:/iot/felix2/kernel/include/los_event.h"
+ 1297              		.file 20 "D:/iot/felix2/kernel/include/los_task.h"
+ 1298              		.file 21 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1299              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1300              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1301              		.file 24 "D:/iot/felix2/kernel/include/los_config.h"
+ 1302              		.file 25 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 1303              		.file 26 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 1304              		.file 27 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccoNigTx.s 			page 34
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 transaction.c
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:18     .text.prv_checkFinished:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:24     .text.prv_checkFinished:00000000 prv_checkFinished
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:158    .text.transaction_new:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:165    .text.transaction_new:00000000 transaction_new
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:493    .text.transaction_free:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:500    .text.transaction_free:00000000 transaction_free
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:562    .text.transaction_remove:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:569    .text.transaction_remove:00000000 transaction_remove
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:616    .text.transaction_handleResponse:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:623    .text.transaction_handleResponse:00000000 transaction_handleResponse
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:872    .text.transaction_send:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:879    .text.transaction_send:00000000 transaction_send
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:1146   .text.transaction_send:000001a8 $d
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:1151   .text.transaction_step:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccoNigTx.s:1158   .text.transaction_step:00000000 transaction_step
+
+UNDEFINED SYMBOLS
+coap_get_header_token
+memcmp
+lwm2m_malloc
+memset
+coap_init_message
+coap_set_header_uri_path_segment
+utils_intToText
+coap_set_header_token
+lwm2m_gettime
+lwm2m_free
+coap_free_header
+lwm2m_list_remove
+lwm2m_session_is_equal
+message_send
+coap_serialize_get_size
+coap_serialize_message
+lwm2m_buffer_send
+output_buffer
+_impure_ptr

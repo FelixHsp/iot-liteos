@@ -1,0 +1,1308 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"usart.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.comm	hlpuart1,120,4
+  18              		.comm	huart1,120,4
+  19              		.comm	huart2,120,4
+  20              		.comm	huart3,120,4
+  21              		.section	.rodata
+  22              		.align	2
+  23              	.LC0:
+  24 0000 443A2F69 		.ascii	"D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src/us"
+  24      6F742F66 
+  24      656C6978 
+  24      322F7461 
+  24      72676574 
+  25 0033 6172742E 		.ascii	"art.c\000"
+  25      6300
+  26              		.section	.text.MX_LPUART1_UART_Init,"ax",%progbits
+  27              		.align	1
+  28              		.global	MX_LPUART1_UART_Init
+  29              		.syntax unified
+  30              		.thumb
+  31              		.thumb_func
+  32              		.fpu fpv4-sp-d16
+  34              	MX_LPUART1_UART_Init:
+  35              	.LFB133:
+  36              		.file 1 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src/usart.c"
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /**
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   ******************************************************************************
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * File Name          : USART.c
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * Description        : This file provides code for the configuration
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *                      of the USART instances.
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   ******************************************************************************
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   ** This notice applies to any and all portions of this file
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * that are not between comment pairs USER CODE BEGIN and
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * USER CODE END. Other portions of this file, whether 
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * inserted by the user or by software development tools
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * are owned by their respective copyright owners.
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * COPYRIGHT(c) 2018 STMicroelectronics
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * are permitted provided that the following conditions are met:
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 2
+
+
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *      this list of conditions and the following disclaimer.
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *      this list of conditions and the following disclaimer in the documentation
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *      and/or other materials provided with the distribution.
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *      may be used to endorse or promote products derived from this software
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *      without specific prior written permission.
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   *
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   ******************************************************************************
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   */
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* Includes ------------------------------------------------------------------*/
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** #include "usart.h"
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** #include "gpio.h"
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* USER CODE BEGIN 0 */
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* USER CODE END 0 */
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** UART_HandleTypeDef hlpuart1;
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** UART_HandleTypeDef huart1;
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** UART_HandleTypeDef huart2;
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** UART_HandleTypeDef huart3;
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* LPUART1 init function */
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** void MX_LPUART1_UART_Init(void)
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+  37              		.loc 1 56 0
+  38              		.cfi_startproc
+  39              		@ args = 0, pretend = 0, frame = 0
+  40              		@ frame_needed = 1, uses_anonymous_args = 0
+  41 0000 80B5     		push	{r7, lr}
+  42              	.LCFI0:
+  43              		.cfi_def_cfa_offset 8
+  44              		.cfi_offset 7, -8
+  45              		.cfi_offset 14, -4
+  46 0002 00AF     		add	r7, sp, #0
+  47              	.LCFI1:
+  48              		.cfi_def_cfa_register 7
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Instance = LPUART1;
+  49              		.loc 1 58 0
+  50 0004 134B     		ldr	r3, .L4
+  51 0006 144A     		ldr	r2, .L4+4
+  52 0008 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 3
+
+
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.BaudRate = 9600;
+  53              		.loc 1 59 0
+  54 000a 124B     		ldr	r3, .L4
+  55 000c 4FF41652 		mov	r2, #9600
+  56 0010 5A60     		str	r2, [r3, #4]
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.WordLength = UART_WORDLENGTH_8B;
+  57              		.loc 1 60 0
+  58 0012 104B     		ldr	r3, .L4
+  59 0014 0022     		movs	r2, #0
+  60 0016 9A60     		str	r2, [r3, #8]
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.StopBits = UART_STOPBITS_1;
+  61              		.loc 1 61 0
+  62 0018 0E4B     		ldr	r3, .L4
+  63 001a 0022     		movs	r2, #0
+  64 001c DA60     		str	r2, [r3, #12]
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.Parity = UART_PARITY_NONE;
+  65              		.loc 1 62 0
+  66 001e 0D4B     		ldr	r3, .L4
+  67 0020 0022     		movs	r2, #0
+  68 0022 1A61     		str	r2, [r3, #16]
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.Mode = UART_MODE_TX_RX;
+  69              		.loc 1 63 0
+  70 0024 0B4B     		ldr	r3, .L4
+  71 0026 0C22     		movs	r2, #12
+  72 0028 5A61     		str	r2, [r3, #20]
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  73              		.loc 1 64 0
+  74 002a 0A4B     		ldr	r3, .L4
+  75 002c 0022     		movs	r2, #0
+  76 002e 9A61     		str	r2, [r3, #24]
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  77              		.loc 1 65 0
+  78 0030 084B     		ldr	r3, .L4
+  79 0032 0022     		movs	r2, #0
+  80 0034 1A62     		str	r2, [r3, #32]
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   hlpuart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  81              		.loc 1 66 0
+  82 0036 074B     		ldr	r3, .L4
+  83 0038 0022     		movs	r2, #0
+  84 003a 5A62     		str	r2, [r3, #36]
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   if (HAL_UART_Init(&hlpuart1) != HAL_OK)
+  85              		.loc 1 67 0
+  86 003c 0548     		ldr	r0, .L4
+  87 003e FFF7FEFF 		bl	HAL_UART_Init
+  88 0042 0346     		mov	r3, r0
+  89 0044 002B     		cmp	r3, #0
+  90 0046 03D0     		beq	.L3
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     _Error_Handler(__FILE__, __LINE__);
+  91              		.loc 1 69 0
+  92 0048 4521     		movs	r1, #69
+  93 004a 0448     		ldr	r0, .L4+8
+  94 004c FFF7FEFF 		bl	_Error_Handler
+  95              	.L3:
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 4
+
+
+  96              		.loc 1 72 0
+  97 0050 00BF     		nop
+  98 0052 80BD     		pop	{r7, pc}
+  99              	.L5:
+ 100              		.align	2
+ 101              	.L4:
+ 102 0054 00000000 		.word	hlpuart1
+ 103 0058 00800040 		.word	1073774592
+ 104 005c 00000000 		.word	.LC0
+ 105              		.cfi_endproc
+ 106              	.LFE133:
+ 108              		.section	.text.MX_USART1_UART_Init,"ax",%progbits
+ 109              		.align	1
+ 110              		.global	MX_USART1_UART_Init
+ 111              		.syntax unified
+ 112              		.thumb
+ 113              		.thumb_func
+ 114              		.fpu fpv4-sp-d16
+ 116              	MX_USART1_UART_Init:
+ 117              	.LFB134:
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* USART1 init function */
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** void MX_USART1_UART_Init(void)
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 118              		.loc 1 77 0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 1, uses_anonymous_args = 0
+ 122 0000 80B5     		push	{r7, lr}
+ 123              	.LCFI2:
+ 124              		.cfi_def_cfa_offset 8
+ 125              		.cfi_offset 7, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 00AF     		add	r7, sp, #0
+ 128              	.LCFI3:
+ 129              		.cfi_def_cfa_register 7
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Instance = USART1;
+ 130              		.loc 1 79 0
+ 131 0004 154B     		ldr	r3, .L9
+ 132 0006 164A     		ldr	r2, .L9+4
+ 133 0008 1A60     		str	r2, [r3]
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.BaudRate = 115200;
+ 134              		.loc 1 80 0
+ 135 000a 144B     		ldr	r3, .L9
+ 136 000c 4FF4E132 		mov	r2, #115200
+ 137 0010 5A60     		str	r2, [r3, #4]
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.WordLength = UART_WORDLENGTH_8B;
+ 138              		.loc 1 81 0
+ 139 0012 124B     		ldr	r3, .L9
+ 140 0014 0022     		movs	r2, #0
+ 141 0016 9A60     		str	r2, [r3, #8]
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.StopBits = UART_STOPBITS_1;
+ 142              		.loc 1 82 0
+ 143 0018 104B     		ldr	r3, .L9
+ 144 001a 0022     		movs	r2, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 5
+
+
+ 145 001c DA60     		str	r2, [r3, #12]
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.Parity = UART_PARITY_NONE;
+ 146              		.loc 1 83 0
+ 147 001e 0F4B     		ldr	r3, .L9
+ 148 0020 0022     		movs	r2, #0
+ 149 0022 1A61     		str	r2, [r3, #16]
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.Mode = UART_MODE_TX_RX;
+ 150              		.loc 1 84 0
+ 151 0024 0D4B     		ldr	r3, .L9
+ 152 0026 0C22     		movs	r2, #12
+ 153 0028 5A61     		str	r2, [r3, #20]
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 154              		.loc 1 85 0
+ 155 002a 0C4B     		ldr	r3, .L9
+ 156 002c 0022     		movs	r2, #0
+ 157 002e 9A61     		str	r2, [r3, #24]
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+ 158              		.loc 1 86 0
+ 159 0030 0A4B     		ldr	r3, .L9
+ 160 0032 0022     		movs	r2, #0
+ 161 0034 DA61     		str	r2, [r3, #28]
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 162              		.loc 1 87 0
+ 163 0036 094B     		ldr	r3, .L9
+ 164 0038 0022     		movs	r2, #0
+ 165 003a 1A62     		str	r2, [r3, #32]
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 166              		.loc 1 88 0
+ 167 003c 074B     		ldr	r3, .L9
+ 168 003e 0022     		movs	r2, #0
+ 169 0040 5A62     		str	r2, [r3, #36]
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   if (HAL_UART_Init(&huart1) != HAL_OK)
+ 170              		.loc 1 89 0
+ 171 0042 0648     		ldr	r0, .L9
+ 172 0044 FFF7FEFF 		bl	HAL_UART_Init
+ 173 0048 0346     		mov	r3, r0
+ 174 004a 002B     		cmp	r3, #0
+ 175 004c 03D0     		beq	.L8
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     _Error_Handler(__FILE__, __LINE__);
+ 176              		.loc 1 91 0
+ 177 004e 5B21     		movs	r1, #91
+ 178 0050 0448     		ldr	r0, .L9+8
+ 179 0052 FFF7FEFF 		bl	_Error_Handler
+ 180              	.L8:
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 181              		.loc 1 94 0
+ 182 0056 00BF     		nop
+ 183 0058 80BD     		pop	{r7, pc}
+ 184              	.L10:
+ 185 005a 00BF     		.align	2
+ 186              	.L9:
+ 187 005c 00000000 		.word	huart1
+ 188 0060 00380140 		.word	1073821696
+ 189 0064 00000000 		.word	.LC0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 6
+
+
+ 190              		.cfi_endproc
+ 191              	.LFE134:
+ 193              		.section	.text.MX_USART2_UART_Init,"ax",%progbits
+ 194              		.align	1
+ 195              		.global	MX_USART2_UART_Init
+ 196              		.syntax unified
+ 197              		.thumb
+ 198              		.thumb_func
+ 199              		.fpu fpv4-sp-d16
+ 201              	MX_USART2_UART_Init:
+ 202              	.LFB135:
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* USART2 init function */
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** void MX_USART2_UART_Init(void)
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 203              		.loc 1 98 0
+ 204              		.cfi_startproc
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 1, uses_anonymous_args = 0
+ 207 0000 80B5     		push	{r7, lr}
+ 208              	.LCFI4:
+ 209              		.cfi_def_cfa_offset 8
+ 210              		.cfi_offset 7, -8
+ 211              		.cfi_offset 14, -4
+ 212 0002 00AF     		add	r7, sp, #0
+ 213              	.LCFI5:
+ 214              		.cfi_def_cfa_register 7
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Instance = USART2;
+ 215              		.loc 1 99 0
+ 216 0004 154B     		ldr	r3, .L14
+ 217 0006 164A     		ldr	r2, .L14+4
+ 218 0008 1A60     		str	r2, [r3]
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.BaudRate = 9600;
+ 219              		.loc 1 100 0
+ 220 000a 144B     		ldr	r3, .L14
+ 221 000c 4FF41652 		mov	r2, #9600
+ 222 0010 5A60     		str	r2, [r3, #4]
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
+ 223              		.loc 1 101 0
+ 224 0012 124B     		ldr	r3, .L14
+ 225 0014 0022     		movs	r2, #0
+ 226 0016 9A60     		str	r2, [r3, #8]
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.StopBits = UART_STOPBITS_1;
+ 227              		.loc 1 102 0
+ 228 0018 104B     		ldr	r3, .L14
+ 229 001a 0022     		movs	r2, #0
+ 230 001c DA60     		str	r2, [r3, #12]
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.Parity = UART_PARITY_NONE;
+ 231              		.loc 1 103 0
+ 232 001e 0F4B     		ldr	r3, .L14
+ 233 0020 0022     		movs	r2, #0
+ 234 0022 1A61     		str	r2, [r3, #16]
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.Mode = UART_MODE_TX_RX;
+ 235              		.loc 1 104 0
+ 236 0024 0D4B     		ldr	r3, .L14
+ 237 0026 0C22     		movs	r2, #12
+ 238 0028 5A61     		str	r2, [r3, #20]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 7
+
+
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 239              		.loc 1 105 0
+ 240 002a 0C4B     		ldr	r3, .L14
+ 241 002c 0022     		movs	r2, #0
+ 242 002e 9A61     		str	r2, [r3, #24]
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+ 243              		.loc 1 106 0
+ 244 0030 0A4B     		ldr	r3, .L14
+ 245 0032 0022     		movs	r2, #0
+ 246 0034 DA61     		str	r2, [r3, #28]
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 247              		.loc 1 107 0
+ 248 0036 094B     		ldr	r3, .L14
+ 249 0038 0022     		movs	r2, #0
+ 250 003a 1A62     		str	r2, [r3, #32]
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 251              		.loc 1 108 0
+ 252 003c 074B     		ldr	r3, .L14
+ 253 003e 0022     		movs	r2, #0
+ 254 0040 5A62     		str	r2, [r3, #36]
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   if (HAL_UART_Init(&huart2) != HAL_OK)
+ 255              		.loc 1 109 0
+ 256 0042 0648     		ldr	r0, .L14
+ 257 0044 FFF7FEFF 		bl	HAL_UART_Init
+ 258 0048 0346     		mov	r3, r0
+ 259 004a 002B     		cmp	r3, #0
+ 260 004c 03D0     		beq	.L13
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     _Error_Handler(__FILE__, __LINE__);
+ 261              		.loc 1 111 0
+ 262 004e 6F21     		movs	r1, #111
+ 263 0050 0448     		ldr	r0, .L14+8
+ 264 0052 FFF7FEFF 		bl	_Error_Handler
+ 265              	.L13:
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 266              		.loc 1 114 0
+ 267 0056 00BF     		nop
+ 268 0058 80BD     		pop	{r7, pc}
+ 269              	.L15:
+ 270 005a 00BF     		.align	2
+ 271              	.L14:
+ 272 005c 00000000 		.word	huart2
+ 273 0060 00440040 		.word	1073759232
+ 274 0064 00000000 		.word	.LC0
+ 275              		.cfi_endproc
+ 276              	.LFE135:
+ 278              		.section	.text.MX_USART3_UART_Init,"ax",%progbits
+ 279              		.align	1
+ 280              		.global	MX_USART3_UART_Init
+ 281              		.syntax unified
+ 282              		.thumb
+ 283              		.thumb_func
+ 284              		.fpu fpv4-sp-d16
+ 286              	MX_USART3_UART_Init:
+ 287              	.LFB136:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 8
+
+
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* USART3 init function */
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** void MX_USART3_UART_Init(void)
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 288              		.loc 1 119 0
+ 289              		.cfi_startproc
+ 290              		@ args = 0, pretend = 0, frame = 0
+ 291              		@ frame_needed = 1, uses_anonymous_args = 0
+ 292 0000 80B5     		push	{r7, lr}
+ 293              	.LCFI6:
+ 294              		.cfi_def_cfa_offset 8
+ 295              		.cfi_offset 7, -8
+ 296              		.cfi_offset 14, -4
+ 297 0002 00AF     		add	r7, sp, #0
+ 298              	.LCFI7:
+ 299              		.cfi_def_cfa_register 7
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Instance = USART3;
+ 300              		.loc 1 121 0
+ 301 0004 154B     		ldr	r3, .L19
+ 302 0006 164A     		ldr	r2, .L19+4
+ 303 0008 1A60     		str	r2, [r3]
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.BaudRate = 115200;
+ 304              		.loc 1 122 0
+ 305 000a 144B     		ldr	r3, .L19
+ 306 000c 4FF4E132 		mov	r2, #115200
+ 307 0010 5A60     		str	r2, [r3, #4]
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.WordLength = UART_WORDLENGTH_8B;
+ 308              		.loc 1 123 0
+ 309 0012 124B     		ldr	r3, .L19
+ 310 0014 0022     		movs	r2, #0
+ 311 0016 9A60     		str	r2, [r3, #8]
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.StopBits = UART_STOPBITS_1;
+ 312              		.loc 1 124 0
+ 313 0018 104B     		ldr	r3, .L19
+ 314 001a 0022     		movs	r2, #0
+ 315 001c DA60     		str	r2, [r3, #12]
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.Parity = UART_PARITY_NONE;
+ 316              		.loc 1 125 0
+ 317 001e 0F4B     		ldr	r3, .L19
+ 318 0020 0022     		movs	r2, #0
+ 319 0022 1A61     		str	r2, [r3, #16]
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.Mode = UART_MODE_TX_RX;
+ 320              		.loc 1 126 0
+ 321 0024 0D4B     		ldr	r3, .L19
+ 322 0026 0C22     		movs	r2, #12
+ 323 0028 5A61     		str	r2, [r3, #20]
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 324              		.loc 1 127 0
+ 325 002a 0C4B     		ldr	r3, .L19
+ 326 002c 0022     		movs	r2, #0
+ 327 002e 9A61     		str	r2, [r3, #24]
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.OverSampling = UART_OVERSAMPLING_16;
+ 328              		.loc 1 128 0
+ 329 0030 0A4B     		ldr	r3, .L19
+ 330 0032 0022     		movs	r2, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 9
+
+
+ 331 0034 DA61     		str	r2, [r3, #28]
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 332              		.loc 1 129 0
+ 333 0036 094B     		ldr	r3, .L19
+ 334 0038 0022     		movs	r2, #0
+ 335 003a 1A62     		str	r2, [r3, #32]
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 336              		.loc 1 130 0
+ 337 003c 074B     		ldr	r3, .L19
+ 338 003e 0022     		movs	r2, #0
+ 339 0040 5A62     		str	r2, [r3, #36]
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   if (HAL_UART_Init(&huart3) != HAL_OK)
+ 340              		.loc 1 131 0
+ 341 0042 0648     		ldr	r0, .L19
+ 342 0044 FFF7FEFF 		bl	HAL_UART_Init
+ 343 0048 0346     		mov	r3, r0
+ 344 004a 002B     		cmp	r3, #0
+ 345 004c 03D0     		beq	.L18
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     _Error_Handler(__FILE__, __LINE__);
+ 346              		.loc 1 133 0
+ 347 004e 8521     		movs	r1, #133
+ 348 0050 0448     		ldr	r0, .L19+8
+ 349 0052 FFF7FEFF 		bl	_Error_Handler
+ 350              	.L18:
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 351              		.loc 1 136 0
+ 352 0056 00BF     		nop
+ 353 0058 80BD     		pop	{r7, pc}
+ 354              	.L20:
+ 355 005a 00BF     		.align	2
+ 356              	.L19:
+ 357 005c 00000000 		.word	huart3
+ 358 0060 00480040 		.word	1073760256
+ 359 0064 00000000 		.word	.LC0
+ 360              		.cfi_endproc
+ 361              	.LFE136:
+ 363              		.section	.text.HAL_UART_MspInit,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	HAL_UART_MspInit
+ 366              		.syntax unified
+ 367              		.thumb
+ 368              		.thumb_func
+ 369              		.fpu fpv4-sp-d16
+ 371              	HAL_UART_MspInit:
+ 372              	.LFB137:
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 373              		.loc 1 138 0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 48
+ 376              		@ frame_needed = 1, uses_anonymous_args = 0
+ 377 0000 80B5     		push	{r7, lr}
+ 378              	.LCFI8:
+ 379              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 10
+
+
+ 380              		.cfi_offset 7, -8
+ 381              		.cfi_offset 14, -4
+ 382 0002 8CB0     		sub	sp, sp, #48
+ 383              	.LCFI9:
+ 384              		.cfi_def_cfa_offset 56
+ 385 0004 00AF     		add	r7, sp, #0
+ 386              	.LCFI10:
+ 387              		.cfi_def_cfa_register 7
+ 388 0006 7860     		str	r0, [r7, #4]
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   if(uartHandle->Instance==LPUART1)
+ 389              		.loc 1 141 0
+ 390 0008 7B68     		ldr	r3, [r7, #4]
+ 391 000a 1B68     		ldr	r3, [r3]
+ 392 000c 554A     		ldr	r2, .L27
+ 393 000e 9342     		cmp	r3, r2
+ 394 0010 24D1     		bne	.L22
+ 395              	.LBB2:
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN LPUART1_MspInit 0 */
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END LPUART1_MspInit 0 */
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* LPUART1 clock enable */
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_LPUART1_CLK_ENABLE();
+ 396              		.loc 1 147 0
+ 397 0012 554B     		ldr	r3, .L27+4
+ 398 0014 DB6D     		ldr	r3, [r3, #92]
+ 399 0016 544A     		ldr	r2, .L27+4
+ 400 0018 43F00103 		orr	r3, r3, #1
+ 401 001c D365     		str	r3, [r2, #92]
+ 402 001e 524B     		ldr	r3, .L27+4
+ 403 0020 DB6D     		ldr	r3, [r3, #92]
+ 404 0022 03F00103 		and	r3, r3, #1
+ 405 0026 BB61     		str	r3, [r7, #24]
+ 406 0028 BB69     		ldr	r3, [r7, #24]
+ 407              	.LBE2:
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**LPUART1 GPIO Configuration    
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC0     ------> LPUART1_RX
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC1     ------> LPUART1_TX 
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
+ 408              		.loc 1 153 0
+ 409 002a 0323     		movs	r3, #3
+ 410 002c FB61     		str	r3, [r7, #28]
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 411              		.loc 1 154 0
+ 412 002e 0223     		movs	r3, #2
+ 413 0030 3B62     		str	r3, [r7, #32]
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 414              		.loc 1 155 0
+ 415 0032 0023     		movs	r3, #0
+ 416 0034 7B62     		str	r3, [r7, #36]
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 417              		.loc 1 156 0
+ 418 0036 0323     		movs	r3, #3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 11
+
+
+ 419 0038 BB62     		str	r3, [r7, #40]
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF8_LPUART1;
+ 420              		.loc 1 157 0
+ 421 003a 0823     		movs	r3, #8
+ 422 003c FB62     		str	r3, [r7, #44]
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 423              		.loc 1 158 0
+ 424 003e 07F11C03 		add	r3, r7, #28
+ 425 0042 1946     		mov	r1, r3
+ 426 0044 4948     		ldr	r0, .L27+8
+ 427 0046 FFF7FEFF 		bl	HAL_GPIO_Init
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 		
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* LPUART1 interrupt Init */
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_SetPriority(LPUART1_IRQn, 0, 0);
+ 428              		.loc 1 161 0
+ 429 004a 0022     		movs	r2, #0
+ 430 004c 0021     		movs	r1, #0
+ 431 004e 4620     		movs	r0, #70
+ 432 0050 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(LPUART1_IRQn);
+ 433              		.loc 1 162 0
+ 434 0054 4620     		movs	r0, #70
+ 435 0056 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN LPUART1_MspInit 1 */
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END LPUART1_MspInit 1 */
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 	else if(uartHandle->Instance==USART1)
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART1_MspInit 0 */
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART1_MspInit 0 */
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART1 clock enable */
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_USART1_CLK_ENABLE();
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**USART1 GPIO Configuration    
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA9     ------> USART1_TX
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA10     ------> USART1_RX 
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_10;
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART1 interrupt Init */
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(USART1_IRQn);
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART1_MspInit 1 */
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART1_MspInit 1 */
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   else if(uartHandle->Instance==USART2)
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART2_MspInit 0 */
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 12
+
+
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART2_MspInit 0 */
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART2 clock enable */
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_USART2_CLK_ENABLE();
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**USART2 GPIO Configuration    
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA2     ------> USART2_TX
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA3     ------> USART2_RX 
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART2 interrupt Init */
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(USART2_IRQn);
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART2_MspInit 1 */
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART2_MspInit 1 */
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   else if(uartHandle->Instance==USART3)
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART3_MspInit 0 */
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART3_MspInit 0 */
+ 224:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART3 clock enable */
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_USART3_CLK_ENABLE();
+ 226:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 227:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**USART3 GPIO Configuration    
+ 228:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC4     ------> USART3_TX
+ 229:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC5     ------> USART3_RX 
+ 230:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 231:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
+ 232:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 233:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 234:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 235:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
+ 236:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 237:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 238:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART3 interrupt Init */
+ 239:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
+ 240:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(USART3_IRQn);
+ 241:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART3_MspInit 1 */
+ 242:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 243:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART3_MspInit 1 */
+ 244:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 245:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 436              		.loc 1 245 0
+ 437 005a 7FE0     		b	.L26
+ 438              	.L22:
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 439              		.loc 1 167 0
+ 440 005c 7B68     		ldr	r3, [r7, #4]
+ 441 005e 1B68     		ldr	r3, [r3]
+ 442 0060 434A     		ldr	r2, .L27+12
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 13
+
+
+ 443 0062 9342     		cmp	r3, r2
+ 444 0064 26D1     		bne	.L24
+ 445              	.LBB3:
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 446              		.loc 1 173 0
+ 447 0066 404B     		ldr	r3, .L27+4
+ 448 0068 1B6E     		ldr	r3, [r3, #96]
+ 449 006a 3F4A     		ldr	r2, .L27+4
+ 450 006c 43F48043 		orr	r3, r3, #16384
+ 451 0070 1366     		str	r3, [r2, #96]
+ 452 0072 3D4B     		ldr	r3, .L27+4
+ 453 0074 1B6E     		ldr	r3, [r3, #96]
+ 454 0076 03F48043 		and	r3, r3, #16384
+ 455 007a 7B61     		str	r3, [r7, #20]
+ 456 007c 7B69     		ldr	r3, [r7, #20]
+ 457              	.LBE3:
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 458              		.loc 1 179 0
+ 459 007e 4FF4C063 		mov	r3, #1536
+ 460 0082 FB61     		str	r3, [r7, #28]
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 461              		.loc 1 180 0
+ 462 0084 0223     		movs	r3, #2
+ 463 0086 3B62     		str	r3, [r7, #32]
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 464              		.loc 1 181 0
+ 465 0088 0023     		movs	r3, #0
+ 466 008a 7B62     		str	r3, [r7, #36]
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART1;
+ 467              		.loc 1 182 0
+ 468 008c 0323     		movs	r3, #3
+ 469 008e BB62     		str	r3, [r7, #40]
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 470              		.loc 1 183 0
+ 471 0090 0723     		movs	r3, #7
+ 472 0092 FB62     		str	r3, [r7, #44]
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 473              		.loc 1 184 0
+ 474 0094 07F11C03 		add	r3, r7, #28
+ 475 0098 1946     		mov	r1, r3
+ 476 009a 4FF09040 		mov	r0, #1207959552
+ 477 009e FFF7FEFF 		bl	HAL_GPIO_Init
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(USART1_IRQn);
+ 478              		.loc 1 187 0
+ 479 00a2 0022     		movs	r2, #0
+ 480 00a4 0021     		movs	r1, #0
+ 481 00a6 2520     		movs	r0, #37
+ 482 00a8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART1_MspInit 1 */
+ 483              		.loc 1 188 0
+ 484 00ac 2520     		movs	r0, #37
+ 485 00ae FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 486              		.loc 1 245 0
+ 487 00b2 53E0     		b	.L26
+ 488              	.L24:
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 489              		.loc 1 193 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 14
+
+
+ 490 00b4 7B68     		ldr	r3, [r7, #4]
+ 491 00b6 1B68     		ldr	r3, [r3]
+ 492 00b8 2E4A     		ldr	r2, .L27+16
+ 493 00ba 9342     		cmp	r3, r2
+ 494 00bc 25D1     		bne	.L25
+ 495              	.LBB4:
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 496              		.loc 1 199 0
+ 497 00be 2A4B     		ldr	r3, .L27+4
+ 498 00c0 9B6D     		ldr	r3, [r3, #88]
+ 499 00c2 294A     		ldr	r2, .L27+4
+ 500 00c4 43F40033 		orr	r3, r3, #131072
+ 501 00c8 9365     		str	r3, [r2, #88]
+ 502 00ca 274B     		ldr	r3, .L27+4
+ 503 00cc 9B6D     		ldr	r3, [r3, #88]
+ 504 00ce 03F40033 		and	r3, r3, #131072
+ 505 00d2 3B61     		str	r3, [r7, #16]
+ 506 00d4 3B69     		ldr	r3, [r7, #16]
+ 507              	.LBE4:
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 508              		.loc 1 205 0
+ 509 00d6 0C23     		movs	r3, #12
+ 510 00d8 FB61     		str	r3, [r7, #28]
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 511              		.loc 1 206 0
+ 512 00da 0223     		movs	r3, #2
+ 513 00dc 3B62     		str	r3, [r7, #32]
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 514              		.loc 1 207 0
+ 515 00de 0023     		movs	r3, #0
+ 516 00e0 7B62     		str	r3, [r7, #36]
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+ 517              		.loc 1 208 0
+ 518 00e2 0323     		movs	r3, #3
+ 519 00e4 BB62     		str	r3, [r7, #40]
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 520              		.loc 1 209 0
+ 521 00e6 0723     		movs	r3, #7
+ 522 00e8 FB62     		str	r3, [r7, #44]
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 523              		.loc 1 210 0
+ 524 00ea 07F11C03 		add	r3, r7, #28
+ 525 00ee 1946     		mov	r1, r3
+ 526 00f0 4FF09040 		mov	r0, #1207959552
+ 527 00f4 FFF7FEFF 		bl	HAL_GPIO_Init
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(USART2_IRQn);
+ 528              		.loc 1 213 0
+ 529 00f8 0022     		movs	r2, #0
+ 530 00fa 0021     		movs	r1, #0
+ 531 00fc 2620     		movs	r0, #38
+ 532 00fe FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART2_MspInit 1 */
+ 533              		.loc 1 214 0
+ 534 0102 2620     		movs	r0, #38
+ 535 0104 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 536              		.loc 1 245 0
+ 537 0108 28E0     		b	.L26
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 15
+
+
+ 538              	.L25:
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 539              		.loc 1 219 0
+ 540 010a 7B68     		ldr	r3, [r7, #4]
+ 541 010c 1B68     		ldr	r3, [r3]
+ 542 010e 1A4A     		ldr	r2, .L27+20
+ 543 0110 9342     		cmp	r3, r2
+ 544 0112 23D1     		bne	.L26
+ 545              	.LBB5:
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 546              		.loc 1 225 0
+ 547 0114 144B     		ldr	r3, .L27+4
+ 548 0116 9B6D     		ldr	r3, [r3, #88]
+ 549 0118 134A     		ldr	r2, .L27+4
+ 550 011a 43F48023 		orr	r3, r3, #262144
+ 551 011e 9365     		str	r3, [r2, #88]
+ 552 0120 114B     		ldr	r3, .L27+4
+ 553 0122 9B6D     		ldr	r3, [r3, #88]
+ 554 0124 03F48023 		and	r3, r3, #262144
+ 555 0128 FB60     		str	r3, [r7, #12]
+ 556 012a FB68     		ldr	r3, [r7, #12]
+ 557              	.LBE5:
+ 231:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 558              		.loc 1 231 0
+ 559 012c 3023     		movs	r3, #48
+ 560 012e FB61     		str	r3, [r7, #28]
+ 232:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 561              		.loc 1 232 0
+ 562 0130 0223     		movs	r3, #2
+ 563 0132 3B62     		str	r3, [r7, #32]
+ 233:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 564              		.loc 1 233 0
+ 565 0134 0023     		movs	r3, #0
+ 566 0136 7B62     		str	r3, [r7, #36]
+ 234:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
+ 567              		.loc 1 234 0
+ 568 0138 0323     		movs	r3, #3
+ 569 013a BB62     		str	r3, [r7, #40]
+ 235:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+ 570              		.loc 1 235 0
+ 571 013c 0723     		movs	r3, #7
+ 572 013e FB62     		str	r3, [r7, #44]
+ 236:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 573              		.loc 1 236 0
+ 574 0140 07F11C03 		add	r3, r7, #28
+ 575 0144 1946     		mov	r1, r3
+ 576 0146 0948     		ldr	r0, .L27+8
+ 577 0148 FFF7FEFF 		bl	HAL_GPIO_Init
+ 239:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_EnableIRQ(USART3_IRQn);
+ 578              		.loc 1 239 0
+ 579 014c 0022     		movs	r2, #0
+ 580 014e 0021     		movs	r1, #0
+ 581 0150 2720     		movs	r0, #39
+ 582 0152 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 240:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART3_MspInit 1 */
+ 583              		.loc 1 240 0
+ 584 0156 2720     		movs	r0, #39
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 16
+
+
+ 585 0158 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 586              	.L26:
+ 587              		.loc 1 245 0
+ 588 015c 00BF     		nop
+ 589 015e 3037     		adds	r7, r7, #48
+ 590              	.LCFI11:
+ 591              		.cfi_def_cfa_offset 8
+ 592 0160 BD46     		mov	sp, r7
+ 593              	.LCFI12:
+ 594              		.cfi_def_cfa_register 13
+ 595              		@ sp needed
+ 596 0162 80BD     		pop	{r7, pc}
+ 597              	.L28:
+ 598              		.align	2
+ 599              	.L27:
+ 600 0164 00800040 		.word	1073774592
+ 601 0168 00100240 		.word	1073876992
+ 602 016c 00080048 		.word	1207961600
+ 603 0170 00380140 		.word	1073821696
+ 604 0174 00440040 		.word	1073759232
+ 605 0178 00480040 		.word	1073760256
+ 606              		.cfi_endproc
+ 607              	.LFE137:
+ 609              		.section	.text.HAL_UART_MspDeInit,"ax",%progbits
+ 610              		.align	1
+ 611              		.global	HAL_UART_MspDeInit
+ 612              		.syntax unified
+ 613              		.thumb
+ 614              		.thumb_func
+ 615              		.fpu fpv4-sp-d16
+ 617              	HAL_UART_MspDeInit:
+ 618              	.LFB138:
+ 246:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 247:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
+ 248:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 619              		.loc 1 248 0
+ 620              		.cfi_startproc
+ 621              		@ args = 0, pretend = 0, frame = 8
+ 622              		@ frame_needed = 1, uses_anonymous_args = 0
+ 623 0000 80B5     		push	{r7, lr}
+ 624              	.LCFI13:
+ 625              		.cfi_def_cfa_offset 8
+ 626              		.cfi_offset 7, -8
+ 627              		.cfi_offset 14, -4
+ 628 0002 82B0     		sub	sp, sp, #8
+ 629              	.LCFI14:
+ 630              		.cfi_def_cfa_offset 16
+ 631 0004 00AF     		add	r7, sp, #0
+ 632              	.LCFI15:
+ 633              		.cfi_def_cfa_register 7
+ 634 0006 7860     		str	r0, [r7, #4]
+ 249:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 250:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   if(uartHandle->Instance==LPUART1)
+ 635              		.loc 1 250 0
+ 636 0008 7B68     		ldr	r3, [r7, #4]
+ 637 000a 1B68     		ldr	r3, [r3]
+ 638 000c 274A     		ldr	r2, .L35
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 17
+
+
+ 639 000e 9342     		cmp	r3, r2
+ 640 0010 0DD1     		bne	.L30
+ 251:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 252:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN LPUART1_MspDeInit 0 */
+ 253:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 254:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END LPUART1_MspDeInit 0 */
+ 255:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* Peripheral clock disable */
+ 256:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_LPUART1_CLK_DISABLE();
+ 641              		.loc 1 256 0
+ 642 0012 274B     		ldr	r3, .L35+4
+ 643 0014 DB6D     		ldr	r3, [r3, #92]
+ 644 0016 264A     		ldr	r2, .L35+4
+ 645 0018 23F00103 		bic	r3, r3, #1
+ 646 001c D365     		str	r3, [r2, #92]
+ 257:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 258:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**LPUART1 GPIO Configuration    
+ 259:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC0     ------> LPUART1_RX
+ 260:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC1     ------> LPUART1_TX 
+ 261:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 262:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_0|GPIO_PIN_1);
+ 647              		.loc 1 262 0
+ 648 001e 0321     		movs	r1, #3
+ 649 0020 2448     		ldr	r0, .L35+8
+ 650 0022 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 263:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 		
+ 264:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 	/* LPUART1 interrupt Deinit */
+ 265:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 		HAL_NVIC_DisableIRQ(LPUART1_IRQn);
+ 651              		.loc 1 265 0
+ 652 0026 4620     		movs	r0, #70
+ 653 0028 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 266:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN LPUART1_MspDeInit 1 */
+ 267:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 268:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END LPUART1_MspDeInit 1 */
+ 269:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 270:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   else if(uartHandle->Instance==USART1)
+ 271:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 272:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART1_MspDeInit 0 */
+ 273:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 274:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART1_MspDeInit 0 */
+ 275:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* Peripheral clock disable */
+ 276:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_USART1_CLK_DISABLE();
+ 277:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 278:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**USART1 GPIO Configuration    
+ 279:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA9     ------> USART1_TX
+ 280:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA10     ------> USART1_RX 
+ 281:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 282:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_9|GPIO_PIN_10);
+ 283:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 284:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART1 interrupt Deinit */
+ 285:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_DisableIRQ(USART1_IRQn);
+ 286:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART1_MspDeInit 1 */
+ 287:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 288:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART1_MspDeInit 1 */
+ 289:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 290:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   else if(uartHandle->Instance==USART2)
+ 291:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 292:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART2_MspDeInit 0 */
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 18
+
+
+ 293:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 294:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART2_MspDeInit 0 */
+ 295:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* Peripheral clock disable */
+ 296:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_USART2_CLK_DISABLE();
+ 297:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 298:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**USART2 GPIO Configuration    
+ 299:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA2     ------> USART2_TX
+ 300:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PA3     ------> USART2_RX 
+ 301:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 302:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
+ 303:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 304:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART2 interrupt Deinit */
+ 305:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_DisableIRQ(USART2_IRQn);
+ 306:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART2_MspDeInit 1 */
+ 307:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 308:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART2_MspDeInit 1 */
+ 309:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 310:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   else if(uartHandle->Instance==USART3)
+ 311:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 312:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART3_MspDeInit 0 */
+ 313:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 314:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART3_MspDeInit 0 */
+ 315:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* Peripheral clock disable */
+ 316:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     __HAL_RCC_USART3_CLK_DISABLE();
+ 317:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 318:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /**USART3 GPIO Configuration    
+ 319:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC4     ------> USART3_TX
+ 320:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     PC5     ------> USART3_RX 
+ 321:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     */
+ 322:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_GPIO_DeInit(GPIOC, GPIO_PIN_4|GPIO_PIN_5);
+ 323:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 324:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     /* USART3 interrupt Deinit */
+ 325:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     HAL_NVIC_DisableIRQ(USART3_IRQn);
+ 326:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART3_MspDeInit 1 */
+ 327:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 328:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE END USART3_MspDeInit 1 */
+ 329:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   }
+ 330:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 654              		.loc 1 330 0
+ 655 002c 3AE0     		b	.L34
+ 656              	.L30:
+ 270:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 657              		.loc 1 270 0
+ 658 002e 7B68     		ldr	r3, [r7, #4]
+ 659 0030 1B68     		ldr	r3, [r3]
+ 660 0032 214A     		ldr	r2, .L35+12
+ 661 0034 9342     		cmp	r3, r2
+ 662 0036 0FD1     		bne	.L32
+ 276:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 663              		.loc 1 276 0
+ 664 0038 1D4B     		ldr	r3, .L35+4
+ 665 003a 1B6E     		ldr	r3, [r3, #96]
+ 666 003c 1C4A     		ldr	r2, .L35+4
+ 667 003e 23F48043 		bic	r3, r3, #16384
+ 668 0042 1366     		str	r3, [r2, #96]
+ 282:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 669              		.loc 1 282 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 19
+
+
+ 670 0044 4FF4C061 		mov	r1, #1536
+ 671 0048 4FF09040 		mov	r0, #1207959552
+ 672 004c FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 285:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART1_MspDeInit 1 */
+ 673              		.loc 1 285 0
+ 674 0050 2520     		movs	r0, #37
+ 675 0052 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 676              		.loc 1 330 0
+ 677 0056 25E0     		b	.L34
+ 678              	.L32:
+ 290:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 679              		.loc 1 290 0
+ 680 0058 7B68     		ldr	r3, [r7, #4]
+ 681 005a 1B68     		ldr	r3, [r3]
+ 682 005c 174A     		ldr	r2, .L35+16
+ 683 005e 9342     		cmp	r3, r2
+ 684 0060 0ED1     		bne	.L33
+ 296:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 685              		.loc 1 296 0
+ 686 0062 134B     		ldr	r3, .L35+4
+ 687 0064 9B6D     		ldr	r3, [r3, #88]
+ 688 0066 124A     		ldr	r2, .L35+4
+ 689 0068 23F40033 		bic	r3, r3, #131072
+ 690 006c 9365     		str	r3, [r2, #88]
+ 302:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 691              		.loc 1 302 0
+ 692 006e 0C21     		movs	r1, #12
+ 693 0070 4FF09040 		mov	r0, #1207959552
+ 694 0074 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 305:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART2_MspDeInit 1 */
+ 695              		.loc 1 305 0
+ 696 0078 2620     		movs	r0, #38
+ 697 007a FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 698              		.loc 1 330 0
+ 699 007e 11E0     		b	.L34
+ 700              	.L33:
+ 310:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   {
+ 701              		.loc 1 310 0
+ 702 0080 7B68     		ldr	r3, [r7, #4]
+ 703 0082 1B68     		ldr	r3, [r3]
+ 704 0084 0E4A     		ldr	r2, .L35+20
+ 705 0086 9342     		cmp	r3, r2
+ 706 0088 0CD1     		bne	.L34
+ 316:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   
+ 707              		.loc 1 316 0
+ 708 008a 094B     		ldr	r3, .L35+4
+ 709 008c 9B6D     		ldr	r3, [r3, #88]
+ 710 008e 084A     		ldr	r2, .L35+4
+ 711 0090 23F48023 		bic	r3, r3, #262144
+ 712 0094 9365     		str	r3, [r2, #88]
+ 322:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 713              		.loc 1 322 0
+ 714 0096 3021     		movs	r1, #48
+ 715 0098 0648     		ldr	r0, .L35+8
+ 716 009a FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 325:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****   /* USER CODE BEGIN USART3_MspDeInit 1 */
+ 717              		.loc 1 325 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 20
+
+
+ 718 009e 2720     		movs	r0, #39
+ 719 00a0 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 720              	.L34:
+ 721              		.loc 1 330 0
+ 722 00a4 00BF     		nop
+ 723 00a6 0837     		adds	r7, r7, #8
+ 724              	.LCFI16:
+ 725              		.cfi_def_cfa_offset 8
+ 726 00a8 BD46     		mov	sp, r7
+ 727              	.LCFI17:
+ 728              		.cfi_def_cfa_register 13
+ 729              		@ sp needed
+ 730 00aa 80BD     		pop	{r7, pc}
+ 731              	.L36:
+ 732              		.align	2
+ 733              	.L35:
+ 734 00ac 00800040 		.word	1073774592
+ 735 00b0 00100240 		.word	1073876992
+ 736 00b4 00080048 		.word	1207961600
+ 737 00b8 00380140 		.word	1073821696
+ 738 00bc 00440040 		.word	1073759232
+ 739 00c0 00480040 		.word	1073760256
+ 740              		.cfi_endproc
+ 741              	.LFE138:
+ 743              		.section	.text._write,"ax",%progbits
+ 744              		.align	1
+ 745              		.global	_write
+ 746              		.syntax unified
+ 747              		.thumb
+ 748              		.thumb_func
+ 749              		.fpu fpv4-sp-d16
+ 751              	_write:
+ 752              	.LFB139:
+ 331:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** 
+ 332:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** /* define fputc */
+ 333:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** #if 1
+ 334:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** #if defined ( __CC_ARM ) || defined ( __ICCARM__ )  /* KEIL and IAR: printf will call fputc to prin
+ 335:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** int fputc(int ch, FILE *f)
+ 336:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 337:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     (void)HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xFFFF);
+ 338:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     return ch;
+ 339:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 340:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** #elif defined ( __GNUC__ )  /* GCC: printf will call _write to print */
+ 341:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** __attribute__((used)) int _write(int fd, char *ptr, int len)
+ 342:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** {
+ 753              		.loc 1 342 0
+ 754              		.cfi_startproc
+ 755              		@ args = 0, pretend = 0, frame = 16
+ 756              		@ frame_needed = 1, uses_anonymous_args = 0
+ 757 0000 80B5     		push	{r7, lr}
+ 758              	.LCFI18:
+ 759              		.cfi_def_cfa_offset 8
+ 760              		.cfi_offset 7, -8
+ 761              		.cfi_offset 14, -4
+ 762 0002 84B0     		sub	sp, sp, #16
+ 763              	.LCFI19:
+ 764              		.cfi_def_cfa_offset 24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 21
+
+
+ 765 0004 00AF     		add	r7, sp, #0
+ 766              	.LCFI20:
+ 767              		.cfi_def_cfa_register 7
+ 768 0006 F860     		str	r0, [r7, #12]
+ 769 0008 B960     		str	r1, [r7, #8]
+ 770 000a 7A60     		str	r2, [r7, #4]
+ 343:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     (void)HAL_UART_Transmit(&huart1, (uint8_t *)ptr, len, 0xFFFF);
+ 771              		.loc 1 343 0
+ 772 000c 7B68     		ldr	r3, [r7, #4]
+ 773 000e 9AB2     		uxth	r2, r3
+ 774 0010 4FF6FF73 		movw	r3, #65535
+ 775 0014 B968     		ldr	r1, [r7, #8]
+ 776 0016 0448     		ldr	r0, .L39
+ 777 0018 FFF7FEFF 		bl	HAL_UART_Transmit
+ 344:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c ****     return len;
+ 778              		.loc 1 344 0
+ 779 001c 7B68     		ldr	r3, [r7, #4]
+ 345:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\usart.c **** }
+ 780              		.loc 1 345 0
+ 781 001e 1846     		mov	r0, r3
+ 782 0020 1037     		adds	r7, r7, #16
+ 783              	.LCFI21:
+ 784              		.cfi_def_cfa_offset 8
+ 785 0022 BD46     		mov	sp, r7
+ 786              	.LCFI22:
+ 787              		.cfi_def_cfa_register 13
+ 788              		@ sp needed
+ 789 0024 80BD     		pop	{r7, pc}
+ 790              	.L40:
+ 791 0026 00BF     		.align	2
+ 792              	.L39:
+ 793 0028 00000000 		.word	huart1
+ 794              		.cfi_endproc
+ 795              	.LFE139:
+ 797              		.text
+ 798              	.Letext0:
+ 799              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 800              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 801              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 802              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 803              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 804              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 805              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 806              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 807              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 808              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 809              		.file 12 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 810              		.file 13 "D:/iot/felix2/kernel/include/los_config.h"
+ 811              		.file 14 "D:/iot/felix2/kernel/include/los_list.h"
+ 812              		.file 15 "D:/iot/felix2/kernel/include/los_err.h"
+ 813              		.file 16 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 814              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 815              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 816              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 817              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 818              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 819              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 22
+
+
+ 820              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 821              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 822              		.file 25 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 823              		.file 26 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/usart.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 usart.c
+                            *COM*:00000078 hlpuart1
+                            *COM*:00000078 huart1
+                            *COM*:00000078 huart2
+                            *COM*:00000078 huart3
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:22     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:27     .text.MX_LPUART1_UART_Init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:34     .text.MX_LPUART1_UART_Init:00000000 MX_LPUART1_UART_Init
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:102    .text.MX_LPUART1_UART_Init:00000054 $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:109    .text.MX_USART1_UART_Init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:116    .text.MX_USART1_UART_Init:00000000 MX_USART1_UART_Init
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:187    .text.MX_USART1_UART_Init:0000005c $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:194    .text.MX_USART2_UART_Init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:201    .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:272    .text.MX_USART2_UART_Init:0000005c $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:279    .text.MX_USART3_UART_Init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:286    .text.MX_USART3_UART_Init:00000000 MX_USART3_UART_Init
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:357    .text.MX_USART3_UART_Init:0000005c $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:364    .text.HAL_UART_MspInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:371    .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:600    .text.HAL_UART_MspInit:00000164 $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:610    .text.HAL_UART_MspDeInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:617    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:734    .text.HAL_UART_MspDeInit:000000ac $d
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:744    .text._write:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:751    .text._write:00000000 _write
+C:\Users\91458\AppData\Local\Temp\ccRuOjlc.s:793    .text._write:00000028 $d
+
+UNDEFINED SYMBOLS
+HAL_UART_Init
+_Error_Handler
+HAL_GPIO_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_GPIO_DeInit
+HAL_NVIC_DisableIRQ
+HAL_UART_Transmit

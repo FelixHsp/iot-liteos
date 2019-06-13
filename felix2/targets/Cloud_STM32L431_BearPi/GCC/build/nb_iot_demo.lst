@@ -1,0 +1,1908 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"nb_iot_demo.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.bss.s_report_buf,"aw",%nobits
+  18              		.align	2
+  21              	s_report_buf:
+  22 0000 00000000 		.space	256
+  22      00000000 
+  22      00000000 
+  22      00000000 
+  22      00000000 
+  23              		.global	counter
+  24              		.section	.bss.counter,"aw",%nobits
+  25              		.align	1
+  28              	counter:
+  29 0000 0000     		.space	2
+  30              		.comm	Lux,2,2
+  31              		.global	qr_code
+  32              		.section	.data.qr_code,"aw",%progbits
+  35              	qr_code:
+  36 0000 01       		.byte	1
+  37              		.comm	ue_stats,16,4
+  38              		.section	.rodata
+  39              		.align	2
+  40              	.LC0:
+  41 0000 46656C69 		.ascii	"Felix's BearPi\000"
+  41      78277320 
+  41      42656172 
+  41      506900
+  42 000f 00       		.align	2
+  43              	.LC1:
+  44 0010 4C697465 		.ascii	"LiteOS NB-IoT\000"
+  44      4F53204E 
+  44      422D496F 
+  44      5400
+  45 001e 0000     		.align	2
+  46              	.LC2:
+  47 0020 4E434450 		.ascii	"NCDP_IP:\000"
+  47      5F49503A 
+  47      00
+  48 0029 000000   		.align	2
+  49              	.LC3:
+  50 002c 34392E34 		.ascii	"49.4.85.232\000"
+  50      2E38352E 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 2
+
+
+  50      32333200 
+  51              		.align	2
+  52              	.LC4:
+  53 0038 4E434450 		.ascii	"NCDP_PORT:\000"
+  53      5F504F52 
+  53      543A00
+  54 0043 00       		.align	2
+  55              	.LC5:
+  56 0044 35363833 		.ascii	"5683\000"
+  56      00
+  57 0049 000000   		.align	2
+  58              	.LC6:
+  59 004c 6C756D69 		.ascii	"luminance is:\000"
+  59      6E616E63 
+  59      65206973 
+  59      3A00
+  60              		.section	.text.Timer1_Callback,"ax",%progbits
+  61              		.align	1
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  65              		.fpu fpv4-sp-d16
+  67              	Timer1_Callback:
+  68              	.LFB134:
+  69              		.file 1 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo/nb_iot_demo.c"
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * All rights reserved.
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * provided with the distribution.
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * permission.
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * ===============================================
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 3
+
+
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****  
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include <stdio.h>
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include "nb_iot/los_nb_api.h"
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include "nb_cmd_ioctl.h"
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include "lcd.h"
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include "bh1750.h"
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include "los_swtmr.h"
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #include "stm32l4xx_hal.h"
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define TELECON_IP "180.101.147.115"
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define OCEAN_IP "49.4.85.232"
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define SECURITY_PORT "5684"
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define NON_SECURITY_PORT "5683"
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define DEV_PSKID  "868744031131026"
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define DEV_PSK  "d1e1be0c05ac5b8c78ce196412f0cdb0"
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #define cn_buf_len    256   //may be big enough
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** static char s_report_buf[cn_buf_len];
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** extern const unsigned char gImage_Huawei_IoT_QR_Code[114720];
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** uint16_t counter = 0;
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** short int Lux; 
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** bool qr_code = true;
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** int ue_stats[4];
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** static void Timer1_Callback(UINT32 arg)
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+  70              		.loc 1 60 0
+  71              		.cfi_startproc
+  72              		@ args = 0, pretend = 0, frame = 8
+  73              		@ frame_needed = 1, uses_anonymous_args = 0
+  74 0000 80B5     		push	{r7, lr}
+  75              	.LCFI0:
+  76              		.cfi_def_cfa_offset 8
+  77              		.cfi_offset 7, -8
+  78              		.cfi_offset 14, -4
+  79 0002 84B0     		sub	sp, sp, #16
+  80              	.LCFI1:
+  81              		.cfi_def_cfa_offset 24
+  82 0004 02AF     		add	r7, sp, #8
+  83              	.LCFI2:
+  84              		.cfi_def_cfa 7, 16
+  85 0006 7860     		str	r0, [r7, #4]
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	qr_code = !qr_code;
+  86              		.loc 1 61 0
+  87 0008 3B4B     		ldr	r3, .L5
+  88 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  89 000c 002B     		cmp	r3, #0
+  90 000e 14BF     		ite	ne
+  91 0010 0123     		movne	r3, #1
+  92 0012 0023     		moveq	r3, #0
+  93 0014 DBB2     		uxtb	r3, r3
+  94 0016 83F00103 		eor	r3, r3, #1
+  95 001a DBB2     		uxtb	r3, r3
+  96 001c 03F00103 		and	r3, r3, #1
+  97 0020 DAB2     		uxtb	r2, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 4
+
+
+  98 0022 354B     		ldr	r3, .L5
+  99 0024 1A70     		strb	r2, [r3]
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	LCD_Clear(WHITE);
+ 100              		.loc 1 62 0
+ 101 0026 4FF6FF70 		movw	r0, #65535
+ 102 002a FFF7FEFF 		bl	LCD_Clear
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	if (qr_code)
+ 103              		.loc 1 63 0
+ 104 002e 324B     		ldr	r3, .L5
+ 105 0030 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 106 0032 002B     		cmp	r3, #0
+ 107 0034 08D0     		beq	.L2
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_Show_Image(0,0,240,239,gImage_Huawei_IoT_QR_Code);
+ 108              		.loc 1 64 0
+ 109 0036 314B     		ldr	r3, .L5+4
+ 110 0038 0093     		str	r3, [sp]
+ 111 003a EF23     		movs	r3, #239
+ 112 003c F022     		movs	r2, #240
+ 113 003e 0021     		movs	r1, #0
+ 114 0040 0020     		movs	r0, #0
+ 115 0042 FFF7FEFF 		bl	LCD_Show_Image
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	else 
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	{
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		POINT_COLOR = BLUE;			
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(40, 10, 200, 16, 24, "Felix's BearPi");
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(15, 50, 210, 16, 24, "LiteOS NB-IoT");
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 100, 200, 16, 16, "NCDP_IP:");
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(80, 100, 200, 16, 16, OCEAN_IP);
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 150, 200, 16, 16, "NCDP_PORT:");
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(100, 150, 200, 16, 16, NON_SECURITY_PORT);
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 200, 200, 16, 16, "luminance is:");
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowNum(140, 200, Lux, 5, 16);
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	}
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 116              		.loc 1 78 0
+ 117 0046 53E0     		b	.L4
+ 118              	.L2:
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(40, 10, 200, 16, 24, "Felix's BearPi");
+ 119              		.loc 1 67 0
+ 120 0048 2D4B     		ldr	r3, .L5+8
+ 121 004a 1F22     		movs	r2, #31
+ 122 004c 1A80     		strh	r2, [r3]	@ movhi
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(15, 50, 210, 16, 24, "LiteOS NB-IoT");
+ 123              		.loc 1 68 0
+ 124 004e 2D4B     		ldr	r3, .L5+12
+ 125 0050 0193     		str	r3, [sp, #4]
+ 126 0052 1823     		movs	r3, #24
+ 127 0054 0093     		str	r3, [sp]
+ 128 0056 1023     		movs	r3, #16
+ 129 0058 C822     		movs	r2, #200
+ 130 005a 0A21     		movs	r1, #10
+ 131 005c 2820     		movs	r0, #40
+ 132 005e FFF7FEFF 		bl	LCD_ShowString
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 100, 200, 16, 16, "NCDP_IP:");
+ 133              		.loc 1 69 0
+ 134 0062 294B     		ldr	r3, .L5+16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 5
+
+
+ 135 0064 0193     		str	r3, [sp, #4]
+ 136 0066 1823     		movs	r3, #24
+ 137 0068 0093     		str	r3, [sp]
+ 138 006a 1023     		movs	r3, #16
+ 139 006c D222     		movs	r2, #210
+ 140 006e 3221     		movs	r1, #50
+ 141 0070 0F20     		movs	r0, #15
+ 142 0072 FFF7FEFF 		bl	LCD_ShowString
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(80, 100, 200, 16, 16, OCEAN_IP);
+ 143              		.loc 1 70 0
+ 144 0076 254B     		ldr	r3, .L5+20
+ 145 0078 0193     		str	r3, [sp, #4]
+ 146 007a 1023     		movs	r3, #16
+ 147 007c 0093     		str	r3, [sp]
+ 148 007e 1023     		movs	r3, #16
+ 149 0080 C822     		movs	r2, #200
+ 150 0082 6421     		movs	r1, #100
+ 151 0084 0A20     		movs	r0, #10
+ 152 0086 FFF7FEFF 		bl	LCD_ShowString
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 150, 200, 16, 16, "NCDP_PORT:");
+ 153              		.loc 1 71 0
+ 154 008a 214B     		ldr	r3, .L5+24
+ 155 008c 0193     		str	r3, [sp, #4]
+ 156 008e 1023     		movs	r3, #16
+ 157 0090 0093     		str	r3, [sp]
+ 158 0092 1023     		movs	r3, #16
+ 159 0094 C822     		movs	r2, #200
+ 160 0096 6421     		movs	r1, #100
+ 161 0098 5020     		movs	r0, #80
+ 162 009a FFF7FEFF 		bl	LCD_ShowString
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(100, 150, 200, 16, 16, NON_SECURITY_PORT);
+ 163              		.loc 1 72 0
+ 164 009e 1D4B     		ldr	r3, .L5+28
+ 165 00a0 0193     		str	r3, [sp, #4]
+ 166 00a2 1023     		movs	r3, #16
+ 167 00a4 0093     		str	r3, [sp]
+ 168 00a6 1023     		movs	r3, #16
+ 169 00a8 C822     		movs	r2, #200
+ 170 00aa 9621     		movs	r1, #150
+ 171 00ac 0A20     		movs	r0, #10
+ 172 00ae FFF7FEFF 		bl	LCD_ShowString
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 200, 200, 16, 16, "luminance is:");
+ 173              		.loc 1 73 0
+ 174 00b2 194B     		ldr	r3, .L5+32
+ 175 00b4 0193     		str	r3, [sp, #4]
+ 176 00b6 1023     		movs	r3, #16
+ 177 00b8 0093     		str	r3, [sp]
+ 178 00ba 1023     		movs	r3, #16
+ 179 00bc C822     		movs	r2, #200
+ 180 00be 9621     		movs	r1, #150
+ 181 00c0 6420     		movs	r0, #100
+ 182 00c2 FFF7FEFF 		bl	LCD_ShowString
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowNum(140, 200, Lux, 5, 16);
+ 183              		.loc 1 74 0
+ 184 00c6 154B     		ldr	r3, .L5+36
+ 185 00c8 0193     		str	r3, [sp, #4]
+ 186 00ca 1023     		movs	r3, #16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 6
+
+
+ 187 00cc 0093     		str	r3, [sp]
+ 188 00ce 1023     		movs	r3, #16
+ 189 00d0 C822     		movs	r2, #200
+ 190 00d2 C821     		movs	r1, #200
+ 191 00d4 0A20     		movs	r0, #10
+ 192 00d6 FFF7FEFF 		bl	LCD_ShowString
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	}
+ 193              		.loc 1 75 0
+ 194 00da 114B     		ldr	r3, .L5+40
+ 195 00dc B3F90030 		ldrsh	r3, [r3]
+ 196 00e0 1A46     		mov	r2, r3
+ 197 00e2 1023     		movs	r3, #16
+ 198 00e4 0093     		str	r3, [sp]
+ 199 00e6 0523     		movs	r3, #5
+ 200 00e8 C821     		movs	r1, #200
+ 201 00ea 8C20     		movs	r0, #140
+ 202 00ec FFF7FEFF 		bl	LCD_ShowNum
+ 203              	.L4:
+ 204              		.loc 1 78 0
+ 205 00f0 00BF     		nop
+ 206 00f2 0837     		adds	r7, r7, #8
+ 207              	.LCFI3:
+ 208              		.cfi_def_cfa_offset 8
+ 209 00f4 BD46     		mov	sp, r7
+ 210              	.LCFI4:
+ 211              		.cfi_def_cfa_register 13
+ 212              		@ sp needed
+ 213 00f6 80BD     		pop	{r7, pc}
+ 214              	.L6:
+ 215              		.align	2
+ 216              	.L5:
+ 217 00f8 00000000 		.word	qr_code
+ 218 00fc 00000000 		.word	gImage_Huawei_IoT_QR_Code
+ 219 0100 00000000 		.word	POINT_COLOR
+ 220 0104 00000000 		.word	.LC0
+ 221 0108 10000000 		.word	.LC1
+ 222 010c 20000000 		.word	.LC2
+ 223 0110 2C000000 		.word	.LC3
+ 224 0114 38000000 		.word	.LC4
+ 225 0118 44000000 		.word	.LC5
+ 226 011c 4C000000 		.word	.LC6
+ 227 0120 00000000 		.word	Lux
+ 228              		.cfi_endproc
+ 229              	.LFE134:
+ 231              		.section	.rodata
+ 232 005a 0000     		.align	2
+ 233              	.LC7:
+ 234 005c 70726F63 		.ascii	"proceed to get ue_status!\015\000"
+ 234      65656420 
+ 234      746F2067 
+ 234      65742075 
+ 234      655F7374 
+ 235              		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	HAL_GPIO_EXTI_Callback
+ 238              		.syntax unified
+ 239              		.thumb
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 7
+
+
+ 240              		.thumb_func
+ 241              		.fpu fpv4-sp-d16
+ 243              	HAL_GPIO_EXTI_Callback:
+ 244              	.LFB135:
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 245              		.loc 1 81 0
+ 246              		.cfi_startproc
+ 247              		@ args = 0, pretend = 0, frame = 8
+ 248              		@ frame_needed = 1, uses_anonymous_args = 0
+ 249 0000 80B5     		push	{r7, lr}
+ 250              	.LCFI5:
+ 251              		.cfi_def_cfa_offset 8
+ 252              		.cfi_offset 7, -8
+ 253              		.cfi_offset 14, -4
+ 254 0002 82B0     		sub	sp, sp, #8
+ 255              	.LCFI6:
+ 256              		.cfi_def_cfa_offset 16
+ 257 0004 00AF     		add	r7, sp, #0
+ 258              	.LCFI7:
+ 259              		.cfi_def_cfa_register 7
+ 260 0006 0346     		mov	r3, r0
+ 261 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	int ret;
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	switch(GPIO_Pin)
+ 262              		.loc 1 83 0
+ 263 000a FB88     		ldrh	r3, [r7, #6]
+ 264 000c 042B     		cmp	r3, #4
+ 265 000e 02D0     		beq	.L9
+ 266 0010 082B     		cmp	r3, #8
+ 267 0012 07D0     		beq	.L10
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	{
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		case KEY1_Pin:	
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			key1 = true;
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			printf("proceed to get ue_status!\r\n");
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			break;
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		case KEY2_Pin:
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			key2 = true;
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			toggle = !toggle;
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			HAL_GPIO_TogglePin(Light_GPIO_Port,Light_Pin);
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			break;
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		default:		
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			break;
+ 268              		.loc 1 95 0
+ 269 0014 19E0     		b	.L11
+ 270              	.L9:
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			printf("proceed to get ue_status!\r\n");
+ 271              		.loc 1 86 0
+ 272 0016 0F4B     		ldr	r3, .L12
+ 273 0018 0122     		movs	r2, #1
+ 274 001a 1A70     		strb	r2, [r3]
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			break;
+ 275              		.loc 1 87 0
+ 276 001c 0E48     		ldr	r0, .L12+4
+ 277 001e FFF7FEFF 		bl	puts
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		case KEY2_Pin:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 8
+
+
+ 278              		.loc 1 88 0
+ 279 0022 12E0     		b	.L11
+ 280              	.L10:
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			toggle = !toggle;
+ 281              		.loc 1 90 0
+ 282 0024 0D4B     		ldr	r3, .L12+8
+ 283 0026 0122     		movs	r2, #1
+ 284 0028 1A70     		strb	r2, [r3]
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			HAL_GPIO_TogglePin(Light_GPIO_Port,Light_Pin);
+ 285              		.loc 1 91 0
+ 286 002a 0D4B     		ldr	r3, .L12+12
+ 287 002c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 288 002e 002B     		cmp	r3, #0
+ 289 0030 0CBF     		ite	eq
+ 290 0032 0123     		moveq	r3, #1
+ 291 0034 0023     		movne	r3, #0
+ 292 0036 DBB2     		uxtb	r3, r3
+ 293 0038 1A46     		mov	r2, r3
+ 294 003a 094B     		ldr	r3, .L12+12
+ 295 003c 1A70     		strb	r2, [r3]
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			break;
+ 296              		.loc 1 92 0
+ 297 003e 4FF40071 		mov	r1, #512
+ 298 0042 0848     		ldr	r0, .L12+16
+ 299 0044 FFF7FEFF 		bl	HAL_GPIO_TogglePin
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		default:		
+ 300              		.loc 1 93 0
+ 301 0048 00BF     		nop
+ 302              	.L11:
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	}
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 303              		.loc 1 97 0
+ 304 004a 00BF     		nop
+ 305 004c 0837     		adds	r7, r7, #8
+ 306              	.LCFI8:
+ 307              		.cfi_def_cfa_offset 8
+ 308 004e BD46     		mov	sp, r7
+ 309              	.LCFI9:
+ 310              		.cfi_def_cfa_register 13
+ 311              		@ sp needed
+ 312 0050 80BD     		pop	{r7, pc}
+ 313              	.L13:
+ 314 0052 00BF     		.align	2
+ 315              	.L12:
+ 316 0054 00000000 		.word	key1
+ 317 0058 5C000000 		.word	.LC7
+ 318 005c 00000000 		.word	key2
+ 319 0060 00000000 		.word	toggle
+ 320 0064 00040048 		.word	1207960576
+ 321              		.cfi_endproc
+ 322              	.LFE135:
+ 324              		.section	.rodata
+ 325 0077 00       		.align	2
+ 326              	.LC8:
+ 327 0078 0D0A3D3D 		.ascii	"\015\012==========================================="
+ 327      3D3D3D3D 
+ 327      3D3D3D3D 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 9
+
+
+ 327      3D3D3D3D 
+ 327      3D3D3D3D 
+ 328 00a5 3D3D3D3D 		.ascii	"==========\000"
+ 328      3D3D3D3D 
+ 328      3D3D00
+ 329              		.align	2
+ 330              	.LC9:
+ 331 00b0 0D0A5354 		.ascii	"\015\012STEP1: Init NB Module( NB Init )\000"
+ 331      4550313A 
+ 331      20496E69 
+ 331      74204E42 
+ 331      204D6F64 
+ 332 00d3 00       		.align	2
+ 333              	.LC10:
+ 334 00d4 0D0A3D3D 		.ascii	"\015\012==========================================="
+ 334      3D3D3D3D 
+ 334      3D3D3D3D 
+ 334      3D3D3D3D 
+ 334      3D3D3D3D 
+ 335 0101 3D3D3D3D 		.ascii	"==========\015\000"
+ 335      3D3D3D3D 
+ 335      3D3D0D00 
+ 336 010d 000000   		.align	2
+ 337              	.LC11:
+ 338 0110 0D0A5354 		.ascii	"\015\012STEP2: Register Command( NB Notify )\000"
+ 338      4550323A 
+ 338      20526567 
+ 338      69737465 
+ 338      7220436F 
+ 339 0137 00       		.align	2
+ 340              	.LC12:
+ 341 0138 2B4E4E4D 		.ascii	"+NNMI:\000"
+ 341      493A00
+ 342 013f 00       		.align	2
+ 343              	.LC13:
+ 344 0140 0D0A5354 		.ascii	"\015\012STEP3: Report Data to Server( NB Report )\000"
+ 344      4550333A 
+ 344      20526570 
+ 344      6F727420 
+ 344      44617461 
+ 345              		.section	.text.demo_nbiot_only,"ax",%progbits
+ 346              		.align	1
+ 347              		.global	demo_nbiot_only
+ 348              		.syntax unified
+ 349              		.thumb
+ 350              		.thumb_func
+ 351              		.fpu fpv4-sp-d16
+ 353              	demo_nbiot_only:
+ 354              	.LFB136:
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** void nb_iot_entry(void);
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** void demo_nbiot_only(void)
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 355              		.loc 1 102 0
+ 356              		.cfi_startproc
+ 357              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 10
+
+
+ 358              		@ frame_needed = 1, uses_anonymous_args = 0
+ 359 0000 80B5     		push	{r7, lr}
+ 360              	.LCFI10:
+ 361              		.cfi_def_cfa_offset 8
+ 362              		.cfi_offset 7, -8
+ 363              		.cfi_offset 14, -4
+ 364 0002 00AF     		add	r7, sp, #0
+ 365              	.LCFI11:
+ 366              		.cfi_def_cfa_register 7
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #if defined(WITH_AT_FRAMEWORK) && defined(USE_NB_NEUL95_NO_ATINY)
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     #define AT_DTLS 0
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     #if AT_DTLS
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     sec_param_s sec;
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     sec.setpsk = 1;
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     sec.pskid = DEV_PSKID;
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     sec.psk = DEV_PSK;
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     #endif
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\n=====================================================");
+ 367              		.loc 1 111 0
+ 368 0004 1448     		ldr	r0, .L15
+ 369 0006 FFF7FEFF 		bl	printf
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\nSTEP1: Init NB Module( NB Init )");
+ 370              		.loc 1 112 0
+ 371 000a 1448     		ldr	r0, .L15+4
+ 372 000c FFF7FEFF 		bl	printf
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\n=====================================================\r\n");
+ 373              		.loc 1 113 0
+ 374 0010 1348     		ldr	r0, .L15+8
+ 375 0012 FFF7FEFF 		bl	puts
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #if AT_DTLS
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     los_nb_init((const int8_t *)OCEAN_IP, (const int8_t *)SECURITY_PORT, &sec);
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_Clear(WHITE);		   
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		POINT_COLOR = RED;			
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(40, 50, 200, 16, 24, "IoTCluB BearPi");	
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 100, 200, 16, 16, "NCDP_IP:");
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(80, 100, 200, 16, 16, OCEAN_IP);
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(10, 150, 200, 16, 16, "NCDP_PORT:");
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		LCD_ShowString(100, 150, 200, 16, 16, SECURITY_PORT);
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #else
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     los_nb_init((const int8_t *)OCEAN_IP, (const int8_t *)NON_SECURITY_PORT, NULL);
+ 376              		.loc 1 125 0
+ 377 0016 0022     		movs	r2, #0
+ 378 0018 1249     		ldr	r1, .L15+12
+ 379 001a 1348     		ldr	r0, .L15+16
+ 380 001c FFF7FEFF 		bl	los_nb_init
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #endif
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #if defined(WITH_SOTA)
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     extern void nb_sota_demo(void);
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     nb_sota_demo();
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #endif
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\n=====================================================");
+ 381              		.loc 1 132 0
+ 382 0020 0D48     		ldr	r0, .L15
+ 383 0022 FFF7FEFF 		bl	printf
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\nSTEP2: Register Command( NB Notify )");
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 11
+
+
+ 384              		.loc 1 133 0
+ 385 0026 1148     		ldr	r0, .L15+20
+ 386 0028 FFF7FEFF 		bl	printf
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\n=====================================================\r\n");
+ 387              		.loc 1 134 0
+ 388 002c 0C48     		ldr	r0, .L15+8
+ 389 002e FFF7FEFF 		bl	puts
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		los_nb_notify("+NNMI:",strlen("+NNMI:"),nb_cmd_data_ioctl,OC_cmd_match);
+ 390              		.loc 1 135 0
+ 391 0032 0F4B     		ldr	r3, .L15+24
+ 392 0034 0F4A     		ldr	r2, .L15+28
+ 393 0036 0621     		movs	r1, #6
+ 394 0038 0F48     		ldr	r0, .L15+32
+ 395 003a FFF7FEFF 		bl	los_nb_notify
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\n=====================================================");
+ 396              		.loc 1 136 0
+ 397 003e 0648     		ldr	r0, .L15
+ 398 0040 FFF7FEFF 		bl	printf
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\nSTEP3: Report Data to Server( NB Report )");
+ 399              		.loc 1 137 0
+ 400 0044 0D48     		ldr	r0, .L15+36
+ 401 0046 FFF7FEFF 		bl	printf
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("\r\n=====================================================\r\n");
+ 402              		.loc 1 138 0
+ 403 004a 0548     		ldr	r0, .L15+8
+ 404 004c FFF7FEFF 		bl	puts
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		nb_iot_entry();
+ 405              		.loc 1 139 0
+ 406 0050 FFF7FEFF 		bl	nb_iot_entry
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #else
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     printf("Please checkout if open WITH_AT_FRAMEWORK and USE_NB_NEUL95_NO_ATINY\n");
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** #endif
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 407              		.loc 1 145 0
+ 408 0054 00BF     		nop
+ 409 0056 80BD     		pop	{r7, pc}
+ 410              	.L16:
+ 411              		.align	2
+ 412              	.L15:
+ 413 0058 78000000 		.word	.LC8
+ 414 005c B0000000 		.word	.LC9
+ 415 0060 D4000000 		.word	.LC10
+ 416 0064 44000000 		.word	.LC5
+ 417 0068 2C000000 		.word	.LC3
+ 418 006c 10010000 		.word	.LC11
+ 419 0070 00000000 		.word	OC_cmd_match
+ 420 0074 00000000 		.word	nb_cmd_data_ioctl
+ 421 0078 38010000 		.word	.LC12
+ 422 007c 40010000 		.word	.LC13
+ 423              		.cfi_endproc
+ 424              	.LFE136:
+ 426              		.section	.rodata
+ 427              		.align	2
+ 428              	.LC14:
+ 429 016c 42483137 		.ascii	"BH1750 Value is:\000"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 12
+
+
+ 429      35302056 
+ 429      616C7565 
+ 429      2069733A 
+ 429      00
+ 430 017d 000000   		.align	2
+ 431              	.LC15:
+ 432 0180 25303458 		.ascii	"%04X\000"
+ 432      00
+ 433              		.section	.text.data_collection_task,"ax",%progbits
+ 434              		.align	1
+ 435              		.global	data_collection_task
+ 436              		.syntax unified
+ 437              		.thumb
+ 438              		.thumb_func
+ 439              		.fpu fpv4-sp-d16
+ 441              	data_collection_task:
+ 442              	.LFB137:
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** VOID data_collection_task(VOID)
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 443              		.loc 1 150 0
+ 444              		.cfi_startproc
+ 445              		@ args = 0, pretend = 0, frame = 8
+ 446              		@ frame_needed = 1, uses_anonymous_args = 0
+ 447 0000 80B5     		push	{r7, lr}
+ 448              	.LCFI12:
+ 449              		.cfi_def_cfa_offset 8
+ 450              		.cfi_offset 7, -8
+ 451              		.cfi_offset 14, -4
+ 452 0002 84B0     		sub	sp, sp, #16
+ 453              	.LCFI13:
+ 454              		.cfi_def_cfa_offset 24
+ 455 0004 02AF     		add	r7, sp, #8
+ 456              	.LCFI14:
+ 457              		.cfi_def_cfa 7, 16
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	UINT32 uwRet = LOS_OK;
+ 458              		.loc 1 151 0
+ 459 0006 0023     		movs	r3, #0
+ 460 0008 7B60     		str	r3, [r7, #4]
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****   
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	Init_BH1750();									
+ 461              		.loc 1 153 0
+ 462 000a FFF7FEFF 		bl	Init_BH1750
+ 463              	.L21:
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	while (1)
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****   {
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		Lux=(int)Convert_BH1750();		
+ 464              		.loc 1 157 0
+ 465 000e FFF7FEFF 		bl	Convert_BH1750
+ 466 0012 F0EE407A 		vmov.f32	s15, s0
+ 467 0016 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 468 001a 17EE903A 		vmov	r3, s15	@ int
+ 469 001e 1AB2     		sxth	r2, r3
+ 470 0020 194B     		ldr	r3, .L24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 13
+
+
+ 471 0022 1A80     		strh	r2, [r3]	@ movhi
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		// printf("\r\n******************************BH1750 Value is  %d\r\n",Lux);
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		if (!qr_code)
+ 472              		.loc 1 159 0
+ 473 0024 194B     		ldr	r3, .L24+4
+ 474 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 475 0028 83F00103 		eor	r3, r3, #1
+ 476 002c DBB2     		uxtb	r3, r3
+ 477 002e 002B     		cmp	r3, #0
+ 478 0030 14D0     		beq	.L18
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		{
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			LCD_ShowString(10, 200, 200, 16, 16, "BH1750 Value is:");
+ 479              		.loc 1 161 0
+ 480 0032 174B     		ldr	r3, .L24+8
+ 481 0034 0193     		str	r3, [sp, #4]
+ 482 0036 1023     		movs	r3, #16
+ 483 0038 0093     		str	r3, [sp]
+ 484 003a 1023     		movs	r3, #16
+ 485 003c C822     		movs	r2, #200
+ 486 003e C821     		movs	r1, #200
+ 487 0040 0A20     		movs	r0, #10
+ 488 0042 FFF7FEFF 		bl	LCD_ShowString
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			LCD_ShowNum(140, 200, Lux, 5, 16);
+ 489              		.loc 1 162 0
+ 490 0046 104B     		ldr	r3, .L24
+ 491 0048 B3F90030 		ldrsh	r3, [r3]
+ 492 004c 1A46     		mov	r2, r3
+ 493 004e 1023     		movs	r3, #16
+ 494 0050 0093     		str	r3, [sp]
+ 495 0052 0523     		movs	r3, #5
+ 496 0054 C821     		movs	r1, #200
+ 497 0056 8C20     		movs	r0, #140
+ 498 0058 FFF7FEFF 		bl	LCD_ShowNum
+ 499              	.L18:
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		}
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		sprintf(BH1750_send.Lux,"%04X", Lux);
+ 500              		.loc 1 164 0
+ 501 005c 0A4B     		ldr	r3, .L24
+ 502 005e B3F90030 		ldrsh	r3, [r3]
+ 503 0062 1A46     		mov	r2, r3
+ 504 0064 0B49     		ldr	r1, .L24+12
+ 505 0066 0C48     		ldr	r0, .L24+16
+ 506 0068 FFF7FEFF 		bl	sprintf
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		uwRet=LOS_TaskDelay(2000);
+ 507              		.loc 1 165 0
+ 508 006c 4FF4FA60 		mov	r0, #2000
+ 509 0070 FFF7FEFF 		bl	LOS_TaskDelay
+ 510 0074 7860     		str	r0, [r7, #4]
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		if(uwRet !=LOS_OK)
+ 511              		.loc 1 166 0
+ 512 0076 7B68     		ldr	r3, [r7, #4]
+ 513 0078 002B     		cmp	r3, #0
+ 514 007a 00D1     		bne	.L23
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		// printf("\r\n******************************BH1750 Value is  %d\r\n",Lux);
+ 515              		.loc 1 157 0
+ 516 007c C7E7     		b	.L21
+ 517              	.L23:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 14
+
+
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		return;
+ 518              		.loc 1 167 0
+ 519 007e 00BF     		nop
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****   }
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 520              		.loc 1 170 0
+ 521 0080 0837     		adds	r7, r7, #8
+ 522              	.LCFI15:
+ 523              		.cfi_def_cfa_offset 8
+ 524 0082 BD46     		mov	sp, r7
+ 525              	.LCFI16:
+ 526              		.cfi_def_cfa_register 13
+ 527              		@ sp needed
+ 528 0084 80BD     		pop	{r7, pc}
+ 529              	.L25:
+ 530 0086 00BF     		.align	2
+ 531              	.L24:
+ 532 0088 00000000 		.word	Lux
+ 533 008c 00000000 		.word	qr_code
+ 534 0090 6C010000 		.word	.LC14
+ 535 0094 80010000 		.word	.LC15
+ 536 0098 00000000 		.word	BH1750_send
+ 537              		.cfi_endproc
+ 538              	.LFE137:
+ 540              		.section	.rodata
+ 541 0185 000000   		.align	2
+ 542              	.LC16:
+ 543 0188 64617461 		.ascii	"data_collection_task\000"
+ 543      5F636F6C 
+ 543      6C656374 
+ 543      696F6E5F 
+ 543      7461736B 
+ 544              		.section	.text.creat_data_collection_task,"ax",%progbits
+ 545              		.align	1
+ 546              		.global	creat_data_collection_task
+ 547              		.syntax unified
+ 548              		.thumb
+ 549              		.thumb_func
+ 550              		.fpu fpv4-sp-d16
+ 552              	creat_data_collection_task:
+ 553              	.LFB138:
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** UINT32 creat_data_collection_task()
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 554              		.loc 1 172 0
+ 555              		.cfi_startproc
+ 556              		@ args = 0, pretend = 0, frame = 32
+ 557              		@ frame_needed = 1, uses_anonymous_args = 0
+ 558 0000 80B5     		push	{r7, lr}
+ 559              	.LCFI17:
+ 560              		.cfi_def_cfa_offset 8
+ 561              		.cfi_offset 7, -8
+ 562              		.cfi_offset 14, -4
+ 563 0002 88B0     		sub	sp, sp, #32
+ 564              	.LCFI18:
+ 565              		.cfi_def_cfa_offset 40
+ 566 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 15
+
+
+ 567              	.LCFI19:
+ 568              		.cfi_def_cfa_register 7
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     UINT32 uwRet = LOS_OK;
+ 569              		.loc 1 173 0
+ 570 0006 0023     		movs	r3, #0
+ 571 0008 FB61     		str	r3, [r7, #28]
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     TSK_INIT_PARAM_S task_init_param;
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		UINT32 TskHandle;
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.usTaskPrio = 0;
+ 572              		.loc 1 176 0
+ 573 000a 0023     		movs	r3, #0
+ 574 000c 3B81     		strh	r3, [r7, #8]	@ movhi
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.pcName = "data_collection_task";
+ 575              		.loc 1 177 0
+ 576 000e 0C4B     		ldr	r3, .L30
+ 577 0010 7B61     		str	r3, [r7, #20]
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)data_collection_task;
+ 578              		.loc 1 178 0
+ 579 0012 0C4B     		ldr	r3, .L30+4
+ 580 0014 7B60     		str	r3, [r7, #4]
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.uwStackSize = 0x400;
+ 581              		.loc 1 179 0
+ 582 0016 4FF48063 		mov	r3, #1024
+ 583 001a 3B61     		str	r3, [r7, #16]
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     uwRet = LOS_TaskCreate(&TskHandle, &task_init_param);
+ 584              		.loc 1 181 0
+ 585 001c 3A1D     		adds	r2, r7, #4
+ 586 001e 3B46     		mov	r3, r7
+ 587 0020 1146     		mov	r1, r2
+ 588 0022 1846     		mov	r0, r3
+ 589 0024 FFF7FEFF 		bl	LOS_TaskCreate
+ 590 0028 F861     		str	r0, [r7, #28]
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if(LOS_OK != uwRet)
+ 591              		.loc 1 182 0
+ 592 002a FB69     		ldr	r3, [r7, #28]
+ 593 002c 002B     		cmp	r3, #0
+ 594 002e 01D0     		beq	.L27
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return uwRet;
+ 595              		.loc 1 184 0
+ 596 0030 FB69     		ldr	r3, [r7, #28]
+ 597 0032 00E0     		b	.L29
+ 598              	.L27:
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     return uwRet;
+ 599              		.loc 1 186 0
+ 600 0034 FB69     		ldr	r3, [r7, #28]
+ 601              	.L29:
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 602              		.loc 1 187 0 discriminator 1
+ 603 0036 1846     		mov	r0, r3
+ 604 0038 2037     		adds	r7, r7, #32
+ 605              	.LCFI20:
+ 606              		.cfi_def_cfa_offset 8
+ 607 003a BD46     		mov	sp, r7
+ 608              	.LCFI21:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 16
+
+
+ 609              		.cfi_def_cfa_register 13
+ 610              		@ sp needed
+ 611 003c 80BD     		pop	{r7, pc}
+ 612              	.L31:
+ 613 003e 00BF     		.align	2
+ 614              	.L30:
+ 615 0040 88010000 		.word	.LC16
+ 616 0044 00000000 		.word	data_collection_task
+ 617              		.cfi_endproc
+ 618              	.LFE138:
+ 620              		.section	.rodata
+ 621 019d 000000   		.align	2
+ 622              	.LC17:
+ 623 01a0 25303264 		.ascii	"%02d\000"
+ 623      00
+ 624 01a5 000000   		.align	2
+ 625              	.LC18:
+ 626 01a8 25303858 		.ascii	"%08X\000"
+ 626      00
+ 627 01ad 000000   		.align	2
+ 628              	.LC19:
+ 629 01b0 6B657931 		.ascii	"key1 message: %s\015\012\000"
+ 629      206D6573 
+ 629      73616765 
+ 629      3A202573 
+ 629      0D0A00
+ 630 01c3 00       		.align	2
+ 631              	.LC20:
+ 632 01c4 6B657932 		.ascii	"key2 message: %s\015\012\000"
+ 632      206D6573 
+ 632      73616765 
+ 632      3A202573 
+ 632      0D0A00
+ 633              		.section	.text.data_report_task,"ax",%progbits
+ 634              		.align	1
+ 635              		.global	data_report_task
+ 636              		.syntax unified
+ 637              		.thumb
+ 638              		.thumb_func
+ 639              		.fpu fpv4-sp-d16
+ 641              	data_report_task:
+ 642              	.LFB139:
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** VOID data_report_task(VOID)
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 643              		.loc 1 190 0
+ 644              		.cfi_startproc
+ 645              		@ args = 0, pretend = 0, frame = 16
+ 646              		@ frame_needed = 1, uses_anonymous_args = 0
+ 647 0000 B0B5     		push	{r4, r5, r7, lr}
+ 648              	.LCFI22:
+ 649              		.cfi_def_cfa_offset 16
+ 650              		.cfi_offset 4, -16
+ 651              		.cfi_offset 5, -12
+ 652              		.cfi_offset 7, -8
+ 653              		.cfi_offset 14, -4
+ 654 0002 84B0     		sub	sp, sp, #16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 17
+
+
+ 655              	.LCFI23:
+ 656              		.cfi_def_cfa_offset 32
+ 657 0004 00AF     		add	r7, sp, #0
+ 658              	.LCFI24:
+ 659              		.cfi_def_cfa_register 7
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	UINT32 uwRet = LOS_OK;
+ 660              		.loc 1 191 0
+ 661 0006 0023     		movs	r3, #0
+ 662 0008 FB60     		str	r3, [r7, #12]
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	UINT32 msglen = 0;
+ 663              		.loc 1 192 0
+ 664 000a 0023     		movs	r3, #0
+ 665 000c BB60     		str	r3, [r7, #8]
+ 666              	.L39:
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	UINT32 msgid;
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	while(1)
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	{
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			if (key1)
+ 667              		.loc 1 196 0
+ 668 000e 644B     		ldr	r3, .L42
+ 669 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 670 0012 002B     		cmp	r3, #0
+ 671 0014 68D0     		beq	.L33
+ 672              	.LBB2:
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			{
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					key1 = false;
+ 673              		.loc 1 198 0
+ 674 0016 624B     		ldr	r3, .L42
+ 675 0018 0022     		movs	r2, #0
+ 676 001a 1A70     		strb	r2, [r3]
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				  uwRet = nb_check_nuestats();
+ 677              		.loc 1 199 0
+ 678 001c FFF7FEFF 		bl	nb_check_nuestats
+ 679 0020 0346     		mov	r3, r0
+ 680 0022 FB60     		str	r3, [r7, #12]
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				  if (ue_stats[0] < -10) ue_stats[0] = ue_stats[0] / 10;
+ 681              		.loc 1 200 0
+ 682 0024 5F4B     		ldr	r3, .L42+4
+ 683 0026 1B68     		ldr	r3, [r3]
+ 684 0028 13F10A0F 		cmn	r3, #10
+ 685 002c 09DA     		bge	.L34
+ 686              		.loc 1 200 0 is_stmt 0 discriminator 1
+ 687 002e 5D4B     		ldr	r3, .L42+4
+ 688 0030 1B68     		ldr	r3, [r3]
+ 689 0032 5D4A     		ldr	r2, .L42+8
+ 690 0034 82FB0312 		smull	r1, r2, r2, r3
+ 691 0038 9210     		asrs	r2, r2, #2
+ 692 003a DB17     		asrs	r3, r3, #31
+ 693 003c D31A     		subs	r3, r2, r3
+ 694 003e 594A     		ldr	r2, .L42+4
+ 695 0040 1360     		str	r3, [r2]
+ 696              	.L34:
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				  if (ue_stats[2] > 10) ue_stats[2] = ue_stats[2] / 10;
+ 697              		.loc 1 201 0 is_stmt 1
+ 698 0042 584B     		ldr	r3, .L42+4
+ 699 0044 9B68     		ldr	r3, [r3, #8]
+ 700 0046 0A2B     		cmp	r3, #10
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 18
+
+
+ 701 0048 09DD     		ble	.L35
+ 702              		.loc 1 201 0 is_stmt 0 discriminator 1
+ 703 004a 564B     		ldr	r3, .L42+4
+ 704 004c 9B68     		ldr	r3, [r3, #8]
+ 705 004e 564A     		ldr	r2, .L42+8
+ 706 0050 82FB0312 		smull	r1, r2, r2, r3
+ 707 0054 9210     		asrs	r2, r2, #2
+ 708 0056 DB17     		asrs	r3, r3, #31
+ 709 0058 D31A     		subs	r3, r2, r3
+ 710 005a 524A     		ldr	r2, .L42+4
+ 711 005c 9360     		str	r3, [r2, #8]
+ 712              	.L35:
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					msgid = app_msgid_counter;
+ 713              		.loc 1 202 0 is_stmt 1
+ 714 005e 0023     		movs	r3, #0
+ 715 0060 7B60     		str	r3, [r7, #4]
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					sprintf(s_report_buf,"%02d", msgid);
+ 716              		.loc 1 203 0
+ 717 0062 7A68     		ldr	r2, [r7, #4]
+ 718 0064 5149     		ldr	r1, .L42+12
+ 719 0066 5248     		ldr	r0, .L42+16
+ 720 0068 FFF7FEFF 		bl	sprintf
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					sprintf(key1_send.rsrp,"%04X", ue_stats[0] & 0x0000FFFF);
+ 721              		.loc 1 204 0
+ 722 006c 4D4B     		ldr	r3, .L42+4
+ 723 006e 1B68     		ldr	r3, [r3]
+ 724 0070 9BB2     		uxth	r3, r3
+ 725 0072 1A46     		mov	r2, r3
+ 726 0074 4F49     		ldr	r1, .L42+20
+ 727 0076 5048     		ldr	r0, .L42+24
+ 728 0078 FFF7FEFF 		bl	sprintf
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				  sprintf(key1_send.ecl,"%04X", ue_stats[1]);
+ 729              		.loc 1 205 0
+ 730 007c 494B     		ldr	r3, .L42+4
+ 731 007e 5B68     		ldr	r3, [r3, #4]
+ 732 0080 1A46     		mov	r2, r3
+ 733 0082 4C49     		ldr	r1, .L42+20
+ 734 0084 4D48     		ldr	r0, .L42+28
+ 735 0086 FFF7FEFF 		bl	sprintf
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				  sprintf(key1_send.snr,"%04X", ue_stats[2]);
+ 736              		.loc 1 206 0
+ 737 008a 464B     		ldr	r3, .L42+4
+ 738 008c 9B68     		ldr	r3, [r3, #8]
+ 739 008e 1A46     		mov	r2, r3
+ 740 0090 4849     		ldr	r1, .L42+20
+ 741 0092 4B48     		ldr	r0, .L42+32
+ 742 0094 FFF7FEFF 		bl	sprintf
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				  sprintf(key1_send.cellid,"%08X", ue_stats[3]);
+ 743              		.loc 1 207 0
+ 744 0098 424B     		ldr	r3, .L42+4
+ 745 009a DB68     		ldr	r3, [r3, #12]
+ 746 009c 1A46     		mov	r2, r3
+ 747 009e 4949     		ldr	r1, .L42+36
+ 748 00a0 4948     		ldr	r0, .L42+40
+ 749 00a2 FFF7FEFF 		bl	sprintf
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					memcpy(s_report_buf + 2, &key1_send, sizeof(key1_send));
+ 750              		.loc 1 208 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 19
+
+
+ 751 00a6 494B     		ldr	r3, .L42+44
+ 752 00a8 434A     		ldr	r2, .L42+24
+ 753 00aa 1168     		ldr	r1, [r2]	@ unaligned
+ 754 00ac 5568     		ldr	r5, [r2, #4]	@ unaligned
+ 755 00ae 9468     		ldr	r4, [r2, #8]	@ unaligned
+ 756 00b0 D068     		ldr	r0, [r2, #12]	@ unaligned
+ 757 00b2 1960     		str	r1, [r3]	@ unaligned
+ 758 00b4 5D60     		str	r5, [r3, #4]	@ unaligned
+ 759 00b6 9C60     		str	r4, [r3, #8]	@ unaligned
+ 760 00b8 D860     		str	r0, [r3, #12]	@ unaligned
+ 761 00ba 1169     		ldr	r1, [r2, #16]	@ unaligned
+ 762 00bc 1961     		str	r1, [r3, #16]	@ unaligned
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					msglen = sizeof(key1_send);
+ 763              		.loc 1 209 0
+ 764 00be 1423     		movs	r3, #20
+ 765 00c0 BB60     		str	r3, [r7, #8]
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					printf("key1 message: %s\r\n",s_report_buf);
+ 766              		.loc 1 210 0
+ 767 00c2 3B49     		ldr	r1, .L42+16
+ 768 00c4 4248     		ldr	r0, .L42+48
+ 769 00c6 FFF7FEFF 		bl	printf
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					uwRet = los_nb_report((const char*)(&s_report_buf), (msglen + 2) / 2);
+ 770              		.loc 1 211 0
+ 771 00ca BB68     		ldr	r3, [r7, #8]
+ 772 00cc 0233     		adds	r3, r3, #2
+ 773 00ce 5B08     		lsrs	r3, r3, #1
+ 774 00d0 1946     		mov	r1, r3
+ 775 00d2 3748     		ldr	r0, .L42+16
+ 776 00d4 FFF7FEFF 		bl	los_nb_report
+ 777 00d8 0346     		mov	r3, r0
+ 778 00da FB60     		str	r3, [r7, #12]
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					memset(s_report_buf, 0, sizeof(s_report_buf));
+ 779              		.loc 1 212 0
+ 780 00dc 4FF48072 		mov	r2, #256
+ 781 00e0 0021     		movs	r1, #0
+ 782 00e2 3348     		ldr	r0, .L42+16
+ 783 00e4 FFF7FEFF 		bl	memset
+ 784              	.L33:
+ 785              	.LBE2:
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			}
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			if (key2)
+ 786              		.loc 1 215 0
+ 787 00e8 3A4B     		ldr	r3, .L42+52
+ 788 00ea 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 789 00ec 002B     		cmp	r3, #0
+ 790 00ee 2BD0     		beq	.L36
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			{
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					key2 = false;
+ 791              		.loc 1 217 0
+ 792 00f0 384B     		ldr	r3, .L42+52
+ 793 00f2 0022     		movs	r2, #0
+ 794 00f4 1A70     		strb	r2, [r3]
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					msgid = app_msgid_toggle;
+ 795              		.loc 1 218 0
+ 796 00f6 0123     		movs	r3, #1
+ 797 00f8 7B60     		str	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 20
+
+
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					sprintf(s_report_buf,"%02d", msgid);
+ 798              		.loc 1 219 0
+ 799 00fa 7A68     		ldr	r2, [r7, #4]
+ 800 00fc 2B49     		ldr	r1, .L42+12
+ 801 00fe 2C48     		ldr	r0, .L42+16
+ 802 0100 FFF7FEFF 		bl	sprintf
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					sprintf(key2_send.tog,"%04X", toggle);
+ 803              		.loc 1 220 0
+ 804 0104 344B     		ldr	r3, .L42+56
+ 805 0106 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 806 0108 1A46     		mov	r2, r3
+ 807 010a 2A49     		ldr	r1, .L42+20
+ 808 010c 3348     		ldr	r0, .L42+60
+ 809 010e FFF7FEFF 		bl	sprintf
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					memcpy(s_report_buf + 2, &key2_send, sizeof(key2_send));
+ 810              		.loc 1 221 0
+ 811 0112 2E4B     		ldr	r3, .L42+44
+ 812 0114 314A     		ldr	r2, .L42+60
+ 813 0116 1168     		ldr	r1, [r2]	@ unaligned
+ 814 0118 1960     		str	r1, [r3]	@ unaligned
+ 815 011a 1279     		ldrb	r2, [r2, #4]
+ 816 011c 1A71     		strb	r2, [r3, #4]
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					msglen = sizeof(key2_send);
+ 817              		.loc 1 222 0
+ 818 011e 0523     		movs	r3, #5
+ 819 0120 BB60     		str	r3, [r7, #8]
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					printf("key2 message: %s\r\n",s_report_buf);
+ 820              		.loc 1 223 0
+ 821 0122 2349     		ldr	r1, .L42+16
+ 822 0124 2E48     		ldr	r0, .L42+64
+ 823 0126 FFF7FEFF 		bl	printf
+ 224:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					uwRet = los_nb_report((const char*)(&s_report_buf), (msglen + 2) / 2);
+ 824              		.loc 1 224 0
+ 825 012a BB68     		ldr	r3, [r7, #8]
+ 826 012c 0233     		adds	r3, r3, #2
+ 827 012e 5B08     		lsrs	r3, r3, #1
+ 828 0130 1946     		mov	r1, r3
+ 829 0132 1F48     		ldr	r0, .L42+16
+ 830 0134 FFF7FEFF 		bl	los_nb_report
+ 831 0138 0346     		mov	r3, r0
+ 832 013a FB60     		str	r3, [r7, #12]
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 					memset(s_report_buf, 0, sizeof(s_report_buf));
+ 833              		.loc 1 225 0
+ 834 013c 4FF48072 		mov	r2, #256
+ 835 0140 0021     		movs	r1, #0
+ 836 0142 1B48     		ldr	r0, .L42+16
+ 837 0144 FFF7FEFF 		bl	memset
+ 838              	.L36:
+ 226:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			}
+ 227:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			
+ 228:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			msgid = app_msgid_lux;
+ 839              		.loc 1 228 0
+ 840 0148 0223     		movs	r3, #2
+ 841 014a 7B60     		str	r3, [r7, #4]
+ 229:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			sprintf(s_report_buf,"%02d", msgid);
+ 842              		.loc 1 229 0
+ 843 014c 7A68     		ldr	r2, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 21
+
+
+ 844 014e 1749     		ldr	r1, .L42+12
+ 845 0150 1748     		ldr	r0, .L42+16
+ 846 0152 FFF7FEFF 		bl	sprintf
+ 230:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			memcpy(s_report_buf + 2, &BH1750_send, sizeof(BH1750_send));
+ 847              		.loc 1 230 0
+ 848 0156 1D4B     		ldr	r3, .L42+44
+ 849 0158 224A     		ldr	r2, .L42+68
+ 850 015a 1168     		ldr	r1, [r2]	@ unaligned
+ 851 015c 1960     		str	r1, [r3]	@ unaligned
+ 852 015e 1279     		ldrb	r2, [r2, #4]
+ 853 0160 1A71     		strb	r2, [r3, #4]
+ 231:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			msglen = sizeof(BH1750_send);
+ 854              		.loc 1 231 0
+ 855 0162 0523     		movs	r3, #5
+ 856 0164 BB60     		str	r3, [r7, #8]
+ 232:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			// printf("BH1750_send message: %s\r\n",s_report_buf);
+ 233:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			uwRet = los_nb_report((const char*)(&s_report_buf), (msglen + 2) / 2);
+ 857              		.loc 1 233 0
+ 858 0166 BB68     		ldr	r3, [r7, #8]
+ 859 0168 0233     		adds	r3, r3, #2
+ 860 016a 5B08     		lsrs	r3, r3, #1
+ 861 016c 1946     		mov	r1, r3
+ 862 016e 1048     		ldr	r0, .L42+16
+ 863 0170 FFF7FEFF 		bl	los_nb_report
+ 864 0174 0346     		mov	r3, r0
+ 865 0176 FB60     		str	r3, [r7, #12]
+ 234:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			memset(s_report_buf, 0, sizeof(s_report_buf));
+ 866              		.loc 1 234 0
+ 867 0178 4FF48072 		mov	r2, #256
+ 868 017c 0021     		movs	r1, #0
+ 869 017e 0C48     		ldr	r0, .L42+16
+ 870 0180 FFF7FEFF 		bl	memset
+ 235:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			uwRet=LOS_TaskDelay(2000);
+ 871              		.loc 1 235 0
+ 872 0184 4FF4FA60 		mov	r0, #2000
+ 873 0188 FFF7FEFF 		bl	LOS_TaskDelay
+ 874 018c F860     		str	r0, [r7, #12]
+ 236:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			if(uwRet !=LOS_OK)
+ 875              		.loc 1 236 0
+ 876 018e FB68     		ldr	r3, [r7, #12]
+ 877 0190 002B     		cmp	r3, #0
+ 878 0192 00D1     		bne	.L41
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			{
+ 879              		.loc 1 196 0
+ 880 0194 3BE7     		b	.L39
+ 881              	.L41:
+ 237:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			return;
+ 882              		.loc 1 237 0
+ 883 0196 00BF     		nop
+ 238:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	}
+ 239:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 884              		.loc 1 239 0
+ 885 0198 1037     		adds	r7, r7, #16
+ 886              	.LCFI25:
+ 887              		.cfi_def_cfa_offset 16
+ 888 019a BD46     		mov	sp, r7
+ 889              	.LCFI26:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 22
+
+
+ 890              		.cfi_def_cfa_register 13
+ 891              		@ sp needed
+ 892 019c B0BD     		pop	{r4, r5, r7, pc}
+ 893              	.L43:
+ 894 019e 00BF     		.align	2
+ 895              	.L42:
+ 896 01a0 00000000 		.word	key1
+ 897 01a4 00000000 		.word	ue_stats
+ 898 01a8 67666666 		.word	1717986919
+ 899 01ac A0010000 		.word	.LC17
+ 900 01b0 00000000 		.word	s_report_buf
+ 901 01b4 80010000 		.word	.LC15
+ 902 01b8 00000000 		.word	key1_send
+ 903 01bc 04000000 		.word	key1_send+4
+ 904 01c0 08000000 		.word	key1_send+8
+ 905 01c4 A8010000 		.word	.LC18
+ 906 01c8 0C000000 		.word	key1_send+12
+ 907 01cc 02000000 		.word	s_report_buf+2
+ 908 01d0 B0010000 		.word	.LC19
+ 909 01d4 00000000 		.word	key2
+ 910 01d8 00000000 		.word	toggle
+ 911 01dc 00000000 		.word	key2_send
+ 912 01e0 C4010000 		.word	.LC20
+ 913 01e4 00000000 		.word	BH1750_send
+ 914              		.cfi_endproc
+ 915              	.LFE139:
+ 917              		.section	.rodata
+ 918 01d7 00       		.align	2
+ 919              	.LC21:
+ 920 01d8 64617461 		.ascii	"data_report_task\000"
+ 920      5F726570 
+ 920      6F72745F 
+ 920      7461736B 
+ 920      00
+ 921              		.section	.text.creat_data_report_task,"ax",%progbits
+ 922              		.align	1
+ 923              		.global	creat_data_report_task
+ 924              		.syntax unified
+ 925              		.thumb
+ 926              		.thumb_func
+ 927              		.fpu fpv4-sp-d16
+ 929              	creat_data_report_task:
+ 930              	.LFB140:
+ 240:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** UINT32 creat_data_report_task()
+ 241:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 931              		.loc 1 241 0
+ 932              		.cfi_startproc
+ 933              		@ args = 0, pretend = 0, frame = 32
+ 934              		@ frame_needed = 1, uses_anonymous_args = 0
+ 935 0000 80B5     		push	{r7, lr}
+ 936              	.LCFI27:
+ 937              		.cfi_def_cfa_offset 8
+ 938              		.cfi_offset 7, -8
+ 939              		.cfi_offset 14, -4
+ 940 0002 88B0     		sub	sp, sp, #32
+ 941              	.LCFI28:
+ 942              		.cfi_def_cfa_offset 40
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 23
+
+
+ 943 0004 00AF     		add	r7, sp, #0
+ 944              	.LCFI29:
+ 945              		.cfi_def_cfa_register 7
+ 242:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     UINT32 uwRet = LOS_OK;
+ 946              		.loc 1 242 0
+ 947 0006 0023     		movs	r3, #0
+ 948 0008 FB61     		str	r3, [r7, #28]
+ 243:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     TSK_INIT_PARAM_S task_init_param;
+ 244:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	  UINT32 TskHandle;
+ 245:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 246:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.usTaskPrio = 1;
+ 949              		.loc 1 246 0
+ 950 000a 0123     		movs	r3, #1
+ 951 000c 3B81     		strh	r3, [r7, #8]	@ movhi
+ 247:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.pcName = "data_report_task";
+ 952              		.loc 1 247 0
+ 953 000e 0C4B     		ldr	r3, .L48
+ 954 0010 7B61     		str	r3, [r7, #20]
+ 248:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)data_report_task;
+ 955              		.loc 1 248 0
+ 956 0012 0C4B     		ldr	r3, .L48+4
+ 957 0014 7B60     		str	r3, [r7, #4]
+ 249:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.uwStackSize = 0x800;
+ 958              		.loc 1 249 0
+ 959 0016 4FF40063 		mov	r3, #2048
+ 960 001a 3B61     		str	r3, [r7, #16]
+ 250:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     uwRet = LOS_TaskCreate(&TskHandle, &task_init_param);
+ 961              		.loc 1 250 0
+ 962 001c 3A1D     		adds	r2, r7, #4
+ 963 001e 3B46     		mov	r3, r7
+ 964 0020 1146     		mov	r1, r2
+ 965 0022 1846     		mov	r0, r3
+ 966 0024 FFF7FEFF 		bl	LOS_TaskCreate
+ 967 0028 F861     		str	r0, [r7, #28]
+ 251:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if(LOS_OK != uwRet)
+ 968              		.loc 1 251 0
+ 969 002a FB69     		ldr	r3, [r7, #28]
+ 970 002c 002B     		cmp	r3, #0
+ 971 002e 01D0     		beq	.L45
+ 252:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 253:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return uwRet;
+ 972              		.loc 1 253 0
+ 973 0030 FB69     		ldr	r3, [r7, #28]
+ 974 0032 00E0     		b	.L47
+ 975              	.L45:
+ 254:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 255:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     return uwRet;
+ 976              		.loc 1 255 0
+ 977 0034 FB69     		ldr	r3, [r7, #28]
+ 978              	.L47:
+ 256:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 979              		.loc 1 256 0 discriminator 1
+ 980 0036 1846     		mov	r0, r3
+ 981 0038 2037     		adds	r7, r7, #32
+ 982              	.LCFI30:
+ 983              		.cfi_def_cfa_offset 8
+ 984 003a BD46     		mov	sp, r7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 24
+
+
+ 985              	.LCFI31:
+ 986              		.cfi_def_cfa_register 13
+ 987              		@ sp needed
+ 988 003c 80BD     		pop	{r7, pc}
+ 989              	.L49:
+ 990 003e 00BF     		.align	2
+ 991              	.L48:
+ 992 0040 D8010000 		.word	.LC21
+ 993 0044 00000000 		.word	data_report_task
+ 994              		.cfi_endproc
+ 995              	.LFE140:
+ 997              		.section	.rodata
+ 998 01e9 000000   		.align	2
+ 999              	.LC22:
+ 1000 01ec 54686973 		.ascii	"This is reply_report_task!\000"
+ 1000      20697320 
+ 1000      7265706C 
+ 1000      795F7265 
+ 1000      706F7274 
+ 1001 0207 00       		.align	2
+ 1002              	.LC23:
+ 1003 0208 6F636561 		.ascii	"ocean_send_reply OK!\000"
+ 1003      6E5F7365 
+ 1003      6E645F72 
+ 1003      65706C79 
+ 1003      204F4B21 
+ 1004 021d 000000   		.align	2
+ 1005              	.LC24:
+ 1006 0220 6F636561 		.ascii	"ocean_send_reply Fail!\000"
+ 1006      6E5F7365 
+ 1006      6E645F72 
+ 1006      65706C79 
+ 1006      20466169 
+ 1007              		.section	.text.nb_reply_task,"ax",%progbits
+ 1008              		.align	1
+ 1009              		.global	nb_reply_task
+ 1010              		.syntax unified
+ 1011              		.thumb
+ 1012              		.thumb_func
+ 1013              		.fpu fpv4-sp-d16
+ 1015              	nb_reply_task:
+ 1016              	.LFB141:
+ 257:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 258:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** VOID nb_reply_task(VOID)
+ 259:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 1017              		.loc 1 259 0
+ 1018              		.cfi_startproc
+ 1019              		@ args = 0, pretend = 0, frame = 8
+ 1020              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1021 0000 80B5     		push	{r7, lr}
+ 1022              	.LCFI32:
+ 1023              		.cfi_def_cfa_offset 8
+ 1024              		.cfi_offset 7, -8
+ 1025              		.cfi_offset 14, -4
+ 1026 0002 82B0     		sub	sp, sp, #8
+ 1027              	.LCFI33:
+ 1028              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 25
+
+
+ 1029 0004 00AF     		add	r7, sp, #0
+ 1030              	.LCFI34:
+ 1031              		.cfi_def_cfa_register 7
+ 260:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		UINT32 msglen = 0;
+ 1032              		.loc 1 260 0
+ 1033 0006 0023     		movs	r3, #0
+ 1034 0008 7B60     		str	r3, [r7, #4]
+ 1035              	.L53:
+ 261:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		while (1)
+ 262:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		{				                                               
+ 263:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				LOS_SemPend(reply_sem, LOS_WAIT_FOREVER);
+ 1036              		.loc 1 263 0
+ 1037 000a 124B     		ldr	r3, .L54
+ 1038 000c 1B68     		ldr	r3, [r3]
+ 1039 000e 4FF0FF31 		mov	r1, #-1
+ 1040 0012 1846     		mov	r0, r3
+ 1041 0014 FFF7FEFF 		bl	LOS_SemPend
+ 264:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				printf("This is reply_report_task!\n");   
+ 1042              		.loc 1 264 0
+ 1043 0018 0F48     		ldr	r0, .L54+4
+ 1044 001a FFF7FEFF 		bl	puts
+ 265:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				msglen = strlen(s_resp_buf);
+ 1045              		.loc 1 265 0
+ 1046 001e 0F48     		ldr	r0, .L54+8
+ 1047 0020 FFF7FEFF 		bl	strlen
+ 1048 0024 7860     		str	r0, [r7, #4]
+ 266:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				if(los_nb_report((const char*)(&s_resp_buf), msglen / 2)>=0)
+ 1049              		.loc 1 266 0
+ 1050 0026 7B68     		ldr	r3, [r7, #4]
+ 1051 0028 5B08     		lsrs	r3, r3, #1
+ 1052 002a 1946     		mov	r1, r3
+ 1053 002c 0B48     		ldr	r0, .L54+8
+ 1054 002e FFF7FEFF 		bl	los_nb_report
+ 1055 0032 0346     		mov	r3, r0
+ 1056 0034 002B     		cmp	r3, #0
+ 1057 0036 03DB     		blt	.L51
+ 267:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				{
+ 268:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 						printf("ocean_send_reply OK!\n");                                                  
+ 1058              		.loc 1 268 0
+ 1059 0038 0948     		ldr	r0, .L54+12
+ 1060 003a FFF7FEFF 		bl	puts
+ 1061 003e 02E0     		b	.L52
+ 1062              	.L51:
+ 269:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				}
+ 270:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				else                                                                                  
+ 271:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				{
+ 272:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 						printf("ocean_send_reply Fail!\n"); 	
+ 1063              		.loc 1 272 0
+ 1064 0040 0848     		ldr	r0, .L54+16
+ 1065 0042 FFF7FEFF 		bl	puts
+ 1066              	.L52:
+ 273:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				}
+ 274:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				memset(s_resp_buf, 0, sizeof(s_resp_buf));
+ 1067              		.loc 1 274 0
+ 1068 0046 0E22     		movs	r2, #14
+ 1069 0048 0021     		movs	r1, #0
+ 1070 004a 0448     		ldr	r0, .L54+8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 26
+
+
+ 1071 004c FFF7FEFF 		bl	memset
+ 263:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 				printf("This is reply_report_task!\n");   
+ 1072              		.loc 1 263 0
+ 1073 0050 DBE7     		b	.L53
+ 1074              	.L55:
+ 1075 0052 00BF     		.align	2
+ 1076              	.L54:
+ 1077 0054 00000000 		.word	reply_sem
+ 1078 0058 EC010000 		.word	.LC22
+ 1079 005c 00000000 		.word	s_resp_buf
+ 1080 0060 08020000 		.word	.LC23
+ 1081 0064 20020000 		.word	.LC24
+ 1082              		.cfi_endproc
+ 1083              	.LFE141:
+ 1085              		.section	.rodata
+ 1086 0237 00       		.align	2
+ 1087              	.LC25:
+ 1088 0238 6E625F72 		.ascii	"nb_reply_task\000"
+ 1088      65706C79 
+ 1088      5F746173 
+ 1088      6B00
+ 1089              		.section	.text.creat_nb_reply_task,"ax",%progbits
+ 1090              		.align	1
+ 1091              		.global	creat_nb_reply_task
+ 1092              		.syntax unified
+ 1093              		.thumb
+ 1094              		.thumb_func
+ 1095              		.fpu fpv4-sp-d16
+ 1097              	creat_nb_reply_task:
+ 1098              	.LFB142:
+ 275:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		}
+ 276:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 277:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 278:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** UINT32 creat_nb_reply_task()
+ 279:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 1099              		.loc 1 279 0
+ 1100              		.cfi_startproc
+ 1101              		@ args = 0, pretend = 0, frame = 32
+ 1102              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1103 0000 80B5     		push	{r7, lr}
+ 1104              	.LCFI35:
+ 1105              		.cfi_def_cfa_offset 8
+ 1106              		.cfi_offset 7, -8
+ 1107              		.cfi_offset 14, -4
+ 1108 0002 88B0     		sub	sp, sp, #32
+ 1109              	.LCFI36:
+ 1110              		.cfi_def_cfa_offset 40
+ 1111 0004 00AF     		add	r7, sp, #0
+ 1112              	.LCFI37:
+ 1113              		.cfi_def_cfa_register 7
+ 280:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     UINT32 uwRet = LOS_OK;
+ 1114              		.loc 1 280 0
+ 1115 0006 0023     		movs	r3, #0
+ 1116 0008 FB61     		str	r3, [r7, #28]
+ 281:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     TSK_INIT_PARAM_S task_init_param;
+ 282:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 	  UINT32 TskHandle;
+ 283:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 27
+
+
+ 284:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.usTaskPrio = 0;
+ 1117              		.loc 1 284 0
+ 1118 000a 0023     		movs	r3, #0
+ 1119 000c 3B81     		strh	r3, [r7, #8]	@ movhi
+ 285:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.pcName = "nb_reply_task";
+ 1120              		.loc 1 285 0
+ 1121 000e 0C4B     		ldr	r3, .L60
+ 1122 0010 7B61     		str	r3, [r7, #20]
+ 286:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)nb_reply_task;
+ 1123              		.loc 1 286 0
+ 1124 0012 0C4B     		ldr	r3, .L60+4
+ 1125 0014 7B60     		str	r3, [r7, #4]
+ 287:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     task_init_param.uwStackSize = 0x400;
+ 1126              		.loc 1 287 0
+ 1127 0016 4FF48063 		mov	r3, #1024
+ 1128 001a 3B61     		str	r3, [r7, #16]
+ 288:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     uwRet = LOS_TaskCreate(&TskHandle, &task_init_param);
+ 1129              		.loc 1 288 0
+ 1130 001c 3A1D     		adds	r2, r7, #4
+ 1131 001e 3B46     		mov	r3, r7
+ 1132 0020 1146     		mov	r1, r2
+ 1133 0022 1846     		mov	r0, r3
+ 1134 0024 FFF7FEFF 		bl	LOS_TaskCreate
+ 1135 0028 F861     		str	r0, [r7, #28]
+ 289:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if(LOS_OK != uwRet)
+ 1136              		.loc 1 289 0
+ 1137 002a FB69     		ldr	r3, [r7, #28]
+ 1138 002c 002B     		cmp	r3, #0
+ 1139 002e 01D0     		beq	.L57
+ 290:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 291:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 			return uwRet;
+ 1140              		.loc 1 291 0
+ 1141 0030 FB69     		ldr	r3, [r7, #28]
+ 1142 0032 00E0     		b	.L59
+ 1143              	.L57:
+ 292:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 293:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 294:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     return uwRet;
+ 1144              		.loc 1 294 0
+ 1145 0034 FB69     		ldr	r3, [r7, #28]
+ 1146              	.L59:
+ 295:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 1147              		.loc 1 295 0 discriminator 1
+ 1148 0036 1846     		mov	r0, r3
+ 1149 0038 2037     		adds	r7, r7, #32
+ 1150              	.LCFI38:
+ 1151              		.cfi_def_cfa_offset 8
+ 1152 003a BD46     		mov	sp, r7
+ 1153              	.LCFI39:
+ 1154              		.cfi_def_cfa_register 13
+ 1155              		@ sp needed
+ 1156 003c 80BD     		pop	{r7, pc}
+ 1157              	.L61:
+ 1158 003e 00BF     		.align	2
+ 1159              	.L60:
+ 1160 0040 38020000 		.word	.LC25
+ 1161 0044 00000000 		.word	nb_reply_task
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 28
+
+
+ 1162              		.cfi_endproc
+ 1163              	.LFE142:
+ 1165              		.section	.text.nb_iot_entry,"ax",%progbits
+ 1166              		.align	1
+ 1167              		.global	nb_iot_entry
+ 1168              		.syntax unified
+ 1169              		.thumb
+ 1170              		.thumb_func
+ 1171              		.fpu fpv4-sp-d16
+ 1173              	nb_iot_entry:
+ 1174              	.LFB143:
+ 296:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 
+ 297:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** void nb_iot_entry(void)
+ 298:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** {
+ 1175              		.loc 1 298 0
+ 1176              		.cfi_startproc
+ 1177              		@ args = 0, pretend = 0, frame = 8
+ 1178              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1179 0000 80B5     		push	{r7, lr}
+ 1180              	.LCFI40:
+ 1181              		.cfi_def_cfa_offset 8
+ 1182              		.cfi_offset 7, -8
+ 1183              		.cfi_offset 14, -4
+ 1184 0002 86B0     		sub	sp, sp, #24
+ 1185              	.LCFI41:
+ 1186              		.cfi_def_cfa_offset 32
+ 1187 0004 04AF     		add	r7, sp, #16
+ 1188              	.LCFI42:
+ 1189              		.cfi_def_cfa 7, 16
+ 299:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     UINT32 uwRet = LOS_OK;
+ 1190              		.loc 1 299 0
+ 1191 0006 0023     		movs	r3, #0
+ 1192 0008 7B60     		str	r3, [r7, #4]
+ 300:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		UINT16 swtmr1,swtmr2,swtmr3;
+ 301:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     uwRet = creat_data_collection_task();
+ 1193              		.loc 1 301 0
+ 1194 000a FFF7FEFF 		bl	creat_data_collection_task
+ 1195 000e 7860     		str	r0, [r7, #4]
+ 302:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if (uwRet != LOS_OK)
+ 1196              		.loc 1 302 0
+ 1197 0010 7B68     		ldr	r3, [r7, #4]
+ 1198 0012 002B     		cmp	r3, #0
+ 1199 0014 2DD1     		bne	.L71
+ 303:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 304:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return ;
+ 305:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 306:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		
+ 307:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		uwRet = creat_data_report_task();
+ 1200              		.loc 1 307 0
+ 1201 0016 FFF7FEFF 		bl	creat_data_report_task
+ 1202 001a 7860     		str	r0, [r7, #4]
+ 308:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if (uwRet != LOS_OK)
+ 1203              		.loc 1 308 0
+ 1204 001c 7B68     		ldr	r3, [r7, #4]
+ 1205 001e 002B     		cmp	r3, #0
+ 1206 0020 29D1     		bne	.L72
+ 309:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 29
+
+
+ 310:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return ;
+ 311:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 312:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		uwRet = LOS_SemCreate(0,&reply_sem);
+ 1207              		.loc 1 312 0
+ 1208 0022 1A49     		ldr	r1, .L76
+ 1209 0024 0020     		movs	r0, #0
+ 1210 0026 FFF7FEFF 		bl	LOS_SemCreate
+ 1211 002a 7860     		str	r0, [r7, #4]
+ 313:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		if (uwRet != LOS_OK)
+ 1212              		.loc 1 313 0
+ 1213 002c 7B68     		ldr	r3, [r7, #4]
+ 1214 002e 002B     		cmp	r3, #0
+ 1215 0030 23D1     		bne	.L73
+ 314:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 315:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return ;
+ 316:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }				
+ 317:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		uwRet = creat_nb_reply_task();
+ 1216              		.loc 1 317 0
+ 1217 0032 FFF7FEFF 		bl	creat_nb_reply_task
+ 1218 0036 7860     		str	r0, [r7, #4]
+ 318:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if (uwRet != LOS_OK)
+ 1219              		.loc 1 318 0
+ 1220 0038 7B68     		ldr	r3, [r7, #4]
+ 1221 003a 002B     		cmp	r3, #0
+ 1222 003c 1FD1     		bne	.L74
+ 319:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 320:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return ;
+ 321:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 322:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		
+ 323:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		uwRet = LOS_SwtmrCreate(8000,LOS_SWTMR_MODE_PERIOD,Timer1_Callback,&swtmr1,1,OS_SWTMR_ROUSES_ALLO
+ 1223              		.loc 1 323 0
+ 1224 003e BA1C     		adds	r2, r7, #2
+ 1225 0040 0023     		movs	r3, #0
+ 1226 0042 0293     		str	r3, [sp, #8]
+ 1227 0044 0123     		movs	r3, #1
+ 1228 0046 0193     		str	r3, [sp, #4]
+ 1229 0048 0123     		movs	r3, #1
+ 1230 004a 0093     		str	r3, [sp]
+ 1231 004c 1346     		mov	r3, r2
+ 1232 004e 104A     		ldr	r2, .L76+4
+ 1233 0050 0121     		movs	r1, #1
+ 1234 0052 4FF4FA50 		mov	r0, #8000
+ 1235 0056 FFF7FEFF 		bl	LOS_SwtmrCreate
+ 1236 005a 7860     		str	r0, [r7, #4]
+ 324:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     if (uwRet != LOS_OK)
+ 1237              		.loc 1 324 0
+ 1238 005c 7B68     		ldr	r3, [r7, #4]
+ 1239 005e 002B     		cmp	r3, #0
+ 1240 0060 0FD1     		bne	.L75
+ 325:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 326:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return ;
+ 327:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 328:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     uwRet = LOS_SwtmrStart(swtmr1);
+ 1241              		.loc 1 328 0
+ 1242 0062 7B88     		ldrh	r3, [r7, #2]
+ 1243 0064 1846     		mov	r0, r3
+ 1244 0066 FFF7FEFF 		bl	LOS_SwtmrStart
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 30
+
+
+ 1245 006a 7860     		str	r0, [r7, #4]
+ 329:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		if (uwRet != LOS_OK)
+ 1246              		.loc 1 329 0
+ 1247 006c 7B68     		ldr	r3, [r7, #4]
+ 1248 006e 002B     		cmp	r3, #0
+ 1249 0070 08E0     		b	.L62
+ 1250              	.L71:
+ 304:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 1251              		.loc 1 304 0
+ 1252 0072 00BF     		nop
+ 1253 0074 06E0     		b	.L62
+ 1254              	.L72:
+ 310:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 1255              		.loc 1 310 0
+ 1256 0076 00BF     		nop
+ 1257 0078 04E0     		b	.L62
+ 1258              	.L73:
+ 315:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }				
+ 1259              		.loc 1 315 0
+ 1260 007a 00BF     		nop
+ 1261 007c 02E0     		b	.L62
+ 1262              	.L74:
+ 320:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 1263              		.loc 1 320 0
+ 1264 007e 00BF     		nop
+ 1265 0080 00E0     		b	.L62
+ 1266              	.L75:
+ 326:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 1267              		.loc 1 326 0
+ 1268 0082 00BF     		nop
+ 1269              	.L62:
+ 330:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     {
+ 331:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****         return ;
+ 332:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c ****     }
+ 333:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** 		
+ 334:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Demo\nb_iot_demo.c **** }
+ 1270              		.loc 1 334 0
+ 1271 0084 0837     		adds	r7, r7, #8
+ 1272              	.LCFI43:
+ 1273              		.cfi_def_cfa_offset 8
+ 1274 0086 BD46     		mov	sp, r7
+ 1275              	.LCFI44:
+ 1276              		.cfi_def_cfa_register 13
+ 1277              		@ sp needed
+ 1278 0088 80BD     		pop	{r7, pc}
+ 1279              	.L77:
+ 1280 008a 00BF     		.align	2
+ 1281              	.L76:
+ 1282 008c 00000000 		.word	reply_sem
+ 1283 0090 00000000 		.word	Timer1_Callback
+ 1284              		.cfi_endproc
+ 1285              	.LFE143:
+ 1287              		.text
+ 1288              	.Letext0:
+ 1289              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1290              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1291              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 31
+
+
+ 1292              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1293              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1294              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1295              		.file 8 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1296              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1297              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1298              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 1299              		.file 12 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1300              		.file 13 "D:/iot/felix2/kernel/include/los_list.h"
+ 1301              		.file 14 "D:/iot/felix2/kernel/include/los_err.h"
+ 1302              		.file 15 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1303              		.file 16 "D:/iot/felix2/kernel/include/los_event.h"
+ 1304              		.file 17 "D:/iot/felix2/kernel/include/los_task.h"
+ 1305              		.file 18 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1306              		.file 19 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1307              		.file 20 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1308              		.file 21 "D:/iot/felix2/kernel/include/los_config.h"
+ 1309              		.file 22 "D:/iot/felix2/include/at_frame/at_main.h"
+ 1310              		.file 23 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 1311              		.file 24 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 1312              		.file 25 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 1313              		.file 26 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Hardware/LCD/lcd.h"
+ 1314              		.file 27 "D:/iot/felix2/kernel/include/los_swtmr.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 nb_iot_demo.c
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:18     .bss.s_report_buf:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:21     .bss.s_report_buf:00000000 s_report_buf
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:28     .bss.counter:00000000 counter
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:25     .bss.counter:00000000 $d
+                            *COM*:00000002 Lux
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:35     .data.qr_code:00000000 qr_code
+                            *COM*:00000010 ue_stats
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:39     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:61     .text.Timer1_Callback:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:67     .text.Timer1_Callback:00000000 Timer1_Callback
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:217    .text.Timer1_Callback:000000f8 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:236    .text.HAL_GPIO_EXTI_Callback:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:243    .text.HAL_GPIO_EXTI_Callback:00000000 HAL_GPIO_EXTI_Callback
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:316    .text.HAL_GPIO_EXTI_Callback:00000054 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:346    .text.demo_nbiot_only:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:353    .text.demo_nbiot_only:00000000 demo_nbiot_only
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1173   .text.nb_iot_entry:00000000 nb_iot_entry
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:413    .text.demo_nbiot_only:00000058 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:434    .text.data_collection_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:441    .text.data_collection_task:00000000 data_collection_task
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:532    .text.data_collection_task:00000088 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:545    .text.creat_data_collection_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:552    .text.creat_data_collection_task:00000000 creat_data_collection_task
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:615    .text.creat_data_collection_task:00000040 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:634    .text.data_report_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:641    .text.data_report_task:00000000 data_report_task
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:896    .text.data_report_task:000001a0 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:922    .text.creat_data_report_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:929    .text.creat_data_report_task:00000000 creat_data_report_task
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:992    .text.creat_data_report_task:00000040 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1008   .text.nb_reply_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1015   .text.nb_reply_task:00000000 nb_reply_task
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1077   .text.nb_reply_task:00000054 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1090   .text.creat_nb_reply_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1097   .text.creat_nb_reply_task:00000000 creat_nb_reply_task
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1160   .text.creat_nb_reply_task:00000040 $d
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1166   .text.nb_iot_entry:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s:1282   .text.nb_iot_entry:0000008c $d
+
+UNDEFINED SYMBOLS
+LCD_Clear
+LCD_Show_Image
+LCD_ShowString
+LCD_ShowNum
+gImage_Huawei_IoT_QR_Code
+POINT_COLOR
+puts
+HAL_GPIO_TogglePin
+key1
+key2
+toggle
+printf
+los_nb_init
+los_nb_notify
+OC_cmd_match
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc6xBjPj.s 			page 33
+
+
+nb_cmd_data_ioctl
+Init_BH1750
+Convert_BH1750
+sprintf
+LOS_TaskDelay
+BH1750_send
+LOS_TaskCreate
+nb_check_nuestats
+los_nb_report
+memset
+key1_send
+key2_send
+LOS_SemPend
+strlen
+reply_sem
+s_resp_buf
+LOS_SemCreate
+LOS_SwtmrCreate
+LOS_SwtmrStart

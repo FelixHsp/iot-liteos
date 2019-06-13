@@ -1,0 +1,1543 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"packet.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.handle_reset,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	handle_reset:
+  25              	.LFB134:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/core/packet.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    domedambrosio - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    Fabien Fleutot - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    Fabien Fleutot - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    Simon Bernard - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    Toby Jaffey - Please refer to git log
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    Pascal Rieux - Please refer to git log
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *******************************************************************************/
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** /*
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  Copyright (c) 2013, 2014 Intel Corporation
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  Redistribution and use in source and binary forms, with or without modification,
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  are permitted provided that the following conditions are met:
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****      * Redistributions of source code must retain the above copyright notice,
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****        this list of conditions and the following disclaimer.
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****      * Redistributions in binary form must reproduce the above copyright notice,
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****        this list of conditions and the following disclaimer in the documentation
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****        and/or other materials provided with the distribution.
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****      * Neither the name of Intel Corporation nor the names of its contributors
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****        may be used to endorse or promote products derived from this software
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****        without specific prior written permission.
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  THE POSSIBILITY OF SUCH DAMAGE.
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  David Navarro <david.navarro@intel.com>
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** */
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** /*
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 3
+
+
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** Contains code snippets which are:
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Copyright (c) 2013, Institute for Pervasive Computing, ETH Zurich
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * All rights reserved.
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Redistribution and use in source and binary forms, with or without
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * modification, are permitted provided that the following conditions
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * are met:
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * 1. Redistributions of source code must retain the above copyright
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    notice, this list of conditions and the following disclaimer.
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * 2. Redistributions in binary form must reproduce the above copyright
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    notice, this list of conditions and the following disclaimer in the
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    documentation and/or other materials provided with the distribution.
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * 3. Neither the name of the Institute nor the names of its contributors
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    may be used to endorse or promote products derived from this software
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *    without specific prior written permission.
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  *
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * THIS SOFTWARE IS PROVIDED BY THE INSTITUTE AND CONTRIBUTORS ``AS IS'' AND
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * ARE DISCLAIMED.  IN NO EVENT SHALL THE INSTITUTE OR CONTRIBUTORS BE LIABLE
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * SUCH DAMAGE.
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** */
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #include "internals.h"
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #include <stdlib.h>
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #include <string.h>
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #include <stdio.h>
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #include "commandline.h"
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** static void handle_reset(lwm2m_context_t *contextP,
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                          void *fromSessionH,
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                          coap_packet_t *message)
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** {
+  27              		.loc 1 133 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 84B0     		sub	sp, sp, #16
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 24
+  39 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 4
+
+
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 F860     		str	r0, [r7, #12]
+  43 0008 B960     		str	r1, [r7, #8]
+  44 000a 7A60     		str	r2, [r7, #4]
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_CLIENT_MODE
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     LOG("Entering");
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     observe_cancel(contextP, message->mid, fromSessionH);
+  45              		.loc 1 136 0
+  46 000c 7B68     		ldr	r3, [r7, #4]
+  47 000e 1B89     		ldrh	r3, [r3, #8]
+  48 0010 BA68     		ldr	r2, [r7, #8]
+  49 0012 1946     		mov	r1, r3
+  50 0014 F868     		ldr	r0, [r7, #12]
+  51 0016 FFF7FEFF 		bl	observe_cancel
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** }
+  52              		.loc 1 138 0
+  53 001a 00BF     		nop
+  54 001c 1037     		adds	r7, r7, #16
+  55              	.LCFI3:
+  56              		.cfi_def_cfa_offset 8
+  57 001e BD46     		mov	sp, r7
+  58              	.LCFI4:
+  59              		.cfi_def_cfa_register 13
+  60              		@ sp needed
+  61 0020 80BD     		pop	{r7, pc}
+  62              		.cfi_endproc
+  63              	.LFE134:
+  65              		.section	.text.handle_request,"ax",%progbits
+  66              		.align	1
+  67              		.syntax unified
+  68              		.thumb
+  69              		.thumb_func
+  70              		.fpu fpv4-sp-d16
+  72              	handle_request:
+  73              	.LFB135:
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** static uint8_t handle_request(lwm2m_context_t *contextP,
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                               void *fromSessionH,
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                               coap_packet_t *message,
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                               coap_packet_t *response)
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** {
+  74              		.loc 1 144 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 32
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78 0000 80B5     		push	{r7, lr}
+  79              	.LCFI5:
+  80              		.cfi_def_cfa_offset 8
+  81              		.cfi_offset 7, -8
+  82              		.cfi_offset 14, -4
+  83 0002 8AB0     		sub	sp, sp, #40
+  84              	.LCFI6:
+  85              		.cfi_def_cfa_offset 48
+  86 0004 02AF     		add	r7, sp, #8
+  87              	.LCFI7:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 5
+
+
+  88              		.cfi_def_cfa 7, 40
+  89 0006 F860     		str	r0, [r7, #12]
+  90 0008 B960     		str	r1, [r7, #8]
+  91 000a 7A60     		str	r2, [r7, #4]
+  92 000c 3B60     		str	r3, [r7]
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     lwm2m_uri_t *uriP;
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     uint8_t result = COAP_IGNORE;
+  93              		.loc 1 146 0
+  94 000e 0123     		movs	r3, #1
+  95 0010 FB77     		strb	r3, [r7, #31]
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     LOG("Entering");
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_CLIENT_MODE
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     uriP = uri_decode(contextP->altPath, message->uri_path);
+  96              		.loc 1 151 0
+  97 0012 FB68     		ldr	r3, [r7, #12]
+  98 0014 DA68     		ldr	r2, [r3, #12]
+  99 0016 7B68     		ldr	r3, [r7, #4]
+ 100 0018 5B6C     		ldr	r3, [r3, #68]
+ 101 001a 1946     		mov	r1, r3
+ 102 001c 1046     		mov	r0, r2
+ 103 001e FFF7FEFF 		bl	uri_decode
+ 104 0022 B861     		str	r0, [r7, #24]
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #else
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     uriP = uri_decode(NULL, message->uri_path);
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     if (uriP == NULL) return COAP_400_BAD_REQUEST;
+ 105              		.loc 1 156 0
+ 106 0024 BB69     		ldr	r3, [r7, #24]
+ 107 0026 002B     		cmp	r3, #0
+ 108 0028 01D1     		bne	.L3
+ 109              		.loc 1 156 0 is_stmt 0 discriminator 1
+ 110 002a 8023     		movs	r3, #128
+ 111 002c 2EE0     		b	.L4
+ 112              	.L3:
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     switch(uriP->flag & LWM2M_URI_MASK_TYPE)
+ 113              		.loc 1 158 0 is_stmt 1
+ 114 002e BB69     		ldr	r3, [r7, #24]
+ 115 0030 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 116 0032 03F07003 		and	r3, r3, #112
+ 117 0036 002B     		cmp	r3, #0
+ 118 0038 12D1     		bne	.L10
+ 119              	.LBB2:
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_CLIENT_MODE
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     case LWM2M_URI_FLAG_DM:
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         lwm2m_server_t *serverP;
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         serverP = utils_findServer(contextP, fromSessionH);
+ 120              		.loc 1 165 0
+ 121 003a B968     		ldr	r1, [r7, #8]
+ 122 003c F868     		ldr	r0, [r7, #12]
+ 123 003e FFF7FEFF 		bl	utils_findServer
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 6
+
+
+ 124 0042 7861     		str	r0, [r7, #20]
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         if (serverP != NULL)
+ 125              		.loc 1 166 0
+ 126 0044 7B69     		ldr	r3, [r7, #20]
+ 127 0046 002B     		cmp	r3, #0
+ 128 0048 0DD0     		beq	.L11
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             result = dm_handleRequest(contextP, uriP, serverP, message, response);
+ 129              		.loc 1 168 0
+ 130 004a 3B68     		ldr	r3, [r7]
+ 131 004c 0093     		str	r3, [sp]
+ 132 004e 7B68     		ldr	r3, [r7, #4]
+ 133 0050 7A69     		ldr	r2, [r7, #20]
+ 134 0052 B969     		ldr	r1, [r7, #24]
+ 135 0054 F868     		ldr	r0, [r7, #12]
+ 136 0056 FFF7FEFF 		bl	dm_handleRequest
+ 137 005a 0346     		mov	r3, r0
+ 138 005c FB77     		strb	r3, [r7, #31]
+ 139              	.LBE2:
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_BOOTSTRAP
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         else
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             serverP = utils_findBootstrapServer(contextP, fromSessionH);
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (serverP != NULL)
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 result = bootstrap_handleCommand(contextP, uriP, serverP, message, response);
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     }
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     break;
+ 140              		.loc 1 181 0
+ 141 005e 02E0     		b	.L11
+ 142              	.L10:
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_BOOTSTRAP
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     case LWM2M_URI_FLAG_DELETE_ALL:
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         if (COAP_DELETE != message->code)
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             result = COAP_400_BAD_REQUEST;
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         else
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             result = bootstrap_handleDeleteAll(contextP, fromSessionH);
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         break;
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     case LWM2M_URI_FLAG_BOOTSTRAP:
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         if (message->code == COAP_POST)
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             result = bootstrap_handleFinish(contextP, fromSessionH);
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         break;
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 7
+
+
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_SERVER_MODE
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     case LWM2M_URI_FLAG_REGISTRATION:
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         result = registration_handleRequest(contextP, uriP, fromSessionH, message, response);
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         break;
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_BOOTSTRAP_SERVER_MODE
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     case LWM2M_URI_FLAG_BOOTSTRAP:
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         result = bootstrap_handleRequest(contextP, uriP, fromSessionH, message, response);
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         break;
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     default:
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         result = COAP_IGNORE;
+ 143              		.loc 1 215 0
+ 144 0060 0123     		movs	r3, #1
+ 145 0062 FB77     		strb	r3, [r7, #31]
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         break;
+ 146              		.loc 1 216 0
+ 147 0064 00E0     		b	.L8
+ 148              	.L11:
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 149              		.loc 1 181 0
+ 150 0066 00BF     		nop
+ 151              	.L8:
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     }
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     coap_set_status_code(response, result);
+ 152              		.loc 1 219 0
+ 153 0068 FB7F     		ldrb	r3, [r7, #31]	@ zero_extendqisi2
+ 154 006a 1946     		mov	r1, r3
+ 155 006c 3868     		ldr	r0, [r7]
+ 156 006e FFF7FEFF 		bl	coap_set_status_code
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     if (COAP_IGNORE < result && result < COAP_400_BAD_REQUEST)
+ 157              		.loc 1 221 0
+ 158 0072 FB7F     		ldrb	r3, [r7, #31]	@ zero_extendqisi2
+ 159 0074 012B     		cmp	r3, #1
+ 160 0076 05D9     		bls	.L9
+ 161              		.loc 1 221 0 is_stmt 0 discriminator 1
+ 162 0078 97F91F30 		ldrsb	r3, [r7, #31]
+ 163 007c 002B     		cmp	r3, #0
+ 164 007e 01DB     		blt	.L9
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         result = NO_ERROR;
+ 165              		.loc 1 223 0 is_stmt 1
+ 166 0080 0023     		movs	r3, #0
+ 167 0082 FB77     		strb	r3, [r7, #31]
+ 168              	.L9:
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     }
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     lwm2m_free(uriP);
+ 169              		.loc 1 226 0
+ 170 0084 B869     		ldr	r0, [r7, #24]
+ 171 0086 FFF7FEFF 		bl	lwm2m_free
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     return result;
+ 172              		.loc 1 227 0
+ 173 008a FB7F     		ldrb	r3, [r7, #31]	@ zero_extendqisi2
+ 174              	.L4:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 8
+
+
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** }
+ 175              		.loc 1 228 0
+ 176 008c 1846     		mov	r0, r3
+ 177 008e 2037     		adds	r7, r7, #32
+ 178              	.LCFI8:
+ 179              		.cfi_def_cfa_offset 8
+ 180 0090 BD46     		mov	sp, r7
+ 181              	.LCFI9:
+ 182              		.cfi_def_cfa_register 13
+ 183              		@ sp needed
+ 184 0092 80BD     		pop	{r7, pc}
+ 185              		.cfi_endproc
+ 186              	.LFE135:
+ 188              		.section	.rodata
+ 189              		.align	2
+ 190              	.LC0:
+ 191 0000 426C6F63 		.ascii	"BlockOutOfScope\000"
+ 191      6B4F7574 
+ 191      4F665363 
+ 191      6F706500 
+ 192              		.section	.text.lwm2m_handle_packet,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	lwm2m_handle_packet
+ 195              		.syntax unified
+ 196              		.thumb
+ 197              		.thumb_func
+ 198              		.fpu fpv4-sp-d16
+ 200              	lwm2m_handle_packet:
+ 201              	.LFB136:
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** /* This function is an adaptation of function coap_receive() from Erbium's er-coap-13-engine.c.
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * Erbium is Copyright (c) 2013, Institute for Pervasive Computing, ETH Zurich
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  * All rights reserved.
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****  */
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** void lwm2m_handle_packet(lwm2m_context_t *contextP,
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                          uint8_t *buffer,
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                          int length,
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                          void *fromSessionH)
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** {
+ 202              		.loc 1 238 0
+ 203              		.cfi_startproc
+ 204              		@ args = 0, pretend = 0, frame = 72
+ 205              		@ frame_needed = 1, uses_anonymous_args = 0
+ 206 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 207              	.LCFI10:
+ 208              		.cfi_def_cfa_offset 20
+ 209              		.cfi_offset 4, -20
+ 210              		.cfi_offset 5, -16
+ 211              		.cfi_offset 6, -12
+ 212              		.cfi_offset 7, -8
+ 213              		.cfi_offset 14, -4
+ 214 0002 99B0     		sub	sp, sp, #100
+ 215              	.LCFI11:
+ 216              		.cfi_def_cfa_offset 120
+ 217 0004 06AF     		add	r7, sp, #24
+ 218              	.LCFI12:
+ 219              		.cfi_def_cfa 7, 96
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 9
+
+
+ 220 0006 F860     		str	r0, [r7, #12]
+ 221 0008 B960     		str	r1, [r7, #8]
+ 222 000a 7A60     		str	r2, [r7, #4]
+ 223 000c 3B60     		str	r3, [r7]
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     uint8_t coap_error_code = NO_ERROR;
+ 224              		.loc 1 239 0
+ 225 000e 0023     		movs	r3, #0
+ 226 0010 87F84730 		strb	r3, [r7, #71]
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     static coap_packet_t message[1];
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     static coap_packet_t response[1];
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     LOG("Entering");
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     coap_error_code = coap_parse_message(message, buffer, (uint16_t)length);
+ 227              		.loc 1 244 0
+ 228 0014 7B68     		ldr	r3, [r7, #4]
+ 229 0016 9BB2     		uxth	r3, r3
+ 230 0018 1A46     		mov	r2, r3
+ 231 001a B968     		ldr	r1, [r7, #8]
+ 232 001c 9F48     		ldr	r0, .L48
+ 233 001e FFF7FEFF 		bl	coap_parse_message
+ 234 0022 0346     		mov	r3, r0
+ 235 0024 87F84730 		strb	r3, [r7, #71]
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     if (coap_error_code == NO_ERROR)
+ 236              		.loc 1 245 0
+ 237 0028 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 238 002c 002B     		cmp	r3, #0
+ 239 002e 40F0DA81 		bne	.L13
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         LOG_ARG("Parsed: ver %u, type %u, tkl %u, code %u.%.2u, mid %u, Content type: %d",
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 message->version, message->type, message->token_len, message->code >> 5, message->c
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         //LOG_ARG("Payload: %.*s", message->payload_len, message->payload);   //%s can not used for
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         if (message->code >= COAP_GET && message->code <= COAP_DELETE)
+ 240              		.loc 1 250 0
+ 241 0032 9A4B     		ldr	r3, .L48
+ 242 0034 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 243 0036 002B     		cmp	r3, #0
+ 244 0038 00F08681 		beq	.L14
+ 245              		.loc 1 250 0 is_stmt 0 discriminator 1
+ 246 003c 974B     		ldr	r3, .L48
+ 247 003e 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 248 0040 042B     		cmp	r3, #4
+ 249 0042 00F28181 		bhi	.L14
+ 250              	.LBB3:
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             uint32_t block_num = 0;
+ 251              		.loc 1 252 0 is_stmt 1
+ 252 0046 0023     		movs	r3, #0
+ 253 0048 FB62     		str	r3, [r7, #44]
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             uint16_t block_size = REST_MAX_CHUNK_SIZE;
+ 254              		.loc 1 253 0
+ 255 004a 8023     		movs	r3, #128
+ 256 004c 7B85     		strh	r3, [r7, #42]	@ movhi
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             uint32_t block_offset = 0;
+ 257              		.loc 1 254 0
+ 258 004e 0023     		movs	r3, #0
+ 259 0050 7B62     		str	r3, [r7, #36]
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             int64_t new_offset = 0;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 10
+
+
+ 260              		.loc 1 255 0
+ 261 0052 4FF00003 		mov	r3, #0
+ 262 0056 4FF00004 		mov	r4, #0
+ 263 005a C7E90E34 		strd	r3, [r7, #56]
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             /* prepare response */
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (message->type == COAP_TYPE_CON)
+ 264              		.loc 1 258 0
+ 265 005e 8F4B     		ldr	r3, .L48
+ 266 0060 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 267 0062 002B     		cmp	r3, #0
+ 268 0064 07D1     		bne	.L15
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 /* Reliable CON requests are answered with an ACK. */
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 coap_init_message(response, COAP_TYPE_ACK, COAP_205_CONTENT, message->mid);
+ 269              		.loc 1 261 0
+ 270 0066 8D4B     		ldr	r3, .L48
+ 271 0068 1B89     		ldrh	r3, [r3, #8]
+ 272 006a 4522     		movs	r2, #69
+ 273 006c 0221     		movs	r1, #2
+ 274 006e 8C48     		ldr	r0, .L48+4
+ 275 0070 FFF7FEFF 		bl	coap_init_message
+ 276 0074 0AE0     		b	.L16
+ 277              	.L15:
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             else
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 /* Unreliable NON requests are answered with a NON as well. */
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 coap_init_message(response, COAP_TYPE_NON, COAP_205_CONTENT, contextP->nextMID++);
+ 278              		.loc 1 266 0
+ 279 0076 FB68     		ldr	r3, [r7, #12]
+ 280 0078 9B8D     		ldrh	r3, [r3, #44]
+ 281 007a 5A1C     		adds	r2, r3, #1
+ 282 007c 91B2     		uxth	r1, r2
+ 283 007e FA68     		ldr	r2, [r7, #12]
+ 284 0080 9185     		strh	r1, [r2, #44]	@ movhi
+ 285 0082 4522     		movs	r2, #69
+ 286 0084 0121     		movs	r1, #1
+ 287 0086 8648     		ldr	r0, .L48+4
+ 288 0088 FFF7FEFF 		bl	coap_init_message
+ 289              	.L16:
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             /* mirror token */
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (message->token_len)
+ 290              		.loc 1 270 0
+ 291 008c 834B     		ldr	r3, .L48
+ 292 008e 93F84C30 		ldrb	r3, [r3, #76]	@ zero_extendqisi2
+ 293 0092 002B     		cmp	r3, #0
+ 294 0094 07D0     		beq	.L17
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 coap_set_header_token(response, message->token, message->token_len);
+ 295              		.loc 1 272 0
+ 296 0096 8349     		ldr	r1, .L48+8
+ 297 0098 804B     		ldr	r3, .L48
+ 298 009a 93F84C30 		ldrb	r3, [r3, #76]	@ zero_extendqisi2
+ 299 009e 1A46     		mov	r2, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 11
+
+
+ 300 00a0 7F48     		ldr	r0, .L48+4
+ 301 00a2 FFF7FEFF 		bl	coap_set_header_token
+ 302              	.L17:
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             /* get offset for blockwise transfers */
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (coap_get_header_block2(message, &block_num, NULL, &block_size, &block_offset))
+ 303              		.loc 1 276 0
+ 304 00a6 07F12A02 		add	r2, r7, #42
+ 305 00aa 07F12C01 		add	r1, r7, #44
+ 306 00ae 07F12403 		add	r3, r7, #36
+ 307 00b2 0093     		str	r3, [sp]
+ 308 00b4 1346     		mov	r3, r2
+ 309 00b6 0022     		movs	r2, #0
+ 310 00b8 7848     		ldr	r0, .L48
+ 311 00ba FFF7FEFF 		bl	coap_get_header_block2
+ 312 00be 0346     		mov	r3, r0
+ 313 00c0 002B     		cmp	r3, #0
+ 314 00c2 0AD0     		beq	.L18
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 LOG_ARG("Blockwise: block request %u (%u/%u) @ %u bytes", block_num, block_size, RE
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 block_size = MIN(block_size, REST_MAX_CHUNK_SIZE);
+ 315              		.loc 1 279 0
+ 316 00c4 7B8D     		ldrh	r3, [r7, #42]
+ 317 00c6 802B     		cmp	r3, #128
+ 318 00c8 28BF     		it	cs
+ 319 00ca 8023     		movcs	r3, #128
+ 320 00cc 9BB2     		uxth	r3, r3
+ 321 00ce 7B85     		strh	r3, [r7, #42]	@ movhi
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 new_offset = block_offset;
+ 322              		.loc 1 280 0
+ 323 00d0 7B6A     		ldr	r3, [r7, #36]
+ 324 00d2 4FF00004 		mov	r4, #0
+ 325 00d6 C7E90E34 		strd	r3, [r7, #56]
+ 326              	.L18:
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             /* handle block1 option */
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (IS_OPTION(message, COAP_OPTION_BLOCK1))
+ 327              		.loc 1 284 0
+ 328 00da 704B     		ldr	r3, .L48
+ 329 00dc 5B7B     		ldrb	r3, [r3, #13]	@ zero_extendqisi2
+ 330 00de 03F00803 		and	r3, r3, #8
+ 331 00e2 002B     		cmp	r3, #0
+ 332 00e4 5DD0     		beq	.L19
+ 333              	.LBB4:
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_CLIENT_MODE
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 // get server
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 lwm2m_server_t *serverP;
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 serverP = utils_findServer(contextP, fromSessionH);
+ 334              		.loc 1 289 0
+ 335 00e6 3968     		ldr	r1, [r7]
+ 336 00e8 F868     		ldr	r0, [r7, #12]
+ 337 00ea FFF7FEFF 		bl	utils_findServer
+ 338 00ee 7863     		str	r0, [r7, #52]
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_BOOTSTRAP
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 12
+
+
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 if (serverP == NULL)
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     serverP = utils_findBootstrapServer(contextP, fromSessionH);
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 if (serverP == NULL)
+ 339              		.loc 1 296 0
+ 340 00f0 7B6B     		ldr	r3, [r7, #52]
+ 341 00f2 002B     		cmp	r3, #0
+ 342 00f4 03D1     		bne	.L20
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_error_code = COAP_500_INTERNAL_SERVER_ERROR;
+ 343              		.loc 1 298 0
+ 344 00f6 A023     		movs	r3, #160
+ 345 00f8 87F84730 		strb	r3, [r7, #71]
+ 346 00fc 51E0     		b	.L19
+ 347              	.L20:
+ 348              	.LBB5:
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 else
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     uint32_t block1_num;
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     uint8_t  block1_more;
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     uint16_t block1_size;
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     uint8_t *complete_buffer = NULL;
+ 349              		.loc 1 305 0
+ 350 00fe 0023     		movs	r3, #0
+ 351 0100 BB61     		str	r3, [r7, #24]
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     size_t complete_buffer_size;
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     // parse block1 header
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_get_header_block1(message, &block1_num, &block1_more, &block1_size, NULL);
+ 352              		.loc 1 309 0
+ 353 0102 07F11C00 		add	r0, r7, #28
+ 354 0106 07F11F02 		add	r2, r7, #31
+ 355 010a 07F12001 		add	r1, r7, #32
+ 356 010e 0023     		movs	r3, #0
+ 357 0110 0093     		str	r3, [sp]
+ 358 0112 0346     		mov	r3, r0
+ 359 0114 6148     		ldr	r0, .L48
+ 360 0116 FFF7FEFF 		bl	coap_get_header_block1
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     LOG_ARG("Blockwise: block1 request NUM %u (SZX %u/ SZX Max%u) MORE %u", block1_
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     // handle block 1
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_error_code = coap_block1_handler(&serverP->block1Data, message->mid, messa
+ 361              		.loc 1 313 0
+ 362 011a 7B6B     		ldr	r3, [r7, #52]
+ 363 011c 03F12C04 		add	r4, r3, #44
+ 364 0120 5E4B     		ldr	r3, .L48
+ 365 0122 1D89     		ldrh	r5, [r3, #8]
+ 366 0124 5D4B     		ldr	r3, .L48
+ 367 0126 D3F88860 		ldr	r6, [r3, #136]
+ 368 012a 5C4B     		ldr	r3, .L48
+ 369 012c B3F88630 		ldrh	r3, [r3, #134]
+ 370 0130 9C46     		mov	ip, r3
+ 371 0132 BB8B     		ldrh	r3, [r7, #28]
+ 372 0134 3A6A     		ldr	r2, [r7, #32]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 13
+
+
+ 373 0136 F97F     		ldrb	r1, [r7, #31]	@ zero_extendqisi2
+ 374 0138 0029     		cmp	r1, #0
+ 375 013a 14BF     		ite	ne
+ 376 013c 0121     		movne	r1, #1
+ 377 013e 0021     		moveq	r1, #0
+ 378 0140 C9B2     		uxtb	r1, r1
+ 379 0142 07F11400 		add	r0, r7, #20
+ 380 0146 0490     		str	r0, [sp, #16]
+ 381 0148 07F11800 		add	r0, r7, #24
+ 382 014c 0390     		str	r0, [sp, #12]
+ 383 014e 0291     		str	r1, [sp, #8]
+ 384 0150 0192     		str	r2, [sp, #4]
+ 385 0152 0093     		str	r3, [sp]
+ 386 0154 6346     		mov	r3, ip
+ 387 0156 3246     		mov	r2, r6
+ 388 0158 2946     		mov	r1, r5
+ 389 015a 2046     		mov	r0, r4
+ 390 015c FFF7FEFF 		bl	coap_block1_handler
+ 391 0160 0346     		mov	r3, r0
+ 392 0162 87F84730 		strb	r3, [r7, #71]
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     // if payload is complete, replace it in the coap message.
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     if (coap_error_code == NO_ERROR)
+ 393              		.loc 1 316 0
+ 394 0166 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 395 016a 002B     		cmp	r3, #0
+ 396 016c 09D1     		bne	.L21
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     {
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         message->payload = complete_buffer;
+ 397              		.loc 1 318 0
+ 398 016e BB69     		ldr	r3, [r7, #24]
+ 399 0170 4A4A     		ldr	r2, .L48
+ 400 0172 C2F88830 		str	r3, [r2, #136]
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         message->payload_len = complete_buffer_size;
+ 401              		.loc 1 319 0
+ 402 0176 7B69     		ldr	r3, [r7, #20]
+ 403 0178 9AB2     		uxth	r2, r3
+ 404 017a 484B     		ldr	r3, .L48
+ 405 017c A3F88620 		strh	r2, [r3, #134]	@ movhi
+ 406 0180 0FE0     		b	.L19
+ 407              	.L21:
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     }
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     else if (coap_error_code == COAP_231_CONTINUE)
+ 408              		.loc 1 321 0
+ 409 0182 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 410 0186 5F2B     		cmp	r3, #95
+ 411 0188 0BD1     		bne	.L19
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     {
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         block1_size = MIN(block1_size, REST_MAX_CHUNK_SIZE);
+ 412              		.loc 1 323 0
+ 413 018a BB8B     		ldrh	r3, [r7, #28]
+ 414 018c 802B     		cmp	r3, #128
+ 415 018e 28BF     		it	cs
+ 416 0190 8023     		movcs	r3, #128
+ 417 0192 9BB2     		uxth	r3, r3
+ 418 0194 BB83     		strh	r3, [r7, #28]	@ movhi
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         coap_set_header_block1(response, block1_num, block1_more, block1_size);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 14
+
+
+ 419              		.loc 1 324 0
+ 420 0196 396A     		ldr	r1, [r7, #32]
+ 421 0198 FA7F     		ldrb	r2, [r7, #31]	@ zero_extendqisi2
+ 422 019a BB8B     		ldrh	r3, [r7, #28]
+ 423 019c 4048     		ldr	r0, .L48+4
+ 424 019e FFF7FEFF 		bl	coap_set_header_block1
+ 425              	.L19:
+ 426              	.LBE5:
+ 427              	.LBE4:
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     }
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #else
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 coap_error_code = COAP_501_NOT_IMPLEMENTED;
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (coap_error_code == NO_ERROR)
+ 428              		.loc 1 331 0
+ 429 01a2 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 430 01a6 002B     		cmp	r3, #0
+ 431 01a8 08D1     		bne	.L23
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 coap_error_code = handle_request(contextP, fromSessionH, message, response);
+ 432              		.loc 1 333 0
+ 433 01aa 3D4B     		ldr	r3, .L48+4
+ 434 01ac 3B4A     		ldr	r2, .L48
+ 435 01ae 3968     		ldr	r1, [r7]
+ 436 01b0 F868     		ldr	r0, [r7, #12]
+ 437 01b2 FFF7FEFF 		bl	handle_request
+ 438 01b6 0346     		mov	r3, r0
+ 439 01b8 87F84730 		strb	r3, [r7, #71]
+ 440              	.L23:
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 335:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             if (coap_error_code == NO_ERROR)
+ 441              		.loc 1 335 0
+ 442 01bc 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 443 01c0 002B     		cmp	r3, #0
+ 444 01c2 40F0AB80 		bne	.L24
+ 336:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 337:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 if ( IS_OPTION(message, COAP_OPTION_BLOCK2) )
+ 445              		.loc 1 337 0
+ 446 01c6 354B     		ldr	r3, .L48
+ 447 01c8 1B7B     		ldrb	r3, [r3, #12]	@ zero_extendqisi2
+ 448 01ca 5BB2     		sxtb	r3, r3
+ 449 01cc 002B     		cmp	r3, #0
+ 450 01ce 6DDA     		bge	.L25
+ 338:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 339:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     /* unchanged new_offset indicates that resource is unaware of blockwise transfe
+ 340:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     if (new_offset == block_offset)
+ 451              		.loc 1 340 0
+ 452 01d0 7B6A     		ldr	r3, [r7, #36]
+ 453 01d2 4FF00004 		mov	r4, #0
+ 454 01d6 D7E90E12 		ldrd	r1, [r7, #56]
+ 455 01da A242     		cmp	r2, r4
+ 456 01dc 08BF     		it	eq
+ 457 01de 9942     		cmpeq	r1, r3
+ 458 01e0 36D1     		bne	.L26
+ 341:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 15
+
+
+ 342:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         LOG_ARG("Blockwise: unaware resource with payload length %u/%u", response->
+ 343:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         if (block_offset >= message->payload_len)
+ 459              		.loc 1 343 0
+ 460 01e2 2E4B     		ldr	r3, .L48
+ 461 01e4 B3F88630 		ldrh	r3, [r3, #134]
+ 462 01e8 1A46     		mov	r2, r3
+ 463 01ea 7B6A     		ldr	r3, [r7, #36]
+ 464 01ec 9A42     		cmp	r2, r3
+ 465 01ee 08D8     		bhi	.L27
+ 344:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         {
+ 345:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                             LOG("handle_incoming_data(): block_offset >= response->payload_len");
+ 346:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 347:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                             response->code = COAP_402_BAD_OPTION;
+ 466              		.loc 1 347 0
+ 467 01f0 2B4B     		ldr	r3, .L48+4
+ 468 01f2 8222     		movs	r2, #130
+ 469 01f4 9A71     		strb	r2, [r3, #6]
+ 348:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                             coap_set_payload(response, "BlockOutOfScope", 15); /* a const char str[
+ 470              		.loc 1 348 0
+ 471 01f6 0F22     		movs	r2, #15
+ 472 01f8 2B49     		ldr	r1, .L48+12
+ 473 01fa 2948     		ldr	r0, .L48+4
+ 474 01fc FFF7FEFF 		bl	coap_set_payload
+ 475 0200 75E0     		b	.L33
+ 476              	.L27:
+ 349:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         }
+ 350:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         else
+ 351:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         {
+ 352:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                             coap_set_header_block2(response, block_num, response->payload_len - blo
+ 477              		.loc 1 352 0
+ 478 0202 F96A     		ldr	r1, [r7, #44]
+ 479 0204 264B     		ldr	r3, .L48+4
+ 480 0206 B3F88630 		ldrh	r3, [r3, #134]
+ 481 020a 1A46     		mov	r2, r3
+ 482 020c 7B6A     		ldr	r3, [r7, #36]
+ 483 020e D31A     		subs	r3, r2, r3
+ 484 0210 7A8D     		ldrh	r2, [r7, #42]
+ 485 0212 9342     		cmp	r3, r2
+ 486 0214 8CBF     		ite	hi
+ 487 0216 0123     		movhi	r3, #1
+ 488 0218 0023     		movls	r3, #0
+ 489 021a DBB2     		uxtb	r3, r3
+ 490 021c 1A46     		mov	r2, r3
+ 491 021e 7B8D     		ldrh	r3, [r7, #42]
+ 492 0220 1F48     		ldr	r0, .L48+4
+ 493 0222 FFF7FEFF 		bl	coap_set_header_block2
+ 353:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                             coap_set_payload(response, response->payload + block_offset, MIN(respon
+ 494              		.loc 1 353 0
+ 495 0226 1E4B     		ldr	r3, .L48+4
+ 496 0228 D3F88820 		ldr	r2, [r3, #136]
+ 497 022c 7B6A     		ldr	r3, [r7, #36]
+ 498 022e D118     		adds	r1, r2, r3
+ 499 0230 7B8D     		ldrh	r3, [r7, #42]
+ 500 0232 1A46     		mov	r2, r3
+ 501 0234 1A4B     		ldr	r3, .L48+4
+ 502 0236 B3F88630 		ldrh	r3, [r3, #134]
+ 503 023a 1846     		mov	r0, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 16
+
+
+ 504 023c 7B6A     		ldr	r3, [r7, #36]
+ 505 023e C31A     		subs	r3, r0, r3
+ 506 0240 9342     		cmp	r3, r2
+ 507 0242 28BF     		it	cs
+ 508 0244 1346     		movcs	r3, r2
+ 509 0246 1A46     		mov	r2, r3
+ 510 0248 1548     		ldr	r0, .L48+4
+ 511 024a FFF7FEFF 		bl	coap_set_payload
+ 512 024e 4EE0     		b	.L33
+ 513              	.L26:
+ 354:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         } /* if (valid offset) */
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     }
+ 356:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     else
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     {
+ 358:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         /* resource provides chunk-wise data */
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         LOG_ARG("Blockwise: blockwise resource, new offset %d", (int) new_offset);
+ 360:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         coap_set_header_block2(response, block_num, new_offset != -1 || response->p
+ 514              		.loc 1 360 0
+ 515 0250 F96A     		ldr	r1, [r7, #44]
+ 516 0252 D7E90E34 		ldrd	r3, [r7, #56]
+ 517 0256 B4F1FF3F 		cmp	r4, #-1
+ 518 025a 08BF     		it	eq
+ 519 025c B3F1FF3F 		cmpeq	r3, #-1
+ 520 0260 05D1     		bne	.L30
+ 521              		.loc 1 360 0 is_stmt 0 discriminator 2
+ 522 0262 0F4B     		ldr	r3, .L48+4
+ 523 0264 B3F88620 		ldrh	r2, [r3, #134]
+ 524 0268 7B8D     		ldrh	r3, [r7, #42]
+ 525 026a 9A42     		cmp	r2, r3
+ 526 026c 01D9     		bls	.L31
+ 527              	.L30:
+ 528              		.loc 1 360 0 discriminator 3
+ 529 026e 0123     		movs	r3, #1
+ 530 0270 00E0     		b	.L32
+ 531              	.L31:
+ 532              		.loc 1 360 0 discriminator 4
+ 533 0272 0023     		movs	r3, #0
+ 534              	.L32:
+ 535              		.loc 1 360 0 discriminator 6
+ 536 0274 DAB2     		uxtb	r2, r3
+ 537 0276 7B8D     		ldrh	r3, [r7, #42]
+ 538 0278 0948     		ldr	r0, .L48+4
+ 539 027a FFF7FEFF 		bl	coap_set_header_block2
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         if (response->payload_len > block_size) coap_set_payload(response, response
+ 540              		.loc 1 361 0 is_stmt 1 discriminator 6
+ 541 027e 084B     		ldr	r3, .L48+4
+ 542 0280 B3F88620 		ldrh	r2, [r3, #134]
+ 543 0284 7B8D     		ldrh	r3, [r7, #42]
+ 544 0286 9A42     		cmp	r2, r3
+ 545 0288 31D9     		bls	.L33
+ 546              		.loc 1 361 0 is_stmt 0 discriminator 1
+ 547 028a 054B     		ldr	r3, .L48+4
+ 548 028c D3F88830 		ldr	r3, [r3, #136]
+ 549 0290 7A8D     		ldrh	r2, [r7, #42]
+ 550 0292 1946     		mov	r1, r3
+ 551 0294 0248     		ldr	r0, .L48+4
+ 552 0296 FFF7FEFF 		bl	coap_set_payload
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 17
+
+
+ 553 029a 28E0     		b	.L33
+ 554              	.L49:
+ 555              		.align	2
+ 556              	.L48:
+ 557 029c 00000000 		.word	message.11596
+ 558 02a0 00000000 		.word	response.11597
+ 559 02a4 4D000000 		.word	message.11596+77
+ 560 02a8 00000000 		.word	.LC0
+ 561              	.L25:
+ 362:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     } /* if (resource aware of blockwise) */
+ 363:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 364:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 else if (new_offset != 0)
+ 562              		.loc 1 364 0 is_stmt 1
+ 563 02ac D7E90E34 		ldrd	r3, [r7, #56]
+ 564 02b0 2343     		orrs	r3, r3, r4
+ 565 02b2 1CD0     		beq	.L33
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 366:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     LOG_ARG("Blockwise: no block option for blockwise resource, using block size %u
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 368:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_set_header_block2(response, 0, new_offset != -1, REST_MAX_CHUNK_SIZE);
+ 566              		.loc 1 368 0
+ 567 02b4 BA6B     		ldr	r2, [r7, #56]
+ 568 02b6 FB6B     		ldr	r3, [r7, #60]
+ 569 02b8 1340     		ands	r3, r3, r2
+ 570 02ba B3F1FF3F 		cmp	r3, #-1
+ 571 02be 14BF     		ite	ne
+ 572 02c0 0123     		movne	r3, #1
+ 573 02c2 0023     		moveq	r3, #0
+ 574 02c4 DBB2     		uxtb	r3, r3
+ 575 02c6 1A46     		mov	r2, r3
+ 576 02c8 8023     		movs	r3, #128
+ 577 02ca 0021     		movs	r1, #0
+ 578 02cc 5C48     		ldr	r0, .L50
+ 579 02ce FFF7FEFF 		bl	coap_set_header_block2
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_set_payload(response, response->payload, MIN(response->payload_len, REST_M
+ 580              		.loc 1 369 0
+ 581 02d2 5B4B     		ldr	r3, .L50
+ 582 02d4 D3F88810 		ldr	r1, [r3, #136]
+ 583 02d8 594B     		ldr	r3, .L50
+ 584 02da B3F88630 		ldrh	r3, [r3, #134]
+ 585 02de 802B     		cmp	r3, #128
+ 586 02e0 28BF     		it	cs
+ 587 02e2 8023     		movcs	r3, #128
+ 588 02e4 9BB2     		uxth	r3, r3
+ 589 02e6 1A46     		mov	r2, r3
+ 590 02e8 5548     		ldr	r0, .L50
+ 591 02ea FFF7FEFF 		bl	coap_set_payload
+ 592              	.L33:
+ 370:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 } /* if (blockwise request) */
+ 371:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 372:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 coap_error_code = message_send(contextP, response, fromSessionH);
+ 593              		.loc 1 372 0
+ 594 02ee 3A68     		ldr	r2, [r7]
+ 595 02f0 5349     		ldr	r1, .L50
+ 596 02f2 F868     		ldr	r0, [r7, #12]
+ 597 02f4 FFF7FEFF 		bl	message_send
+ 598 02f8 0346     		mov	r3, r0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 18
+
+
+ 599 02fa 87F84730 		strb	r3, [r7, #71]
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 374:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 lwm2m_free(response->payload);
+ 600              		.loc 1 374 0
+ 601 02fe 504B     		ldr	r3, .L50
+ 602 0300 D3F88830 		ldr	r3, [r3, #136]
+ 603 0304 1846     		mov	r0, r3
+ 604 0306 FFF7FEFF 		bl	lwm2m_free
+ 375:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 response->payload = NULL;
+ 605              		.loc 1 375 0
+ 606 030a 4D4B     		ldr	r3, .L50
+ 607 030c 0022     		movs	r2, #0
+ 608 030e C3F88820 		str	r2, [r3, #136]
+ 376:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 response->payload_len = 0;
+ 609              		.loc 1 376 0
+ 610 0312 4B4B     		ldr	r3, .L50
+ 611 0314 0022     		movs	r2, #0
+ 612 0316 A3F88620 		strh	r2, [r3, #134]	@ movhi
+ 613              	.LBE3:
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             uint32_t block_num = 0;
+ 614              		.loc 1 251 0
+ 615 031a 5CE0     		b	.L44
+ 616              	.L24:
+ 617              	.LBB6:
+ 377:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 378:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             else if (coap_error_code != COAP_IGNORE)
+ 618              		.loc 1 378 0
+ 619 031c 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 620 0320 012B     		cmp	r3, #1
+ 621 0322 58D0     		beq	.L44
+ 379:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 380:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 if (1 == coap_set_status_code(response, coap_error_code))
+ 622              		.loc 1 380 0
+ 623 0324 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 624 0328 1946     		mov	r1, r3
+ 625 032a 4548     		ldr	r0, .L50
+ 626 032c FFF7FEFF 		bl	coap_set_status_code
+ 627 0330 0346     		mov	r3, r0
+ 628 0332 012B     		cmp	r3, #1
+ 629 0334 4FD1     		bne	.L44
+ 381:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 382:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_error_code = message_send(contextP, response, fromSessionH);
+ 630              		.loc 1 382 0
+ 631 0336 3A68     		ldr	r2, [r7]
+ 632 0338 4149     		ldr	r1, .L50
+ 633 033a F868     		ldr	r0, [r7, #12]
+ 634 033c FFF7FEFF 		bl	message_send
+ 635 0340 0346     		mov	r3, r0
+ 636 0342 87F84730 		strb	r3, [r7, #71]
+ 637              	.LBE6:
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             uint32_t block_num = 0;
+ 638              		.loc 1 251 0
+ 639 0346 46E0     		b	.L44
+ 640              	.L14:
+ 383:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 384:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 385:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 19
+
+
+ 386:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         else
+ 387:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 388:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             /* Responses */
+ 389:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             switch (message->type)
+ 641              		.loc 1 389 0
+ 642 0348 3E4B     		ldr	r3, .L50+4
+ 643 034a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 644 034c 032B     		cmp	r3, #3
+ 645 034e 44D8     		bhi	.L45
+ 646 0350 01A2     		adr	r2, .L38
+ 647 0352 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 648 0356 00BF     		.p2align 2
+ 649              	.L38:
+ 650 0358 69030000 		.word	.L37+1
+ 651 035c 69030000 		.word	.L37+1
+ 652 0360 C9030000 		.word	.L39+1
+ 653 0364 B1030000 		.word	.L40+1
+ 654              		.p2align 1
+ 655              	.L37:
+ 656              	.LBB7:
+ 390:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 391:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             case COAP_TYPE_NON:
+ 392:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             case COAP_TYPE_CON:
+ 393:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             {
+ 394:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 bool done = transaction_handleResponse(contextP, fromSessionH, message, response);
+ 657              		.loc 1 394 0
+ 658 0368 354B     		ldr	r3, .L50
+ 659 036a 364A     		ldr	r2, .L50+4
+ 660 036c 3968     		ldr	r1, [r7]
+ 661 036e F868     		ldr	r0, [r7, #12]
+ 662 0370 FFF7FEFF 		bl	transaction_handleResponse
+ 663 0374 0346     		mov	r3, r0
+ 664 0376 87F83330 		strb	r3, [r7, #51]
+ 395:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 396:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #ifdef LWM2M_SERVER_MODE
+ 397:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 if (!done && IS_OPTION(message, COAP_OPTION_OBSERVE) &&
+ 398:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                         ((message->code == COAP_204_CHANGED) || (message->code == COAP_205_CONTENT)
+ 399:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 400:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     done = observe_handleNotify(contextP, fromSessionH, message, response);
+ 401:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 402:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** #endif
+ 403:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 if (!done && message->type == COAP_TYPE_CON )
+ 665              		.loc 1 403 0
+ 666 037a 97F83330 		ldrb	r3, [r7, #51]
+ 667 037e 83F00103 		eor	r3, r3, #1
+ 668 0382 DBB2     		uxtb	r3, r3
+ 669 0384 002B     		cmp	r3, #0
+ 670 0386 2AD0     		beq	.L46
+ 671              		.loc 1 403 0 is_stmt 0 discriminator 1
+ 672 0388 2E4B     		ldr	r3, .L50+4
+ 673 038a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 674 038c 002B     		cmp	r3, #0
+ 675 038e 26D1     		bne	.L46
+ 404:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 {
+ 405:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_init_message(response, COAP_TYPE_ACK, 0, message->mid);
+ 676              		.loc 1 405 0 is_stmt 1
+ 677 0390 2C4B     		ldr	r3, .L50+4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 20
+
+
+ 678 0392 1B89     		ldrh	r3, [r3, #8]
+ 679 0394 0022     		movs	r2, #0
+ 680 0396 0221     		movs	r1, #2
+ 681 0398 2948     		ldr	r0, .L50
+ 682 039a FFF7FEFF 		bl	coap_init_message
+ 406:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                     coap_error_code = message_send(contextP, response, fromSessionH);
+ 683              		.loc 1 406 0
+ 684 039e 3A68     		ldr	r2, [r7]
+ 685 03a0 2749     		ldr	r1, .L50
+ 686 03a2 F868     		ldr	r0, [r7, #12]
+ 687 03a4 FFF7FEFF 		bl	message_send
+ 688 03a8 0346     		mov	r3, r0
+ 689 03aa 87F84730 		strb	r3, [r7, #71]
+ 690              	.LBE7:
+ 407:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 }
+ 408:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 409:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             break;
+ 691              		.loc 1 409 0
+ 692 03ae 16E0     		b	.L46
+ 693              	.L40:
+ 410:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 411:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             case COAP_TYPE_RST:
+ 412:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 /* Cancel possible subscriptions. */
+ 413:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 handle_reset(contextP, fromSessionH, message);
+ 694              		.loc 1 413 0
+ 695 03b0 244A     		ldr	r2, .L50+4
+ 696 03b2 3968     		ldr	r1, [r7]
+ 697 03b4 F868     		ldr	r0, [r7, #12]
+ 698 03b6 FFF7FEFF 		bl	handle_reset
+ 414:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 transaction_handleResponse(contextP, fromSessionH, message, NULL);
+ 699              		.loc 1 414 0
+ 700 03ba 0023     		movs	r3, #0
+ 701 03bc 214A     		ldr	r2, .L50+4
+ 702 03be 3968     		ldr	r1, [r7]
+ 703 03c0 F868     		ldr	r0, [r7, #12]
+ 704 03c2 FFF7FEFF 		bl	transaction_handleResponse
+ 415:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 break;
+ 705              		.loc 1 415 0
+ 706 03c6 0BE0     		b	.L35
+ 707              	.L39:
+ 416:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 417:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             case COAP_TYPE_ACK:
+ 418:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 transaction_handleResponse(contextP, fromSessionH, message, NULL);
+ 708              		.loc 1 418 0
+ 709 03c8 0023     		movs	r3, #0
+ 710 03ca 1E4A     		ldr	r2, .L50+4
+ 711 03cc 3968     		ldr	r1, [r7]
+ 712 03ce F868     		ldr	r0, [r7, #12]
+ 713 03d0 FFF7FEFF 		bl	transaction_handleResponse
+ 419:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 break;
+ 714              		.loc 1 419 0
+ 715 03d4 04E0     		b	.L35
+ 716              	.L44:
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             uint32_t block_num = 0;
+ 717              		.loc 1 251 0
+ 718 03d6 00BF     		nop
+ 719 03d8 02E0     		b	.L35
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 21
+
+
+ 720              	.L45:
+ 420:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 421:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             default:
+ 422:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                 break;
+ 721              		.loc 1 422 0
+ 722 03da 00BF     		nop
+ 723 03dc 00E0     		b	.L35
+ 724              	.L46:
+ 409:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 725              		.loc 1 409 0
+ 726 03de 00BF     		nop
+ 727              	.L35:
+ 423:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             }
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         } /* Request or Response */
+ 425:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         coap_free_header(message);
+ 728              		.loc 1 425 0
+ 729 03e0 1848     		ldr	r0, .L50+4
+ 730 03e2 FFF7FEFF 		bl	coap_free_header
+ 731              	.L13:
+ 426:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     } /* if (parsed correctly) */
+ 427:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     else
+ 428:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ 429:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         LOG_ARG("Message parsing failed %u.%2u", coap_error_code >> 5, coap_error_code & 0x1F);
+ 430:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     }
+ 431:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 432:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     if (coap_error_code != NO_ERROR && coap_error_code != COAP_IGNORE)
+ 732              		.loc 1 432 0
+ 733 03e6 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 734 03ea 002B     		cmp	r3, #0
+ 735 03ec 24D0     		beq	.L47
+ 736              		.loc 1 432 0 is_stmt 0 discriminator 1
+ 737 03ee 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 738 03f2 012B     		cmp	r3, #1
+ 739 03f4 20D0     		beq	.L47
+ 433:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ 434:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         LOG_ARG("ERROR %u: %s", coap_error_code, coap_error_message);
+ 435:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 436:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         /* Set to sendable error code. */
+ 437:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         if (coap_error_code >= 192)
+ 740              		.loc 1 437 0 is_stmt 1
+ 741 03f6 97F84730 		ldrb	r3, [r7, #71]	@ zero_extendqisi2
+ 742 03fa BF2B     		cmp	r3, #191
+ 743 03fc 02D9     		bls	.L43
+ 438:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 439:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             coap_error_code = COAP_500_INTERNAL_SERVER_ERROR;
+ 744              		.loc 1 439 0
+ 745 03fe A023     		movs	r3, #160
+ 746 0400 87F84730 		strb	r3, [r7, #71]
+ 747              	.L43:
+ 440:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 441:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         /* Reuse input buffer for error message. */
+ 442:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         coap_init_message(message, COAP_TYPE_ACK, coap_error_code, message->mid);
+ 748              		.loc 1 442 0
+ 749 0404 0F4B     		ldr	r3, .L50+4
+ 750 0406 1B89     		ldrh	r3, [r3, #8]
+ 751 0408 97F84720 		ldrb	r2, [r7, #71]	@ zero_extendqisi2
+ 752 040c 0221     		movs	r1, #2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 22
+
+
+ 753 040e 0D48     		ldr	r0, .L50+4
+ 754 0410 FFF7FEFF 		bl	coap_init_message
+ 443:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         coap_set_payload(message, coap_error_message, strlen(coap_error_message));
+ 755              		.loc 1 443 0
+ 756 0414 0C4B     		ldr	r3, .L50+8
+ 757 0416 1C68     		ldr	r4, [r3]
+ 758 0418 0B4B     		ldr	r3, .L50+8
+ 759 041a 1B68     		ldr	r3, [r3]
+ 760 041c 1846     		mov	r0, r3
+ 761 041e FFF7FEFF 		bl	strlen
+ 762 0422 0346     		mov	r3, r0
+ 763 0424 1A46     		mov	r2, r3
+ 764 0426 2146     		mov	r1, r4
+ 765 0428 0648     		ldr	r0, .L50+4
+ 766 042a FFF7FEFF 		bl	coap_set_payload
+ 444:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         message_send(contextP, message, fromSessionH);
+ 767              		.loc 1 444 0
+ 768 042e 3A68     		ldr	r2, [r7]
+ 769 0430 0449     		ldr	r1, .L50+4
+ 770 0432 F868     		ldr	r0, [r7, #12]
+ 771 0434 FFF7FEFF 		bl	message_send
+ 772              	.L47:
+ 445:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     }
+ 446:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** }
+ 773              		.loc 1 446 0
+ 774 0438 00BF     		nop
+ 775 043a 4C37     		adds	r7, r7, #76
+ 776              	.LCFI13:
+ 777              		.cfi_def_cfa_offset 20
+ 778 043c BD46     		mov	sp, r7
+ 779              	.LCFI14:
+ 780              		.cfi_def_cfa_register 13
+ 781              		@ sp needed
+ 782 043e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 783              	.L51:
+ 784              		.align	2
+ 785              	.L50:
+ 786 0440 00000000 		.word	response.11597
+ 787 0444 00000000 		.word	message.11596
+ 788 0448 00000000 		.word	coap_error_message
+ 789              		.cfi_endproc
+ 790              	.LFE136:
+ 792              		.section	.text.message_send,"ax",%progbits
+ 793              		.align	1
+ 794              		.global	message_send
+ 795              		.syntax unified
+ 796              		.thumb
+ 797              		.thumb_func
+ 798              		.fpu fpv4-sp-d16
+ 800              	message_send:
+ 801              	.LFB137:
+ 447:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 448:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 449:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** uint8_t message_send(lwm2m_context_t *contextP,
+ 450:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                      coap_packet_t *message,
+ 451:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****                      void *sessionH)
+ 452:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 23
+
+
+ 802              		.loc 1 452 0
+ 803              		.cfi_startproc
+ 804              		@ args = 0, pretend = 0, frame = 32
+ 805              		@ frame_needed = 1, uses_anonymous_args = 0
+ 806 0000 80B5     		push	{r7, lr}
+ 807              	.LCFI15:
+ 808              		.cfi_def_cfa_offset 8
+ 809              		.cfi_offset 7, -8
+ 810              		.cfi_offset 14, -4
+ 811 0002 88B0     		sub	sp, sp, #32
+ 812              	.LCFI16:
+ 813              		.cfi_def_cfa_offset 40
+ 814 0004 00AF     		add	r7, sp, #0
+ 815              	.LCFI17:
+ 816              		.cfi_def_cfa_register 7
+ 817 0006 F860     		str	r0, [r7, #12]
+ 818 0008 B960     		str	r1, [r7, #8]
+ 819 000a 7A60     		str	r2, [r7, #4]
+ 453:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     uint8_t result = COAP_500_INTERNAL_SERVER_ERROR;
+ 820              		.loc 1 453 0
+ 821 000c A023     		movs	r3, #160
+ 822 000e FB77     		strb	r3, [r7, #31]
+ 454:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     uint8_t *pktBuffer;
+ 455:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     size_t pktBufferLen = 0;
+ 823              		.loc 1 455 0
+ 824 0010 0023     		movs	r3, #0
+ 825 0012 BB61     		str	r3, [r7, #24]
+ 456:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     size_t allocLen;
+ 457:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 458:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     LOG("Entering");
+ 459:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     allocLen = coap_serialize_get_size(message);
+ 826              		.loc 1 459 0
+ 827 0014 B868     		ldr	r0, [r7, #8]
+ 828 0016 FFF7FEFF 		bl	coap_serialize_get_size
+ 829 001a 7861     		str	r0, [r7, #20]
+ 460:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     LOG_ARG("Size to allocate: %d", allocLen);
+ 461:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     if (allocLen == 0) return COAP_500_INTERNAL_SERVER_ERROR;
+ 830              		.loc 1 461 0
+ 831 001c 7B69     		ldr	r3, [r7, #20]
+ 832 001e 002B     		cmp	r3, #0
+ 833 0020 01D1     		bne	.L53
+ 834              		.loc 1 461 0 is_stmt 0 discriminator 1
+ 835 0022 A023     		movs	r3, #160
+ 836 0024 23E0     		b	.L54
+ 837              	.L53:
+ 462:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 463:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     pktBuffer = (uint8_t *)lwm2m_malloc(allocLen);
+ 838              		.loc 1 463 0 is_stmt 1
+ 839 0026 7869     		ldr	r0, [r7, #20]
+ 840 0028 FFF7FEFF 		bl	lwm2m_malloc
+ 841 002c 3861     		str	r0, [r7, #16]
+ 464:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     if (pktBuffer != NULL)
+ 842              		.loc 1 464 0
+ 843 002e 3B69     		ldr	r3, [r7, #16]
+ 844 0030 002B     		cmp	r3, #0
+ 845 0032 1BD0     		beq	.L55
+ 465:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 24
+
+
+ 466:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         pktBufferLen = coap_serialize_message(message, pktBuffer);
+ 846              		.loc 1 466 0
+ 847 0034 3969     		ldr	r1, [r7, #16]
+ 848 0036 B868     		ldr	r0, [r7, #8]
+ 849 0038 FFF7FEFF 		bl	coap_serialize_message
+ 850 003c B861     		str	r0, [r7, #24]
+ 467:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         LOG_ARG("coap_serialize_message() returned %d", pktBufferLen);
+ 468:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         if (0 != pktBufferLen)
+ 851              		.loc 1 468 0
+ 852 003e BB69     		ldr	r3, [r7, #24]
+ 853 0040 002B     		cmp	r3, #0
+ 854 0042 10D0     		beq	.L56
+ 469:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         {
+ 470:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             result = lwm2m_buffer_send(sessionH, pktBuffer, pktBufferLen, contextP->userData);
+ 855              		.loc 1 470 0
+ 856 0044 FB68     		ldr	r3, [r7, #12]
+ 857 0046 5B6B     		ldr	r3, [r3, #52]
+ 858 0048 BA69     		ldr	r2, [r7, #24]
+ 859 004a 3969     		ldr	r1, [r7, #16]
+ 860 004c 7868     		ldr	r0, [r7, #4]
+ 861 004e FFF7FEFF 		bl	lwm2m_buffer_send
+ 862 0052 0346     		mov	r3, r0
+ 863 0054 FB77     		strb	r3, [r7, #31]
+ 471:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****             output_buffer(stderr, (uint8_t *)pktBuffer, pktBufferLen, 0);
+ 864              		.loc 1 471 0
+ 865 0056 084B     		ldr	r3, .L57
+ 866 0058 1B68     		ldr	r3, [r3]
+ 867 005a D868     		ldr	r0, [r3, #12]
+ 868 005c BA69     		ldr	r2, [r7, #24]
+ 869 005e 0023     		movs	r3, #0
+ 870 0060 3969     		ldr	r1, [r7, #16]
+ 871 0062 FFF7FEFF 		bl	output_buffer
+ 872              	.L56:
+ 472:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         }
+ 473:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****         lwm2m_free(pktBuffer);
+ 873              		.loc 1 473 0
+ 874 0066 3869     		ldr	r0, [r7, #16]
+ 875 0068 FFF7FEFF 		bl	lwm2m_free
+ 876              	.L55:
+ 474:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     }
+ 475:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** 
+ 476:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c ****     return result;
+ 877              		.loc 1 476 0
+ 878 006c FB7F     		ldrb	r3, [r7, #31]	@ zero_extendqisi2
+ 879              	.L54:
+ 477:D:/iot/felix2/components/connectivity/lwm2m/core\packet.c **** }
+ 880              		.loc 1 477 0
+ 881 006e 1846     		mov	r0, r3
+ 882 0070 2037     		adds	r7, r7, #32
+ 883              	.LCFI18:
+ 884              		.cfi_def_cfa_offset 8
+ 885 0072 BD46     		mov	sp, r7
+ 886              	.LCFI19:
+ 887              		.cfi_def_cfa_register 13
+ 888              		@ sp needed
+ 889 0074 80BD     		pop	{r7, pc}
+ 890              	.L58:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 25
+
+
+ 891 0076 00BF     		.align	2
+ 892              	.L57:
+ 893 0078 00000000 		.word	_impure_ptr
+ 894              		.cfi_endproc
+ 895              	.LFE137:
+ 897              		.section	.bss.message.11596,"aw",%nobits
+ 898              		.align	2
+ 901              	message.11596:
+ 902 0000 00000000 		.space	140
+ 902      00000000 
+ 902      00000000 
+ 902      00000000 
+ 902      00000000 
+ 903              		.section	.bss.response.11597,"aw",%nobits
+ 904              		.align	2
+ 907              	response.11597:
+ 908 0000 00000000 		.space	140
+ 908      00000000 
+ 908      00000000 
+ 908      00000000 
+ 908      00000000 
+ 909              		.text
+ 910              	.Letext0:
+ 911              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 912              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 913              		.file 4 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 914              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 915              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 916              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 917              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 918              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_timeval.h"
+ 919              		.file 10 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 920              		.file 11 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 921              		.file 12 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 922              		.file 13 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 923              		.file 14 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 924              		.file 15 "D:/iot/felix2/kernel/include/los_list.h"
+ 925              		.file 16 "D:/iot/felix2/kernel/include/los_err.h"
+ 926              		.file 17 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 927              		.file 18 "D:/iot/felix2/kernel/include/los_tick.h"
+ 928              		.file 19 "D:/iot/felix2/kernel/include/los_event.h"
+ 929              		.file 20 "D:/iot/felix2/kernel/include/los_task.h"
+ 930              		.file 21 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 931              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 932              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 933              		.file 24 "D:/iot/felix2/kernel/include/los_config.h"
+ 934              		.file 25 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 935              		.file 26 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 936              		.file 27 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 packet.c
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:18     .text.handle_reset:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:24     .text.handle_reset:00000000 handle_reset
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:66     .text.handle_request:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:72     .text.handle_request:00000000 handle_request
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:189    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:193    .text.lwm2m_handle_packet:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:200    .text.lwm2m_handle_packet:00000000 lwm2m_handle_packet
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:557    .text.lwm2m_handle_packet:0000029c $d
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:901    .bss.message.11596:00000000 message.11596
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:907    .bss.response.11597:00000000 response.11597
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:563    .text.lwm2m_handle_packet:000002ac $t
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:800    .text.message_send:00000000 message_send
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:650    .text.lwm2m_handle_packet:00000358 $d
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:654    .text.lwm2m_handle_packet:00000368 $t
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:786    .text.lwm2m_handle_packet:00000440 $d
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:793    .text.message_send:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:893    .text.message_send:00000078 $d
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:898    .bss.message.11596:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccJfnHi8.s:904    .bss.response.11597:00000000 $d
+
+UNDEFINED SYMBOLS
+observe_cancel
+uri_decode
+utils_findServer
+dm_handleRequest
+coap_set_status_code
+lwm2m_free
+coap_parse_message
+coap_init_message
+coap_set_header_token
+coap_get_header_block2
+coap_get_header_block1
+coap_block1_handler
+coap_set_header_block1
+coap_set_payload
+coap_set_header_block2
+transaction_handleResponse
+coap_free_header
+strlen
+coap_error_message
+coap_serialize_get_size
+lwm2m_malloc
+coap_serialize_message
+lwm2m_buffer_send
+output_buffer
+_impure_ptr

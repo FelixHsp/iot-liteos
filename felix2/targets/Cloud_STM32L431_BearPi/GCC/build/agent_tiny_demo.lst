@@ -1,0 +1,879 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"agent_tiny_demo.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	g_endpoint_name
+  18              		.section	.rodata
+  19              		.align	2
+  20              	.LC1:
+  21 0000 38363935 		.ascii	"86950504709001\000"
+  21      30353034 
+  21      37303930 
+  21      303100
+  22              		.section	.data.g_endpoint_name,"aw",%progbits
+  23              		.align	2
+  26              	g_endpoint_name:
+  27 0000 00000000 		.word	.LC1
+  28              		.section	.bss.g_phandle,"aw",%nobits
+  29              		.align	2
+  32              	g_phandle:
+  33 0000 00000000 		.space	4
+  34              		.section	.bss.g_device_info,"aw",%nobits
+  35              		.align	2
+  38              	g_device_info:
+  39 0000 00000000 		.space	12
+  39      00000000 
+  39      00000000 
+  40              		.section	.bss.g_atiny_params,"aw",%nobits
+  41              		.align	2
+  44              	g_atiny_params:
+  45 0000 00000000 		.space	60
+  45      00000000 
+  45      00000000 
+  45      00000000 
+  45      00000000 
+  46              		.section	.rodata
+  47 000f 00       		.align	2
+  48              	.LC2:
+  49 0010 5B25735D 		.ascii	"[%s][%u][%s:%d] type:%d cookie:%d status:%d\012\015"
+  49      5B25755D 
+  49      5B25733A 
+  49      25645D20 
+  49      74797065 
+  50 003d 0A00     		.ascii	"\012\000"
+  51              		.section	.text.ack_callback,"ax",%progbits
+  52              		.align	1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 2
+
+
+  53              		.global	ack_callback
+  54              		.syntax unified
+  55              		.thumb
+  56              		.thumb_func
+  57              		.fpu fpv4-sp-d16
+  59              	ack_callback:
+  60              	.LFB133:
+  61              		.file 1 "D:/iot/felix2/demos/agenttiny_lwm2m/agent_tiny_demo.c"
+   1:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * All rights reserved.
+   4:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * provided with the distribution.
+  11:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * permission.
+  14:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * ===============================================
+  29:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  35:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #include "agent_tiny_demo.h"
+  36:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  37:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #if defined WITH_AT_FRAMEWORK
+  38:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #include "at_frame/at_api.h"
+  39:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #endif
+  40:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  41:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** //#define DEFAULT_SERVER_IP "180.101.147.115" /*dianxin*/
+  42:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** //#define DEFAULT_SERVER_IP "2000::1"
+  43:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #define DEFAULT_SERVER_IP "49.4.85.232" /*local ipv4*/
+  44:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  45:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  46:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #define LWM2M_LIFE_TIME     50000
+  47:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  48:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** char *g_endpoint_name = "86950504709001";
+  49:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #ifdef WITH_DTLS
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 3
+
+
+  50:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  51:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** char *g_endpoint_name_s = "20181214";
+  52:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** char *g_endpoint_name_iots = "20181214";
+  53:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** char *g_endpoint_name_bs = "20181214";
+  54:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** unsigned char g_psk_iot_value[] = {0x68,0xda,0x7a,0xea,0xf6,0x12,0xfd,0x95,0xbb,0xe0,0x91,0x5a,0x67
+  55:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** unsigned char g_psk_bs_value[] = {0x68,0xda,0x7a,0xea,0xf6,0x12,0xfd,0x95,0xbb,0xe0,0x91,0x5a,0x67,
+  56:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** //unsigned char g_psk_value[16] = {0x58,0xea,0xfd,0xab,0x2f,0x38,0x4d,0x39,0x80,0x69,0x4d,0x1c,0xda
+  57:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  58:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  59:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #endif
+  60:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  61:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** static void *g_phandle = NULL;
+  62:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** static atiny_device_info_t g_device_info;
+  63:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** static atiny_param_t g_atiny_params;
+  64:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  65:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  66:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** void ack_callback(atiny_report_type_e type, int cookie, data_send_status_e status)
+  67:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** {
+  62              		.loc 1 67 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 8
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  66 0000 B0B5     		push	{r4, r5, r7, lr}
+  67              	.LCFI0:
+  68              		.cfi_def_cfa_offset 16
+  69              		.cfi_offset 4, -16
+  70              		.cfi_offset 5, -12
+  71              		.cfi_offset 7, -8
+  72              		.cfi_offset 14, -4
+  73 0002 86B0     		sub	sp, sp, #24
+  74              	.LCFI1:
+  75              		.cfi_def_cfa_offset 40
+  76 0004 04AF     		add	r7, sp, #16
+  77              	.LCFI2:
+  78              		.cfi_def_cfa 7, 24
+  79 0006 0346     		mov	r3, r0
+  80 0008 3960     		str	r1, [r7]
+  81 000a FB71     		strb	r3, [r7, #7]
+  82 000c 1346     		mov	r3, r2
+  83 000e BB71     		strb	r3, [r7, #6]
+  68:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     ATINY_LOG(LOG_DEBUG, "type:%d cookie:%d status:%d\n", type, cookie, status);
+  84              		.loc 1 68 0
+  85 0010 FFF7FEFF 		bl	atiny_get_log_level
+  86 0014 0346     		mov	r3, r0
+  87 0016 002B     		cmp	r3, #0
+  88 0018 16D1     		bne	.L3
+  89              		.loc 1 68 0 is_stmt 0 discriminator 1
+  90 001a 0020     		movs	r0, #0
+  91 001c FFF7FEFF 		bl	atiny_get_log_level_name
+  92 0020 0546     		mov	r5, r0
+  93 0022 FFF7FEFF 		bl	atiny_gettime_ms
+  94 0026 0346     		mov	r3, r0
+  95 0028 0C46     		mov	r4, r1
+  96 002a 1946     		mov	r1, r3
+  97 002c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  98 002e BA79     		ldrb	r2, [r7, #6]	@ zero_extendqisi2
+  99 0030 0392     		str	r2, [sp, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 4
+
+
+ 100 0032 3A68     		ldr	r2, [r7]
+ 101 0034 0292     		str	r2, [sp, #8]
+ 102 0036 0193     		str	r3, [sp, #4]
+ 103 0038 4423     		movs	r3, #68
+ 104 003a 0093     		str	r3, [sp]
+ 105 003c 044B     		ldr	r3, .L4
+ 106 003e 0A46     		mov	r2, r1
+ 107 0040 2946     		mov	r1, r5
+ 108 0042 0448     		ldr	r0, .L4+4
+ 109 0044 FFF7FEFF 		bl	atiny_printf
+ 110              	.L3:
+  69:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** }
+ 111              		.loc 1 69 0 is_stmt 1
+ 112 0048 00BF     		nop
+ 113 004a 0837     		adds	r7, r7, #8
+ 114              	.LCFI3:
+ 115              		.cfi_def_cfa_offset 16
+ 116 004c BD46     		mov	sp, r7
+ 117              	.LCFI4:
+ 118              		.cfi_def_cfa_register 13
+ 119              		@ sp needed
+ 120 004e B0BD     		pop	{r4, r5, r7, pc}
+ 121              	.L5:
+ 122              		.align	2
+ 123              	.L4:
+ 124 0050 00000000 		.word	__FUNCTION__.10131
+ 125 0054 10000000 		.word	.LC2
+ 126              		.cfi_endproc
+ 127              	.LFE133:
+ 129              		.section	.rodata
+ 130 003f 00       		.align	2
+ 131              	.LC3:
+ 132 0040 5B25735D 		.ascii	"[%s][%u][%s:%d] data report ret: %d\012\015\012\000"
+ 132      5B25755D 
+ 132      5B25733A 
+ 132      25645D20 
+ 132      64617461 
+ 133 0067 00       		.align	2
+ 134              	.LC4:
+ 135 0068 2F332F30 		.ascii	"/3/0/10\000"
+ 135      2F313000 
+ 136              		.align	2
+ 137              	.LC5:
+ 138 0070 5B25735D 		.ascii	"[%s][%u][%s:%d] data change ret: %d\012\015\012\000"
+ 138      5B25755D 
+ 138      5B25733A 
+ 138      25645D20 
+ 138      64617461 
+ 139 0097 00       		.align	2
+ 140              	.LC0:
+ 141 0098 00       		.byte	0
+ 142 0099 01       		.byte	1
+ 143 009a 06       		.byte	6
+ 144 009b 05       		.byte	5
+ 145 009c 09       		.byte	9
+ 146              		.section	.text.app_data_report,"ax",%progbits
+ 147              		.align	1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 5
+
+
+ 148              		.global	app_data_report
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.fpu fpv4-sp-d16
+ 154              	app_data_report:
+ 155              	.LFB134:
+  70:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** /*lint -e550*/
+  71:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** void app_data_report(void)
+  72:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** {
+ 156              		.loc 1 72 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 40
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160 0000 B0B5     		push	{r4, r5, r7, lr}
+ 161              	.LCFI5:
+ 162              		.cfi_def_cfa_offset 16
+ 163              		.cfi_offset 4, -16
+ 164              		.cfi_offset 5, -12
+ 165              		.cfi_offset 7, -8
+ 166              		.cfi_offset 14, -4
+ 167 0002 8CB0     		sub	sp, sp, #48
+ 168              	.LCFI6:
+ 169              		.cfi_def_cfa_offset 64
+ 170 0004 02AF     		add	r7, sp, #8
+ 171              	.LCFI7:
+ 172              		.cfi_def_cfa 7, 56
+  73:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     uint8_t buf[5] = {0, 1, 6, 5, 9};
+ 173              		.loc 1 73 0
+ 174 0006 2F4A     		ldr	r2, .L10
+ 175 0008 07F11803 		add	r3, r7, #24
+ 176 000c 92E80300 		ldm	r2, {r0, r1}
+ 177 0010 1860     		str	r0, [r3]
+ 178 0012 0433     		adds	r3, r3, #4
+ 179 0014 1970     		strb	r1, [r3]
+  74:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     data_report_t report_data;
+  75:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     int ret = 0;
+ 180              		.loc 1 75 0
+ 181 0016 0023     		movs	r3, #0
+ 182 0018 3B62     		str	r3, [r7, #32]
+  76:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     int cnt = 0;
+ 183              		.loc 1 76 0
+ 184 001a 0023     		movs	r3, #0
+ 185 001c 7B62     		str	r3, [r7, #36]
+  77:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     report_data.buf = buf;
+ 186              		.loc 1 77 0
+ 187 001e 07F11803 		add	r3, r7, #24
+ 188 0022 3B61     		str	r3, [r7, #16]
+  78:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     report_data.callback = ack_callback;
+ 189              		.loc 1 78 0
+ 190 0024 284B     		ldr	r3, .L10+4
+ 191 0026 7B61     		str	r3, [r7, #20]
+  79:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     report_data.cookie = 0;
+ 192              		.loc 1 79 0
+ 193 0028 0023     		movs	r3, #0
+ 194 002a BB60     		str	r3, [r7, #8]
+  80:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     report_data.len = sizeof(buf);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 6
+
+
+ 195              		.loc 1 80 0
+ 196 002c 0523     		movs	r3, #5
+ 197 002e FB60     		str	r3, [r7, #12]
+  81:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     report_data.type = APP_DATA;
+ 198              		.loc 1 81 0
+ 199 0030 0123     		movs	r3, #1
+ 200 0032 3B71     		strb	r3, [r7, #4]
+ 201              	.L9:
+  82:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     (void)ret;
+  83:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     while(1)
+  84:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     {
+  85:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         report_data.cookie = cnt;
+ 202              		.loc 1 85 0
+ 203 0034 7B6A     		ldr	r3, [r7, #36]
+ 204 0036 BB60     		str	r3, [r7, #8]
+  86:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         cnt++;
+ 205              		.loc 1 86 0
+ 206 0038 7B6A     		ldr	r3, [r7, #36]
+ 207 003a 0133     		adds	r3, r3, #1
+ 208 003c 7B62     		str	r3, [r7, #36]
+  87:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         ret = atiny_data_report(g_phandle, &report_data);
+ 209              		.loc 1 87 0
+ 210 003e 234B     		ldr	r3, .L10+8
+ 211 0040 1B68     		ldr	r3, [r3]
+ 212 0042 3A1D     		adds	r2, r7, #4
+ 213 0044 1146     		mov	r1, r2
+ 214 0046 1846     		mov	r0, r3
+ 215 0048 FFF7FEFF 		bl	atiny_data_report
+ 216 004c 3862     		str	r0, [r7, #32]
+  88:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         ATINY_LOG(LOG_DEBUG, "data report ret: %d\n", ret);
+ 217              		.loc 1 88 0
+ 218 004e FFF7FEFF 		bl	atiny_get_log_level
+ 219 0052 0346     		mov	r3, r0
+ 220 0054 002B     		cmp	r3, #0
+ 221 0056 11D1     		bne	.L7
+ 222              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 223 0058 0020     		movs	r0, #0
+ 224 005a FFF7FEFF 		bl	atiny_get_log_level_name
+ 225 005e 0546     		mov	r5, r0
+ 226 0060 FFF7FEFF 		bl	atiny_gettime_ms
+ 227 0064 0346     		mov	r3, r0
+ 228 0066 0C46     		mov	r4, r1
+ 229 0068 1A46     		mov	r2, r3
+ 230 006a 3B6A     		ldr	r3, [r7, #32]
+ 231 006c 0193     		str	r3, [sp, #4]
+ 232 006e 5823     		movs	r3, #88
+ 233 0070 0093     		str	r3, [sp]
+ 234 0072 174B     		ldr	r3, .L10+12
+ 235 0074 2946     		mov	r1, r5
+ 236 0076 1748     		ldr	r0, .L10+16
+ 237 0078 FFF7FEFF 		bl	atiny_printf
+ 238              	.L7:
+  89:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         ret = atiny_data_change(g_phandle, DEVICE_MEMORY_FREE);
+ 239              		.loc 1 89 0 is_stmt 1
+ 240 007c 134B     		ldr	r3, .L10+8
+ 241 007e 1B68     		ldr	r3, [r3]
+ 242 0080 1549     		ldr	r1, .L10+20
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 7
+
+
+ 243 0082 1846     		mov	r0, r3
+ 244 0084 FFF7FEFF 		bl	atiny_data_change
+ 245 0088 3862     		str	r0, [r7, #32]
+  90:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         ATINY_LOG(LOG_DEBUG, "data change ret: %d\n", ret);
+ 246              		.loc 1 90 0
+ 247 008a FFF7FEFF 		bl	atiny_get_log_level
+ 248 008e 0346     		mov	r3, r0
+ 249 0090 002B     		cmp	r3, #0
+ 250 0092 11D1     		bne	.L8
+ 251              		.loc 1 90 0 is_stmt 0 discriminator 1
+ 252 0094 0020     		movs	r0, #0
+ 253 0096 FFF7FEFF 		bl	atiny_get_log_level_name
+ 254 009a 0546     		mov	r5, r0
+ 255 009c FFF7FEFF 		bl	atiny_gettime_ms
+ 256 00a0 0346     		mov	r3, r0
+ 257 00a2 0C46     		mov	r4, r1
+ 258 00a4 1A46     		mov	r2, r3
+ 259 00a6 3B6A     		ldr	r3, [r7, #32]
+ 260 00a8 0193     		str	r3, [sp, #4]
+ 261 00aa 5A23     		movs	r3, #90
+ 262 00ac 0093     		str	r3, [sp]
+ 263 00ae 084B     		ldr	r3, .L10+12
+ 264 00b0 2946     		mov	r1, r5
+ 265 00b2 0A48     		ldr	r0, .L10+24
+ 266 00b4 FFF7FEFF 		bl	atiny_printf
+ 267              	.L8:
+  91:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         (void)LOS_TaskDelay(250 * 8);
+ 268              		.loc 1 91 0 is_stmt 1
+ 269 00b8 4FF4FA60 		mov	r0, #2000
+ 270 00bc FFF7FEFF 		bl	LOS_TaskDelay
+  85:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         cnt++;
+ 271              		.loc 1 85 0
+ 272 00c0 B8E7     		b	.L9
+ 273              	.L11:
+ 274 00c2 00BF     		.align	2
+ 275              	.L10:
+ 276 00c4 98000000 		.word	.LC0
+ 277 00c8 00000000 		.word	ack_callback
+ 278 00cc 00000000 		.word	g_phandle
+ 279 00d0 00000000 		.word	__FUNCTION__.10139
+ 280 00d4 40000000 		.word	.LC3
+ 281 00d8 68000000 		.word	.LC4
+ 282 00dc 70000000 		.word	.LC5
+ 283              		.cfi_endproc
+ 284              	.LFE134:
+ 286              		.section	.rodata
+ 287 009d 000000   		.align	2
+ 288              	.LC6:
+ 289 00a0 6170705F 		.ascii	"app_data_report\000"
+ 289      64617461 
+ 289      5F726570 
+ 289      6F727400 
+ 290              		.section	.text.creat_report_task,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	creat_report_task
+ 293              		.syntax unified
+ 294              		.thumb
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 8
+
+
+ 295              		.thumb_func
+ 296              		.fpu fpv4-sp-d16
+ 298              	creat_report_task:
+ 299              	.LFB135:
+  92:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     }
+  93:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** }
+  94:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** /*lint +e550*/
+  95:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+  96:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** UINT32 creat_report_task()
+  97:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** {
+ 300              		.loc 1 97 0
+ 301              		.cfi_startproc
+ 302              		@ args = 0, pretend = 0, frame = 32
+ 303              		@ frame_needed = 1, uses_anonymous_args = 0
+ 304 0000 80B5     		push	{r7, lr}
+ 305              	.LCFI8:
+ 306              		.cfi_def_cfa_offset 8
+ 307              		.cfi_offset 7, -8
+ 308              		.cfi_offset 14, -4
+ 309 0002 88B0     		sub	sp, sp, #32
+ 310              	.LCFI9:
+ 311              		.cfi_def_cfa_offset 40
+ 312 0004 00AF     		add	r7, sp, #0
+ 313              	.LCFI10:
+ 314              		.cfi_def_cfa_register 7
+  98:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     UINT32 uwRet = LOS_OK;
+ 315              		.loc 1 98 0
+ 316 0006 0023     		movs	r3, #0
+ 317 0008 FB61     		str	r3, [r7, #28]
+  99:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     TSK_INIT_PARAM_S task_init_param;
+ 100:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     UINT32 TskHandle;
+ 101:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 102:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     task_init_param.usTaskPrio = 1;
+ 318              		.loc 1 102 0
+ 319 000a 0123     		movs	r3, #1
+ 320 000c 3B81     		strh	r3, [r7, #8]	@ movhi
+ 103:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     task_init_param.pcName = "app_data_report";
+ 321              		.loc 1 103 0
+ 322 000e 0C4B     		ldr	r3, .L16
+ 323 0010 7B61     		str	r3, [r7, #20]
+ 104:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     task_init_param.pfnTaskEntry = (TSK_ENTRY_FUNC)app_data_report;
+ 324              		.loc 1 104 0
+ 325 0012 0C4B     		ldr	r3, .L16+4
+ 326 0014 7B60     		str	r3, [r7, #4]
+ 105:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     task_init_param.uwStackSize = 0x1000;
+ 327              		.loc 1 105 0
+ 328 0016 4FF48053 		mov	r3, #4096
+ 329 001a 3B61     		str	r3, [r7, #16]
+ 106:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 107:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     uwRet = LOS_TaskCreate(&TskHandle, &task_init_param);
+ 330              		.loc 1 107 0
+ 331 001c 3A1D     		adds	r2, r7, #4
+ 332 001e 3B46     		mov	r3, r7
+ 333 0020 1146     		mov	r1, r2
+ 334 0022 1846     		mov	r0, r3
+ 335 0024 FFF7FEFF 		bl	LOS_TaskCreate
+ 336 0028 F861     		str	r0, [r7, #28]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 9
+
+
+ 108:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     if(LOS_OK != uwRet)
+ 337              		.loc 1 108 0
+ 338 002a FB69     		ldr	r3, [r7, #28]
+ 339 002c 002B     		cmp	r3, #0
+ 340 002e 01D0     		beq	.L13
+ 109:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     {
+ 110:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         return uwRet;
+ 341              		.loc 1 110 0
+ 342 0030 FB69     		ldr	r3, [r7, #28]
+ 343 0032 00E0     		b	.L15
+ 344              	.L13:
+ 111:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     }
+ 112:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     return uwRet;
+ 345              		.loc 1 112 0
+ 346 0034 FB69     		ldr	r3, [r7, #28]
+ 347              	.L15:
+ 113:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 114:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** }
+ 348              		.loc 1 114 0 discriminator 1
+ 349 0036 1846     		mov	r0, r3
+ 350 0038 2037     		adds	r7, r7, #32
+ 351              	.LCFI11:
+ 352              		.cfi_def_cfa_offset 8
+ 353 003a BD46     		mov	sp, r7
+ 354              	.LCFI12:
+ 355              		.cfi_def_cfa_register 13
+ 356              		@ sp needed
+ 357 003c 80BD     		pop	{r7, pc}
+ 358              	.L17:
+ 359 003e 00BF     		.align	2
+ 360              	.L16:
+ 361 0040 A0000000 		.word	.LC6
+ 362 0044 00000000 		.word	app_data_report
+ 363              		.cfi_endproc
+ 364              	.LFE135:
+ 366              		.section	.rodata
+ 367              		.align	2
+ 368              	.LC7:
+ 369 00b0 4167656E 		.ascii	"Agent_Tiny\000"
+ 369      745F5469 
+ 369      6E7900
+ 370 00bb 00       		.align	2
+ 371              	.LC8:
+ 372 00bc 555100   		.ascii	"UQ\000"
+ 373 00bf 00       		.align	2
+ 374              	.LC9:
+ 375 00c0 34392E34 		.ascii	"49.4.85.232\000"
+ 375      2E38352E 
+ 375      32333200 
+ 376              		.align	2
+ 377              	.LC10:
+ 378 00cc 35363833 		.ascii	"5683\000"
+ 378      00
+ 379              		.section	.text.agent_tiny_entry,"ax",%progbits
+ 380              		.align	1
+ 381              		.global	agent_tiny_entry
+ 382              		.syntax unified
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 10
+
+
+ 383              		.thumb
+ 384              		.thumb_func
+ 385              		.fpu fpv4-sp-d16
+ 387              	agent_tiny_entry:
+ 388              	.LFB136:
+ 115:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 116:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 117:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** void agent_tiny_entry(void)
+ 118:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** {
+ 389              		.loc 1 118 0
+ 390              		.cfi_startproc
+ 391              		@ args = 0, pretend = 0, frame = 24
+ 392              		@ frame_needed = 1, uses_anonymous_args = 0
+ 393 0000 80B5     		push	{r7, lr}
+ 394              	.LCFI13:
+ 395              		.cfi_def_cfa_offset 8
+ 396              		.cfi_offset 7, -8
+ 397              		.cfi_offset 14, -4
+ 398 0002 86B0     		sub	sp, sp, #24
+ 399              	.LCFI14:
+ 400              		.cfi_def_cfa_offset 32
+ 401 0004 00AF     		add	r7, sp, #0
+ 402              	.LCFI15:
+ 403              		.cfi_def_cfa_register 7
+ 119:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     UINT32 uwRet = LOS_OK;
+ 404              		.loc 1 119 0
+ 405 0006 0023     		movs	r3, #0
+ 406 0008 7B61     		str	r3, [r7, #20]
+ 120:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_param_t *atiny_params;
+ 121:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_security_param_t  *iot_security_param = NULL;
+ 407              		.loc 1 121 0
+ 408 000a 0023     		movs	r3, #0
+ 409 000c 3B61     		str	r3, [r7, #16]
+ 122:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_security_param_t  *bs_security_param = NULL;
+ 410              		.loc 1 122 0
+ 411 000e 0023     		movs	r3, #0
+ 412 0010 FB60     		str	r3, [r7, #12]
+ 123:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 124:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_device_info_t *device_info = &g_device_info;
+ 413              		.loc 1 124 0
+ 414 0012 2C4B     		ldr	r3, .L24
+ 415 0014 BB60     		str	r3, [r7, #8]
+ 125:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 126:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 127:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #ifdef WITH_DTLS
+ 128:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     device_info->endpoint_name = g_endpoint_name_s;
+ 129:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #else
+ 130:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     device_info->endpoint_name = g_endpoint_name;
+ 416              		.loc 1 130 0
+ 417 0016 2C4B     		ldr	r3, .L24+4
+ 418 0018 1A68     		ldr	r2, [r3]
+ 419 001a BB68     		ldr	r3, [r7, #8]
+ 420 001c 1A60     		str	r2, [r3]
+ 131:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #endif
+ 132:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #ifdef CONFIG_FEATURE_FOTA
+ 133:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     device_info->manufacturer = "Lwm2mFota";
+ 134:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     device_info->dev_type = "Lwm2mFota";
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 11
+
+
+ 135:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #else
+ 136:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     device_info->manufacturer = "Agent_Tiny";
+ 421              		.loc 1 136 0
+ 422 001e BB68     		ldr	r3, [r7, #8]
+ 423 0020 2A4A     		ldr	r2, .L24+8
+ 424 0022 5A60     		str	r2, [r3, #4]
+ 137:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #endif
+ 138:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_params = &g_atiny_params;
+ 425              		.loc 1 138 0
+ 426 0024 2A4B     		ldr	r3, .L24+12
+ 427 0026 7B60     		str	r3, [r7, #4]
+ 139:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_params->server_params.binding = "UQ";
+ 428              		.loc 1 139 0
+ 429 0028 7B68     		ldr	r3, [r7, #4]
+ 430 002a 2A4A     		ldr	r2, .L24+16
+ 431 002c 1A60     		str	r2, [r3]
+ 140:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     //atiny_params->server_params.life_time = LWM2M_LIFE_TIME;
+ 141:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_params->server_params.life_time = 20;
+ 432              		.loc 1 141 0
+ 433 002e 7B68     		ldr	r3, [r7, #4]
+ 434 0030 1422     		movs	r2, #20
+ 435 0032 5A60     		str	r2, [r3, #4]
+ 142:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_params->server_params.storing_cnt = 0;
+ 436              		.loc 1 142 0
+ 437 0034 7B68     		ldr	r3, [r7, #4]
+ 438 0036 0022     		movs	r2, #0
+ 439 0038 9A60     		str	r2, [r3, #8]
+ 143:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 144:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_params->server_params.bootstrap_mode = BOOTSTRAP_FACTORY;
+ 440              		.loc 1 144 0
+ 441 003a 7B68     		ldr	r3, [r7, #4]
+ 442 003c 0022     		movs	r2, #0
+ 443 003e 1A73     		strb	r2, [r3, #12]
+ 145:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     atiny_params->server_params.hold_off_time = 10;
+ 444              		.loc 1 145 0
+ 445 0040 7B68     		ldr	r3, [r7, #4]
+ 446 0042 0A22     		movs	r2, #10
+ 447 0044 1A61     		str	r2, [r3, #16]
+ 146:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 147:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     //pay attention: index 0 for iot server, index 1 for bootstrap server.
+ 148:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param = &(atiny_params->security_params[0]);
+ 448              		.loc 1 148 0
+ 449 0046 7B68     		ldr	r3, [r7, #4]
+ 450 0048 1433     		adds	r3, r3, #20
+ 451 004a 3B61     		str	r3, [r7, #16]
+ 149:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param = &(atiny_params->security_params[1]);
+ 452              		.loc 1 149 0
+ 453 004c 7B68     		ldr	r3, [r7, #4]
+ 454 004e 2833     		adds	r3, r3, #40
+ 455 0050 FB60     		str	r3, [r7, #12]
+ 150:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 151:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 152:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->server_ip = DEFAULT_SERVER_IP;
+ 456              		.loc 1 152 0
+ 457 0052 3B69     		ldr	r3, [r7, #16]
+ 458 0054 204A     		ldr	r2, .L24+20
+ 459 0056 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 12
+
+
+ 153:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->server_ip  = DEFAULT_SERVER_IP;
+ 460              		.loc 1 153 0
+ 461 0058 FB68     		ldr	r3, [r7, #12]
+ 462 005a 1F4A     		ldr	r2, .L24+20
+ 463 005c 1A60     		str	r2, [r3]
+ 154:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 155:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 156:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #ifdef WITH_DTLS
+ 157:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->server_port = "5684";
+ 158:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->server_port = "5684";
+ 159:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 160:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->psk_Id = g_endpoint_name_iots;
+ 161:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->psk = (char *)g_psk_iot_value;
+ 162:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->psk_len = sizeof(g_psk_iot_value);
+ 163:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 164:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->psk_Id = g_endpoint_name_bs;
+ 165:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->psk = (char *)g_psk_bs_value;
+ 166:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->psk_len = sizeof(g_psk_bs_value);
+ 167:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #else
+ 168:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->server_port = "5683";
+ 464              		.loc 1 168 0
+ 465 005e 3B69     		ldr	r3, [r7, #16]
+ 466 0060 1E4A     		ldr	r2, .L24+24
+ 467 0062 5A60     		str	r2, [r3, #4]
+ 169:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->server_port = "5683";
+ 468              		.loc 1 169 0
+ 469 0064 FB68     		ldr	r3, [r7, #12]
+ 470 0066 1D4A     		ldr	r2, .L24+24
+ 471 0068 5A60     		str	r2, [r3, #4]
+ 170:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 171:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->psk_Id = NULL;
+ 472              		.loc 1 171 0
+ 473 006a 3B69     		ldr	r3, [r7, #16]
+ 474 006c 0022     		movs	r2, #0
+ 475 006e 9A60     		str	r2, [r3, #8]
+ 172:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->psk = NULL;
+ 476              		.loc 1 172 0
+ 477 0070 3B69     		ldr	r3, [r7, #16]
+ 478 0072 0022     		movs	r2, #0
+ 479 0074 DA60     		str	r2, [r3, #12]
+ 173:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     iot_security_param->psk_len = 0;
+ 480              		.loc 1 173 0
+ 481 0076 3B69     		ldr	r3, [r7, #16]
+ 482 0078 0022     		movs	r2, #0
+ 483 007a 1A82     		strh	r2, [r3, #16]	@ movhi
+ 174:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 175:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->psk_Id = NULL;
+ 484              		.loc 1 175 0
+ 485 007c FB68     		ldr	r3, [r7, #12]
+ 486 007e 0022     		movs	r2, #0
+ 487 0080 9A60     		str	r2, [r3, #8]
+ 176:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->psk = NULL;
+ 488              		.loc 1 176 0
+ 489 0082 FB68     		ldr	r3, [r7, #12]
+ 490 0084 0022     		movs	r2, #0
+ 491 0086 DA60     		str	r2, [r3, #12]
+ 177:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     bs_security_param->psk_len = 0;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 13
+
+
+ 492              		.loc 1 177 0
+ 493 0088 FB68     		ldr	r3, [r7, #12]
+ 494 008a 0022     		movs	r2, #0
+ 495 008c 1A82     		strh	r2, [r3, #16]	@ movhi
+ 178:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** #endif
+ 179:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 180:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     if(ATINY_OK != atiny_init(atiny_params, &g_phandle))
+ 496              		.loc 1 180 0
+ 497 008e 1449     		ldr	r1, .L24+28
+ 498 0090 7868     		ldr	r0, [r7, #4]
+ 499 0092 FFF7FEFF 		bl	atiny_init
+ 500 0096 0346     		mov	r3, r0
+ 501 0098 002B     		cmp	r3, #0
+ 502 009a 0CD1     		bne	.L22
+ 181:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     {
+ 182:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         return;
+ 183:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     }
+ 184:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 185:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     uwRet = creat_report_task();
+ 503              		.loc 1 185 0
+ 504 009c FFF7FEFF 		bl	creat_report_task
+ 505 00a0 7861     		str	r0, [r7, #20]
+ 186:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     if(LOS_OK != uwRet)
+ 506              		.loc 1 186 0
+ 507 00a2 7B69     		ldr	r3, [r7, #20]
+ 508 00a4 002B     		cmp	r3, #0
+ 509 00a6 08D1     		bne	.L23
+ 187:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     {
+ 188:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****         return;
+ 189:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     }
+ 190:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** 
+ 191:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     (void)atiny_bind(device_info, g_phandle);
+ 510              		.loc 1 191 0
+ 511 00a8 0D4B     		ldr	r3, .L24+28
+ 512 00aa 1B68     		ldr	r3, [r3]
+ 513 00ac 1946     		mov	r1, r3
+ 514 00ae B868     		ldr	r0, [r7, #8]
+ 515 00b0 FFF7FEFF 		bl	atiny_bind
+ 516 00b4 02E0     		b	.L18
+ 517              	.L22:
+ 182:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     }
+ 518              		.loc 1 182 0
+ 519 00b6 00BF     		nop
+ 520 00b8 00E0     		b	.L18
+ 521              	.L23:
+ 188:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c ****     }
+ 522              		.loc 1 188 0
+ 523 00ba 00BF     		nop
+ 524              	.L18:
+ 192:D:/iot/felix2/demos/agenttiny_lwm2m\agent_tiny_demo.c **** }
+ 525              		.loc 1 192 0
+ 526 00bc 1837     		adds	r7, r7, #24
+ 527              	.LCFI16:
+ 528              		.cfi_def_cfa_offset 8
+ 529 00be BD46     		mov	sp, r7
+ 530              	.LCFI17:
+ 531              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 14
+
+
+ 532              		@ sp needed
+ 533 00c0 80BD     		pop	{r7, pc}
+ 534              	.L25:
+ 535 00c2 00BF     		.align	2
+ 536              	.L24:
+ 537 00c4 00000000 		.word	g_device_info
+ 538 00c8 00000000 		.word	g_endpoint_name
+ 539 00cc B0000000 		.word	.LC7
+ 540 00d0 00000000 		.word	g_atiny_params
+ 541 00d4 BC000000 		.word	.LC8
+ 542 00d8 C0000000 		.word	.LC9
+ 543 00dc CC000000 		.word	.LC10
+ 544 00e0 00000000 		.word	g_phandle
+ 545              		.cfi_endproc
+ 546              	.LFE136:
+ 548              		.section	.rodata.__FUNCTION__.10131,"a",%progbits
+ 549              		.align	2
+ 552              	__FUNCTION__.10131:
+ 553 0000 61636B5F 		.ascii	"ack_callback\000"
+ 553      63616C6C 
+ 553      6261636B 
+ 553      00
+ 554              		.section	.rodata.__FUNCTION__.10139,"a",%progbits
+ 555              		.align	2
+ 558              	__FUNCTION__.10139:
+ 559 0000 6170705F 		.ascii	"app_data_report\000"
+ 559      64617461 
+ 559      5F726570 
+ 559      6F727400 
+ 560              		.text
+ 561              	.Letext0:
+ 562              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 563              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 564              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 565              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 566              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 567              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 568              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 569              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 570              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 571              		.file 11 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 572              		.file 12 "D:/iot/felix2/kernel/include/los_list.h"
+ 573              		.file 13 "D:/iot/felix2/kernel/include/los_err.h"
+ 574              		.file 14 "D:/iot/felix2/kernel/include/los_tick.h"
+ 575              		.file 15 "D:/iot/felix2/kernel/include/los_event.h"
+ 576              		.file 16 "D:/iot/felix2/kernel/include/los_task.h"
+ 577              		.file 17 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 578              		.file 18 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 579              		.file 19 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 580              		.file 20 "D:/iot/felix2/kernel/include/los_config.h"
+ 581              		.file 21 "D:/iot/felix2/include/atiny_error.h"
+ 582              		.file 22 "D:/iot/felix2/include/log/atiny_log.h"
+ 583              		.file 23 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 584              		.file 24 "D:/iot/felix2/include/atiny_lwm2m/agenttiny.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 agent_tiny_demo.c
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:26     .data.g_endpoint_name:00000000 g_endpoint_name
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:19     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:23     .data.g_endpoint_name:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:29     .bss.g_phandle:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:32     .bss.g_phandle:00000000 g_phandle
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:35     .bss.g_device_info:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:38     .bss.g_device_info:00000000 g_device_info
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:41     .bss.g_atiny_params:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:44     .bss.g_atiny_params:00000000 g_atiny_params
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:52     .text.ack_callback:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:59     .text.ack_callback:00000000 ack_callback
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:124    .text.ack_callback:00000050 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:552    .rodata.__FUNCTION__.10131:00000000 __FUNCTION__.10131
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:147    .text.app_data_report:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:154    .text.app_data_report:00000000 app_data_report
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:276    .text.app_data_report:000000c4 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:558    .rodata.__FUNCTION__.10139:00000000 __FUNCTION__.10139
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:291    .text.creat_report_task:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:298    .text.creat_report_task:00000000 creat_report_task
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:361    .text.creat_report_task:00000040 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:380    .text.agent_tiny_entry:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:387    .text.agent_tiny_entry:00000000 agent_tiny_entry
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:537    .text.agent_tiny_entry:000000c4 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:549    .rodata.__FUNCTION__.10131:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccf5ZR6u.s:555    .rodata.__FUNCTION__.10139:00000000 $d
+
+UNDEFINED SYMBOLS
+atiny_get_log_level
+atiny_get_log_level_name
+atiny_gettime_ms
+atiny_printf
+atiny_data_report
+atiny_data_change
+LOS_TaskDelay
+LOS_TaskCreate
+atiny_init
+atiny_bind

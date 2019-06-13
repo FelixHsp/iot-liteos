@@ -1,0 +1,766 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32l4xx_it.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.NMI_Handler,"ax",%progbits
+  18              		.align	1
+  19              		.global	NMI_Handler
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	NMI_Handler:
+  26              	.LFB133:
+  27              		.file 1 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src/stm32l4xx_it.c"
+   1:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+   2:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   ******************************************************************************
+   3:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * @file    stm32l4xx_it.c
+   4:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * @brief   Interrupt Service Routines.
+   5:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   ******************************************************************************
+   6:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *
+   7:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * COPYRIGHT(c) 2018 STMicroelectronics
+   8:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *
+   9:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * Redistribution and use in source and binary forms, with or without modification,
+  10:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * are permitted provided that the following conditions are met:
+  11:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *   1. Redistributions of source code must retain the above copyright notice,
+  12:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *      this list of conditions and the following disclaimer.
+  13:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *   2. Redistributions in binary form must reproduce the above copyright notice,
+  14:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *      this list of conditions and the following disclaimer in the documentation
+  15:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *      and/or other materials provided with the distribution.
+  16:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *   3. Neither the name of STMicroelectronics nor the names of its contributors
+  17:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *      may be used to endorse or promote products derived from this software
+  18:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *      without specific prior written permission.
+  19:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *
+  20:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  21:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  22:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  23:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  24:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  25:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  26:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  27:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  28:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  29:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  30:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   *
+  31:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   ******************************************************************************
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 2
+
+
+  32:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   */
+  33:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* Includes ------------------------------------------------------------------*/
+  34:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** #include "stm32l4xx_hal.h"
+  35:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** #include "stm32l4xx.h"
+  36:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** #include "stm32l4xx_it.h"
+  37:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  38:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* USER CODE BEGIN 0 */
+  39:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  40:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* USER CODE END 0 */
+  41:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  42:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* External variables --------------------------------------------------------*/
+  43:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** extern UART_HandleTypeDef huart1;
+  44:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** extern UART_HandleTypeDef huart2;
+  45:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  46:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /******************************************************************************/
+  47:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
+  48:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /******************************************************************************/
+  49:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  50:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+  51:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Non maskable interrupt.
+  52:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+  53:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void NMI_Handler(void)
+  54:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+  28              		.loc 1 54 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 00AF     		add	r7, sp, #0
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_register 7
+  55:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+  56:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  57:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 0 */
+  58:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+  59:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  60:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END NonMaskableInt_IRQn 1 */
+  61:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+  40              		.loc 1 61 0
+  41 0004 00BF     		nop
+  42 0006 BD46     		mov	sp, r7
+  43              	.LCFI2:
+  44              		.cfi_def_cfa_register 13
+  45              		@ sp needed
+  46 0008 5DF8047B 		ldr	r7, [sp], #4
+  47              	.LCFI3:
+  48              		.cfi_restore 7
+  49              		.cfi_def_cfa_offset 0
+  50 000c 7047     		bx	lr
+  51              		.cfi_endproc
+  52              	.LFE133:
+  54              		.section	.text.HardFault_Handler,"ax",%progbits
+  55              		.align	1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 3
+
+
+  56              		.global	HardFault_Handler
+  57              		.syntax unified
+  58              		.thumb
+  59              		.thumb_func
+  60              		.fpu fpv4-sp-d16
+  62              	HardFault_Handler:
+  63              	.LFB134:
+  62:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  63:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+  64:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Hard fault interrupt.
+  65:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+  66:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void HardFault_Handler(void)
+  67:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+  64              		.loc 1 67 0
+  65              		.cfi_startproc
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 1, uses_anonymous_args = 0
+  68              		@ link register save eliminated.
+  69 0000 80B4     		push	{r7}
+  70              	.LCFI4:
+  71              		.cfi_def_cfa_offset 4
+  72              		.cfi_offset 7, -4
+  73 0002 00AF     		add	r7, sp, #0
+  74              	.LCFI5:
+  75              		.cfi_def_cfa_register 7
+  76              	.L3:
+  68:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN HardFault_IRQn 0 */
+  69:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  70:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END HardFault_IRQn 0 */
+  71:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   while (1)
+  77              		.loc 1 71 0 discriminator 1
+  78 0004 FEE7     		b	.L3
+  79              		.cfi_endproc
+  80              	.LFE134:
+  82              		.section	.text.MemManage_Handler,"ax",%progbits
+  83              		.align	1
+  84              		.global	MemManage_Handler
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  88              		.fpu fpv4-sp-d16
+  90              	MemManage_Handler:
+  91              	.LFB135:
+  72:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   {
+  73:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+  74:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE END W1_HardFault_IRQn 0 */
+  75:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   }
+  76:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN HardFault_IRQn 1 */
+  77:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  78:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END HardFault_IRQn 1 */
+  79:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+  80:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  81:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+  82:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Memory management fault.
+  83:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+  84:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void MemManage_Handler(void)
+  85:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 4
+
+
+  92              		.loc 1 85 0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96              		@ link register save eliminated.
+  97 0000 80B4     		push	{r7}
+  98              	.LCFI6:
+  99              		.cfi_def_cfa_offset 4
+ 100              		.cfi_offset 7, -4
+ 101 0002 00AF     		add	r7, sp, #0
+ 102              	.LCFI7:
+ 103              		.cfi_def_cfa_register 7
+ 104              	.L5:
+  86:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+  87:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  88:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END MemoryManagement_IRQn 0 */
+  89:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   while (1)
+ 105              		.loc 1 89 0 discriminator 1
+ 106 0004 FEE7     		b	.L5
+ 107              		.cfi_endproc
+ 108              	.LFE135:
+ 110              		.section	.text.BusFault_Handler,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	BusFault_Handler
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 116              		.fpu fpv4-sp-d16
+ 118              	BusFault_Handler:
+ 119              	.LFB136:
+  90:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   {
+  91:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
+  92:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE END W1_MemoryManagement_IRQn 0 */
+  93:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   }
+  94:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN MemoryManagement_IRQn 1 */
+  95:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  96:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END MemoryManagement_IRQn 1 */
+  97:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+  98:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+  99:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 100:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Prefetch fault, memory access fault.
+ 101:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 102:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void BusFault_Handler(void)
+ 103:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 120              		.loc 1 103 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 1, uses_anonymous_args = 0
+ 124              		@ link register save eliminated.
+ 125 0000 80B4     		push	{r7}
+ 126              	.LCFI8:
+ 127              		.cfi_def_cfa_offset 4
+ 128              		.cfi_offset 7, -4
+ 129 0002 00AF     		add	r7, sp, #0
+ 130              	.LCFI9:
+ 131              		.cfi_def_cfa_register 7
+ 132              	.L7:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 5
+
+
+ 104:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN BusFault_IRQn 0 */
+ 105:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 106:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END BusFault_IRQn 0 */
+ 107:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   while (1)
+ 133              		.loc 1 107 0 discriminator 1
+ 134 0004 FEE7     		b	.L7
+ 135              		.cfi_endproc
+ 136              	.LFE136:
+ 138              		.section	.text.UsageFault_Handler,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	UsageFault_Handler
+ 141              		.syntax unified
+ 142              		.thumb
+ 143              		.thumb_func
+ 144              		.fpu fpv4-sp-d16
+ 146              	UsageFault_Handler:
+ 147              	.LFB137:
+ 108:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   {
+ 109:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE BEGIN W1_BusFault_IRQn 0 */
+ 110:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE END W1_BusFault_IRQn 0 */
+ 111:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   }
+ 112:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN BusFault_IRQn 1 */
+ 113:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 114:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END BusFault_IRQn 1 */
+ 115:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 116:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 117:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 118:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Undefined instruction or illegal state.
+ 119:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 120:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void UsageFault_Handler(void)
+ 121:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 148              		.loc 1 121 0
+ 149              		.cfi_startproc
+ 150              		@ args = 0, pretend = 0, frame = 0
+ 151              		@ frame_needed = 1, uses_anonymous_args = 0
+ 152              		@ link register save eliminated.
+ 153 0000 80B4     		push	{r7}
+ 154              	.LCFI10:
+ 155              		.cfi_def_cfa_offset 4
+ 156              		.cfi_offset 7, -4
+ 157 0002 00AF     		add	r7, sp, #0
+ 158              	.LCFI11:
+ 159              		.cfi_def_cfa_register 7
+ 160              	.L9:
+ 122:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN UsageFault_IRQn 0 */
+ 123:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 124:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END UsageFault_IRQn 0 */
+ 125:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   while (1)
+ 161              		.loc 1 125 0 discriminator 1
+ 162 0004 FEE7     		b	.L9
+ 163              		.cfi_endproc
+ 164              	.LFE137:
+ 166              		.section	.text.SVC_Handler,"ax",%progbits
+ 167              		.align	1
+ 168              		.global	SVC_Handler
+ 169              		.syntax unified
+ 170              		.thumb
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 6
+
+
+ 171              		.thumb_func
+ 172              		.fpu fpv4-sp-d16
+ 174              	SVC_Handler:
+ 175              	.LFB138:
+ 126:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   {
+ 127:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
+ 128:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****     /* USER CODE END W1_UsageFault_IRQn 0 */
+ 129:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   }
+ 130:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN UsageFault_IRQn 1 */
+ 131:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 132:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END UsageFault_IRQn 1 */
+ 133:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 134:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 135:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 136:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles System service call via SWI instruction.
+ 137:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 138:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void SVC_Handler(void)
+ 139:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 176              		.loc 1 139 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ 179              		@ frame_needed = 1, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181 0000 80B4     		push	{r7}
+ 182              	.LCFI12:
+ 183              		.cfi_def_cfa_offset 4
+ 184              		.cfi_offset 7, -4
+ 185 0002 00AF     		add	r7, sp, #0
+ 186              	.LCFI13:
+ 187              		.cfi_def_cfa_register 7
+ 140:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN SVCall_IRQn 0 */
+ 141:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 142:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END SVCall_IRQn 0 */
+ 143:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN SVCall_IRQn 1 */
+ 144:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 145:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END SVCall_IRQn 1 */
+ 146:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 188              		.loc 1 146 0
+ 189 0004 00BF     		nop
+ 190 0006 BD46     		mov	sp, r7
+ 191              	.LCFI14:
+ 192              		.cfi_def_cfa_register 13
+ 193              		@ sp needed
+ 194 0008 5DF8047B 		ldr	r7, [sp], #4
+ 195              	.LCFI15:
+ 196              		.cfi_restore 7
+ 197              		.cfi_def_cfa_offset 0
+ 198 000c 7047     		bx	lr
+ 199              		.cfi_endproc
+ 200              	.LFE138:
+ 202              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 203              		.align	1
+ 204              		.global	DebugMon_Handler
+ 205              		.syntax unified
+ 206              		.thumb
+ 207              		.thumb_func
+ 208              		.fpu fpv4-sp-d16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 7
+
+
+ 210              	DebugMon_Handler:
+ 211              	.LFB139:
+ 147:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 148:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 149:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Debug monitor.
+ 150:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 151:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void DebugMon_Handler(void)
+ 152:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 212              		.loc 1 152 0
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 0
+ 215              		@ frame_needed = 1, uses_anonymous_args = 0
+ 216              		@ link register save eliminated.
+ 217 0000 80B4     		push	{r7}
+ 218              	.LCFI16:
+ 219              		.cfi_def_cfa_offset 4
+ 220              		.cfi_offset 7, -4
+ 221 0002 00AF     		add	r7, sp, #0
+ 222              	.LCFI17:
+ 223              		.cfi_def_cfa_register 7
+ 153:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN DebugMonitor_IRQn 0 */
+ 154:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 155:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END DebugMonitor_IRQn 0 */
+ 156:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+ 157:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 158:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END DebugMonitor_IRQn 1 */
+ 159:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 224              		.loc 1 159 0
+ 225 0004 00BF     		nop
+ 226 0006 BD46     		mov	sp, r7
+ 227              	.LCFI18:
+ 228              		.cfi_def_cfa_register 13
+ 229              		@ sp needed
+ 230 0008 5DF8047B 		ldr	r7, [sp], #4
+ 231              	.LCFI19:
+ 232              		.cfi_restore 7
+ 233              		.cfi_def_cfa_offset 0
+ 234 000c 7047     		bx	lr
+ 235              		.cfi_endproc
+ 236              	.LFE139:
+ 238              		.section	.text.PendSV_Handler,"ax",%progbits
+ 239              		.align	1
+ 240              		.weak	PendSV_Handler
+ 241              		.syntax unified
+ 242              		.thumb
+ 243              		.thumb_func
+ 244              		.fpu fpv4-sp-d16
+ 246              	PendSV_Handler:
+ 247              	.LFB140:
+ 160:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 161:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 162:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles Pendable request for system service.
+ 163:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 164:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** __weak void PendSV_Handler(void)
+ 165:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 248              		.loc 1 165 0
+ 249              		.cfi_startproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 8
+
+
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 1, uses_anonymous_args = 0
+ 252              		@ link register save eliminated.
+ 253 0000 80B4     		push	{r7}
+ 254              	.LCFI20:
+ 255              		.cfi_def_cfa_offset 4
+ 256              		.cfi_offset 7, -4
+ 257 0002 00AF     		add	r7, sp, #0
+ 258              	.LCFI21:
+ 259              		.cfi_def_cfa_register 7
+ 166:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN PendSV_IRQn 0 */
+ 167:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 168:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END PendSV_IRQn 0 */
+ 169:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN PendSV_IRQn 1 */
+ 170:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 171:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END PendSV_IRQn 1 */
+ 172:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 260              		.loc 1 172 0
+ 261 0004 00BF     		nop
+ 262 0006 BD46     		mov	sp, r7
+ 263              	.LCFI22:
+ 264              		.cfi_def_cfa_register 13
+ 265              		@ sp needed
+ 266 0008 5DF8047B 		ldr	r7, [sp], #4
+ 267              	.LCFI23:
+ 268              		.cfi_restore 7
+ 269              		.cfi_def_cfa_offset 0
+ 270 000c 7047     		bx	lr
+ 271              		.cfi_endproc
+ 272              	.LFE140:
+ 274              		.section	.text.SysTick_Handler,"ax",%progbits
+ 275              		.align	1
+ 276              		.weak	SysTick_Handler
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 280              		.fpu fpv4-sp-d16
+ 282              	SysTick_Handler:
+ 283              	.LFB141:
+ 173:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 174:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 175:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles System tick timer.
+ 176:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 177:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** __weak void SysTick_Handler(void)
+ 178:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 284              		.loc 1 178 0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 1, uses_anonymous_args = 0
+ 288 0000 80B5     		push	{r7, lr}
+ 289              	.LCFI24:
+ 290              		.cfi_def_cfa_offset 8
+ 291              		.cfi_offset 7, -8
+ 292              		.cfi_offset 14, -4
+ 293 0002 00AF     		add	r7, sp, #0
+ 294              	.LCFI25:
+ 295              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 9
+
+
+ 179:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 0 */
+ 180:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 181:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END SysTick_IRQn 0 */
+ 182:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   HAL_IncTick();
+ 296              		.loc 1 182 0
+ 297 0004 FFF7FEFF 		bl	HAL_IncTick
+ 183:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   HAL_SYSTICK_IRQHandler();
+ 298              		.loc 1 183 0
+ 299 0008 FFF7FEFF 		bl	HAL_SYSTICK_IRQHandler
+ 184:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN SysTick_IRQn 1 */
+ 185:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 186:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END SysTick_IRQn 1 */
+ 187:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 300              		.loc 1 187 0
+ 301 000c 00BF     		nop
+ 302 000e 80BD     		pop	{r7, pc}
+ 303              		.cfi_endproc
+ 304              	.LFE141:
+ 306              		.section	.text.EXTI2_IRQHandler,"ax",%progbits
+ 307              		.align	1
+ 308              		.global	EXTI2_IRQHandler
+ 309              		.syntax unified
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.fpu fpv4-sp-d16
+ 314              	EXTI2_IRQHandler:
+ 315              	.LFB142:
+ 188:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 189:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /******************************************************************************/
+ 190:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* STM32L4xx Peripheral Interrupt Handlers                                    */
+ 191:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* Add here the Interrupt Handlers for the used peripherals.                  */
+ 192:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* For the available peripheral interrupt handler names,                      */
+ 193:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /* please refer to the startup file (startup_stm32l4xx.s).                    */
+ 194:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /******************************************************************************/
+ 195:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 196:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 197:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles EXTI line2 interrupt.
+ 198:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 199:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void EXTI2_IRQHandler(void)
+ 200:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 316              		.loc 1 200 0
+ 317              		.cfi_startproc
+ 318              		@ args = 0, pretend = 0, frame = 0
+ 319              		@ frame_needed = 1, uses_anonymous_args = 0
+ 320 0000 80B5     		push	{r7, lr}
+ 321              	.LCFI26:
+ 322              		.cfi_def_cfa_offset 8
+ 323              		.cfi_offset 7, -8
+ 324              		.cfi_offset 14, -4
+ 325 0002 00AF     		add	r7, sp, #0
+ 326              	.LCFI27:
+ 327              		.cfi_def_cfa_register 7
+ 201:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN EXTI2_IRQn 0 */
+ 202:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 203:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END EXTI2_IRQn 0 */
+ 204:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_2);
+ 328              		.loc 1 204 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 10
+
+
+ 329 0004 0420     		movs	r0, #4
+ 330 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 205:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN EXTI2_IRQn 1 */
+ 206:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 207:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END EXTI2_IRQn 1 */
+ 208:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 331              		.loc 1 208 0
+ 332 000a 00BF     		nop
+ 333 000c 80BD     		pop	{r7, pc}
+ 334              		.cfi_endproc
+ 335              	.LFE142:
+ 337              		.section	.text.EXTI3_IRQHandler,"ax",%progbits
+ 338              		.align	1
+ 339              		.global	EXTI3_IRQHandler
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.fpu fpv4-sp-d16
+ 345              	EXTI3_IRQHandler:
+ 346              	.LFB143:
+ 209:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 210:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 211:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles EXTI line3 interrupt.
+ 212:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 213:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void EXTI3_IRQHandler(void)
+ 214:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 347              		.loc 1 214 0
+ 348              		.cfi_startproc
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 1, uses_anonymous_args = 0
+ 351 0000 80B5     		push	{r7, lr}
+ 352              	.LCFI28:
+ 353              		.cfi_def_cfa_offset 8
+ 354              		.cfi_offset 7, -8
+ 355              		.cfi_offset 14, -4
+ 356 0002 00AF     		add	r7, sp, #0
+ 357              	.LCFI29:
+ 358              		.cfi_def_cfa_register 7
+ 215:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN EXTI3_IRQn 0 */
+ 216:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 217:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END EXTI3_IRQn 0 */
+ 218:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
+ 359              		.loc 1 218 0
+ 360 0004 0820     		movs	r0, #8
+ 361 0006 FFF7FEFF 		bl	HAL_GPIO_EXTI_IRQHandler
+ 219:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN EXTI3_IRQn 1 */
+ 220:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 221:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END EXTI3_IRQn 1 */
+ 222:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 362              		.loc 1 222 0
+ 363 000a 00BF     		nop
+ 364 000c 80BD     		pop	{r7, pc}
+ 365              		.cfi_endproc
+ 366              	.LFE143:
+ 368              		.section	.text.USART1_IRQHandler,"ax",%progbits
+ 369              		.align	1
+ 370              		.global	USART1_IRQHandler
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 11
+
+
+ 371              		.syntax unified
+ 372              		.thumb
+ 373              		.thumb_func
+ 374              		.fpu fpv4-sp-d16
+ 376              	USART1_IRQHandler:
+ 377              	.LFB144:
+ 223:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 224:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 225:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles USART1 global interrupt.
+ 226:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ 227:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void USART1_IRQHandler(void)
+ 228:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 378              		.loc 1 228 0
+ 379              		.cfi_startproc
+ 380              		@ args = 0, pretend = 0, frame = 0
+ 381              		@ frame_needed = 1, uses_anonymous_args = 0
+ 382 0000 80B5     		push	{r7, lr}
+ 383              	.LCFI30:
+ 384              		.cfi_def_cfa_offset 8
+ 385              		.cfi_offset 7, -8
+ 386              		.cfi_offset 14, -4
+ 387 0002 00AF     		add	r7, sp, #0
+ 388              	.LCFI31:
+ 389              		.cfi_def_cfa_register 7
+ 229:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 0 */
+ 230:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 231:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END USART1_IRQn 0 */
+ 232:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   HAL_UART_IRQHandler(&huart1);
+ 390              		.loc 1 232 0
+ 391 0004 0248     		ldr	r0, .L17
+ 392 0006 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 233:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN USART1_IRQn 1 */
+ 234:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 235:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END USART1_IRQn 1 */
+ 236:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 393              		.loc 1 236 0
+ 394 000a 00BF     		nop
+ 395 000c 80BD     		pop	{r7, pc}
+ 396              	.L18:
+ 397 000e 00BF     		.align	2
+ 398              	.L17:
+ 399 0010 00000000 		.word	huart1
+ 400              		.cfi_endproc
+ 401              	.LFE144:
+ 403              		.section	.text.USART2_IRQHandler,"ax",%progbits
+ 404              		.align	1
+ 405              		.global	USART2_IRQHandler
+ 406              		.syntax unified
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.fpu fpv4-sp-d16
+ 411              	USART2_IRQHandler:
+ 412              	.LFB145:
+ 237:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 238:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** /**
+ 239:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** * @brief This function handles USART2 global interrupt.
+ 240:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** */
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 12
+
+
+ 241:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** void USART2_IRQHandler(void)
+ 242:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** {
+ 413              		.loc 1 242 0
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 1, uses_anonymous_args = 0
+ 417 0000 80B5     		push	{r7, lr}
+ 418              	.LCFI32:
+ 419              		.cfi_def_cfa_offset 8
+ 420              		.cfi_offset 7, -8
+ 421              		.cfi_offset 14, -4
+ 422 0002 00AF     		add	r7, sp, #0
+ 423              	.LCFI33:
+ 424              		.cfi_def_cfa_register 7
+ 243:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN USART2_IRQn 0 */
+ 244:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 245:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END USART2_IRQn 0 */
+ 246:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   HAL_UART_IRQHandler(&huart2);
+ 425              		.loc 1 246 0
+ 426 0004 0248     		ldr	r0, .L20
+ 427 0006 FFF7FEFF 		bl	HAL_UART_IRQHandler
+ 247:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE BEGIN USART2_IRQn 1 */
+ 248:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** 
+ 249:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c ****   /* USER CODE END USART2_IRQn 1 */
+ 250:D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Src\stm32l4xx_it.c **** }
+ 428              		.loc 1 250 0
+ 429 000a 00BF     		nop
+ 430 000c 80BD     		pop	{r7, pc}
+ 431              	.L21:
+ 432 000e 00BF     		.align	2
+ 433              	.L20:
+ 434 0010 00000000 		.word	huart2
+ 435              		.cfi_endproc
+ 436              	.LFE145:
+ 438              		.text
+ 439              	.Letext0:
+ 440              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 441              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 442              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 443              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 444              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 445              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 446              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 447              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 448              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 449              		.file 11 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/stm32l431xx.h"
+ 450              		.file 12 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 451              		.file 13 "D:/iot/felix2/kernel/include/los_config.h"
+ 452              		.file 14 "D:/iot/felix2/kernel/include/los_list.h"
+ 453              		.file 15 "D:/iot/felix2/kernel/include/los_err.h"
+ 454              		.file 16 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 455              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 456              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 457              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 458              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 459              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 460              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 13
+
+
+ 461              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ 462              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32l4xx_it.c
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:18     .text.NMI_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:25     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:55     .text.HardFault_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:62     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:83     .text.MemManage_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:90     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:111    .text.BusFault_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:118    .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:139    .text.UsageFault_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:146    .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:167    .text.SVC_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:174    .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:203    .text.DebugMon_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:210    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:239    .text.PendSV_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:246    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:275    .text.SysTick_Handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:282    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:307    .text.EXTI2_IRQHandler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:314    .text.EXTI2_IRQHandler:00000000 EXTI2_IRQHandler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:338    .text.EXTI3_IRQHandler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:345    .text.EXTI3_IRQHandler:00000000 EXTI3_IRQHandler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:369    .text.USART1_IRQHandler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:376    .text.USART1_IRQHandler:00000000 USART1_IRQHandler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:399    .text.USART1_IRQHandler:00000010 $d
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:404    .text.USART2_IRQHandler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:411    .text.USART2_IRQHandler:00000000 USART2_IRQHandler
+C:\Users\91458\AppData\Local\Temp\ccEJAkfo.s:434    .text.USART2_IRQHandler:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_IncTick
+HAL_SYSTICK_IRQHandler
+HAL_GPIO_EXTI_IRQHandler
+HAL_UART_IRQHandler
+huart1
+huart2

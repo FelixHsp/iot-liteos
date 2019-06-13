@@ -1,0 +1,526 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"platform_adapter.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.lwm2m_malloc,"ax",%progbits
+  18              		.align	1
+  19              		.global	lwm2m_malloc
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	lwm2m_malloc:
+  26              	.LFB134:
+  27              		.file 1 "D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m/platform_adapter.c"
+   1:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 2
+
+
+  32:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  35:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *
+  37:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Copyright (c) 2013, 2014, 2015 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *
+  42:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *
+  47:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****  *******************************************************************************/
+  50:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  51:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** #include <stdarg.h>
+  52:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  53:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** #include "internals.h"
+  54:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** #include "osdepends/atiny_osdep.h"
+  55:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  56:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** #ifndef LWM2M_MEMORY_TRACE
+  57:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  58:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** void *lwm2m_malloc(size_t s)
+  59:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+  28              		.loc 1 59 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 84B0     		sub	sp, sp, #16
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  60:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     void *mem = NULL;
+  44              		.loc 1 60 0
+  45 0008 0023     		movs	r3, #0
+  46 000a FB60     		str	r3, [r7, #12]
+  61:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     mem = atiny_malloc(s);
+  47              		.loc 1 61 0
+  48 000c 7868     		ldr	r0, [r7, #4]
+  49 000e FFF7FEFF 		bl	atiny_malloc
+  50 0012 F860     		str	r0, [r7, #12]
+  62:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     return mem;
+  51              		.loc 1 62 0
+  52 0014 FB68     		ldr	r3, [r7, #12]
+  63:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 3
+
+
+  53              		.loc 1 63 0
+  54 0016 1846     		mov	r0, r3
+  55 0018 1037     		adds	r7, r7, #16
+  56              	.LCFI3:
+  57              		.cfi_def_cfa_offset 8
+  58 001a BD46     		mov	sp, r7
+  59              	.LCFI4:
+  60              		.cfi_def_cfa_register 13
+  61              		@ sp needed
+  62 001c 80BD     		pop	{r7, pc}
+  63              		.cfi_endproc
+  64              	.LFE134:
+  66              		.section	.text.lwm2m_free,"ax",%progbits
+  67              		.align	1
+  68              		.global	lwm2m_free
+  69              		.syntax unified
+  70              		.thumb
+  71              		.thumb_func
+  72              		.fpu fpv4-sp-d16
+  74              	lwm2m_free:
+  75              	.LFB135:
+  64:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  65:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** void lwm2m_free(void *p)
+  66:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+  76              		.loc 1 66 0
+  77              		.cfi_startproc
+  78              		@ args = 0, pretend = 0, frame = 8
+  79              		@ frame_needed = 1, uses_anonymous_args = 0
+  80 0000 80B5     		push	{r7, lr}
+  81              	.LCFI5:
+  82              		.cfi_def_cfa_offset 8
+  83              		.cfi_offset 7, -8
+  84              		.cfi_offset 14, -4
+  85 0002 82B0     		sub	sp, sp, #8
+  86              	.LCFI6:
+  87              		.cfi_def_cfa_offset 16
+  88 0004 00AF     		add	r7, sp, #0
+  89              	.LCFI7:
+  90              		.cfi_def_cfa_register 7
+  91 0006 7860     		str	r0, [r7, #4]
+  67:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     if(NULL != p)
+  92              		.loc 1 67 0
+  93 0008 7B68     		ldr	r3, [r7, #4]
+  94 000a 002B     		cmp	r3, #0
+  95 000c 02D0     		beq	.L5
+  68:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****         atiny_free(p);
+  96              		.loc 1 68 0
+  97 000e 7868     		ldr	r0, [r7, #4]
+  98 0010 FFF7FEFF 		bl	atiny_free
+  99              	.L5:
+  69:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ 100              		.loc 1 69 0
+ 101 0014 00BF     		nop
+ 102 0016 0837     		adds	r7, r7, #8
+ 103              	.LCFI8:
+ 104              		.cfi_def_cfa_offset 8
+ 105 0018 BD46     		mov	sp, r7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 4
+
+
+ 106              	.LCFI9:
+ 107              		.cfi_def_cfa_register 13
+ 108              		@ sp needed
+ 109 001a 80BD     		pop	{r7, pc}
+ 110              		.cfi_endproc
+ 111              	.LFE135:
+ 113              		.section	.text.lwm2m_strdup,"ax",%progbits
+ 114              		.align	1
+ 115              		.global	lwm2m_strdup
+ 116              		.syntax unified
+ 117              		.thumb
+ 118              		.thumb_func
+ 119              		.fpu fpv4-sp-d16
+ 121              	lwm2m_strdup:
+ 122              	.LFB136:
+  70:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  71:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  72:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** char *lwm2m_strdup(const char *str)
+  73:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+ 123              		.loc 1 73 0
+ 124              		.cfi_startproc
+ 125              		@ args = 0, pretend = 0, frame = 16
+ 126              		@ frame_needed = 1, uses_anonymous_args = 0
+ 127 0000 80B5     		push	{r7, lr}
+ 128              	.LCFI10:
+ 129              		.cfi_def_cfa_offset 8
+ 130              		.cfi_offset 7, -8
+ 131              		.cfi_offset 14, -4
+ 132 0002 84B0     		sub	sp, sp, #16
+ 133              	.LCFI11:
+ 134              		.cfi_def_cfa_offset 24
+ 135 0004 00AF     		add	r7, sp, #0
+ 136              	.LCFI12:
+ 137              		.cfi_def_cfa_register 7
+ 138 0006 7860     		str	r0, [r7, #4]
+  74:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     int len = strlen(str) + 1;
+ 139              		.loc 1 74 0
+ 140 0008 7868     		ldr	r0, [r7, #4]
+ 141 000a FFF7FEFF 		bl	strlen
+ 142 000e 0346     		mov	r3, r0
+ 143 0010 0133     		adds	r3, r3, #1
+ 144 0012 FB60     		str	r3, [r7, #12]
+  75:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     void *new = lwm2m_malloc(len);
+ 145              		.loc 1 75 0
+ 146 0014 FB68     		ldr	r3, [r7, #12]
+ 147 0016 1846     		mov	r0, r3
+ 148 0018 FFF7FEFF 		bl	lwm2m_malloc
+ 149 001c B860     		str	r0, [r7, #8]
+  76:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     if (new == NULL)
+ 150              		.loc 1 76 0
+ 151 001e BB68     		ldr	r3, [r7, #8]
+ 152 0020 002B     		cmp	r3, #0
+ 153 0022 01D1     		bne	.L7
+  77:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****         return NULL;
+ 154              		.loc 1 77 0
+ 155 0024 0023     		movs	r3, #0
+ 156 0026 06E0     		b	.L8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 5
+
+
+ 157              	.L7:
+  78:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     return (char *)memcpy(new, str, len);
+ 158              		.loc 1 78 0
+ 159 0028 FB68     		ldr	r3, [r7, #12]
+ 160 002a 1A46     		mov	r2, r3
+ 161 002c 7968     		ldr	r1, [r7, #4]
+ 162 002e B868     		ldr	r0, [r7, #8]
+ 163 0030 FFF7FEFF 		bl	memcpy
+ 164 0034 0346     		mov	r3, r0
+ 165              	.L8:
+  79:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  80:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ 166              		.loc 1 80 0
+ 167 0036 1846     		mov	r0, r3
+ 168 0038 1037     		adds	r7, r7, #16
+ 169              	.LCFI13:
+ 170              		.cfi_def_cfa_offset 8
+ 171 003a BD46     		mov	sp, r7
+ 172              	.LCFI14:
+ 173              		.cfi_def_cfa_register 13
+ 174              		@ sp needed
+ 175 003c 80BD     		pop	{r7, pc}
+ 176              		.cfi_endproc
+ 177              	.LFE136:
+ 179              		.section	.text.lwm2m_strncmp,"ax",%progbits
+ 180              		.align	1
+ 181              		.global	lwm2m_strncmp
+ 182              		.syntax unified
+ 183              		.thumb
+ 184              		.thumb_func
+ 185              		.fpu fpv4-sp-d16
+ 187              	lwm2m_strncmp:
+ 188              	.LFB137:
+  81:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  82:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** #endif
+  83:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  84:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** int lwm2m_strncmp(const char *s1,
+  85:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****                   const char *s2,
+  86:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****                   size_t n)
+  87:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+ 189              		.loc 1 87 0
+ 190              		.cfi_startproc
+ 191              		@ args = 0, pretend = 0, frame = 16
+ 192              		@ frame_needed = 1, uses_anonymous_args = 0
+ 193 0000 80B5     		push	{r7, lr}
+ 194              	.LCFI15:
+ 195              		.cfi_def_cfa_offset 8
+ 196              		.cfi_offset 7, -8
+ 197              		.cfi_offset 14, -4
+ 198 0002 84B0     		sub	sp, sp, #16
+ 199              	.LCFI16:
+ 200              		.cfi_def_cfa_offset 24
+ 201 0004 00AF     		add	r7, sp, #0
+ 202              	.LCFI17:
+ 203              		.cfi_def_cfa_register 7
+ 204 0006 F860     		str	r0, [r7, #12]
+ 205 0008 B960     		str	r1, [r7, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 6
+
+
+ 206 000a 7A60     		str	r2, [r7, #4]
+  88:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     return strncmp(s1, s2, n);
+ 207              		.loc 1 88 0
+ 208 000c 7A68     		ldr	r2, [r7, #4]
+ 209 000e B968     		ldr	r1, [r7, #8]
+ 210 0010 F868     		ldr	r0, [r7, #12]
+ 211 0012 FFF7FEFF 		bl	strncmp
+ 212 0016 0346     		mov	r3, r0
+  89:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ 213              		.loc 1 89 0
+ 214 0018 1846     		mov	r0, r3
+ 215 001a 1037     		adds	r7, r7, #16
+ 216              	.LCFI18:
+ 217              		.cfi_def_cfa_offset 8
+ 218 001c BD46     		mov	sp, r7
+ 219              	.LCFI19:
+ 220              		.cfi_def_cfa_register 13
+ 221              		@ sp needed
+ 222 001e 80BD     		pop	{r7, pc}
+ 223              		.cfi_endproc
+ 224              	.LFE137:
+ 226              		.global	__aeabi_uldivmod
+ 227              		.section	.text.lwm2m_gettime,"ax",%progbits
+ 228              		.align	1
+ 229              		.global	lwm2m_gettime
+ 230              		.syntax unified
+ 231              		.thumb
+ 232              		.thumb_func
+ 233              		.fpu fpv4-sp-d16
+ 235              	lwm2m_gettime:
+ 236              	.LFB138:
+  90:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  91:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** time_t lwm2m_gettime(void)
+  92:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+ 237              		.loc 1 92 0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 1, uses_anonymous_args = 0
+ 241 0000 98B5     		push	{r3, r4, r7, lr}
+ 242              	.LCFI20:
+ 243              		.cfi_def_cfa_offset 16
+ 244              		.cfi_offset 3, -16
+ 245              		.cfi_offset 4, -12
+ 246              		.cfi_offset 7, -8
+ 247              		.cfi_offset 14, -4
+ 248 0002 00AF     		add	r7, sp, #0
+ 249              	.LCFI21:
+ 250              		.cfi_def_cfa_register 7
+  93:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     return (uint32_t)(atiny_gettime_ms() / 1000);
+ 251              		.loc 1 93 0
+ 252 0004 FFF7FEFF 		bl	atiny_gettime_ms
+ 253 0008 4FF47A72 		mov	r2, #1000
+ 254 000c 4FF00003 		mov	r3, #0
+ 255 0010 FFF7FEFF 		bl	__aeabi_uldivmod
+ 256              	.LVL0:
+ 257 0014 0346     		mov	r3, r0
+ 258 0016 0C46     		mov	r4, r1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 7
+
+
+ 259 0018 4FF00004 		mov	r4, #0
+  94:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ 260              		.loc 1 94 0
+ 261 001c 1846     		mov	r0, r3
+ 262 001e 2146     		mov	r1, r4
+ 263 0020 98BD     		pop	{r3, r4, r7, pc}
+ 264              		.cfi_endproc
+ 265              	.LFE138:
+ 267              		.section	.text.lwm2m_rand,"ax",%progbits
+ 268              		.align	1
+ 269              		.global	lwm2m_rand
+ 270              		.syntax unified
+ 271              		.thumb
+ 272              		.thumb_func
+ 273              		.fpu fpv4-sp-d16
+ 275              	lwm2m_rand:
+ 276              	.LFB139:
+  95:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+  96:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** int lwm2m_rand(void *output, size_t len)
+  97:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+ 277              		.loc 1 97 0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 8
+ 280              		@ frame_needed = 1, uses_anonymous_args = 0
+ 281 0000 80B5     		push	{r7, lr}
+ 282              	.LCFI22:
+ 283              		.cfi_def_cfa_offset 8
+ 284              		.cfi_offset 7, -8
+ 285              		.cfi_offset 14, -4
+ 286 0002 82B0     		sub	sp, sp, #8
+ 287              	.LCFI23:
+ 288              		.cfi_def_cfa_offset 16
+ 289 0004 00AF     		add	r7, sp, #0
+ 290              	.LCFI24:
+ 291              		.cfi_def_cfa_register 7
+ 292 0006 7860     		str	r0, [r7, #4]
+ 293 0008 3960     		str	r1, [r7]
+  98:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     return atiny_random(output, len);
+ 294              		.loc 1 98 0
+ 295 000a 3968     		ldr	r1, [r7]
+ 296 000c 7868     		ldr	r0, [r7, #4]
+ 297 000e FFF7FEFF 		bl	atiny_random
+ 298 0012 0346     		mov	r3, r0
+  99:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ 299              		.loc 1 99 0
+ 300 0014 1846     		mov	r0, r3
+ 301 0016 0837     		adds	r7, r7, #8
+ 302              	.LCFI25:
+ 303              		.cfi_def_cfa_offset 8
+ 304 0018 BD46     		mov	sp, r7
+ 305              	.LCFI26:
+ 306              		.cfi_def_cfa_register 13
+ 307              		@ sp needed
+ 308 001a 80BD     		pop	{r7, pc}
+ 309              		.cfi_endproc
+ 310              	.LFE139:
+ 312              		.section	.text.lwm2m_delay,"ax",%progbits
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 8
+
+
+ 313              		.align	1
+ 314              		.global	lwm2m_delay
+ 315              		.syntax unified
+ 316              		.thumb
+ 317              		.thumb_func
+ 318              		.fpu fpv4-sp-d16
+ 320              	lwm2m_delay:
+ 321              	.LFB140:
+ 100:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** 
+ 101:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** void lwm2m_delay(uint32_t second)
+ 102:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** {
+ 322              		.loc 1 102 0
+ 323              		.cfi_startproc
+ 324              		@ args = 0, pretend = 0, frame = 8
+ 325              		@ frame_needed = 1, uses_anonymous_args = 0
+ 326 0000 80B5     		push	{r7, lr}
+ 327              	.LCFI27:
+ 328              		.cfi_def_cfa_offset 8
+ 329              		.cfi_offset 7, -8
+ 330              		.cfi_offset 14, -4
+ 331 0002 82B0     		sub	sp, sp, #8
+ 332              	.LCFI28:
+ 333              		.cfi_def_cfa_offset 16
+ 334 0004 00AF     		add	r7, sp, #0
+ 335              	.LCFI29:
+ 336              		.cfi_def_cfa_register 7
+ 337 0006 7860     		str	r0, [r7, #4]
+ 103:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c ****     atiny_delay(second);
+ 338              		.loc 1 103 0
+ 339 0008 7868     		ldr	r0, [r7, #4]
+ 340 000a FFF7FEFF 		bl	atiny_delay
+ 104:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\platform_adapter.c **** }
+ 341              		.loc 1 104 0
+ 342 000e 00BF     		nop
+ 343 0010 0837     		adds	r7, r7, #8
+ 344              	.LCFI30:
+ 345              		.cfi_def_cfa_offset 8
+ 346 0012 BD46     		mov	sp, r7
+ 347              	.LCFI31:
+ 348              		.cfi_def_cfa_register 13
+ 349              		@ sp needed
+ 350 0014 80BD     		pop	{r7, pc}
+ 351              		.cfi_endproc
+ 352              	.LFE140:
+ 354              		.text
+ 355              	.Letext0:
+ 356              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 357              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 358              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 359              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 360              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 361              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 362              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_timeval.h"
+ 363              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 364              		.file 10 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 365              		.file 11 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 366              		.file 12 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 9
+
+
+ 367              		.file 13 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 368              		.file 14 "D:/iot/felix2/kernel/include/los_list.h"
+ 369              		.file 15 "D:/iot/felix2/kernel/include/los_err.h"
+ 370              		.file 16 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 371              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 372              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 373              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 374              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 375              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 376              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 377              		.file 23 "D:/iot/felix2/kernel/include/los_config.h"
+ 378              		.file 24 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 379              		.file 25 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\cc5EvWud.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 platform_adapter.c
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:18     .text.lwm2m_malloc:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:25     .text.lwm2m_malloc:00000000 lwm2m_malloc
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:67     .text.lwm2m_free:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:74     .text.lwm2m_free:00000000 lwm2m_free
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:114    .text.lwm2m_strdup:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:121    .text.lwm2m_strdup:00000000 lwm2m_strdup
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:180    .text.lwm2m_strncmp:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:187    .text.lwm2m_strncmp:00000000 lwm2m_strncmp
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:228    .text.lwm2m_gettime:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:235    .text.lwm2m_gettime:00000000 lwm2m_gettime
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:268    .text.lwm2m_rand:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:275    .text.lwm2m_rand:00000000 lwm2m_rand
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:313    .text.lwm2m_delay:00000000 $t
+C:\Users\91458\AppData\Local\Temp\cc5EvWud.s:320    .text.lwm2m_delay:00000000 lwm2m_delay
+
+UNDEFINED SYMBOLS
+atiny_malloc
+atiny_free
+strlen
+memcpy
+strncmp
+__aeabi_uldivmod
+atiny_gettime_ms
+atiny_random
+atiny_delay

@@ -1,0 +1,1631 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"los_memory.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	g_pPoolHead
+  18              		.section	.bss.g_pPoolHead,"aw",%nobits
+  19              		.align	2
+  22              	g_pPoolHead:
+  23 0000 00000000 		.space	4
+  24              		.section	.text.osSlabCtrlHdrGet,"ax",%progbits
+  25              		.align	1
+  26              		.global	osSlabCtrlHdrGet
+  27              		.syntax unified
+  28              		.thumb
+  29              		.thumb_func
+  30              		.fpu fpv4-sp-d16
+  32              	osSlabCtrlHdrGet:
+  33              	.LFB133:
+  34              		.file 1 "D:/iot/felix2/kernel/base/mem/bestfit_little/los_memory.c"
+   1:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * Copyright (c) <2013-2017>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * All rights reserved.
+   4:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * provided with the distribution.
+  11:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * permission.
+  14:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*----------------------------------------------------------------------------
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 2
+
+
+  27:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * ===============================================
+  29:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "string.h"
+  35:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_typedef.h"
+  36:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_memory.ph"
+  37:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+  38:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_slab.ph"
+  39:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+  40:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_heap.ph"
+  41:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_hwi.h"
+  42:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_PLATFORM_EXC == YES)
+  43:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_exc.ph"
+  44:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+  45:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_PLATFORM_EXC == YES)
+  46:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #include "los_memcheck.ph"
+  47:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+  48:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  49:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_MEM_MUL_POOL == YES)
+  50:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** VOID *g_pPoolHead = NULL;
+  51:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+  52:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  53:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #define OS_SLAB_CAST(_t, _exp) ((_t)(_exp))
+  54:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #define OS_MEM_POOL_BASE_ALIGN 4
+  55:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #define IS_POOL_ALIGNED(value, alignSize)  (0 == (((UINT32)(value)) & ((UINT32)(alignSize - 1))))
+  56:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  57:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_MINOR VOID *osSlabCtrlHdrGet(VOID *pPool)
+  58:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+  35              		.loc 1 58 0
+  36              		.cfi_startproc
+  37              		@ args = 0, pretend = 0, frame = 8
+  38              		@ frame_needed = 1, uses_anonymous_args = 0
+  39              		@ link register save eliminated.
+  40 0000 80B4     		push	{r7}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 4
+  43              		.cfi_offset 7, -4
+  44 0002 83B0     		sub	sp, sp, #12
+  45              	.LCFI1:
+  46              		.cfi_def_cfa_offset 16
+  47 0004 00AF     		add	r7, sp, #0
+  48              	.LCFI2:
+  49              		.cfi_def_cfa_register 7
+  50 0006 7860     		str	r0, [r7, #4]
+  59:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+  60:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return (&(OS_SLAB_CAST(struct LOS_HEAP_MANAGER *, pPool)->stSlabCtrlHdr));
+  51              		.loc 1 60 0
+  52 0008 7B68     		ldr	r3, [r7, #4]
+  53 000a 1033     		adds	r3, r3, #16
+  61:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #else
+  62:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return NULL;
+  63:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+  64:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 3
+
+
+  54              		.loc 1 64 0
+  55 000c 1846     		mov	r0, r3
+  56 000e 0C37     		adds	r7, r7, #12
+  57              	.LCFI3:
+  58              		.cfi_def_cfa_offset 4
+  59 0010 BD46     		mov	sp, r7
+  60              	.LCFI4:
+  61              		.cfi_def_cfa_register 13
+  62              		@ sp needed
+  63 0012 5DF8047B 		ldr	r7, [sp], #4
+  64              	.LCFI5:
+  65              		.cfi_restore 7
+  66              		.cfi_def_cfa_offset 0
+  67 0016 7047     		bx	lr
+  68              		.cfi_endproc
+  69              	.LFE133:
+  71              		.section	.rodata
+  72              		.align	2
+  73              	.LC0:
+  74 0000 5B455252 		.ascii	"[ERR] \000"
+  74      5D2000
+  75 0007 00       		.align	2
+  76              	.LC1:
+  77 0008 706F6F6C 		.ascii	"pool [%p, 0x%x) conflict with pool [%p, 0x%x)\012\000"
+  77      205B2570 
+  77      2C203078 
+  77      25782920 
+  77      636F6E66 
+  78              		.section	.text.LOS_MemInit,"ax",%progbits
+  79              		.align	1
+  80              		.global	LOS_MemInit
+  81              		.syntax unified
+  82              		.thumb
+  83              		.thumb_func
+  84              		.fpu fpv4-sp-d16
+  86              	LOS_MemInit:
+  87              	.LFB134:
+  65:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  66:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*****************************************************************************
+  67:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Function : LOS_MemInit
+  68:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Description : Initialize Dynamic Memory pool
+  69:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Input       : pPool    --- Pointer to memory pool
+  70:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                uwSize  --- Size of memory in bytes to allocate
+  71:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Output      : None
+  72:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Return      : LOS_OK - Ok, LOS_NOK - Error
+  73:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** *****************************************************************************/
+  74:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_INIT UINT32 LOS_MemInit(VOID *pPool, UINT32 uwSize)
+  75:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+  88              		.loc 1 75 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 32
+  91              		@ frame_needed = 1, uses_anonymous_args = 0
+  92 0000 80B5     		push	{r7, lr}
+  93              	.LCFI6:
+  94              		.cfi_def_cfa_offset 8
+  95              		.cfi_offset 7, -8
+  96              		.cfi_offset 14, -4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 4
+
+
+  97 0002 8AB0     		sub	sp, sp, #40
+  98              	.LCFI7:
+  99              		.cfi_def_cfa_offset 48
+ 100 0004 02AF     		add	r7, sp, #8
+ 101              	.LCFI8:
+ 102              		.cfi_def_cfa 7, 40
+ 103 0006 7860     		str	r0, [r7, #4]
+ 104 0008 3960     		str	r1, [r7]
+  76:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     BOOL bRet = TRUE;
+ 105              		.loc 1 76 0
+ 106 000a 0123     		movs	r3, #1
+ 107 000c 7B61     		str	r3, [r7, #20]
+  77:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINTPTR uvIntSave;
+  78:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_MEM_MUL_POOL == YES)
+  79:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     VOID *pNext = g_pPoolHead;
+ 108              		.loc 1 79 0
+ 109 000e 414B     		ldr	r3, .L17
+ 110 0010 1B68     		ldr	r3, [r3]
+ 111 0012 FB61     		str	r3, [r7, #28]
+  80:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     VOID * pCur = g_pPoolHead;
+ 112              		.loc 1 80 0
+ 113 0014 3F4B     		ldr	r3, .L17
+ 114 0016 1B68     		ldr	r3, [r3]
+ 115 0018 BB61     		str	r3, [r7, #24]
+  81:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwPoolEnd;
+  82:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+  83:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  84:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (!pPool || uwSize <= sizeof(struct LOS_HEAP_MANAGER))
+ 116              		.loc 1 84 0
+ 117 001a 7B68     		ldr	r3, [r7, #4]
+ 118 001c 002B     		cmp	r3, #0
+ 119 001e 02D0     		beq	.L4
+ 120              		.loc 1 84 0 is_stmt 0 discriminator 1
+ 121 0020 3B68     		ldr	r3, [r7]
+ 122 0022 502B     		cmp	r3, #80
+ 123 0024 01D8     		bhi	.L5
+ 124              	.L4:
+  85:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return LOS_NOK;
+ 125              		.loc 1 85 0 is_stmt 1
+ 126 0026 0123     		movs	r3, #1
+ 127 0028 70E0     		b	.L6
+ 128              	.L5:
+  86:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  87:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (!IS_POOL_ALIGNED(pPool, OS_MEM_POOL_BASE_ALIGN))
+ 129              		.loc 1 87 0
+ 130 002a 7B68     		ldr	r3, [r7, #4]
+ 131 002c 03F00303 		and	r3, r3, #3
+ 132 0030 002B     		cmp	r3, #0
+ 133 0032 01D0     		beq	.L7
+  88:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return LOS_NOK;
+ 134              		.loc 1 88 0
+ 135 0034 0123     		movs	r3, #1
+ 136 0036 69E0     		b	.L6
+ 137              	.L7:
+  89:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  90:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uvIntSave = LOS_IntLock();
+ 138              		.loc 1 90 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 5
+
+
+ 139 0038 FFF7FEFF 		bl	LOS_IntLock
+ 140 003c 3861     		str	r0, [r7, #16]
+  91:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+  92:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_MEM_MUL_POOL == YES)
+  93:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     while (pNext != NULL)
+ 141              		.loc 1 93 0
+ 142 003e 33E0     		b	.L8
+ 143              	.L12:
+  94:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+  95:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         uwPoolEnd = (UINT32)pNext + ((struct LOS_HEAP_MANAGER *)pNext)->uwSize;
+ 144              		.loc 1 95 0
+ 145 0040 FB69     		ldr	r3, [r7, #28]
+ 146 0042 9A68     		ldr	r2, [r3, #8]
+ 147 0044 FB69     		ldr	r3, [r7, #28]
+ 148 0046 1344     		add	r3, r3, r2
+ 149 0048 FB60     		str	r3, [r7, #12]
+  96:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         if ((pPool <= pNext && ((UINT32)pPool + uwSize) > (UINT32)pNext) ||
+ 150              		.loc 1 96 0
+ 151 004a 7A68     		ldr	r2, [r7, #4]
+ 152 004c FB69     		ldr	r3, [r7, #28]
+ 153 004e 9A42     		cmp	r2, r3
+ 154 0050 05D8     		bhi	.L9
+ 155              		.loc 1 96 0 is_stmt 0 discriminator 1
+ 156 0052 7A68     		ldr	r2, [r7, #4]
+ 157 0054 3B68     		ldr	r3, [r7]
+ 158 0056 1A44     		add	r2, r2, r3
+ 159 0058 FB69     		ldr	r3, [r7, #28]
+ 160 005a 9A42     		cmp	r2, r3
+ 161 005c 09D8     		bhi	.L10
+ 162              	.L9:
+  97:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             ((UINT32)pPool < uwPoolEnd && ((UINT32)pPool + uwSize) >= uwPoolEnd))
+ 163              		.loc 1 97 0 is_stmt 1 discriminator 3
+ 164 005e 7B68     		ldr	r3, [r7, #4]
+  96:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         if ((pPool <= pNext && ((UINT32)pPool + uwSize) > (UINT32)pNext) ||
+ 165              		.loc 1 96 0 discriminator 3
+ 166 0060 FA68     		ldr	r2, [r7, #12]
+ 167 0062 9A42     		cmp	r2, r3
+ 168 0064 1BD9     		bls	.L11
+ 169              		.loc 1 97 0
+ 170 0066 7A68     		ldr	r2, [r7, #4]
+ 171 0068 3B68     		ldr	r3, [r7]
+ 172 006a 1344     		add	r3, r3, r2
+ 173 006c FA68     		ldr	r2, [r7, #12]
+ 174 006e 9A42     		cmp	r2, r3
+ 175 0070 15D8     		bhi	.L11
+ 176              	.L10:
+  98:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+  99:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             PRINT_ERR("pool [%p, 0x%x) conflict with pool [%p, 0x%x)\n",
+ 177              		.loc 1 99 0
+ 178 0072 2948     		ldr	r0, .L17+4
+ 179 0074 FFF7FEFF 		bl	printf
+ 180 0078 7A68     		ldr	r2, [r7, #4]
+ 181 007a 3B68     		ldr	r3, [r7]
+ 182 007c D118     		adds	r1, r2, r3
+ 183 007e FB69     		ldr	r3, [r7, #28]
+ 184 0080 9A68     		ldr	r2, [r3, #8]
+ 185 0082 FB69     		ldr	r3, [r7, #28]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 6
+
+
+ 186 0084 1344     		add	r3, r3, r2
+ 187 0086 0093     		str	r3, [sp]
+ 188 0088 FB69     		ldr	r3, [r7, #28]
+ 189 008a 0A46     		mov	r2, r1
+ 190 008c 7968     		ldr	r1, [r7, #4]
+ 191 008e 2348     		ldr	r0, .L17+8
+ 192 0090 FFF7FEFF 		bl	printf
+ 100:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                           pPool, (UINT32)pPool + uwSize,
+ 101:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                           pNext, (UINT32)pNext + ((struct LOS_HEAP_MANAGER *)pNext)->uwSize);
+ 102:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 103:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             LOS_IntRestore(uvIntSave);
+ 193              		.loc 1 103 0
+ 194 0094 3869     		ldr	r0, [r7, #16]
+ 195 0096 FFF7FEFF 		bl	LOS_IntRestore
+ 104:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             return LOS_NOK;
+ 196              		.loc 1 104 0
+ 197 009a 0123     		movs	r3, #1
+ 198 009c 36E0     		b	.L6
+ 199              	.L11:
+ 105:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 106:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         pCur = pNext;
+ 200              		.loc 1 106 0
+ 201 009e FB69     		ldr	r3, [r7, #28]
+ 202 00a0 BB61     		str	r3, [r7, #24]
+ 107:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         pNext = ((struct LOS_HEAP_MANAGER *)pNext)->pNextPool;
+ 203              		.loc 1 107 0
+ 204 00a2 FB69     		ldr	r3, [r7, #28]
+ 205 00a4 DB68     		ldr	r3, [r3, #12]
+ 206 00a6 FB61     		str	r3, [r7, #28]
+ 207              	.L8:
+  93:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 208              		.loc 1 93 0
+ 209 00a8 FB69     		ldr	r3, [r7, #28]
+ 210 00aa 002B     		cmp	r3, #0
+ 211 00ac C8D1     		bne	.L12
+ 108:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 109:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 110:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 111:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     bRet = osHeapInit(pPool, uwSize);
+ 212              		.loc 1 111 0
+ 213 00ae 3968     		ldr	r1, [r7]
+ 214 00b0 7868     		ldr	r0, [r7, #4]
+ 215 00b2 FFF7FEFF 		bl	osHeapInit
+ 216 00b6 7861     		str	r0, [r7, #20]
+ 112:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if(!bRet)
+ 217              		.loc 1 112 0
+ 218 00b8 7B69     		ldr	r3, [r7, #20]
+ 219 00ba 002B     		cmp	r3, #0
+ 220 00bc 04D1     		bne	.L13
+ 113:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 114:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         LOS_IntRestore(uvIntSave);
+ 221              		.loc 1 114 0
+ 222 00be 3869     		ldr	r0, [r7, #16]
+ 223 00c0 FFF7FEFF 		bl	LOS_IntRestore
+ 115:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return LOS_NOK;
+ 224              		.loc 1 115 0
+ 225 00c4 0123     		movs	r3, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 7
+
+
+ 226 00c6 21E0     		b	.L6
+ 227              	.L13:
+ 116:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 117:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 118:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (uwSize >= SLAB_BASIC_NEED_SIZE)//if size of pool is small than size of slab need, don`t ini
+ 228              		.loc 1 118 0
+ 229 00c8 3B68     		ldr	r3, [r7]
+ 230 00ca B3F5805F 		cmp	r3, #4096
+ 231 00ce 0BD3     		bcc	.L14
+ 119:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 120:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         bRet = osSlabMemInit(pPool);
+ 232              		.loc 1 120 0
+ 233 00d0 7868     		ldr	r0, [r7, #4]
+ 234 00d2 FFF7FEFF 		bl	osSlabMemInit
+ 235 00d6 7861     		str	r0, [r7, #20]
+ 121:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         if(!bRet)
+ 236              		.loc 1 121 0
+ 237 00d8 7B69     		ldr	r3, [r7, #20]
+ 238 00da 002B     		cmp	r3, #0
+ 239 00dc 04D1     		bne	.L14
+ 122:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 123:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             LOS_IntRestore(uvIntSave);
+ 240              		.loc 1 123 0
+ 241 00de 3869     		ldr	r0, [r7, #16]
+ 242 00e0 FFF7FEFF 		bl	LOS_IntRestore
+ 124:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             return LOS_NOK;
+ 243              		.loc 1 124 0
+ 244 00e4 0123     		movs	r3, #1
+ 245 00e6 11E0     		b	.L6
+ 246              	.L14:
+ 125:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 126:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 127:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 128:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 129:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_MEM_MUL_POOL == YES)
+ 130:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (g_pPoolHead == NULL)
+ 247              		.loc 1 130 0
+ 248 00e8 0A4B     		ldr	r3, .L17
+ 249 00ea 1B68     		ldr	r3, [r3]
+ 250 00ec 002B     		cmp	r3, #0
+ 251 00ee 03D1     		bne	.L15
+ 131:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 132:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         g_pPoolHead = pPool;
+ 252              		.loc 1 132 0
+ 253 00f0 084A     		ldr	r2, .L17
+ 254 00f2 7B68     		ldr	r3, [r7, #4]
+ 255 00f4 1360     		str	r3, [r2]
+ 256 00f6 02E0     		b	.L16
+ 257              	.L15:
+ 133:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 134:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     else
+ 135:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 136:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         ((struct LOS_HEAP_MANAGER *)pCur)->pNextPool = pPool;
+ 258              		.loc 1 136 0
+ 259 00f8 BB69     		ldr	r3, [r7, #24]
+ 260 00fa 7A68     		ldr	r2, [r7, #4]
+ 261 00fc DA60     		str	r2, [r3, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 8
+
+
+ 262              	.L16:
+ 137:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 138:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 139:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     ((struct LOS_HEAP_MANAGER *)pPool)->pNextPool = NULL;
+ 263              		.loc 1 139 0
+ 264 00fe 7B68     		ldr	r3, [r7, #4]
+ 265 0100 0022     		movs	r2, #0
+ 266 0102 DA60     		str	r2, [r3, #12]
+ 140:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 141:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 142:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if ((LOSCFG_PLATFORM_EXC == YES) && (LOSCFG_SAVE_EXC_INFO == YES))
+ 143:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     osMemInfoUpdate(pPool, uwSize, MEM_MANG_MEMORY);
+ 144:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 145:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 146:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     LOS_IntRestore(uvIntSave);
+ 267              		.loc 1 146 0
+ 268 0104 3869     		ldr	r0, [r7, #16]
+ 269 0106 FFF7FEFF 		bl	LOS_IntRestore
+ 147:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return LOS_OK;
+ 270              		.loc 1 147 0
+ 271 010a 0023     		movs	r3, #0
+ 272              	.L6:
+ 148:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 273              		.loc 1 148 0
+ 274 010c 1846     		mov	r0, r3
+ 275 010e 2037     		adds	r7, r7, #32
+ 276              	.LCFI9:
+ 277              		.cfi_def_cfa_offset 8
+ 278 0110 BD46     		mov	sp, r7
+ 279              	.LCFI10:
+ 280              		.cfi_def_cfa_register 13
+ 281              		@ sp needed
+ 282 0112 80BD     		pop	{r7, pc}
+ 283              	.L18:
+ 284              		.align	2
+ 285              	.L17:
+ 286 0114 00000000 		.word	g_pPoolHead
+ 287 0118 00000000 		.word	.LC0
+ 288 011c 08000000 		.word	.LC1
+ 289              		.cfi_endproc
+ 290              	.LFE134:
+ 292              		.section	.text.osMemSystemInit,"ax",%progbits
+ 293              		.align	1
+ 294              		.global	osMemSystemInit
+ 295              		.syntax unified
+ 296              		.thumb
+ 297              		.thumb_func
+ 298              		.fpu fpv4-sp-d16
+ 300              	osMemSystemInit:
+ 301              	.LFB135:
+ 149:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 150:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_INIT UINT32 osMemSystemInit(VOID)
+ 151:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 302              		.loc 1 151 0
+ 303              		.cfi_startproc
+ 304              		@ args = 0, pretend = 0, frame = 8
+ 305              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 9
+
+
+ 306 0000 80B5     		push	{r7, lr}
+ 307              	.LCFI11:
+ 308              		.cfi_def_cfa_offset 8
+ 309              		.cfi_offset 7, -8
+ 310              		.cfi_offset 14, -4
+ 311 0002 82B0     		sub	sp, sp, #8
+ 312              	.LCFI12:
+ 313              		.cfi_def_cfa_offset 16
+ 314 0004 00AF     		add	r7, sp, #0
+ 315              	.LCFI13:
+ 316              		.cfi_def_cfa_register 7
+ 152:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwRet = LOS_OK;
+ 317              		.loc 1 152 0
+ 318 0006 0023     		movs	r3, #0
+ 319 0008 7B60     		str	r3, [r7, #4]
+ 153:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 154:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uwRet = LOS_MemInit((VOID *)OS_SYS_MEM_ADDR, OS_SYS_MEM_SIZE);
+ 320              		.loc 1 154 0
+ 321 000a 074B     		ldr	r3, .L21
+ 322 000c 0133     		adds	r3, r3, #1
+ 323 000e 074A     		ldr	r2, .L21+4
+ 324 0010 9B1A     		subs	r3, r3, r2
+ 325 0012 1946     		mov	r1, r3
+ 326 0014 0548     		ldr	r0, .L21+4
+ 327 0016 FFF7FEFF 		bl	LOS_MemInit
+ 328 001a 7860     		str	r0, [r7, #4]
+ 155:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 156:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if ((LOSCFG_PLATFORM_EXC == YES) && (LOSCFG_SAVE_EXC_INFO == YES))
+ 157:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     osExcRegister(OS_EXC_TYPE_MEM, (EXC_INFO_SAVE_CALLBACK)LOS_MemExcInfoGet, g_aucMemMang);
+ 158:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 159:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return uwRet;
+ 329              		.loc 1 159 0
+ 330 001c 7B68     		ldr	r3, [r7, #4]
+ 160:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 331              		.loc 1 160 0
+ 332 001e 1846     		mov	r0, r3
+ 333 0020 0837     		adds	r7, r7, #8
+ 334              	.LCFI14:
+ 335              		.cfi_def_cfa_offset 8
+ 336 0022 BD46     		mov	sp, r7
+ 337              	.LCFI15:
+ 338              		.cfi_def_cfa_register 13
+ 339              		@ sp needed
+ 340 0024 80BD     		pop	{r7, pc}
+ 341              	.L22:
+ 342 0026 00BF     		.align	2
+ 343              	.L21:
+ 344 0028 00000000 		.word	__los_heap_addr_end__
+ 345 002c 00000000 		.word	__los_heap_addr_start__
+ 346              		.cfi_endproc
+ 347              	.LFE135:
+ 349              		.section	.text.LOS_MemDeInit,"ax",%progbits
+ 350              		.align	1
+ 351              		.global	LOS_MemDeInit
+ 352              		.syntax unified
+ 353              		.thumb
+ 354              		.thumb_func
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 10
+
+
+ 355              		.fpu fpv4-sp-d16
+ 357              	LOS_MemDeInit:
+ 358              	.LFB136:
+ 161:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 162:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_MEM_MUL_POOL == YES)
+ 163:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_INIT UINT32 LOS_MemDeInit(VOID *pPool)
+ 164:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 359              		.loc 1 164 0
+ 360              		.cfi_startproc
+ 361              		@ args = 0, pretend = 0, frame = 24
+ 362              		@ frame_needed = 1, uses_anonymous_args = 0
+ 363 0000 80B5     		push	{r7, lr}
+ 364              	.LCFI16:
+ 365              		.cfi_def_cfa_offset 8
+ 366              		.cfi_offset 7, -8
+ 367              		.cfi_offset 14, -4
+ 368 0002 86B0     		sub	sp, sp, #24
+ 369              	.LCFI17:
+ 370              		.cfi_def_cfa_offset 32
+ 371 0004 00AF     		add	r7, sp, #0
+ 372              	.LCFI18:
+ 373              		.cfi_def_cfa_register 7
+ 374 0006 7860     		str	r0, [r7, #4]
+ 165:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINTPTR uvIntSave, uvRet = LOS_NOK;
+ 375              		.loc 1 165 0
+ 376 0008 0123     		movs	r3, #1
+ 377 000a 7B61     		str	r3, [r7, #20]
+ 166:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     VOID *pNext, *pCur;
+ 167:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 168:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (NULL == pPool)
+ 378              		.loc 1 168 0
+ 379 000c 7B68     		ldr	r3, [r7, #4]
+ 380 000e 002B     		cmp	r3, #0
+ 381 0010 01D1     		bne	.L24
+ 169:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 170:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return uvRet;
+ 382              		.loc 1 170 0
+ 383 0012 7B69     		ldr	r3, [r7, #20]
+ 384 0014 30E0     		b	.L25
+ 385              	.L24:
+ 171:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 172:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uvIntSave = LOS_IntLock();
+ 386              		.loc 1 172 0
+ 387 0016 FFF7FEFF 		bl	LOS_IntLock
+ 388 001a B860     		str	r0, [r7, #8]
+ 173:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     do
+ 174:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 175:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         if (pPool == g_pPoolHead)
+ 389              		.loc 1 175 0
+ 390 001c 184B     		ldr	r3, .L31
+ 391 001e 1B68     		ldr	r3, [r3]
+ 392 0020 7A68     		ldr	r2, [r7, #4]
+ 393 0022 9A42     		cmp	r2, r3
+ 394 0024 07D1     		bne	.L26
+ 176:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 177:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             g_pPoolHead = ((struct LOS_HEAP_MANAGER *)g_pPoolHead)->pNextPool;
+ 395              		.loc 1 177 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 11
+
+
+ 396 0026 164B     		ldr	r3, .L31
+ 397 0028 1B68     		ldr	r3, [r3]
+ 398 002a DB68     		ldr	r3, [r3, #12]
+ 399 002c 144A     		ldr	r2, .L31
+ 400 002e 1360     		str	r3, [r2]
+ 178:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             uvRet = LOS_OK;
+ 401              		.loc 1 178 0
+ 402 0030 0023     		movs	r3, #0
+ 403 0032 7B61     		str	r3, [r7, #20]
+ 179:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             break;
+ 404              		.loc 1 179 0
+ 405 0034 19E0     		b	.L27
+ 406              	.L26:
+ 180:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 181:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 182:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         pCur = g_pPoolHead;
+ 407              		.loc 1 182 0
+ 408 0036 124B     		ldr	r3, .L31
+ 409 0038 1B68     		ldr	r3, [r3]
+ 410 003a FB60     		str	r3, [r7, #12]
+ 183:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         pNext = g_pPoolHead;
+ 411              		.loc 1 183 0
+ 412 003c 104B     		ldr	r3, .L31
+ 413 003e 1B68     		ldr	r3, [r3]
+ 414 0040 3B61     		str	r3, [r7, #16]
+ 184:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 185:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         while (pNext != NULL)
+ 415              		.loc 1 185 0
+ 416 0042 0FE0     		b	.L28
+ 417              	.L30:
+ 186:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 187:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             if (pPool == pNext)
+ 418              		.loc 1 187 0
+ 419 0044 7A68     		ldr	r2, [r7, #4]
+ 420 0046 3B69     		ldr	r3, [r7, #16]
+ 421 0048 9A42     		cmp	r2, r3
+ 422 004a 06D1     		bne	.L29
+ 188:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             {
+ 189:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                 ((struct LOS_HEAP_MANAGER *)pCur)->pNextPool = ((struct LOS_HEAP_MANAGER *)pNext)->
+ 423              		.loc 1 189 0
+ 424 004c 3B69     		ldr	r3, [r7, #16]
+ 425 004e DA68     		ldr	r2, [r3, #12]
+ 426 0050 FB68     		ldr	r3, [r7, #12]
+ 427 0052 DA60     		str	r2, [r3, #12]
+ 190:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                 uvRet = LOS_OK;
+ 428              		.loc 1 190 0
+ 429 0054 0023     		movs	r3, #0
+ 430 0056 7B61     		str	r3, [r7, #20]
+ 191:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                 break;
+ 431              		.loc 1 191 0
+ 432 0058 07E0     		b	.L27
+ 433              	.L29:
+ 192:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             }
+ 193:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             pCur = pNext;
+ 434              		.loc 1 193 0
+ 435 005a 3B69     		ldr	r3, [r7, #16]
+ 436 005c FB60     		str	r3, [r7, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 12
+
+
+ 194:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             pNext = ((struct LOS_HEAP_MANAGER *)pNext)->pNextPool;
+ 437              		.loc 1 194 0
+ 438 005e 3B69     		ldr	r3, [r7, #16]
+ 439 0060 DB68     		ldr	r3, [r3, #12]
+ 440 0062 3B61     		str	r3, [r7, #16]
+ 441              	.L28:
+ 185:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 442              		.loc 1 185 0
+ 443 0064 3B69     		ldr	r3, [r7, #16]
+ 444 0066 002B     		cmp	r3, #0
+ 445 0068 ECD1     		bne	.L30
+ 446              	.L27:
+ 195:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 196:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }while(0);
+ 197:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 198:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if ((LOSCFG_PLATFORM_EXC == YES) && (LOSCFG_SAVE_EXC_INFO == YES))
+ 199:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (uvRet == LOS_OK)
+ 200:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         osMemInfoUpdate(pPool, 0, MEM_MANG_EMPTY);
+ 201:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 202:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 203:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     osSlabMemDeinit(pPool);
+ 447              		.loc 1 203 0
+ 448 006a 7868     		ldr	r0, [r7, #4]
+ 449 006c FFF7FEFF 		bl	osSlabMemDeinit
+ 204:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 205:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     LOS_IntRestore(uvIntSave);
+ 450              		.loc 1 205 0
+ 451 0070 B868     		ldr	r0, [r7, #8]
+ 452 0072 FFF7FEFF 		bl	LOS_IntRestore
+ 206:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return uvRet;
+ 453              		.loc 1 206 0
+ 454 0076 7B69     		ldr	r3, [r7, #20]
+ 455              	.L25:
+ 207:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 456              		.loc 1 207 0
+ 457 0078 1846     		mov	r0, r3
+ 458 007a 1837     		adds	r7, r7, #24
+ 459              	.LCFI19:
+ 460              		.cfi_def_cfa_offset 8
+ 461 007c BD46     		mov	sp, r7
+ 462              	.LCFI20:
+ 463              		.cfi_def_cfa_register 13
+ 464              		@ sp needed
+ 465 007e 80BD     		pop	{r7, pc}
+ 466              	.L32:
+ 467              		.align	2
+ 468              	.L31:
+ 469 0080 00000000 		.word	g_pPoolHead
+ 470              		.cfi_endproc
+ 471              	.LFE136:
+ 473              		.section	.text.LOS_MemPoolList,"ax",%progbits
+ 474              		.align	1
+ 475              		.global	LOS_MemPoolList
+ 476              		.syntax unified
+ 477              		.thumb
+ 478              		.thumb_func
+ 479              		.fpu fpv4-sp-d16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 13
+
+
+ 481              	LOS_MemPoolList:
+ 482              	.LFB137:
+ 208:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 209:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_INIT UINT32 LOS_MemPoolList(VOID)
+ 210:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 483              		.loc 1 210 0
+ 484              		.cfi_startproc
+ 485              		@ args = 0, pretend = 0, frame = 8
+ 486              		@ frame_needed = 1, uses_anonymous_args = 0
+ 487 0000 80B5     		push	{r7, lr}
+ 488              	.LCFI21:
+ 489              		.cfi_def_cfa_offset 8
+ 490              		.cfi_offset 7, -8
+ 491              		.cfi_offset 14, -4
+ 492 0002 82B0     		sub	sp, sp, #8
+ 493              	.LCFI22:
+ 494              		.cfi_def_cfa_offset 16
+ 495 0004 00AF     		add	r7, sp, #0
+ 496              	.LCFI23:
+ 497              		.cfi_def_cfa_register 7
+ 211:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     VOID *pNext = g_pPoolHead;
+ 498              		.loc 1 211 0
+ 499 0006 0B4B     		ldr	r3, .L37
+ 500 0008 1B68     		ldr	r3, [r3]
+ 501 000a 7B60     		str	r3, [r7, #4]
+ 212:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwIndex = 0;
+ 502              		.loc 1 212 0
+ 503 000c 0023     		movs	r3, #0
+ 504 000e 3B60     		str	r3, [r7]
+ 213:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 214:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     while (pNext != NULL)
+ 505              		.loc 1 214 0
+ 506 0010 08E0     		b	.L34
+ 507              	.L35:
+ 215:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 216:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         uwIndex++;
+ 508              		.loc 1 216 0
+ 509 0012 3B68     		ldr	r3, [r7]
+ 510 0014 0133     		adds	r3, r3, #1
+ 511 0016 3B60     		str	r3, [r7]
+ 217:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         osAlarmHeapInfo(pNext);
+ 512              		.loc 1 217 0
+ 513 0018 7868     		ldr	r0, [r7, #4]
+ 514 001a FFF7FEFF 		bl	osAlarmHeapInfo
+ 218:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         pNext = ((struct LOS_HEAP_MANAGER *)pNext)->pNextPool;
+ 515              		.loc 1 218 0
+ 516 001e 7B68     		ldr	r3, [r7, #4]
+ 517 0020 DB68     		ldr	r3, [r3, #12]
+ 518 0022 7B60     		str	r3, [r7, #4]
+ 519              	.L34:
+ 214:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 520              		.loc 1 214 0
+ 521 0024 7B68     		ldr	r3, [r7, #4]
+ 522 0026 002B     		cmp	r3, #0
+ 523 0028 F3D1     		bne	.L35
+ 219:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 220:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return uwIndex;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 14
+
+
+ 524              		.loc 1 220 0
+ 525 002a 3B68     		ldr	r3, [r7]
+ 221:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 526              		.loc 1 221 0
+ 527 002c 1846     		mov	r0, r3
+ 528 002e 0837     		adds	r7, r7, #8
+ 529              	.LCFI24:
+ 530              		.cfi_def_cfa_offset 8
+ 531 0030 BD46     		mov	sp, r7
+ 532              	.LCFI25:
+ 533              		.cfi_def_cfa_register 13
+ 534              		@ sp needed
+ 535 0032 80BD     		pop	{r7, pc}
+ 536              	.L38:
+ 537              		.align	2
+ 538              	.L37:
+ 539 0034 00000000 		.word	g_pPoolHead
+ 540              		.cfi_endproc
+ 541              	.LFE137:
+ 543              		.section	.text.LOS_MemAlloc,"ax",%progbits
+ 544              		.align	1
+ 545              		.global	LOS_MemAlloc
+ 546              		.syntax unified
+ 547              		.thumb
+ 548              		.thumb_func
+ 549              		.fpu fpv4-sp-d16
+ 551              	LOS_MemAlloc:
+ 552              	.LFB138:
+ 222:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 223:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 224:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*****************************************************************************
+ 225:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Function : LOS_MemAlloc
+ 226:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Description : Allocate Memory from Memory pool
+ 227:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Input       : pPool    --- Pointer to memory pool
+ 228:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                uwSize   --- Size of memory in bytes to allocate
+ 229:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Output      : None
+ 230:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Return      : Pointer to allocated memory
+ 231:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** *****************************************************************************/
+ 232:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT VOID *LOS_MemAlloc (VOID *pPool, UINT32 uwSize)
+ 233:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 553              		.loc 1 233 0
+ 554              		.cfi_startproc
+ 555              		@ args = 0, pretend = 0, frame = 16
+ 556              		@ frame_needed = 1, uses_anonymous_args = 0
+ 557 0000 80B5     		push	{r7, lr}
+ 558              	.LCFI26:
+ 559              		.cfi_def_cfa_offset 8
+ 560              		.cfi_offset 7, -8
+ 561              		.cfi_offset 14, -4
+ 562 0002 84B0     		sub	sp, sp, #16
+ 563              	.LCFI27:
+ 564              		.cfi_def_cfa_offset 24
+ 565 0004 00AF     		add	r7, sp, #0
+ 566              	.LCFI28:
+ 567              		.cfi_def_cfa_register 7
+ 568 0006 7860     		str	r0, [r7, #4]
+ 569 0008 3960     		str	r1, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 15
+
+
+ 234:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     VOID *pRet = NULL;
+ 570              		.loc 1 234 0
+ 571 000a 0023     		movs	r3, #0
+ 572 000c FB60     		str	r3, [r7, #12]
+ 235:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 236:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if ((NULL == pPool) || (0 == uwSize))
+ 573              		.loc 1 236 0
+ 574 000e 7B68     		ldr	r3, [r7, #4]
+ 575 0010 002B     		cmp	r3, #0
+ 576 0012 02D0     		beq	.L40
+ 577              		.loc 1 236 0 is_stmt 0 discriminator 1
+ 578 0014 3B68     		ldr	r3, [r7]
+ 579 0016 002B     		cmp	r3, #0
+ 580 0018 01D1     		bne	.L41
+ 581              	.L40:
+ 237:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 238:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return pRet;
+ 582              		.loc 1 238 0 is_stmt 1
+ 583 001a FB68     		ldr	r3, [r7, #12]
+ 584 001c 0DE0     		b	.L42
+ 585              	.L41:
+ 239:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 240:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 241:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 242:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pRet = osSlabMemAlloc(pPool, uwSize);
+ 586              		.loc 1 242 0
+ 587 001e 3968     		ldr	r1, [r7]
+ 588 0020 7868     		ldr	r0, [r7, #4]
+ 589 0022 FFF7FEFF 		bl	osSlabMemAlloc
+ 590 0026 F860     		str	r0, [r7, #12]
+ 243:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if(pRet == NULL)
+ 591              		.loc 1 243 0
+ 592 0028 FB68     		ldr	r3, [r7, #12]
+ 593 002a 002B     		cmp	r3, #0
+ 594 002c 04D1     		bne	.L43
+ 244:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 245:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         pRet = osHeapAlloc(pPool, uwSize);
+ 595              		.loc 1 245 0
+ 596 002e 3968     		ldr	r1, [r7]
+ 597 0030 7868     		ldr	r0, [r7, #4]
+ 598 0032 FFF7FEFF 		bl	osHeapAlloc
+ 599 0036 F860     		str	r0, [r7, #12]
+ 600              	.L43:
+ 246:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 247:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return pRet;
+ 601              		.loc 1 247 0
+ 602 0038 FB68     		ldr	r3, [r7, #12]
+ 603              	.L42:
+ 248:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 604              		.loc 1 248 0
+ 605 003a 1846     		mov	r0, r3
+ 606 003c 1037     		adds	r7, r7, #16
+ 607              	.LCFI29:
+ 608              		.cfi_def_cfa_offset 8
+ 609 003e BD46     		mov	sp, r7
+ 610              	.LCFI30:
+ 611              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 16
+
+
+ 612              		@ sp needed
+ 613 0040 80BD     		pop	{r7, pc}
+ 614              		.cfi_endproc
+ 615              	.LFE138:
+ 617              		.section	.text.LOS_MemAllocAlign,"ax",%progbits
+ 618              		.align	1
+ 619              		.global	LOS_MemAllocAlign
+ 620              		.syntax unified
+ 621              		.thumb
+ 622              		.thumb_func
+ 623              		.fpu fpv4-sp-d16
+ 625              	LOS_MemAllocAlign:
+ 626              	.LFB139:
+ 249:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*****************************************************************************
+ 250:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Function : LOS_MemAllocAlign
+ 251:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Description : align size then allocate node from Memory pool
+ 252:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Input       : pPool        --- Pointer to memory pool
+ 253:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                uwSize       --- Size of memory in bytes to allocate
+ 254:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                uwBoundary   --- align form
+ 255:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Output      : None
+ 256:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Return      : Pointer to allocated memory node
+ 257:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** *****************************************************************************/
+ 258:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT VOID *LOS_MemAllocAlign(VOID *pPool, UINT32 uwSize, UINT32 uwBoundary)
+ 259:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 627              		.loc 1 259 0
+ 628              		.cfi_startproc
+ 629              		@ args = 0, pretend = 0, frame = 16
+ 630              		@ frame_needed = 1, uses_anonymous_args = 0
+ 631 0000 80B5     		push	{r7, lr}
+ 632              	.LCFI31:
+ 633              		.cfi_def_cfa_offset 8
+ 634              		.cfi_offset 7, -8
+ 635              		.cfi_offset 14, -4
+ 636 0002 84B0     		sub	sp, sp, #16
+ 637              	.LCFI32:
+ 638              		.cfi_def_cfa_offset 24
+ 639 0004 00AF     		add	r7, sp, #0
+ 640              	.LCFI33:
+ 641              		.cfi_def_cfa_register 7
+ 642 0006 F860     		str	r0, [r7, #12]
+ 643 0008 B960     		str	r1, [r7, #8]
+ 644 000a 7A60     		str	r2, [r7, #4]
+ 260:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return osHeapAllocAlign(pPool, uwSize, uwBoundary);
+ 645              		.loc 1 260 0
+ 646 000c 7A68     		ldr	r2, [r7, #4]
+ 647 000e B968     		ldr	r1, [r7, #8]
+ 648 0010 F868     		ldr	r0, [r7, #12]
+ 649 0012 FFF7FEFF 		bl	osHeapAllocAlign
+ 650 0016 0346     		mov	r3, r0
+ 261:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 651              		.loc 1 261 0
+ 652 0018 1846     		mov	r0, r3
+ 653 001a 1037     		adds	r7, r7, #16
+ 654              	.LCFI34:
+ 655              		.cfi_def_cfa_offset 8
+ 656 001c BD46     		mov	sp, r7
+ 657              	.LCFI35:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 17
+
+
+ 658              		.cfi_def_cfa_register 13
+ 659              		@ sp needed
+ 660 001e 80BD     		pop	{r7, pc}
+ 661              		.cfi_endproc
+ 662              	.LFE139:
+ 664              		.section	.text.LOS_MemRealloc,"ax",%progbits
+ 665              		.align	1
+ 666              		.global	LOS_MemRealloc
+ 667              		.syntax unified
+ 668              		.thumb
+ 669              		.thumb_func
+ 670              		.fpu fpv4-sp-d16
+ 672              	LOS_MemRealloc:
+ 673              	.LFB140:
+ 262:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 263:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*****************************************************************************
+ 264:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Function : LOS_MemRealloc
+ 265:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Description : realloc memory from Memory pool
+ 266:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Input       : pPool    --- Pointer to memory pool
+ 267:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                pPtr     --- Pointer to memory
+ 268:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                uwSize   --- new size
+ 269:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Output      : None
+ 270:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Return      : Pointer to allocated memory node
+ 271:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** *****************************************************************************/
+ 272:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_MINOR VOID *LOS_MemRealloc(VOID *pPool, VOID *pPtr, UINT32 uwSize)
+ 273:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 674              		.loc 1 273 0
+ 675              		.cfi_startproc
+ 676              		@ args = 0, pretend = 0, frame = 40
+ 677              		@ frame_needed = 1, uses_anonymous_args = 0
+ 678 0000 80B5     		push	{r7, lr}
+ 679              	.LCFI36:
+ 680              		.cfi_def_cfa_offset 8
+ 681              		.cfi_offset 7, -8
+ 682              		.cfi_offset 14, -4
+ 683 0002 8AB0     		sub	sp, sp, #40
+ 684              	.LCFI37:
+ 685              		.cfi_def_cfa_offset 48
+ 686 0004 00AF     		add	r7, sp, #0
+ 687              	.LCFI38:
+ 688              		.cfi_def_cfa_register 7
+ 689 0006 F860     		str	r0, [r7, #12]
+ 690 0008 B960     		str	r1, [r7, #8]
+ 691 000a 7A60     		str	r2, [r7, #4]
+ 274:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     VOID *p = NULL;
+ 692              		.loc 1 274 0
+ 693 000c 0023     		movs	r3, #0
+ 694 000e 7B62     		str	r3, [r7, #36]
+ 275:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINTPTR uvIntSave;
+ 276:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     struct LOS_HEAP_NODE *pstNode;
+ 277:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwCpySize = 0;
+ 695              		.loc 1 277 0
+ 696 0010 0023     		movs	r3, #0
+ 697 0012 3B62     		str	r3, [r7, #32]
+ 278:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)	
+ 279:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwOldSize = (UINT32)-1;
+ 698              		.loc 1 279 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 18
+
+
+ 699 0014 4FF0FF33 		mov	r3, #-1
+ 700 0018 FB61     		str	r3, [r7, #28]
+ 280:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 281:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwGapSize = 0;
+ 701              		.loc 1 281 0
+ 702 001a 0023     		movs	r3, #0
+ 703 001c BB61     		str	r3, [r7, #24]
+ 282:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 283:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if ((int)uwSize < 0)
+ 704              		.loc 1 283 0
+ 705 001e 7B68     		ldr	r3, [r7, #4]
+ 706 0020 002B     		cmp	r3, #0
+ 707 0022 01DA     		bge	.L47
+ 284:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 285:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return NULL;
+ 708              		.loc 1 285 0
+ 709 0024 0023     		movs	r3, #0
+ 710 0026 51E0     		b	.L48
+ 711              	.L47:
+ 286:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 287:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uvIntSave = LOS_IntLock();
+ 712              		.loc 1 287 0
+ 713 0028 FFF7FEFF 		bl	LOS_IntLock
+ 714 002c 7861     		str	r0, [r7, #20]
+ 288:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 289:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     /* Zero-size requests are treated as free. */
+ 290:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if ((NULL != pPtr) && (0 == uwSize))
+ 715              		.loc 1 290 0
+ 716 002e BB68     		ldr	r3, [r7, #8]
+ 717 0030 002B     		cmp	r3, #0
+ 718 0032 07D0     		beq	.L49
+ 719              		.loc 1 290 0 is_stmt 0 discriminator 1
+ 720 0034 7B68     		ldr	r3, [r7, #4]
+ 721 0036 002B     		cmp	r3, #0
+ 722 0038 04D1     		bne	.L49
+ 291:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 292:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         (VOID)LOS_MemFree(pPool, pPtr);
+ 723              		.loc 1 292 0 is_stmt 1
+ 724 003a B968     		ldr	r1, [r7, #8]
+ 725 003c F868     		ldr	r0, [r7, #12]
+ 726 003e FFF7FEFF 		bl	LOS_MemFree
+ 727 0042 3FE0     		b	.L50
+ 728              	.L49:
+ 293:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 294:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     /* Requests with NULL pointers are treated as malloc. */
+ 295:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     else if (NULL == pPtr)
+ 729              		.loc 1 295 0
+ 730 0044 BB68     		ldr	r3, [r7, #8]
+ 731 0046 002B     		cmp	r3, #0
+ 732 0048 05D1     		bne	.L51
+ 296:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 297:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         p = LOS_MemAlloc(pPool, uwSize);
+ 733              		.loc 1 297 0
+ 734 004a 7968     		ldr	r1, [r7, #4]
+ 735 004c F868     		ldr	r0, [r7, #12]
+ 736 004e FFF7FEFF 		bl	LOS_MemAlloc
+ 737 0052 7862     		str	r0, [r7, #36]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 19
+
+
+ 738 0054 36E0     		b	.L50
+ 739              	.L51:
+ 298:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 299:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     else
+ 300:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 301:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 302:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         uwOldSize = osSlabMemCheck(pPool, pPtr);
+ 740              		.loc 1 302 0
+ 741 0056 B968     		ldr	r1, [r7, #8]
+ 742 0058 F868     		ldr	r0, [r7, #12]
+ 743 005a FFF7FEFF 		bl	osSlabMemCheck
+ 744 005e F861     		str	r0, [r7, #28]
+ 303:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         if (uwOldSize != (UINT32)-1)
+ 745              		.loc 1 303 0
+ 746 0060 FB69     		ldr	r3, [r7, #28]
+ 747 0062 B3F1FF3F 		cmp	r3, #-1
+ 748 0066 06D0     		beq	.L52
+ 304:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 305:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             uwCpySize = uwSize > uwOldSize ? uwOldSize : uwSize;
+ 749              		.loc 1 305 0
+ 750 0068 7A68     		ldr	r2, [r7, #4]
+ 751 006a FB69     		ldr	r3, [r7, #28]
+ 752 006c 9342     		cmp	r3, r2
+ 753 006e 28BF     		it	cs
+ 754 0070 1346     		movcs	r3, r2
+ 755 0072 3B62     		str	r3, [r7, #32]
+ 756 0074 15E0     		b	.L53
+ 757              	.L52:
+ 306:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 307:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         else
+ 308:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 309:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 310:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             /* find the real ptr through gap size */
+ 311:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             uwGapSize = *((UINT32 *)((UINT32)pPtr - 4));
+ 758              		.loc 1 311 0
+ 759 0076 BB68     		ldr	r3, [r7, #8]
+ 760 0078 043B     		subs	r3, r3, #4
+ 761 007a 1B68     		ldr	r3, [r3]
+ 762 007c BB61     		str	r3, [r7, #24]
+ 312:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             if (OS_MEM_GET_ALIGN_FLAG(uwGapSize))
+ 763              		.loc 1 312 0
+ 764 007e BB69     		ldr	r3, [r7, #24]
+ 765 0080 002B     		cmp	r3, #0
+ 766 0082 01DA     		bge	.L54
+ 313:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             {
+ 314:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                 return NULL;
+ 767              		.loc 1 314 0
+ 768 0084 0023     		movs	r3, #0
+ 769 0086 21E0     		b	.L48
+ 770              	.L54:
+ 315:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             }
+ 316:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 317:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             pstNode = ((struct LOS_HEAP_NODE *)pPtr) - 1;
+ 771              		.loc 1 317 0
+ 772 0088 BB68     		ldr	r3, [r7, #8]
+ 773 008a 083B     		subs	r3, r3, #8
+ 774 008c 3B61     		str	r3, [r7, #16]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 20
+
+
+ 318:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             uwCpySize = uwSize > pstNode->uwSize ? pstNode->uwSize : uwSize;
+ 775              		.loc 1 318 0
+ 776 008e 3B69     		ldr	r3, [r7, #16]
+ 777 0090 5B68     		ldr	r3, [r3, #4]
+ 778 0092 C3F31D03 		ubfx	r3, r3, #0, #30
+ 779 0096 1A46     		mov	r2, r3
+ 780 0098 7B68     		ldr	r3, [r7, #4]
+ 781 009a 9342     		cmp	r3, r2
+ 782 009c 28BF     		it	cs
+ 783 009e 1346     		movcs	r3, r2
+ 784 00a0 3B62     		str	r3, [r7, #32]
+ 785              	.L53:
+ 319:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 320:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         p = LOS_MemAlloc(pPool, uwSize);
+ 786              		.loc 1 320 0
+ 787 00a2 7968     		ldr	r1, [r7, #4]
+ 788 00a4 F868     		ldr	r0, [r7, #12]
+ 789 00a6 FFF7FEFF 		bl	LOS_MemAlloc
+ 790 00aa 7862     		str	r0, [r7, #36]
+ 321:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 322:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         if (p != NULL)
+ 791              		.loc 1 322 0
+ 792 00ac 7B6A     		ldr	r3, [r7, #36]
+ 793 00ae 002B     		cmp	r3, #0
+ 794 00b0 08D0     		beq	.L50
+ 323:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         {
+ 324:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             (VOID)memcpy(p, pPtr, uwCpySize);
+ 795              		.loc 1 324 0
+ 796 00b2 3A6A     		ldr	r2, [r7, #32]
+ 797 00b4 B968     		ldr	r1, [r7, #8]
+ 798 00b6 786A     		ldr	r0, [r7, #36]
+ 799 00b8 FFF7FEFF 		bl	memcpy
+ 325:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****             (VOID)LOS_MemFree(pPool, pPtr);
+ 800              		.loc 1 325 0
+ 801 00bc B968     		ldr	r1, [r7, #8]
+ 802 00be F868     		ldr	r0, [r7, #12]
+ 803 00c0 FFF7FEFF 		bl	LOS_MemFree
+ 804              	.L50:
+ 326:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         }
+ 327:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 328:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 329:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     LOS_IntRestore(uvIntSave);
+ 805              		.loc 1 329 0
+ 806 00c4 7869     		ldr	r0, [r7, #20]
+ 807 00c6 FFF7FEFF 		bl	LOS_IntRestore
+ 330:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return p;
+ 808              		.loc 1 330 0
+ 809 00ca 7B6A     		ldr	r3, [r7, #36]
+ 810              	.L48:
+ 331:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 811              		.loc 1 331 0
+ 812 00cc 1846     		mov	r0, r3
+ 813 00ce 2837     		adds	r7, r7, #40
+ 814              	.LCFI39:
+ 815              		.cfi_def_cfa_offset 8
+ 816 00d0 BD46     		mov	sp, r7
+ 817              	.LCFI40:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 21
+
+
+ 818              		.cfi_def_cfa_register 13
+ 819              		@ sp needed
+ 820 00d2 80BD     		pop	{r7, pc}
+ 821              		.cfi_endproc
+ 822              	.LFE140:
+ 824              		.section	.text.LOS_MemFree,"ax",%progbits
+ 825              		.align	1
+ 826              		.global	LOS_MemFree
+ 827              		.syntax unified
+ 828              		.thumb
+ 829              		.thumb_func
+ 830              		.fpu fpv4-sp-d16
+ 832              	LOS_MemFree:
+ 833              	.LFB141:
+ 332:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 333:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** /*****************************************************************************
+ 334:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Function : LOS_MemFree
+ 335:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Description : Free Memory and return it to Memory pool
+ 336:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Input       : pPool    --- Pointer to memory pool
+ 337:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****                pMem     --- Pointer to memory to free
+ 338:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Output      : None
+ 339:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****  Return      : LOS_OK - OK, LOS_NOK - Error
+ 340:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** *****************************************************************************/
+ 341:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT UINT32 LOS_MemFree (VOID *pPool, VOID *pMem)
+ 342:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 834              		.loc 1 342 0
+ 835              		.cfi_startproc
+ 836              		@ args = 0, pretend = 0, frame = 16
+ 837              		@ frame_needed = 1, uses_anonymous_args = 0
+ 838 0000 80B5     		push	{r7, lr}
+ 839              	.LCFI41:
+ 840              		.cfi_def_cfa_offset 8
+ 841              		.cfi_offset 7, -8
+ 842              		.cfi_offset 14, -4
+ 843 0002 84B0     		sub	sp, sp, #16
+ 844              	.LCFI42:
+ 845              		.cfi_def_cfa_offset 24
+ 846 0004 00AF     		add	r7, sp, #0
+ 847              	.LCFI43:
+ 848              		.cfi_def_cfa_register 7
+ 849 0006 7860     		str	r0, [r7, #4]
+ 850 0008 3960     		str	r1, [r7]
+ 343:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     BOOL bRet = FALSE;
+ 851              		.loc 1 343 0
+ 852 000a 0023     		movs	r3, #0
+ 853 000c FB60     		str	r3, [r7, #12]
+ 344:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 345:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if ((NULL == pPool) || (NULL == pMem))
+ 854              		.loc 1 345 0
+ 855 000e 7B68     		ldr	r3, [r7, #4]
+ 856 0010 002B     		cmp	r3, #0
+ 857 0012 02D0     		beq	.L56
+ 858              		.loc 1 345 0 is_stmt 0 discriminator 1
+ 859 0014 3B68     		ldr	r3, [r7]
+ 860 0016 002B     		cmp	r3, #0
+ 861 0018 01D1     		bne	.L57
+ 862              	.L56:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 22
+
+
+ 346:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 347:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return LOS_NOK;
+ 863              		.loc 1 347 0 is_stmt 1
+ 864 001a 0123     		movs	r3, #1
+ 865 001c 12E0     		b	.L58
+ 866              	.L57:
+ 348:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 349:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 350:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 351:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     bRet = osSlabMemFree(pPool, pMem);
+ 867              		.loc 1 351 0
+ 868 001e 3968     		ldr	r1, [r7]
+ 869 0020 7868     		ldr	r0, [r7, #4]
+ 870 0022 FFF7FEFF 		bl	osSlabMemFree
+ 871 0026 F860     		str	r0, [r7, #12]
+ 352:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if(bRet != TRUE)
+ 872              		.loc 1 352 0
+ 873 0028 FB68     		ldr	r3, [r7, #12]
+ 874 002a 012B     		cmp	r3, #1
+ 875 002c 04D0     		beq	.L59
+ 353:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 354:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         bRet = osHeapFree(pPool, pMem);
+ 876              		.loc 1 354 0
+ 877 002e 3968     		ldr	r1, [r7]
+ 878 0030 7868     		ldr	r0, [r7, #4]
+ 879 0032 FFF7FEFF 		bl	osHeapFree
+ 880 0036 F860     		str	r0, [r7, #12]
+ 881              	.L59:
+ 355:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 356:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return (bRet == TRUE ? LOS_OK : LOS_NOK);
+ 882              		.loc 1 356 0
+ 883 0038 FB68     		ldr	r3, [r7, #12]
+ 884 003a 012B     		cmp	r3, #1
+ 885 003c 14BF     		ite	ne
+ 886 003e 0123     		movne	r3, #1
+ 887 0040 0023     		moveq	r3, #0
+ 888 0042 DBB2     		uxtb	r3, r3
+ 889              	.L58:
+ 357:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 890              		.loc 1 357 0
+ 891 0044 1846     		mov	r0, r3
+ 892 0046 1037     		adds	r7, r7, #16
+ 893              	.LCFI44:
+ 894              		.cfi_def_cfa_offset 8
+ 895 0048 BD46     		mov	sp, r7
+ 896              	.LCFI45:
+ 897              		.cfi_def_cfa_register 13
+ 898              		@ sp needed
+ 899 004a 80BD     		pop	{r7, pc}
+ 900              		.cfi_endproc
+ 901              	.LFE141:
+ 903              		.section	.text.LOS_MemStatisticsGet,"ax",%progbits
+ 904              		.align	1
+ 905              		.global	LOS_MemStatisticsGet
+ 906              		.syntax unified
+ 907              		.thumb
+ 908              		.thumb_func
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 23
+
+
+ 909              		.fpu fpv4-sp-d16
+ 911              	LOS_MemStatisticsGet:
+ 912              	.LFB142:
+ 358:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 359:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT UINT32 LOS_MemStatisticsGet(VOID *pPool, LOS_MEM_STATUS *pstStatus)
+ 360:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 913              		.loc 1 360 0
+ 914              		.cfi_startproc
+ 915              		@ args = 0, pretend = 0, frame = 56
+ 916              		@ frame_needed = 1, uses_anonymous_args = 0
+ 917 0000 80B5     		push	{r7, lr}
+ 918              	.LCFI46:
+ 919              		.cfi_def_cfa_offset 8
+ 920              		.cfi_offset 7, -8
+ 921              		.cfi_offset 14, -4
+ 922 0002 8EB0     		sub	sp, sp, #56
+ 923              	.LCFI47:
+ 924              		.cfi_def_cfa_offset 64
+ 925 0004 00AF     		add	r7, sp, #0
+ 926              	.LCFI48:
+ 927              		.cfi_def_cfa_register 7
+ 928 0006 7860     		str	r0, [r7, #4]
+ 929 0008 3960     		str	r1, [r7]
+ 361:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     LOS_HEAP_STATUS stHeapStatus;
+ 362:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 363:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     LOS_SLAB_STATUS stSlabStatus;
+ 364:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 365:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwErr;
+ 366:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 367:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uwErr = osHeapStatisticsGet(pPool, &stHeapStatus);
+ 930              		.loc 1 367 0
+ 931 000a 07F12003 		add	r3, r7, #32
+ 932 000e 1946     		mov	r1, r3
+ 933 0010 7868     		ldr	r0, [r7, #4]
+ 934 0012 FFF7FEFF 		bl	osHeapStatisticsGet
+ 935 0016 7863     		str	r0, [r7, #52]
+ 368:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (uwErr != LOS_OK)
+ 936              		.loc 1 368 0
+ 937 0018 7B6B     		ldr	r3, [r7, #52]
+ 938 001a 002B     		cmp	r3, #0
+ 939 001c 01D0     		beq	.L61
+ 369:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 370:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return LOS_NOK;
+ 940              		.loc 1 370 0
+ 941 001e 0123     		movs	r3, #1
+ 942 0020 32E0     		b	.L64
+ 943              	.L61:
+ 371:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 372:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 373:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->totalSize  = stHeapStatus.totalSize;
+ 944              		.loc 1 373 0
+ 945 0022 3A6A     		ldr	r2, [r7, #32]
+ 946 0024 3B68     		ldr	r3, [r7]
+ 947 0026 1A60     		str	r2, [r3]
+ 374:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->usedSize   = stHeapStatus.usedSize;
+ 948              		.loc 1 374 0
+ 949 0028 7A6A     		ldr	r2, [r7, #36]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 24
+
+
+ 950 002a 3B68     		ldr	r3, [r7]
+ 951 002c 5A60     		str	r2, [r3, #4]
+ 375:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->freeSize   = stHeapStatus.freeSize;
+ 952              		.loc 1 375 0
+ 953 002e BA6A     		ldr	r2, [r7, #40]
+ 954 0030 3B68     		ldr	r3, [r7]
+ 955 0032 9A60     		str	r2, [r3, #8]
+ 376:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->allocCount = stHeapStatus.allocCount;
+ 956              		.loc 1 376 0
+ 957 0034 FA6A     		ldr	r2, [r7, #44]
+ 958 0036 3B68     		ldr	r3, [r7]
+ 959 0038 DA60     		str	r2, [r3, #12]
+ 377:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->freeCount  = stHeapStatus.freeCount;
+ 960              		.loc 1 377 0
+ 961 003a 3A6B     		ldr	r2, [r7, #48]
+ 962 003c 3B68     		ldr	r3, [r7]
+ 963 003e 1A61     		str	r2, [r3, #16]
+ 378:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 379:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 380:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uwErr = osSlabStatisticsGet(pPool, &stSlabStatus);
+ 964              		.loc 1 380 0
+ 965 0040 07F10C03 		add	r3, r7, #12
+ 966 0044 1946     		mov	r1, r3
+ 967 0046 7868     		ldr	r0, [r7, #4]
+ 968 0048 FFF7FEFF 		bl	osSlabStatisticsGet
+ 969 004c 7863     		str	r0, [r7, #52]
+ 381:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     if (uwErr != LOS_OK)
+ 970              		.loc 1 381 0
+ 971 004e 7B6B     		ldr	r3, [r7, #52]
+ 972 0050 002B     		cmp	r3, #0
+ 973 0052 01D0     		beq	.L63
+ 382:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     {
+ 383:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****         return LOS_NOK;
+ 974              		.loc 1 383 0
+ 975 0054 0123     		movs	r3, #1
+ 976 0056 17E0     		b	.L64
+ 977              	.L63:
+ 384:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     }
+ 385:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 386:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->totalSize  = stHeapStatus.totalSize;
+ 978              		.loc 1 386 0
+ 979 0058 3A6A     		ldr	r2, [r7, #32]
+ 980 005a 3B68     		ldr	r3, [r7]
+ 981 005c 1A60     		str	r2, [r3]
+ 387:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->usedSize   = stHeapStatus.usedSize - stSlabStatus.freeSize;  //all slab region insid
+ 982              		.loc 1 387 0
+ 983 005e 7A6A     		ldr	r2, [r7, #36]
+ 984 0060 7B69     		ldr	r3, [r7, #20]
+ 985 0062 D21A     		subs	r2, r2, r3
+ 986 0064 3B68     		ldr	r3, [r7]
+ 987 0066 5A60     		str	r2, [r3, #4]
+ 388:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->freeSize   = stHeapStatus.freeSize + stSlabStatus.freeSize;
+ 988              		.loc 1 388 0
+ 989 0068 BA6A     		ldr	r2, [r7, #40]
+ 990 006a 7B69     		ldr	r3, [r7, #20]
+ 991 006c 1A44     		add	r2, r2, r3
+ 992 006e 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 25
+
+
+ 993 0070 9A60     		str	r2, [r3, #8]
+ 389:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->allocCount = stHeapStatus.allocCount + stSlabStatus.allocCount;
+ 994              		.loc 1 389 0
+ 995 0072 FA6A     		ldr	r2, [r7, #44]
+ 996 0074 BB69     		ldr	r3, [r7, #24]
+ 997 0076 1A44     		add	r2, r2, r3
+ 998 0078 3B68     		ldr	r3, [r7]
+ 999 007a DA60     		str	r2, [r3, #12]
+ 390:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     pstStatus->freeCount  = stHeapStatus.freeCount + stSlabStatus.freeCount;
+ 1000              		.loc 1 390 0
+ 1001 007c 3A6B     		ldr	r2, [r7, #48]
+ 1002 007e FB69     		ldr	r3, [r7, #28]
+ 1003 0080 1A44     		add	r2, r2, r3
+ 1004 0082 3B68     		ldr	r3, [r7]
+ 1005 0084 1A61     		str	r2, [r3, #16]
+ 391:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 392:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return LOS_OK;
+ 1006              		.loc 1 392 0
+ 1007 0086 0023     		movs	r3, #0
+ 1008              	.L64:
+ 393:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 1009              		.loc 1 393 0 discriminator 1
+ 1010 0088 1846     		mov	r0, r3
+ 1011 008a 3837     		adds	r7, r7, #56
+ 1012              	.LCFI49:
+ 1013              		.cfi_def_cfa_offset 8
+ 1014 008c BD46     		mov	sp, r7
+ 1015              	.LCFI50:
+ 1016              		.cfi_def_cfa_register 13
+ 1017              		@ sp needed
+ 1018 008e 80BD     		pop	{r7, pc}
+ 1019              		.cfi_endproc
+ 1020              	.LFE142:
+ 1022              		.section	.text.LOS_MemGetMaxFreeBlkSize,"ax",%progbits
+ 1023              		.align	1
+ 1024              		.global	LOS_MemGetMaxFreeBlkSize
+ 1025              		.syntax unified
+ 1026              		.thumb
+ 1027              		.thumb_func
+ 1028              		.fpu fpv4-sp-d16
+ 1030              	LOS_MemGetMaxFreeBlkSize:
+ 1031              	.LFB143:
+ 394:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 395:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** LITE_OS_SEC_TEXT_MINOR UINT32 LOS_MemGetMaxFreeBlkSize(VOID *pPool)
+ 396:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** {
+ 1032              		.loc 1 396 0
+ 1033              		.cfi_startproc
+ 1034              		@ args = 0, pretend = 0, frame = 16
+ 1035              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1036 0000 80B5     		push	{r7, lr}
+ 1037              	.LCFI51:
+ 1038              		.cfi_def_cfa_offset 8
+ 1039              		.cfi_offset 7, -8
+ 1040              		.cfi_offset 14, -4
+ 1041 0002 84B0     		sub	sp, sp, #16
+ 1042              	.LCFI52:
+ 1043              		.cfi_def_cfa_offset 24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 26
+
+
+ 1044 0004 00AF     		add	r7, sp, #0
+ 1045              	.LCFI53:
+ 1046              		.cfi_def_cfa_register 7
+ 1047 0006 7860     		str	r0, [r7, #4]
+ 397:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwMaxFreeSize = osHeapGetMaxFreeBlkSize(pPool);
+ 1048              		.loc 1 397 0
+ 1049 0008 7868     		ldr	r0, [r7, #4]
+ 1050 000a FFF7FEFF 		bl	osHeapGetMaxFreeBlkSize
+ 1051 000e F860     		str	r0, [r7, #12]
+ 398:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     UINT32 uwMaxSlabFreeSize = 0;
+ 1052              		.loc 1 398 0
+ 1053 0010 0023     		movs	r3, #0
+ 1054 0012 BB60     		str	r3, [r7, #8]
+ 399:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #if (LOSCFG_KERNEL_MEM_SLAB == YES)
+ 400:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     uwMaxSlabFreeSize = osSlabGetMaxFreeBlkSize(pPool);
+ 1055              		.loc 1 400 0
+ 1056 0014 7868     		ldr	r0, [r7, #4]
+ 1057 0016 FFF7FEFF 		bl	osSlabGetMaxFreeBlkSize
+ 1058 001a B860     		str	r0, [r7, #8]
+ 401:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 402:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** 
+ 403:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #ifndef MAX
+ 404:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #define MAX(x,y) (x)>(y)?(x):(y)
+ 405:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** #endif
+ 406:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c ****     return MAX(uwMaxFreeSize, uwMaxSlabFreeSize);
+ 1059              		.loc 1 406 0
+ 1060 001c BA68     		ldr	r2, [r7, #8]
+ 1061 001e FB68     		ldr	r3, [r7, #12]
+ 1062 0020 9342     		cmp	r3, r2
+ 1063 0022 38BF     		it	cc
+ 1064 0024 1346     		movcc	r3, r2
+ 407:D:/iot/felix2/kernel/base/mem/bestfit_little\los_memory.c **** }
+ 1065              		.loc 1 407 0
+ 1066 0026 1846     		mov	r0, r3
+ 1067 0028 1037     		adds	r7, r7, #16
+ 1068              	.LCFI54:
+ 1069              		.cfi_def_cfa_offset 8
+ 1070 002a BD46     		mov	sp, r7
+ 1071              	.LCFI55:
+ 1072              		.cfi_def_cfa_register 13
+ 1073              		@ sp needed
+ 1074 002c 80BD     		pop	{r7, pc}
+ 1075              		.cfi_endproc
+ 1076              	.LFE143:
+ 1078              		.text
+ 1079              	.Letext0:
+ 1080              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1081              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1082              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1083              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1084              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1085              		.file 7 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1086              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 1087              		.file 9 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1088              		.file 10 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1089              		.file 11 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1090              		.file 12 "D:/iot/felix2/kernel/include/los_list.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 27
+
+
+ 1091              		.file 13 "D:/iot/felix2/kernel/include/los_err.h"
+ 1092              		.file 14 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1093              		.file 15 "D:/iot/felix2/kernel/include/los_event.h"
+ 1094              		.file 16 "D:/iot/felix2/kernel/include/los_task.h"
+ 1095              		.file 17 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1096              		.file 18 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1097              		.file 19 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1098              		.file 20 "D:/iot/felix2/kernel/include/los_config.h"
+ 1099              		.file 21 "D:/iot/felix2/kernel/base/include/los_slab.ph"
+ 1100              		.file 22 "D:/iot/felix2/kernel/include/los_heap.h"
+ 1101              		.file 23 "D:/iot/felix2/kernel/base/include/los_heap.ph"
+ 1102              		.file 24 "D:/iot/felix2/kernel/include/los_memory.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccizf5Db.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 los_memory.c
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:22     .bss.g_pPoolHead:00000000 g_pPoolHead
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:19     .bss.g_pPoolHead:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:25     .text.osSlabCtrlHdrGet:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:32     .text.osSlabCtrlHdrGet:00000000 osSlabCtrlHdrGet
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:72     .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:79     .text.LOS_MemInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:86     .text.LOS_MemInit:00000000 LOS_MemInit
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:286    .text.LOS_MemInit:00000114 $d
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:293    .text.osMemSystemInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:300    .text.osMemSystemInit:00000000 osMemSystemInit
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:344    .text.osMemSystemInit:00000028 $d
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:350    .text.LOS_MemDeInit:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:357    .text.LOS_MemDeInit:00000000 LOS_MemDeInit
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:469    .text.LOS_MemDeInit:00000080 $d
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:474    .text.LOS_MemPoolList:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:481    .text.LOS_MemPoolList:00000000 LOS_MemPoolList
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:539    .text.LOS_MemPoolList:00000034 $d
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:544    .text.LOS_MemAlloc:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:551    .text.LOS_MemAlloc:00000000 LOS_MemAlloc
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:618    .text.LOS_MemAllocAlign:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:625    .text.LOS_MemAllocAlign:00000000 LOS_MemAllocAlign
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:665    .text.LOS_MemRealloc:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:672    .text.LOS_MemRealloc:00000000 LOS_MemRealloc
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:832    .text.LOS_MemFree:00000000 LOS_MemFree
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:825    .text.LOS_MemFree:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:904    .text.LOS_MemStatisticsGet:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:911    .text.LOS_MemStatisticsGet:00000000 LOS_MemStatisticsGet
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:1023   .text.LOS_MemGetMaxFreeBlkSize:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccizf5Db.s:1030   .text.LOS_MemGetMaxFreeBlkSize:00000000 LOS_MemGetMaxFreeBlkSize
+
+UNDEFINED SYMBOLS
+LOS_IntLock
+printf
+LOS_IntRestore
+osHeapInit
+osSlabMemInit
+__los_heap_addr_end__
+__los_heap_addr_start__
+osSlabMemDeinit
+osAlarmHeapInfo
+osSlabMemAlloc
+osHeapAlloc
+osHeapAllocAlign
+osSlabMemCheck
+memcpy
+osSlabMemFree
+osHeapFree
+osHeapStatisticsGet
+osSlabStatisticsGet
+osHeapGetMaxFreeBlkSize
+osSlabGetMaxFreeBlkSize

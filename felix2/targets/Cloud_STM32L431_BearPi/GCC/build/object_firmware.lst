@@ -1,0 +1,556 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"object_firmware.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.get_object_firmware,"ax",%progbits
+  18              		.align	1
+  19              		.global	get_object_firmware
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	get_object_firmware:
+  26              	.LFB134:
+  27              		.file 1 "D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m/object_firmware.c"
+   1:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 2
+
+
+  32:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  35:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *
+  37:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *
+  42:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *
+  47:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    Julien Vermillard - initial implementation
+  49:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    Fabien Fleutot - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    David Navarro, Intel Corporation - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *    Pascal Rieux - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *
+  54:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  *******************************************************************************/
+  55:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  56:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** /*
+  57:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * This object is single instance only, and provide firmware upgrade functionality.
+  58:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * Object ID is 5.
+  59:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  */
+  60:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  61:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** /*
+  62:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * resources:
+  63:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 0 package                   write
+  64:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 1 package url               write
+  65:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 2 update                    exec
+  66:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 3 state                     read
+  67:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 4 update supported objects  read/write
+  68:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  * 5 update result             read
+  69:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****  */
+  70:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  71:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #include "internals.h"
+  72:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #include "atiny_lwm2m/agenttiny.h"
+  73:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #include "log/atiny_log.h"
+  74:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  75:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA
+  76:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #include "atiny_fota_manager.h"
+  77:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  78:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  79:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** // ---- private object "Firmware" specific defines ----
+  80:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** // Resource Id's:
+  81:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_M_PACKAGE                   0
+  82:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_M_PACKAGE_URI               1
+  83:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_M_UPDATE                    2
+  84:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_M_STATE                     3
+  85:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_O_UPDATE_SUPPORTED_OBJECTS  4
+  86:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_M_UPDATE_RESULT             5
+  87:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_O_PKG_NAME                  6
+  88:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_O_PKG_VERSION               7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 3
+
+
+  89:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #define RES_O_FIRMWARE_UPDATE_DELIVER_METHOD               8
+  90:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  91:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+  92:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** static uint8_t prv_firmware_read(uint16_t instanceId,
+  93:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                  int *numDataP,
+  94:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                  lwm2m_data_t **dataArrayP,
+  95:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                  lwm2m_data_cfg_t *dataCfg,
+  96:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                  lwm2m_object_t *objectP)
+  97:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+  98:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     uint32_t i;
+  99:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     uint8_t result;
+ 100:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 101:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     // this is a single instance object
+ 102:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (instanceId != 0)
+ 103:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 104:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         return COAP_404_NOT_FOUND;
+ 105:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 106:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 107:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     // is the server asking for the full object ?
+ 108:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (*numDataP == 0)
+ 109:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 110:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         uint16_t resources[] = {RES_M_PACKAGE_URI, RES_M_STATE,
+ 111:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                 RES_M_UPDATE_RESULT, RES_O_FIRMWARE_UPDATE_DELIVER_METHOD
+ 112:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                };
+ 113:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         *dataArrayP = lwm2m_data_new(array_size(resources));
+ 114:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         if (*dataArrayP == NULL) return COAP_500_INTERNAL_SERVER_ERROR;
+ 115:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         *numDataP = array_size(resources);
+ 116:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         for(i = 0 ; i < array_size(resources); ++i)
+ 117:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 118:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             (*dataArrayP)[i].id = resources[i];
+ 119:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 120:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 121:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 122:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     i = 0;
+ 123:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     do
+ 124:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 125:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         switch ((*dataArrayP)[i].id)
+ 126:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 127:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_M_PACKAGE:
+ 128:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED;
+ 129:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             break;
+ 130:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_M_PACKAGE_URI:
+ 131:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 132:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA
+ 133:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             const char *pkg_uri;
+ 134:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             pkg_uri = atiny_fota_manager_get_pkg_uri(atiny_fota_manager_get_instance());
+ 135:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             if(pkg_uri == NULL)
+ 136:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             {
+ 137:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                 pkg_uri = "";
+ 138:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             }
+ 139:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             lwm2m_data_encode_nstring(pkg_uri, strlen(pkg_uri) + 1, *dataArrayP + i);
+ 140:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_205_CONTENT;
+ 141:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else 
+ 142:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED; 
+ 143:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif 
+ 144:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             break;
+ 145:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 4
+
+
+ 146:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 147:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_M_UPDATE:
+ 148:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED;
+ 149:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             break;
+ 150:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 151:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_M_STATE:
+ 152:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             // firmware update state (int)
+ 153:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 154:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA    
+ 155:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             int state = atiny_fota_manager_get_rpt_state(atiny_fota_manager_get_instance());
+ 156:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             lwm2m_data_encode_int(state, *dataArrayP + i);
+ 157:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_205_CONTENT;
+ 158:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ 159:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED; 
+ 160:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif
+ 161:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             break;
+ 162:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 163:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 164:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_M_UPDATE_RESULT:
+ 165:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 166:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA    
+ 167:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             int updateresult = atiny_fota_manager_get_update_result(atiny_fota_manager_get_instance
+ 168:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             lwm2m_data_encode_int(updateresult, *dataArrayP + i);
+ 169:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_205_CONTENT;
+ 170:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ 171:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED; 
+ 172:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif         
+ 173:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             break;
+ 174:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 175:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 176:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_O_FIRMWARE_UPDATE_DELIVER_METHOD:
+ 177:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 178:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA   
+ 179:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             int method = atiny_fota_manager_get_deliver_method(atiny_fota_manager_get_instance());
+ 180:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             lwm2m_data_encode_int(method, *dataArrayP + i);
+ 181:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_205_CONTENT;
+ 182:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ 183:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED; 
+ 184:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif
+ 185:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 186:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 187:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         break;
+ 188:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         default:
+ 189:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_404_NOT_FOUND;
+ 190:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 191:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 192:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         i++;
+ 193:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 194:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     while (i < *numDataP && result == COAP_205_CONTENT);
+ 195:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 196:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA   
+ 197:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if(dataCfg && (1 == *numDataP) && (RES_M_STATE == (*dataArrayP)[0].id))
+ 198:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 199:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         atiny_fota_manager_get_data_cfg(atiny_fota_manager_get_instance(), dataCfg);
+ 200:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 201:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif
+ 202:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 5
+
+
+ 203:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     return result;
+ 204:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+ 205:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 206:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** static uint8_t prv_firmware_write(uint16_t instanceId,
+ 207:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                   int numData,
+ 208:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                   lwm2m_data_t *dataArray,
+ 209:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                   lwm2m_object_t *objectP)
+ 210:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+ 211:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     int i;
+ 212:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     uint8_t result;
+ 213:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 214:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     // this is a single instance object
+ 215:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (instanceId != 0)
+ 216:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 217:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         return COAP_404_NOT_FOUND;
+ 218:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 219:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 220:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     i = 0;
+ 221:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 222:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     do
+ 223:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 224:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         switch (dataArray[i].id)
+ 225:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 226:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 227:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         case RES_M_PACKAGE_URI:
+ 228:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             // URL for download the firmware
+ 229:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 230:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             int ret;
+ 231:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             if(dataArray[i].type != LWM2M_TYPE_STRING || NULL == dataArray[i].value.asBuffer.buffer
+ 232:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             {
+ 233:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                 ATINY_LOG(LOG_ERR, "type ERR %d", dataArray[i].type);
+ 234:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                 result = COAP_400_BAD_REQUEST;
+ 235:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                 break;
+ 236:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             }
+ 237:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA   
+ 238:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 239:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             ret = atiny_fota_manager_start_download(atiny_fota_manager_get_instance(), \
+ 240:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                                     (const char *)(dataArray[i].value.asBuffer.buff
+ 241:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ 242:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             ret = ATINY_ERR;
+ 243:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif
+ 244:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = (ATINY_OK == ret ? COAP_204_CHANGED : COAP_405_METHOD_NOT_ALLOWED);
+ 245:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             break;
+ 246:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 247:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 248:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         default:
+ 249:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             result = COAP_405_METHOD_NOT_ALLOWED;
+ 250:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 251:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 252:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         i++;
+ 253:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 254:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     while (i < numData && result == COAP_204_CHANGED);
+ 255:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 256:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     return result;
+ 257:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+ 258:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 259:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** static uint8_t prv_firmware_execute(uint16_t instanceId,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 6
+
+
+ 260:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                     uint16_t resourceId,
+ 261:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                     uint8_t *buffer,
+ 262:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                     int length,
+ 263:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****                                     lwm2m_object_t *objectP)
+ 264:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+ 265:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 266:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     // this is a single instance object
+ 267:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (instanceId != 0)
+ 268:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 269:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         return COAP_404_NOT_FOUND;
+ 270:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 271:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 272:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (length != 0) return COAP_400_BAD_REQUEST;
+ 273:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 274:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     // for execute callback, resId is always set.
+ 275:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     switch (resourceId)
+ 276:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 277:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     case RES_M_UPDATE:
+ 278:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 279:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA 
+ 280:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         int ret = atiny_fota_manager_execute_update(atiny_fota_manager_get_instance());
+ 281:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ 282:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         int ret = ATINY_ERR;
+ 283:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif
+ 284:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         if (ATINY_OK == ret)
+ 285:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 286:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             return COAP_204_CHANGED;
+ 287:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 288:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         else
+ 289:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 290:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             // firmware update already running
+ 291:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #ifdef CONFIG_FEATURE_FOTA
+ 292:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             return COAP_400_BAD_REQUEST;
+ 293:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ 294:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             return COAP_405_METHOD_NOT_ALLOWED;
+ 295:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #endif
+ 296:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 297:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 298:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     default:
+ 299:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         return COAP_405_METHOD_NOT_ALLOWED;
+ 300:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 301:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 302:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 303:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+ 304:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 305:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 306:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** lwm2m_object_t *get_object_firmware(atiny_param_t *atiny_params)
+ 307:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+ 308:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     /*
+ 309:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****      * The get_object_firmware function create the object itself and return a pointer to the struct
+ 310:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****      */
+ 311:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     lwm2m_object_t *firmwareObj;
+ 312:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 313:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     firmwareObj = (lwm2m_object_t *)lwm2m_malloc(sizeof(lwm2m_object_t));
+ 314:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 315:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (NULL != firmwareObj)
+ 316:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 7
+
+
+ 317:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         memset(firmwareObj, 0, sizeof(lwm2m_object_t));
+ 318:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 319:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         /*
+ 320:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * It assigns its unique ID
+ 321:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * The 5 is the standard ID for the optional object "Object firmware".
+ 322:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          */
+ 323:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         firmwareObj->objID = LWM2M_FIRMWARE_UPDATE_OBJECT_ID;
+ 324:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 325:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         /*
+ 326:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * and its unique instance
+ 327:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          *
+ 328:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          */
+ 329:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         firmwareObj->instanceList = (lwm2m_list_t *)lwm2m_malloc(sizeof(lwm2m_list_t));
+ 330:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         if (NULL != firmwareObj->instanceList)
+ 331:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 332:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             memset(firmwareObj->instanceList, 0, sizeof(lwm2m_list_t));
+ 333:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 334:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         else
+ 335:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         {
+ 336:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             lwm2m_free(firmwareObj);
+ 337:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****             return NULL;
+ 338:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         }
+ 339:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 340:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         /*
+ 341:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * And the private function that will access the object.
+ 342:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * Those function will be called when a read/write/execute query is made by the server. In 
+ 343:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * know the resources of the object, only the server does.
+ 344:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          */
+ 345:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         firmwareObj->readFunc    = prv_firmware_read;
+ 346:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         firmwareObj->writeFunc   = prv_firmware_write;
+ 347:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         firmwareObj->executeFunc = prv_firmware_execute;
+ 348:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         firmwareObj->userData    = NULL;
+ 349:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 350:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         /*
+ 351:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          * Also some user data can be stored in the object with a private structure containing the 
+ 352:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****          */
+ 353:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 354:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 355:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     return firmwareObj;
+ 356:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+ 357:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 358:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** void free_object_firmware(lwm2m_object_t *objectP)
+ 359:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+ 360:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (NULL != objectP->userData)
+ 361:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 362:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         lwm2m_free(objectP->userData);
+ 363:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         objectP->userData = NULL;
+ 364:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 365:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     if (NULL != objectP->instanceList)
+ 366:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     {
+ 367:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         lwm2m_free(objectP->instanceList);
+ 368:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****         objectP->instanceList = NULL;
+ 369:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     }
+ 370:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     lwm2m_free(objectP);
+ 371:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+ 372:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 373:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** #else
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 8
+
+
+ 374:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 375:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 376:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** lwm2m_object_t *get_object_firmware(atiny_param_t *atiny_params)
+ 377:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+  28              		.loc 1 377 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+ 378:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     (void)atiny_params;
+ 379:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     return NULL;
+  44              		.loc 1 379 0
+  45 0008 0023     		movs	r3, #0
+ 380:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+  46              		.loc 1 380 0
+  47 000a 1846     		mov	r0, r3
+  48 000c 0C37     		adds	r7, r7, #12
+  49              	.LCFI3:
+  50              		.cfi_def_cfa_offset 4
+  51 000e BD46     		mov	sp, r7
+  52              	.LCFI4:
+  53              		.cfi_def_cfa_register 13
+  54              		@ sp needed
+  55 0010 5DF8047B 		ldr	r7, [sp], #4
+  56              	.LCFI5:
+  57              		.cfi_restore 7
+  58              		.cfi_def_cfa_offset 0
+  59 0014 7047     		bx	lr
+  60              		.cfi_endproc
+  61              	.LFE134:
+  63              		.section	.text.free_object_firmware,"ax",%progbits
+  64              		.align	1
+  65              		.global	free_object_firmware
+  66              		.syntax unified
+  67              		.thumb
+  68              		.thumb_func
+  69              		.fpu fpv4-sp-d16
+  71              	free_object_firmware:
+  72              	.LFB135:
+ 381:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 382:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** 
+ 383:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** void free_object_firmware(lwm2m_object_t *objectP)
+ 384:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** {
+  73              		.loc 1 384 0
+  74              		.cfi_startproc
+  75              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 9
+
+
+  76              		@ frame_needed = 1, uses_anonymous_args = 0
+  77              		@ link register save eliminated.
+  78 0000 80B4     		push	{r7}
+  79              	.LCFI6:
+  80              		.cfi_def_cfa_offset 4
+  81              		.cfi_offset 7, -4
+  82 0002 83B0     		sub	sp, sp, #12
+  83              	.LCFI7:
+  84              		.cfi_def_cfa_offset 16
+  85 0004 00AF     		add	r7, sp, #0
+  86              	.LCFI8:
+  87              		.cfi_def_cfa_register 7
+  88 0006 7860     		str	r0, [r7, #4]
+ 385:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c ****     (void)objectP;
+ 386:D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m\object_firmware.c **** }
+  89              		.loc 1 386 0
+  90 0008 00BF     		nop
+  91 000a 0C37     		adds	r7, r7, #12
+  92              	.LCFI9:
+  93              		.cfi_def_cfa_offset 4
+  94 000c BD46     		mov	sp, r7
+  95              	.LCFI10:
+  96              		.cfi_def_cfa_register 13
+  97              		@ sp needed
+  98 000e 5DF8047B 		ldr	r7, [sp], #4
+  99              	.LCFI11:
+ 100              		.cfi_restore 7
+ 101              		.cfi_def_cfa_offset 0
+ 102 0012 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE135:
+ 106              		.text
+ 107              	.Letext0:
+ 108              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 109              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 110              		.file 4 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 111              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 112              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 113              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 114              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 115              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 116              		.file 10 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 117              		.file 11 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 118              		.file 12 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 119              		.file 13 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 120              		.file 14 "D:/iot/felix2/kernel/include/los_list.h"
+ 121              		.file 15 "D:/iot/felix2/kernel/include/los_err.h"
+ 122              		.file 16 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 123              		.file 17 "D:/iot/felix2/kernel/include/los_tick.h"
+ 124              		.file 18 "D:/iot/felix2/kernel/include/los_event.h"
+ 125              		.file 19 "D:/iot/felix2/kernel/include/los_task.h"
+ 126              		.file 20 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 127              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 128              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 129              		.file 23 "D:/iot/felix2/kernel/include/los_config.h"
+ 130              		.file 24 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 131              		.file 25 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 10
+
+
+ 132              		.file 26 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 133              		.file 27 "D:/iot/felix2/include/atiny_lwm2m/agenttiny.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccypFhFf.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 object_firmware.c
+C:\Users\91458\AppData\Local\Temp\ccypFhFf.s:18     .text.get_object_firmware:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccypFhFf.s:25     .text.get_object_firmware:00000000 get_object_firmware
+C:\Users\91458\AppData\Local\Temp\ccypFhFf.s:64     .text.free_object_firmware:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccypFhFf.s:71     .text.free_object_firmware:00000000 free_object_firmware
+
+NO UNDEFINED SYMBOLS

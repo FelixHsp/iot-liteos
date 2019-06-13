@@ -1,0 +1,1612 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"uri.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.prv_parseNumber,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	prv_parseNumber:
+  25              	.LFB134:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/core/uri.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** /*******************************************************************************
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * All rights reserved. This program and the accompanying materials
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * are made available under the terms of the Eclipse Public License v1.0
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * The Eclipse Public License is available at
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * The Eclipse Distribution License is available at
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  * Contributors:
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    Fabien Fleutot - Please refer to git log
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    Toby Jaffey - Please refer to git log
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    Bosch Software Innovations GmbH - Please refer to git log
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *    Pascal Rieux - Please refer to git log
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  *******************************************************************************/
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** /*
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  Copyright (c) 2013, 2014 Intel Corporation
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  Redistribution and use in source and binary forms, with or without modification,
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  are permitted provided that the following conditions are met:
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****      * Redistributions of source code must retain the above copyright notice,
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****        this list of conditions and the following disclaimer.
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****      * Redistributions in binary form must reproduce the above copyright notice,
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****        this list of conditions and the following disclaimer in the documentation
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****        and/or other materials provided with the distribution.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****      * Neither the name of Intel Corporation nor the names of its contributors
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****        may be used to endorse or promote products derived from this software
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****        without specific prior written permission.
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  THE POSSIBILITY OF SUCH DAMAGE.
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****  David Navarro <david.navarro@intel.com>
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** */
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** #include "internals.h"
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** #include <stdlib.h>
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** #include <string.h>
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** #include <ctype.h>
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** static int prv_parseNumber(uint8_t *uriString,
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                            size_t uriLength,
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                            size_t *headP)
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** {
+  27              		.loc 1 60 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 87B0     		sub	sp, sp, #28
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 32
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 F860     		str	r0, [r7, #12]
+  43 0008 B960     		str	r1, [r7, #8]
+  44 000a 7A60     		str	r2, [r7, #4]
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     int result = 0;
+  45              		.loc 1 61 0
+  46 000c 0023     		movs	r3, #0
+  47 000e 7B61     		str	r3, [r7, #20]
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (uriString[*headP] == '/')
+  48              		.loc 1 63 0
+  49 0010 7B68     		ldr	r3, [r7, #4]
+  50 0012 1B68     		ldr	r3, [r3]
+  51 0014 FA68     		ldr	r2, [r7, #12]
+  52 0016 1344     		add	r3, r3, r2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 3
+
+
+  53 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  54 001a 2F2B     		cmp	r3, #47
+  55 001c 28D1     		bne	.L4
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         // empty Object Instance ID with resource ID is not allowed
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return -1;
+  56              		.loc 1 66 0
+  57 001e 4FF0FF33 		mov	r3, #-1
+  58 0022 3AE0     		b	.L3
+  59              	.L7:
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     while (*headP < uriLength && uriString[*headP] != '/')
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if ('0' <= uriString[*headP] && uriString[*headP] <= '9')
+  60              		.loc 1 70 0
+  61 0024 7B68     		ldr	r3, [r7, #4]
+  62 0026 1B68     		ldr	r3, [r3]
+  63 0028 FA68     		ldr	r2, [r7, #12]
+  64 002a 1344     		add	r3, r3, r2
+  65 002c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  66 002e 2F2B     		cmp	r3, #47
+  67 0030 1BD9     		bls	.L5
+  68              		.loc 1 70 0 is_stmt 0 discriminator 1
+  69 0032 7B68     		ldr	r3, [r7, #4]
+  70 0034 1B68     		ldr	r3, [r3]
+  71 0036 FA68     		ldr	r2, [r7, #12]
+  72 0038 1344     		add	r3, r3, r2
+  73 003a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  74 003c 392B     		cmp	r3, #57
+  75 003e 14D8     		bhi	.L5
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         {
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             result += uriString[*headP] - '0';
+  76              		.loc 1 72 0 is_stmt 1
+  77 0040 7B68     		ldr	r3, [r7, #4]
+  78 0042 1B68     		ldr	r3, [r3]
+  79 0044 FA68     		ldr	r2, [r7, #12]
+  80 0046 1344     		add	r3, r3, r2
+  81 0048 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  82 004a 303B     		subs	r3, r3, #48
+  83 004c 7A69     		ldr	r2, [r7, #20]
+  84 004e 1344     		add	r3, r3, r2
+  85 0050 7B61     		str	r3, [r7, #20]
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             result *= 10;
+  86              		.loc 1 73 0
+  87 0052 7A69     		ldr	r2, [r7, #20]
+  88 0054 1346     		mov	r3, r2
+  89 0056 9B00     		lsls	r3, r3, #2
+  90 0058 1344     		add	r3, r3, r2
+  91 005a 5B00     		lsls	r3, r3, #1
+  92 005c 7B61     		str	r3, [r7, #20]
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         }
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         else
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         {
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             return -1;
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         }
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         *headP += 1;
+  93              		.loc 1 79 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 4
+
+
+  94 005e 7B68     		ldr	r3, [r7, #4]
+  95 0060 1B68     		ldr	r3, [r3]
+  96 0062 5A1C     		adds	r2, r3, #1
+  97 0064 7B68     		ldr	r3, [r7, #4]
+  98 0066 1A60     		str	r2, [r3]
+  99 0068 02E0     		b	.L4
+ 100              	.L5:
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         }
+ 101              		.loc 1 77 0
+ 102 006a 4FF0FF33 		mov	r3, #-1
+ 103 006e 14E0     		b	.L3
+ 104              	.L4:
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 105              		.loc 1 68 0
+ 106 0070 7B68     		ldr	r3, [r7, #4]
+ 107 0072 1B68     		ldr	r3, [r3]
+ 108 0074 BA68     		ldr	r2, [r7, #8]
+ 109 0076 9A42     		cmp	r2, r3
+ 110 0078 06D9     		bls	.L6
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 111              		.loc 1 68 0 is_stmt 0 discriminator 1
+ 112 007a 7B68     		ldr	r3, [r7, #4]
+ 113 007c 1B68     		ldr	r3, [r3]
+ 114 007e FA68     		ldr	r2, [r7, #12]
+ 115 0080 1344     		add	r3, r3, r2
+ 116 0082 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 117 0084 2F2B     		cmp	r3, #47
+ 118 0086 CDD1     		bne	.L7
+ 119              	.L6:
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     result /= 10;
+ 120              		.loc 1 82 0 is_stmt 1
+ 121 0088 7B69     		ldr	r3, [r7, #20]
+ 122 008a 074A     		ldr	r2, .L8
+ 123 008c 82FB0312 		smull	r1, r2, r2, r3
+ 124 0090 9210     		asrs	r2, r2, #2
+ 125 0092 DB17     		asrs	r3, r3, #31
+ 126 0094 D31A     		subs	r3, r2, r3
+ 127 0096 7B61     		str	r3, [r7, #20]
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     return result;
+ 128              		.loc 1 83 0
+ 129 0098 7B69     		ldr	r3, [r7, #20]
+ 130              	.L3:
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** }
+ 131              		.loc 1 84 0
+ 132 009a 1846     		mov	r0, r3
+ 133 009c 1C37     		adds	r7, r7, #28
+ 134              	.LCFI3:
+ 135              		.cfi_def_cfa_offset 4
+ 136 009e BD46     		mov	sp, r7
+ 137              	.LCFI4:
+ 138              		.cfi_def_cfa_register 13
+ 139              		@ sp needed
+ 140 00a0 5DF8047B 		ldr	r7, [sp], #4
+ 141              	.LCFI5:
+ 142              		.cfi_restore 7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 5
+
+
+ 143              		.cfi_def_cfa_offset 0
+ 144 00a4 7047     		bx	lr
+ 145              	.L9:
+ 146 00a6 00BF     		.align	2
+ 147              	.L8:
+ 148 00a8 67666666 		.word	1717986919
+ 149              		.cfi_endproc
+ 150              	.LFE134:
+ 152              		.section	.text.uri_getNumber,"ax",%progbits
+ 153              		.align	1
+ 154              		.global	uri_getNumber
+ 155              		.syntax unified
+ 156              		.thumb
+ 157              		.thumb_func
+ 158              		.fpu fpv4-sp-d16
+ 160              	uri_getNumber:
+ 161              	.LFB135:
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** int uri_getNumber(uint8_t *uriString,
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                   size_t uriLength)
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** {
+ 162              		.loc 1 89 0
+ 163              		.cfi_startproc
+ 164              		@ args = 0, pretend = 0, frame = 16
+ 165              		@ frame_needed = 1, uses_anonymous_args = 0
+ 166 0000 80B5     		push	{r7, lr}
+ 167              	.LCFI6:
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 7, -8
+ 170              		.cfi_offset 14, -4
+ 171 0002 84B0     		sub	sp, sp, #16
+ 172              	.LCFI7:
+ 173              		.cfi_def_cfa_offset 24
+ 174 0004 00AF     		add	r7, sp, #0
+ 175              	.LCFI8:
+ 176              		.cfi_def_cfa_register 7
+ 177 0006 7860     		str	r0, [r7, #4]
+ 178 0008 3960     		str	r1, [r7]
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     size_t index = 0;
+ 179              		.loc 1 90 0
+ 180 000a 0023     		movs	r3, #0
+ 181 000c FB60     		str	r3, [r7, #12]
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     return prv_parseNumber(uriString, uriLength, &index);
+ 182              		.loc 1 92 0
+ 183 000e 07F10C03 		add	r3, r7, #12
+ 184 0012 1A46     		mov	r2, r3
+ 185 0014 3968     		ldr	r1, [r7]
+ 186 0016 7868     		ldr	r0, [r7, #4]
+ 187 0018 FFF7FEFF 		bl	prv_parseNumber
+ 188 001c 0346     		mov	r3, r0
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** }
+ 189              		.loc 1 93 0
+ 190 001e 1846     		mov	r0, r3
+ 191 0020 1037     		adds	r7, r7, #16
+ 192              	.LCFI9:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 6
+
+
+ 193              		.cfi_def_cfa_offset 8
+ 194 0022 BD46     		mov	sp, r7
+ 195              	.LCFI10:
+ 196              		.cfi_def_cfa_register 13
+ 197              		@ sp needed
+ 198 0024 80BD     		pop	{r7, pc}
+ 199              		.cfi_endproc
+ 200              	.LFE135:
+ 202              		.section	.rodata
+ 203              		.align	2
+ 204              	.LC0:
+ 205 0000 726400   		.ascii	"rd\000"
+ 206 0003 00       		.align	2
+ 207              	.LC1:
+ 208 0004 627300   		.ascii	"bs\000"
+ 209              		.section	.text.uri_decode,"ax",%progbits
+ 210              		.align	1
+ 211              		.global	uri_decode
+ 212              		.syntax unified
+ 213              		.thumb
+ 214              		.thumb_func
+ 215              		.fpu fpv4-sp-d16
+ 217              	uri_decode:
+ 218              	.LFB136:
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** lwm2m_uri_t *uri_decode(char *altPath,
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                         multi_option_t *uriPath)
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** {
+ 219              		.loc 1 98 0
+ 220              		.cfi_startproc
+ 221              		@ args = 0, pretend = 0, frame = 24
+ 222              		@ frame_needed = 1, uses_anonymous_args = 0
+ 223 0000 80B5     		push	{r7, lr}
+ 224              	.LCFI11:
+ 225              		.cfi_def_cfa_offset 8
+ 226              		.cfi_offset 7, -8
+ 227              		.cfi_offset 14, -4
+ 228 0002 86B0     		sub	sp, sp, #24
+ 229              	.LCFI12:
+ 230              		.cfi_def_cfa_offset 32
+ 231 0004 00AF     		add	r7, sp, #0
+ 232              	.LCFI13:
+ 233              		.cfi_def_cfa_register 7
+ 234 0006 7860     		str	r0, [r7, #4]
+ 235 0008 3960     		str	r1, [r7]
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     lwm2m_uri_t *uriP;
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     int readNum;
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if(altPath != NULL)
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         LOG_ARG("altPath: \"%s\"", altPath);
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     else
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****          LOG("altPath: NULL");
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 7
+
+
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP = (lwm2m_uri_t *)lwm2m_malloc(sizeof(lwm2m_uri_t));
+ 236              		.loc 1 110 0
+ 237 000a 0820     		movs	r0, #8
+ 238 000c FFF7FEFF 		bl	lwm2m_malloc
+ 239 0010 3861     		str	r0, [r7, #16]
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (NULL == uriP) return NULL;
+ 240              		.loc 1 111 0
+ 241 0012 3B69     		ldr	r3, [r7, #16]
+ 242 0014 002B     		cmp	r3, #0
+ 243 0016 01D1     		bne	.L13
+ 244              		.loc 1 111 0 is_stmt 0 discriminator 1
+ 245 0018 0023     		movs	r3, #0
+ 246 001a 18E1     		b	.L14
+ 247              	.L13:
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     memset(uriP, 0, sizeof(lwm2m_uri_t));
+ 248              		.loc 1 113 0 is_stmt 1
+ 249 001c 0822     		movs	r2, #8
+ 250 001e 0021     		movs	r1, #0
+ 251 0020 3869     		ldr	r0, [r7, #16]
+ 252 0022 FFF7FEFF 		bl	memset
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // Read object ID
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (NULL != uriPath
+ 253              		.loc 1 116 0
+ 254 0026 3B68     		ldr	r3, [r7]
+ 255 0028 002B     		cmp	r3, #0
+ 256 002a 1DD0     		beq	.L15
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             && URI_REGISTRATION_SEGMENT_LEN == uriPath->len
+ 257              		.loc 1 117 0
+ 258 002c 3B68     		ldr	r3, [r7]
+ 259 002e 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 260 0030 022B     		cmp	r3, #2
+ 261 0032 19D1     		bne	.L15
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             && 0 == strncmp(URI_REGISTRATION_SEGMENT, (char *)uriPath->data, uriPath->len))
+ 262              		.loc 1 118 0
+ 263 0034 3B68     		ldr	r3, [r7]
+ 264 0036 9968     		ldr	r1, [r3, #8]
+ 265 0038 3B68     		ldr	r3, [r7]
+ 266 003a 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 267 003c 1A46     		mov	r2, r3
+ 268 003e 8648     		ldr	r0, .L38
+ 269 0040 FFF7FEFF 		bl	strncmp
+ 270 0044 0346     		mov	r3, r0
+ 271 0046 002B     		cmp	r3, #0
+ 272 0048 0ED1     		bne	.L15
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriP->flag |= LWM2M_URI_FLAG_REGISTRATION;
+ 273              		.loc 1 120 0
+ 274 004a 3B69     		ldr	r3, [r7, #16]
+ 275 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 276 004e 43F02003 		orr	r3, r3, #32
+ 277 0052 DAB2     		uxtb	r2, r3
+ 278 0054 3B69     		ldr	r3, [r7, #16]
+ 279 0056 1A70     		strb	r2, [r3]
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriPath = uriPath->next;
+ 280              		.loc 1 121 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 8
+
+
+ 281 0058 3B68     		ldr	r3, [r7]
+ 282 005a 1B68     		ldr	r3, [r3]
+ 283 005c 3B60     		str	r3, [r7]
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (uriPath == NULL) return uriP;
+ 284              		.loc 1 122 0
+ 285 005e 3B68     		ldr	r3, [r7]
+ 286 0060 002B     		cmp	r3, #0
+ 287 0062 23D1     		bne	.L17
+ 288              		.loc 1 122 0 is_stmt 0 discriminator 1
+ 289 0064 3B69     		ldr	r3, [r7, #16]
+ 290 0066 F2E0     		b	.L14
+ 291              	.L15:
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     else if (NULL != uriPath
+ 292              		.loc 1 124 0 is_stmt 1
+ 293 0068 3B68     		ldr	r3, [r7]
+ 294 006a 002B     		cmp	r3, #0
+ 295 006c 1ED0     		beq	.L17
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****              && URI_BOOTSTRAP_SEGMENT_LEN == uriPath->len
+ 296              		.loc 1 125 0
+ 297 006e 3B68     		ldr	r3, [r7]
+ 298 0070 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 299 0072 022B     		cmp	r3, #2
+ 300 0074 1AD1     		bne	.L17
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****              && 0 == strncmp(URI_BOOTSTRAP_SEGMENT, (char *)uriPath->data, uriPath->len))
+ 301              		.loc 1 126 0
+ 302 0076 3B68     		ldr	r3, [r7]
+ 303 0078 9968     		ldr	r1, [r3, #8]
+ 304 007a 3B68     		ldr	r3, [r7]
+ 305 007c 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 306 007e 1A46     		mov	r2, r3
+ 307 0080 7648     		ldr	r0, .L38+4
+ 308 0082 FFF7FEFF 		bl	strncmp
+ 309 0086 0346     		mov	r3, r0
+ 310 0088 002B     		cmp	r3, #0
+ 311 008a 0FD1     		bne	.L17
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriP->flag |= LWM2M_URI_FLAG_BOOTSTRAP;
+ 312              		.loc 1 128 0
+ 313 008c 3B69     		ldr	r3, [r7, #16]
+ 314 008e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 315 0090 43F04003 		orr	r3, r3, #64
+ 316 0094 DAB2     		uxtb	r2, r3
+ 317 0096 3B69     		ldr	r3, [r7, #16]
+ 318 0098 1A70     		strb	r2, [r3]
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriPath = uriPath->next;
+ 319              		.loc 1 129 0
+ 320 009a 3B68     		ldr	r3, [r7]
+ 321 009c 1B68     		ldr	r3, [r3]
+ 322 009e 3B60     		str	r3, [r7]
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (uriPath != NULL) goto error;
+ 323              		.loc 1 130 0
+ 324 00a0 3B68     		ldr	r3, [r7]
+ 325 00a2 002B     		cmp	r3, #0
+ 326 00a4 40F0C880 		bne	.L34
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return uriP;
+ 327              		.loc 1 131 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 9
+
+
+ 328 00a8 3B69     		ldr	r3, [r7, #16]
+ 329 00aa D0E0     		b	.L14
+ 330              	.L17:
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if ((uriP->flag & LWM2M_URI_MASK_TYPE) != LWM2M_URI_FLAG_REGISTRATION)
+ 331              		.loc 1 134 0
+ 332 00ac 3B69     		ldr	r3, [r7, #16]
+ 333 00ae 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 334 00b0 03F07003 		and	r3, r3, #112
+ 335 00b4 202B     		cmp	r3, #32
+ 336 00b6 3AD0     		beq	.L20
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         // Read altPath if any
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (altPath != NULL)
+ 337              		.loc 1 137 0
+ 338 00b8 7B68     		ldr	r3, [r7, #4]
+ 339 00ba 002B     		cmp	r3, #0
+ 340 00bc 27D0     		beq	.L21
+ 341              	.LBB2:
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         {
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             int i;
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             if (NULL == uriPath)
+ 342              		.loc 1 140 0
+ 343 00be 3B68     		ldr	r3, [r7]
+ 344 00c0 002B     		cmp	r3, #0
+ 345 00c2 04D1     		bne	.L22
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             {
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                 lwm2m_free(uriP);
+ 346              		.loc 1 142 0
+ 347 00c4 3869     		ldr	r0, [r7, #16]
+ 348 00c6 FFF7FEFF 		bl	lwm2m_free
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                 return NULL;
+ 349              		.loc 1 143 0
+ 350 00ca 0023     		movs	r3, #0
+ 351 00cc BFE0     		b	.L14
+ 352              	.L22:
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             }
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             for (i = 0 ; i < uriPath->len ; i++)
+ 353              		.loc 1 145 0
+ 354 00ce 0023     		movs	r3, #0
+ 355 00d0 7B61     		str	r3, [r7, #20]
+ 356 00d2 13E0     		b	.L23
+ 357              	.L25:
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             {
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                 if (uriPath->data[i] != altPath[i + 1])
+ 358              		.loc 1 147 0
+ 359 00d4 3B68     		ldr	r3, [r7]
+ 360 00d6 9A68     		ldr	r2, [r3, #8]
+ 361 00d8 7B69     		ldr	r3, [r7, #20]
+ 362 00da 1344     		add	r3, r3, r2
+ 363 00dc 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 364 00de 7B69     		ldr	r3, [r7, #20]
+ 365 00e0 0133     		adds	r3, r3, #1
+ 366 00e2 7968     		ldr	r1, [r7, #4]
+ 367 00e4 0B44     		add	r3, r3, r1
+ 368 00e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 10
+
+
+ 369 00e8 9A42     		cmp	r2, r3
+ 370 00ea 04D0     		beq	.L24
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                 {
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                     lwm2m_free(uriP);
+ 371              		.loc 1 149 0
+ 372 00ec 3869     		ldr	r0, [r7, #16]
+ 373 00ee FFF7FEFF 		bl	lwm2m_free
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                     return NULL;
+ 374              		.loc 1 150 0
+ 375 00f2 0023     		movs	r3, #0
+ 376 00f4 ABE0     		b	.L14
+ 377              	.L24:
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             {
+ 378              		.loc 1 145 0 discriminator 2
+ 379 00f6 7B69     		ldr	r3, [r7, #20]
+ 380 00f8 0133     		adds	r3, r3, #1
+ 381 00fa 7B61     		str	r3, [r7, #20]
+ 382              	.L23:
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             {
+ 383              		.loc 1 145 0 is_stmt 0 discriminator 1
+ 384 00fc 3B68     		ldr	r3, [r7]
+ 385 00fe 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 386 0100 1A46     		mov	r2, r3
+ 387 0102 7B69     		ldr	r3, [r7, #20]
+ 388 0104 9342     		cmp	r3, r2
+ 389 0106 E5DB     		blt	.L25
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                 }
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             }
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             uriPath = uriPath->next;
+ 390              		.loc 1 153 0 is_stmt 1
+ 391 0108 3B68     		ldr	r3, [r7]
+ 392 010a 1B68     		ldr	r3, [r3]
+ 393 010c 3B60     		str	r3, [r7]
+ 394              	.L21:
+ 395              	.LBE2:
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         }
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (NULL == uriPath || uriPath->len == 0)
+ 396              		.loc 1 155 0
+ 397 010e 3B68     		ldr	r3, [r7]
+ 398 0110 002B     		cmp	r3, #0
+ 399 0112 03D0     		beq	.L26
+ 400              		.loc 1 155 0 is_stmt 0 discriminator 1
+ 401 0114 3B68     		ldr	r3, [r7]
+ 402 0116 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 403 0118 002B     		cmp	r3, #0
+ 404 011a 08D1     		bne	.L20
+ 405              	.L26:
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         {
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             uriP->flag |= LWM2M_URI_FLAG_DELETE_ALL;
+ 406              		.loc 1 157 0 is_stmt 1
+ 407 011c 3B69     		ldr	r3, [r7, #16]
+ 408 011e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 409 0120 43F01003 		orr	r3, r3, #16
+ 410 0124 DAB2     		uxtb	r2, r3
+ 411 0126 3B69     		ldr	r3, [r7, #16]
+ 412 0128 1A70     		strb	r2, [r3]
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             return uriP;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 11
+
+
+ 413              		.loc 1 158 0
+ 414 012a 3B69     		ldr	r3, [r7, #16]
+ 415 012c 8FE0     		b	.L14
+ 416              	.L20:
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         }
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     readNum = uri_getNumber(uriPath->data, uriPath->len);
+ 417              		.loc 1 162 0
+ 418 012e 3B68     		ldr	r3, [r7]
+ 419 0130 9A68     		ldr	r2, [r3, #8]
+ 420 0132 3B68     		ldr	r3, [r7]
+ 421 0134 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 422 0136 1946     		mov	r1, r3
+ 423 0138 1046     		mov	r0, r2
+ 424 013a FFF7FEFF 		bl	uri_getNumber
+ 425 013e F860     		str	r0, [r7, #12]
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (readNum < 0 || readNum > LWM2M_MAX_ID) goto error;
+ 426              		.loc 1 163 0
+ 427 0140 FB68     		ldr	r3, [r7, #12]
+ 428 0142 002B     		cmp	r3, #0
+ 429 0144 7ADB     		blt	.L35
+ 430              		.loc 1 163 0 is_stmt 0 discriminator 1
+ 431 0146 FB68     		ldr	r3, [r7, #12]
+ 432 0148 B3F5803F 		cmp	r3, #65536
+ 433 014c 76DA     		bge	.L35
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->objectId = (uint16_t)readNum;
+ 434              		.loc 1 164 0 is_stmt 1
+ 435 014e FB68     		ldr	r3, [r7, #12]
+ 436 0150 9AB2     		uxth	r2, r3
+ 437 0152 3B69     		ldr	r3, [r7, #16]
+ 438 0154 5A80     		strh	r2, [r3, #2]	@ movhi
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->flag |= LWM2M_URI_FLAG_OBJECT_ID;
+ 439              		.loc 1 165 0
+ 440 0156 3B69     		ldr	r3, [r7, #16]
+ 441 0158 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 442 015a 43F00403 		orr	r3, r3, #4
+ 443 015e DAB2     		uxtb	r2, r3
+ 444 0160 3B69     		ldr	r3, [r7, #16]
+ 445 0162 1A70     		strb	r2, [r3]
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriPath = uriPath->next;
+ 446              		.loc 1 166 0
+ 447 0164 3B68     		ldr	r3, [r7]
+ 448 0166 1B68     		ldr	r3, [r3]
+ 449 0168 3B60     		str	r3, [r7]
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if ((uriP->flag & LWM2M_URI_MASK_TYPE) == LWM2M_URI_FLAG_REGISTRATION)
+ 450              		.loc 1 168 0
+ 451 016a 3B69     		ldr	r3, [r7, #16]
+ 452 016c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 453 016e 03F07003 		and	r3, r3, #112
+ 454 0172 202B     		cmp	r3, #32
+ 455 0174 04D1     		bne	.L27
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (uriPath != NULL) goto error;
+ 456              		.loc 1 170 0
+ 457 0176 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 12
+
+
+ 458 0178 002B     		cmp	r3, #0
+ 459 017a 61D1     		bne	.L36
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return uriP;
+ 460              		.loc 1 171 0
+ 461 017c 3B69     		ldr	r3, [r7, #16]
+ 462 017e 66E0     		b	.L14
+ 463              	.L27:
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->flag |= LWM2M_URI_FLAG_DM;
+ 464              		.loc 1 173 0
+ 465 0180 3B69     		ldr	r3, [r7, #16]
+ 466 0182 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 467 0184 3B69     		ldr	r3, [r7, #16]
+ 468 0186 1A70     		strb	r2, [r3]
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (uriPath == NULL) return uriP;
+ 469              		.loc 1 175 0
+ 470 0188 3B68     		ldr	r3, [r7]
+ 471 018a 002B     		cmp	r3, #0
+ 472 018c 01D1     		bne	.L29
+ 473              		.loc 1 175 0 is_stmt 0 discriminator 1
+ 474 018e 3B69     		ldr	r3, [r7, #16]
+ 475 0190 5DE0     		b	.L14
+ 476              	.L29:
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // Read object instance
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (uriPath->len != 0)
+ 477              		.loc 1 178 0 is_stmt 1
+ 478 0192 3B68     		ldr	r3, [r7]
+ 479 0194 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 480 0196 002B     		cmp	r3, #0
+ 481 0198 1BD0     		beq	.L30
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         readNum = uri_getNumber(uriPath->data, uriPath->len);
+ 482              		.loc 1 180 0
+ 483 019a 3B68     		ldr	r3, [r7]
+ 484 019c 9A68     		ldr	r2, [r3, #8]
+ 485 019e 3B68     		ldr	r3, [r7]
+ 486 01a0 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 487 01a2 1946     		mov	r1, r3
+ 488 01a4 1046     		mov	r0, r2
+ 489 01a6 FFF7FEFF 		bl	uri_getNumber
+ 490 01aa F860     		str	r0, [r7, #12]
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (readNum < 0 || readNum >= LWM2M_MAX_ID) goto error;
+ 491              		.loc 1 181 0
+ 492 01ac FB68     		ldr	r3, [r7, #12]
+ 493 01ae 002B     		cmp	r3, #0
+ 494 01b0 44DB     		blt	.L35
+ 495              		.loc 1 181 0 is_stmt 0 discriminator 1
+ 496 01b2 FB68     		ldr	r3, [r7, #12]
+ 497 01b4 4FF6FE72 		movw	r2, #65534
+ 498 01b8 9342     		cmp	r3, r2
+ 499 01ba 3FDC     		bgt	.L35
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriP->instanceId = (uint16_t)readNum;
+ 500              		.loc 1 182 0 is_stmt 1
+ 501 01bc FB68     		ldr	r3, [r7, #12]
+ 502 01be 9AB2     		uxth	r2, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 13
+
+
+ 503 01c0 3B69     		ldr	r3, [r7, #16]
+ 504 01c2 9A80     		strh	r2, [r3, #4]	@ movhi
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriP->flag |= LWM2M_URI_FLAG_INSTANCE_ID;
+ 505              		.loc 1 183 0
+ 506 01c4 3B69     		ldr	r3, [r7, #16]
+ 507 01c6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 508 01c8 43F00203 		orr	r3, r3, #2
+ 509 01cc DAB2     		uxtb	r2, r3
+ 510 01ce 3B69     		ldr	r3, [r7, #16]
+ 511 01d0 1A70     		strb	r2, [r3]
+ 512              	.L30:
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriPath = uriPath->next;
+ 513              		.loc 1 185 0
+ 514 01d2 3B68     		ldr	r3, [r7]
+ 515 01d4 1B68     		ldr	r3, [r3]
+ 516 01d6 3B60     		str	r3, [r7]
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (uriPath == NULL) return uriP;
+ 517              		.loc 1 187 0
+ 518 01d8 3B68     		ldr	r3, [r7]
+ 519 01da 002B     		cmp	r3, #0
+ 520 01dc 01D1     		bne	.L31
+ 521              		.loc 1 187 0 is_stmt 0 discriminator 1
+ 522 01de 3B69     		ldr	r3, [r7, #16]
+ 523 01e0 35E0     		b	.L14
+ 524              	.L31:
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // Read resource ID
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (uriPath->len != 0)
+ 525              		.loc 1 190 0 is_stmt 1
+ 526 01e2 3B68     		ldr	r3, [r7]
+ 527 01e4 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 528 01e6 002B     		cmp	r3, #0
+ 529 01e8 20D0     		beq	.L32
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         // resource ID without an instance ID is not allowed
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if ((uriP->flag & LWM2M_URI_FLAG_INSTANCE_ID) == 0) goto error;
+ 530              		.loc 1 193 0
+ 531 01ea 3B69     		ldr	r3, [r7, #16]
+ 532 01ec 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 533 01ee 03F00203 		and	r3, r3, #2
+ 534 01f2 002B     		cmp	r3, #0
+ 535 01f4 26D0     		beq	.L37
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         readNum = uri_getNumber(uriPath->data, uriPath->len);
+ 536              		.loc 1 195 0
+ 537 01f6 3B68     		ldr	r3, [r7]
+ 538 01f8 9A68     		ldr	r2, [r3, #8]
+ 539 01fa 3B68     		ldr	r3, [r7]
+ 540 01fc 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 541 01fe 1946     		mov	r1, r3
+ 542 0200 1046     		mov	r0, r2
+ 543 0202 FFF7FEFF 		bl	uri_getNumber
+ 544 0206 F860     		str	r0, [r7, #12]
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (readNum < 0 || readNum > LWM2M_MAX_ID) goto error;
+ 545              		.loc 1 196 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 14
+
+
+ 546 0208 FB68     		ldr	r3, [r7, #12]
+ 547 020a 002B     		cmp	r3, #0
+ 548 020c 16DB     		blt	.L35
+ 549              		.loc 1 196 0 is_stmt 0 discriminator 1
+ 550 020e FB68     		ldr	r3, [r7, #12]
+ 551 0210 B3F5803F 		cmp	r3, #65536
+ 552 0214 12DA     		bge	.L35
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriP->resourceId = (uint16_t)readNum;
+ 553              		.loc 1 197 0 is_stmt 1
+ 554 0216 FB68     		ldr	r3, [r7, #12]
+ 555 0218 9AB2     		uxth	r2, r3
+ 556 021a 3B69     		ldr	r3, [r7, #16]
+ 557 021c DA80     		strh	r2, [r3, #6]	@ movhi
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         uriP->flag |= LWM2M_URI_FLAG_RESOURCE_ID;
+ 558              		.loc 1 198 0
+ 559 021e 3B69     		ldr	r3, [r7, #16]
+ 560 0220 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 561 0222 43F00103 		orr	r3, r3, #1
+ 562 0226 DAB2     		uxtb	r2, r3
+ 563 0228 3B69     		ldr	r3, [r7, #16]
+ 564 022a 1A70     		strb	r2, [r3]
+ 565              	.L32:
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // must be the last segment
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (NULL == uriPath->next)
+ 566              		.loc 1 202 0
+ 567 022c 3B68     		ldr	r3, [r7]
+ 568 022e 1B68     		ldr	r3, [r3]
+ 569 0230 002B     		cmp	r3, #0
+ 570 0232 03D1     		bne	.L35
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         LOG_URI(uriP);
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return uriP;
+ 571              		.loc 1 205 0
+ 572 0234 3B69     		ldr	r3, [r7, #16]
+ 573 0236 0AE0     		b	.L14
+ 574              	.L34:
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return uriP;
+ 575              		.loc 1 130 0
+ 576 0238 00BF     		nop
+ 577 023a 04E0     		b	.L19
+ 578              	.L35:
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** error:
+ 579              		.loc 1 208 0
+ 580 023c 00BF     		nop
+ 581 023e 02E0     		b	.L19
+ 582              	.L36:
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return uriP;
+ 583              		.loc 1 170 0
+ 584 0240 00BF     		nop
+ 585 0242 00E0     		b	.L19
+ 586              	.L37:
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 587              		.loc 1 193 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 15
+
+
+ 588 0244 00BF     		nop
+ 589              	.L19:
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG("Exiting on error");
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     lwm2m_free(uriP);
+ 590              		.loc 1 210 0
+ 591 0246 3869     		ldr	r0, [r7, #16]
+ 592 0248 FFF7FEFF 		bl	lwm2m_free
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     return NULL;
+ 593              		.loc 1 211 0
+ 594 024c 0023     		movs	r3, #0
+ 595              	.L14:
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** }
+ 596              		.loc 1 212 0
+ 597 024e 1846     		mov	r0, r3
+ 598 0250 1837     		adds	r7, r7, #24
+ 599              	.LCFI14:
+ 600              		.cfi_def_cfa_offset 8
+ 601 0252 BD46     		mov	sp, r7
+ 602              	.LCFI15:
+ 603              		.cfi_def_cfa_register 13
+ 604              		@ sp needed
+ 605 0254 80BD     		pop	{r7, pc}
+ 606              	.L39:
+ 607 0256 00BF     		.align	2
+ 608              	.L38:
+ 609 0258 00000000 		.word	.LC0
+ 610 025c 04000000 		.word	.LC1
+ 611              		.cfi_endproc
+ 612              	.LFE136:
+ 614              		.section	.text.lwm2m_stringToUri,"ax",%progbits
+ 615              		.align	1
+ 616              		.global	lwm2m_stringToUri
+ 617              		.syntax unified
+ 618              		.thumb
+ 619              		.thumb_func
+ 620              		.fpu fpv4-sp-d16
+ 622              	lwm2m_stringToUri:
+ 623              	.LFB137:
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** int lwm2m_stringToUri(const char *buffer,
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                       size_t buffer_len,
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                       lwm2m_uri_t *uriP)
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** {
+ 624              		.loc 1 217 0
+ 625              		.cfi_startproc
+ 626              		@ args = 0, pretend = 0, frame = 24
+ 627              		@ frame_needed = 1, uses_anonymous_args = 0
+ 628 0000 80B5     		push	{r7, lr}
+ 629              	.LCFI16:
+ 630              		.cfi_def_cfa_offset 8
+ 631              		.cfi_offset 7, -8
+ 632              		.cfi_offset 14, -4
+ 633 0002 86B0     		sub	sp, sp, #24
+ 634              	.LCFI17:
+ 635              		.cfi_def_cfa_offset 32
+ 636 0004 00AF     		add	r7, sp, #0
+ 637              	.LCFI18:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 16
+
+
+ 638              		.cfi_def_cfa_register 7
+ 639 0006 F860     		str	r0, [r7, #12]
+ 640 0008 B960     		str	r1, [r7, #8]
+ 641 000a 7A60     		str	r2, [r7, #4]
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     size_t head;
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     int readNum;
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG_ARG("buffer_len: %u, buffer: \"%.*s\"", buffer_len, buffer_len, buffer);
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (buffer == NULL || buffer_len == 0 || uriP == NULL) return 0;
+ 642              		.loc 1 223 0
+ 643 000c FB68     		ldr	r3, [r7, #12]
+ 644 000e 002B     		cmp	r3, #0
+ 645 0010 05D0     		beq	.L41
+ 646              		.loc 1 223 0 is_stmt 0 discriminator 2
+ 647 0012 BB68     		ldr	r3, [r7, #8]
+ 648 0014 002B     		cmp	r3, #0
+ 649 0016 02D0     		beq	.L41
+ 650              		.loc 1 223 0 discriminator 4
+ 651 0018 7B68     		ldr	r3, [r7, #4]
+ 652 001a 002B     		cmp	r3, #0
+ 653 001c 01D1     		bne	.L42
+ 654              	.L41:
+ 655              		.loc 1 223 0 discriminator 5
+ 656 001e 0023     		movs	r3, #0
+ 657 0020 AEE0     		b	.L61
+ 658              	.L42:
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     memset(uriP, 0, sizeof(lwm2m_uri_t));
+ 659              		.loc 1 225 0 is_stmt 1
+ 660 0022 0822     		movs	r2, #8
+ 661 0024 0021     		movs	r1, #0
+ 662 0026 7868     		ldr	r0, [r7, #4]
+ 663 0028 FFF7FEFF 		bl	memset
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // Skip any white space
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     head = 0;
+ 664              		.loc 1 228 0
+ 665 002c 0023     		movs	r3, #0
+ 666 002e 3B61     		str	r3, [r7, #16]
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     while (head < buffer_len && isspace(buffer[head] & 0xFF))
+ 667              		.loc 1 229 0
+ 668 0030 02E0     		b	.L44
+ 669              	.L46:
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         head++;
+ 670              		.loc 1 231 0
+ 671 0032 3B69     		ldr	r3, [r7, #16]
+ 672 0034 0133     		adds	r3, r3, #1
+ 673 0036 3B61     		str	r3, [r7, #16]
+ 674              	.L44:
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     while (head < buffer_len && isspace(buffer[head] & 0xFF))
+ 675              		.loc 1 229 0
+ 676 0038 3B69     		ldr	r3, [r7, #16]
+ 677 003a BA68     		ldr	r2, [r7, #8]
+ 678 003c 9A42     		cmp	r2, r3
+ 679 003e 0DD9     		bls	.L45
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 17
+
+
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     while (head < buffer_len && isspace(buffer[head] & 0xFF))
+ 680              		.loc 1 229 0 is_stmt 0 discriminator 1
+ 681 0040 FFF7FEFF 		bl	__locale_ctype_ptr
+ 682 0044 0146     		mov	r1, r0
+ 683 0046 3B69     		ldr	r3, [r7, #16]
+ 684 0048 FA68     		ldr	r2, [r7, #12]
+ 685 004a 1344     		add	r3, r3, r2
+ 686 004c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 687 004e 0133     		adds	r3, r3, #1
+ 688 0050 0B44     		add	r3, r3, r1
+ 689 0052 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 690 0054 03F00803 		and	r3, r3, #8
+ 691 0058 002B     		cmp	r3, #0
+ 692 005a EAD1     		bne	.L46
+ 693              	.L45:
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (head == buffer_len) return 0;
+ 694              		.loc 1 233 0 is_stmt 1
+ 695 005c 3B69     		ldr	r3, [r7, #16]
+ 696 005e BA68     		ldr	r2, [r7, #8]
+ 697 0060 9A42     		cmp	r2, r3
+ 698 0062 01D1     		bne	.L47
+ 699              		.loc 1 233 0 is_stmt 0 discriminator 1
+ 700 0064 0023     		movs	r3, #0
+ 701 0066 8BE0     		b	.L61
+ 702              	.L47:
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // Check the URI start with a '/'
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (buffer[head] != '/') return 0;
+ 703              		.loc 1 236 0 is_stmt 1
+ 704 0068 3B69     		ldr	r3, [r7, #16]
+ 705 006a FA68     		ldr	r2, [r7, #12]
+ 706 006c 1344     		add	r3, r3, r2
+ 707 006e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 708 0070 2F2B     		cmp	r3, #47
+ 709 0072 01D0     		beq	.L48
+ 710              		.loc 1 236 0 is_stmt 0 discriminator 1
+ 711 0074 0023     		movs	r3, #0
+ 712 0076 83E0     		b	.L61
+ 713              	.L48:
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     head++;
+ 714              		.loc 1 237 0 is_stmt 1
+ 715 0078 3B69     		ldr	r3, [r7, #16]
+ 716 007a 0133     		adds	r3, r3, #1
+ 717 007c 3B61     		str	r3, [r7, #16]
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (head == buffer_len) return 0;
+ 718              		.loc 1 238 0
+ 719 007e 3B69     		ldr	r3, [r7, #16]
+ 720 0080 BA68     		ldr	r2, [r7, #8]
+ 721 0082 9A42     		cmp	r2, r3
+ 722 0084 01D1     		bne	.L49
+ 723              		.loc 1 238 0 is_stmt 0 discriminator 1
+ 724 0086 0023     		movs	r3, #0
+ 725 0088 7AE0     		b	.L61
+ 726              	.L49:
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     // Read object ID
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 18
+
+
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     readNum = prv_parseNumber((uint8_t *)buffer, buffer_len, &head);
+ 727              		.loc 1 241 0 is_stmt 1
+ 728 008a 07F11003 		add	r3, r7, #16
+ 729 008e 1A46     		mov	r2, r3
+ 730 0090 B968     		ldr	r1, [r7, #8]
+ 731 0092 F868     		ldr	r0, [r7, #12]
+ 732 0094 FFF7FEFF 		bl	prv_parseNumber
+ 733 0098 7861     		str	r0, [r7, #20]
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (readNum < 0 || readNum > LWM2M_MAX_ID) return 0;
+ 734              		.loc 1 242 0
+ 735 009a 7B69     		ldr	r3, [r7, #20]
+ 736 009c 002B     		cmp	r3, #0
+ 737 009e 03DB     		blt	.L50
+ 738              		.loc 1 242 0 is_stmt 0 discriminator 2
+ 739 00a0 7B69     		ldr	r3, [r7, #20]
+ 740 00a2 B3F5803F 		cmp	r3, #65536
+ 741 00a6 01DB     		blt	.L51
+ 742              	.L50:
+ 743              		.loc 1 242 0 discriminator 3
+ 744 00a8 0023     		movs	r3, #0
+ 745 00aa 69E0     		b	.L61
+ 746              	.L51:
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->objectId = (uint16_t)readNum;
+ 747              		.loc 1 243 0 is_stmt 1
+ 748 00ac 7B69     		ldr	r3, [r7, #20]
+ 749 00ae 9AB2     		uxth	r2, r3
+ 750 00b0 7B68     		ldr	r3, [r7, #4]
+ 751 00b2 5A80     		strh	r2, [r3, #2]	@ movhi
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->flag |= LWM2M_URI_FLAG_OBJECT_ID;
+ 752              		.loc 1 244 0
+ 753 00b4 7B68     		ldr	r3, [r7, #4]
+ 754 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 755 00b8 43F00403 		orr	r3, r3, #4
+ 756 00bc DAB2     		uxtb	r2, r3
+ 757 00be 7B68     		ldr	r3, [r7, #4]
+ 758 00c0 1A70     		strb	r2, [r3]
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (buffer[head] == '/') head += 1;
+ 759              		.loc 1 246 0
+ 760 00c2 3B69     		ldr	r3, [r7, #16]
+ 761 00c4 FA68     		ldr	r2, [r7, #12]
+ 762 00c6 1344     		add	r3, r3, r2
+ 763 00c8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 764 00ca 2F2B     		cmp	r3, #47
+ 765 00cc 02D1     		bne	.L52
+ 766              		.loc 1 246 0 is_stmt 0 discriminator 1
+ 767 00ce 3B69     		ldr	r3, [r7, #16]
+ 768 00d0 0133     		adds	r3, r3, #1
+ 769 00d2 3B61     		str	r3, [r7, #16]
+ 770              	.L52:
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (head >= buffer_len)
+ 771              		.loc 1 247 0 is_stmt 1
+ 772 00d4 3B69     		ldr	r3, [r7, #16]
+ 773 00d6 BA68     		ldr	r2, [r7, #8]
+ 774 00d8 9A42     		cmp	r2, r3
+ 775 00da 01D8     		bhi	.L53
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 19
+
+
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         LOG_ARG("Parsed characters: %u", head);
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         LOG_URI(uriP);
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return head;
+ 776              		.loc 1 251 0
+ 777 00dc 3B69     		ldr	r3, [r7, #16]
+ 778 00de 4FE0     		b	.L61
+ 779              	.L53:
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     readNum = prv_parseNumber((uint8_t *)buffer, buffer_len, &head);
+ 780              		.loc 1 254 0
+ 781 00e0 07F11003 		add	r3, r7, #16
+ 782 00e4 1A46     		mov	r2, r3
+ 783 00e6 B968     		ldr	r1, [r7, #8]
+ 784 00e8 F868     		ldr	r0, [r7, #12]
+ 785 00ea FFF7FEFF 		bl	prv_parseNumber
+ 786 00ee 7861     		str	r0, [r7, #20]
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (readNum < 0 || readNum >= LWM2M_MAX_ID) return 0;
+ 787              		.loc 1 255 0
+ 788 00f0 7B69     		ldr	r3, [r7, #20]
+ 789 00f2 002B     		cmp	r3, #0
+ 790 00f4 04DB     		blt	.L54
+ 791              		.loc 1 255 0 is_stmt 0 discriminator 2
+ 792 00f6 7B69     		ldr	r3, [r7, #20]
+ 793 00f8 4FF6FE72 		movw	r2, #65534
+ 794 00fc 9342     		cmp	r3, r2
+ 795 00fe 01DD     		ble	.L55
+ 796              	.L54:
+ 797              		.loc 1 255 0 discriminator 3
+ 798 0100 0023     		movs	r3, #0
+ 799 0102 3DE0     		b	.L61
+ 800              	.L55:
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->instanceId = (uint16_t)readNum;
+ 801              		.loc 1 256 0 is_stmt 1
+ 802 0104 7B69     		ldr	r3, [r7, #20]
+ 803 0106 9AB2     		uxth	r2, r3
+ 804 0108 7B68     		ldr	r3, [r7, #4]
+ 805 010a 9A80     		strh	r2, [r3, #4]	@ movhi
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->flag |= LWM2M_URI_FLAG_INSTANCE_ID;
+ 806              		.loc 1 257 0
+ 807 010c 7B68     		ldr	r3, [r7, #4]
+ 808 010e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 809 0110 43F00203 		orr	r3, r3, #2
+ 810 0114 DAB2     		uxtb	r2, r3
+ 811 0116 7B68     		ldr	r3, [r7, #4]
+ 812 0118 1A70     		strb	r2, [r3]
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (buffer[head] == '/') head += 1;
+ 813              		.loc 1 259 0
+ 814 011a 3B69     		ldr	r3, [r7, #16]
+ 815 011c FA68     		ldr	r2, [r7, #12]
+ 816 011e 1344     		add	r3, r3, r2
+ 817 0120 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 818 0122 2F2B     		cmp	r3, #47
+ 819 0124 02D1     		bne	.L56
+ 820              		.loc 1 259 0 is_stmt 0 discriminator 1
+ 821 0126 3B69     		ldr	r3, [r7, #16]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 20
+
+
+ 822 0128 0133     		adds	r3, r3, #1
+ 823 012a 3B61     		str	r3, [r7, #16]
+ 824              	.L56:
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (head >= buffer_len)
+ 825              		.loc 1 260 0 is_stmt 1
+ 826 012c 3B69     		ldr	r3, [r7, #16]
+ 827 012e BA68     		ldr	r2, [r7, #8]
+ 828 0130 9A42     		cmp	r2, r3
+ 829 0132 01D8     		bhi	.L57
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         LOG_ARG("Parsed characters: %u", head);
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         LOG_URI(uriP);
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return head;
+ 830              		.loc 1 264 0
+ 831 0134 3B69     		ldr	r3, [r7, #16]
+ 832 0136 23E0     		b	.L61
+ 833              	.L57:
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     readNum = prv_parseNumber((uint8_t *)buffer, buffer_len, &head);
+ 834              		.loc 1 267 0
+ 835 0138 07F11003 		add	r3, r7, #16
+ 836 013c 1A46     		mov	r2, r3
+ 837 013e B968     		ldr	r1, [r7, #8]
+ 838 0140 F868     		ldr	r0, [r7, #12]
+ 839 0142 FFF7FEFF 		bl	prv_parseNumber
+ 840 0146 7861     		str	r0, [r7, #20]
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (readNum < 0 || readNum >= LWM2M_MAX_ID) return 0;
+ 841              		.loc 1 268 0
+ 842 0148 7B69     		ldr	r3, [r7, #20]
+ 843 014a 002B     		cmp	r3, #0
+ 844 014c 04DB     		blt	.L58
+ 845              		.loc 1 268 0 is_stmt 0 discriminator 2
+ 846 014e 7B69     		ldr	r3, [r7, #20]
+ 847 0150 4FF6FE72 		movw	r2, #65534
+ 848 0154 9342     		cmp	r3, r2
+ 849 0156 01DD     		ble	.L59
+ 850              	.L58:
+ 851              		.loc 1 268 0 discriminator 3
+ 852 0158 0023     		movs	r3, #0
+ 853 015a 11E0     		b	.L61
+ 854              	.L59:
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->resourceId = (uint16_t)readNum;
+ 855              		.loc 1 269 0 is_stmt 1
+ 856 015c 7B69     		ldr	r3, [r7, #20]
+ 857 015e 9AB2     		uxth	r2, r3
+ 858 0160 7B68     		ldr	r3, [r7, #4]
+ 859 0162 DA80     		strh	r2, [r3, #6]	@ movhi
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     uriP->flag |= LWM2M_URI_FLAG_RESOURCE_ID;
+ 860              		.loc 1 270 0
+ 861 0164 7B68     		ldr	r3, [r7, #4]
+ 862 0166 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 863 0168 43F00103 		orr	r3, r3, #1
+ 864 016c DAB2     		uxtb	r2, r3
+ 865 016e 7B68     		ldr	r3, [r7, #4]
+ 866 0170 1A70     		strb	r2, [r3]
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 21
+
+
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (head != buffer_len) return 0;
+ 867              		.loc 1 272 0
+ 868 0172 3B69     		ldr	r3, [r7, #16]
+ 869 0174 BA68     		ldr	r2, [r7, #8]
+ 870 0176 9A42     		cmp	r2, r3
+ 871 0178 01D0     		beq	.L60
+ 872              		.loc 1 272 0 is_stmt 0 discriminator 1
+ 873 017a 0023     		movs	r3, #0
+ 874 017c 00E0     		b	.L61
+ 875              	.L60:
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG_ARG("Parsed characters: %u", head);
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG_URI(uriP);
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     return head;
+ 876              		.loc 1 277 0 is_stmt 1
+ 877 017e 3B69     		ldr	r3, [r7, #16]
+ 878              	.L61:
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** }
+ 879              		.loc 1 278 0 discriminator 1
+ 880 0180 1846     		mov	r0, r3
+ 881 0182 1837     		adds	r7, r7, #24
+ 882              	.LCFI19:
+ 883              		.cfi_def_cfa_offset 8
+ 884 0184 BD46     		mov	sp, r7
+ 885              	.LCFI20:
+ 886              		.cfi_def_cfa_register 13
+ 887              		@ sp needed
+ 888 0186 80BD     		pop	{r7, pc}
+ 889              		.cfi_endproc
+ 890              	.LFE137:
+ 892              		.section	.text.uri_toString,"ax",%progbits
+ 893              		.align	1
+ 894              		.global	uri_toString
+ 895              		.syntax unified
+ 896              		.thumb
+ 897              		.thumb_func
+ 898              		.fpu fpv4-sp-d16
+ 900              	uri_toString:
+ 901              	.LFB138:
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** int uri_toString(lwm2m_uri_t *uriP,
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                  uint8_t *buffer,
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                  size_t bufferLen,
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****                  uri_depth_t *depthP)
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** {
+ 902              		.loc 1 284 0
+ 903              		.cfi_startproc
+ 904              		@ args = 0, pretend = 0, frame = 24
+ 905              		@ frame_needed = 1, uses_anonymous_args = 0
+ 906 0000 90B5     		push	{r4, r7, lr}
+ 907              	.LCFI21:
+ 908              		.cfi_def_cfa_offset 12
+ 909              		.cfi_offset 4, -12
+ 910              		.cfi_offset 7, -8
+ 911              		.cfi_offset 14, -4
+ 912 0002 87B0     		sub	sp, sp, #28
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 22
+
+
+ 913              	.LCFI22:
+ 914              		.cfi_def_cfa_offset 40
+ 915 0004 00AF     		add	r7, sp, #0
+ 916              	.LCFI23:
+ 917              		.cfi_def_cfa_register 7
+ 918 0006 F860     		str	r0, [r7, #12]
+ 919 0008 B960     		str	r1, [r7, #8]
+ 920 000a 7A60     		str	r2, [r7, #4]
+ 921 000c 3B60     		str	r3, [r7]
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     size_t head;
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     int res;
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG_ARG("bufferLen: %u", bufferLen);
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG_URI(uriP);
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     buffer[0] = '/';
+ 922              		.loc 1 291 0
+ 923 000e BB68     		ldr	r3, [r7, #8]
+ 924 0010 2F22     		movs	r2, #47
+ 925 0012 1A70     		strb	r2, [r3]
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (uriP == NULL)
+ 926              		.loc 1 293 0
+ 927 0014 FB68     		ldr	r3, [r7, #12]
+ 928 0016 002B     		cmp	r3, #0
+ 929 0018 07D1     		bne	.L63
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (depthP) *depthP = URI_DEPTH_OBJECT;
+ 930              		.loc 1 295 0
+ 931 001a 3B68     		ldr	r3, [r7]
+ 932 001c 002B     		cmp	r3, #0
+ 933 001e 02D0     		beq	.L64
+ 934              		.loc 1 295 0 is_stmt 0 discriminator 1
+ 935 0020 3B68     		ldr	r3, [r7]
+ 936 0022 0022     		movs	r2, #0
+ 937 0024 1A70     		strb	r2, [r3]
+ 938              	.L64:
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         return 1;
+ 939              		.loc 1 296 0 is_stmt 1
+ 940 0026 0123     		movs	r3, #1
+ 941 0028 9EE0     		b	.L65
+ 942              	.L63:
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     head = 1;
+ 943              		.loc 1 299 0
+ 944 002a 0123     		movs	r3, #1
+ 945 002c 7B61     		str	r3, [r7, #20]
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     res = utils_intToText(uriP->objectId, buffer + head, bufferLen - head);
+ 946              		.loc 1 301 0
+ 947 002e FB68     		ldr	r3, [r7, #12]
+ 948 0030 5B88     		ldrh	r3, [r3, #2]
+ 949 0032 98B2     		uxth	r0, r3
+ 950 0034 4FF00001 		mov	r1, #0
+ 951 0038 BA68     		ldr	r2, [r7, #8]
+ 952 003a 7B69     		ldr	r3, [r7, #20]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 23
+
+
+ 953 003c D418     		adds	r4, r2, r3
+ 954 003e 7A68     		ldr	r2, [r7, #4]
+ 955 0040 7B69     		ldr	r3, [r7, #20]
+ 956 0042 D31A     		subs	r3, r2, r3
+ 957 0044 2246     		mov	r2, r4
+ 958 0046 FFF7FEFF 		bl	utils_intToText
+ 959 004a 0346     		mov	r3, r0
+ 960 004c 3B61     		str	r3, [r7, #16]
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (res <= 0) return -1;
+ 961              		.loc 1 302 0
+ 962 004e 3B69     		ldr	r3, [r7, #16]
+ 963 0050 002B     		cmp	r3, #0
+ 964 0052 02DC     		bgt	.L66
+ 965              		.loc 1 302 0 is_stmt 0 discriminator 1
+ 966 0054 4FF0FF33 		mov	r3, #-1
+ 967 0058 86E0     		b	.L65
+ 968              	.L66:
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     head += res;
+ 969              		.loc 1 303 0 is_stmt 1
+ 970 005a 3B69     		ldr	r3, [r7, #16]
+ 971 005c 7A69     		ldr	r2, [r7, #20]
+ 972 005e 1344     		add	r3, r3, r2
+ 973 0060 7B61     		str	r3, [r7, #20]
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (head >= bufferLen - 1) return -1;
+ 974              		.loc 1 304 0
+ 975 0062 7B68     		ldr	r3, [r7, #4]
+ 976 0064 013B     		subs	r3, r3, #1
+ 977 0066 7A69     		ldr	r2, [r7, #20]
+ 978 0068 9A42     		cmp	r2, r3
+ 979 006a 02D3     		bcc	.L67
+ 980              		.loc 1 304 0 is_stmt 0 discriminator 1
+ 981 006c 4FF0FF33 		mov	r3, #-1
+ 982 0070 7AE0     		b	.L65
+ 983              	.L67:
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (depthP) *depthP = URI_DEPTH_OBJECT_INSTANCE;
+ 984              		.loc 1 305 0 is_stmt 1
+ 985 0072 3B68     		ldr	r3, [r7]
+ 986 0074 002B     		cmp	r3, #0
+ 987 0076 02D0     		beq	.L68
+ 988              		.loc 1 305 0 is_stmt 0 discriminator 1
+ 989 0078 3B68     		ldr	r3, [r7]
+ 990 007a 0122     		movs	r2, #1
+ 991 007c 1A70     		strb	r2, [r3]
+ 992              	.L68:
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     if (LWM2M_URI_IS_SET_INSTANCE(uriP))
+ 993              		.loc 1 307 0 is_stmt 1
+ 994 007e FB68     		ldr	r3, [r7, #12]
+ 995 0080 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 996 0082 03F00203 		and	r3, r3, #2
+ 997 0086 002B     		cmp	r3, #0
+ 998 0088 65D0     		beq	.L69
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     {
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         buffer[head] = '/';
+ 999              		.loc 1 309 0
+ 1000 008a BA68     		ldr	r2, [r7, #8]
+ 1001 008c 7B69     		ldr	r3, [r7, #20]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 24
+
+
+ 1002 008e 1344     		add	r3, r3, r2
+ 1003 0090 2F22     		movs	r2, #47
+ 1004 0092 1A70     		strb	r2, [r3]
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         head++;
+ 1005              		.loc 1 310 0
+ 1006 0094 7B69     		ldr	r3, [r7, #20]
+ 1007 0096 0133     		adds	r3, r3, #1
+ 1008 0098 7B61     		str	r3, [r7, #20]
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         res = utils_intToText(uriP->instanceId, buffer + head, bufferLen - head);
+ 1009              		.loc 1 311 0
+ 1010 009a FB68     		ldr	r3, [r7, #12]
+ 1011 009c 9B88     		ldrh	r3, [r3, #4]
+ 1012 009e 98B2     		uxth	r0, r3
+ 1013 00a0 4FF00001 		mov	r1, #0
+ 1014 00a4 BA68     		ldr	r2, [r7, #8]
+ 1015 00a6 7B69     		ldr	r3, [r7, #20]
+ 1016 00a8 D418     		adds	r4, r2, r3
+ 1017 00aa 7A68     		ldr	r2, [r7, #4]
+ 1018 00ac 7B69     		ldr	r3, [r7, #20]
+ 1019 00ae D31A     		subs	r3, r2, r3
+ 1020 00b0 2246     		mov	r2, r4
+ 1021 00b2 FFF7FEFF 		bl	utils_intToText
+ 1022 00b6 0346     		mov	r3, r0
+ 1023 00b8 3B61     		str	r3, [r7, #16]
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (res <= 0) return -1;
+ 1024              		.loc 1 312 0
+ 1025 00ba 3B69     		ldr	r3, [r7, #16]
+ 1026 00bc 002B     		cmp	r3, #0
+ 1027 00be 02DC     		bgt	.L70
+ 1028              		.loc 1 312 0 is_stmt 0 discriminator 1
+ 1029 00c0 4FF0FF33 		mov	r3, #-1
+ 1030 00c4 50E0     		b	.L65
+ 1031              	.L70:
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         head += res;
+ 1032              		.loc 1 313 0 is_stmt 1
+ 1033 00c6 3B69     		ldr	r3, [r7, #16]
+ 1034 00c8 7A69     		ldr	r2, [r7, #20]
+ 1035 00ca 1344     		add	r3, r3, r2
+ 1036 00cc 7B61     		str	r3, [r7, #20]
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (head >= bufferLen - 1) return -1;
+ 1037              		.loc 1 314 0
+ 1038 00ce 7B68     		ldr	r3, [r7, #4]
+ 1039 00d0 013B     		subs	r3, r3, #1
+ 1040 00d2 7A69     		ldr	r2, [r7, #20]
+ 1041 00d4 9A42     		cmp	r2, r3
+ 1042 00d6 02D3     		bcc	.L71
+ 1043              		.loc 1 314 0 is_stmt 0 discriminator 1
+ 1044 00d8 4FF0FF33 		mov	r3, #-1
+ 1045 00dc 44E0     		b	.L65
+ 1046              	.L71:
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (depthP) *depthP = URI_DEPTH_RESOURCE;
+ 1047              		.loc 1 315 0 is_stmt 1
+ 1048 00de 3B68     		ldr	r3, [r7]
+ 1049 00e0 002B     		cmp	r3, #0
+ 1050 00e2 02D0     		beq	.L72
+ 1051              		.loc 1 315 0 is_stmt 0 discriminator 1
+ 1052 00e4 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 25
+
+
+ 1053 00e6 0222     		movs	r2, #2
+ 1054 00e8 1A70     		strb	r2, [r3]
+ 1055              	.L72:
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         if (LWM2M_URI_IS_SET_RESOURCE(uriP))
+ 1056              		.loc 1 316 0 is_stmt 1
+ 1057 00ea FB68     		ldr	r3, [r7, #12]
+ 1058 00ec 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1059 00ee 03F00103 		and	r3, r3, #1
+ 1060 00f2 002B     		cmp	r3, #0
+ 1061 00f4 2FD0     		beq	.L69
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         {
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             buffer[head] = '/';
+ 1062              		.loc 1 318 0
+ 1063 00f6 BA68     		ldr	r2, [r7, #8]
+ 1064 00f8 7B69     		ldr	r3, [r7, #20]
+ 1065 00fa 1344     		add	r3, r3, r2
+ 1066 00fc 2F22     		movs	r2, #47
+ 1067 00fe 1A70     		strb	r2, [r3]
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             head++;
+ 1068              		.loc 1 319 0
+ 1069 0100 7B69     		ldr	r3, [r7, #20]
+ 1070 0102 0133     		adds	r3, r3, #1
+ 1071 0104 7B61     		str	r3, [r7, #20]
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             res = utils_intToText(uriP->resourceId, buffer + head, bufferLen - head);
+ 1072              		.loc 1 320 0
+ 1073 0106 FB68     		ldr	r3, [r7, #12]
+ 1074 0108 DB88     		ldrh	r3, [r3, #6]
+ 1075 010a 98B2     		uxth	r0, r3
+ 1076 010c 4FF00001 		mov	r1, #0
+ 1077 0110 BA68     		ldr	r2, [r7, #8]
+ 1078 0112 7B69     		ldr	r3, [r7, #20]
+ 1079 0114 D418     		adds	r4, r2, r3
+ 1080 0116 7A68     		ldr	r2, [r7, #4]
+ 1081 0118 7B69     		ldr	r3, [r7, #20]
+ 1082 011a D31A     		subs	r3, r2, r3
+ 1083 011c 2246     		mov	r2, r4
+ 1084 011e FFF7FEFF 		bl	utils_intToText
+ 1085 0122 0346     		mov	r3, r0
+ 1086 0124 3B61     		str	r3, [r7, #16]
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             if (res <= 0) return -1;
+ 1087              		.loc 1 321 0
+ 1088 0126 3B69     		ldr	r3, [r7, #16]
+ 1089 0128 002B     		cmp	r3, #0
+ 1090 012a 02DC     		bgt	.L73
+ 1091              		.loc 1 321 0 is_stmt 0 discriminator 1
+ 1092 012c 4FF0FF33 		mov	r3, #-1
+ 1093 0130 1AE0     		b	.L65
+ 1094              	.L73:
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             head += res;
+ 1095              		.loc 1 322 0 is_stmt 1
+ 1096 0132 3B69     		ldr	r3, [r7, #16]
+ 1097 0134 7A69     		ldr	r2, [r7, #20]
+ 1098 0136 1344     		add	r3, r3, r2
+ 1099 0138 7B61     		str	r3, [r7, #20]
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             if (head >= bufferLen - 1) return -1;
+ 1100              		.loc 1 323 0
+ 1101 013a 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 26
+
+
+ 1102 013c 013B     		subs	r3, r3, #1
+ 1103 013e 7A69     		ldr	r2, [r7, #20]
+ 1104 0140 9A42     		cmp	r2, r3
+ 1105 0142 02D3     		bcc	.L74
+ 1106              		.loc 1 323 0 is_stmt 0 discriminator 1
+ 1107 0144 4FF0FF33 		mov	r3, #-1
+ 1108 0148 0EE0     		b	.L65
+ 1109              	.L74:
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****             if (depthP) *depthP = URI_DEPTH_RESOURCE_INSTANCE;
+ 1110              		.loc 1 324 0 is_stmt 1
+ 1111 014a 3B68     		ldr	r3, [r7]
+ 1112 014c 002B     		cmp	r3, #0
+ 1113 014e 02D0     		beq	.L69
+ 1114              		.loc 1 324 0 is_stmt 0 discriminator 1
+ 1115 0150 3B68     		ldr	r3, [r7]
+ 1116 0152 0322     		movs	r2, #3
+ 1117 0154 1A70     		strb	r2, [r3]
+ 1118              	.L69:
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****         }
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     }
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     buffer[head] = '/';
+ 1119              		.loc 1 328 0 is_stmt 1
+ 1120 0156 BA68     		ldr	r2, [r7, #8]
+ 1121 0158 7B69     		ldr	r3, [r7, #20]
+ 1122 015a 1344     		add	r3, r3, r2
+ 1123 015c 2F22     		movs	r2, #47
+ 1124 015e 1A70     		strb	r2, [r3]
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     head++;
+ 1125              		.loc 1 329 0
+ 1126 0160 7B69     		ldr	r3, [r7, #20]
+ 1127 0162 0133     		adds	r3, r3, #1
+ 1128 0164 7B61     		str	r3, [r7, #20]
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     LOG_ARG("length: %u, buffer: \"%.*s\"", head, head, buffer);
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** 
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c ****     return head;
+ 1129              		.loc 1 333 0
+ 1130 0166 7B69     		ldr	r3, [r7, #20]
+ 1131              	.L65:
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\uri.c **** }
+ 1132              		.loc 1 334 0
+ 1133 0168 1846     		mov	r0, r3
+ 1134 016a 1C37     		adds	r7, r7, #28
+ 1135              	.LCFI24:
+ 1136              		.cfi_def_cfa_offset 12
+ 1137 016c BD46     		mov	sp, r7
+ 1138              	.LCFI25:
+ 1139              		.cfi_def_cfa_register 13
+ 1140              		@ sp needed
+ 1141 016e 90BD     		pop	{r4, r7, pc}
+ 1142              		.cfi_endproc
+ 1143              	.LFE138:
+ 1145              		.text
+ 1146              	.Letext0:
+ 1147              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 1148              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 27
+
+
+ 1149              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 1150              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 1151              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 1152              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 1153              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 1154              		.file 9 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 1155              		.file 10 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 1156              		.file 11 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 1157              		.file 12 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 1158              		.file 13 "D:/iot/felix2/kernel/include/los_list.h"
+ 1159              		.file 14 "D:/iot/felix2/kernel/include/los_err.h"
+ 1160              		.file 15 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 1161              		.file 16 "D:/iot/felix2/kernel/include/los_tick.h"
+ 1162              		.file 17 "D:/iot/felix2/kernel/include/los_event.h"
+ 1163              		.file 18 "D:/iot/felix2/kernel/include/los_task.h"
+ 1164              		.file 19 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 1165              		.file 20 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 1166              		.file 21 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 1167              		.file 22 "D:/iot/felix2/kernel/include/los_config.h"
+ 1168              		.file 23 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 1169              		.file 24 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 1170              		.file 25 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 1171              		.file 26 "D:/iot/felix2/components/connectivity/lwm2m/core/internals.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 uri.c
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:18     .text.prv_parseNumber:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:24     .text.prv_parseNumber:00000000 prv_parseNumber
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:148    .text.prv_parseNumber:000000a8 $d
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:153    .text.uri_getNumber:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:160    .text.uri_getNumber:00000000 uri_getNumber
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:203    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:210    .text.uri_decode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:217    .text.uri_decode:00000000 uri_decode
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:609    .text.uri_decode:00000258 $d
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:615    .text.lwm2m_stringToUri:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:622    .text.lwm2m_stringToUri:00000000 lwm2m_stringToUri
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:893    .text.uri_toString:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccQLHCHX.s:900    .text.uri_toString:00000000 uri_toString
+
+UNDEFINED SYMBOLS
+lwm2m_malloc
+memset
+strncmp
+lwm2m_free
+__locale_ctype_ptr
+utils_intToText

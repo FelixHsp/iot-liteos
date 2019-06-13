@@ -1,0 +1,3318 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"liblwm2m.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.lwm2m_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	lwm2m_init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	lwm2m_init:
+  26              	.LFB134:
+  27              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 2
+
+
+  32:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * applicable export control laws and regulations.
+  33:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  35:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *
+  37:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Copyright (c) 2013, 2014 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *
+  42:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *
+  47:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    Fabien Fleutot - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    Simon Bernard - Please refer to git log
+  51:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    Toby Jaffey - Please refer to git log
+  52:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *    Pascal Rieux - Please refer to git log
+  53:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *
+  54:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  *******************************************************************************/
+  55:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  56:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** /*
+  57:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  Copyright (c) 2013, 2014 Intel Corporation
+  58:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  59:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  Redistribution and use in source and binary forms, with or without modification,
+  60:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  are permitted provided that the following conditions are met:
+  61:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  62:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****      * Redistributions of source code must retain the above copyright notice,
+  63:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****        this list of conditions and the following disclaimer.
+  64:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****      * Redistributions in binary form must reproduce the above copyright notice,
+  65:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****        this list of conditions and the following disclaimer in the documentation
+  66:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****        and/or other materials provided with the distribution.
+  67:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****      * Neither the name of Intel Corporation nor the names of its contributors
+  68:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****        may be used to endorse or promote products derived from this software
+  69:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****        without specific prior written permission.
+  70:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  71:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+  72:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+  73:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  74:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+  75:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+  76:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  77:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  78:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  79:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+  80:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  THE POSSIBILITY OF SUCH DAMAGE.
+  81:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  82:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****  David Navarro <david.navarro@intel.com>
+  83:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  84:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** */
+  85:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  86:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #include "internals.h"
+  87:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #include "osdepends/atiny_osdep.h"
+  88:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #include <stdlib.h>
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 3
+
+
+  89:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #include <string.h>
+  90:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  91:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #include <stdio.h>
+  92:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  93:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  94:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** lwm2m_context_t *lwm2m_init(void *userData)
+  95:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+  28              		.loc 1 95 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 84B0     		sub	sp, sp, #16
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  96:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_context_t *contextP;
+  97:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+  98:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG("Entering");
+  99:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP = (lwm2m_context_t *)lwm2m_malloc(sizeof(lwm2m_context_t));
+  44              		.loc 1 99 0
+  45 0008 3820     		movs	r0, #56
+  46 000a FFF7FEFF 		bl	lwm2m_malloc
+  47 000e F860     		str	r0, [r7, #12]
+ 100:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (NULL != contextP)
+  48              		.loc 1 100 0
+  49 0010 FB68     		ldr	r3, [r7, #12]
+  50 0012 002B     		cmp	r3, #0
+  51 0014 0DD0     		beq	.L2
+ 101:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 102:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         memset(contextP, 0, sizeof(lwm2m_context_t));
+  52              		.loc 1 102 0
+  53 0016 3822     		movs	r2, #56
+  54 0018 0021     		movs	r1, #0
+  55 001a F868     		ldr	r0, [r7, #12]
+  56 001c FFF7FEFF 		bl	memset
+ 103:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->userData = userData;
+  57              		.loc 1 103 0
+  58 0020 FB68     		ldr	r3, [r7, #12]
+  59 0022 7A68     		ldr	r2, [r7, #4]
+  60 0024 5A63     		str	r2, [r3, #52]
+ 104:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_rand((void *)&contextP->nextMID, sizeof(contextP->nextMID));
+  61              		.loc 1 104 0
+  62 0026 FB68     		ldr	r3, [r7, #12]
+  63 0028 2C33     		adds	r3, r3, #44
+  64 002a 0221     		movs	r1, #2
+  65 002c 1846     		mov	r0, r3
+  66 002e FFF7FEFF 		bl	lwm2m_rand
+  67              	.L2:
+ 105:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 4
+
+
+ 106:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 107:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return contextP;
+  68              		.loc 1 107 0
+  69 0032 FB68     		ldr	r3, [r7, #12]
+ 108:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+  70              		.loc 1 108 0
+  71 0034 1846     		mov	r0, r3
+  72 0036 1037     		adds	r7, r7, #16
+  73              	.LCFI3:
+  74              		.cfi_def_cfa_offset 8
+  75 0038 BD46     		mov	sp, r7
+  76              	.LCFI4:
+  77              		.cfi_def_cfa_register 13
+  78              		@ sp needed
+  79 003a 80BD     		pop	{r7, pc}
+  80              		.cfi_endproc
+  81              	.LFE134:
+  83              		.section	.bss.event_handler,"aw",%nobits
+  84              		.align	2
+  87              	event_handler:
+  88 0000 00000000 		.space	4
+  89              		.section	.text.lwm2m_register_event_handler,"ax",%progbits
+  90              		.align	1
+  91              		.global	lwm2m_register_event_handler
+  92              		.syntax unified
+  93              		.thumb
+  94              		.thumb_func
+  95              		.fpu fpv4-sp-d16
+  97              	lwm2m_register_event_handler:
+  98              	.LFB135:
+ 109:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 110:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_CLIENT_MODE
+ 111:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 112:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 113:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static lwm2m_event_handler_t event_handler = NULL;
+ 114:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void lwm2m_register_event_handler(lwm2m_event_handler_t callback)
+ 115:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+  99              		.loc 1 115 0
+ 100              		.cfi_startproc
+ 101              		@ args = 0, pretend = 0, frame = 8
+ 102              		@ frame_needed = 1, uses_anonymous_args = 0
+ 103              		@ link register save eliminated.
+ 104 0000 80B4     		push	{r7}
+ 105              	.LCFI5:
+ 106              		.cfi_def_cfa_offset 4
+ 107              		.cfi_offset 7, -4
+ 108 0002 83B0     		sub	sp, sp, #12
+ 109              	.LCFI6:
+ 110              		.cfi_def_cfa_offset 16
+ 111 0004 00AF     		add	r7, sp, #0
+ 112              	.LCFI7:
+ 113              		.cfi_def_cfa_register 7
+ 114 0006 7860     		str	r0, [r7, #4]
+ 116:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     event_handler = callback;
+ 115              		.loc 1 116 0
+ 116 0008 044A     		ldr	r2, .L5
+ 117 000a 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 5
+
+
+ 118 000c 1360     		str	r3, [r2]
+ 117:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 119              		.loc 1 117 0
+ 120 000e 00BF     		nop
+ 121 0010 0C37     		adds	r7, r7, #12
+ 122              	.LCFI8:
+ 123              		.cfi_def_cfa_offset 4
+ 124 0012 BD46     		mov	sp, r7
+ 125              	.LCFI9:
+ 126              		.cfi_def_cfa_register 13
+ 127              		@ sp needed
+ 128 0014 5DF8047B 		ldr	r7, [sp], #4
+ 129              	.LCFI10:
+ 130              		.cfi_restore 7
+ 131              		.cfi_def_cfa_offset 0
+ 132 0018 7047     		bx	lr
+ 133              	.L6:
+ 134 001a 00BF     		.align	2
+ 135              	.L5:
+ 136 001c 00000000 		.word	event_handler
+ 137              		.cfi_endproc
+ 138              	.LFE135:
+ 140              		.section	.text.lwm2m_notify_even,"ax",%progbits
+ 141              		.align	1
+ 142              		.global	lwm2m_notify_even
+ 143              		.syntax unified
+ 144              		.thumb
+ 145              		.thumb_func
+ 146              		.fpu fpv4-sp-d16
+ 148              	lwm2m_notify_even:
+ 149              	.LFB136:
+ 118:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 119:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void lwm2m_notify_even(module_type_t type, int code, const char *arg, int arg_len)
+ 120:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 150              		.loc 1 120 0
+ 151              		.cfi_startproc
+ 152              		@ args = 0, pretend = 0, frame = 16
+ 153              		@ frame_needed = 1, uses_anonymous_args = 0
+ 154 0000 90B5     		push	{r4, r7, lr}
+ 155              	.LCFI11:
+ 156              		.cfi_def_cfa_offset 12
+ 157              		.cfi_offset 4, -12
+ 158              		.cfi_offset 7, -8
+ 159              		.cfi_offset 14, -4
+ 160 0002 85B0     		sub	sp, sp, #20
+ 161              	.LCFI12:
+ 162              		.cfi_def_cfa_offset 32
+ 163 0004 00AF     		add	r7, sp, #0
+ 164              	.LCFI13:
+ 165              		.cfi_def_cfa_register 7
+ 166 0006 B960     		str	r1, [r7, #8]
+ 167 0008 7A60     		str	r2, [r7, #4]
+ 168 000a 3B60     		str	r3, [r7]
+ 169 000c 0346     		mov	r3, r0
+ 170 000e FB73     		strb	r3, [r7, #15]
+ 121:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if(event_handler != NULL)
+ 171              		.loc 1 121 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 6
+
+
+ 172 0010 074B     		ldr	r3, .L10
+ 173 0012 1B68     		ldr	r3, [r3]
+ 174 0014 002B     		cmp	r3, #0
+ 175 0016 06D0     		beq	.L9
+ 122:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 123:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         event_handler(type, code, arg, arg_len);
+ 176              		.loc 1 123 0
+ 177 0018 054B     		ldr	r3, .L10
+ 178 001a 1C68     		ldr	r4, [r3]
+ 179 001c F87B     		ldrb	r0, [r7, #15]	@ zero_extendqisi2
+ 180 001e 3B68     		ldr	r3, [r7]
+ 181 0020 7A68     		ldr	r2, [r7, #4]
+ 182 0022 B968     		ldr	r1, [r7, #8]
+ 183 0024 A047     		blx	r4
+ 184              	.LVL0:
+ 185              	.L9:
+ 124:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 125:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 186              		.loc 1 125 0
+ 187 0026 00BF     		nop
+ 188 0028 1437     		adds	r7, r7, #20
+ 189              	.LCFI14:
+ 190              		.cfi_def_cfa_offset 12
+ 191 002a BD46     		mov	sp, r7
+ 192              	.LCFI15:
+ 193              		.cfi_def_cfa_register 13
+ 194              		@ sp needed
+ 195 002c 90BD     		pop	{r4, r7, pc}
+ 196              	.L11:
+ 197 002e 00BF     		.align	2
+ 198              	.L10:
+ 199 0030 00000000 		.word	event_handler
+ 200              		.cfi_endproc
+ 201              	.LFE136:
+ 203              		.section	.text.lwm2m_deregister,"ax",%progbits
+ 204              		.align	1
+ 205              		.global	lwm2m_deregister
+ 206              		.syntax unified
+ 207              		.thumb
+ 208              		.thumb_func
+ 209              		.fpu fpv4-sp-d16
+ 211              	lwm2m_deregister:
+ 212              	.LFB137:
+ 126:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 127:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void lwm2m_deregister(lwm2m_context_t *context)
+ 128:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 213              		.loc 1 128 0
+ 214              		.cfi_startproc
+ 215              		@ args = 0, pretend = 0, frame = 16
+ 216              		@ frame_needed = 1, uses_anonymous_args = 0
+ 217 0000 80B5     		push	{r7, lr}
+ 218              	.LCFI16:
+ 219              		.cfi_def_cfa_offset 8
+ 220              		.cfi_offset 7, -8
+ 221              		.cfi_offset 14, -4
+ 222 0002 84B0     		sub	sp, sp, #16
+ 223              	.LCFI17:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 7
+
+
+ 224              		.cfi_def_cfa_offset 24
+ 225 0004 00AF     		add	r7, sp, #0
+ 226              	.LCFI18:
+ 227              		.cfi_def_cfa_register 7
+ 228 0006 7860     		str	r0, [r7, #4]
+ 129:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_server_t *server = context->serverList;
+ 229              		.loc 1 129 0
+ 230 0008 7B68     		ldr	r3, [r7, #4]
+ 231 000a 5B69     		ldr	r3, [r3, #20]
+ 232 000c FB60     		str	r3, [r7, #12]
+ 130:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 131:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG("Entering");
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != server)
+ 233              		.loc 1 132 0
+ 234 000e 06E0     		b	.L13
+ 235              	.L14:
+ 133:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 134:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         registration_deregister(context, server);
+ 236              		.loc 1 134 0
+ 237 0010 F968     		ldr	r1, [r7, #12]
+ 238 0012 7868     		ldr	r0, [r7, #4]
+ 239 0014 FFF7FEFF 		bl	registration_deregister
+ 135:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         server = server->next;
+ 240              		.loc 1 135 0
+ 241 0018 FB68     		ldr	r3, [r7, #12]
+ 242 001a 1B68     		ldr	r3, [r3]
+ 243 001c FB60     		str	r3, [r7, #12]
+ 244              	.L13:
+ 132:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 245              		.loc 1 132 0
+ 246 001e FB68     		ldr	r3, [r7, #12]
+ 247 0020 002B     		cmp	r3, #0
+ 248 0022 F5D1     		bne	.L14
+ 136:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 137:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 249              		.loc 1 137 0
+ 250 0024 00BF     		nop
+ 251 0026 1037     		adds	r7, r7, #16
+ 252              	.LCFI19:
+ 253              		.cfi_def_cfa_offset 8
+ 254 0028 BD46     		mov	sp, r7
+ 255              	.LCFI20:
+ 256              		.cfi_def_cfa_register 13
+ 257              		@ sp needed
+ 258 002a 80BD     		pop	{r7, pc}
+ 259              		.cfi_endproc
+ 260              	.LFE137:
+ 262              		.section	.text.prv_deleteServer,"ax",%progbits
+ 263              		.align	1
+ 264              		.syntax unified
+ 265              		.thumb
+ 266              		.thumb_func
+ 267              		.fpu fpv4-sp-d16
+ 269              	prv_deleteServer:
+ 270              	.LFB138:
+ 138:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 139:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void prv_deleteServer(lwm2m_server_t *serverP, void *userData)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 8
+
+
+ 140:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 271              		.loc 1 140 0
+ 272              		.cfi_startproc
+ 273              		@ args = 0, pretend = 0, frame = 8
+ 274              		@ frame_needed = 1, uses_anonymous_args = 0
+ 275 0000 80B5     		push	{r7, lr}
+ 276              	.LCFI21:
+ 277              		.cfi_def_cfa_offset 8
+ 278              		.cfi_offset 7, -8
+ 279              		.cfi_offset 14, -4
+ 280 0002 82B0     		sub	sp, sp, #8
+ 281              	.LCFI22:
+ 282              		.cfi_def_cfa_offset 16
+ 283 0004 00AF     		add	r7, sp, #0
+ 284              	.LCFI23:
+ 285              		.cfi_def_cfa_register 7
+ 286 0006 7860     		str	r0, [r7, #4]
+ 287 0008 3960     		str	r1, [r7]
+ 141:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // TODO parse transaction and observation to remove the ones related to this server
+ 142:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (serverP->sessionH != NULL)
+ 288              		.loc 1 142 0
+ 289 000a 7B68     		ldr	r3, [r7, #4]
+ 290 000c DB69     		ldr	r3, [r3, #28]
+ 291 000e 002B     		cmp	r3, #0
+ 292 0010 05D0     		beq	.L16
+ 143:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 144:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_close_connection(serverP->sessionH, userData);
+ 293              		.loc 1 144 0
+ 294 0012 7B68     		ldr	r3, [r7, #4]
+ 295 0014 DB69     		ldr	r3, [r3, #28]
+ 296 0016 3968     		ldr	r1, [r7]
+ 297 0018 1846     		mov	r0, r3
+ 298 001a FFF7FEFF 		bl	lwm2m_close_connection
+ 299              	.L16:
+ 145:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 146:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (NULL != serverP->location)
+ 300              		.loc 1 146 0
+ 301 001e 7B68     		ldr	r3, [r7, #4]
+ 302 0020 5B6A     		ldr	r3, [r3, #36]
+ 303 0022 002B     		cmp	r3, #0
+ 304 0024 04D0     		beq	.L17
+ 147:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 148:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_free(serverP->location);
+ 305              		.loc 1 148 0
+ 306 0026 7B68     		ldr	r3, [r7, #4]
+ 307 0028 5B6A     		ldr	r3, [r3, #36]
+ 308 002a 1846     		mov	r0, r3
+ 309 002c FFF7FEFF 		bl	lwm2m_free
+ 310              	.L17:
+ 149:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 150:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     free_block1_buffer(serverP->block1Data);
+ 311              		.loc 1 150 0
+ 312 0030 7B68     		ldr	r3, [r7, #4]
+ 313 0032 DB6A     		ldr	r3, [r3, #44]
+ 314 0034 1846     		mov	r0, r3
+ 315 0036 FFF7FEFF 		bl	free_block1_buffer
+ 151:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_free(serverP);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 9
+
+
+ 316              		.loc 1 151 0
+ 317 003a 7868     		ldr	r0, [r7, #4]
+ 318 003c FFF7FEFF 		bl	lwm2m_free
+ 152:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 319              		.loc 1 152 0
+ 320 0040 00BF     		nop
+ 321 0042 0837     		adds	r7, r7, #8
+ 322              	.LCFI24:
+ 323              		.cfi_def_cfa_offset 8
+ 324 0044 BD46     		mov	sp, r7
+ 325              	.LCFI25:
+ 326              		.cfi_def_cfa_register 13
+ 327              		@ sp needed
+ 328 0046 80BD     		pop	{r7, pc}
+ 329              		.cfi_endproc
+ 330              	.LFE138:
+ 332              		.section	.text.prv_deleteServerList,"ax",%progbits
+ 333              		.align	1
+ 334              		.syntax unified
+ 335              		.thumb
+ 336              		.thumb_func
+ 337              		.fpu fpv4-sp-d16
+ 339              	prv_deleteServerList:
+ 340              	.LFB139:
+ 153:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 154:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void prv_deleteServerList(lwm2m_context_t *context)
+ 155:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 341              		.loc 1 155 0
+ 342              		.cfi_startproc
+ 343              		@ args = 0, pretend = 0, frame = 16
+ 344              		@ frame_needed = 1, uses_anonymous_args = 0
+ 345 0000 80B5     		push	{r7, lr}
+ 346              	.LCFI26:
+ 347              		.cfi_def_cfa_offset 8
+ 348              		.cfi_offset 7, -8
+ 349              		.cfi_offset 14, -4
+ 350 0002 84B0     		sub	sp, sp, #16
+ 351              	.LCFI27:
+ 352              		.cfi_def_cfa_offset 24
+ 353 0004 00AF     		add	r7, sp, #0
+ 354              	.LCFI28:
+ 355              		.cfi_def_cfa_register 7
+ 356 0006 7860     		str	r0, [r7, #4]
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != context->serverList)
+ 357              		.loc 1 156 0
+ 358 0008 0CE0     		b	.L19
+ 359              	.L20:
+ 360              	.LBB2:
+ 157:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 158:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_server_t *server;
+ 159:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         server = context->serverList;
+ 361              		.loc 1 159 0
+ 362 000a 7B68     		ldr	r3, [r7, #4]
+ 363 000c 5B69     		ldr	r3, [r3, #20]
+ 364 000e FB60     		str	r3, [r7, #12]
+ 160:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         context->serverList = server->next;
+ 365              		.loc 1 160 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 10
+
+
+ 366 0010 FB68     		ldr	r3, [r7, #12]
+ 367 0012 1A68     		ldr	r2, [r3]
+ 368 0014 7B68     		ldr	r3, [r7, #4]
+ 369 0016 5A61     		str	r2, [r3, #20]
+ 161:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         prv_deleteServer(server, context->userData);
+ 370              		.loc 1 161 0
+ 371 0018 7B68     		ldr	r3, [r7, #4]
+ 372 001a 5B6B     		ldr	r3, [r3, #52]
+ 373 001c 1946     		mov	r1, r3
+ 374 001e F868     		ldr	r0, [r7, #12]
+ 375 0020 FFF7FEFF 		bl	prv_deleteServer
+ 376              	.L19:
+ 377              	.LBE2:
+ 156:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 378              		.loc 1 156 0
+ 379 0024 7B68     		ldr	r3, [r7, #4]
+ 380 0026 5B69     		ldr	r3, [r3, #20]
+ 381 0028 002B     		cmp	r3, #0
+ 382 002a EED1     		bne	.L20
+ 162:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 163:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 383              		.loc 1 163 0
+ 384 002c 00BF     		nop
+ 385 002e 1037     		adds	r7, r7, #16
+ 386              	.LCFI29:
+ 387              		.cfi_def_cfa_offset 8
+ 388 0030 BD46     		mov	sp, r7
+ 389              	.LCFI30:
+ 390              		.cfi_def_cfa_register 13
+ 391              		@ sp needed
+ 392 0032 80BD     		pop	{r7, pc}
+ 393              		.cfi_endproc
+ 394              	.LFE139:
+ 396              		.section	.text.prv_deleteObservedList,"ax",%progbits
+ 397              		.align	1
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 401              		.fpu fpv4-sp-d16
+ 403              	prv_deleteObservedList:
+ 404              	.LFB140:
+ 164:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 165:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_BOOTSTRAP
+ 166:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void prv_deleteBootstrapServer(lwm2m_server_t *serverP, void *userData)
+ 167:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 168:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // TODO should we free location as in prv_deleteServer ?
+ 169:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // TODO should we parse transaction and observation to remove the ones related to this server ?
+ 170:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (serverP->sessionH != NULL)
+ 171:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 172:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_close_connection(serverP->sessionH, userData);
+ 173:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 174:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     free_block1_buffer(serverP->block1Data);
+ 175:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_free(serverP);
+ 176:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 177:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 178:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void prv_deleteBootstrapServerList(lwm2m_context_t *context)
+ 179:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 11
+
+
+ 180:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != context->bootstrapServerList)
+ 181:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 182:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_server_t *server;
+ 183:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         server = context->bootstrapServerList;
+ 184:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         context->bootstrapServerList = server->next;
+ 185:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_stop_striger_server_initiated_bs(server->sessionH);
+ 186:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         prv_deleteBootstrapServer(server, context->userData);
+ 187:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 188:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 189:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 190:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 191:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void prv_deleteObservedList(lwm2m_context_t *contextP)
+ 192:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 405              		.loc 1 192 0
+ 406              		.cfi_startproc
+ 407              		@ args = 0, pretend = 0, frame = 16
+ 408              		@ frame_needed = 1, uses_anonymous_args = 0
+ 409 0000 80B5     		push	{r7, lr}
+ 410              	.LCFI31:
+ 411              		.cfi_def_cfa_offset 8
+ 412              		.cfi_offset 7, -8
+ 413              		.cfi_offset 14, -4
+ 414 0002 84B0     		sub	sp, sp, #16
+ 415              	.LCFI32:
+ 416              		.cfi_def_cfa_offset 24
+ 417 0004 00AF     		add	r7, sp, #0
+ 418              	.LCFI33:
+ 419              		.cfi_def_cfa_register 7
+ 420 0006 7860     		str	r0, [r7, #4]
+ 193:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     atiny_mutex_lock(contextP->observe_mutex);
+ 421              		.loc 1 193 0
+ 422 0008 7B68     		ldr	r3, [r7, #4]
+ 423 000a 1B6A     		ldr	r3, [r3, #32]
+ 424 000c 1846     		mov	r0, r3
+ 425 000e FFF7FEFF 		bl	atiny_mutex_lock
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != contextP->observedList)
+ 426              		.loc 1 194 0
+ 427 0012 29E0     		b	.L22
+ 428              	.L26:
+ 429              	.LBB3:
+ 195:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 196:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_observed_t *targetP;
+ 197:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_watcher_t *watcherP;
+ 198:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 199:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         targetP = contextP->observedList;
+ 430              		.loc 1 199 0
+ 431 0014 7B68     		ldr	r3, [r7, #4]
+ 432 0016 DB69     		ldr	r3, [r3, #28]
+ 433 0018 BB60     		str	r3, [r7, #8]
+ 200:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->observedList = contextP->observedList->next;
+ 434              		.loc 1 200 0
+ 435 001a 7B68     		ldr	r3, [r7, #4]
+ 436 001c DB69     		ldr	r3, [r3, #28]
+ 437 001e 1A68     		ldr	r2, [r3]
+ 438 0020 7B68     		ldr	r3, [r7, #4]
+ 439 0022 DA61     		str	r2, [r3, #28]
+ 201:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 12
+
+
+ 202:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_notify_even(MODULE_URI, OBSERVE_UNSUBSCRIBE, (char *) & (targetP->uri), sizeof(target
+ 440              		.loc 1 202 0
+ 441 0024 BB68     		ldr	r3, [r7, #8]
+ 442 0026 1A1D     		adds	r2, r3, #4
+ 443 0028 0823     		movs	r3, #8
+ 444 002a 0021     		movs	r1, #0
+ 445 002c 0220     		movs	r0, #2
+ 446 002e FFF7FEFF 		bl	lwm2m_notify_even
+ 203:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         for (watcherP = targetP->watcherList ; watcherP != NULL ; watcherP = watcherP->next)
+ 447              		.loc 1 204 0
+ 448 0032 BB68     		ldr	r3, [r7, #8]
+ 449 0034 DB68     		ldr	r3, [r3, #12]
+ 450 0036 FB60     		str	r3, [r7, #12]
+ 451 0038 0BE0     		b	.L23
+ 452              	.L25:
+ 205:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 206:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             if (watcherP->parameters != NULL) lwm2m_free(watcherP->parameters);
+ 453              		.loc 1 206 0
+ 454 003a FB68     		ldr	r3, [r7, #12]
+ 455 003c DB68     		ldr	r3, [r3, #12]
+ 456 003e 002B     		cmp	r3, #0
+ 457 0040 04D0     		beq	.L24
+ 458              		.loc 1 206 0 is_stmt 0 discriminator 1
+ 459 0042 FB68     		ldr	r3, [r7, #12]
+ 460 0044 DB68     		ldr	r3, [r3, #12]
+ 461 0046 1846     		mov	r0, r3
+ 462 0048 FFF7FEFF 		bl	lwm2m_free
+ 463              	.L24:
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 464              		.loc 1 204 0 is_stmt 1 discriminator 2
+ 465 004c FB68     		ldr	r3, [r7, #12]
+ 466 004e 1B68     		ldr	r3, [r3]
+ 467 0050 FB60     		str	r3, [r7, #12]
+ 468              	.L23:
+ 204:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 469              		.loc 1 204 0 is_stmt 0 discriminator 1
+ 470 0052 FB68     		ldr	r3, [r7, #12]
+ 471 0054 002B     		cmp	r3, #0
+ 472 0056 F0D1     		bne	.L25
+ 207:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 208:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         LWM2M_LIST_FREE(targetP->watcherList);
+ 473              		.loc 1 208 0 is_stmt 1
+ 474 0058 BB68     		ldr	r3, [r7, #8]
+ 475 005a DB68     		ldr	r3, [r3, #12]
+ 476 005c 1846     		mov	r0, r3
+ 477 005e FFF7FEFF 		bl	lwm2m_list_free
+ 209:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 210:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_free(targetP);
+ 478              		.loc 1 210 0
+ 479 0062 B868     		ldr	r0, [r7, #8]
+ 480 0064 FFF7FEFF 		bl	lwm2m_free
+ 481              	.L22:
+ 482              	.LBE3:
+ 194:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 483              		.loc 1 194 0
+ 484 0068 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 13
+
+
+ 485 006a DB69     		ldr	r3, [r3, #28]
+ 486 006c 002B     		cmp	r3, #0
+ 487 006e D1D1     		bne	.L26
+ 211:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 212:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     atiny_mutex_unlock(contextP->observe_mutex);
+ 488              		.loc 1 212 0
+ 489 0070 7B68     		ldr	r3, [r7, #4]
+ 490 0072 1B6A     		ldr	r3, [r3, #32]
+ 491 0074 1846     		mov	r0, r3
+ 492 0076 FFF7FEFF 		bl	atiny_mutex_unlock
+ 213:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 493              		.loc 1 213 0
+ 494 007a 00BF     		nop
+ 495 007c 1037     		adds	r7, r7, #16
+ 496              	.LCFI34:
+ 497              		.cfi_def_cfa_offset 8
+ 498 007e BD46     		mov	sp, r7
+ 499              	.LCFI35:
+ 500              		.cfi_def_cfa_register 13
+ 501              		@ sp needed
+ 502 0080 80BD     		pop	{r7, pc}
+ 503              		.cfi_endproc
+ 504              	.LFE140:
+ 506              		.section	.text.prv_deleteTransactionList,"ax",%progbits
+ 507              		.align	1
+ 508              		.global	prv_deleteTransactionList
+ 509              		.syntax unified
+ 510              		.thumb
+ 511              		.thumb_func
+ 512              		.fpu fpv4-sp-d16
+ 514              	prv_deleteTransactionList:
+ 515              	.LFB141:
+ 214:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 215:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 216:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void prv_deleteTransactionList(lwm2m_context_t *context)
+ 217:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 516              		.loc 1 217 0
+ 517              		.cfi_startproc
+ 518              		@ args = 0, pretend = 0, frame = 16
+ 519              		@ frame_needed = 1, uses_anonymous_args = 0
+ 520 0000 80B5     		push	{r7, lr}
+ 521              	.LCFI36:
+ 522              		.cfi_def_cfa_offset 8
+ 523              		.cfi_offset 7, -8
+ 524              		.cfi_offset 14, -4
+ 525 0002 84B0     		sub	sp, sp, #16
+ 526              	.LCFI37:
+ 527              		.cfi_def_cfa_offset 24
+ 528 0004 00AF     		add	r7, sp, #0
+ 529              	.LCFI38:
+ 530              		.cfi_def_cfa_register 7
+ 531 0006 7860     		str	r0, [r7, #4]
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != context->transactionList)
+ 532              		.loc 1 218 0
+ 533 0008 13E0     		b	.L28
+ 534              	.L30:
+ 535              	.LBB4:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 14
+
+
+ 219:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 220:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_transaction_t *transaction;
+ 221:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 222:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         transaction = context->transactionList;
+ 536              		.loc 1 222 0
+ 537 000a 7B68     		ldr	r3, [r7, #4]
+ 538 000c 1B6B     		ldr	r3, [r3, #48]
+ 539 000e FB60     		str	r3, [r7, #12]
+ 223:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         context->transactionList = context->transactionList->next;
+ 540              		.loc 1 223 0
+ 541 0010 7B68     		ldr	r3, [r7, #4]
+ 542 0012 1B6B     		ldr	r3, [r3, #48]
+ 543 0014 1A68     		ldr	r2, [r3]
+ 544 0016 7B68     		ldr	r3, [r7, #4]
+ 545 0018 1A63     		str	r2, [r3, #48]
+ 224:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (transaction->callback != NULL)
+ 546              		.loc 1 224 0
+ 547 001a FB68     		ldr	r3, [r7, #12]
+ 548 001c 1B6C     		ldr	r3, [r3, #64]
+ 549 001e 002B     		cmp	r3, #0
+ 550 0020 04D0     		beq	.L29
+ 225:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 226:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             transaction->callback(transaction, NULL);
+ 551              		.loc 1 226 0
+ 552 0022 FB68     		ldr	r3, [r7, #12]
+ 553 0024 1B6C     		ldr	r3, [r3, #64]
+ 554 0026 0021     		movs	r1, #0
+ 555 0028 F868     		ldr	r0, [r7, #12]
+ 556 002a 9847     		blx	r3
+ 557              	.LVL1:
+ 558              	.L29:
+ 227:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 228:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         transaction_free(transaction);
+ 559              		.loc 1 228 0
+ 560 002c F868     		ldr	r0, [r7, #12]
+ 561 002e FFF7FEFF 		bl	transaction_free
+ 562              	.L28:
+ 563              	.LBE4:
+ 218:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 564              		.loc 1 218 0
+ 565 0032 7B68     		ldr	r3, [r7, #4]
+ 566 0034 1B6B     		ldr	r3, [r3, #48]
+ 567 0036 002B     		cmp	r3, #0
+ 568 0038 E7D1     		bne	.L30
+ 229:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 230:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 569              		.loc 1 230 0
+ 570 003a 00BF     		nop
+ 571 003c 1037     		adds	r7, r7, #16
+ 572              	.LCFI39:
+ 573              		.cfi_def_cfa_offset 8
+ 574 003e BD46     		mov	sp, r7
+ 575              	.LCFI40:
+ 576              		.cfi_def_cfa_register 13
+ 577              		@ sp needed
+ 578 0040 80BD     		pop	{r7, pc}
+ 579              		.cfi_endproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 15
+
+
+ 580              	.LFE141:
+ 582              		.section	.text.lwm2m_close,"ax",%progbits
+ 583              		.align	1
+ 584              		.global	lwm2m_close
+ 585              		.syntax unified
+ 586              		.thumb
+ 587              		.thumb_func
+ 588              		.fpu fpv4-sp-d16
+ 590              	lwm2m_close:
+ 591              	.LFB142:
+ 231:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 232:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void lwm2m_close(lwm2m_context_t *contextP)
+ 233:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 592              		.loc 1 233 0
+ 593              		.cfi_startproc
+ 594              		@ args = 0, pretend = 0, frame = 8
+ 595              		@ frame_needed = 1, uses_anonymous_args = 0
+ 596 0000 80B5     		push	{r7, lr}
+ 597              	.LCFI41:
+ 598              		.cfi_def_cfa_offset 8
+ 599              		.cfi_offset 7, -8
+ 600              		.cfi_offset 14, -4
+ 601 0002 82B0     		sub	sp, sp, #8
+ 602              	.LCFI42:
+ 603              		.cfi_def_cfa_offset 16
+ 604 0004 00AF     		add	r7, sp, #0
+ 605              	.LCFI43:
+ 606              		.cfi_def_cfa_register 7
+ 607 0006 7860     		str	r0, [r7, #4]
+ 234:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_CLIENT_MODE
+ 235:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 236:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG("Entering");
+ 237:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_deregister(contextP);
+ 608              		.loc 1 237 0
+ 609 0008 7868     		ldr	r0, [r7, #4]
+ 610 000a FFF7FEFF 		bl	lwm2m_deregister
+ 238:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     prv_deleteServerList(contextP);
+ 611              		.loc 1 238 0
+ 612 000e 7868     		ldr	r0, [r7, #4]
+ 613 0010 FFF7FEFF 		bl	prv_deleteServerList
+ 239:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_BOOTSTRAP
+ 240:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     prv_deleteBootstrapServerList(contextP);
+ 241:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 242:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     prv_deleteObservedList(contextP);
+ 614              		.loc 1 242 0
+ 615 0014 7868     		ldr	r0, [r7, #4]
+ 616 0016 FFF7FEFF 		bl	prv_deleteObservedList
+ 243:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_free(contextP->endpointName);
+ 617              		.loc 1 243 0
+ 618 001a 7B68     		ldr	r3, [r7, #4]
+ 619 001c 5B68     		ldr	r3, [r3, #4]
+ 620 001e 1846     		mov	r0, r3
+ 621 0020 FFF7FEFF 		bl	lwm2m_free
+ 244:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     //lwm2m_free(contextP->bs_server_uri);
+ 245:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->msisdn != NULL)
+ 622              		.loc 1 245 0
+ 623 0024 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 16
+
+
+ 624 0026 9B68     		ldr	r3, [r3, #8]
+ 625 0028 002B     		cmp	r3, #0
+ 626 002a 04D0     		beq	.L32
+ 246:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 247:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_free(contextP->msisdn);
+ 627              		.loc 1 247 0
+ 628 002c 7B68     		ldr	r3, [r7, #4]
+ 629 002e 9B68     		ldr	r3, [r3, #8]
+ 630 0030 1846     		mov	r0, r3
+ 631 0032 FFF7FEFF 		bl	lwm2m_free
+ 632              	.L32:
+ 248:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 249:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->altPath != NULL)
+ 633              		.loc 1 249 0
+ 634 0036 7B68     		ldr	r3, [r7, #4]
+ 635 0038 DB68     		ldr	r3, [r3, #12]
+ 636 003a 002B     		cmp	r3, #0
+ 637 003c 04D0     		beq	.L33
+ 250:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 251:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_free(contextP->altPath);
+ 638              		.loc 1 251 0
+ 639 003e 7B68     		ldr	r3, [r7, #4]
+ 640 0040 DB68     		ldr	r3, [r3, #12]
+ 641 0042 1846     		mov	r0, r3
+ 642 0044 FFF7FEFF 		bl	lwm2m_free
+ 643              	.L33:
+ 252:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 253:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 254:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 255:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 256:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_SERVER_MODE
+ 257:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != contextP->clientList)
+ 258:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 259:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_client_t *clientP;
+ 260:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 261:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         clientP = contextP->clientList;
+ 262:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->clientList = contextP->clientList->next;
+ 263:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 264:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         registration_freeClient(clientP);
+ 265:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 266:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 267:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 268:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     prv_deleteTransactionList(contextP);
+ 644              		.loc 1 268 0
+ 645 0048 7868     		ldr	r0, [r7, #4]
+ 646 004a FFF7FEFF 		bl	prv_deleteTransactionList
+ 269:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_free(contextP);
+ 647              		.loc 1 269 0
+ 648 004e 7868     		ldr	r0, [r7, #4]
+ 649 0050 FFF7FEFF 		bl	lwm2m_free
+ 270:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 650              		.loc 1 270 0
+ 651 0054 00BF     		nop
+ 652 0056 0837     		adds	r7, r7, #8
+ 653              	.LCFI44:
+ 654              		.cfi_def_cfa_offset 8
+ 655 0058 BD46     		mov	sp, r7
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 17
+
+
+ 656              	.LCFI45:
+ 657              		.cfi_def_cfa_register 13
+ 658              		@ sp needed
+ 659 005a 80BD     		pop	{r7, pc}
+ 660              		.cfi_endproc
+ 661              	.LFE142:
+ 663              		.section	.text.prv_isBoostrpEnable,"ax",%progbits
+ 664              		.align	1
+ 665              		.syntax unified
+ 666              		.thumb
+ 667              		.thumb_func
+ 668              		.fpu fpv4-sp-d16
+ 670              	prv_isBoostrpEnable:
+ 671              	.LFB143:
+ 271:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 272:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 273:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static bool prv_isBoostrpEnable(const lwm2m_context_t *contextP)
+ 274:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 672              		.loc 1 274 0
+ 673              		.cfi_startproc
+ 674              		@ args = 0, pretend = 0, frame = 8
+ 675              		@ frame_needed = 1, uses_anonymous_args = 0
+ 676              		@ link register save eliminated.
+ 677 0000 80B4     		push	{r7}
+ 678              	.LCFI46:
+ 679              		.cfi_def_cfa_offset 4
+ 680              		.cfi_offset 7, -4
+ 681 0002 83B0     		sub	sp, sp, #12
+ 682              	.LCFI47:
+ 683              		.cfi_def_cfa_offset 16
+ 684 0004 00AF     		add	r7, sp, #0
+ 685              	.LCFI48:
+ 686              		.cfi_def_cfa_register 7
+ 687 0006 7860     		str	r0, [r7, #4]
+ 275:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_BOOTSTRAP
+ 276:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return contextP->bsCtrl.bsType != BOOTSTRAP_FACTORY;
+ 277:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #else
+ 278:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return false;
+ 688              		.loc 1 278 0
+ 689 0008 0023     		movs	r3, #0
+ 279:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 280:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 690              		.loc 1 280 0
+ 691 000a 1846     		mov	r0, r3
+ 692 000c 0C37     		adds	r7, r7, #12
+ 693              	.LCFI49:
+ 694              		.cfi_def_cfa_offset 4
+ 695 000e BD46     		mov	sp, r7
+ 696              	.LCFI50:
+ 697              		.cfi_def_cfa_register 13
+ 698              		@ sp needed
+ 699 0010 5DF8047B 		ldr	r7, [sp], #4
+ 700              	.LCFI51:
+ 701              		.cfi_restore 7
+ 702              		.cfi_def_cfa_offset 0
+ 703 0014 7047     		bx	lr
+ 704              		.cfi_endproc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 18
+
+
+ 705              	.LFE143:
+ 707              		.section	.text.lwm2m_isBsCtrlInServerInitiatedBs,"ax",%progbits
+ 708              		.align	1
+ 709              		.global	lwm2m_isBsCtrlInServerInitiatedBs
+ 710              		.syntax unified
+ 711              		.thumb
+ 712              		.thumb_func
+ 713              		.fpu fpv4-sp-d16
+ 715              	lwm2m_isBsCtrlInServerInitiatedBs:
+ 716              	.LFB144:
+ 281:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 282:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** /* BsCtrl bootstrap control is used to control the register(factory bootstrap(FBS)), client initiat
+ 283:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** and server initiated bootstrap(CIBS).it try max time to register and the change to bootstrap(CIBS a
+ 284:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** the state is STATE_REGISTER_REQUIRED, STATE_BOOTSTRAP_REQUIRED and STATE_NON. CIBS is only state is
+ 285:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** ,cnt is 0 and bs type is BOOTSTRAP_SEQUENCE. cnt is used to calculte the delay for the next retry.
+ 286:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** Delay(cnt) = Base + Interval * cnt; Base and Interval are configured by different macros.
+ 287:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** */
+ 288:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** bool lwm2m_isBsCtrlInServerInitiatedBs(const lwm2m_context_t *contextP)
+ 289:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 717              		.loc 1 289 0
+ 718              		.cfi_startproc
+ 719              		@ args = 0, pretend = 0, frame = 8
+ 720              		@ frame_needed = 1, uses_anonymous_args = 0
+ 721              		@ link register save eliminated.
+ 722 0000 80B4     		push	{r7}
+ 723              	.LCFI52:
+ 724              		.cfi_def_cfa_offset 4
+ 725              		.cfi_offset 7, -4
+ 726 0002 83B0     		sub	sp, sp, #12
+ 727              	.LCFI53:
+ 728              		.cfi_def_cfa_offset 16
+ 729 0004 00AF     		add	r7, sp, #0
+ 730              	.LCFI54:
+ 731              		.cfi_def_cfa_register 7
+ 732 0006 7860     		str	r0, [r7, #4]
+ 290:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return (contextP->bsCtrl.bsType == BOOTSTRAP_SEQUENCE) && (contextP->bsCtrl.cnt == 0);
+ 733              		.loc 1 290 0
+ 734 0008 7B68     		ldr	r3, [r7, #4]
+ 735 000a 93F82430 		ldrb	r3, [r3, #36]	@ zero_extendqisi2
+ 736 000e 022B     		cmp	r3, #2
+ 737 0010 05D1     		bne	.L37
+ 738              		.loc 1 290 0 is_stmt 0 discriminator 1
+ 739 0012 7B68     		ldr	r3, [r7, #4]
+ 740 0014 9B6A     		ldr	r3, [r3, #40]
+ 741 0016 002B     		cmp	r3, #0
+ 742 0018 01D1     		bne	.L37
+ 743              		.loc 1 290 0 discriminator 3
+ 744 001a 0123     		movs	r3, #1
+ 745 001c 00E0     		b	.L38
+ 746              	.L37:
+ 747              		.loc 1 290 0 discriminator 4
+ 748 001e 0023     		movs	r3, #0
+ 749              	.L38:
+ 750              		.loc 1 290 0 discriminator 6
+ 751 0020 03F00103 		and	r3, r3, #1
+ 752 0024 DBB2     		uxtb	r3, r3
+ 291:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 19
+
+
+ 753              		.loc 1 291 0 is_stmt 1 discriminator 6
+ 754 0026 1846     		mov	r0, r3
+ 755 0028 0C37     		adds	r7, r7, #12
+ 756              	.LCFI55:
+ 757              		.cfi_def_cfa_offset 4
+ 758 002a BD46     		mov	sp, r7
+ 759              	.LCFI56:
+ 760              		.cfi_def_cfa_register 13
+ 761              		@ sp needed
+ 762 002c 5DF8047B 		ldr	r7, [sp], #4
+ 763              	.LCFI57:
+ 764              		.cfi_restore 7
+ 765              		.cfi_def_cfa_offset 0
+ 766 0030 7047     		bx	lr
+ 767              		.cfi_endproc
+ 768              	.LFE144:
+ 770              		.section	.text.lwm2m_initBsCtrlStat,"ax",%progbits
+ 771              		.align	1
+ 772              		.global	lwm2m_initBsCtrlStat
+ 773              		.syntax unified
+ 774              		.thumb
+ 775              		.thumb_func
+ 776              		.fpu fpv4-sp-d16
+ 778              	lwm2m_initBsCtrlStat:
+ 779              	.LFB145:
+ 292:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 293:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void lwm2m_initBsCtrlStat(lwm2m_context_t *contextP, lwm2m_bootstrap_type_e bs_type)
+ 294:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 780              		.loc 1 294 0
+ 781              		.cfi_startproc
+ 782              		@ args = 0, pretend = 0, frame = 8
+ 783              		@ frame_needed = 1, uses_anonymous_args = 0
+ 784 0000 80B5     		push	{r7, lr}
+ 785              	.LCFI58:
+ 786              		.cfi_def_cfa_offset 8
+ 787              		.cfi_offset 7, -8
+ 788              		.cfi_offset 14, -4
+ 789 0002 82B0     		sub	sp, sp, #8
+ 790              	.LCFI59:
+ 791              		.cfi_def_cfa_offset 16
+ 792 0004 00AF     		add	r7, sp, #0
+ 793              	.LCFI60:
+ 794              		.cfi_def_cfa_register 7
+ 795 0006 7860     		str	r0, [r7, #4]
+ 796 0008 0B46     		mov	r3, r1
+ 797 000a FB70     		strb	r3, [r7, #3]
+ 295:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     memset(&contextP->bsCtrl, 0, sizeof(contextP->bsCtrl));
+ 798              		.loc 1 295 0
+ 799 000c 7B68     		ldr	r3, [r7, #4]
+ 800 000e 2433     		adds	r3, r3, #36
+ 801 0010 0822     		movs	r2, #8
+ 802 0012 0021     		movs	r1, #0
+ 803 0014 1846     		mov	r0, r3
+ 804 0016 FFF7FEFF 		bl	memset
+ 296:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->bsCtrl.bsType = bs_type;
+ 805              		.loc 1 296 0
+ 806 001a 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 20
+
+
+ 807 001c FA78     		ldrb	r2, [r7, #3]
+ 808 001e 83F82420 		strb	r2, [r3, #36]
+ 297:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->bsCtrl.state = STATE_INITIAL;
+ 809              		.loc 1 297 0
+ 810 0022 7B68     		ldr	r3, [r7, #4]
+ 811 0024 0022     		movs	r2, #0
+ 812 0026 83F82520 		strb	r2, [r3, #37]
+ 298:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 813              		.loc 1 298 0
+ 814 002a 00BF     		nop
+ 815 002c 0837     		adds	r7, r7, #8
+ 816              	.LCFI61:
+ 817              		.cfi_def_cfa_offset 8
+ 818 002e BD46     		mov	sp, r7
+ 819              	.LCFI62:
+ 820              		.cfi_def_cfa_register 13
+ 821              		@ sp needed
+ 822 0030 80BD     		pop	{r7, pc}
+ 823              		.cfi_endproc
+ 824              	.LFE145:
+ 826              		.section	.text.lwm2m_setBsCtrlStatWithoutCheck,"ax",%progbits
+ 827              		.align	1
+ 828              		.syntax unified
+ 829              		.thumb
+ 830              		.thumb_func
+ 831              		.fpu fpv4-sp-d16
+ 833              	lwm2m_setBsCtrlStatWithoutCheck:
+ 834              	.LFB146:
+ 299:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 300:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void lwm2m_setBsCtrlStatWithoutCheck(lwm2m_context_t *contextP, lwm2m_client_state_t state)
+ 301:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 835              		.loc 1 301 0
+ 836              		.cfi_startproc
+ 837              		@ args = 0, pretend = 0, frame = 16
+ 838              		@ frame_needed = 1, uses_anonymous_args = 0
+ 839              		@ link register save eliminated.
+ 840 0000 80B4     		push	{r7}
+ 841              	.LCFI63:
+ 842              		.cfi_def_cfa_offset 4
+ 843              		.cfi_offset 7, -4
+ 844 0002 85B0     		sub	sp, sp, #20
+ 845              	.LCFI64:
+ 846              		.cfi_def_cfa_offset 24
+ 847 0004 00AF     		add	r7, sp, #0
+ 848              	.LCFI65:
+ 849              		.cfi_def_cfa_register 7
+ 850 0006 7860     		str	r0, [r7, #4]
+ 851 0008 0B46     		mov	r3, r1
+ 852 000a FB70     		strb	r3, [r7, #3]
+ 302:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->bsCtrl.state != state)
+ 853              		.loc 1 302 0
+ 854 000c 7B68     		ldr	r3, [r7, #4]
+ 855 000e 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 856 0012 FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 857 0014 9A42     		cmp	r2, r3
+ 858 0016 07D0     		beq	.L42
+ 303:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 21
+
+
+ 304:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->bsCtrl.state = state;
+ 859              		.loc 1 304 0
+ 860 0018 7B68     		ldr	r3, [r7, #4]
+ 861 001a FA78     		ldrb	r2, [r7, #3]
+ 862 001c 83F82520 		strb	r2, [r3, #37]
+ 305:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->bsCtrl.cnt = 0;
+ 863              		.loc 1 305 0
+ 864 0020 7B68     		ldr	r3, [r7, #4]
+ 865 0022 0022     		movs	r2, #0
+ 866 0024 9A62     		str	r2, [r3, #40]
+ 306:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         return;
+ 867              		.loc 1 306 0
+ 868 0026 24E0     		b	.L41
+ 869              	.L42:
+ 870              	.LBB5:
+ 307:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 308:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 309:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         uint32_t maxValue = ((STATE_REGISTER_REQUIRED == state)
+ 871              		.loc 1 309 0
+ 872 0028 0323     		movs	r3, #3
+ 873 002a FB60     		str	r3, [r7, #12]
+ 310:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                             ? MAX_FACTORY_BS_RETRY_CNT : MAX_CLIENT_INITIATED_BS_RETRY_CNT);
+ 311:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 312:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if ((STATE_BOOTSTRAP_REQUIRED == state) && (BOOTSTRAP_SEQUENCE == contextP->bsCtrl.bsType))
+ 874              		.loc 1 312 0
+ 875 002c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 876 002e 012B     		cmp	r3, #1
+ 877 0030 07D1     		bne	.L44
+ 878              		.loc 1 312 0 is_stmt 0 discriminator 1
+ 879 0032 7B68     		ldr	r3, [r7, #4]
+ 880 0034 93F82430 		ldrb	r3, [r3, #36]	@ zero_extendqisi2
+ 881 0038 022B     		cmp	r3, #2
+ 882 003a 02D1     		bne	.L44
+ 313:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 314:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             maxValue++;
+ 883              		.loc 1 314 0 is_stmt 1
+ 884 003c FB68     		ldr	r3, [r7, #12]
+ 885 003e 0133     		adds	r3, r3, #1
+ 886 0040 FB60     		str	r3, [r7, #12]
+ 887              	.L44:
+ 315:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 316:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if(++(contextP->bsCtrl.cnt) >= maxValue)
+ 888              		.loc 1 316 0
+ 889 0042 7B68     		ldr	r3, [r7, #4]
+ 890 0044 9B6A     		ldr	r3, [r3, #40]
+ 891 0046 5A1C     		adds	r2, r3, #1
+ 892 0048 7B68     		ldr	r3, [r7, #4]
+ 893 004a 9A62     		str	r2, [r3, #40]
+ 894 004c 7B68     		ldr	r3, [r7, #4]
+ 895 004e 9B6A     		ldr	r3, [r3, #40]
+ 896 0050 FA68     		ldr	r2, [r7, #12]
+ 897 0052 9A42     		cmp	r2, r3
+ 898 0054 0DD8     		bhi	.L41
+ 317:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bsCtrl.state = ((STATE_REGISTER_REQUIRED == contextP->bsCtrl.state)
+ 899              		.loc 1 318 0
+ 900 0056 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 22
+
+
+ 901 0058 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 319:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                                      ? STATE_BOOTSTRAP_REQUIRED :STATE_REGISTER_REQUIRED);
+ 902              		.loc 1 319 0
+ 903 005c 032B     		cmp	r3, #3
+ 904 005e 01D1     		bne	.L45
+ 905              		.loc 1 319 0 is_stmt 0 discriminator 1
+ 906 0060 0122     		movs	r2, #1
+ 907 0062 00E0     		b	.L46
+ 908              	.L45:
+ 909              		.loc 1 319 0 discriminator 2
+ 910 0064 0322     		movs	r2, #3
+ 911              	.L46:
+ 318:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                                      ? STATE_BOOTSTRAP_REQUIRED :STATE_REGISTER_REQUIRED);
+ 912              		.loc 1 318 0 is_stmt 1
+ 913 0066 7B68     		ldr	r3, [r7, #4]
+ 914 0068 83F82520 		strb	r2, [r3, #37]
+ 320:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bsCtrl.cnt = 0;
+ 915              		.loc 1 320 0
+ 916 006c 7B68     		ldr	r3, [r7, #4]
+ 917 006e 0022     		movs	r2, #0
+ 918 0070 9A62     		str	r2, [r3, #40]
+ 919              	.L41:
+ 920              	.LBE5:
+ 321:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 322:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 323:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 324:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 921              		.loc 1 324 0
+ 922 0072 1437     		adds	r7, r7, #20
+ 923              	.LCFI66:
+ 924              		.cfi_def_cfa_offset 4
+ 925 0074 BD46     		mov	sp, r7
+ 926              	.LCFI67:
+ 927              		.cfi_def_cfa_register 13
+ 928              		@ sp needed
+ 929 0076 5DF8047B 		ldr	r7, [sp], #4
+ 930              	.LCFI68:
+ 931              		.cfi_restore 7
+ 932              		.cfi_def_cfa_offset 0
+ 933 007a 7047     		bx	lr
+ 934              		.cfi_endproc
+ 935              	.LFE146:
+ 937              		.section	.text.lwm2m_setBsCtrlStat,"ax",%progbits
+ 938              		.align	1
+ 939              		.global	lwm2m_setBsCtrlStat
+ 940              		.syntax unified
+ 941              		.thumb
+ 942              		.thumb_func
+ 943              		.fpu fpv4-sp-d16
+ 945              	lwm2m_setBsCtrlStat:
+ 946              	.LFB147:
+ 325:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 326:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** void lwm2m_setBsCtrlStat(lwm2m_context_t *contextP, lwm2m_client_state_t state)
+ 327:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 947              		.loc 1 327 0
+ 948              		.cfi_startproc
+ 949              		@ args = 0, pretend = 0, frame = 16
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 23
+
+
+ 950              		@ frame_needed = 1, uses_anonymous_args = 0
+ 951 0000 80B5     		push	{r7, lr}
+ 952              	.LCFI69:
+ 953              		.cfi_def_cfa_offset 8
+ 954              		.cfi_offset 7, -8
+ 955              		.cfi_offset 14, -4
+ 956 0002 84B0     		sub	sp, sp, #16
+ 957              	.LCFI70:
+ 958              		.cfi_def_cfa_offset 24
+ 959 0004 00AF     		add	r7, sp, #0
+ 960              	.LCFI71:
+ 961              		.cfi_def_cfa_register 7
+ 962 0006 7860     		str	r0, [r7, #4]
+ 963 0008 0B46     		mov	r3, r1
+ 964 000a FB70     		strb	r3, [r7, #3]
+ 328:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_client_state_t oldState = contextP->bsCtrl.state;
+ 965              		.loc 1 328 0
+ 966 000c 7B68     		ldr	r3, [r7, #4]
+ 967 000e 93F82530 		ldrb	r3, [r3, #37]
+ 968 0012 FB73     		strb	r3, [r7, #15]
+ 329:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     uint32_t oldCnt = contextP->bsCtrl.cnt;
+ 969              		.loc 1 329 0
+ 970 0014 7B68     		ldr	r3, [r7, #4]
+ 971 0016 9B6A     		ldr	r3, [r3, #40]
+ 972 0018 BB60     		str	r3, [r7, #8]
+ 330:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 331:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_setBsCtrlStatWithoutCheck(contextP, state);
+ 973              		.loc 1 331 0
+ 974 001a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 975 001c 1946     		mov	r1, r3
+ 976 001e 7868     		ldr	r0, [r7, #4]
+ 977 0020 FFF7FEFF 		bl	lwm2m_setBsCtrlStatWithoutCheck
+ 332:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 333:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (STATE_REGISTER_REQUIRED == contextP->bsCtrl.state)
+ 978              		.loc 1 333 0
+ 979 0024 7B68     		ldr	r3, [r7, #4]
+ 980 0026 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 981 002a 032B     		cmp	r3, #3
+ 982 002c 0AD1     		bne	.L48
+ 334:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 335:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (contextP->serverList == NULL)
+ 983              		.loc 1 335 0
+ 984 002e 7B68     		ldr	r3, [r7, #4]
+ 985 0030 5B69     		ldr	r3, [r3, #20]
+ 986 0032 002B     		cmp	r3, #0
+ 987 0034 06D1     		bne	.L48
+ 336:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 337:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bsCtrl.state = STATE_BOOTSTRAP_REQUIRED;
+ 988              		.loc 1 337 0
+ 989 0036 7B68     		ldr	r3, [r7, #4]
+ 990 0038 0122     		movs	r2, #1
+ 991 003a 83F82520 		strb	r2, [r3, #37]
+ 338:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bsCtrl.cnt = 0;
+ 992              		.loc 1 338 0
+ 993 003e 7B68     		ldr	r3, [r7, #4]
+ 994 0040 0022     		movs	r2, #0
+ 995 0042 9A62     		str	r2, [r3, #40]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 24
+
+
+ 996              	.L48:
+ 339:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 340:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 341:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 342:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (STATE_BOOTSTRAP_REQUIRED == contextP->bsCtrl.state)
+ 997              		.loc 1 342 0
+ 998 0044 7B68     		ldr	r3, [r7, #4]
+ 999 0046 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 1000 004a 012B     		cmp	r3, #1
+ 1001 004c 36D1     		bne	.L54
+ 343:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 344:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if ((!prv_isBoostrpEnable(contextP))
+ 1002              		.loc 1 344 0
+ 1003 004e 7868     		ldr	r0, [r7, #4]
+ 1004 0050 FFF7FEFF 		bl	prv_isBoostrpEnable
+ 1005 0054 0346     		mov	r3, r0
+ 1006 0056 83F00103 		eor	r3, r3, #1
+ 1007 005a DBB2     		uxtb	r3, r3
+ 1008 005c 002B     		cmp	r3, #0
+ 1009 005e 03D1     		bne	.L50
+ 345:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             || (contextP->bootstrapServerList == NULL))
+ 1010              		.loc 1 345 0
+ 1011 0060 7B68     		ldr	r3, [r7, #4]
+ 1012 0062 1B69     		ldr	r3, [r3, #16]
+ 1013 0064 002B     		cmp	r3, #0
+ 1014 0066 07D1     		bne	.L51
+ 1015              	.L50:
+ 346:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 347:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bsCtrl.state = STATE_REGISTER_REQUIRED;
+ 1016              		.loc 1 347 0
+ 1017 0068 7B68     		ldr	r3, [r7, #4]
+ 1018 006a 0322     		movs	r2, #3
+ 1019 006c 83F82520 		strb	r2, [r3, #37]
+ 348:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bsCtrl.cnt = 0;
+ 1020              		.loc 1 348 0
+ 1021 0070 7B68     		ldr	r3, [r7, #4]
+ 1022 0072 0022     		movs	r2, #0
+ 1023 0074 9A62     		str	r2, [r3, #40]
+ 349:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             goto END;
+ 1024              		.loc 1 349 0
+ 1025 0076 22E0     		b	.L49
+ 1026              	.L51:
+ 350:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 351:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 352:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         // bootstrapServerList not empty, int CIBS but bs ip not valid.
+ 353:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if((!lwm2m_isBsCtrlInServerInitiatedBs(contextP))
+ 1027              		.loc 1 353 0
+ 1028 0078 7868     		ldr	r0, [r7, #4]
+ 1029 007a FFF7FEFF 		bl	lwm2m_isBsCtrlInServerInitiatedBs
+ 1030 007e 0346     		mov	r3, r0
+ 1031 0080 83F00103 		eor	r3, r3, #1
+ 1032 0084 DBB2     		uxtb	r3, r3
+ 1033 0086 002B     		cmp	r3, #0
+ 1034 0088 18D0     		beq	.L54
+ 354:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             #if defined(LWM2M_BOOTSTRAP)
+ 355:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                && (!bootstrap_isBsServerIpValid(contextP))
+ 356:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             #endif
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 25
+
+
+ 357:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             )
+ 358:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 359:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             //FBS
+ 360:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             if (contextP->serverList)
+ 1035              		.loc 1 360 0
+ 1036 008a 7B68     		ldr	r3, [r7, #4]
+ 1037 008c 5B69     		ldr	r3, [r3, #20]
+ 1038 008e 002B     		cmp	r3, #0
+ 1039 0090 07D0     		beq	.L52
+ 361:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             {
+ 362:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                 contextP->bsCtrl.state = STATE_REGISTER_REQUIRED;
+ 1040              		.loc 1 362 0
+ 1041 0092 7B68     		ldr	r3, [r7, #4]
+ 1042 0094 0322     		movs	r2, #3
+ 1043 0096 83F82520 		strb	r2, [r3, #37]
+ 363:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                 contextP->bsCtrl.cnt = 0;
+ 1044              		.loc 1 363 0
+ 1045 009a 7B68     		ldr	r3, [r7, #4]
+ 1046 009c 0022     		movs	r2, #0
+ 1047 009e 9A62     		str	r2, [r3, #40]
+ 1048 00a0 0DE0     		b	.L49
+ 1049              	.L52:
+ 364:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             }
+ 365:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             // only in SIBS
+ 366:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             else if ((contextP->serverList == NULL) && (contextP->bsCtrl.bsType == BOOTSTRAP_SEQUEN
+ 1050              		.loc 1 366 0
+ 1051 00a2 7B68     		ldr	r3, [r7, #4]
+ 1052 00a4 5B69     		ldr	r3, [r3, #20]
+ 1053 00a6 002B     		cmp	r3, #0
+ 1054 00a8 08D1     		bne	.L54
+ 1055              		.loc 1 366 0 is_stmt 0 discriminator 1
+ 1056 00aa 7B68     		ldr	r3, [r7, #4]
+ 1057 00ac 93F82430 		ldrb	r3, [r3, #36]	@ zero_extendqisi2
+ 1058 00b0 022B     		cmp	r3, #2
+ 1059 00b2 03D1     		bne	.L54
+ 367:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             {
+ 368:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                 contextP->bsCtrl.cnt = 0;
+ 1060              		.loc 1 368 0 is_stmt 1
+ 1061 00b4 7B68     		ldr	r3, [r7, #4]
+ 1062 00b6 0022     		movs	r2, #0
+ 1063 00b8 9A62     		str	r2, [r3, #40]
+ 1064 00ba 00E0     		b	.L49
+ 1065              	.L54:
+ 369:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             }
+ 370:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             else
+ 371:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             {
+ 372:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             }
+ 373:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 374:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 375:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** END:
+ 1066              		.loc 1 375 0
+ 1067 00bc 00BF     		nop
+ 1068              	.L49:
+ 376:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if ((oldState != contextP->bsCtrl.state)
+ 1069              		.loc 1 376 0
+ 1070 00be 7B68     		ldr	r3, [r7, #4]
+ 1071 00c0 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 26
+
+
+ 1072 00c4 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 1073 00c6 9A42     		cmp	r2, r3
+ 377:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         || (oldCnt != contextP->bsCtrl.cnt))
+ 378:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 379:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         LOG_ARG("bsctrlstat (%d,%d) to (%d,%d)", oldState, oldCnt,
+ 380:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                     contextP->bsCtrl.state, contextP->bsCtrl.cnt);
+ 381:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 382:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 383:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1074              		.loc 1 383 0
+ 1075 00c8 00BF     		nop
+ 1076 00ca 1037     		adds	r7, r7, #16
+ 1077              	.LCFI72:
+ 1078              		.cfi_def_cfa_offset 8
+ 1079 00cc BD46     		mov	sp, r7
+ 1080              	.LCFI73:
+ 1081              		.cfi_def_cfa_register 13
+ 1082              		@ sp needed
+ 1083 00ce 80BD     		pop	{r7, pc}
+ 1084              		.cfi_endproc
+ 1085              	.LFE147:
+ 1087              		.section	.text.lwm2m_delayBsRetry,"ax",%progbits
+ 1088              		.align	1
+ 1089              		.syntax unified
+ 1090              		.thumb
+ 1091              		.thumb_func
+ 1092              		.fpu fpv4-sp-d16
+ 1094              	lwm2m_delayBsRetry:
+ 1095              	.LFB148:
+ 384:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 385:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void lwm2m_delayBsRetry(lwm2m_context_t *contextP)
+ 386:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1096              		.loc 1 386 0
+ 1097              		.cfi_startproc
+ 1098              		@ args = 0, pretend = 0, frame = 24
+ 1099              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1100 0000 80B5     		push	{r7, lr}
+ 1101              	.LCFI74:
+ 1102              		.cfi_def_cfa_offset 8
+ 1103              		.cfi_offset 7, -8
+ 1104              		.cfi_offset 14, -4
+ 1105 0002 86B0     		sub	sp, sp, #24
+ 1106              	.LCFI75:
+ 1107              		.cfi_def_cfa_offset 32
+ 1108 0004 00AF     		add	r7, sp, #0
+ 1109              	.LCFI76:
+ 1110              		.cfi_def_cfa_register 7
+ 1111 0006 7860     		str	r0, [r7, #4]
+ 387:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     uint32_t delayBase;
+ 388:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     uint32_t delayInterval;
+ 389:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     uint32_t cnt = contextP->bsCtrl.cnt;
+ 1112              		.loc 1 389 0
+ 1113 0008 7B68     		ldr	r3, [r7, #4]
+ 1114 000a 9B6A     		ldr	r3, [r3, #40]
+ 1115 000c FB60     		str	r3, [r7, #12]
+ 390:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     uint32_t expireTime;
+ 391:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 27
+
+
+ 392:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->bsCtrl.state == STATE_REGISTER_REQUIRED)
+ 1116              		.loc 1 392 0
+ 1117 000e 7B68     		ldr	r3, [r7, #4]
+ 1118 0010 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 1119 0014 032B     		cmp	r3, #3
+ 1120 0016 04D1     		bne	.L56
+ 393:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 394:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         delayBase = FACTORY_BS_DELAY_BASE;
+ 1121              		.loc 1 394 0
+ 1122 0018 0023     		movs	r3, #0
+ 1123 001a 7B61     		str	r3, [r7, #20]
+ 395:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         delayInterval = FACTORY_BS_DELAY_INTERVAL;
+ 1124              		.loc 1 395 0
+ 1125 001c 0A23     		movs	r3, #10
+ 1126 001e 3B61     		str	r3, [r7, #16]
+ 1127 0020 0EE0     		b	.L57
+ 1128              	.L56:
+ 396:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 397:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     else
+ 398:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 399:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         delayBase = CLIENT_INITIATED_BS_DELAY_BASE;
+ 1129              		.loc 1 399 0
+ 1130 0022 0023     		movs	r3, #0
+ 1131 0024 7B61     		str	r3, [r7, #20]
+ 400:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         delayInterval = CLIENT_INITIATED_BS_DELAY_INTERVAL;
+ 1132              		.loc 1 400 0
+ 1133 0026 0A23     		movs	r3, #10
+ 1134 0028 3B61     		str	r3, [r7, #16]
+ 401:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if ((contextP->bsCtrl.bsType == BOOTSTRAP_SEQUENCE) && (cnt > 0))
+ 1135              		.loc 1 401 0
+ 1136 002a 7B68     		ldr	r3, [r7, #4]
+ 1137 002c 93F82430 		ldrb	r3, [r3, #36]	@ zero_extendqisi2
+ 1138 0030 022B     		cmp	r3, #2
+ 1139 0032 05D1     		bne	.L57
+ 1140              		.loc 1 401 0 is_stmt 0 discriminator 1
+ 1141 0034 FB68     		ldr	r3, [r7, #12]
+ 1142 0036 002B     		cmp	r3, #0
+ 1143 0038 02D0     		beq	.L57
+ 402:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 403:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             cnt--;
+ 1144              		.loc 1 403 0 is_stmt 1
+ 1145 003a FB68     		ldr	r3, [r7, #12]
+ 1146 003c 013B     		subs	r3, r3, #1
+ 1147 003e FB60     		str	r3, [r7, #12]
+ 1148              	.L57:
+ 404:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 405:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 406:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 407:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     expireTime = delayBase + delayInterval * cnt;
+ 1149              		.loc 1 407 0
+ 1150 0040 3B69     		ldr	r3, [r7, #16]
+ 1151 0042 FA68     		ldr	r2, [r7, #12]
+ 1152 0044 02FB03F3 		mul	r3, r2, r3
+ 1153 0048 7A69     		ldr	r2, [r7, #20]
+ 1154 004a 1344     		add	r3, r3, r2
+ 1155 004c BB60     		str	r3, [r7, #8]
+ 408:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (expireTime > 0)
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 28
+
+
+ 1156              		.loc 1 408 0
+ 1157 004e BB68     		ldr	r3, [r7, #8]
+ 1158 0050 002B     		cmp	r3, #0
+ 1159 0052 02D0     		beq	.L59
+ 409:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 410:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         lwm2m_delay(expireTime);
+ 1160              		.loc 1 410 0
+ 1161 0054 B868     		ldr	r0, [r7, #8]
+ 1162 0056 FFF7FEFF 		bl	lwm2m_delay
+ 1163              	.L59:
+ 411:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 412:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1164              		.loc 1 412 0
+ 1165 005a 00BF     		nop
+ 1166 005c 1837     		adds	r7, r7, #24
+ 1167              	.LCFI77:
+ 1168              		.cfi_def_cfa_offset 8
+ 1169 005e BD46     		mov	sp, r7
+ 1170              	.LCFI78:
+ 1171              		.cfi_def_cfa_register 13
+ 1172              		@ sp needed
+ 1173 0060 80BD     		pop	{r7, pc}
+ 1174              		.cfi_endproc
+ 1175              	.LFE148:
+ 1177              		.section	.text.lwm2m_getBsCtrlStat,"ax",%progbits
+ 1178              		.align	1
+ 1179              		.global	lwm2m_getBsCtrlStat
+ 1180              		.syntax unified
+ 1181              		.thumb
+ 1182              		.thumb_func
+ 1183              		.fpu fpv4-sp-d16
+ 1185              	lwm2m_getBsCtrlStat:
+ 1186              	.LFB149:
+ 413:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 414:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** lwm2m_client_state_t lwm2m_getBsCtrlStat(const lwm2m_context_t *contextP)
+ 415:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1187              		.loc 1 415 0
+ 1188              		.cfi_startproc
+ 1189              		@ args = 0, pretend = 0, frame = 8
+ 1190              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1191              		@ link register save eliminated.
+ 1192 0000 80B4     		push	{r7}
+ 1193              	.LCFI79:
+ 1194              		.cfi_def_cfa_offset 4
+ 1195              		.cfi_offset 7, -4
+ 1196 0002 83B0     		sub	sp, sp, #12
+ 1197              	.LCFI80:
+ 1198              		.cfi_def_cfa_offset 16
+ 1199 0004 00AF     		add	r7, sp, #0
+ 1200              	.LCFI81:
+ 1201              		.cfi_def_cfa_register 7
+ 1202 0006 7860     		str	r0, [r7, #4]
+ 416:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return contextP->bsCtrl.state;
+ 1203              		.loc 1 416 0
+ 1204 0008 7B68     		ldr	r3, [r7, #4]
+ 1205 000a 93F82530 		ldrb	r3, [r3, #37]	@ zero_extendqisi2
+ 417:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 29
+
+
+ 1206              		.loc 1 417 0
+ 1207 000e 1846     		mov	r0, r3
+ 1208 0010 0C37     		adds	r7, r7, #12
+ 1209              	.LCFI82:
+ 1210              		.cfi_def_cfa_offset 4
+ 1211 0012 BD46     		mov	sp, r7
+ 1212              	.LCFI83:
+ 1213              		.cfi_def_cfa_register 13
+ 1214              		@ sp needed
+ 1215 0014 5DF8047B 		ldr	r7, [sp], #4
+ 1216              	.LCFI84:
+ 1217              		.cfi_restore 7
+ 1218              		.cfi_def_cfa_offset 0
+ 1219 0018 7047     		bx	lr
+ 1220              		.cfi_endproc
+ 1221              	.LFE149:
+ 1223              		.section	.text.prv_refreshServerList,"ax",%progbits
+ 1224              		.align	1
+ 1225              		.syntax unified
+ 1226              		.thumb
+ 1227              		.thumb_func
+ 1228              		.fpu fpv4-sp-d16
+ 1230              	prv_refreshServerList:
+ 1231              	.LFB150:
+ 418:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 419:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 420:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_CLIENT_MODE
+ 421:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static int prv_refreshServerList(lwm2m_context_t *contextP)
+ 422:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1232              		.loc 1 422 0
+ 1233              		.cfi_startproc
+ 1234              		@ args = 0, pretend = 0, frame = 16
+ 1235              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1236 0000 80B5     		push	{r7, lr}
+ 1237              	.LCFI85:
+ 1238              		.cfi_def_cfa_offset 8
+ 1239              		.cfi_offset 7, -8
+ 1240              		.cfi_offset 14, -4
+ 1241 0002 84B0     		sub	sp, sp, #16
+ 1242              	.LCFI86:
+ 1243              		.cfi_def_cfa_offset 24
+ 1244 0004 00AF     		add	r7, sp, #0
+ 1245              	.LCFI87:
+ 1246              		.cfi_def_cfa_register 7
+ 1247 0006 7860     		str	r0, [r7, #4]
+ 423:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_server_t *targetP;
+ 424:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_server_t *nextP;
+ 425:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 426:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // Remove all servers marked as dirty
+ 427:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     targetP = contextP->bootstrapServerList;
+ 1248              		.loc 1 427 0
+ 1249 0008 7B68     		ldr	r3, [r7, #4]
+ 1250 000a 1B69     		ldr	r3, [r3, #16]
+ 1251 000c FB60     		str	r3, [r7, #12]
+ 428:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->bootstrapServerList = NULL;
+ 1252              		.loc 1 428 0
+ 1253 000e 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 30
+
+
+ 1254 0010 0022     		movs	r2, #0
+ 1255 0012 1A61     		str	r2, [r3, #16]
+ 429:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (targetP != NULL)
+ 1256              		.loc 1 429 0
+ 1257 0014 23E0     		b	.L63
+ 1258              	.L66:
+ 430:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 431:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         nextP = targetP->next;
+ 1259              		.loc 1 431 0
+ 1260 0016 FB68     		ldr	r3, [r7, #12]
+ 1261 0018 1B68     		ldr	r3, [r3]
+ 1262 001a BB60     		str	r3, [r7, #8]
+ 432:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         targetP->next = NULL;
+ 1263              		.loc 1 432 0
+ 1264 001c FB68     		ldr	r3, [r7, #12]
+ 1265 001e 0022     		movs	r2, #0
+ 1266 0020 1A60     		str	r2, [r3]
+ 433:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (!targetP->dirty)
+ 1267              		.loc 1 433 0
+ 1268 0022 FB68     		ldr	r3, [r7, #12]
+ 1269 0024 93F82830 		ldrb	r3, [r3, #40]	@ zero_extendqisi2
+ 1270 0028 83F00103 		eor	r3, r3, #1
+ 1271 002c DBB2     		uxtb	r3, r3
+ 1272 002e 002B     		cmp	r3, #0
+ 1273 0030 0DD0     		beq	.L64
+ 434:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 435:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             targetP->status = STATE_DEREGISTERED;
+ 1274              		.loc 1 435 0
+ 1275 0032 FB68     		ldr	r3, [r7, #12]
+ 1276 0034 0022     		movs	r2, #0
+ 1277 0036 83F82020 		strb	r2, [r3, #32]
+ 436:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->bootstrapServerList = (lwm2m_server_t *)LWM2M_LIST_ADD(contextP->bootstrapSer
+ 1278              		.loc 1 436 0
+ 1279 003a 7B68     		ldr	r3, [r7, #4]
+ 1280 003c 1B69     		ldr	r3, [r3, #16]
+ 1281 003e F968     		ldr	r1, [r7, #12]
+ 1282 0040 1846     		mov	r0, r3
+ 1283 0042 FFF7FEFF 		bl	lwm2m_list_add
+ 1284 0046 0246     		mov	r2, r0
+ 1285 0048 7B68     		ldr	r3, [r7, #4]
+ 1286 004a 1A61     		str	r2, [r3, #16]
+ 1287 004c 05E0     		b	.L65
+ 1288              	.L64:
+ 437:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 438:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         else
+ 439:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 440:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             prv_deleteServer(targetP, contextP->userData);
+ 1289              		.loc 1 440 0
+ 1290 004e 7B68     		ldr	r3, [r7, #4]
+ 1291 0050 5B6B     		ldr	r3, [r3, #52]
+ 1292 0052 1946     		mov	r1, r3
+ 1293 0054 F868     		ldr	r0, [r7, #12]
+ 1294 0056 FFF7FEFF 		bl	prv_deleteServer
+ 1295              	.L65:
+ 441:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 442:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         targetP = nextP;
+ 1296              		.loc 1 442 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 31
+
+
+ 1297 005a BB68     		ldr	r3, [r7, #8]
+ 1298 005c FB60     		str	r3, [r7, #12]
+ 1299              	.L63:
+ 429:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1300              		.loc 1 429 0
+ 1301 005e FB68     		ldr	r3, [r7, #12]
+ 1302 0060 002B     		cmp	r3, #0
+ 1303 0062 D8D1     		bne	.L66
+ 443:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 444:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     targetP = contextP->serverList;
+ 1304              		.loc 1 444 0
+ 1305 0064 7B68     		ldr	r3, [r7, #4]
+ 1306 0066 5B69     		ldr	r3, [r3, #20]
+ 1307 0068 FB60     		str	r3, [r7, #12]
+ 445:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->serverList = NULL;
+ 1308              		.loc 1 445 0
+ 1309 006a 7B68     		ldr	r3, [r7, #4]
+ 1310 006c 0022     		movs	r2, #0
+ 1311 006e 5A61     		str	r2, [r3, #20]
+ 446:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (targetP != NULL)
+ 1312              		.loc 1 446 0
+ 1313 0070 1FE0     		b	.L67
+ 1314              	.L70:
+ 447:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 448:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         nextP = targetP->next;
+ 1315              		.loc 1 448 0
+ 1316 0072 FB68     		ldr	r3, [r7, #12]
+ 1317 0074 1B68     		ldr	r3, [r3]
+ 1318 0076 BB60     		str	r3, [r7, #8]
+ 449:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         targetP->next = NULL;
+ 1319              		.loc 1 449 0
+ 1320 0078 FB68     		ldr	r3, [r7, #12]
+ 1321 007a 0022     		movs	r2, #0
+ 1322 007c 1A60     		str	r2, [r3]
+ 450:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (!targetP->dirty)
+ 1323              		.loc 1 450 0
+ 1324 007e FB68     		ldr	r3, [r7, #12]
+ 1325 0080 93F82830 		ldrb	r3, [r3, #40]	@ zero_extendqisi2
+ 1326 0084 83F00103 		eor	r3, r3, #1
+ 1327 0088 DBB2     		uxtb	r3, r3
+ 1328 008a 002B     		cmp	r3, #0
+ 1329 008c 09D0     		beq	.L68
+ 451:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 452:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             // TODO: Should we revert the status to STATE_DEREGISTERED ?
+ 453:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->serverList = (lwm2m_server_t *)LWM2M_LIST_ADD(contextP->serverList, targetP);
+ 1330              		.loc 1 453 0
+ 1331 008e 7B68     		ldr	r3, [r7, #4]
+ 1332 0090 5B69     		ldr	r3, [r3, #20]
+ 1333 0092 F968     		ldr	r1, [r7, #12]
+ 1334 0094 1846     		mov	r0, r3
+ 1335 0096 FFF7FEFF 		bl	lwm2m_list_add
+ 1336 009a 0246     		mov	r2, r0
+ 1337 009c 7B68     		ldr	r3, [r7, #4]
+ 1338 009e 5A61     		str	r2, [r3, #20]
+ 1339 00a0 05E0     		b	.L69
+ 1340              	.L68:
+ 454:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 32
+
+
+ 455:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         else
+ 456:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 457:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             prv_deleteServer(targetP, contextP->userData);
+ 1341              		.loc 1 457 0
+ 1342 00a2 7B68     		ldr	r3, [r7, #4]
+ 1343 00a4 5B6B     		ldr	r3, [r3, #52]
+ 1344 00a6 1946     		mov	r1, r3
+ 1345 00a8 F868     		ldr	r0, [r7, #12]
+ 1346 00aa FFF7FEFF 		bl	prv_deleteServer
+ 1347              	.L69:
+ 458:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 459:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         targetP = nextP;
+ 1348              		.loc 1 459 0
+ 1349 00ae BB68     		ldr	r3, [r7, #8]
+ 1350 00b0 FB60     		str	r3, [r7, #12]
+ 1351              	.L67:
+ 446:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1352              		.loc 1 446 0
+ 1353 00b2 FB68     		ldr	r3, [r7, #12]
+ 1354 00b4 002B     		cmp	r3, #0
+ 1355 00b6 DCD1     		bne	.L70
+ 460:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 461:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 462:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return object_getServers(contextP, false);
+ 1356              		.loc 1 462 0
+ 1357 00b8 0021     		movs	r1, #0
+ 1358 00ba 7868     		ldr	r0, [r7, #4]
+ 1359 00bc FFF7FEFF 		bl	object_getServers
+ 1360 00c0 0346     		mov	r3, r0
+ 463:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1361              		.loc 1 463 0
+ 1362 00c2 1846     		mov	r0, r3
+ 1363 00c4 1037     		adds	r7, r7, #16
+ 1364              	.LCFI88:
+ 1365              		.cfi_def_cfa_offset 8
+ 1366 00c6 BD46     		mov	sp, r7
+ 1367              	.LCFI89:
+ 1368              		.cfi_def_cfa_register 13
+ 1369              		@ sp needed
+ 1370 00c8 80BD     		pop	{r7, pc}
+ 1371              		.cfi_endproc
+ 1372              	.LFE150:
+ 1374              		.section	.text.lwm2m_configure,"ax",%progbits
+ 1375              		.align	1
+ 1376              		.global	lwm2m_configure
+ 1377              		.syntax unified
+ 1378              		.thumb
+ 1379              		.thumb_func
+ 1380              		.fpu fpv4-sp-d16
+ 1382              	lwm2m_configure:
+ 1383              	.LFB151:
+ 464:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** //result = lwm2m_configure(lwm2mH, name, NULL, NULL, OBJ_COUNT, objArray)
+ 465:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** int lwm2m_configure(lwm2m_context_t *contextP,
+ 466:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                     const char *endpointName,
+ 467:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                     const char *msisdn,
+ 468:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                     const char *altPath,
+ 469:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                     uint16_t numObject,
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 33
+
+
+ 470:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                     lwm2m_object_t *objectList[])
+ 471:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1384              		.loc 1 471 0
+ 1385              		.cfi_startproc
+ 1386              		@ args = 8, pretend = 0, frame = 24
+ 1387              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1388 0000 80B5     		push	{r7, lr}
+ 1389              	.LCFI90:
+ 1390              		.cfi_def_cfa_offset 8
+ 1391              		.cfi_offset 7, -8
+ 1392              		.cfi_offset 14, -4
+ 1393 0002 86B0     		sub	sp, sp, #24
+ 1394              	.LCFI91:
+ 1395              		.cfi_def_cfa_offset 32
+ 1396 0004 00AF     		add	r7, sp, #0
+ 1397              	.LCFI92:
+ 1398              		.cfi_def_cfa_register 7
+ 1399 0006 F860     		str	r0, [r7, #12]
+ 1400 0008 B960     		str	r1, [r7, #8]
+ 1401 000a 7A60     		str	r2, [r7, #4]
+ 1402 000c 3B60     		str	r3, [r7]
+ 472:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     int i;
+ 473:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     uint8_t found;
+ 474:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 475:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     //LOG_ARG("endpointName: \"%s\", msisdn: \"%s\", altPath: \"%s\", numObject: %d", endpointName,
+ 476:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // This API can be called only once for now
+ 477:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->endpointName != NULL || contextP->objectList != NULL) return COAP_400_BAD_REQUEST
+ 1403              		.loc 1 477 0
+ 1404 000e FB68     		ldr	r3, [r7, #12]
+ 1405 0010 5B68     		ldr	r3, [r3, #4]
+ 1406 0012 002B     		cmp	r3, #0
+ 1407 0014 03D1     		bne	.L73
+ 1408              		.loc 1 477 0 is_stmt 0 discriminator 2
+ 1409 0016 FB68     		ldr	r3, [r7, #12]
+ 1410 0018 9B69     		ldr	r3, [r3, #24]
+ 1411 001a 002B     		cmp	r3, #0
+ 1412 001c 01D0     		beq	.L74
+ 1413              	.L73:
+ 1414              		.loc 1 477 0 discriminator 3
+ 1415 001e 8023     		movs	r3, #128
+ 1416 0020 ABE0     		b	.L75
+ 1417              	.L74:
+ 478:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 479:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (endpointName == NULL) return COAP_400_BAD_REQUEST;
+ 1418              		.loc 1 479 0 is_stmt 1
+ 1419 0022 BB68     		ldr	r3, [r7, #8]
+ 1420 0024 002B     		cmp	r3, #0
+ 1421 0026 01D1     		bne	.L76
+ 1422              		.loc 1 479 0 is_stmt 0 discriminator 1
+ 1423 0028 8023     		movs	r3, #128
+ 1424 002a A6E0     		b	.L75
+ 1425              	.L76:
+ 480:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (numObject < 3) return COAP_400_BAD_REQUEST;
+ 1426              		.loc 1 480 0 is_stmt 1
+ 1427 002c 3B8C     		ldrh	r3, [r7, #32]
+ 1428 002e 022B     		cmp	r3, #2
+ 1429 0030 01D8     		bhi	.L77
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 34
+
+
+ 1430              		.loc 1 480 0 is_stmt 0 discriminator 1
+ 1431 0032 8023     		movs	r3, #128
+ 1432 0034 A1E0     		b	.L75
+ 1433              	.L77:
+ 481:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // Check that mandatory objects are present
+ 482:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     found = 0;
+ 1434              		.loc 1 482 0 is_stmt 1
+ 1435 0036 0023     		movs	r3, #0
+ 1436 0038 FB74     		strb	r3, [r7, #19]
+ 483:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     for (i = 0 ; i < numObject ; i++)
+ 1437              		.loc 1 483 0
+ 1438 003a 0023     		movs	r3, #0
+ 1439 003c 7B61     		str	r3, [r7, #20]
+ 1440 003e 2FE0     		b	.L78
+ 1441              	.L83:
+ 484:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 485:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if(objectList[i] == NULL) // happens when undef CONFIG_FEATURE_FOTA
+ 1442              		.loc 1 485 0
+ 1443 0040 7B69     		ldr	r3, [r7, #20]
+ 1444 0042 9B00     		lsls	r3, r3, #2
+ 1445 0044 7A6A     		ldr	r2, [r7, #36]
+ 1446 0046 1344     		add	r3, r3, r2
+ 1447 0048 1B68     		ldr	r3, [r3]
+ 1448 004a 002B     		cmp	r3, #0
+ 1449 004c 24D0     		beq	.L94
+ 486:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             continue;
+ 487:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (objectList[i]->objID == LWM2M_SECURITY_OBJECT_ID) found |= 0x01;
+ 1450              		.loc 1 487 0
+ 1451 004e 7B69     		ldr	r3, [r7, #20]
+ 1452 0050 9B00     		lsls	r3, r3, #2
+ 1453 0052 7A6A     		ldr	r2, [r7, #36]
+ 1454 0054 1344     		add	r3, r3, r2
+ 1455 0056 1B68     		ldr	r3, [r3]
+ 1456 0058 9B88     		ldrh	r3, [r3, #4]
+ 1457 005a 002B     		cmp	r3, #0
+ 1458 005c 03D1     		bne	.L81
+ 1459              		.loc 1 487 0 is_stmt 0 discriminator 1
+ 1460 005e FB7C     		ldrb	r3, [r7, #19]
+ 1461 0060 43F00103 		orr	r3, r3, #1
+ 1462 0064 FB74     		strb	r3, [r7, #19]
+ 1463              	.L81:
+ 488:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (objectList[i]->objID == LWM2M_SERVER_OBJECT_ID) found |= 0x02;
+ 1464              		.loc 1 488 0 is_stmt 1
+ 1465 0066 7B69     		ldr	r3, [r7, #20]
+ 1466 0068 9B00     		lsls	r3, r3, #2
+ 1467 006a 7A6A     		ldr	r2, [r7, #36]
+ 1468 006c 1344     		add	r3, r3, r2
+ 1469 006e 1B68     		ldr	r3, [r3]
+ 1470 0070 9B88     		ldrh	r3, [r3, #4]
+ 1471 0072 012B     		cmp	r3, #1
+ 1472 0074 03D1     		bne	.L82
+ 1473              		.loc 1 488 0 is_stmt 0 discriminator 1
+ 1474 0076 FB7C     		ldrb	r3, [r7, #19]
+ 1475 0078 43F00203 		orr	r3, r3, #2
+ 1476 007c FB74     		strb	r3, [r7, #19]
+ 1477              	.L82:
+ 489:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (objectList[i]->objID == LWM2M_DEVICE_OBJECT_ID) found |= 0x04;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 35
+
+
+ 1478              		.loc 1 489 0 is_stmt 1
+ 1479 007e 7B69     		ldr	r3, [r7, #20]
+ 1480 0080 9B00     		lsls	r3, r3, #2
+ 1481 0082 7A6A     		ldr	r2, [r7, #36]
+ 1482 0084 1344     		add	r3, r3, r2
+ 1483 0086 1B68     		ldr	r3, [r3]
+ 1484 0088 9B88     		ldrh	r3, [r3, #4]
+ 1485 008a 032B     		cmp	r3, #3
+ 1486 008c 05D1     		bne	.L80
+ 1487              		.loc 1 489 0 is_stmt 0 discriminator 1
+ 1488 008e FB7C     		ldrb	r3, [r7, #19]
+ 1489 0090 43F00403 		orr	r3, r3, #4
+ 1490 0094 FB74     		strb	r3, [r7, #19]
+ 1491 0096 00E0     		b	.L80
+ 1492              	.L94:
+ 486:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             continue;
+ 1493              		.loc 1 486 0 is_stmt 1
+ 1494 0098 00BF     		nop
+ 1495              	.L80:
+ 483:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1496              		.loc 1 483 0 discriminator 2
+ 1497 009a 7B69     		ldr	r3, [r7, #20]
+ 1498 009c 0133     		adds	r3, r3, #1
+ 1499 009e 7B61     		str	r3, [r7, #20]
+ 1500              	.L78:
+ 483:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1501              		.loc 1 483 0 is_stmt 0 discriminator 1
+ 1502 00a0 3B8C     		ldrh	r3, [r7, #32]
+ 1503 00a2 7A69     		ldr	r2, [r7, #20]
+ 1504 00a4 9A42     		cmp	r2, r3
+ 1505 00a6 CBDB     		blt	.L83
+ 490:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 491:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (found != 0x07) return COAP_400_BAD_REQUEST;
+ 1506              		.loc 1 491 0 is_stmt 1
+ 1507 00a8 FB7C     		ldrb	r3, [r7, #19]	@ zero_extendqisi2
+ 1508 00aa 072B     		cmp	r3, #7
+ 1509 00ac 01D0     		beq	.L84
+ 1510              		.loc 1 491 0 is_stmt 0 discriminator 1
+ 1511 00ae 8023     		movs	r3, #128
+ 1512 00b0 63E0     		b	.L75
+ 1513              	.L84:
+ 492:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (altPath != NULL)
+ 1514              		.loc 1 492 0 is_stmt 1
+ 1515 00b2 3B68     		ldr	r3, [r7]
+ 1516 00b4 002B     		cmp	r3, #0
+ 1517 00b6 0ED0     		beq	.L85
+ 493:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 494:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (0 == utils_isAltPathValid(altPath))
+ 1518              		.loc 1 494 0
+ 1519 00b8 3868     		ldr	r0, [r7]
+ 1520 00ba FFF7FEFF 		bl	utils_isAltPathValid
+ 1521 00be 0346     		mov	r3, r0
+ 1522 00c0 002B     		cmp	r3, #0
+ 1523 00c2 01D1     		bne	.L86
+ 495:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 496:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             return COAP_400_BAD_REQUEST;
+ 1524              		.loc 1 496 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 36
+
+
+ 1525 00c4 8023     		movs	r3, #128
+ 1526 00c6 58E0     		b	.L75
+ 1527              	.L86:
+ 497:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 498:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (altPath[1] == 0)
+ 1528              		.loc 1 498 0
+ 1529 00c8 3B68     		ldr	r3, [r7]
+ 1530 00ca 0133     		adds	r3, r3, #1
+ 1531 00cc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1532 00ce 002B     		cmp	r3, #0
+ 1533 00d0 01D1     		bne	.L85
+ 499:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 500:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             altPath = NULL;
+ 1534              		.loc 1 500 0
+ 1535 00d2 0023     		movs	r3, #0
+ 1536 00d4 3B60     		str	r3, [r7]
+ 1537              	.L85:
+ 501:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 502:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 503:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->endpointName = lwm2m_strdup(endpointName);
+ 1538              		.loc 1 503 0
+ 1539 00d6 B868     		ldr	r0, [r7, #8]
+ 1540 00d8 FFF7FEFF 		bl	lwm2m_strdup
+ 1541 00dc 0246     		mov	r2, r0
+ 1542 00de FB68     		ldr	r3, [r7, #12]
+ 1543 00e0 5A60     		str	r2, [r3, #4]
+ 504:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->endpointName == NULL)
+ 1544              		.loc 1 504 0
+ 1545 00e2 FB68     		ldr	r3, [r7, #12]
+ 1546 00e4 5B68     		ldr	r3, [r3, #4]
+ 1547 00e6 002B     		cmp	r3, #0
+ 1548 00e8 01D1     		bne	.L87
+ 505:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 506:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         return COAP_500_INTERNAL_SERVER_ERROR;
+ 1549              		.loc 1 506 0
+ 1550 00ea A023     		movs	r3, #160
+ 1551 00ec 45E0     		b	.L75
+ 1552              	.L87:
+ 507:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 508:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 509:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (msisdn != NULL)
+ 1553              		.loc 1 509 0
+ 1554 00ee 7B68     		ldr	r3, [r7, #4]
+ 1555 00f0 002B     		cmp	r3, #0
+ 1556 00f2 0BD0     		beq	.L88
+ 510:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 511:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->msisdn = lwm2m_strdup(msisdn);
+ 1557              		.loc 1 511 0
+ 1558 00f4 7868     		ldr	r0, [r7, #4]
+ 1559 00f6 FFF7FEFF 		bl	lwm2m_strdup
+ 1560 00fa 0246     		mov	r2, r0
+ 1561 00fc FB68     		ldr	r3, [r7, #12]
+ 1562 00fe 9A60     		str	r2, [r3, #8]
+ 512:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (contextP->msisdn == NULL)
+ 1563              		.loc 1 512 0
+ 1564 0100 FB68     		ldr	r3, [r7, #12]
+ 1565 0102 9B68     		ldr	r3, [r3, #8]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 37
+
+
+ 1566 0104 002B     		cmp	r3, #0
+ 1567 0106 01D1     		bne	.L88
+ 513:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 514:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             return COAP_500_INTERNAL_SERVER_ERROR;
+ 1568              		.loc 1 514 0
+ 1569 0108 A023     		movs	r3, #160
+ 1570 010a 36E0     		b	.L75
+ 1571              	.L88:
+ 515:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 516:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 517:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 518:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (altPath != NULL)
+ 1572              		.loc 1 518 0
+ 1573 010c 3B68     		ldr	r3, [r7]
+ 1574 010e 002B     		cmp	r3, #0
+ 1575 0110 0BD0     		beq	.L89
+ 519:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 520:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->altPath = lwm2m_strdup(altPath);
+ 1576              		.loc 1 520 0
+ 1577 0112 3868     		ldr	r0, [r7]
+ 1578 0114 FFF7FEFF 		bl	lwm2m_strdup
+ 1579 0118 0246     		mov	r2, r0
+ 1580 011a FB68     		ldr	r3, [r7, #12]
+ 1581 011c DA60     		str	r2, [r3, #12]
+ 521:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (contextP->altPath == NULL)
+ 1582              		.loc 1 521 0
+ 1583 011e FB68     		ldr	r3, [r7, #12]
+ 1584 0120 DB68     		ldr	r3, [r3, #12]
+ 1585 0122 002B     		cmp	r3, #0
+ 1586 0124 01D1     		bne	.L89
+ 522:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 523:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             return COAP_500_INTERNAL_SERVER_ERROR;
+ 1587              		.loc 1 523 0
+ 1588 0126 A023     		movs	r3, #160
+ 1589 0128 27E0     		b	.L75
+ 1590              	.L89:
+ 524:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 525:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 526:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 527:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     for (i = 0; i < numObject; i++)
+ 1591              		.loc 1 527 0
+ 1592 012a 0023     		movs	r3, #0
+ 1593 012c 7B61     		str	r3, [r7, #20]
+ 1594 012e 1FE0     		b	.L90
+ 1595              	.L93:
+ 528:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 529:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if(objectList[i] == NULL) // happens when undef CONFIG_FEATURE_FOTA
+ 1596              		.loc 1 529 0
+ 1597 0130 7B69     		ldr	r3, [r7, #20]
+ 1598 0132 9B00     		lsls	r3, r3, #2
+ 1599 0134 7A6A     		ldr	r2, [r7, #36]
+ 1600 0136 1344     		add	r3, r3, r2
+ 1601 0138 1B68     		ldr	r3, [r3]
+ 1602 013a 002B     		cmp	r3, #0
+ 1603 013c 14D0     		beq	.L95
+ 530:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             continue;
+ 531:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         objectList[i]->next = NULL;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 38
+
+
+ 1604              		.loc 1 531 0
+ 1605 013e 7B69     		ldr	r3, [r7, #20]
+ 1606 0140 9B00     		lsls	r3, r3, #2
+ 1607 0142 7A6A     		ldr	r2, [r7, #36]
+ 1608 0144 1344     		add	r3, r3, r2
+ 1609 0146 1B68     		ldr	r3, [r3]
+ 1610 0148 0022     		movs	r2, #0
+ 1611 014a 1A60     		str	r2, [r3]
+ 532:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->objectList = (lwm2m_object_t *)LWM2M_LIST_ADD(contextP->objectList, objectList[i]
+ 1612              		.loc 1 532 0
+ 1613 014c FB68     		ldr	r3, [r7, #12]
+ 1614 014e 9869     		ldr	r0, [r3, #24]
+ 1615 0150 7B69     		ldr	r3, [r7, #20]
+ 1616 0152 9B00     		lsls	r3, r3, #2
+ 1617 0154 7A6A     		ldr	r2, [r7, #36]
+ 1618 0156 1344     		add	r3, r3, r2
+ 1619 0158 1B68     		ldr	r3, [r3]
+ 1620 015a 1946     		mov	r1, r3
+ 1621 015c FFF7FEFF 		bl	lwm2m_list_add
+ 1622 0160 0246     		mov	r2, r0
+ 1623 0162 FB68     		ldr	r3, [r7, #12]
+ 1624 0164 9A61     		str	r2, [r3, #24]
+ 1625 0166 00E0     		b	.L92
+ 1626              	.L95:
+ 530:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             continue;
+ 1627              		.loc 1 530 0
+ 1628 0168 00BF     		nop
+ 1629              	.L92:
+ 527:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1630              		.loc 1 527 0 discriminator 2
+ 1631 016a 7B69     		ldr	r3, [r7, #20]
+ 1632 016c 0133     		adds	r3, r3, #1
+ 1633 016e 7B61     		str	r3, [r7, #20]
+ 1634              	.L90:
+ 527:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1635              		.loc 1 527 0 is_stmt 0 discriminator 1
+ 1636 0170 3B8C     		ldrh	r3, [r7, #32]
+ 1637 0172 7A69     		ldr	r2, [r7, #20]
+ 1638 0174 9A42     		cmp	r2, r3
+ 1639 0176 DBDB     		blt	.L93
+ 533:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 534:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 535:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return COAP_NO_ERROR;
+ 1640              		.loc 1 535 0 is_stmt 1
+ 1641 0178 0023     		movs	r3, #0
+ 1642              	.L75:
+ 536:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1643              		.loc 1 536 0
+ 1644 017a 1846     		mov	r0, r3
+ 1645 017c 1837     		adds	r7, r7, #24
+ 1646              	.LCFI93:
+ 1647              		.cfi_def_cfa_offset 8
+ 1648 017e BD46     		mov	sp, r7
+ 1649              	.LCFI94:
+ 1650              		.cfi_def_cfa_register 13
+ 1651              		@ sp needed
+ 1652 0180 80BD     		pop	{r7, pc}
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 39
+
+
+ 1653              		.cfi_endproc
+ 1654              	.LFE151:
+ 1656              		.section	.text.lwm2m_add_object,"ax",%progbits
+ 1657              		.align	1
+ 1658              		.global	lwm2m_add_object
+ 1659              		.syntax unified
+ 1660              		.thumb
+ 1661              		.thumb_func
+ 1662              		.fpu fpv4-sp-d16
+ 1664              	lwm2m_add_object:
+ 1665              	.LFB152:
+ 537:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 538:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** int lwm2m_add_object(lwm2m_context_t *contextP,
+ 539:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                      lwm2m_object_t *objectP)
+ 540:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1666              		.loc 1 540 0
+ 1667              		.cfi_startproc
+ 1668              		@ args = 0, pretend = 0, frame = 16
+ 1669              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1670 0000 80B5     		push	{r7, lr}
+ 1671              	.LCFI95:
+ 1672              		.cfi_def_cfa_offset 8
+ 1673              		.cfi_offset 7, -8
+ 1674              		.cfi_offset 14, -4
+ 1675 0002 84B0     		sub	sp, sp, #16
+ 1676              	.LCFI96:
+ 1677              		.cfi_def_cfa_offset 24
+ 1678 0004 00AF     		add	r7, sp, #0
+ 1679              	.LCFI97:
+ 1680              		.cfi_def_cfa_register 7
+ 1681 0006 7860     		str	r0, [r7, #4]
+ 1682 0008 3960     		str	r1, [r7]
+ 541:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_object_t *targetP;
+ 542:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 543:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG_ARG("ID: %d", objectP->objID);
+ 544:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     targetP = (lwm2m_object_t *)LWM2M_LIST_FIND(contextP->objectList, objectP->objID);
+ 1683              		.loc 1 544 0
+ 1684 000a 7B68     		ldr	r3, [r7, #4]
+ 1685 000c 9A69     		ldr	r2, [r3, #24]
+ 1686 000e 3B68     		ldr	r3, [r7]
+ 1687 0010 9B88     		ldrh	r3, [r3, #4]
+ 1688 0012 1946     		mov	r1, r3
+ 1689 0014 1046     		mov	r0, r2
+ 1690 0016 FFF7FEFF 		bl	lwm2m_list_find
+ 1691 001a F860     		str	r0, [r7, #12]
+ 545:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (targetP != NULL) return COAP_406_NOT_ACCEPTABLE;
+ 1692              		.loc 1 545 0
+ 1693 001c FB68     		ldr	r3, [r7, #12]
+ 1694 001e 002B     		cmp	r3, #0
+ 1695 0020 01D0     		beq	.L97
+ 1696              		.loc 1 545 0 is_stmt 0 discriminator 1
+ 1697 0022 8623     		movs	r3, #134
+ 1698 0024 17E0     		b	.L98
+ 1699              	.L97:
+ 546:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     objectP->next = NULL;
+ 1700              		.loc 1 546 0 is_stmt 1
+ 1701 0026 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 40
+
+
+ 1702 0028 0022     		movs	r2, #0
+ 1703 002a 1A60     		str	r2, [r3]
+ 547:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 548:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->objectList = (lwm2m_object_t *)LWM2M_LIST_ADD(contextP->objectList, objectP);
+ 1704              		.loc 1 548 0
+ 1705 002c 7B68     		ldr	r3, [r7, #4]
+ 1706 002e 9B69     		ldr	r3, [r3, #24]
+ 1707 0030 3968     		ldr	r1, [r7]
+ 1708 0032 1846     		mov	r0, r3
+ 1709 0034 FFF7FEFF 		bl	lwm2m_list_add
+ 1710 0038 0246     		mov	r2, r0
+ 1711 003a 7B68     		ldr	r3, [r7, #4]
+ 1712 003c 9A61     		str	r2, [r3, #24]
+ 549:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 550:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->state == STATE_READY)
+ 1713              		.loc 1 550 0
+ 1714 003e 7B68     		ldr	r3, [r7, #4]
+ 1715 0040 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1716 0042 052B     		cmp	r3, #5
+ 1717 0044 06D1     		bne	.L99
+ 551:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 552:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         return lwm2m_update_registration(contextP, 0, true);
+ 1718              		.loc 1 552 0
+ 1719 0046 0122     		movs	r2, #1
+ 1720 0048 0021     		movs	r1, #0
+ 1721 004a 7868     		ldr	r0, [r7, #4]
+ 1722 004c FFF7FEFF 		bl	lwm2m_update_registration
+ 1723 0050 0346     		mov	r3, r0
+ 1724 0052 00E0     		b	.L98
+ 1725              	.L99:
+ 553:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 554:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 555:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return COAP_NO_ERROR;
+ 1726              		.loc 1 555 0
+ 1727 0054 0023     		movs	r3, #0
+ 1728              	.L98:
+ 556:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1729              		.loc 1 556 0
+ 1730 0056 1846     		mov	r0, r3
+ 1731 0058 1037     		adds	r7, r7, #16
+ 1732              	.LCFI98:
+ 1733              		.cfi_def_cfa_offset 8
+ 1734 005a BD46     		mov	sp, r7
+ 1735              	.LCFI99:
+ 1736              		.cfi_def_cfa_register 13
+ 1737              		@ sp needed
+ 1738 005c 80BD     		pop	{r7, pc}
+ 1739              		.cfi_endproc
+ 1740              	.LFE152:
+ 1742              		.section	.text.lwm2m_remove_object,"ax",%progbits
+ 1743              		.align	1
+ 1744              		.global	lwm2m_remove_object
+ 1745              		.syntax unified
+ 1746              		.thumb
+ 1747              		.thumb_func
+ 1748              		.fpu fpv4-sp-d16
+ 1750              	lwm2m_remove_object:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 41
+
+
+ 1751              	.LFB153:
+ 557:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 558:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** int lwm2m_remove_object(lwm2m_context_t *contextP,
+ 559:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                         uint16_t id)
+ 560:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1752              		.loc 1 560 0
+ 1753              		.cfi_startproc
+ 1754              		@ args = 0, pretend = 0, frame = 16
+ 1755              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1756 0000 80B5     		push	{r7, lr}
+ 1757              	.LCFI100:
+ 1758              		.cfi_def_cfa_offset 8
+ 1759              		.cfi_offset 7, -8
+ 1760              		.cfi_offset 14, -4
+ 1761 0002 84B0     		sub	sp, sp, #16
+ 1762              	.LCFI101:
+ 1763              		.cfi_def_cfa_offset 24
+ 1764 0004 00AF     		add	r7, sp, #0
+ 1765              	.LCFI102:
+ 1766              		.cfi_def_cfa_register 7
+ 1767 0006 7860     		str	r0, [r7, #4]
+ 1768 0008 0B46     		mov	r3, r1
+ 1769 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 561:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_object_t *targetP;
+ 562:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 563:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG_ARG("ID: %d", id);
+ 564:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->objectList = (lwm2m_object_t *)LWM2M_LIST_RM(contextP->objectList, id, &targetP);
+ 1770              		.loc 1 564 0
+ 1771 000c 7B68     		ldr	r3, [r7, #4]
+ 1772 000e 9B69     		ldr	r3, [r3, #24]
+ 1773 0010 07F10C02 		add	r2, r7, #12
+ 1774 0014 7988     		ldrh	r1, [r7, #2]
+ 1775 0016 1846     		mov	r0, r3
+ 1776 0018 FFF7FEFF 		bl	lwm2m_list_remove
+ 1777 001c 0246     		mov	r2, r0
+ 1778 001e 7B68     		ldr	r3, [r7, #4]
+ 1779 0020 9A61     		str	r2, [r3, #24]
+ 565:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 566:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (targetP == NULL) return COAP_404_NOT_FOUND;
+ 1780              		.loc 1 566 0
+ 1781 0022 FB68     		ldr	r3, [r7, #12]
+ 1782 0024 002B     		cmp	r3, #0
+ 1783 0026 01D1     		bne	.L101
+ 1784              		.loc 1 566 0 is_stmt 0 discriminator 1
+ 1785 0028 8423     		movs	r3, #132
+ 1786 002a 0BE0     		b	.L104
+ 1787              	.L101:
+ 567:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 568:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (contextP->state == STATE_READY)
+ 1788              		.loc 1 568 0 is_stmt 1
+ 1789 002c 7B68     		ldr	r3, [r7, #4]
+ 1790 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1791 0030 052B     		cmp	r3, #5
+ 1792 0032 06D1     		bne	.L103
+ 569:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 570:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         return lwm2m_update_registration(contextP, 0, true);
+ 1793              		.loc 1 570 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 42
+
+
+ 1794 0034 0122     		movs	r2, #1
+ 1795 0036 0021     		movs	r1, #0
+ 1796 0038 7868     		ldr	r0, [r7, #4]
+ 1797 003a FFF7FEFF 		bl	lwm2m_update_registration
+ 1798 003e 0346     		mov	r3, r0
+ 1799 0040 00E0     		b	.L104
+ 1800              	.L103:
+ 571:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 572:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 573:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return 0;
+ 1801              		.loc 1 573 0
+ 1802 0042 0023     		movs	r3, #0
+ 1803              	.L104:
+ 574:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1804              		.loc 1 574 0 discriminator 1
+ 1805 0044 1846     		mov	r0, r3
+ 1806 0046 1037     		adds	r7, r7, #16
+ 1807              	.LCFI103:
+ 1808              		.cfi_def_cfa_offset 8
+ 1809 0048 BD46     		mov	sp, r7
+ 1810              	.LCFI104:
+ 1811              		.cfi_def_cfa_register 13
+ 1812              		@ sp needed
+ 1813 004a 80BD     		pop	{r7, pc}
+ 1814              		.cfi_endproc
+ 1815              	.LFE153:
+ 1817              		.section	.text.lwm2m_reset_register,"ax",%progbits
+ 1818              		.align	1
+ 1819              		.syntax unified
+ 1820              		.thumb
+ 1821              		.thumb_func
+ 1822              		.fpu fpv4-sp-d16
+ 1824              	lwm2m_reset_register:
+ 1825              	.LFB154:
+ 575:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 576:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 577:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** static void lwm2m_reset_register(lwm2m_context_t *context)
+ 578:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1826              		.loc 1 578 0
+ 1827              		.cfi_startproc
+ 1828              		@ args = 0, pretend = 0, frame = 16
+ 1829              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1830 0000 80B5     		push	{r7, lr}
+ 1831              	.LCFI105:
+ 1832              		.cfi_def_cfa_offset 8
+ 1833              		.cfi_offset 7, -8
+ 1834              		.cfi_offset 14, -4
+ 1835 0002 84B0     		sub	sp, sp, #16
+ 1836              	.LCFI106:
+ 1837              		.cfi_def_cfa_offset 24
+ 1838 0004 00AF     		add	r7, sp, #0
+ 1839              	.LCFI107:
+ 1840              		.cfi_def_cfa_register 7
+ 1841 0006 7860     		str	r0, [r7, #4]
+ 579:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_server_t *server = context->serverList;
+ 1842              		.loc 1 579 0
+ 1843 0008 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 43
+
+
+ 1844 000a 5B69     		ldr	r3, [r3, #20]
+ 1845 000c FB60     		str	r3, [r7, #12]
+ 580:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 581:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG("Entering");
+ 582:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     while (NULL != server)
+ 1846              		.loc 1 582 0
+ 1847 000e 06E0     		b	.L106
+ 1848              	.L107:
+ 583:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 584:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         registration_reset(context, server);
+ 1849              		.loc 1 584 0
+ 1850 0010 F968     		ldr	r1, [r7, #12]
+ 1851 0012 7868     		ldr	r0, [r7, #4]
+ 1852 0014 FFF7FEFF 		bl	registration_reset
+ 585:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         server = server->next;
+ 1853              		.loc 1 585 0
+ 1854 0018 FB68     		ldr	r3, [r7, #12]
+ 1855 001a 1B68     		ldr	r3, [r3]
+ 1856 001c FB60     		str	r3, [r7, #12]
+ 1857              	.L106:
+ 582:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 1858              		.loc 1 582 0
+ 1859 001e FB68     		ldr	r3, [r7, #12]
+ 1860 0020 002B     		cmp	r3, #0
+ 1861 0022 F5D1     		bne	.L107
+ 586:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 587:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1862              		.loc 1 587 0
+ 1863 0024 00BF     		nop
+ 1864 0026 1037     		adds	r7, r7, #16
+ 1865              	.LCFI108:
+ 1866              		.cfi_def_cfa_offset 8
+ 1867 0028 BD46     		mov	sp, r7
+ 1868              	.LCFI109:
+ 1869              		.cfi_def_cfa_register 13
+ 1870              		@ sp needed
+ 1871 002a 80BD     		pop	{r7, pc}
+ 1872              		.cfi_endproc
+ 1873              	.LFE154:
+ 1875              		.section	.text.lwm2m_reconnect,"ax",%progbits
+ 1876              		.align	1
+ 1877              		.global	lwm2m_reconnect
+ 1878              		.syntax unified
+ 1879              		.thumb
+ 1880              		.thumb_func
+ 1881              		.fpu fpv4-sp-d16
+ 1883              	lwm2m_reconnect:
+ 1884              	.LFB155:
+ 588:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 589:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** int lwm2m_reconnect(lwm2m_context_t *context)
+ 590:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1885              		.loc 1 590 0
+ 1886              		.cfi_startproc
+ 1887              		@ args = 0, pretend = 0, frame = 8
+ 1888              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1889 0000 80B5     		push	{r7, lr}
+ 1890              	.LCFI110:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 44
+
+
+ 1891              		.cfi_def_cfa_offset 8
+ 1892              		.cfi_offset 7, -8
+ 1893              		.cfi_offset 14, -4
+ 1894 0002 82B0     		sub	sp, sp, #8
+ 1895              	.LCFI111:
+ 1896              		.cfi_def_cfa_offset 16
+ 1897 0004 00AF     		add	r7, sp, #0
+ 1898              	.LCFI112:
+ 1899              		.cfi_def_cfa_register 7
+ 1900 0006 7860     		str	r0, [r7, #4]
+ 591:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if(NULL == context)
+ 1901              		.loc 1 591 0
+ 1902 0008 7B68     		ldr	r3, [r7, #4]
+ 1903 000a 002B     		cmp	r3, #0
+ 1904 000c 01D1     		bne	.L109
+ 592:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 593:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         LOG("context null point");
+ 594:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         return COAP_405_METHOD_NOT_ALLOWED;
+ 1905              		.loc 1 594 0
+ 1906 000e 8523     		movs	r3, #133
+ 1907 0010 1AE0     		b	.L110
+ 1908              	.L109:
+ 595:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 596:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 597:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_reset_register(context);
+ 1909              		.loc 1 597 0
+ 1910 0012 7868     		ldr	r0, [r7, #4]
+ 1911 0014 FFF7FEFF 		bl	lwm2m_reset_register
+ 598:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     prv_deleteObservedList(context);
+ 1912              		.loc 1 598 0
+ 1913 0018 7868     		ldr	r0, [r7, #4]
+ 1914 001a FFF7FEFF 		bl	prv_deleteObservedList
+ 599:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     prv_deleteTransactionList(context);
+ 1915              		.loc 1 599 0
+ 1916 001e 7868     		ldr	r0, [r7, #4]
+ 1917 0020 FFF7FEFF 		bl	prv_deleteTransactionList
+ 600:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_setBsCtrlStat(context, STATE_REGISTER_REQUIRED);
+ 1918              		.loc 1 600 0
+ 1919 0024 0321     		movs	r1, #3
+ 1920 0026 7868     		ldr	r0, [r7, #4]
+ 1921 0028 FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 601:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     context->state = lwm2m_getBsCtrlStat(context);
+ 1922              		.loc 1 601 0
+ 1923 002c 7868     		ldr	r0, [r7, #4]
+ 1924 002e FFF7FEFF 		bl	lwm2m_getBsCtrlStat
+ 1925 0032 0346     		mov	r3, r0
+ 1926 0034 1A46     		mov	r2, r3
+ 1927 0036 7B68     		ldr	r3, [r7, #4]
+ 1928 0038 1A70     		strb	r2, [r3]
+ 602:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_notify_even(MODULE_LWM2M, STATE_REG_FAILED, NULL, 0);
+ 1929              		.loc 1 602 0
+ 1930 003a 0023     		movs	r3, #0
+ 1931 003c 0022     		movs	r2, #0
+ 1932 003e 0321     		movs	r1, #3
+ 1933 0040 0020     		movs	r0, #0
+ 1934 0042 FFF7FEFF 		bl	lwm2m_notify_even
+ 603:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return COAP_NO_ERROR;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 45
+
+
+ 1935              		.loc 1 603 0
+ 1936 0046 0023     		movs	r3, #0
+ 1937              	.L110:
+ 604:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 1938              		.loc 1 604 0
+ 1939 0048 1846     		mov	r0, r3
+ 1940 004a 0837     		adds	r7, r7, #8
+ 1941              	.LCFI113:
+ 1942              		.cfi_def_cfa_offset 8
+ 1943 004c BD46     		mov	sp, r7
+ 1944              	.LCFI114:
+ 1945              		.cfi_def_cfa_register 13
+ 1946              		@ sp needed
+ 1947 004e 80BD     		pop	{r7, pc}
+ 1948              		.cfi_endproc
+ 1949              	.LFE155:
+ 1951              		.section	.text.lwm2m_initBootStrap,"ax",%progbits
+ 1952              		.align	1
+ 1953              		.global	lwm2m_initBootStrap
+ 1954              		.syntax unified
+ 1955              		.thumb
+ 1956              		.thumb_func
+ 1957              		.fpu fpv4-sp-d16
+ 1959              	lwm2m_initBootStrap:
+ 1960              	.LFB156:
+ 605:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 606:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** int lwm2m_initBootStrap(lwm2m_context_t *contextP, lwm2m_bootstrap_type_e bsType)
+ 607:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 1961              		.loc 1 607 0
+ 1962              		.cfi_startproc
+ 1963              		@ args = 0, pretend = 0, frame = 8
+ 1964              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1965 0000 80B5     		push	{r7, lr}
+ 1966              	.LCFI115:
+ 1967              		.cfi_def_cfa_offset 8
+ 1968              		.cfi_offset 7, -8
+ 1969              		.cfi_offset 14, -4
+ 1970 0002 82B0     		sub	sp, sp, #8
+ 1971              	.LCFI116:
+ 1972              		.cfi_def_cfa_offset 16
+ 1973 0004 00AF     		add	r7, sp, #0
+ 1974              	.LCFI117:
+ 1975              		.cfi_def_cfa_register 7
+ 1976 0006 7860     		str	r0, [r7, #4]
+ 1977 0008 0B46     		mov	r3, r1
+ 1978 000a FB70     		strb	r3, [r7, #3]
+ 608:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     if (NULL == contextP)
+ 1979              		.loc 1 608 0
+ 1980 000c 7B68     		ldr	r3, [r7, #4]
+ 1981 000e 002B     		cmp	r3, #0
+ 1982 0010 01D1     		bne	.L112
+ 609:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 610:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         LOG("context null point");
+ 611:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         return COAP_500_INTERNAL_SERVER_ERROR;
+ 1983              		.loc 1 611 0
+ 1984 0012 A023     		movs	r3, #160
+ 1985 0014 0DE0     		b	.L113
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 46
+
+
+ 1986              	.L112:
+ 612:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 613:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 614:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->regist_first_flag = ((bsType == BOOTSTRAP_CLIENT_INITIATED) ? false : true);
+ 1987              		.loc 1 614 0
+ 1988 0016 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1989 0018 012B     		cmp	r3, #1
+ 1990 001a 14BF     		ite	ne
+ 1991 001c 0123     		movne	r3, #1
+ 1992 001e 0023     		moveq	r3, #0
+ 1993 0020 DAB2     		uxtb	r2, r3
+ 1994 0022 7B68     		ldr	r3, [r7, #4]
+ 1995 0024 5A70     		strb	r2, [r3, #1]
+ 615:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_initBsCtrlStat(contextP, bsType);
+ 1996              		.loc 1 615 0
+ 1997 0026 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1998 0028 1946     		mov	r1, r3
+ 1999 002a 7868     		ldr	r0, [r7, #4]
+ 2000 002c FFF7FEFF 		bl	lwm2m_initBsCtrlStat
+ 616:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return COAP_NO_ERROR;
+ 2001              		.loc 1 616 0
+ 2002 0030 0023     		movs	r3, #0
+ 2003              	.L113:
+ 617:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 2004              		.loc 1 617 0
+ 2005 0032 1846     		mov	r0, r3
+ 2006 0034 0837     		adds	r7, r7, #8
+ 2007              	.LCFI118:
+ 2008              		.cfi_def_cfa_offset 8
+ 2009 0036 BD46     		mov	sp, r7
+ 2010              	.LCFI119:
+ 2011              		.cfi_def_cfa_register 13
+ 2012              		@ sp needed
+ 2013 0038 80BD     		pop	{r7, pc}
+ 2014              		.cfi_endproc
+ 2015              	.LFE156:
+ 2017              		.section	.text.lwm2m_step,"ax",%progbits
+ 2018              		.align	1
+ 2019              		.global	lwm2m_step
+ 2020              		.syntax unified
+ 2021              		.thumb
+ 2022              		.thumb_func
+ 2023              		.fpu fpv4-sp-d16
+ 2025              	lwm2m_step:
+ 2026              	.LFB157:
+ 618:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 619:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 620:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 621:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 622:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 623:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #define SET_BS_LATER(contextP, newState) \
+ 624:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** do{\
+ 625:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_setBsCtrlStat(contextP, newState);\
+ 626:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     contextP->state = lwm2m_getBsCtrlStat(contextP);\
+ 627:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_delayBsRetry(contextP);\
+ 628:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }while(0)
+ 629:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 47
+
+
+ 630:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** int lwm2m_step(lwm2m_context_t *contextP,
+ 631:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                time_t *timeoutP)
+ 632:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** {
+ 2027              		.loc 1 632 0
+ 2028              		.cfi_startproc
+ 2029              		@ args = 0, pretend = 0, frame = 32
+ 2030              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2031 0000 80B5     		push	{r7, lr}
+ 2032              	.LCFI120:
+ 2033              		.cfi_def_cfa_offset 8
+ 2034              		.cfi_offset 7, -8
+ 2035              		.cfi_offset 14, -4
+ 2036 0002 8AB0     		sub	sp, sp, #40
+ 2037              	.LCFI121:
+ 2038              		.cfi_def_cfa_offset 48
+ 2039 0004 02AF     		add	r7, sp, #8
+ 2040              	.LCFI122:
+ 2041              		.cfi_def_cfa 7, 40
+ 2042 0006 7860     		str	r0, [r7, #4]
+ 2043 0008 3960     		str	r1, [r7]
+ 633:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     time_t tv_sec;
+ 634:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     int result;
+ 635:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     lwm2m_client_state_t state;
+ 636:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     int ret = 0;
+ 2044              		.loc 1 636 0
+ 2045 000a 0023     		movs	r3, #0
+ 2046 000c FB61     		str	r3, [r7, #28]
+ 637:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 638:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG_ARG("timeoutP: %" PRId64, *timeoutP);
+ 639:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     tv_sec = lwm2m_gettime();
+ 2047              		.loc 1 639 0
+ 2048 000e FFF7FEFF 		bl	lwm2m_gettime
+ 2049 0012 C7E90401 		strd	r0, [r7, #16]
+ 2050              	.L115:
+ 640:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     //if (tv_sec < 0) return COAP_500_INTERNAL_SERVER_ERROR;
+ 641:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 642:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_CLIENT_MODE
+ 643:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG_ARG("State: %s", STR_STATE(contextP->state));
+ 644:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     // state can also be modified in bootstrap_handleCommand().
+ 645:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 646:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** next_step:
+ 647:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     switch (contextP->state)
+ 2051              		.loc 1 647 0
+ 2052 0016 7B68     		ldr	r3, [r7, #4]
+ 2053 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2054 001a 052B     		cmp	r3, #5
+ 2055 001c 00F2A980 		bhi	.L135
+ 2056 0020 01A2     		adr	r2, .L118
+ 2057 0022 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 2058 0026 00BF     		.p2align 2
+ 2059              	.L118:
+ 2060 0028 41000000 		.word	.L117+1
+ 2061 002c A1000000 		.word	.L119+1
+ 2062 0030 73010000 		.word	.L135+1
+ 2063 0034 C3000000 		.word	.L120+1
+ 2064 0038 FD000000 		.word	.L121+1
+ 2065 003c 57010000 		.word	.L122+1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 48
+
+
+ 2066              		.p2align 1
+ 2067              	.L117:
+ 648:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 649:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     case STATE_INITIAL:
+ 650:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (0 != prv_refreshServerList(contextP))
+ 2068              		.loc 1 650 0
+ 2069 0040 7868     		ldr	r0, [r7, #4]
+ 2070 0042 FFF7FEFF 		bl	prv_refreshServerList
+ 2071 0046 0346     		mov	r3, r0
+ 2072 0048 002B     		cmp	r3, #0
+ 2073 004a 01D0     		beq	.L123
+ 651:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 652:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             LOG("prv_refreshServerList fail");
+ 653:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             return COAP_503_SERVICE_UNAVAILABLE;
+ 2074              		.loc 1 653 0
+ 2075 004c A323     		movs	r3, #163
+ 2076 004e A9E0     		b	.L124
+ 2077              	.L123:
+ 654:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 655:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 656:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         state = ((!prv_isBoostrpEnable(contextP))
+ 2078              		.loc 1 656 0
+ 2079 0050 7868     		ldr	r0, [r7, #4]
+ 2080 0052 FFF7FEFF 		bl	prv_isBoostrpEnable
+ 2081 0056 0346     		mov	r3, r0
+ 2082 0058 83F00103 		eor	r3, r3, #1
+ 2083 005c DBB2     		uxtb	r3, r3
+ 657:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                  || ((contextP->serverList != NULL) && contextP->regist_first_flag)
+ 658:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                  ?  STATE_REGISTER_REQUIRED : STATE_BOOTSTRAP_REQUIRED);
+ 2084              		.loc 1 658 0
+ 2085 005e 002B     		cmp	r3, #0
+ 2086 0060 07D1     		bne	.L125
+ 657:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                  || ((contextP->serverList != NULL) && contextP->regist_first_flag)
+ 2087              		.loc 1 657 0
+ 2088 0062 7B68     		ldr	r3, [r7, #4]
+ 2089 0064 5B69     		ldr	r3, [r3, #20]
+ 2090 0066 002B     		cmp	r3, #0
+ 2091 0068 05D0     		beq	.L126
+ 657:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                  || ((contextP->serverList != NULL) && contextP->regist_first_flag)
+ 2092              		.loc 1 657 0 is_stmt 0 discriminator 1
+ 2093 006a 7B68     		ldr	r3, [r7, #4]
+ 2094 006c 5B78     		ldrb	r3, [r3, #1]	@ zero_extendqisi2
+ 2095 006e 002B     		cmp	r3, #0
+ 2096 0070 01D0     		beq	.L126
+ 2097              	.L125:
+ 2098              		.loc 1 658 0 is_stmt 1 discriminator 1
+ 2099 0072 0323     		movs	r3, #3
+ 2100 0074 00E0     		b	.L127
+ 2101              	.L126:
+ 2102              		.loc 1 658 0 is_stmt 0
+ 2103 0076 0123     		movs	r3, #1
+ 2104              	.L127:
+ 656:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****                  || ((contextP->serverList != NULL) && contextP->regist_first_flag)
+ 2105              		.loc 1 656 0 is_stmt 1
+ 2106 0078 FB72     		strb	r3, [r7, #11]
+ 659:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 660:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->regist_first_flag = true;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 49
+
+
+ 2107              		.loc 1 660 0
+ 2108 007a 7B68     		ldr	r3, [r7, #4]
+ 2109 007c 0122     		movs	r2, #1
+ 2110 007e 5A70     		strb	r2, [r3, #1]
+ 661:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 662:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         SET_BS_LATER(contextP, state);
+ 2111              		.loc 1 662 0
+ 2112 0080 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 2113 0082 1946     		mov	r1, r3
+ 2114 0084 7868     		ldr	r0, [r7, #4]
+ 2115 0086 FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 2116 008a 7868     		ldr	r0, [r7, #4]
+ 2117 008c FFF7FEFF 		bl	lwm2m_getBsCtrlStat
+ 2118 0090 0346     		mov	r3, r0
+ 2119 0092 1A46     		mov	r2, r3
+ 2120 0094 7B68     		ldr	r3, [r7, #4]
+ 2121 0096 1A70     		strb	r2, [r3]
+ 2122 0098 7868     		ldr	r0, [r7, #4]
+ 2123 009a FFF7FEFF 		bl	lwm2m_delayBsRetry
+ 663:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         goto next_step;
+ 2124              		.loc 1 663 0
+ 2125 009e BAE7     		b	.L115
+ 2126              	.L119:
+ 664:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     //break;
+ 665:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 666:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     case STATE_BOOTSTRAP_REQUIRED:
+ 667:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_BOOTSTRAP
+ 668:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (contextP->bootstrapServerList != NULL)
+ 669:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 670:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             bootstrap_start(contextP);
+ 671:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->state = STATE_BOOTSTRAPPING;
+ 672:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             bootstrap_step(contextP, tv_sec, timeoutP);
+ 673:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 674:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 675:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         else
+ 676:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 677:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 678:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             SET_BS_LATER(contextP, STATE_BOOTSTRAP_REQUIRED);
+ 2127              		.loc 1 678 0
+ 2128 00a0 0121     		movs	r1, #1
+ 2129 00a2 7868     		ldr	r0, [r7, #4]
+ 2130 00a4 FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 2131 00a8 7868     		ldr	r0, [r7, #4]
+ 2132 00aa FFF7FEFF 		bl	lwm2m_getBsCtrlStat
+ 2133 00ae 0346     		mov	r3, r0
+ 2134 00b0 1A46     		mov	r2, r3
+ 2135 00b2 7B68     		ldr	r3, [r7, #4]
+ 2136 00b4 1A70     		strb	r2, [r3]
+ 2137 00b6 7868     		ldr	r0, [r7, #4]
+ 2138 00b8 FFF7FEFF 		bl	lwm2m_delayBsRetry
+ 679:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             ret = COAP_503_SERVICE_UNAVAILABLE;
+ 2139              		.loc 1 679 0
+ 2140 00bc A323     		movs	r3, #163
+ 2141 00be FB61     		str	r3, [r7, #28]
+ 680:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 2142              		.loc 1 680 0
+ 2143 00c0 5AE0     		b	.L128
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 50
+
+
+ 2144              	.L120:
+ 681:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 682:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 683:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_BOOTSTRAP
+ 684:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     case STATE_BOOTSTRAPPING:
+ 685:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         switch (bootstrap_getStatus(contextP))
+ 686:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 687:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         case STATE_BS_FINISHED:
+ 688:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->state = STATE_INITIAL;
+ 689:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_setBsCtrlStat(contextP, STATE_INITIAL);
+ 690:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             goto next_step;
+ 691:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 692:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 693:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         case STATE_BS_FAILED:
+ 694:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             SET_BS_LATER(contextP, STATE_BOOTSTRAP_REQUIRED);
+ 695:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             ret = COAP_503_SERVICE_UNAVAILABLE;
+ 696:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 697:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 698:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         default:
+ 699:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             // keep on waiting
+ 700:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             bootstrap_step(contextP, tv_sec, timeoutP);
+ 701:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 702:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 703:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         break;
+ 704:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 705:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     case STATE_REGISTER_REQUIRED:
+ 706:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         result = registration_start(contextP);
+ 2145              		.loc 1 706 0
+ 2146 00c2 7868     		ldr	r0, [r7, #4]
+ 2147 00c4 FFF7FEFF 		bl	registration_start
+ 2148 00c8 0346     		mov	r3, r0
+ 2149 00ca FB60     		str	r3, [r7, #12]
+ 707:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         LOG_ARG("[bootstrap_tag]: ---the return value result = %d of registration_start-----", resu
+ 708:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (COAP_NO_ERROR != result)
+ 2150              		.loc 1 708 0
+ 2151 00cc FB68     		ldr	r3, [r7, #12]
+ 2152 00ce 002B     		cmp	r3, #0
+ 2153 00d0 10D0     		beq	.L129
+ 709:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 710:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             SET_BS_LATER(contextP, STATE_REGISTER_REQUIRED);
+ 2154              		.loc 1 710 0
+ 2155 00d2 0321     		movs	r1, #3
+ 2156 00d4 7868     		ldr	r0, [r7, #4]
+ 2157 00d6 FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 2158 00da 7868     		ldr	r0, [r7, #4]
+ 2159 00dc FFF7FEFF 		bl	lwm2m_getBsCtrlStat
+ 2160 00e0 0346     		mov	r3, r0
+ 2161 00e2 1A46     		mov	r2, r3
+ 2162 00e4 7B68     		ldr	r3, [r7, #4]
+ 2163 00e6 1A70     		strb	r2, [r3]
+ 2164 00e8 7868     		ldr	r0, [r7, #4]
+ 2165 00ea FFF7FEFF 		bl	lwm2m_delayBsRetry
+ 711:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             ret = result;
+ 2166              		.loc 1 711 0
+ 2167 00ee FB68     		ldr	r3, [r7, #12]
+ 2168 00f0 FB61     		str	r3, [r7, #28]
+ 712:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 51
+
+
+ 2169              		.loc 1 712 0
+ 2170 00f2 41E0     		b	.L128
+ 2171              	.L129:
+ 713:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 714:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         contextP->state = STATE_REGISTERING;
+ 2172              		.loc 1 714 0
+ 2173 00f4 7B68     		ldr	r3, [r7, #4]
+ 2174 00f6 0422     		movs	r2, #4
+ 2175 00f8 1A70     		strb	r2, [r3]
+ 715:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         break;
+ 2176              		.loc 1 715 0
+ 2177 00fa 3DE0     		b	.L128
+ 2178              	.L121:
+ 716:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 717:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     case STATE_REGISTERING:
+ 718:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     {
+ 719:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         switch (registration_getStatus(contextP))
+ 2179              		.loc 1 719 0
+ 2180 00fc 7868     		ldr	r0, [r7, #4]
+ 2181 00fe FFF7FEFF 		bl	registration_getStatus
+ 2182 0102 0346     		mov	r3, r0
+ 2183 0104 022B     		cmp	r3, #2
+ 2184 0106 02D0     		beq	.L131
+ 2185 0108 032B     		cmp	r3, #3
+ 2186 010a 0ED0     		beq	.L132
+ 720:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 721:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         case STATE_REGISTERED:
+ 722:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->state = STATE_READY;
+ 723:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_notify_even(MODULE_LWM2M, STATE_REGISTERED, NULL, 0);
+ 724:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_setBsCtrlStat(contextP, STATE_INITIAL);
+ 725:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 726:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 727:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         case STATE_REG_FAILED:
+ 728:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             // TODO avoid infinite loop by checking the bootstrap info is different
+ 729:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             //contextP->state = STATE_BOOTSTRAP_REQUIRED;
+ 730:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 731:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_notify_even(MODULE_LWM2M,STATE_REG_FAILED, NULL, 0);
+ 732:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             SET_BS_LATER(contextP, STATE_REGISTER_REQUIRED);
+ 733:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 734:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 735:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 736:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         case STATE_REG_PENDING:
+ 737:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         default:
+ 738:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             // keep on waiting
+ 739:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 2187              		.loc 1 739 0
+ 2188 010c 22E0     		b	.L133
+ 2189              	.L131:
+ 722:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_notify_even(MODULE_LWM2M, STATE_REGISTERED, NULL, 0);
+ 2190              		.loc 1 722 0
+ 2191 010e 7B68     		ldr	r3, [r7, #4]
+ 2192 0110 0522     		movs	r2, #5
+ 2193 0112 1A70     		strb	r2, [r3]
+ 723:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_setBsCtrlStat(contextP, STATE_INITIAL);
+ 2194              		.loc 1 723 0
+ 2195 0114 0023     		movs	r3, #0
+ 2196 0116 0022     		movs	r2, #0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 52
+
+
+ 2197 0118 0221     		movs	r1, #2
+ 2198 011a 0020     		movs	r0, #0
+ 2199 011c FFF7FEFF 		bl	lwm2m_notify_even
+ 724:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             break;
+ 2200              		.loc 1 724 0
+ 2201 0120 0021     		movs	r1, #0
+ 2202 0122 7868     		ldr	r0, [r7, #4]
+ 2203 0124 FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 725:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 2204              		.loc 1 725 0
+ 2205 0128 14E0     		b	.L133
+ 2206              	.L132:
+ 731:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             SET_BS_LATER(contextP, STATE_REGISTER_REQUIRED);
+ 2207              		.loc 1 731 0
+ 2208 012a 0023     		movs	r3, #0
+ 2209 012c 0022     		movs	r2, #0
+ 2210 012e 0321     		movs	r1, #3
+ 2211 0130 0020     		movs	r0, #0
+ 2212 0132 FFF7FEFF 		bl	lwm2m_notify_even
+ 732:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 2213              		.loc 1 732 0
+ 2214 0136 0321     		movs	r1, #3
+ 2215 0138 7868     		ldr	r0, [r7, #4]
+ 2216 013a FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 2217 013e 7868     		ldr	r0, [r7, #4]
+ 2218 0140 FFF7FEFF 		bl	lwm2m_getBsCtrlStat
+ 2219 0144 0346     		mov	r3, r0
+ 2220 0146 1A46     		mov	r2, r3
+ 2221 0148 7B68     		ldr	r3, [r7, #4]
+ 2222 014a 1A70     		strb	r2, [r3]
+ 2223 014c 7868     		ldr	r0, [r7, #4]
+ 2224 014e FFF7FEFF 		bl	lwm2m_delayBsRetry
+ 734:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 2225              		.loc 1 734 0
+ 2226 0152 00BF     		nop
+ 2227              	.L133:
+ 740:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 741:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 742:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     break;
+ 2228              		.loc 1 742 0
+ 2229 0154 10E0     		b	.L128
+ 2230              	.L122:
+ 743:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 744:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     case STATE_READY:
+ 745:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         if (registration_getStatus(contextP) == STATE_REG_FAILED)
+ 2231              		.loc 1 745 0
+ 2232 0156 7868     		ldr	r0, [r7, #4]
+ 2233 0158 FFF7FEFF 		bl	registration_getStatus
+ 2234 015c 0346     		mov	r3, r0
+ 2235 015e 032B     		cmp	r3, #3
+ 2236 0160 09D1     		bne	.L136
+ 746:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         {
+ 747:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             // TODO avoid infinite loop by checking the bootstrap info is different
+ 748:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             //contextP->state = STATE_BOOTSTRAP_REQUIRED;
+ 749:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             contextP->state = STATE_REGISTER_REQUIRED;
+ 2237              		.loc 1 749 0
+ 2238 0162 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 53
+
+
+ 2239 0164 0322     		movs	r2, #3
+ 2240 0166 1A70     		strb	r2, [r3]
+ 750:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             lwm2m_setBsCtrlStat(contextP, STATE_REGISTER_REQUIRED);
+ 2241              		.loc 1 750 0
+ 2242 0168 0321     		movs	r1, #3
+ 2243 016a 7868     		ldr	r0, [r7, #4]
+ 2244 016c FFF7FEFF 		bl	lwm2m_setBsCtrlStat
+ 751:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             goto next_step;
+ 2245              		.loc 1 751 0
+ 2246 0170 51E7     		b	.L115
+ 2247              	.L135:
+ 752:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****             //            break;
+ 753:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         }
+ 754:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         break;
+ 755:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 756:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     default:
+ 757:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         // do nothing
+ 758:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****         break;
+ 2248              		.loc 1 758 0
+ 2249 0172 00BF     		nop
+ 2250 0174 00E0     		b	.L128
+ 2251              	.L136:
+ 754:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 2252              		.loc 1 754 0
+ 2253 0176 00BF     		nop
+ 2254              	.L128:
+ 759:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     }
+ 760:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 761:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     observe_step(contextP, tv_sec, timeoutP);
+ 2255              		.loc 1 761 0
+ 2256 0178 3B68     		ldr	r3, [r7]
+ 2257 017a 0093     		str	r3, [sp]
+ 2258 017c D7E90423 		ldrd	r2, [r7, #16]
+ 2259 0180 7868     		ldr	r0, [r7, #4]
+ 2260 0182 FFF7FEFF 		bl	observe_step
+ 762:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 763:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 764:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     registration_step(contextP, tv_sec, timeoutP);
+ 2261              		.loc 1 764 0
+ 2262 0186 3B68     		ldr	r3, [r7]
+ 2263 0188 0093     		str	r3, [sp]
+ 2264 018a D7E90423 		ldrd	r2, [r7, #16]
+ 2265 018e 7868     		ldr	r0, [r7, #4]
+ 2266 0190 FFF7FEFF 		bl	registration_step
+ 765:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     transaction_step(contextP, tv_sec, timeoutP);
+ 2267              		.loc 1 765 0
+ 2268 0194 3B68     		ldr	r3, [r7]
+ 2269 0196 0093     		str	r3, [sp]
+ 2270 0198 D7E90423 		ldrd	r2, [r7, #16]
+ 2271 019c 7868     		ldr	r0, [r7, #4]
+ 2272 019e FFF7FEFF 		bl	transaction_step
+ 766:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** 
+ 767:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG_ARG("Final timeoutP: %" PRId64, *timeoutP);
+ 768:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #ifdef LWM2M_CLIENT_MODE
+ 769:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     LOG_ARG("Final state: %s", STR_STATE(contextP->state));
+ 770:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** #endif
+ 771:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c ****     return ret;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 54
+
+
+ 2273              		.loc 1 771 0
+ 2274 01a2 FB69     		ldr	r3, [r7, #28]
+ 2275              	.L124:
+ 772:D:/iot/felix2/components/connectivity/lwm2m/core\liblwm2m.c **** }
+ 2276              		.loc 1 772 0
+ 2277 01a4 1846     		mov	r0, r3
+ 2278 01a6 2037     		adds	r7, r7, #32
+ 2279              	.LCFI123:
+ 2280              		.cfi_def_cfa_offset 8
+ 2281 01a8 BD46     		mov	sp, r7
+ 2282              	.LCFI124:
+ 2283              		.cfi_def_cfa_register 13
+ 2284              		@ sp needed
+ 2285 01aa 80BD     		pop	{r7, pc}
+ 2286              		.cfi_endproc
+ 2287              	.LFE157:
+ 2289              		.text
+ 2290              	.Letext0:
+ 2291              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 2292              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 2293              		.file 4 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m_api.h"
+ 2294              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 2295              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 2296              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 2297              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 2298              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_timeval.h"
+ 2299              		.file 10 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 2300              		.file 11 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 2301              		.file 12 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 2302              		.file 13 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 2303              		.file 14 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 2304              		.file 15 "D:/iot/felix2/kernel/include/los_list.h"
+ 2305              		.file 16 "D:/iot/felix2/kernel/include/los_err.h"
+ 2306              		.file 17 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 2307              		.file 18 "D:/iot/felix2/kernel/include/los_tick.h"
+ 2308              		.file 19 "D:/iot/felix2/kernel/include/los_event.h"
+ 2309              		.file 20 "D:/iot/felix2/kernel/include/los_task.h"
+ 2310              		.file 21 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 2311              		.file 22 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 2312              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 2313              		.file 24 "D:/iot/felix2/kernel/include/los_config.h"
+ 2314              		.file 25 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 2315              		.file 26 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 2316              		.file 27 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 2317              		.file 28 "D:/iot/felix2/components/connectivity/agent_tiny/atiny_lwm2m/connection.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 55
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 liblwm2m.c
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:18     .text.lwm2m_init:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:25     .text.lwm2m_init:00000000 lwm2m_init
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:84     .bss.event_handler:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:87     .bss.event_handler:00000000 event_handler
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:90     .text.lwm2m_register_event_handler:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:97     .text.lwm2m_register_event_handler:00000000 lwm2m_register_event_handler
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:136    .text.lwm2m_register_event_handler:0000001c $d
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:141    .text.lwm2m_notify_even:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:148    .text.lwm2m_notify_even:00000000 lwm2m_notify_even
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:199    .text.lwm2m_notify_even:00000030 $d
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:204    .text.lwm2m_deregister:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:211    .text.lwm2m_deregister:00000000 lwm2m_deregister
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:263    .text.prv_deleteServer:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:269    .text.prv_deleteServer:00000000 prv_deleteServer
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:333    .text.prv_deleteServerList:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:339    .text.prv_deleteServerList:00000000 prv_deleteServerList
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:397    .text.prv_deleteObservedList:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:403    .text.prv_deleteObservedList:00000000 prv_deleteObservedList
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:507    .text.prv_deleteTransactionList:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:514    .text.prv_deleteTransactionList:00000000 prv_deleteTransactionList
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:583    .text.lwm2m_close:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:590    .text.lwm2m_close:00000000 lwm2m_close
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:664    .text.prv_isBoostrpEnable:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:670    .text.prv_isBoostrpEnable:00000000 prv_isBoostrpEnable
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:708    .text.lwm2m_isBsCtrlInServerInitiatedBs:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:715    .text.lwm2m_isBsCtrlInServerInitiatedBs:00000000 lwm2m_isBsCtrlInServerInitiatedBs
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:771    .text.lwm2m_initBsCtrlStat:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:778    .text.lwm2m_initBsCtrlStat:00000000 lwm2m_initBsCtrlStat
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:827    .text.lwm2m_setBsCtrlStatWithoutCheck:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:833    .text.lwm2m_setBsCtrlStatWithoutCheck:00000000 lwm2m_setBsCtrlStatWithoutCheck
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:938    .text.lwm2m_setBsCtrlStat:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:945    .text.lwm2m_setBsCtrlStat:00000000 lwm2m_setBsCtrlStat
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1088   .text.lwm2m_delayBsRetry:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1094   .text.lwm2m_delayBsRetry:00000000 lwm2m_delayBsRetry
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1178   .text.lwm2m_getBsCtrlStat:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1185   .text.lwm2m_getBsCtrlStat:00000000 lwm2m_getBsCtrlStat
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1224   .text.prv_refreshServerList:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1230   .text.prv_refreshServerList:00000000 prv_refreshServerList
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1375   .text.lwm2m_configure:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1382   .text.lwm2m_configure:00000000 lwm2m_configure
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1657   .text.lwm2m_add_object:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1664   .text.lwm2m_add_object:00000000 lwm2m_add_object
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1743   .text.lwm2m_remove_object:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1750   .text.lwm2m_remove_object:00000000 lwm2m_remove_object
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1818   .text.lwm2m_reset_register:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1824   .text.lwm2m_reset_register:00000000 lwm2m_reset_register
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1876   .text.lwm2m_reconnect:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1883   .text.lwm2m_reconnect:00000000 lwm2m_reconnect
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1952   .text.lwm2m_initBootStrap:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:1959   .text.lwm2m_initBootStrap:00000000 lwm2m_initBootStrap
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:2018   .text.lwm2m_step:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:2025   .text.lwm2m_step:00000000 lwm2m_step
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:2060   .text.lwm2m_step:00000028 $d
+C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s:2066   .text.lwm2m_step:00000040 $t
+
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccU7Z1rk.s 			page 56
+
+
+UNDEFINED SYMBOLS
+lwm2m_malloc
+memset
+lwm2m_rand
+registration_deregister
+lwm2m_close_connection
+lwm2m_free
+free_block1_buffer
+atiny_mutex_lock
+lwm2m_list_free
+atiny_mutex_unlock
+transaction_free
+lwm2m_delay
+lwm2m_list_add
+object_getServers
+utils_isAltPathValid
+lwm2m_strdup
+lwm2m_list_find
+lwm2m_update_registration
+lwm2m_list_remove
+registration_reset
+lwm2m_gettime
+registration_start
+registration_getStatus
+observe_step
+registration_step
+transaction_step

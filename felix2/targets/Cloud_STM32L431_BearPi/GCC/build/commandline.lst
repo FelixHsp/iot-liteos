@@ -1,0 +1,3841 @@
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"commandline.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.prv_find_command,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	prv_find_command:
+  25              	.LFB134:
+  26              		.file 1 "D:/iot/felix2/components/connectivity/lwm2m/examples/shared/commandline.c"
+   1:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** /*----------------------------------------------------------------------------
+   2:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Copyright (c) <2016-2018>, <Huawei Technologies Co., Ltd>
+   3:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * All rights reserved.
+   4:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Redistribution and use in source and binary forms, with or without modification,
+   5:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * are permitted provided that the following conditions are met:
+   6:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * 1. Redistributions of source code must retain the above copyright notice, this list of
+   7:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * conditions and the following disclaimer.
+   8:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * 2. Redistributions in binary form must reproduce the above copyright notice, this list
+   9:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * of conditions and the following disclaimer in the documentation and/or other materials
+  10:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * provided with the distribution.
+  11:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * 3. Neither the name of the copyright holder nor the names of its contributors may be used
+  12:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * to endorse or promote products derived from this software without specific prior written
+  13:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * permission.
+  14:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  15:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+  16:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  17:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+  18:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+  19:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  20:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  21:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+  22:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+  23:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  24:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  25:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *---------------------------------------------------------------------------*/
+  26:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** /*----------------------------------------------------------------------------
+  27:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Notice of Export Control Law
+  28:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * ===============================================
+  29:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Huawei LiteOS may be subject to applicable export control laws and regulations, which might
+  30:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * include those applicable to Huawei LiteOS of U.S. and the country in which you are located.
+  31:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Import, export and usage of Huawei LiteOS in any manner by you shall be in compliance with such
+  32:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * applicable export control laws and regulations.
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 2
+
+
+  33:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *---------------------------------------------------------------------------*/
+  34:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  35:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** /*******************************************************************************
+  36:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *
+  37:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Copyright (c) 2013, 2014, 2015 Intel Corporation and others.
+  38:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * All rights reserved. This program and the accompanying materials
+  39:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * are made available under the terms of the Eclipse Public License v1.0
+  40:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * and Eclipse Distribution License v1.0 which accompany this distribution.
+  41:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *
+  42:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * The Eclipse Public License is available at
+  43:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *    http://www.eclipse.org/legal/epl-v10.html
+  44:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * The Eclipse Distribution License is available at
+  45:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *    http://www.eclipse.org/org/documents/edl-v10.php.
+  46:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *
+  47:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Contributors:
+  48:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *    David Navarro, Intel Corporation - initial API and implementation
+  49:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *    Fabien Fleutot - Please refer to git log
+  50:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *
+  51:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  *******************************************************************************/
+  52:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  53:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include <string.h>
+  54:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include <stdlib.h>
+  55:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include <stdio.h>
+  56:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include <ctype.h>
+  57:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include <inttypes.h>
+  58:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include "liblwm2m.h"
+  59:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include "internals.h"
+  60:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #include "commandline.h"
+  61:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  62:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #define HELP_COMMAND "help"
+  63:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #define HELP_DESC    "Type '"HELP_COMMAND" [COMMAND]' for more details on a command."
+  64:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #define UNKNOWN_CMD_MSG "Unknown command. Type '"HELP_COMMAND"' for help."
+  65:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  66:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static command_desc_t *prv_find_command(command_desc_t *commandArray,
+  67:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                                         char *buffer,
+  68:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                                         size_t length)
+  69:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+  27              		.loc 1 69 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 24
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 86B0     		sub	sp, sp, #24
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 32
+  39 0004 00AF     		add	r7, sp, #0
+  40              	.LCFI2:
+  41              		.cfi_def_cfa_register 7
+  42 0006 F860     		str	r0, [r7, #12]
+  43 0008 B960     		str	r1, [r7, #8]
+  44 000a 7A60     		str	r2, [r7, #4]
+  70:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int i;
+  71:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 3
+
+
+  72:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (length == 0) return NULL;
+  45              		.loc 1 72 0
+  46 000c 7B68     		ldr	r3, [r7, #4]
+  47 000e 002B     		cmp	r3, #0
+  48 0010 01D1     		bne	.L2
+  49              		.loc 1 72 0 is_stmt 0 discriminator 1
+  50 0012 0023     		movs	r3, #0
+  51 0014 46E0     		b	.L3
+  52              	.L2:
+  73:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  74:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     i = 0;
+  53              		.loc 1 74 0 is_stmt 1
+  54 0016 0023     		movs	r3, #0
+  55 0018 7B61     		str	r3, [r7, #20]
+  75:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (commandArray[i].name != NULL
+  56              		.loc 1 75 0
+  57 001a 02E0     		b	.L4
+  58              	.L6:
+  76:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             && (strlen(commandArray[i].name) != length || strncmp(buffer, commandArray[i].name, len
+  77:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+  78:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         i++;
+  59              		.loc 1 78 0
+  60 001c 7B69     		ldr	r3, [r7, #20]
+  61 001e 0133     		adds	r3, r3, #1
+  62 0020 7B61     		str	r3, [r7, #20]
+  63              	.L4:
+  75:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (commandArray[i].name != NULL
+  64              		.loc 1 75 0
+  65 0022 7A69     		ldr	r2, [r7, #20]
+  66 0024 1346     		mov	r3, r2
+  67 0026 9B00     		lsls	r3, r3, #2
+  68 0028 1344     		add	r3, r3, r2
+  69 002a 9B00     		lsls	r3, r3, #2
+  70 002c 1A46     		mov	r2, r3
+  71 002e FB68     		ldr	r3, [r7, #12]
+  72 0030 1344     		add	r3, r3, r2
+  73 0032 1B68     		ldr	r3, [r3]
+  74 0034 002B     		cmp	r3, #0
+  75 0036 20D0     		beq	.L5
+  76:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             && (strlen(commandArray[i].name) != length || strncmp(buffer, commandArray[i].name, len
+  76              		.loc 1 76 0
+  77 0038 7A69     		ldr	r2, [r7, #20]
+  78 003a 1346     		mov	r3, r2
+  79 003c 9B00     		lsls	r3, r3, #2
+  80 003e 1344     		add	r3, r3, r2
+  81 0040 9B00     		lsls	r3, r3, #2
+  82 0042 1A46     		mov	r2, r3
+  83 0044 FB68     		ldr	r3, [r7, #12]
+  84 0046 1344     		add	r3, r3, r2
+  85 0048 1B68     		ldr	r3, [r3]
+  86 004a 1846     		mov	r0, r3
+  87 004c FFF7FEFF 		bl	strlen
+  88 0050 0246     		mov	r2, r0
+  89 0052 7B68     		ldr	r3, [r7, #4]
+  90 0054 9342     		cmp	r3, r2
+  91 0056 E1D1     		bne	.L6
+  76:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             && (strlen(commandArray[i].name) != length || strncmp(buffer, commandArray[i].name, len
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 4
+
+
+  92              		.loc 1 76 0 is_stmt 0 discriminator 1
+  93 0058 7A69     		ldr	r2, [r7, #20]
+  94 005a 1346     		mov	r3, r2
+  95 005c 9B00     		lsls	r3, r3, #2
+  96 005e 1344     		add	r3, r3, r2
+  97 0060 9B00     		lsls	r3, r3, #2
+  98 0062 1A46     		mov	r2, r3
+  99 0064 FB68     		ldr	r3, [r7, #12]
+ 100 0066 1344     		add	r3, r3, r2
+ 101 0068 1B68     		ldr	r3, [r3]
+ 102 006a 7A68     		ldr	r2, [r7, #4]
+ 103 006c 1946     		mov	r1, r3
+ 104 006e B868     		ldr	r0, [r7, #8]
+ 105 0070 FFF7FEFF 		bl	strncmp
+ 106 0074 0346     		mov	r3, r0
+ 107 0076 002B     		cmp	r3, #0
+ 108 0078 D0D1     		bne	.L6
+ 109              	.L5:
+  79:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+  80:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  81:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (commandArray[i].name == NULL)
+ 110              		.loc 1 81 0 is_stmt 1
+ 111 007a 7A69     		ldr	r2, [r7, #20]
+ 112 007c 1346     		mov	r3, r2
+ 113 007e 9B00     		lsls	r3, r3, #2
+ 114 0080 1344     		add	r3, r3, r2
+ 115 0082 9B00     		lsls	r3, r3, #2
+ 116 0084 1A46     		mov	r2, r3
+ 117 0086 FB68     		ldr	r3, [r7, #12]
+ 118 0088 1344     		add	r3, r3, r2
+ 119 008a 1B68     		ldr	r3, [r3]
+ 120 008c 002B     		cmp	r3, #0
+ 121 008e 01D1     		bne	.L7
+  82:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+  83:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return NULL;
+ 122              		.loc 1 83 0
+ 123 0090 0023     		movs	r3, #0
+ 124 0092 07E0     		b	.L3
+ 125              	.L7:
+  84:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+  85:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     else
+  86:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+  87:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return &commandArray[i];
+ 126              		.loc 1 87 0
+ 127 0094 7A69     		ldr	r2, [r7, #20]
+ 128 0096 1346     		mov	r3, r2
+ 129 0098 9B00     		lsls	r3, r3, #2
+ 130 009a 1344     		add	r3, r3, r2
+ 131 009c 9B00     		lsls	r3, r3, #2
+ 132 009e 1A46     		mov	r2, r3
+ 133 00a0 FB68     		ldr	r3, [r7, #12]
+ 134 00a2 1344     		add	r3, r3, r2
+ 135              	.L3:
+  88:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+  89:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 136              		.loc 1 89 0
+ 137 00a4 1846     		mov	r0, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 5
+
+
+ 138 00a6 1837     		adds	r7, r7, #24
+ 139              	.LCFI3:
+ 140              		.cfi_def_cfa_offset 8
+ 141 00a8 BD46     		mov	sp, r7
+ 142              	.LCFI4:
+ 143              		.cfi_def_cfa_register 13
+ 144              		@ sp needed
+ 145 00aa 80BD     		pop	{r7, pc}
+ 146              		.cfi_endproc
+ 147              	.LFE134:
+ 149              		.section	.rodata
+ 150              		.align	2
+ 151              	.LC0:
+ 152 0000 68656C70 		.ascii	"help\011Type 'help [COMMAND]' for more details on a"
+ 152      09547970 
+ 152      65202768 
+ 152      656C7020 
+ 152      5B434F4D 
+ 153 0030 20636F6D 		.ascii	" command.\015\012\000"
+ 153      6D616E64 
+ 153      2E0D0A00 
+ 154              		.align	2
+ 155              	.LC1:
+ 156 003c 25730925 		.ascii	"%s\011%s\015\012\000"
+ 156      730D0A00 
+ 157              		.align	2
+ 158              	.LC2:
+ 159 0044 25730D0A 		.ascii	"%s\015\012\000"
+ 159      00
+ 160              		.section	.text.prv_displayHelp,"ax",%progbits
+ 161              		.align	1
+ 162              		.syntax unified
+ 163              		.thumb
+ 164              		.thumb_func
+ 165              		.fpu fpv4-sp-d16
+ 167              	prv_displayHelp:
+ 168              	.LFB135:
+  90:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  91:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static void prv_displayHelp(command_desc_t *commandArray,
+  92:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                             char *buffer)
+  93:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 169              		.loc 1 93 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 24
+ 172              		@ frame_needed = 1, uses_anonymous_args = 0
+ 173 0000 80B5     		push	{r7, lr}
+ 174              	.LCFI5:
+ 175              		.cfi_def_cfa_offset 8
+ 176              		.cfi_offset 7, -8
+ 177              		.cfi_offset 14, -4
+ 178 0002 86B0     		sub	sp, sp, #24
+ 179              	.LCFI6:
+ 180              		.cfi_def_cfa_offset 32
+ 181 0004 00AF     		add	r7, sp, #0
+ 182              	.LCFI7:
+ 183              		.cfi_def_cfa_register 7
+ 184 0006 7860     		str	r0, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 6
+
+
+ 185 0008 3960     		str	r1, [r7]
+  94:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     command_desc_t *cmdP;
+  95:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int length;
+  96:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+  97:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     // find end of first argument
+  98:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     length = 0;
+ 186              		.loc 1 98 0
+ 187 000a 0023     		movs	r3, #0
+ 188 000c 7B61     		str	r3, [r7, #20]
+  99:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[length] != 0 && !isspace(buffer[length] & 0xff))
+ 189              		.loc 1 99 0
+ 190 000e 02E0     		b	.L9
+ 191              	.L11:
+ 100:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         length++;
+ 192              		.loc 1 100 0
+ 193 0010 7B69     		ldr	r3, [r7, #20]
+ 194 0012 0133     		adds	r3, r3, #1
+ 195 0014 7B61     		str	r3, [r7, #20]
+ 196              	.L9:
+  99:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[length] != 0 && !isspace(buffer[length] & 0xff))
+ 197              		.loc 1 99 0
+ 198 0016 7B69     		ldr	r3, [r7, #20]
+ 199 0018 3A68     		ldr	r2, [r7]
+ 200 001a 1344     		add	r3, r3, r2
+ 201 001c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 202 001e 002B     		cmp	r3, #0
+ 203 0020 0DD0     		beq	.L10
+  99:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[length] != 0 && !isspace(buffer[length] & 0xff))
+ 204              		.loc 1 99 0 is_stmt 0 discriminator 1
+ 205 0022 FFF7FEFF 		bl	__locale_ctype_ptr
+ 206 0026 0146     		mov	r1, r0
+ 207 0028 7B69     		ldr	r3, [r7, #20]
+ 208 002a 3A68     		ldr	r2, [r7]
+ 209 002c 1344     		add	r3, r3, r2
+ 210 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 211 0030 0133     		adds	r3, r3, #1
+ 212 0032 0B44     		add	r3, r3, r1
+ 213 0034 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 214 0036 03F00803 		and	r3, r3, #8
+ 215 003a 002B     		cmp	r3, #0
+ 216 003c E8D0     		beq	.L11
+ 217              	.L10:
+ 101:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 102:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     cmdP = prv_find_command(commandArray, buffer, length);
+ 218              		.loc 1 102 0 is_stmt 1
+ 219 003e 7B69     		ldr	r3, [r7, #20]
+ 220 0040 1A46     		mov	r2, r3
+ 221 0042 3968     		ldr	r1, [r7]
+ 222 0044 7868     		ldr	r0, [r7, #4]
+ 223 0046 FFF7FEFF 		bl	prv_find_command
+ 224 004a F860     		str	r0, [r7, #12]
+ 103:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 104:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (cmdP == NULL)
+ 225              		.loc 1 104 0
+ 226 004c FB68     		ldr	r3, [r7, #12]
+ 227 004e 002B     		cmp	r3, #0
+ 228 0050 32D1     		bne	.L12
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 7
+
+
+ 229              	.LBB2:
+ 105:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 106:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         int i;
+ 107:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 108:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stdout, HELP_COMMAND"\t"HELP_DESC"\r\n");
+ 230              		.loc 1 108 0
+ 231 0052 234B     		ldr	r3, .L19
+ 232 0054 1B68     		ldr	r3, [r3]
+ 233 0056 9B68     		ldr	r3, [r3, #8]
+ 234 0058 3B22     		movs	r2, #59
+ 235 005a 0121     		movs	r1, #1
+ 236 005c 2148     		ldr	r0, .L19+4
+ 237 005e FFF7FEFF 		bl	fwrite
+ 109:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 110:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; commandArray[i].name != NULL ; i++)
+ 238              		.loc 1 110 0
+ 239 0062 0023     		movs	r3, #0
+ 240 0064 3B61     		str	r3, [r7, #16]
+ 241 0066 1BE0     		b	.L13
+ 242              	.L14:
+ 111:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 112:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stdout, "%s\t%s\r\n", commandArray[i].name, commandArray[i].shortDesc);
+ 243              		.loc 1 112 0 discriminator 3
+ 244 0068 1D4B     		ldr	r3, .L19
+ 245 006a 1B68     		ldr	r3, [r3]
+ 246 006c 9868     		ldr	r0, [r3, #8]
+ 247 006e 3A69     		ldr	r2, [r7, #16]
+ 248 0070 1346     		mov	r3, r2
+ 249 0072 9B00     		lsls	r3, r3, #2
+ 250 0074 1344     		add	r3, r3, r2
+ 251 0076 9B00     		lsls	r3, r3, #2
+ 252 0078 1A46     		mov	r2, r3
+ 253 007a 7B68     		ldr	r3, [r7, #4]
+ 254 007c 1344     		add	r3, r3, r2
+ 255 007e 1968     		ldr	r1, [r3]
+ 256 0080 3A69     		ldr	r2, [r7, #16]
+ 257 0082 1346     		mov	r3, r2
+ 258 0084 9B00     		lsls	r3, r3, #2
+ 259 0086 1344     		add	r3, r3, r2
+ 260 0088 9B00     		lsls	r3, r3, #2
+ 261 008a 1A46     		mov	r2, r3
+ 262 008c 7B68     		ldr	r3, [r7, #4]
+ 263 008e 1344     		add	r3, r3, r2
+ 264 0090 5B68     		ldr	r3, [r3, #4]
+ 265 0092 0A46     		mov	r2, r1
+ 266 0094 1449     		ldr	r1, .L19+8
+ 267 0096 FFF7FEFF 		bl	fprintf
+ 110:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 268              		.loc 1 110 0 discriminator 3
+ 269 009a 3B69     		ldr	r3, [r7, #16]
+ 270 009c 0133     		adds	r3, r3, #1
+ 271 009e 3B61     		str	r3, [r7, #16]
+ 272              	.L13:
+ 110:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 273              		.loc 1 110 0 is_stmt 0 discriminator 1
+ 274 00a0 3A69     		ldr	r2, [r7, #16]
+ 275 00a2 1346     		mov	r3, r2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 8
+
+
+ 276 00a4 9B00     		lsls	r3, r3, #2
+ 277 00a6 1344     		add	r3, r3, r2
+ 278 00a8 9B00     		lsls	r3, r3, #2
+ 279 00aa 1A46     		mov	r2, r3
+ 280 00ac 7B68     		ldr	r3, [r7, #4]
+ 281 00ae 1344     		add	r3, r3, r2
+ 282 00b0 1B68     		ldr	r3, [r3]
+ 283 00b2 002B     		cmp	r3, #0
+ 284 00b4 D8D1     		bne	.L14
+ 285              	.LBE2:
+ 113:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 114:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 115:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     else
+ 116:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 117:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stdout, "%s\r\n", cmdP->longDesc ? cmdP->longDesc : cmdP->shortDesc);
+ 118:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 119:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 286              		.loc 1 119 0 is_stmt 1
+ 287 00b6 0FE0     		b	.L18
+ 288              	.L12:
+ 117:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 289              		.loc 1 117 0
+ 290 00b8 094B     		ldr	r3, .L19
+ 291 00ba 1B68     		ldr	r3, [r3]
+ 292 00bc 9868     		ldr	r0, [r3, #8]
+ 293 00be FB68     		ldr	r3, [r7, #12]
+ 294 00c0 9B68     		ldr	r3, [r3, #8]
+ 295 00c2 002B     		cmp	r3, #0
+ 296 00c4 02D0     		beq	.L16
+ 117:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 297              		.loc 1 117 0 is_stmt 0 discriminator 1
+ 298 00c6 FB68     		ldr	r3, [r7, #12]
+ 299 00c8 9B68     		ldr	r3, [r3, #8]
+ 300 00ca 01E0     		b	.L17
+ 301              	.L16:
+ 117:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 302              		.loc 1 117 0 discriminator 2
+ 303 00cc FB68     		ldr	r3, [r7, #12]
+ 304 00ce 5B68     		ldr	r3, [r3, #4]
+ 305              	.L17:
+ 117:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 306              		.loc 1 117 0 discriminator 4
+ 307 00d0 1A46     		mov	r2, r3
+ 308 00d2 0649     		ldr	r1, .L19+12
+ 309 00d4 FFF7FEFF 		bl	fprintf
+ 310              	.L18:
+ 311              		.loc 1 119 0 is_stmt 1
+ 312 00d8 00BF     		nop
+ 313 00da 1837     		adds	r7, r7, #24
+ 314              	.LCFI8:
+ 315              		.cfi_def_cfa_offset 8
+ 316 00dc BD46     		mov	sp, r7
+ 317              	.LCFI9:
+ 318              		.cfi_def_cfa_register 13
+ 319              		@ sp needed
+ 320 00de 80BD     		pop	{r7, pc}
+ 321              	.L20:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 9
+
+
+ 322              		.align	2
+ 323              	.L19:
+ 324 00e0 00000000 		.word	_impure_ptr
+ 325 00e4 00000000 		.word	.LC0
+ 326 00e8 3C000000 		.word	.LC1
+ 327 00ec 44000000 		.word	.LC2
+ 328              		.cfi_endproc
+ 329              	.LFE135:
+ 331              		.section	.rodata
+ 332 0049 000000   		.align	2
+ 333              	.LC3:
+ 334 004c 68656C70 		.ascii	"help\000"
+ 334      00
+ 335 0051 000000   		.align	2
+ 336              	.LC4:
+ 337 0054 556E6B6E 		.ascii	"Unknown command. Type 'help' for help.\015\012\000"
+ 337      6F776E20 
+ 337      636F6D6D 
+ 337      616E642E 
+ 337      20547970 
+ 338              		.section	.text.handle_command,"ax",%progbits
+ 339              		.align	1
+ 340              		.global	handle_command
+ 341              		.syntax unified
+ 342              		.thumb
+ 343              		.thumb_func
+ 344              		.fpu fpv4-sp-d16
+ 346              	handle_command:
+ 347              	.LFB136:
+ 120:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 121:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 122:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void handle_command(command_desc_t *commandArray,
+ 123:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                     char *buffer)
+ 124:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 348              		.loc 1 124 0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 16
+ 351              		@ frame_needed = 1, uses_anonymous_args = 0
+ 352 0000 80B5     		push	{r7, lr}
+ 353              	.LCFI10:
+ 354              		.cfi_def_cfa_offset 8
+ 355              		.cfi_offset 7, -8
+ 356              		.cfi_offset 14, -4
+ 357 0002 84B0     		sub	sp, sp, #16
+ 358              	.LCFI11:
+ 359              		.cfi_def_cfa_offset 24
+ 360 0004 00AF     		add	r7, sp, #0
+ 361              	.LCFI12:
+ 362              		.cfi_def_cfa_register 7
+ 363 0006 7860     		str	r0, [r7, #4]
+ 364 0008 3960     		str	r1, [r7]
+ 125:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     command_desc_t *cmdP;
+ 126:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int length;
+ 127:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 128:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     // find end of command name
+ 129:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     length = 0;
+ 365              		.loc 1 129 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 10
+
+
+ 366 000a 0023     		movs	r3, #0
+ 367 000c FB60     		str	r3, [r7, #12]
+ 130:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[length] != 0 && !isspace(buffer[length] & 0xFF))
+ 368              		.loc 1 130 0
+ 369 000e 02E0     		b	.L22
+ 370              	.L24:
+ 131:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         length++;
+ 371              		.loc 1 131 0
+ 372 0010 FB68     		ldr	r3, [r7, #12]
+ 373 0012 0133     		adds	r3, r3, #1
+ 374 0014 FB60     		str	r3, [r7, #12]
+ 375              	.L22:
+ 130:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[length] != 0 && !isspace(buffer[length] & 0xFF))
+ 376              		.loc 1 130 0
+ 377 0016 FB68     		ldr	r3, [r7, #12]
+ 378 0018 3A68     		ldr	r2, [r7]
+ 379 001a 1344     		add	r3, r3, r2
+ 380 001c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 381 001e 002B     		cmp	r3, #0
+ 382 0020 0DD0     		beq	.L23
+ 130:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[length] != 0 && !isspace(buffer[length] & 0xFF))
+ 383              		.loc 1 130 0 is_stmt 0 discriminator 1
+ 384 0022 FFF7FEFF 		bl	__locale_ctype_ptr
+ 385 0026 0146     		mov	r1, r0
+ 386 0028 FB68     		ldr	r3, [r7, #12]
+ 387 002a 3A68     		ldr	r2, [r7]
+ 388 002c 1344     		add	r3, r3, r2
+ 389 002e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 390 0030 0133     		adds	r3, r3, #1
+ 391 0032 0B44     		add	r3, r3, r1
+ 392 0034 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 393 0036 03F00803 		and	r3, r3, #8
+ 394 003a 002B     		cmp	r3, #0
+ 395 003c E8D0     		beq	.L24
+ 396              	.L23:
+ 132:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 133:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     cmdP = prv_find_command(commandArray, buffer, length);
+ 397              		.loc 1 133 0 is_stmt 1
+ 398 003e FB68     		ldr	r3, [r7, #12]
+ 399 0040 1A46     		mov	r2, r3
+ 400 0042 3968     		ldr	r1, [r7]
+ 401 0044 7868     		ldr	r0, [r7, #4]
+ 402 0046 FFF7FEFF 		bl	prv_find_command
+ 403 004a B860     		str	r0, [r7, #8]
+ 134:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (cmdP != NULL)
+ 404              		.loc 1 134 0
+ 405 004c BB68     		ldr	r3, [r7, #8]
+ 406 004e 002B     		cmp	r3, #0
+ 407 0050 21D0     		beq	.L25
+ 135:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 136:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         while (buffer[length] != 0 && isspace(buffer[length] & 0xFF))
+ 408              		.loc 1 136 0
+ 409 0052 02E0     		b	.L26
+ 410              	.L28:
+ 137:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             length++;
+ 411              		.loc 1 137 0
+ 412 0054 FB68     		ldr	r3, [r7, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 11
+
+
+ 413 0056 0133     		adds	r3, r3, #1
+ 414 0058 FB60     		str	r3, [r7, #12]
+ 415              	.L26:
+ 136:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             length++;
+ 416              		.loc 1 136 0
+ 417 005a FB68     		ldr	r3, [r7, #12]
+ 418 005c 3A68     		ldr	r2, [r7]
+ 419 005e 1344     		add	r3, r3, r2
+ 420 0060 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 421 0062 002B     		cmp	r3, #0
+ 422 0064 0DD0     		beq	.L27
+ 136:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             length++;
+ 423              		.loc 1 136 0 is_stmt 0 discriminator 1
+ 424 0066 FFF7FEFF 		bl	__locale_ctype_ptr
+ 425 006a 0146     		mov	r1, r0
+ 426 006c FB68     		ldr	r3, [r7, #12]
+ 427 006e 3A68     		ldr	r2, [r7]
+ 428 0070 1344     		add	r3, r3, r2
+ 429 0072 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 430 0074 0133     		adds	r3, r3, #1
+ 431 0076 0B44     		add	r3, r3, r1
+ 432 0078 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 433 007a 03F00803 		and	r3, r3, #8
+ 434 007e 002B     		cmp	r3, #0
+ 435 0080 E8D1     		bne	.L28
+ 436              	.L27:
+ 138:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         cmdP->callback(buffer + length, cmdP->userData);
+ 437              		.loc 1 138 0 is_stmt 1
+ 438 0082 BB68     		ldr	r3, [r7, #8]
+ 439 0084 DB68     		ldr	r3, [r3, #12]
+ 440 0086 FA68     		ldr	r2, [r7, #12]
+ 441 0088 3968     		ldr	r1, [r7]
+ 442 008a 8818     		adds	r0, r1, r2
+ 443 008c BA68     		ldr	r2, [r7, #8]
+ 444 008e 1269     		ldr	r2, [r2, #16]
+ 445 0090 1146     		mov	r1, r2
+ 446 0092 9847     		blx	r3
+ 447              	.LVL0:
+ 139:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 140:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     else
+ 141:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 142:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         if (!strncmp(buffer, HELP_COMMAND, length))
+ 143:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 144:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             while (buffer[length] != 0 && isspace(buffer[length] & 0xFF))
+ 145:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 length++;
+ 146:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             prv_displayHelp(commandArray, buffer + length);
+ 147:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 148:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         else
+ 149:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 150:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stdout, UNKNOWN_CMD_MSG"\r\n");
+ 151:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 152:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 153:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 448              		.loc 1 153 0
+ 449 0094 30E0     		b	.L34
+ 450              	.L25:
+ 142:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 12
+
+
+ 451              		.loc 1 142 0
+ 452 0096 FB68     		ldr	r3, [r7, #12]
+ 453 0098 1A46     		mov	r2, r3
+ 454 009a 1949     		ldr	r1, .L35
+ 455 009c 3868     		ldr	r0, [r7]
+ 456 009e FFF7FEFF 		bl	strncmp
+ 457 00a2 0346     		mov	r3, r0
+ 458 00a4 002B     		cmp	r3, #0
+ 459 00a6 1FD1     		bne	.L30
+ 144:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 length++;
+ 460              		.loc 1 144 0
+ 461 00a8 02E0     		b	.L31
+ 462              	.L33:
+ 145:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             prv_displayHelp(commandArray, buffer + length);
+ 463              		.loc 1 145 0
+ 464 00aa FB68     		ldr	r3, [r7, #12]
+ 465 00ac 0133     		adds	r3, r3, #1
+ 466 00ae FB60     		str	r3, [r7, #12]
+ 467              	.L31:
+ 144:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 length++;
+ 468              		.loc 1 144 0
+ 469 00b0 FB68     		ldr	r3, [r7, #12]
+ 470 00b2 3A68     		ldr	r2, [r7]
+ 471 00b4 1344     		add	r3, r3, r2
+ 472 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 473 00b8 002B     		cmp	r3, #0
+ 474 00ba 0DD0     		beq	.L32
+ 144:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 length++;
+ 475              		.loc 1 144 0 is_stmt 0 discriminator 1
+ 476 00bc FFF7FEFF 		bl	__locale_ctype_ptr
+ 477 00c0 0146     		mov	r1, r0
+ 478 00c2 FB68     		ldr	r3, [r7, #12]
+ 479 00c4 3A68     		ldr	r2, [r7]
+ 480 00c6 1344     		add	r3, r3, r2
+ 481 00c8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 482 00ca 0133     		adds	r3, r3, #1
+ 483 00cc 0B44     		add	r3, r3, r1
+ 484 00ce 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 485 00d0 03F00803 		and	r3, r3, #8
+ 486 00d4 002B     		cmp	r3, #0
+ 487 00d6 E8D1     		bne	.L33
+ 488              	.L32:
+ 146:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 489              		.loc 1 146 0 is_stmt 1
+ 490 00d8 FB68     		ldr	r3, [r7, #12]
+ 491 00da 3A68     		ldr	r2, [r7]
+ 492 00dc 1344     		add	r3, r3, r2
+ 493 00de 1946     		mov	r1, r3
+ 494 00e0 7868     		ldr	r0, [r7, #4]
+ 495 00e2 FFF7FEFF 		bl	prv_displayHelp
+ 496              		.loc 1 153 0
+ 497 00e6 07E0     		b	.L34
+ 498              	.L30:
+ 150:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 499              		.loc 1 150 0
+ 500 00e8 064B     		ldr	r3, .L35+4
+ 501 00ea 1B68     		ldr	r3, [r3]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 13
+
+
+ 502 00ec 9B68     		ldr	r3, [r3, #8]
+ 503 00ee 2822     		movs	r2, #40
+ 504 00f0 0121     		movs	r1, #1
+ 505 00f2 0548     		ldr	r0, .L35+8
+ 506 00f4 FFF7FEFF 		bl	fwrite
+ 507              	.L34:
+ 508              		.loc 1 153 0
+ 509 00f8 00BF     		nop
+ 510 00fa 1037     		adds	r7, r7, #16
+ 511              	.LCFI13:
+ 512              		.cfi_def_cfa_offset 8
+ 513 00fc BD46     		mov	sp, r7
+ 514              	.LCFI14:
+ 515              		.cfi_def_cfa_register 13
+ 516              		@ sp needed
+ 517 00fe 80BD     		pop	{r7, pc}
+ 518              	.L36:
+ 519              		.align	2
+ 520              	.L35:
+ 521 0100 4C000000 		.word	.LC3
+ 522 0104 00000000 		.word	_impure_ptr
+ 523 0108 54000000 		.word	.LC4
+ 524              		.cfi_endproc
+ 525              	.LFE136:
+ 527              		.section	.text.prv_end_of_space,"ax",%progbits
+ 528              		.align	1
+ 529              		.syntax unified
+ 530              		.thumb
+ 531              		.thumb_func
+ 532              		.fpu fpv4-sp-d16
+ 534              	prv_end_of_space:
+ 535              	.LFB137:
+ 154:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 155:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static char *prv_end_of_space(char *buffer)
+ 156:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 536              		.loc 1 156 0
+ 537              		.cfi_startproc
+ 538              		@ args = 0, pretend = 0, frame = 8
+ 539              		@ frame_needed = 1, uses_anonymous_args = 0
+ 540 0000 80B5     		push	{r7, lr}
+ 541              	.LCFI15:
+ 542              		.cfi_def_cfa_offset 8
+ 543              		.cfi_offset 7, -8
+ 544              		.cfi_offset 14, -4
+ 545 0002 82B0     		sub	sp, sp, #8
+ 546              	.LCFI16:
+ 547              		.cfi_def_cfa_offset 16
+ 548 0004 00AF     		add	r7, sp, #0
+ 549              	.LCFI17:
+ 550              		.cfi_def_cfa_register 7
+ 551 0006 7860     		str	r0, [r7, #4]
+ 157:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (isspace(buffer[0] & 0xff))
+ 552              		.loc 1 157 0
+ 553 0008 02E0     		b	.L38
+ 554              	.L39:
+ 158:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 159:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         buffer++;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 14
+
+
+ 555              		.loc 1 159 0
+ 556 000a 7B68     		ldr	r3, [r7, #4]
+ 557 000c 0133     		adds	r3, r3, #1
+ 558 000e 7B60     		str	r3, [r7, #4]
+ 559              	.L38:
+ 157:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (isspace(buffer[0] & 0xff))
+ 560              		.loc 1 157 0
+ 561 0010 FFF7FEFF 		bl	__locale_ctype_ptr
+ 562 0014 0246     		mov	r2, r0
+ 563 0016 7B68     		ldr	r3, [r7, #4]
+ 564 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 565 001a 0133     		adds	r3, r3, #1
+ 566 001c 1344     		add	r3, r3, r2
+ 567 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 568 0020 03F00803 		and	r3, r3, #8
+ 569 0024 002B     		cmp	r3, #0
+ 570 0026 F0D1     		bne	.L39
+ 160:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 161:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     return buffer;
+ 571              		.loc 1 161 0
+ 572 0028 7B68     		ldr	r3, [r7, #4]
+ 162:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 573              		.loc 1 162 0
+ 574 002a 1846     		mov	r0, r3
+ 575 002c 0837     		adds	r7, r7, #8
+ 576              	.LCFI18:
+ 577              		.cfi_def_cfa_offset 8
+ 578 002e BD46     		mov	sp, r7
+ 579              	.LCFI19:
+ 580              		.cfi_def_cfa_register 13
+ 581              		@ sp needed
+ 582 0030 80BD     		pop	{r7, pc}
+ 583              		.cfi_endproc
+ 584              	.LFE137:
+ 586              		.section	.text.get_end_of_arg,"ax",%progbits
+ 587              		.align	1
+ 588              		.global	get_end_of_arg
+ 589              		.syntax unified
+ 590              		.thumb
+ 591              		.thumb_func
+ 592              		.fpu fpv4-sp-d16
+ 594              	get_end_of_arg:
+ 595              	.LFB138:
+ 163:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 164:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** char *get_end_of_arg(char *buffer)
+ 165:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 596              		.loc 1 165 0
+ 597              		.cfi_startproc
+ 598              		@ args = 0, pretend = 0, frame = 8
+ 599              		@ frame_needed = 1, uses_anonymous_args = 0
+ 600 0000 80B5     		push	{r7, lr}
+ 601              	.LCFI20:
+ 602              		.cfi_def_cfa_offset 8
+ 603              		.cfi_offset 7, -8
+ 604              		.cfi_offset 14, -4
+ 605 0002 82B0     		sub	sp, sp, #8
+ 606              	.LCFI21:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 15
+
+
+ 607              		.cfi_def_cfa_offset 16
+ 608 0004 00AF     		add	r7, sp, #0
+ 609              	.LCFI22:
+ 610              		.cfi_def_cfa_register 7
+ 611 0006 7860     		str	r0, [r7, #4]
+ 166:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[0] != 0 && !isspace(buffer[0] & 0xFF))
+ 612              		.loc 1 166 0
+ 613 0008 02E0     		b	.L42
+ 614              	.L44:
+ 167:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 168:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         buffer++;
+ 615              		.loc 1 168 0
+ 616 000a 7B68     		ldr	r3, [r7, #4]
+ 617 000c 0133     		adds	r3, r3, #1
+ 618 000e 7B60     		str	r3, [r7, #4]
+ 619              	.L42:
+ 166:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[0] != 0 && !isspace(buffer[0] & 0xFF))
+ 620              		.loc 1 166 0
+ 621 0010 7B68     		ldr	r3, [r7, #4]
+ 622 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 623 0014 002B     		cmp	r3, #0
+ 624 0016 0BD0     		beq	.L43
+ 166:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (buffer[0] != 0 && !isspace(buffer[0] & 0xFF))
+ 625              		.loc 1 166 0 is_stmt 0 discriminator 1
+ 626 0018 FFF7FEFF 		bl	__locale_ctype_ptr
+ 627 001c 0246     		mov	r2, r0
+ 628 001e 7B68     		ldr	r3, [r7, #4]
+ 629 0020 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 630 0022 0133     		adds	r3, r3, #1
+ 631 0024 1344     		add	r3, r3, r2
+ 632 0026 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 633 0028 03F00803 		and	r3, r3, #8
+ 634 002c 002B     		cmp	r3, #0
+ 635 002e ECD0     		beq	.L44
+ 636              	.L43:
+ 169:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 170:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     return buffer;
+ 637              		.loc 1 170 0 is_stmt 1
+ 638 0030 7B68     		ldr	r3, [r7, #4]
+ 171:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 639              		.loc 1 171 0
+ 640 0032 1846     		mov	r0, r3
+ 641 0034 0837     		adds	r7, r7, #8
+ 642              	.LCFI23:
+ 643              		.cfi_def_cfa_offset 8
+ 644 0036 BD46     		mov	sp, r7
+ 645              	.LCFI24:
+ 646              		.cfi_def_cfa_register 13
+ 647              		@ sp needed
+ 648 0038 80BD     		pop	{r7, pc}
+ 649              		.cfi_endproc
+ 650              	.LFE138:
+ 652              		.section	.text.get_next_arg,"ax",%progbits
+ 653              		.align	1
+ 654              		.global	get_next_arg
+ 655              		.syntax unified
+ 656              		.thumb
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 16
+
+
+ 657              		.thumb_func
+ 658              		.fpu fpv4-sp-d16
+ 660              	get_next_arg:
+ 661              	.LFB139:
+ 172:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 173:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** char *get_next_arg(char *buffer, char **end)
+ 174:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 662              		.loc 1 174 0
+ 663              		.cfi_startproc
+ 664              		@ args = 0, pretend = 0, frame = 8
+ 665              		@ frame_needed = 1, uses_anonymous_args = 0
+ 666 0000 80B5     		push	{r7, lr}
+ 667              	.LCFI25:
+ 668              		.cfi_def_cfa_offset 8
+ 669              		.cfi_offset 7, -8
+ 670              		.cfi_offset 14, -4
+ 671 0002 82B0     		sub	sp, sp, #8
+ 672              	.LCFI26:
+ 673              		.cfi_def_cfa_offset 16
+ 674 0004 00AF     		add	r7, sp, #0
+ 675              	.LCFI27:
+ 676              		.cfi_def_cfa_register 7
+ 677 0006 7860     		str	r0, [r7, #4]
+ 678 0008 3960     		str	r1, [r7]
+ 175:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     // skip arg
+ 176:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     buffer = get_end_of_arg(buffer);
+ 679              		.loc 1 176 0
+ 680 000a 7868     		ldr	r0, [r7, #4]
+ 681 000c FFF7FEFF 		bl	get_end_of_arg
+ 682 0010 7860     		str	r0, [r7, #4]
+ 177:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     // skip space
+ 178:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     buffer = prv_end_of_space(buffer);
+ 683              		.loc 1 178 0
+ 684 0012 7868     		ldr	r0, [r7, #4]
+ 685 0014 FFF7FEFF 		bl	prv_end_of_space
+ 686 0018 7860     		str	r0, [r7, #4]
+ 179:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (NULL != end)
+ 687              		.loc 1 179 0
+ 688 001a 3B68     		ldr	r3, [r7]
+ 689 001c 002B     		cmp	r3, #0
+ 690 001e 05D0     		beq	.L47
+ 180:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 181:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *end = get_end_of_arg(buffer);
+ 691              		.loc 1 181 0
+ 692 0020 7868     		ldr	r0, [r7, #4]
+ 693 0022 FFF7FEFF 		bl	get_end_of_arg
+ 694 0026 0246     		mov	r2, r0
+ 695 0028 3B68     		ldr	r3, [r7]
+ 696 002a 1A60     		str	r2, [r3]
+ 697              	.L47:
+ 182:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 183:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 184:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     return buffer;
+ 698              		.loc 1 184 0
+ 699 002c 7B68     		ldr	r3, [r7, #4]
+ 185:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 700              		.loc 1 185 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 17
+
+
+ 701 002e 1846     		mov	r0, r3
+ 702 0030 0837     		adds	r7, r7, #8
+ 703              	.LCFI28:
+ 704              		.cfi_def_cfa_offset 8
+ 705 0032 BD46     		mov	sp, r7
+ 706              	.LCFI29:
+ 707              		.cfi_def_cfa_register 13
+ 708              		@ sp needed
+ 709 0034 80BD     		pop	{r7, pc}
+ 710              		.cfi_endproc
+ 711              	.LFE139:
+ 713              		.section	.text.check_end_of_args,"ax",%progbits
+ 714              		.align	1
+ 715              		.global	check_end_of_args
+ 716              		.syntax unified
+ 717              		.thumb
+ 718              		.thumb_func
+ 719              		.fpu fpv4-sp-d16
+ 721              	check_end_of_args:
+ 722              	.LFB140:
+ 186:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 187:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** int check_end_of_args(char *buffer)
+ 188:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 723              		.loc 1 188 0
+ 724              		.cfi_startproc
+ 725              		@ args = 0, pretend = 0, frame = 8
+ 726              		@ frame_needed = 1, uses_anonymous_args = 0
+ 727 0000 80B5     		push	{r7, lr}
+ 728              	.LCFI30:
+ 729              		.cfi_def_cfa_offset 8
+ 730              		.cfi_offset 7, -8
+ 731              		.cfi_offset 14, -4
+ 732 0002 82B0     		sub	sp, sp, #8
+ 733              	.LCFI31:
+ 734              		.cfi_def_cfa_offset 16
+ 735 0004 00AF     		add	r7, sp, #0
+ 736              	.LCFI32:
+ 737              		.cfi_def_cfa_register 7
+ 738 0006 7860     		str	r0, [r7, #4]
+ 189:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     buffer = prv_end_of_space(buffer);
+ 739              		.loc 1 189 0
+ 740 0008 7868     		ldr	r0, [r7, #4]
+ 741 000a FFF7FEFF 		bl	prv_end_of_space
+ 742 000e 7860     		str	r0, [r7, #4]
+ 190:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 191:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     return (0 == buffer[0]);
+ 743              		.loc 1 191 0
+ 744 0010 7B68     		ldr	r3, [r7, #4]
+ 745 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 746 0014 002B     		cmp	r3, #0
+ 747 0016 0CBF     		ite	eq
+ 748 0018 0123     		moveq	r3, #1
+ 749 001a 0023     		movne	r3, #0
+ 750 001c DBB2     		uxtb	r3, r3
+ 192:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 751              		.loc 1 192 0
+ 752 001e 1846     		mov	r0, r3
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 18
+
+
+ 753 0020 0837     		adds	r7, r7, #8
+ 754              	.LCFI33:
+ 755              		.cfi_def_cfa_offset 8
+ 756 0022 BD46     		mov	sp, r7
+ 757              	.LCFI34:
+ 758              		.cfi_def_cfa_register 13
+ 759              		@ sp needed
+ 760 0024 80BD     		pop	{r7, pc}
+ 761              		.cfi_endproc
+ 762              	.LFE140:
+ 764              		.section	.rodata
+ 765 007d 000000   		.align	2
+ 766              	.LC5:
+ 767 0080 20202020 		.ascii	"    \000"
+ 767      00
+ 768              		.section	.text.print_indent,"ax",%progbits
+ 769              		.align	1
+ 770              		.syntax unified
+ 771              		.thumb
+ 772              		.thumb_func
+ 773              		.fpu fpv4-sp-d16
+ 775              	print_indent:
+ 776              	.LFB141:
+ 193:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 194:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** /**********************************************************
+ 195:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  * Display Functions
+ 196:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****  */
+ 197:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 198:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static void print_indent(FILE *stream,
+ 199:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                          int num)
+ 200:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 777              		.loc 1 200 0
+ 778              		.cfi_startproc
+ 779              		@ args = 0, pretend = 0, frame = 16
+ 780              		@ frame_needed = 1, uses_anonymous_args = 0
+ 781 0000 80B5     		push	{r7, lr}
+ 782              	.LCFI35:
+ 783              		.cfi_def_cfa_offset 8
+ 784              		.cfi_offset 7, -8
+ 785              		.cfi_offset 14, -4
+ 786 0002 84B0     		sub	sp, sp, #16
+ 787              	.LCFI36:
+ 788              		.cfi_def_cfa_offset 24
+ 789 0004 00AF     		add	r7, sp, #0
+ 790              	.LCFI37:
+ 791              		.cfi_def_cfa_register 7
+ 792 0006 7860     		str	r0, [r7, #4]
+ 793 0008 3960     		str	r1, [r7]
+ 201:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int i;
+ 202:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 203:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     for ( i = 0 ; i < num ; i++)
+ 794              		.loc 1 203 0
+ 795 000a 0023     		movs	r3, #0
+ 796 000c FB60     		str	r3, [r7, #12]
+ 797 000e 08E0     		b	.L52
+ 798              	.L53:
+ 204:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "    ");
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 19
+
+
+ 799              		.loc 1 204 0 discriminator 3
+ 800 0010 7B68     		ldr	r3, [r7, #4]
+ 801 0012 0422     		movs	r2, #4
+ 802 0014 0121     		movs	r1, #1
+ 803 0016 0748     		ldr	r0, .L54
+ 804 0018 FFF7FEFF 		bl	fwrite
+ 203:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "    ");
+ 805              		.loc 1 203 0 discriminator 3
+ 806 001c FB68     		ldr	r3, [r7, #12]
+ 807 001e 0133     		adds	r3, r3, #1
+ 808 0020 FB60     		str	r3, [r7, #12]
+ 809              	.L52:
+ 203:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "    ");
+ 810              		.loc 1 203 0 is_stmt 0 discriminator 1
+ 811 0022 FA68     		ldr	r2, [r7, #12]
+ 812 0024 3B68     		ldr	r3, [r7]
+ 813 0026 9A42     		cmp	r2, r3
+ 814 0028 F2DB     		blt	.L53
+ 205:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 815              		.loc 1 205 0 is_stmt 1
+ 816 002a 00BF     		nop
+ 817 002c 1037     		adds	r7, r7, #16
+ 818              	.LCFI38:
+ 819              		.cfi_def_cfa_offset 8
+ 820 002e BD46     		mov	sp, r7
+ 821              	.LCFI39:
+ 822              		.cfi_def_cfa_register 13
+ 823              		@ sp needed
+ 824 0030 80BD     		pop	{r7, pc}
+ 825              	.L55:
+ 826 0032 00BF     		.align	2
+ 827              	.L54:
+ 828 0034 80000000 		.word	.LC5
+ 829              		.cfi_endproc
+ 830              	.LFE141:
+ 832              		.section	.text.output_buffer,"ax",%progbits
+ 833              		.align	1
+ 834              		.global	output_buffer
+ 835              		.syntax unified
+ 836              		.thumb
+ 837              		.thumb_func
+ 838              		.fpu fpv4-sp-d16
+ 840              	output_buffer:
+ 841              	.LFB142:
+ 206:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #ifdef ATING_DEBUG
+ 207:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void output_buffer(FILE *stream,
+ 208:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                    uint8_t *buffer,
+ 209:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                    int length,
+ 210:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                    int indent)
+ 211:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 212:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int i;
+ 213:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 214:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (length == 0) fprintf(stream, "\n");
+ 215:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 216:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (buffer == NULL) return;
+ 217:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 218:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     i = 0;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 20
+
+
+ 219:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (i < length)
+ 220:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 221:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         uint8_t array[16];
+ 222:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         int j;
+ 223:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 224:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 225:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         memcpy(array, buffer + i, 16);
+ 226:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (j = 0 ; j < 16 && i + j < length; j++)
+ 227:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 228:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "%02X ", array[j]);
+ 229:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             if (j % 4 == 3) fprintf(stream, " ");
+ 230:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 231:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         if (length > 16)
+ 232:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 233:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             while (j < 16)
+ 234:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             {
+ 235:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 fprintf(stream, "   ");
+ 236:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 if (j % 4 == 3) fprintf(stream, " ");
+ 237:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 j++;
+ 238:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             }
+ 239:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 240:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, " ");
+ 241:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (j = 0 ; j < 16 && i + j < length; j++)
+ 242:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 243:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             if (isprint(array[j]))
+ 244:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 fprintf(stream, "%c", array[j]);
+ 245:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             else
+ 246:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 fprintf(stream, ".");
+ 247:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 248:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "\n");
+ 249:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         i += 16;
+ 250:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 251:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 252:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #else
+ 253:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void output_buffer(FILE *stream,
+ 254:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                    uint8_t *buffer,
+ 255:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                    int length,
+ 256:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                    int indent)
+ 257:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 842              		.loc 1 257 0
+ 843              		.cfi_startproc
+ 844              		@ args = 0, pretend = 0, frame = 16
+ 845              		@ frame_needed = 1, uses_anonymous_args = 0
+ 846              		@ link register save eliminated.
+ 847 0000 80B4     		push	{r7}
+ 848              	.LCFI40:
+ 849              		.cfi_def_cfa_offset 4
+ 850              		.cfi_offset 7, -4
+ 851 0002 85B0     		sub	sp, sp, #20
+ 852              	.LCFI41:
+ 853              		.cfi_def_cfa_offset 24
+ 854 0004 00AF     		add	r7, sp, #0
+ 855              	.LCFI42:
+ 856              		.cfi_def_cfa_register 7
+ 857 0006 F860     		str	r0, [r7, #12]
+ 858 0008 B960     		str	r1, [r7, #8]
+ 859 000a 7A60     		str	r2, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 21
+
+
+ 860 000c 3B60     		str	r3, [r7]
+ 258:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 861              		.loc 1 258 0
+ 862 000e 00BF     		nop
+ 863 0010 1437     		adds	r7, r7, #20
+ 864              	.LCFI43:
+ 865              		.cfi_def_cfa_offset 4
+ 866 0012 BD46     		mov	sp, r7
+ 867              	.LCFI44:
+ 868              		.cfi_def_cfa_register 13
+ 869              		@ sp needed
+ 870 0014 5DF8047B 		ldr	r7, [sp], #4
+ 871              	.LCFI45:
+ 872              		.cfi_restore 7
+ 873              		.cfi_def_cfa_offset 0
+ 874 0018 7047     		bx	lr
+ 875              		.cfi_endproc
+ 876              	.LFE142:
+ 878              		.section	.rodata
+ 879 0085 000000   		.align	2
+ 880              	.LC6:
+ 881 0088 7B0D0A00 		.ascii	"{\015\012\000"
+ 882              		.align	2
+ 883              	.LC7:
+ 884 008c 49443A20 		.ascii	"ID: %d\000"
+ 884      256400
+ 885 0093 00       		.align	2
+ 886              	.LC8:
+ 887 0094 20747970 		.ascii	" type: \000"
+ 887      653A2000 
+ 888              		.align	2
+ 889              	.LC9:
+ 890 009c 4F626A65 		.ascii	"Object Instance\000"
+ 890      63742049 
+ 890      6E737461 
+ 890      6E636500 
+ 891              		.align	2
+ 892              	.LC10:
+ 893 00ac 4D756C74 		.ascii	"Multiple Instances\000"
+ 893      69706C65 
+ 893      20496E73 
+ 893      74616E63 
+ 893      657300
+ 894 00bf 00       		.align	2
+ 895              	.LC11:
+ 896 00c0 5265736F 		.ascii	"Resource Value\000"
+ 896      75726365 
+ 896      2056616C 
+ 896      756500
+ 897 00cf 00       		.align	2
+ 898              	.LC12:
+ 899 00d0 756E6B6E 		.ascii	"unknown (%d)\000"
+ 899      6F776E20 
+ 899      28256429 
+ 899      00
+ 900 00dd 000000   		.align	2
+ 901              	.LC13:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 22
+
+
+ 902 00e0 7B0A00   		.ascii	"{\012\000"
+ 903 00e3 00       		.align	2
+ 904              	.LC14:
+ 905 00e4 64617461 		.ascii	"data (%d bytes):\015\012\000"
+ 905      20282564 
+ 905      20627974 
+ 905      6573293A 
+ 905      0D0A00
+ 906 00f7 00       		.align	2
+ 907              	.LC15:
+ 908 00f8 256C6C64 		.ascii	"%lld\000"
+ 908      00
+ 909 00fd 000000   		.align	2
+ 910              	.LC16:
+ 911 0100 64617461 		.ascii	"data as Integer: %lld\015\012\000"
+ 911      20617320 
+ 911      496E7465 
+ 911      6765723A 
+ 911      20256C6C 
+ 912              		.align	2
+ 913              	.LC17:
+ 914 0118 256C6700 		.ascii	"%lg\000"
+ 915              		.align	2
+ 916              	.LC18:
+ 917 011c 64617461 		.ascii	"data as Float: %.16g\015\012\000"
+ 917      20617320 
+ 917      466C6F61 
+ 917      743A2025 
+ 917      2E313667 
+ 918 0133 00       		.align	2
+ 919              	.LC19:
+ 920 0134 7D0D0A00 		.ascii	"}\015\012\000"
+ 921              		.section	.text.output_tlv,"ax",%progbits
+ 922              		.align	1
+ 923              		.global	output_tlv
+ 924              		.syntax unified
+ 925              		.thumb
+ 926              		.thumb_func
+ 927              		.fpu fpv4-sp-d16
+ 929              	output_tlv:
+ 930              	.LFB143:
+ 259:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #endif
+ 260:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void output_tlv(FILE *stream,
+ 261:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 uint8_t *buffer,
+ 262:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 size_t buffer_len,
+ 263:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 int indent)
+ 264:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 931              		.loc 1 264 0
+ 932              		.cfi_startproc
+ 933              		@ args = 0, pretend = 0, frame = 56
+ 934              		@ frame_needed = 1, uses_anonymous_args = 0
+ 935 0000 90B5     		push	{r4, r7, lr}
+ 936              	.LCFI46:
+ 937              		.cfi_def_cfa_offset 12
+ 938              		.cfi_offset 4, -12
+ 939              		.cfi_offset 7, -8
+ 940              		.cfi_offset 14, -4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 23
+
+
+ 941 0002 91B0     		sub	sp, sp, #68
+ 942              	.LCFI47:
+ 943              		.cfi_def_cfa_offset 80
+ 944 0004 02AF     		add	r7, sp, #8
+ 945              	.LCFI48:
+ 946              		.cfi_def_cfa 7, 72
+ 947 0006 F860     		str	r0, [r7, #12]
+ 948 0008 B960     		str	r1, [r7, #8]
+ 949 000a 7A60     		str	r2, [r7, #4]
+ 950 000c 3B60     		str	r3, [r7]
+ 265:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     lwm2m_data_type_t type;
+ 266:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     uint16_t id;
+ 267:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     size_t dataIndex;
+ 268:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     size_t dataLen;
+ 269:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int length = 0;
+ 951              		.loc 1 269 0
+ 952 000e 0023     		movs	r3, #0
+ 953 0010 7B63     		str	r3, [r7, #52]
+ 270:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int result;
+ 271:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 272:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (0 != (result = lwm2m_decode_TLV((uint8_t *)buffer + length, buffer_len - length, &type, 
+ 954              		.loc 1 272 0
+ 955 0012 EAE0     		b	.L58
+ 956              	.L69:
+ 273:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 274:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 957              		.loc 1 274 0
+ 958 0014 3968     		ldr	r1, [r7]
+ 959 0016 F868     		ldr	r0, [r7, #12]
+ 960 0018 FFF7FEFF 		bl	print_indent
+ 275:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "{\r\n");
+ 961              		.loc 1 275 0
+ 962 001c FB68     		ldr	r3, [r7, #12]
+ 963 001e 0322     		movs	r2, #3
+ 964 0020 0121     		movs	r1, #1
+ 965 0022 8048     		ldr	r0, .L71
+ 966 0024 FFF7FEFF 		bl	fwrite
+ 276:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent + 1);
+ 967              		.loc 1 276 0
+ 968 0028 3B68     		ldr	r3, [r7]
+ 969 002a 0133     		adds	r3, r3, #1
+ 970 002c 1946     		mov	r1, r3
+ 971 002e F868     		ldr	r0, [r7, #12]
+ 972 0030 FFF7FEFF 		bl	print_indent
+ 277:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "ID: %d", id);
+ 973              		.loc 1 277 0
+ 974 0034 BB8D     		ldrh	r3, [r7, #44]
+ 975 0036 1A46     		mov	r2, r3
+ 976 0038 7B49     		ldr	r1, .L71+4
+ 977 003a F868     		ldr	r0, [r7, #12]
+ 978 003c FFF7FEFF 		bl	fprintf
+ 278:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 279:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, " type: ");
+ 979              		.loc 1 279 0
+ 980 0040 FB68     		ldr	r3, [r7, #12]
+ 981 0042 0722     		movs	r2, #7
+ 982 0044 0121     		movs	r1, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 24
+
+
+ 983 0046 7948     		ldr	r0, .L71+8
+ 984 0048 FFF7FEFF 		bl	fwrite
+ 280:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         switch (type)
+ 985              		.loc 1 280 0
+ 986 004c 97F82E30 		ldrb	r3, [r7, #46]	@ zero_extendqisi2
+ 987 0050 032B     		cmp	r3, #3
+ 988 0052 0AD0     		beq	.L60
+ 989 0054 052B     		cmp	r3, #5
+ 990 0056 0FD0     		beq	.L61
+ 991 0058 022B     		cmp	r3, #2
+ 992 005a 14D1     		bne	.L70
+ 281:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 282:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_OBJECT_INSTANCE:
+ 283:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "Object Instance");
+ 993              		.loc 1 283 0
+ 994 005c FB68     		ldr	r3, [r7, #12]
+ 995 005e 0F22     		movs	r2, #15
+ 996 0060 0121     		movs	r1, #1
+ 997 0062 7348     		ldr	r0, .L71+12
+ 998 0064 FFF7FEFF 		bl	fwrite
+ 284:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 999              		.loc 1 284 0
+ 1000 0068 14E0     		b	.L63
+ 1001              	.L60:
+ 285:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_MULTIPLE_RESOURCE:
+ 286:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "Multiple Instances");
+ 1002              		.loc 1 286 0
+ 1003 006a FB68     		ldr	r3, [r7, #12]
+ 1004 006c 1222     		movs	r2, #18
+ 1005 006e 0121     		movs	r1, #1
+ 1006 0070 7048     		ldr	r0, .L71+16
+ 1007 0072 FFF7FEFF 		bl	fwrite
+ 287:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1008              		.loc 1 287 0
+ 1009 0076 0DE0     		b	.L63
+ 1010              	.L61:
+ 288:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_OPAQUE:
+ 289:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "Resource Value");
+ 1011              		.loc 1 289 0
+ 1012 0078 FB68     		ldr	r3, [r7, #12]
+ 1013 007a 0E22     		movs	r2, #14
+ 1014 007c 0121     		movs	r1, #1
+ 1015 007e 6E48     		ldr	r0, .L71+20
+ 1016 0080 FFF7FEFF 		bl	fwrite
+ 290:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1017              		.loc 1 290 0
+ 1018 0084 06E0     		b	.L63
+ 1019              	.L70:
+ 291:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         default:
+ 292:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             printf("unknown (%d)", (int)type);
+ 1020              		.loc 1 292 0
+ 1021 0086 97F82E30 		ldrb	r3, [r7, #46]	@ zero_extendqisi2
+ 1022 008a 1946     		mov	r1, r3
+ 1023 008c 6B48     		ldr	r0, .L71+24
+ 1024 008e FFF7FEFF 		bl	printf
+ 293:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1025              		.loc 1 293 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 25
+
+
+ 1026 0092 00BF     		nop
+ 1027              	.L63:
+ 294:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 295:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "\n");
+ 1028              		.loc 1 295 0
+ 1029 0094 F968     		ldr	r1, [r7, #12]
+ 1030 0096 0A20     		movs	r0, #10
+ 1031 0098 FFF7FEFF 		bl	fputc
+ 296:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 297:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent + 1);
+ 1032              		.loc 1 297 0
+ 1033 009c 3B68     		ldr	r3, [r7]
+ 1034 009e 0133     		adds	r3, r3, #1
+ 1035 00a0 1946     		mov	r1, r3
+ 1036 00a2 F868     		ldr	r0, [r7, #12]
+ 1037 00a4 FFF7FEFF 		bl	print_indent
+ 298:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "{\n");
+ 1038              		.loc 1 298 0
+ 1039 00a8 FB68     		ldr	r3, [r7, #12]
+ 1040 00aa 0222     		movs	r2, #2
+ 1041 00ac 0121     		movs	r1, #1
+ 1042 00ae 6448     		ldr	r0, .L71+28
+ 1043 00b0 FFF7FEFF 		bl	fwrite
+ 299:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         if (type == LWM2M_TYPE_OBJECT_INSTANCE || type == LWM2M_TYPE_MULTIPLE_RESOURCE)
+ 1044              		.loc 1 299 0
+ 1045 00b4 97F82E30 		ldrb	r3, [r7, #46]	@ zero_extendqisi2
+ 1046 00b8 022B     		cmp	r3, #2
+ 1047 00ba 03D0     		beq	.L64
+ 1048              		.loc 1 299 0 is_stmt 0 discriminator 1
+ 1049 00bc 97F82E30 		ldrb	r3, [r7, #46]	@ zero_extendqisi2
+ 1050 00c0 032B     		cmp	r3, #3
+ 1051 00c2 0BD1     		bne	.L65
+ 1052              	.L64:
+ 300:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 301:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             output_tlv(stream, buffer + length + dataIndex, dataLen, indent + 1);
+ 1053              		.loc 1 301 0 is_stmt 1
+ 1054 00c4 7A6B     		ldr	r2, [r7, #52]
+ 1055 00c6 BB6A     		ldr	r3, [r7, #40]
+ 1056 00c8 1344     		add	r3, r3, r2
+ 1057 00ca BA68     		ldr	r2, [r7, #8]
+ 1058 00cc D118     		adds	r1, r2, r3
+ 1059 00ce 7A6A     		ldr	r2, [r7, #36]
+ 1060 00d0 3B68     		ldr	r3, [r7]
+ 1061 00d2 0133     		adds	r3, r3, #1
+ 1062 00d4 F868     		ldr	r0, [r7, #12]
+ 1063 00d6 FFF7FEFF 		bl	output_tlv
+ 1064 00da 6CE0     		b	.L66
+ 1065              	.L65:
+ 1066              	.LBB3:
+ 302:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 303:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         else
+ 304:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 305:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             int64_t intValue;
+ 306:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             double floatValue;
+ 307:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             uint8_t tmp;
+ 308:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 309:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             print_indent(stream, indent + 2);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 26
+
+
+ 1067              		.loc 1 309 0
+ 1068 00dc 3B68     		ldr	r3, [r7]
+ 1069 00de 0233     		adds	r3, r3, #2
+ 1070 00e0 1946     		mov	r1, r3
+ 1071 00e2 F868     		ldr	r0, [r7, #12]
+ 1072 00e4 FFF7FEFF 		bl	print_indent
+ 310:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "data (%d bytes):\r\n", dataLen);
+ 1073              		.loc 1 310 0
+ 1074 00e8 7B6A     		ldr	r3, [r7, #36]
+ 1075 00ea 1A46     		mov	r2, r3
+ 1076 00ec 5549     		ldr	r1, .L71+32
+ 1077 00ee F868     		ldr	r0, [r7, #12]
+ 1078 00f0 FFF7FEFF 		bl	fprintf
+ 311:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             output_buffer(stream, (uint8_t *)buffer + length + dataIndex, dataLen, indent + 2);
+ 1079              		.loc 1 311 0
+ 1080 00f4 7A6B     		ldr	r2, [r7, #52]
+ 1081 00f6 BB6A     		ldr	r3, [r7, #40]
+ 1082 00f8 1344     		add	r3, r3, r2
+ 1083 00fa BA68     		ldr	r2, [r7, #8]
+ 1084 00fc D118     		adds	r1, r2, r3
+ 1085 00fe 7B6A     		ldr	r3, [r7, #36]
+ 1086 0100 1A46     		mov	r2, r3
+ 1087 0102 3B68     		ldr	r3, [r7]
+ 1088 0104 0233     		adds	r3, r3, #2
+ 1089 0106 F868     		ldr	r0, [r7, #12]
+ 1090 0108 FFF7FEFF 		bl	output_buffer
+ 312:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 313:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             tmp = buffer[length + dataIndex + dataLen];
+ 1091              		.loc 1 313 0
+ 1092 010c 7A6B     		ldr	r2, [r7, #52]
+ 1093 010e BB6A     		ldr	r3, [r7, #40]
+ 1094 0110 1A44     		add	r2, r2, r3
+ 1095 0112 7B6A     		ldr	r3, [r7, #36]
+ 1096 0114 1344     		add	r3, r3, r2
+ 1097 0116 BA68     		ldr	r2, [r7, #8]
+ 1098 0118 1344     		add	r3, r3, r2
+ 1099 011a 1B78     		ldrb	r3, [r3]
+ 1100 011c 87F82F30 		strb	r3, [r7, #47]
+ 314:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             buffer[length + dataIndex + dataLen] = 0;
+ 1101              		.loc 1 314 0
+ 1102 0120 7A6B     		ldr	r2, [r7, #52]
+ 1103 0122 BB6A     		ldr	r3, [r7, #40]
+ 1104 0124 1A44     		add	r2, r2, r3
+ 1105 0126 7B6A     		ldr	r3, [r7, #36]
+ 1106 0128 1344     		add	r3, r3, r2
+ 1107 012a BA68     		ldr	r2, [r7, #8]
+ 1108 012c 1344     		add	r3, r3, r2
+ 1109 012e 0022     		movs	r2, #0
+ 1110 0130 1A70     		strb	r2, [r3]
+ 315:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             if (0 < sscanf((const char *)buffer + length + dataIndex, "%"PRId64, &intValue))
+ 1111              		.loc 1 315 0
+ 1112 0132 7A6B     		ldr	r2, [r7, #52]
+ 1113 0134 BB6A     		ldr	r3, [r7, #40]
+ 1114 0136 1344     		add	r3, r3, r2
+ 1115 0138 BA68     		ldr	r2, [r7, #8]
+ 1116 013a 1344     		add	r3, r3, r2
+ 1117 013c 07F11802 		add	r2, r7, #24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 27
+
+
+ 1118 0140 4149     		ldr	r1, .L71+36
+ 1119 0142 1846     		mov	r0, r3
+ 1120 0144 FFF7FEFF 		bl	sscanf
+ 1121 0148 0346     		mov	r3, r0
+ 1122 014a 002B     		cmp	r3, #0
+ 1123 014c 0DDD     		ble	.L67
+ 316:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             {
+ 317:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 print_indent(stream, indent + 2);
+ 1124              		.loc 1 317 0
+ 1125 014e 3B68     		ldr	r3, [r7]
+ 1126 0150 0233     		adds	r3, r3, #2
+ 1127 0152 1946     		mov	r1, r3
+ 1128 0154 F868     		ldr	r0, [r7, #12]
+ 1129 0156 FFF7FEFF 		bl	print_indent
+ 318:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 fprintf(stream, "data as Integer: %" PRId64 "\r\n", intValue);
+ 1130              		.loc 1 318 0
+ 1131 015a D7E90634 		ldrd	r3, [r7, #24]
+ 1132 015e 1A46     		mov	r2, r3
+ 1133 0160 2346     		mov	r3, r4
+ 1134 0162 3A49     		ldr	r1, .L71+40
+ 1135 0164 F868     		ldr	r0, [r7, #12]
+ 1136 0166 FFF7FEFF 		bl	fprintf
+ 1137              	.L67:
+ 319:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             }
+ 320:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             if (0 < sscanf((const char *)buffer + length + dataIndex, "%lg", &floatValue))
+ 1138              		.loc 1 320 0
+ 1139 016a 7A6B     		ldr	r2, [r7, #52]
+ 1140 016c BB6A     		ldr	r3, [r7, #40]
+ 1141 016e 1344     		add	r3, r3, r2
+ 1142 0170 BA68     		ldr	r2, [r7, #8]
+ 1143 0172 1344     		add	r3, r3, r2
+ 1144 0174 07F11002 		add	r2, r7, #16
+ 1145 0178 3549     		ldr	r1, .L71+44
+ 1146 017a 1846     		mov	r0, r3
+ 1147 017c FFF7FEFF 		bl	sscanf
+ 1148 0180 0346     		mov	r3, r0
+ 1149 0182 002B     		cmp	r3, #0
+ 1150 0184 0DDD     		ble	.L68
+ 321:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             {
+ 322:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 print_indent(stream, indent + 2);
+ 1151              		.loc 1 322 0
+ 1152 0186 3B68     		ldr	r3, [r7]
+ 1153 0188 0233     		adds	r3, r3, #2
+ 1154 018a 1946     		mov	r1, r3
+ 1155 018c F868     		ldr	r0, [r7, #12]
+ 1156 018e FFF7FEFF 		bl	print_indent
+ 323:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                 fprintf(stream, "data as Float: %.16g\r\n", floatValue);
+ 1157              		.loc 1 323 0
+ 1158 0192 D7E90434 		ldrd	r3, [r7, #16]
+ 1159 0196 1A46     		mov	r2, r3
+ 1160 0198 2346     		mov	r3, r4
+ 1161 019a 2E49     		ldr	r1, .L71+48
+ 1162 019c F868     		ldr	r0, [r7, #12]
+ 1163 019e FFF7FEFF 		bl	fprintf
+ 1164              	.L68:
+ 324:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             }
+ 325:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             buffer[length + dataIndex + dataLen] = tmp;
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 28
+
+
+ 1165              		.loc 1 325 0
+ 1166 01a2 7A6B     		ldr	r2, [r7, #52]
+ 1167 01a4 BB6A     		ldr	r3, [r7, #40]
+ 1168 01a6 1A44     		add	r2, r2, r3
+ 1169 01a8 7B6A     		ldr	r3, [r7, #36]
+ 1170 01aa 1344     		add	r3, r3, r2
+ 1171 01ac BA68     		ldr	r2, [r7, #8]
+ 1172 01ae 1344     		add	r3, r3, r2
+ 1173 01b0 97F82F20 		ldrb	r2, [r7, #47]
+ 1174 01b4 1A70     		strb	r2, [r3]
+ 1175              	.L66:
+ 1176              	.LBE3:
+ 326:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 327:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent + 1);
+ 1177              		.loc 1 327 0
+ 1178 01b6 3B68     		ldr	r3, [r7]
+ 1179 01b8 0133     		adds	r3, r3, #1
+ 1180 01ba 1946     		mov	r1, r3
+ 1181 01bc F868     		ldr	r0, [r7, #12]
+ 1182 01be FFF7FEFF 		bl	print_indent
+ 328:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "}\r\n");
+ 1183              		.loc 1 328 0
+ 1184 01c2 FB68     		ldr	r3, [r7, #12]
+ 1185 01c4 0322     		movs	r2, #3
+ 1186 01c6 0121     		movs	r1, #1
+ 1187 01c8 2348     		ldr	r0, .L71+52
+ 1188 01ca FFF7FEFF 		bl	fwrite
+ 329:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         length += result;
+ 1189              		.loc 1 329 0
+ 1190 01ce 7A6B     		ldr	r2, [r7, #52]
+ 1191 01d0 3B6B     		ldr	r3, [r7, #48]
+ 1192 01d2 1344     		add	r3, r3, r2
+ 1193 01d4 7B63     		str	r3, [r7, #52]
+ 330:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 1194              		.loc 1 330 0
+ 1195 01d6 3968     		ldr	r1, [r7]
+ 1196 01d8 F868     		ldr	r0, [r7, #12]
+ 1197 01da FFF7FEFF 		bl	print_indent
+ 331:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "}\r\n");
+ 1198              		.loc 1 331 0
+ 1199 01de FB68     		ldr	r3, [r7, #12]
+ 1200 01e0 0322     		movs	r2, #3
+ 1201 01e2 0121     		movs	r1, #1
+ 1202 01e4 1C48     		ldr	r0, .L71+52
+ 1203 01e6 FFF7FEFF 		bl	fwrite
+ 1204              	.L58:
+ 272:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 1205              		.loc 1 272 0
+ 1206 01ea 7B6B     		ldr	r3, [r7, #52]
+ 1207 01ec BA68     		ldr	r2, [r7, #8]
+ 1208 01ee D018     		adds	r0, r2, r3
+ 1209 01f0 7B6B     		ldr	r3, [r7, #52]
+ 1210 01f2 7A68     		ldr	r2, [r7, #4]
+ 1211 01f4 D11A     		subs	r1, r2, r3
+ 1212 01f6 07F12C04 		add	r4, r7, #44
+ 1213 01fa 07F12E02 		add	r2, r7, #46
+ 1214 01fe 07F12403 		add	r3, r7, #36
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 29
+
+
+ 1215 0202 0193     		str	r3, [sp, #4]
+ 1216 0204 07F12803 		add	r3, r7, #40
+ 1217 0208 0093     		str	r3, [sp]
+ 1218 020a 2346     		mov	r3, r4
+ 1219 020c FFF7FEFF 		bl	lwm2m_decode_TLV
+ 1220 0210 3863     		str	r0, [r7, #48]
+ 1221 0212 3B6B     		ldr	r3, [r7, #48]
+ 1222 0214 002B     		cmp	r3, #0
+ 1223 0216 7FF4FDAE 		bne	.L69
+ 332:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 333:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 1224              		.loc 1 333 0
+ 1225 021a 00BF     		nop
+ 1226 021c 3C37     		adds	r7, r7, #60
+ 1227              	.LCFI49:
+ 1228              		.cfi_def_cfa_offset 12
+ 1229 021e BD46     		mov	sp, r7
+ 1230              	.LCFI50:
+ 1231              		.cfi_def_cfa_register 13
+ 1232              		@ sp needed
+ 1233 0220 90BD     		pop	{r4, r7, pc}
+ 1234              	.L72:
+ 1235 0222 00BF     		.align	2
+ 1236              	.L71:
+ 1237 0224 88000000 		.word	.LC6
+ 1238 0228 8C000000 		.word	.LC7
+ 1239 022c 94000000 		.word	.LC8
+ 1240 0230 9C000000 		.word	.LC9
+ 1241 0234 AC000000 		.word	.LC10
+ 1242 0238 C0000000 		.word	.LC11
+ 1243 023c D0000000 		.word	.LC12
+ 1244 0240 E0000000 		.word	.LC13
+ 1245 0244 E4000000 		.word	.LC14
+ 1246 0248 F8000000 		.word	.LC15
+ 1247 024c 00010000 		.word	.LC16
+ 1248 0250 18010000 		.word	.LC17
+ 1249 0254 1C010000 		.word	.LC18
+ 1250 0258 34010000 		.word	.LC19
+ 1251              		.cfi_endproc
+ 1252              	.LFE143:
+ 1254              		.section	.rodata
+ 1255              		.align	2
+ 1256              	.LC20:
+ 1257 0138 25642062 		.ascii	"%d bytes received of type \000"
+ 1257      79746573 
+ 1257      20726563 
+ 1257      65697665 
+ 1257      64206F66 
+ 1258 0153 00       		.align	2
+ 1259              	.LC21:
+ 1260 0154 74657874 		.ascii	"text/plain:\015\012\000"
+ 1260      2F706C61 
+ 1260      696E3A0D 
+ 1260      0A00
+ 1261 0162 0000     		.align	2
+ 1262              	.LC22:
+ 1263 0164 6170706C 		.ascii	"application/octet-stream:\015\012\000"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 30
+
+
+ 1263      69636174 
+ 1263      696F6E2F 
+ 1263      6F637465 
+ 1263      742D7374 
+ 1264              		.align	2
+ 1265              	.LC23:
+ 1266 0180 6170706C 		.ascii	"application/vnd.oma.lwm2m+tlv:\015\012\000"
+ 1266      69636174 
+ 1266      696F6E2F 
+ 1266      766E642E 
+ 1266      6F6D612E 
+ 1267 01a1 000000   		.align	2
+ 1268              	.LC24:
+ 1269 01a4 6170706C 		.ascii	"application/vnd.oma.lwm2m+json:\015\012\000"
+ 1269      69636174 
+ 1269      696F6E2F 
+ 1269      766E642E 
+ 1269      6F6D612E 
+ 1270 01c6 0000     		.align	2
+ 1271              	.LC25:
+ 1272 01c8 6170706C 		.ascii	"application/link-format:\015\012\000"
+ 1272      69636174 
+ 1272      696F6E2F 
+ 1272      6C696E6B 
+ 1272      2D666F72 
+ 1273 01e3 00       		.align	2
+ 1274              	.LC26:
+ 1275 01e4 556E6B6E 		.ascii	"Unknown (%d):\015\012\000"
+ 1275      6F776E20 
+ 1275      28256429 
+ 1275      3A0D0A00 
+ 1276              		.section	.text.output_data,"ax",%progbits
+ 1277              		.align	1
+ 1278              		.global	output_data
+ 1279              		.syntax unified
+ 1280              		.thumb
+ 1281              		.thumb_func
+ 1282              		.fpu fpv4-sp-d16
+ 1284              	output_data:
+ 1285              	.LFB144:
+ 334:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 335:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void output_data(FILE *stream,
+ 336:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                  lwm2m_media_type_t format,
+ 337:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                  uint8_t *data,
+ 338:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                  int dataLength,
+ 339:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                  int indent)
+ 340:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 1286              		.loc 1 340 0
+ 1287              		.cfi_startproc
+ 1288              		@ args = 4, pretend = 0, frame = 24
+ 1289              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1290 0000 80B5     		push	{r7, lr}
+ 1291              	.LCFI51:
+ 1292              		.cfi_def_cfa_offset 8
+ 1293              		.cfi_offset 7, -8
+ 1294              		.cfi_offset 14, -4
+ 1295 0002 86B0     		sub	sp, sp, #24
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 31
+
+
+ 1296              	.LCFI52:
+ 1297              		.cfi_def_cfa_offset 32
+ 1298 0004 00AF     		add	r7, sp, #0
+ 1299              	.LCFI53:
+ 1300              		.cfi_def_cfa_register 7
+ 1301 0006 F860     		str	r0, [r7, #12]
+ 1302 0008 7A60     		str	r2, [r7, #4]
+ 1303 000a 3B60     		str	r3, [r7]
+ 1304 000c 0B46     		mov	r3, r1	@ movhi
+ 1305 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 341:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int i;
+ 342:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 343:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     print_indent(stream, indent);
+ 1306              		.loc 1 343 0
+ 1307 0010 396A     		ldr	r1, [r7, #32]
+ 1308 0012 F868     		ldr	r0, [r7, #12]
+ 1309 0014 FFF7FEFF 		bl	print_indent
+ 344:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     fprintf(stream, "%d bytes received of type ", dataLength);
+ 1310              		.loc 1 344 0
+ 1311 0018 3A68     		ldr	r2, [r7]
+ 1312 001a 4849     		ldr	r1, .L86
+ 1313 001c F868     		ldr	r0, [r7, #12]
+ 1314 001e FFF7FEFF 		bl	fprintf
+ 345:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 346:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     switch (format)
+ 1315              		.loc 1 346 0
+ 1316 0022 7B89     		ldrh	r3, [r7, #10]
+ 1317 0024 2A2B     		cmp	r3, #42
+ 1318 0026 1CD0     		beq	.L75
+ 1319 0028 2A2B     		cmp	r3, #42
+ 1320 002a 04DC     		bgt	.L76
+ 1321 002c 002B     		cmp	r3, #0
+ 1322 002e 0BD0     		beq	.L77
+ 1323 0030 282B     		cmp	r3, #40
+ 1324 0032 51D0     		beq	.L78
+ 1325 0034 71E0     		b	.L74
+ 1326              	.L76:
+ 1327 0036 42F61652 		movw	r2, #11542
+ 1328 003a 9342     		cmp	r3, r2
+ 1329 003c 1ED0     		beq	.L79
+ 1330 003e 42F61752 		movw	r2, #11543
+ 1331 0042 9342     		cmp	r3, r2
+ 1332 0044 27D0     		beq	.L80
+ 1333 0046 68E0     		b	.L74
+ 1334              	.L77:
+ 347:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 348:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case LWM2M_CONTENT_TEXT:
+ 349:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "text/plain:\r\n");
+ 1335              		.loc 1 349 0
+ 1336 0048 FB68     		ldr	r3, [r7, #12]
+ 1337 004a 0D22     		movs	r2, #13
+ 1338 004c 0121     		movs	r1, #1
+ 1339 004e 3C48     		ldr	r0, .L86+4
+ 1340 0050 FFF7FEFF 		bl	fwrite
+ 350:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         output_buffer(stream, data, dataLength, indent);
+ 1341              		.loc 1 350 0
+ 1342 0054 3B6A     		ldr	r3, [r7, #32]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 32
+
+
+ 1343 0056 3A68     		ldr	r2, [r7]
+ 1344 0058 7968     		ldr	r1, [r7, #4]
+ 1345 005a F868     		ldr	r0, [r7, #12]
+ 1346 005c FFF7FEFF 		bl	output_buffer
+ 351:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 1347              		.loc 1 351 0
+ 1348 0060 68E0     		b	.L81
+ 1349              	.L75:
+ 352:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 353:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case LWM2M_CONTENT_OPAQUE:
+ 354:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "application/octet-stream:\r\n");
+ 1350              		.loc 1 354 0
+ 1351 0062 FB68     		ldr	r3, [r7, #12]
+ 1352 0064 1B22     		movs	r2, #27
+ 1353 0066 0121     		movs	r1, #1
+ 1354 0068 3648     		ldr	r0, .L86+8
+ 1355 006a FFF7FEFF 		bl	fwrite
+ 355:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         output_buffer(stream, data, dataLength, indent);
+ 1356              		.loc 1 355 0
+ 1357 006e 3B6A     		ldr	r3, [r7, #32]
+ 1358 0070 3A68     		ldr	r2, [r7]
+ 1359 0072 7968     		ldr	r1, [r7, #4]
+ 1360 0074 F868     		ldr	r0, [r7, #12]
+ 1361 0076 FFF7FEFF 		bl	output_buffer
+ 356:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 1362              		.loc 1 356 0
+ 1363 007a 5BE0     		b	.L81
+ 1364              	.L79:
+ 357:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 358:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case LWM2M_CONTENT_TLV:
+ 359:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "application/vnd.oma.lwm2m+tlv:\r\n");
+ 1365              		.loc 1 359 0
+ 1366 007c FB68     		ldr	r3, [r7, #12]
+ 1367 007e 2022     		movs	r2, #32
+ 1368 0080 0121     		movs	r1, #1
+ 1369 0082 3148     		ldr	r0, .L86+12
+ 1370 0084 FFF7FEFF 		bl	fwrite
+ 360:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         output_tlv(stream, data, dataLength, indent);
+ 1371              		.loc 1 360 0
+ 1372 0088 3A68     		ldr	r2, [r7]
+ 1373 008a 3B6A     		ldr	r3, [r7, #32]
+ 1374 008c 7968     		ldr	r1, [r7, #4]
+ 1375 008e F868     		ldr	r0, [r7, #12]
+ 1376 0090 FFF7FEFF 		bl	output_tlv
+ 361:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 1377              		.loc 1 361 0
+ 1378 0094 4EE0     		b	.L81
+ 1379              	.L80:
+ 362:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 363:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case LWM2M_CONTENT_JSON:
+ 364:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "application/vnd.oma.lwm2m+json:\r\n");
+ 1380              		.loc 1 364 0
+ 1381 0096 FB68     		ldr	r3, [r7, #12]
+ 1382 0098 2122     		movs	r2, #33
+ 1383 009a 0121     		movs	r1, #1
+ 1384 009c 2B48     		ldr	r0, .L86+16
+ 1385 009e FFF7FEFF 		bl	fwrite
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 33
+
+
+ 365:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 1386              		.loc 1 365 0
+ 1387 00a2 396A     		ldr	r1, [r7, #32]
+ 1388 00a4 F868     		ldr	r0, [r7, #12]
+ 1389 00a6 FFF7FEFF 		bl	print_indent
+ 366:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; i < dataLength ; i++)
+ 1390              		.loc 1 366 0
+ 1391 00aa 0023     		movs	r3, #0
+ 1392 00ac 7B61     		str	r3, [r7, #20]
+ 1393 00ae 0AE0     		b	.L82
+ 1394              	.L83:
+ 367:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 368:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "%c", data[i]);
+ 1395              		.loc 1 368 0 discriminator 3
+ 1396 00b0 7B69     		ldr	r3, [r7, #20]
+ 1397 00b2 7A68     		ldr	r2, [r7, #4]
+ 1398 00b4 1344     		add	r3, r3, r2
+ 1399 00b6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1400 00b8 F968     		ldr	r1, [r7, #12]
+ 1401 00ba 1846     		mov	r0, r3
+ 1402 00bc FFF7FEFF 		bl	fputc
+ 366:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; i < dataLength ; i++)
+ 1403              		.loc 1 366 0 discriminator 3
+ 1404 00c0 7B69     		ldr	r3, [r7, #20]
+ 1405 00c2 0133     		adds	r3, r3, #1
+ 1406 00c4 7B61     		str	r3, [r7, #20]
+ 1407              	.L82:
+ 366:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; i < dataLength ; i++)
+ 1408              		.loc 1 366 0 is_stmt 0 discriminator 1
+ 1409 00c6 7A69     		ldr	r2, [r7, #20]
+ 1410 00c8 3B68     		ldr	r3, [r7]
+ 1411 00ca 9A42     		cmp	r2, r3
+ 1412 00cc F0DB     		blt	.L83
+ 369:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 370:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "\n");
+ 1413              		.loc 1 370 0 is_stmt 1
+ 1414 00ce F968     		ldr	r1, [r7, #12]
+ 1415 00d0 0A20     		movs	r0, #10
+ 1416 00d2 FFF7FEFF 		bl	fputc
+ 371:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 1417              		.loc 1 371 0
+ 1418 00d6 2DE0     		b	.L81
+ 1419              	.L78:
+ 372:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 373:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case LWM2M_CONTENT_LINK:
+ 374:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "application/link-format:\r\n");
+ 1420              		.loc 1 374 0
+ 1421 00d8 FB68     		ldr	r3, [r7, #12]
+ 1422 00da 1A22     		movs	r2, #26
+ 1423 00dc 0121     		movs	r1, #1
+ 1424 00de 1C48     		ldr	r0, .L86+20
+ 1425 00e0 FFF7FEFF 		bl	fwrite
+ 375:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 1426              		.loc 1 375 0
+ 1427 00e4 396A     		ldr	r1, [r7, #32]
+ 1428 00e6 F868     		ldr	r0, [r7, #12]
+ 1429 00e8 FFF7FEFF 		bl	print_indent
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 34
+
+
+ 376:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; i < dataLength ; i++)
+ 1430              		.loc 1 376 0
+ 1431 00ec 0023     		movs	r3, #0
+ 1432 00ee 7B61     		str	r3, [r7, #20]
+ 1433 00f0 0AE0     		b	.L84
+ 1434              	.L85:
+ 377:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 378:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "%c", data[i]);
+ 1435              		.loc 1 378 0 discriminator 3
+ 1436 00f2 7B69     		ldr	r3, [r7, #20]
+ 1437 00f4 7A68     		ldr	r2, [r7, #4]
+ 1438 00f6 1344     		add	r3, r3, r2
+ 1439 00f8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1440 00fa F968     		ldr	r1, [r7, #12]
+ 1441 00fc 1846     		mov	r0, r3
+ 1442 00fe FFF7FEFF 		bl	fputc
+ 376:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; i < dataLength ; i++)
+ 1443              		.loc 1 376 0 discriminator 3
+ 1444 0102 7B69     		ldr	r3, [r7, #20]
+ 1445 0104 0133     		adds	r3, r3, #1
+ 1446 0106 7B61     		str	r3, [r7, #20]
+ 1447              	.L84:
+ 376:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         for (i = 0 ; i < dataLength ; i++)
+ 1448              		.loc 1 376 0 is_stmt 0 discriminator 1
+ 1449 0108 7A69     		ldr	r2, [r7, #20]
+ 1450 010a 3B68     		ldr	r3, [r7]
+ 1451 010c 9A42     		cmp	r2, r3
+ 1452 010e F0DB     		blt	.L85
+ 379:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 380:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "\n");
+ 1453              		.loc 1 380 0 is_stmt 1
+ 1454 0110 F968     		ldr	r1, [r7, #12]
+ 1455 0112 0A20     		movs	r0, #10
+ 1456 0114 FFF7FEFF 		bl	fputc
+ 381:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 1457              		.loc 1 381 0
+ 1458 0118 0CE0     		b	.L81
+ 1459              	.L74:
+ 382:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 383:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     default:
+ 384:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "Unknown (%d):\r\n", format);
+ 1460              		.loc 1 384 0
+ 1461 011a 7B89     		ldrh	r3, [r7, #10]
+ 1462 011c 1A46     		mov	r2, r3
+ 1463 011e 0D49     		ldr	r1, .L86+24
+ 1464 0120 F868     		ldr	r0, [r7, #12]
+ 1465 0122 FFF7FEFF 		bl	fprintf
+ 385:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         output_buffer(stream, data, dataLength, indent);
+ 1466              		.loc 1 385 0
+ 1467 0126 3B6A     		ldr	r3, [r7, #32]
+ 1468 0128 3A68     		ldr	r2, [r7]
+ 1469 012a 7968     		ldr	r1, [r7, #4]
+ 1470 012c F868     		ldr	r0, [r7, #12]
+ 1471 012e FFF7FEFF 		bl	output_buffer
+ 386:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 1472              		.loc 1 386 0
+ 1473 0132 00BF     		nop
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 35
+
+
+ 1474              	.L81:
+ 387:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 388:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 1475              		.loc 1 388 0
+ 1476 0134 00BF     		nop
+ 1477 0136 1837     		adds	r7, r7, #24
+ 1478              	.LCFI54:
+ 1479              		.cfi_def_cfa_offset 8
+ 1480 0138 BD46     		mov	sp, r7
+ 1481              	.LCFI55:
+ 1482              		.cfi_def_cfa_register 13
+ 1483              		@ sp needed
+ 1484 013a 80BD     		pop	{r7, pc}
+ 1485              	.L87:
+ 1486              		.align	2
+ 1487              	.L86:
+ 1488 013c 38010000 		.word	.LC20
+ 1489 0140 54010000 		.word	.LC21
+ 1490 0144 64010000 		.word	.LC22
+ 1491 0148 80010000 		.word	.LC23
+ 1492 014c A4010000 		.word	.LC24
+ 1493 0150 C8010000 		.word	.LC25
+ 1494 0154 E4010000 		.word	.LC26
+ 1495              		.cfi_endproc
+ 1496              	.LFE144:
+ 1498              		.section	.rodata
+ 1499              		.align	2
+ 1500              	.LC27:
+ 1501 01f4 69643A20 		.ascii	"id: %d\015\012\000"
+ 1501      25640D0A 
+ 1501      00
+ 1502 01fd 000000   		.align	2
+ 1503              	.LC28:
+ 1504 0200 74797065 		.ascii	"type: \000"
+ 1504      3A2000
+ 1505 0207 00       		.align	2
+ 1506              	.LC29:
+ 1507 0208 4C574D32 		.ascii	"LWM2M_TYPE_OBJECT\015\012\000"
+ 1507      4D5F5459 
+ 1507      50455F4F 
+ 1507      424A4543 
+ 1507      540D0A00 
+ 1508              		.align	2
+ 1509              	.LC30:
+ 1510 021c 4C574D32 		.ascii	"LWM2M_TYPE_OBJECT_INSTANCE\015\012\000"
+ 1510      4D5F5459 
+ 1510      50455F4F 
+ 1510      424A4543 
+ 1510      545F494E 
+ 1511 0239 000000   		.align	2
+ 1512              	.LC31:
+ 1513 023c 4C574D32 		.ascii	"LWM2M_TYPE_MULTIPLE_RESOURCE\015\012\000"
+ 1513      4D5F5459 
+ 1513      50455F4D 
+ 1513      554C5449 
+ 1513      504C455F 
+ 1514 025b 00       		.align	2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 36
+
+
+ 1515              	.LC32:
+ 1516 025c 4C574D32 		.ascii	"LWM2M_TYPE_UNDEFINED\015\012\000"
+ 1516      4D5F5459 
+ 1516      50455F55 
+ 1516      4E444546 
+ 1516      494E4544 
+ 1517 0273 00       		.align	2
+ 1518              	.LC33:
+ 1519 0274 4C574D32 		.ascii	"LWM2M_TYPE_STRING\015\012\000"
+ 1519      4D5F5459 
+ 1519      50455F53 
+ 1519      5452494E 
+ 1519      470D0A00 
+ 1520              		.align	2
+ 1521              	.LC34:
+ 1522 0288 22252E2A 		.ascii	"\"%.*s\"\015\012\000"
+ 1522      73220D0A 
+ 1522      00
+ 1523 0291 000000   		.align	2
+ 1524              	.LC35:
+ 1525 0294 4C574D32 		.ascii	"LWM2M_TYPE_OPAQUE\015\012\000"
+ 1525      4D5F5459 
+ 1525      50455F4F 
+ 1525      50415155 
+ 1525      450D0A00 
+ 1526              		.align	2
+ 1527              	.LC36:
+ 1528 02a8 4C574D32 		.ascii	"LWM2M_TYPE_INTEGER: \000"
+ 1528      4D5F5459 
+ 1528      50455F49 
+ 1528      4E544547 
+ 1528      45523A20 
+ 1529 02bd 000000   		.align	2
+ 1530              	.LC37:
+ 1531 02c0 0D0A00   		.ascii	"\015\012\000"
+ 1532 02c3 00       		.align	2
+ 1533              	.LC38:
+ 1534 02c4 4C574D32 		.ascii	"LWM2M_TYPE_FLOAT: \000"
+ 1534      4D5F5459 
+ 1534      50455F46 
+ 1534      4C4F4154 
+ 1534      3A2000
+ 1535 02d7 00       		.align	2
+ 1536              	.LC39:
+ 1537 02d8 4C574D32 		.ascii	"LWM2M_TYPE_BOOLEAN: \000"
+ 1537      4D5F5459 
+ 1537      50455F42 
+ 1537      4F4F4C45 
+ 1537      414E3A20 
+ 1538 02ed 000000   		.align	2
+ 1539              	.LC40:
+ 1540 02f0 74727565 		.ascii	"true\000"
+ 1540      00
+ 1541 02f5 000000   		.align	2
+ 1542              	.LC41:
+ 1543 02f8 66616C73 		.ascii	"false\000"
+ 1543      6500
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 37
+
+
+ 1544 02fe 0000     		.align	2
+ 1545              	.LC42:
+ 1546 0300 4C574D32 		.ascii	"LWM2M_TYPE_OBJECT_LINK\015\012\000"
+ 1546      4D5F5459 
+ 1546      50455F4F 
+ 1546      424A4543 
+ 1546      545F4C49 
+ 1547 0319 000000   		.align	2
+ 1548              	.LC43:
+ 1549 031c 756E6B6E 		.ascii	"unknown (%d)\015\012\000"
+ 1549      6F776E20 
+ 1549      28256429 
+ 1549      0D0A00
+ 1550              		.section	.text.dump_tlv,"ax",%progbits
+ 1551              		.align	1
+ 1552              		.global	dump_tlv
+ 1553              		.syntax unified
+ 1554              		.thumb
+ 1555              		.thumb_func
+ 1556              		.fpu fpv4-sp-d16
+ 1558              	dump_tlv:
+ 1559              	.LFB145:
+ 389:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 390:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void dump_tlv(FILE *stream,
+ 391:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****               int size,
+ 392:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****               lwm2m_data_t *dataP,
+ 393:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****               int indent)
+ 394:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 1560              		.loc 1 394 0
+ 1561              		.cfi_startproc
+ 1562              		@ args = 0, pretend = 0, frame = 24
+ 1563              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1564 0000 90B5     		push	{r4, r7, lr}
+ 1565              	.LCFI56:
+ 1566              		.cfi_def_cfa_offset 12
+ 1567              		.cfi_offset 4, -12
+ 1568              		.cfi_offset 7, -8
+ 1569              		.cfi_offset 14, -4
+ 1570 0002 87B0     		sub	sp, sp, #28
+ 1571              	.LCFI57:
+ 1572              		.cfi_def_cfa_offset 40
+ 1573 0004 00AF     		add	r7, sp, #0
+ 1574              	.LCFI58:
+ 1575              		.cfi_def_cfa_register 7
+ 1576 0006 F860     		str	r0, [r7, #12]
+ 1577 0008 B960     		str	r1, [r7, #8]
+ 1578 000a 7A60     		str	r2, [r7, #4]
+ 1579 000c 3B60     		str	r3, [r7]
+ 395:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int i;
+ 396:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 397:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     for(i = 0 ; i < size ; i++)
+ 1580              		.loc 1 397 0
+ 1581 000e 0023     		movs	r3, #0
+ 1582 0010 7B61     		str	r3, [r7, #20]
+ 1583 0012 3DE1     		b	.L89
+ 1584              	.L105:
+ 398:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 38
+
+
+ 399:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 1585              		.loc 1 399 0
+ 1586 0014 3968     		ldr	r1, [r7]
+ 1587 0016 F868     		ldr	r0, [r7, #12]
+ 1588 0018 FFF7FEFF 		bl	print_indent
+ 400:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "{\r\n");
+ 1589              		.loc 1 400 0
+ 1590 001c FB68     		ldr	r3, [r7, #12]
+ 1591 001e 0322     		movs	r2, #3
+ 1592 0020 0121     		movs	r1, #1
+ 1593 0022 A048     		ldr	r0, .L106
+ 1594 0024 FFF7FEFF 		bl	fwrite
+ 401:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent + 1);
+ 1595              		.loc 1 401 0
+ 1596 0028 3B68     		ldr	r3, [r7]
+ 1597 002a 0133     		adds	r3, r3, #1
+ 1598 002c 1946     		mov	r1, r3
+ 1599 002e F868     		ldr	r0, [r7, #12]
+ 1600 0030 FFF7FEFF 		bl	print_indent
+ 402:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "id: %d\r\n", dataP[i].id);
+ 1601              		.loc 1 402 0
+ 1602 0034 7B69     		ldr	r3, [r7, #20]
+ 1603 0036 1B01     		lsls	r3, r3, #4
+ 1604 0038 7A68     		ldr	r2, [r7, #4]
+ 1605 003a 1344     		add	r3, r3, r2
+ 1606 003c 5B88     		ldrh	r3, [r3, #2]
+ 1607 003e 1A46     		mov	r2, r3
+ 1608 0040 9949     		ldr	r1, .L106+4
+ 1609 0042 F868     		ldr	r0, [r7, #12]
+ 1610 0044 FFF7FEFF 		bl	fprintf
+ 403:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 404:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent + 1);
+ 1611              		.loc 1 404 0
+ 1612 0048 3B68     		ldr	r3, [r7]
+ 1613 004a 0133     		adds	r3, r3, #1
+ 1614 004c 1946     		mov	r1, r3
+ 1615 004e F868     		ldr	r0, [r7, #12]
+ 1616 0050 FFF7FEFF 		bl	print_indent
+ 405:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "type: ");
+ 1617              		.loc 1 405 0
+ 1618 0054 FB68     		ldr	r3, [r7, #12]
+ 1619 0056 0622     		movs	r2, #6
+ 1620 0058 0121     		movs	r1, #1
+ 1621 005a 9448     		ldr	r0, .L106+8
+ 1622 005c FFF7FEFF 		bl	fwrite
+ 406:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         switch (dataP[i].type)
+ 1623              		.loc 1 406 0
+ 1624 0060 7B69     		ldr	r3, [r7, #20]
+ 1625 0062 1B01     		lsls	r3, r3, #4
+ 1626 0064 7A68     		ldr	r2, [r7, #4]
+ 1627 0066 1344     		add	r3, r3, r2
+ 1628 0068 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1629 006a 092B     		cmp	r3, #9
+ 1630 006c 00F2F880 		bhi	.L90
+ 1631 0070 01A2     		adr	r2, .L92
+ 1632 0072 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 1633 0076 00BF     		.p2align 2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 39
+
+
+ 1634              	.L92:
+ 1635 0078 2B010000 		.word	.L91+1
+ 1636 007c A1000000 		.word	.L93+1
+ 1637 0080 CF000000 		.word	.L94+1
+ 1638 0084 FD000000 		.word	.L95+1
+ 1639 0088 39010000 		.word	.L96+1
+ 1640 008c 73010000 		.word	.L97+1
+ 1641 0090 A1010000 		.word	.L98+1
+ 1642 0094 DF010000 		.word	.L99+1
+ 1643 0098 1D020000 		.word	.L100+1
+ 1644 009c 53020000 		.word	.L101+1
+ 1645              		.p2align 1
+ 1646              	.L93:
+ 407:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         {
+ 408:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_OBJECT:
+ 409:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_OBJECT\r\n");
+ 1647              		.loc 1 409 0
+ 1648 00a0 FB68     		ldr	r3, [r7, #12]
+ 1649 00a2 1322     		movs	r2, #19
+ 1650 00a4 0121     		movs	r1, #1
+ 1651 00a6 8248     		ldr	r0, .L106+12
+ 1652 00a8 FFF7FEFF 		bl	fwrite
+ 410:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             dump_tlv(stream, dataP[i].value.asChildren.count, dataP[i].value.asChildren.array, inde
+ 1653              		.loc 1 410 0
+ 1654 00ac 7B69     		ldr	r3, [r7, #20]
+ 1655 00ae 1B01     		lsls	r3, r3, #4
+ 1656 00b0 7A68     		ldr	r2, [r7, #4]
+ 1657 00b2 1344     		add	r3, r3, r2
+ 1658 00b4 9B68     		ldr	r3, [r3, #8]
+ 1659 00b6 1946     		mov	r1, r3
+ 1660 00b8 7B69     		ldr	r3, [r7, #20]
+ 1661 00ba 1B01     		lsls	r3, r3, #4
+ 1662 00bc 7A68     		ldr	r2, [r7, #4]
+ 1663 00be 1344     		add	r3, r3, r2
+ 1664 00c0 DA68     		ldr	r2, [r3, #12]
+ 1665 00c2 3B68     		ldr	r3, [r7]
+ 1666 00c4 0133     		adds	r3, r3, #1
+ 1667 00c6 F868     		ldr	r0, [r7, #12]
+ 1668 00c8 FFF7FEFF 		bl	dump_tlv
+ 411:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1669              		.loc 1 411 0
+ 1670 00cc D3E0     		b	.L102
+ 1671              	.L94:
+ 412:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_OBJECT_INSTANCE:
+ 413:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_OBJECT_INSTANCE\r\n");
+ 1672              		.loc 1 413 0
+ 1673 00ce FB68     		ldr	r3, [r7, #12]
+ 1674 00d0 1C22     		movs	r2, #28
+ 1675 00d2 0121     		movs	r1, #1
+ 1676 00d4 7748     		ldr	r0, .L106+16
+ 1677 00d6 FFF7FEFF 		bl	fwrite
+ 414:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             dump_tlv(stream, dataP[i].value.asChildren.count, dataP[i].value.asChildren.array, inde
+ 1678              		.loc 1 414 0
+ 1679 00da 7B69     		ldr	r3, [r7, #20]
+ 1680 00dc 1B01     		lsls	r3, r3, #4
+ 1681 00de 7A68     		ldr	r2, [r7, #4]
+ 1682 00e0 1344     		add	r3, r3, r2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 40
+
+
+ 1683 00e2 9B68     		ldr	r3, [r3, #8]
+ 1684 00e4 1946     		mov	r1, r3
+ 1685 00e6 7B69     		ldr	r3, [r7, #20]
+ 1686 00e8 1B01     		lsls	r3, r3, #4
+ 1687 00ea 7A68     		ldr	r2, [r7, #4]
+ 1688 00ec 1344     		add	r3, r3, r2
+ 1689 00ee DA68     		ldr	r2, [r3, #12]
+ 1690 00f0 3B68     		ldr	r3, [r7]
+ 1691 00f2 0133     		adds	r3, r3, #1
+ 1692 00f4 F868     		ldr	r0, [r7, #12]
+ 1693 00f6 FFF7FEFF 		bl	dump_tlv
+ 415:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1694              		.loc 1 415 0
+ 1695 00fa BCE0     		b	.L102
+ 1696              	.L95:
+ 416:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_MULTIPLE_RESOURCE:
+ 417:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_MULTIPLE_RESOURCE\r\n");
+ 1697              		.loc 1 417 0
+ 1698 00fc FB68     		ldr	r3, [r7, #12]
+ 1699 00fe 1E22     		movs	r2, #30
+ 1700 0100 0121     		movs	r1, #1
+ 1701 0102 6D48     		ldr	r0, .L106+20
+ 1702 0104 FFF7FEFF 		bl	fwrite
+ 418:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             dump_tlv(stream, dataP[i].value.asChildren.count, dataP[i].value.asChildren.array, inde
+ 1703              		.loc 1 418 0
+ 1704 0108 7B69     		ldr	r3, [r7, #20]
+ 1705 010a 1B01     		lsls	r3, r3, #4
+ 1706 010c 7A68     		ldr	r2, [r7, #4]
+ 1707 010e 1344     		add	r3, r3, r2
+ 1708 0110 9B68     		ldr	r3, [r3, #8]
+ 1709 0112 1946     		mov	r1, r3
+ 1710 0114 7B69     		ldr	r3, [r7, #20]
+ 1711 0116 1B01     		lsls	r3, r3, #4
+ 1712 0118 7A68     		ldr	r2, [r7, #4]
+ 1713 011a 1344     		add	r3, r3, r2
+ 1714 011c DA68     		ldr	r2, [r3, #12]
+ 1715 011e 3B68     		ldr	r3, [r7]
+ 1716 0120 0133     		adds	r3, r3, #1
+ 1717 0122 F868     		ldr	r0, [r7, #12]
+ 1718 0124 FFF7FEFF 		bl	dump_tlv
+ 419:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1719              		.loc 1 419 0
+ 1720 0128 A5E0     		b	.L102
+ 1721              	.L91:
+ 420:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_UNDEFINED:
+ 421:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_UNDEFINED\r\n");
+ 1722              		.loc 1 421 0
+ 1723 012a FB68     		ldr	r3, [r7, #12]
+ 1724 012c 1622     		movs	r2, #22
+ 1725 012e 0121     		movs	r1, #1
+ 1726 0130 6248     		ldr	r0, .L106+24
+ 1727 0132 FFF7FEFF 		bl	fwrite
+ 422:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1728              		.loc 1 422 0
+ 1729 0136 9EE0     		b	.L102
+ 1730              	.L96:
+ 423:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_STRING:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 41
+
+
+ 424:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_STRING\r\n");
+ 1731              		.loc 1 424 0
+ 1732 0138 FB68     		ldr	r3, [r7, #12]
+ 1733 013a 1322     		movs	r2, #19
+ 1734 013c 0121     		movs	r1, #1
+ 1735 013e 6048     		ldr	r0, .L106+28
+ 1736 0140 FFF7FEFF 		bl	fwrite
+ 425:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             print_indent(stream, indent + 1);
+ 1737              		.loc 1 425 0
+ 1738 0144 3B68     		ldr	r3, [r7]
+ 1739 0146 0133     		adds	r3, r3, #1
+ 1740 0148 1946     		mov	r1, r3
+ 1741 014a F868     		ldr	r0, [r7, #12]
+ 1742 014c FFF7FEFF 		bl	print_indent
+ 426:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "\"%.*s\"\r\n", (int)dataP[i].value.asBuffer.length, dataP[i].value.asB
+ 1743              		.loc 1 426 0
+ 1744 0150 7B69     		ldr	r3, [r7, #20]
+ 1745 0152 1B01     		lsls	r3, r3, #4
+ 1746 0154 7A68     		ldr	r2, [r7, #4]
+ 1747 0156 1344     		add	r3, r3, r2
+ 1748 0158 9B68     		ldr	r3, [r3, #8]
+ 1749 015a 1946     		mov	r1, r3
+ 1750 015c 7B69     		ldr	r3, [r7, #20]
+ 1751 015e 1B01     		lsls	r3, r3, #4
+ 1752 0160 7A68     		ldr	r2, [r7, #4]
+ 1753 0162 1344     		add	r3, r3, r2
+ 1754 0164 DB68     		ldr	r3, [r3, #12]
+ 1755 0166 0A46     		mov	r2, r1
+ 1756 0168 5649     		ldr	r1, .L106+32
+ 1757 016a F868     		ldr	r0, [r7, #12]
+ 1758 016c FFF7FEFF 		bl	fprintf
+ 427:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1759              		.loc 1 427 0
+ 1760 0170 81E0     		b	.L102
+ 1761              	.L97:
+ 428:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_OPAQUE:
+ 429:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_OPAQUE\r\n");
+ 1762              		.loc 1 429 0
+ 1763 0172 FB68     		ldr	r3, [r7, #12]
+ 1764 0174 1322     		movs	r2, #19
+ 1765 0176 0121     		movs	r1, #1
+ 1766 0178 5348     		ldr	r0, .L106+36
+ 1767 017a FFF7FEFF 		bl	fwrite
+ 430:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             output_buffer(stream, dataP[i].value.asBuffer.buffer, dataP[i].value.asBuffer.length, i
+ 1768              		.loc 1 430 0
+ 1769 017e 7B69     		ldr	r3, [r7, #20]
+ 1770 0180 1B01     		lsls	r3, r3, #4
+ 1771 0182 7A68     		ldr	r2, [r7, #4]
+ 1772 0184 1344     		add	r3, r3, r2
+ 1773 0186 D968     		ldr	r1, [r3, #12]
+ 1774 0188 7B69     		ldr	r3, [r7, #20]
+ 1775 018a 1B01     		lsls	r3, r3, #4
+ 1776 018c 7A68     		ldr	r2, [r7, #4]
+ 1777 018e 1344     		add	r3, r3, r2
+ 1778 0190 9B68     		ldr	r3, [r3, #8]
+ 1779 0192 1A46     		mov	r2, r3
+ 1780 0194 3B68     		ldr	r3, [r7]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 42
+
+
+ 1781 0196 0133     		adds	r3, r3, #1
+ 1782 0198 F868     		ldr	r0, [r7, #12]
+ 1783 019a FFF7FEFF 		bl	output_buffer
+ 431:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1784              		.loc 1 431 0
+ 1785 019e 6AE0     		b	.L102
+ 1786              	.L98:
+ 432:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_INTEGER:
+ 433:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_INTEGER: ");
+ 1787              		.loc 1 433 0
+ 1788 01a0 FB68     		ldr	r3, [r7, #12]
+ 1789 01a2 1422     		movs	r2, #20
+ 1790 01a4 0121     		movs	r1, #1
+ 1791 01a6 4948     		ldr	r0, .L106+40
+ 1792 01a8 FFF7FEFF 		bl	fwrite
+ 434:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             print_indent(stream, indent + 1);
+ 1793              		.loc 1 434 0
+ 1794 01ac 3B68     		ldr	r3, [r7]
+ 1795 01ae 0133     		adds	r3, r3, #1
+ 1796 01b0 1946     		mov	r1, r3
+ 1797 01b2 F868     		ldr	r0, [r7, #12]
+ 1798 01b4 FFF7FEFF 		bl	print_indent
+ 435:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "%" PRId64, dataP[i].value.asInteger);
+ 1799              		.loc 1 435 0
+ 1800 01b8 7B69     		ldr	r3, [r7, #20]
+ 1801 01ba 1B01     		lsls	r3, r3, #4
+ 1802 01bc 7A68     		ldr	r2, [r7, #4]
+ 1803 01be 1344     		add	r3, r3, r2
+ 1804 01c0 D3E90234 		ldrd	r3, [r3, #8]
+ 1805 01c4 1A46     		mov	r2, r3
+ 1806 01c6 2346     		mov	r3, r4
+ 1807 01c8 4149     		ldr	r1, .L106+44
+ 1808 01ca F868     		ldr	r0, [r7, #12]
+ 1809 01cc FFF7FEFF 		bl	fprintf
+ 436:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "\r\n");
+ 1810              		.loc 1 436 0
+ 1811 01d0 FB68     		ldr	r3, [r7, #12]
+ 1812 01d2 0222     		movs	r2, #2
+ 1813 01d4 0121     		movs	r1, #1
+ 1814 01d6 3F48     		ldr	r0, .L106+48
+ 1815 01d8 FFF7FEFF 		bl	fwrite
+ 437:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1816              		.loc 1 437 0
+ 1817 01dc 4BE0     		b	.L102
+ 1818              	.L99:
+ 438:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_FLOAT:
+ 439:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_FLOAT: ");
+ 1819              		.loc 1 439 0
+ 1820 01de FB68     		ldr	r3, [r7, #12]
+ 1821 01e0 1222     		movs	r2, #18
+ 1822 01e2 0121     		movs	r1, #1
+ 1823 01e4 3C48     		ldr	r0, .L106+52
+ 1824 01e6 FFF7FEFF 		bl	fwrite
+ 440:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             print_indent(stream, indent + 1);
+ 1825              		.loc 1 440 0
+ 1826 01ea 3B68     		ldr	r3, [r7]
+ 1827 01ec 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 43
+
+
+ 1828 01ee 1946     		mov	r1, r3
+ 1829 01f0 F868     		ldr	r0, [r7, #12]
+ 1830 01f2 FFF7FEFF 		bl	print_indent
+ 441:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "%" PRId64, dataP[i].value.asInteger);
+ 1831              		.loc 1 441 0
+ 1832 01f6 7B69     		ldr	r3, [r7, #20]
+ 1833 01f8 1B01     		lsls	r3, r3, #4
+ 1834 01fa 7A68     		ldr	r2, [r7, #4]
+ 1835 01fc 1344     		add	r3, r3, r2
+ 1836 01fe D3E90234 		ldrd	r3, [r3, #8]
+ 1837 0202 1A46     		mov	r2, r3
+ 1838 0204 2346     		mov	r3, r4
+ 1839 0206 3249     		ldr	r1, .L106+44
+ 1840 0208 F868     		ldr	r0, [r7, #12]
+ 1841 020a FFF7FEFF 		bl	fprintf
+ 442:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "\r\n");
+ 1842              		.loc 1 442 0
+ 1843 020e FB68     		ldr	r3, [r7, #12]
+ 1844 0210 0222     		movs	r2, #2
+ 1845 0212 0121     		movs	r1, #1
+ 1846 0214 2F48     		ldr	r0, .L106+48
+ 1847 0216 FFF7FEFF 		bl	fwrite
+ 443:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1848              		.loc 1 443 0
+ 1849 021a 2CE0     		b	.L102
+ 1850              	.L100:
+ 444:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_BOOLEAN:
+ 445:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_BOOLEAN: ");
+ 1851              		.loc 1 445 0
+ 1852 021c FB68     		ldr	r3, [r7, #12]
+ 1853 021e 1422     		movs	r2, #20
+ 1854 0220 0121     		movs	r1, #1
+ 1855 0222 2E48     		ldr	r0, .L106+56
+ 1856 0224 FFF7FEFF 		bl	fwrite
+ 446:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "%s", dataP[i].value.asBoolean ? "true" : "false");
+ 1857              		.loc 1 446 0
+ 1858 0228 7B69     		ldr	r3, [r7, #20]
+ 1859 022a 1B01     		lsls	r3, r3, #4
+ 1860 022c 7A68     		ldr	r2, [r7, #4]
+ 1861 022e 1344     		add	r3, r3, r2
+ 1862 0230 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ 1863 0232 002B     		cmp	r3, #0
+ 1864 0234 01D0     		beq	.L103
+ 1865              		.loc 1 446 0 is_stmt 0 discriminator 1
+ 1866 0236 2A4B     		ldr	r3, .L106+60
+ 1867 0238 00E0     		b	.L104
+ 1868              	.L103:
+ 1869              		.loc 1 446 0 discriminator 2
+ 1870 023a 2A4B     		ldr	r3, .L106+64
+ 1871              	.L104:
+ 1872              		.loc 1 446 0 discriminator 4
+ 1873 023c F968     		ldr	r1, [r7, #12]
+ 1874 023e 1846     		mov	r0, r3
+ 1875 0240 FFF7FEFF 		bl	fputs
+ 447:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "\r\n");
+ 1876              		.loc 1 447 0 is_stmt 1 discriminator 4
+ 1877 0244 FB68     		ldr	r3, [r7, #12]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 44
+
+
+ 1878 0246 0222     		movs	r2, #2
+ 1879 0248 0121     		movs	r1, #1
+ 1880 024a 2248     		ldr	r0, .L106+48
+ 1881 024c FFF7FEFF 		bl	fwrite
+ 448:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1882              		.loc 1 448 0 discriminator 4
+ 1883 0250 11E0     		b	.L102
+ 1884              	.L101:
+ 449:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         case LWM2M_TYPE_OBJECT_LINK:
+ 450:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "LWM2M_TYPE_OBJECT_LINK\r\n");
+ 1885              		.loc 1 450 0
+ 1886 0252 FB68     		ldr	r3, [r7, #12]
+ 1887 0254 1822     		movs	r2, #24
+ 1888 0256 0121     		movs	r1, #1
+ 1889 0258 2348     		ldr	r0, .L106+68
+ 1890 025a FFF7FEFF 		bl	fwrite
+ 451:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1891              		.loc 1 451 0
+ 1892 025e 0AE0     		b	.L102
+ 1893              	.L90:
+ 452:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         default:
+ 453:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             fprintf(stream, "unknown (%d)\r\n", (int)dataP[i].type);
+ 1894              		.loc 1 453 0
+ 1895 0260 7B69     		ldr	r3, [r7, #20]
+ 1896 0262 1B01     		lsls	r3, r3, #4
+ 1897 0264 7A68     		ldr	r2, [r7, #4]
+ 1898 0266 1344     		add	r3, r3, r2
+ 1899 0268 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1900 026a 1A46     		mov	r2, r3
+ 1901 026c 1F49     		ldr	r1, .L106+72
+ 1902 026e F868     		ldr	r0, [r7, #12]
+ 1903 0270 FFF7FEFF 		bl	fprintf
+ 454:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****             break;
+ 1904              		.loc 1 454 0
+ 1905 0274 00BF     		nop
+ 1906              	.L102:
+ 455:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         }
+ 456:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         print_indent(stream, indent);
+ 1907              		.loc 1 456 0 discriminator 2
+ 1908 0276 3968     		ldr	r1, [r7]
+ 1909 0278 F868     		ldr	r0, [r7, #12]
+ 1910 027a FFF7FEFF 		bl	print_indent
+ 457:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         fprintf(stream, "}\r\n");
+ 1911              		.loc 1 457 0 discriminator 2
+ 1912 027e FB68     		ldr	r3, [r7, #12]
+ 1913 0280 0322     		movs	r2, #3
+ 1914 0282 0121     		movs	r1, #1
+ 1915 0284 1A48     		ldr	r0, .L106+76
+ 1916 0286 FFF7FEFF 		bl	fwrite
+ 397:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 1917              		.loc 1 397 0 discriminator 2
+ 1918 028a 7B69     		ldr	r3, [r7, #20]
+ 1919 028c 0133     		adds	r3, r3, #1
+ 1920 028e 7B61     		str	r3, [r7, #20]
+ 1921              	.L89:
+ 397:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 1922              		.loc 1 397 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 45
+
+
+ 1923 0290 7A69     		ldr	r2, [r7, #20]
+ 1924 0292 BB68     		ldr	r3, [r7, #8]
+ 1925 0294 9A42     		cmp	r2, r3
+ 1926 0296 FFF6BDAE 		blt	.L105
+ 458:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 459:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 1927              		.loc 1 459 0 is_stmt 1
+ 1928 029a 00BF     		nop
+ 1929 029c 1C37     		adds	r7, r7, #28
+ 1930              	.LCFI59:
+ 1931              		.cfi_def_cfa_offset 12
+ 1932 029e BD46     		mov	sp, r7
+ 1933              	.LCFI60:
+ 1934              		.cfi_def_cfa_register 13
+ 1935              		@ sp needed
+ 1936 02a0 90BD     		pop	{r4, r7, pc}
+ 1937              	.L107:
+ 1938 02a2 00BF     		.align	2
+ 1939              	.L106:
+ 1940 02a4 88000000 		.word	.LC6
+ 1941 02a8 F4010000 		.word	.LC27
+ 1942 02ac 00020000 		.word	.LC28
+ 1943 02b0 08020000 		.word	.LC29
+ 1944 02b4 1C020000 		.word	.LC30
+ 1945 02b8 3C020000 		.word	.LC31
+ 1946 02bc 5C020000 		.word	.LC32
+ 1947 02c0 74020000 		.word	.LC33
+ 1948 02c4 88020000 		.word	.LC34
+ 1949 02c8 94020000 		.word	.LC35
+ 1950 02cc A8020000 		.word	.LC36
+ 1951 02d0 F8000000 		.word	.LC15
+ 1952 02d4 C0020000 		.word	.LC37
+ 1953 02d8 C4020000 		.word	.LC38
+ 1954 02dc D8020000 		.word	.LC39
+ 1955 02e0 F0020000 		.word	.LC40
+ 1956 02e4 F8020000 		.word	.LC41
+ 1957 02e8 00030000 		.word	.LC42
+ 1958 02ec 1C030000 		.word	.LC43
+ 1959 02f0 34010000 		.word	.LC19
+ 1960              		.cfi_endproc
+ 1961              	.LFE145:
+ 1963              		.section	.rodata
+ 1964 032b 00       		.align	2
+ 1965              	.LC44:
+ 1966 032c 434F4150 		.ascii	"COAP_NO_ERROR\000"
+ 1966      5F4E4F5F 
+ 1966      4552524F 
+ 1966      5200
+ 1967 033a 0000     		.align	2
+ 1968              	.LC45:
+ 1969 033c 434F4150 		.ascii	"COAP_IGNORE\000"
+ 1969      5F49474E 
+ 1969      4F524500 
+ 1970              		.align	2
+ 1971              	.LC46:
+ 1972 0348 434F4150 		.ascii	"COAP_201_CREATED\000"
+ 1972      5F323031 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 46
+
+
+ 1972      5F435245 
+ 1972      41544544 
+ 1972      00
+ 1973 0359 000000   		.align	2
+ 1974              	.LC47:
+ 1975 035c 434F4150 		.ascii	"COAP_202_DELETED\000"
+ 1975      5F323032 
+ 1975      5F44454C 
+ 1975      45544544 
+ 1975      00
+ 1976 036d 000000   		.align	2
+ 1977              	.LC48:
+ 1978 0370 434F4150 		.ascii	"COAP_204_CHANGED\000"
+ 1978      5F323034 
+ 1978      5F434841 
+ 1978      4E474544 
+ 1978      00
+ 1979 0381 000000   		.align	2
+ 1980              	.LC49:
+ 1981 0384 434F4150 		.ascii	"COAP_205_CONTENT\000"
+ 1981      5F323035 
+ 1981      5F434F4E 
+ 1981      54454E54 
+ 1981      00
+ 1982 0395 000000   		.align	2
+ 1983              	.LC50:
+ 1984 0398 434F4150 		.ascii	"COAP_400_BAD_REQUEST\000"
+ 1984      5F343030 
+ 1984      5F424144 
+ 1984      5F524551 
+ 1984      55455354 
+ 1985 03ad 000000   		.align	2
+ 1986              	.LC51:
+ 1987 03b0 434F4150 		.ascii	"COAP_401_UNAUTHORIZED\000"
+ 1987      5F343031 
+ 1987      5F554E41 
+ 1987      5554484F 
+ 1987      52495A45 
+ 1988 03c6 0000     		.align	2
+ 1989              	.LC52:
+ 1990 03c8 434F4150 		.ascii	"COAP_404_NOT_FOUND\000"
+ 1990      5F343034 
+ 1990      5F4E4F54 
+ 1990      5F464F55 
+ 1990      4E4400
+ 1991 03db 00       		.align	2
+ 1992              	.LC53:
+ 1993 03dc 434F4150 		.ascii	"COAP_405_METHOD_NOT_ALLOWED\000"
+ 1993      5F343035 
+ 1993      5F4D4554 
+ 1993      484F445F 
+ 1993      4E4F545F 
+ 1994              		.align	2
+ 1995              	.LC54:
+ 1996 03f8 434F4150 		.ascii	"COAP_406_NOT_ACCEPTABLE\000"
+ 1996      5F343036 
+ 1996      5F4E4F54 
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 47
+
+
+ 1996      5F414343 
+ 1996      45505441 
+ 1997              		.align	2
+ 1998              	.LC55:
+ 1999 0410 434F4150 		.ascii	"COAP_500_INTERNAL_SERVER_ERROR\000"
+ 1999      5F353030 
+ 1999      5F494E54 
+ 1999      45524E41 
+ 1999      4C5F5345 
+ 2000 042f 00       		.align	2
+ 2001              	.LC56:
+ 2002 0430 434F4150 		.ascii	"COAP_501_NOT_IMPLEMENTED\000"
+ 2002      5F353031 
+ 2002      5F4E4F54 
+ 2002      5F494D50 
+ 2002      4C454D45 
+ 2003 0449 000000   		.align	2
+ 2004              	.LC57:
+ 2005 044c 434F4150 		.ascii	"COAP_503_SERVICE_UNAVAILABLE\000"
+ 2005      5F353033 
+ 2005      5F534552 
+ 2005      56494345 
+ 2005      5F554E41 
+ 2006 0469 000000   		.align	2
+ 2007              	.LC58:
+ 2008 046c 00       		.ascii	"\000"
+ 2009              		.section	.text.prv_status_to_string,"ax",%progbits
+ 2010              		.align	1
+ 2011              		.syntax unified
+ 2012              		.thumb
+ 2013              		.thumb_func
+ 2014              		.fpu fpv4-sp-d16
+ 2016              	prv_status_to_string:
+ 2017              	.LFB146:
+ 460:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 461:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #define CODE_TO_STRING(X)   case X : return #X
+ 462:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 463:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static const char *prv_status_to_string(int status)
+ 464:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 2018              		.loc 1 464 0
+ 2019              		.cfi_startproc
+ 2020              		@ args = 0, pretend = 0, frame = 8
+ 2021              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2022              		@ link register save eliminated.
+ 2023 0000 80B4     		push	{r7}
+ 2024              	.LCFI61:
+ 2025              		.cfi_def_cfa_offset 4
+ 2026              		.cfi_offset 7, -4
+ 2027 0002 83B0     		sub	sp, sp, #12
+ 2028              	.LCFI62:
+ 2029              		.cfi_def_cfa_offset 16
+ 2030 0004 00AF     		add	r7, sp, #0
+ 2031              	.LCFI63:
+ 2032              		.cfi_def_cfa_register 7
+ 2033 0006 7860     		str	r0, [r7, #4]
+ 465:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     switch(status)
+ 2034              		.loc 1 465 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 48
+
+
+ 2035 0008 7B68     		ldr	r3, [r7, #4]
+ 2036 000a 802B     		cmp	r3, #128
+ 2037 000c 2FD0     		beq	.L110
+ 2038 000e 802B     		cmp	r3, #128
+ 2039 0010 0FDC     		bgt	.L111
+ 2040 0012 412B     		cmp	r3, #65
+ 2041 0014 23D0     		beq	.L112
+ 2042 0016 412B     		cmp	r3, #65
+ 2043 0018 04DC     		bgt	.L113
+ 2044 001a 002B     		cmp	r3, #0
+ 2045 001c 1BD0     		beq	.L114
+ 2046 001e 012B     		cmp	r3, #1
+ 2047 0020 1BD0     		beq	.L115
+ 2048 0022 34E0     		b	.L109
+ 2049              	.L113:
+ 2050 0024 442B     		cmp	r3, #68
+ 2051 0026 1ED0     		beq	.L116
+ 2052 0028 452B     		cmp	r3, #69
+ 2053 002a 1ED0     		beq	.L117
+ 2054 002c 422B     		cmp	r3, #66
+ 2055 002e 18D0     		beq	.L118
+ 2056 0030 2DE0     		b	.L109
+ 2057              	.L111:
+ 2058 0032 862B     		cmp	r3, #134
+ 2059 0034 23D0     		beq	.L119
+ 2060 0036 862B     		cmp	r3, #134
+ 2061 0038 06DC     		bgt	.L120
+ 2062 003a 842B     		cmp	r3, #132
+ 2063 003c 1BD0     		beq	.L121
+ 2064 003e 842B     		cmp	r3, #132
+ 2065 0040 1BDC     		bgt	.L122
+ 2066 0042 812B     		cmp	r3, #129
+ 2067 0044 15D0     		beq	.L123
+ 2068 0046 22E0     		b	.L109
+ 2069              	.L120:
+ 2070 0048 A12B     		cmp	r3, #161
+ 2071 004a 1CD0     		beq	.L124
+ 2072 004c A32B     		cmp	r3, #163
+ 2073 004e 1CD0     		beq	.L125
+ 2074 0050 A02B     		cmp	r3, #160
+ 2075 0052 16D0     		beq	.L126
+ 2076 0054 1BE0     		b	.L109
+ 2077              	.L114:
+ 466:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 467:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_NO_ERROR);
+ 2078              		.loc 1 467 0
+ 2079 0056 114B     		ldr	r3, .L128
+ 2080 0058 1AE0     		b	.L127
+ 2081              	.L115:
+ 468:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_IGNORE);
+ 2082              		.loc 1 468 0
+ 2083 005a 114B     		ldr	r3, .L128+4
+ 2084 005c 18E0     		b	.L127
+ 2085              	.L112:
+ 469:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_201_CREATED);
+ 2086              		.loc 1 469 0
+ 2087 005e 114B     		ldr	r3, .L128+8
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 49
+
+
+ 2088 0060 16E0     		b	.L127
+ 2089              	.L118:
+ 470:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_202_DELETED);
+ 2090              		.loc 1 470 0
+ 2091 0062 114B     		ldr	r3, .L128+12
+ 2092 0064 14E0     		b	.L127
+ 2093              	.L116:
+ 471:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_204_CHANGED);
+ 2094              		.loc 1 471 0
+ 2095 0066 114B     		ldr	r3, .L128+16
+ 2096 0068 12E0     		b	.L127
+ 2097              	.L117:
+ 472:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_205_CONTENT);
+ 2098              		.loc 1 472 0
+ 2099 006a 114B     		ldr	r3, .L128+20
+ 2100 006c 10E0     		b	.L127
+ 2101              	.L110:
+ 473:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_400_BAD_REQUEST);
+ 2102              		.loc 1 473 0
+ 2103 006e 114B     		ldr	r3, .L128+24
+ 2104 0070 0EE0     		b	.L127
+ 2105              	.L123:
+ 474:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_401_UNAUTHORIZED);
+ 2106              		.loc 1 474 0
+ 2107 0072 114B     		ldr	r3, .L128+28
+ 2108 0074 0CE0     		b	.L127
+ 2109              	.L121:
+ 475:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_404_NOT_FOUND);
+ 2110              		.loc 1 475 0
+ 2111 0076 114B     		ldr	r3, .L128+32
+ 2112 0078 0AE0     		b	.L127
+ 2113              	.L122:
+ 476:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_405_METHOD_NOT_ALLOWED);
+ 2114              		.loc 1 476 0
+ 2115 007a 114B     		ldr	r3, .L128+36
+ 2116 007c 08E0     		b	.L127
+ 2117              	.L119:
+ 477:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_406_NOT_ACCEPTABLE);
+ 2118              		.loc 1 477 0
+ 2119 007e 114B     		ldr	r3, .L128+40
+ 2120 0080 06E0     		b	.L127
+ 2121              	.L126:
+ 478:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_500_INTERNAL_SERVER_ERROR);
+ 2122              		.loc 1 478 0
+ 2123 0082 114B     		ldr	r3, .L128+44
+ 2124 0084 04E0     		b	.L127
+ 2125              	.L124:
+ 479:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_501_NOT_IMPLEMENTED);
+ 2126              		.loc 1 479 0
+ 2127 0086 114B     		ldr	r3, .L128+48
+ 2128 0088 02E0     		b	.L127
+ 2129              	.L125:
+ 480:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         CODE_TO_STRING(COAP_503_SERVICE_UNAVAILABLE);
+ 2130              		.loc 1 480 0
+ 2131 008a 114B     		ldr	r3, .L128+52
+ 2132 008c 00E0     		b	.L127
+ 2133              	.L109:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 50
+
+
+ 481:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     default:
+ 482:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return "";
+ 2134              		.loc 1 482 0
+ 2135 008e 114B     		ldr	r3, .L128+56
+ 2136              	.L127:
+ 483:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 484:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 2137              		.loc 1 484 0
+ 2138 0090 1846     		mov	r0, r3
+ 2139 0092 0C37     		adds	r7, r7, #12
+ 2140              	.LCFI64:
+ 2141              		.cfi_def_cfa_offset 4
+ 2142 0094 BD46     		mov	sp, r7
+ 2143              	.LCFI65:
+ 2144              		.cfi_def_cfa_register 13
+ 2145              		@ sp needed
+ 2146 0096 5DF8047B 		ldr	r7, [sp], #4
+ 2147              	.LCFI66:
+ 2148              		.cfi_restore 7
+ 2149              		.cfi_def_cfa_offset 0
+ 2150 009a 7047     		bx	lr
+ 2151              	.L129:
+ 2152              		.align	2
+ 2153              	.L128:
+ 2154 009c 2C030000 		.word	.LC44
+ 2155 00a0 3C030000 		.word	.LC45
+ 2156 00a4 48030000 		.word	.LC46
+ 2157 00a8 5C030000 		.word	.LC47
+ 2158 00ac 70030000 		.word	.LC48
+ 2159 00b0 84030000 		.word	.LC49
+ 2160 00b4 98030000 		.word	.LC50
+ 2161 00b8 B0030000 		.word	.LC51
+ 2162 00bc C8030000 		.word	.LC52
+ 2163 00c0 DC030000 		.word	.LC53
+ 2164 00c4 F8030000 		.word	.LC54
+ 2165 00c8 10040000 		.word	.LC55
+ 2166 00cc 30040000 		.word	.LC56
+ 2167 00d0 4C040000 		.word	.LC57
+ 2168 00d4 6C040000 		.word	.LC58
+ 2169              		.cfi_endproc
+ 2170              	.LFE146:
+ 2172              		.section	.rodata
+ 2173 046d 000000   		.align	2
+ 2174              	.LC59:
+ 2175 0470 25642E25 		.ascii	"%d.%02d (%s)\000"
+ 2175      30326420 
+ 2175      28257329 
+ 2175      00
+ 2176              		.section	.text.print_status,"ax",%progbits
+ 2177              		.align	1
+ 2178              		.global	print_status
+ 2179              		.syntax unified
+ 2180              		.thumb
+ 2181              		.thumb_func
+ 2182              		.fpu fpv4-sp-d16
+ 2184              	print_status:
+ 2185              	.LFB147:
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 51
+
+
+ 485:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 486:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** void print_status(FILE *stream,
+ 487:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                   uint8_t status)
+ 488:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 2186              		.loc 1 488 0
+ 2187              		.cfi_startproc
+ 2188              		@ args = 0, pretend = 0, frame = 8
+ 2189              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2190 0000 B0B5     		push	{r4, r5, r7, lr}
+ 2191              	.LCFI67:
+ 2192              		.cfi_def_cfa_offset 16
+ 2193              		.cfi_offset 4, -16
+ 2194              		.cfi_offset 5, -12
+ 2195              		.cfi_offset 7, -8
+ 2196              		.cfi_offset 14, -4
+ 2197 0002 84B0     		sub	sp, sp, #16
+ 2198              	.LCFI68:
+ 2199              		.cfi_def_cfa_offset 32
+ 2200 0004 02AF     		add	r7, sp, #8
+ 2201              	.LCFI69:
+ 2202              		.cfi_def_cfa 7, 24
+ 2203 0006 7860     		str	r0, [r7, #4]
+ 2204 0008 0B46     		mov	r3, r1
+ 2205 000a FB70     		strb	r3, [r7, #3]
+ 489:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     fprintf(stream, "%d.%02d (%s)", (status & 0xE0) >> 5, status & 0x1F, prv_status_to_string(statu
+ 2206              		.loc 1 489 0
+ 2207 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 2208 000e 5B09     		lsrs	r3, r3, #5
+ 2209 0010 DBB2     		uxtb	r3, r3
+ 2210 0012 1D46     		mov	r5, r3
+ 2211 0014 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 2212 0016 03F01F04 		and	r4, r3, #31
+ 2213 001a FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 2214 001c 1846     		mov	r0, r3
+ 2215 001e FFF7FEFF 		bl	prv_status_to_string
+ 2216 0022 0346     		mov	r3, r0
+ 2217 0024 0093     		str	r3, [sp]
+ 2218 0026 2346     		mov	r3, r4
+ 2219 0028 2A46     		mov	r2, r5
+ 2220 002a 0449     		ldr	r1, .L131
+ 2221 002c 7868     		ldr	r0, [r7, #4]
+ 2222 002e FFF7FEFF 		bl	fprintf
+ 490:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 2223              		.loc 1 490 0
+ 2224 0032 00BF     		nop
+ 2225 0034 0837     		adds	r7, r7, #8
+ 2226              	.LCFI70:
+ 2227              		.cfi_def_cfa_offset 16
+ 2228 0036 BD46     		mov	sp, r7
+ 2229              	.LCFI71:
+ 2230              		.cfi_def_cfa_register 13
+ 2231              		@ sp needed
+ 2232 0038 B0BD     		pop	{r4, r5, r7, pc}
+ 2233              	.L132:
+ 2234 003a 00BF     		.align	2
+ 2235              	.L131:
+ 2236 003c 70040000 		.word	.LC59
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 52
+
+
+ 2237              		.cfi_endproc
+ 2238              	.LFE147:
+ 2240              		.section	.text.prv_b64Revert,"ax",%progbits
+ 2241              		.align	1
+ 2242              		.syntax unified
+ 2243              		.thumb
+ 2244              		.thumb_func
+ 2245              		.fpu fpv4-sp-d16
+ 2247              	prv_b64Revert:
+ 2248              	.LFB148:
+ 491:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 492:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** /**********************************************************
+ 493:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** * Base64 decoding function
+ 494:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** *
+ 495:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** * WARNING: Bugged for input strings with length < 4
+ 496:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** *
+ 497:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** */
+ 498:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 499:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** #define PRV_B64_PADDING '='
+ 500:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 501:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static uint8_t prv_b64Revert(uint8_t value)
+ 502:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 2249              		.loc 1 502 0
+ 2250              		.cfi_startproc
+ 2251              		@ args = 0, pretend = 0, frame = 8
+ 2252              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2253              		@ link register save eliminated.
+ 2254 0000 80B4     		push	{r7}
+ 2255              	.LCFI72:
+ 2256              		.cfi_def_cfa_offset 4
+ 2257              		.cfi_offset 7, -4
+ 2258 0002 83B0     		sub	sp, sp, #12
+ 2259              	.LCFI73:
+ 2260              		.cfi_def_cfa_offset 16
+ 2261 0004 00AF     		add	r7, sp, #0
+ 2262              	.LCFI74:
+ 2263              		.cfi_def_cfa_register 7
+ 2264 0006 0346     		mov	r3, r0
+ 2265 0008 FB71     		strb	r3, [r7, #7]
+ 503:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (value >= 'A' && value <= 'Z')
+ 2266              		.loc 1 503 0
+ 2267 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2268 000c 402B     		cmp	r3, #64
+ 2269 000e 06D9     		bls	.L134
+ 2270              		.loc 1 503 0 is_stmt 0 discriminator 1
+ 2271 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2272 0012 5A2B     		cmp	r3, #90
+ 2273 0014 03D8     		bhi	.L134
+ 504:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 505:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return (value - 'A');
+ 2274              		.loc 1 505 0 is_stmt 1
+ 2275 0016 FB79     		ldrb	r3, [r7, #7]
+ 2276 0018 413B     		subs	r3, r3, #65
+ 2277 001a DBB2     		uxtb	r3, r3
+ 2278 001c 1EE0     		b	.L135
+ 2279              	.L134:
+ 506:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 53
+
+
+ 507:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (value >= 'a' && value <= 'z')
+ 2280              		.loc 1 507 0
+ 2281 001e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2282 0020 602B     		cmp	r3, #96
+ 2283 0022 06D9     		bls	.L136
+ 2284              		.loc 1 507 0 is_stmt 0 discriminator 1
+ 2285 0024 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2286 0026 7A2B     		cmp	r3, #122
+ 2287 0028 03D8     		bhi	.L136
+ 508:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 509:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return (26 + value - 'a');
+ 2288              		.loc 1 509 0 is_stmt 1
+ 2289 002a FB79     		ldrb	r3, [r7, #7]
+ 2290 002c 473B     		subs	r3, r3, #71
+ 2291 002e DBB2     		uxtb	r3, r3
+ 2292 0030 14E0     		b	.L135
+ 2293              	.L136:
+ 510:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 511:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (value >= '0' && value <= '9')
+ 2294              		.loc 1 511 0
+ 2295 0032 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2296 0034 2F2B     		cmp	r3, #47
+ 2297 0036 06D9     		bls	.L137
+ 2298              		.loc 1 511 0 is_stmt 0 discriminator 1
+ 2299 0038 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2300 003a 392B     		cmp	r3, #57
+ 2301 003c 03D8     		bhi	.L137
+ 512:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 513:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return (52 + value - '0');
+ 2302              		.loc 1 513 0 is_stmt 1
+ 2303 003e FB79     		ldrb	r3, [r7, #7]
+ 2304 0040 0433     		adds	r3, r3, #4
+ 2305 0042 DBB2     		uxtb	r3, r3
+ 2306 0044 0AE0     		b	.L135
+ 2307              	.L137:
+ 514:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 515:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     switch (value)
+ 2308              		.loc 1 515 0
+ 2309 0046 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 2310 0048 2B2B     		cmp	r3, #43
+ 2311 004a 02D0     		beq	.L139
+ 2312 004c 2F2B     		cmp	r3, #47
+ 2313 004e 02D0     		beq	.L140
+ 2314 0050 03E0     		b	.L141
+ 2315              	.L139:
+ 516:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 517:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case '+':
+ 518:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return 62;
+ 2316              		.loc 1 518 0
+ 2317 0052 3E23     		movs	r3, #62
+ 2318 0054 02E0     		b	.L135
+ 2319              	.L140:
+ 519:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case '/':
+ 520:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return 63;
+ 2320              		.loc 1 520 0
+ 2321 0056 3F23     		movs	r3, #63
+ 2322 0058 00E0     		b	.L135
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 54
+
+
+ 2323              	.L141:
+ 521:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     default:
+ 522:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         return 0;
+ 2324              		.loc 1 522 0
+ 2325 005a 0023     		movs	r3, #0
+ 2326              	.L135:
+ 523:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 524:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 2327              		.loc 1 524 0
+ 2328 005c 1846     		mov	r0, r3
+ 2329 005e 0C37     		adds	r7, r7, #12
+ 2330              	.LCFI75:
+ 2331              		.cfi_def_cfa_offset 4
+ 2332 0060 BD46     		mov	sp, r7
+ 2333              	.LCFI76:
+ 2334              		.cfi_def_cfa_register 13
+ 2335              		@ sp needed
+ 2336 0062 5DF8047B 		ldr	r7, [sp], #4
+ 2337              	.LCFI77:
+ 2338              		.cfi_restore 7
+ 2339              		.cfi_def_cfa_offset 0
+ 2340 0066 7047     		bx	lr
+ 2341              		.cfi_endproc
+ 2342              	.LFE148:
+ 2344              		.section	.text.prv_decodeBlock,"ax",%progbits
+ 2345              		.align	1
+ 2346              		.syntax unified
+ 2347              		.thumb
+ 2348              		.thumb_func
+ 2349              		.fpu fpv4-sp-d16
+ 2351              	prv_decodeBlock:
+ 2352              	.LFB149:
+ 525:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 526:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** static void prv_decodeBlock(uint8_t input[4],
+ 527:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                             uint8_t output[3])
+ 528:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 2353              		.loc 1 528 0
+ 2354              		.cfi_startproc
+ 2355              		@ args = 0, pretend = 0, frame = 16
+ 2356              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2357 0000 80B5     		push	{r7, lr}
+ 2358              	.LCFI78:
+ 2359              		.cfi_def_cfa_offset 8
+ 2360              		.cfi_offset 7, -8
+ 2361              		.cfi_offset 14, -4
+ 2362 0002 84B0     		sub	sp, sp, #16
+ 2363              	.LCFI79:
+ 2364              		.cfi_def_cfa_offset 24
+ 2365 0004 00AF     		add	r7, sp, #0
+ 2366              	.LCFI80:
+ 2367              		.cfi_def_cfa_register 7
+ 2368 0006 7860     		str	r0, [r7, #4]
+ 2369 0008 3960     		str	r1, [r7]
+ 529:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     uint8_t tmp[4];
+ 530:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     int i;
+ 531:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 532:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     memset(output, 0, 3);
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 55
+
+
+ 2370              		.loc 1 532 0
+ 2371 000a 0322     		movs	r2, #3
+ 2372 000c 0021     		movs	r1, #0
+ 2373 000e 3868     		ldr	r0, [r7]
+ 2374 0010 FFF7FEFF 		bl	memset
+ 533:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 534:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     for (i = 0; i < 4; i++)
+ 2375              		.loc 1 534 0
+ 2376 0014 0023     		movs	r3, #0
+ 2377 0016 FB60     		str	r3, [r7, #12]
+ 2378 0018 11E0     		b	.L143
+ 2379              	.L144:
+ 535:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 536:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         tmp[i] = prv_b64Revert(input[i]);
+ 2380              		.loc 1 536 0 discriminator 3
+ 2381 001a FB68     		ldr	r3, [r7, #12]
+ 2382 001c 7A68     		ldr	r2, [r7, #4]
+ 2383 001e 1344     		add	r3, r3, r2
+ 2384 0020 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2385 0022 1846     		mov	r0, r3
+ 2386 0024 FFF7FEFF 		bl	prv_b64Revert
+ 2387 0028 0346     		mov	r3, r0
+ 2388 002a 1946     		mov	r1, r3
+ 2389 002c 07F10802 		add	r2, r7, #8
+ 2390 0030 FB68     		ldr	r3, [r7, #12]
+ 2391 0032 1344     		add	r3, r3, r2
+ 2392 0034 0A46     		mov	r2, r1
+ 2393 0036 1A70     		strb	r2, [r3]
+ 534:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 2394              		.loc 1 534 0 discriminator 3
+ 2395 0038 FB68     		ldr	r3, [r7, #12]
+ 2396 003a 0133     		adds	r3, r3, #1
+ 2397 003c FB60     		str	r3, [r7, #12]
+ 2398              	.L143:
+ 534:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 2399              		.loc 1 534 0 is_stmt 0 discriminator 1
+ 2400 003e FB68     		ldr	r3, [r7, #12]
+ 2401 0040 032B     		cmp	r3, #3
+ 2402 0042 EADD     		ble	.L144
+ 537:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 538:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 539:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     output[0] = (tmp[0] << 2) | (tmp[1] >> 4);
+ 2403              		.loc 1 539 0 is_stmt 1
+ 2404 0044 3B7A     		ldrb	r3, [r7, #8]	@ zero_extendqisi2
+ 2405 0046 9B00     		lsls	r3, r3, #2
+ 2406 0048 5AB2     		sxtb	r2, r3
+ 2407 004a 7B7A     		ldrb	r3, [r7, #9]	@ zero_extendqisi2
+ 2408 004c 1B09     		lsrs	r3, r3, #4
+ 2409 004e DBB2     		uxtb	r3, r3
+ 2410 0050 5BB2     		sxtb	r3, r3
+ 2411 0052 1343     		orrs	r3, r3, r2
+ 2412 0054 5BB2     		sxtb	r3, r3
+ 2413 0056 DAB2     		uxtb	r2, r3
+ 2414 0058 3B68     		ldr	r3, [r7]
+ 2415 005a 1A70     		strb	r2, [r3]
+ 540:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     output[1] = (tmp[1] << 4) | (tmp[2] >> 2);
+ 2416              		.loc 1 540 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 56
+
+
+ 2417 005c 7B7A     		ldrb	r3, [r7, #9]	@ zero_extendqisi2
+ 2418 005e 1B01     		lsls	r3, r3, #4
+ 2419 0060 5AB2     		sxtb	r2, r3
+ 2420 0062 BB7A     		ldrb	r3, [r7, #10]	@ zero_extendqisi2
+ 2421 0064 9B08     		lsrs	r3, r3, #2
+ 2422 0066 DBB2     		uxtb	r3, r3
+ 2423 0068 5BB2     		sxtb	r3, r3
+ 2424 006a 1343     		orrs	r3, r3, r2
+ 2425 006c 5AB2     		sxtb	r2, r3
+ 2426 006e 3B68     		ldr	r3, [r7]
+ 2427 0070 0133     		adds	r3, r3, #1
+ 2428 0072 D2B2     		uxtb	r2, r2
+ 2429 0074 1A70     		strb	r2, [r3]
+ 541:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     output[2] = (tmp[2] << 6) | tmp[3];
+ 2430              		.loc 1 541 0
+ 2431 0076 BB7A     		ldrb	r3, [r7, #10]	@ zero_extendqisi2
+ 2432 0078 9B01     		lsls	r3, r3, #6
+ 2433 007a 5AB2     		sxtb	r2, r3
+ 2434 007c FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+ 2435 007e 5BB2     		sxtb	r3, r3
+ 2436 0080 1343     		orrs	r3, r3, r2
+ 2437 0082 5AB2     		sxtb	r2, r3
+ 2438 0084 3B68     		ldr	r3, [r7]
+ 2439 0086 0233     		adds	r3, r3, #2
+ 2440 0088 D2B2     		uxtb	r2, r2
+ 2441 008a 1A70     		strb	r2, [r3]
+ 542:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 2442              		.loc 1 542 0
+ 2443 008c 00BF     		nop
+ 2444 008e 1037     		adds	r7, r7, #16
+ 2445              	.LCFI81:
+ 2446              		.cfi_def_cfa_offset 8
+ 2447 0090 BD46     		mov	sp, r7
+ 2448              	.LCFI82:
+ 2449              		.cfi_def_cfa_register 13
+ 2450              		@ sp needed
+ 2451 0092 80BD     		pop	{r7, pc}
+ 2452              		.cfi_endproc
+ 2453              	.LFE149:
+ 2455              		.section	.text.base64_decode,"ax",%progbits
+ 2456              		.align	1
+ 2457              		.global	base64_decode
+ 2458              		.syntax unified
+ 2459              		.thumb
+ 2460              		.thumb_func
+ 2461              		.fpu fpv4-sp-d16
+ 2463              	base64_decode:
+ 2464              	.LFB150:
+ 543:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 544:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** size_t base64_decode(uint8_t *dataP,
+ 545:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                      size_t dataLen,
+ 546:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****                      uint8_t **bufferP)
+ 547:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** {
+ 2465              		.loc 1 547 0
+ 2466              		.cfi_startproc
+ 2467              		@ args = 0, pretend = 0, frame = 40
+ 2468              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 57
+
+
+ 2469 0000 80B5     		push	{r7, lr}
+ 2470              	.LCFI83:
+ 2471              		.cfi_def_cfa_offset 8
+ 2472              		.cfi_offset 7, -8
+ 2473              		.cfi_offset 14, -4
+ 2474 0002 8AB0     		sub	sp, sp, #40
+ 2475              	.LCFI84:
+ 2476              		.cfi_def_cfa_offset 48
+ 2477 0004 00AF     		add	r7, sp, #0
+ 2478              	.LCFI85:
+ 2479              		.cfi_def_cfa_register 7
+ 2480 0006 F860     		str	r0, [r7, #12]
+ 2481 0008 B960     		str	r1, [r7, #8]
+ 2482 000a 7A60     		str	r2, [r7, #4]
+ 548:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     size_t data_index;
+ 549:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     size_t result_index;
+ 550:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     size_t result_len;
+ 551:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 552:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (dataLen % 4) return 0;
+ 2483              		.loc 1 552 0
+ 2484 000c BB68     		ldr	r3, [r7, #8]
+ 2485 000e 03F00303 		and	r3, r3, #3
+ 2486 0012 002B     		cmp	r3, #0
+ 2487 0014 01D0     		beq	.L146
+ 2488              		.loc 1 552 0 is_stmt 0 discriminator 1
+ 2489 0016 0023     		movs	r3, #0
+ 2490 0018 DFE0     		b	.L147
+ 2491              	.L146:
+ 553:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 554:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     result_len = (dataLen >> 2) * 3;
+ 2492              		.loc 1 554 0 is_stmt 1
+ 2493 001a BB68     		ldr	r3, [r7, #8]
+ 2494 001c 9A08     		lsrs	r2, r3, #2
+ 2495 001e 1346     		mov	r3, r2
+ 2496 0020 5B00     		lsls	r3, r3, #1
+ 2497 0022 1344     		add	r3, r3, r2
+ 2498 0024 FB61     		str	r3, [r7, #28]
+ 555:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     *bufferP = (uint8_t *)lwm2m_malloc(result_len);
+ 2499              		.loc 1 555 0
+ 2500 0026 F869     		ldr	r0, [r7, #28]
+ 2501 0028 FFF7FEFF 		bl	lwm2m_malloc
+ 2502 002c 0246     		mov	r2, r0
+ 2503 002e 7B68     		ldr	r3, [r7, #4]
+ 2504 0030 1A60     		str	r2, [r3]
+ 556:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     if (NULL == *bufferP) return 0;
+ 2505              		.loc 1 556 0
+ 2506 0032 7B68     		ldr	r3, [r7, #4]
+ 2507 0034 1B68     		ldr	r3, [r3]
+ 2508 0036 002B     		cmp	r3, #0
+ 2509 0038 01D1     		bne	.L148
+ 2510              		.loc 1 556 0 is_stmt 0 discriminator 1
+ 2511 003a 0023     		movs	r3, #0
+ 2512 003c CDE0     		b	.L147
+ 2513              	.L148:
+ 557:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     memset(*bufferP, 0, result_len);
+ 2514              		.loc 1 557 0 is_stmt 1
+ 2515 003e 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 58
+
+
+ 2516 0040 1B68     		ldr	r3, [r3]
+ 2517 0042 FA69     		ldr	r2, [r7, #28]
+ 2518 0044 0021     		movs	r1, #0
+ 2519 0046 1846     		mov	r0, r3
+ 2520 0048 FFF7FEFF 		bl	memset
+ 558:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 559:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     // remove padding
+ 560:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (dataP[dataLen - 1] == PRV_B64_PADDING)
+ 2521              		.loc 1 560 0
+ 2522 004c 02E0     		b	.L149
+ 2523              	.L150:
+ 561:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 562:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         dataLen--;
+ 2524              		.loc 1 562 0
+ 2525 004e BB68     		ldr	r3, [r7, #8]
+ 2526 0050 013B     		subs	r3, r3, #1
+ 2527 0052 BB60     		str	r3, [r7, #8]
+ 2528              	.L149:
+ 560:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 2529              		.loc 1 560 0
+ 2530 0054 BB68     		ldr	r3, [r7, #8]
+ 2531 0056 013B     		subs	r3, r3, #1
+ 2532 0058 FA68     		ldr	r2, [r7, #12]
+ 2533 005a 1344     		add	r3, r3, r2
+ 2534 005c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2535 005e 3D2B     		cmp	r3, #61
+ 2536 0060 F5D0     		beq	.L150
+ 563:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 564:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 565:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     data_index = 0;
+ 2537              		.loc 1 565 0
+ 2538 0062 0023     		movs	r3, #0
+ 2539 0064 7B62     		str	r3, [r7, #36]
+ 566:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     result_index = 0;
+ 2540              		.loc 1 566 0
+ 2541 0066 0023     		movs	r3, #0
+ 2542 0068 3B62     		str	r3, [r7, #32]
+ 567:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     while (data_index < dataLen)
+ 2543              		.loc 1 567 0
+ 2544 006a 0FE0     		b	.L151
+ 2545              	.L152:
+ 568:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 569:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         prv_decodeBlock(dataP + data_index, *bufferP + result_index);
+ 2546              		.loc 1 569 0
+ 2547 006c FA68     		ldr	r2, [r7, #12]
+ 2548 006e 7B6A     		ldr	r3, [r7, #36]
+ 2549 0070 D018     		adds	r0, r2, r3
+ 2550 0072 7B68     		ldr	r3, [r7, #4]
+ 2551 0074 1A68     		ldr	r2, [r3]
+ 2552 0076 3B6A     		ldr	r3, [r7, #32]
+ 2553 0078 1344     		add	r3, r3, r2
+ 2554 007a 1946     		mov	r1, r3
+ 2555 007c FFF7FEFF 		bl	prv_decodeBlock
+ 570:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         data_index += 4;
+ 2556              		.loc 1 570 0
+ 2557 0080 7B6A     		ldr	r3, [r7, #36]
+ 2558 0082 0433     		adds	r3, r3, #4
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 59
+
+
+ 2559 0084 7B62     		str	r3, [r7, #36]
+ 571:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         result_index += 3;
+ 2560              		.loc 1 571 0
+ 2561 0086 3B6A     		ldr	r3, [r7, #32]
+ 2562 0088 0333     		adds	r3, r3, #3
+ 2563 008a 3B62     		str	r3, [r7, #32]
+ 2564              	.L151:
+ 567:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 2565              		.loc 1 567 0
+ 2566 008c 7A6A     		ldr	r2, [r7, #36]
+ 2567 008e BB68     		ldr	r3, [r7, #8]
+ 2568 0090 9A42     		cmp	r2, r3
+ 2569 0092 EBD3     		bcc	.L152
+ 572:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 573:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     switch (data_index - dataLen)
+ 2570              		.loc 1 573 0
+ 2571 0094 7A6A     		ldr	r2, [r7, #36]
+ 2572 0096 BB68     		ldr	r3, [r7, #8]
+ 2573 0098 D31A     		subs	r3, r2, r3
+ 2574 009a 022B     		cmp	r3, #2
+ 2575 009c 05D0     		beq	.L154
+ 2576 009e 032B     		cmp	r3, #3
+ 2577 00a0 3AD0     		beq	.L155
+ 2578 00a2 002B     		cmp	r3, #0
+ 2579 00a4 00F09780 		beq	.L159
+ 2580 00a8 8AE0     		b	.L158
+ 2581              	.L154:
+ 2582              	.LBB4:
+ 574:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 575:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case 0:
+ 576:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 577:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case 2:
+ 578:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 579:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         uint8_t tmp[2];
+ 580:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 581:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         tmp[0] = prv_b64Revert(dataP[dataLen - 2]);
+ 2583              		.loc 1 581 0
+ 2584 00aa BB68     		ldr	r3, [r7, #8]
+ 2585 00ac 023B     		subs	r3, r3, #2
+ 2586 00ae FA68     		ldr	r2, [r7, #12]
+ 2587 00b0 1344     		add	r3, r3, r2
+ 2588 00b2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2589 00b4 1846     		mov	r0, r3
+ 2590 00b6 FFF7FEFF 		bl	prv_b64Revert
+ 2591 00ba 0346     		mov	r3, r0
+ 2592 00bc 3B76     		strb	r3, [r7, #24]
+ 582:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         tmp[1] = prv_b64Revert(dataP[dataLen - 1]);
+ 2593              		.loc 1 582 0
+ 2594 00be BB68     		ldr	r3, [r7, #8]
+ 2595 00c0 013B     		subs	r3, r3, #1
+ 2596 00c2 FA68     		ldr	r2, [r7, #12]
+ 2597 00c4 1344     		add	r3, r3, r2
+ 2598 00c6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2599 00c8 1846     		mov	r0, r3
+ 2600 00ca FFF7FEFF 		bl	prv_b64Revert
+ 2601 00ce 0346     		mov	r3, r0
+ 2602 00d0 7B76     		strb	r3, [r7, #25]
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 60
+
+
+ 583:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 584:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *bufferP[result_index - 3] = (tmp[0] << 2) | (tmp[1] >> 4);
+ 2603              		.loc 1 584 0
+ 2604 00d2 3B7E     		ldrb	r3, [r7, #24]	@ zero_extendqisi2
+ 2605 00d4 9B00     		lsls	r3, r3, #2
+ 2606 00d6 5AB2     		sxtb	r2, r3
+ 2607 00d8 7B7E     		ldrb	r3, [r7, #25]	@ zero_extendqisi2
+ 2608 00da 1B09     		lsrs	r3, r3, #4
+ 2609 00dc DBB2     		uxtb	r3, r3
+ 2610 00de 5BB2     		sxtb	r3, r3
+ 2611 00e0 1343     		orrs	r3, r3, r2
+ 2612 00e2 59B2     		sxtb	r1, r3
+ 2613 00e4 3B6A     		ldr	r3, [r7, #32]
+ 2614 00e6 03F18043 		add	r3, r3, #1073741824
+ 2615 00ea 033B     		subs	r3, r3, #3
+ 2616 00ec 9B00     		lsls	r3, r3, #2
+ 2617 00ee 7A68     		ldr	r2, [r7, #4]
+ 2618 00f0 1344     		add	r3, r3, r2
+ 2619 00f2 1B68     		ldr	r3, [r3]
+ 2620 00f4 CAB2     		uxtb	r2, r1
+ 2621 00f6 1A70     		strb	r2, [r3]
+ 585:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *bufferP[result_index - 2] = (tmp[1] << 4);
+ 2622              		.loc 1 585 0
+ 2623 00f8 7A7E     		ldrb	r2, [r7, #25]	@ zero_extendqisi2
+ 2624 00fa 3B6A     		ldr	r3, [r7, #32]
+ 2625 00fc 03F18043 		add	r3, r3, #1073741824
+ 2626 0100 023B     		subs	r3, r3, #2
+ 2627 0102 9B00     		lsls	r3, r3, #2
+ 2628 0104 7968     		ldr	r1, [r7, #4]
+ 2629 0106 0B44     		add	r3, r3, r1
+ 2630 0108 1B68     		ldr	r3, [r3]
+ 2631 010a 1201     		lsls	r2, r2, #4
+ 2632 010c D2B2     		uxtb	r2, r2
+ 2633 010e 1A70     		strb	r2, [r3]
+ 586:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         result_len -= 2;
+ 2634              		.loc 1 586 0
+ 2635 0110 FB69     		ldr	r3, [r7, #28]
+ 2636 0112 023B     		subs	r3, r3, #2
+ 2637 0114 FB61     		str	r3, [r7, #28]
+ 2638              	.LBE4:
+ 587:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 588:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     break;
+ 2639              		.loc 1 588 0
+ 2640 0116 5FE0     		b	.L157
+ 2641              	.L155:
+ 2642              	.LBB5:
+ 589:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case 3:
+ 590:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     {
+ 591:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         uint8_t tmp[3];
+ 592:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 593:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         tmp[0] = prv_b64Revert(dataP[dataLen - 3]);
+ 2643              		.loc 1 593 0
+ 2644 0118 BB68     		ldr	r3, [r7, #8]
+ 2645 011a 033B     		subs	r3, r3, #3
+ 2646 011c FA68     		ldr	r2, [r7, #12]
+ 2647 011e 1344     		add	r3, r3, r2
+ 2648 0120 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 61
+
+
+ 2649 0122 1846     		mov	r0, r3
+ 2650 0124 FFF7FEFF 		bl	prv_b64Revert
+ 2651 0128 0346     		mov	r3, r0
+ 2652 012a 3B75     		strb	r3, [r7, #20]
+ 594:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         tmp[1] = prv_b64Revert(dataP[dataLen - 2]);
+ 2653              		.loc 1 594 0
+ 2654 012c BB68     		ldr	r3, [r7, #8]
+ 2655 012e 023B     		subs	r3, r3, #2
+ 2656 0130 FA68     		ldr	r2, [r7, #12]
+ 2657 0132 1344     		add	r3, r3, r2
+ 2658 0134 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2659 0136 1846     		mov	r0, r3
+ 2660 0138 FFF7FEFF 		bl	prv_b64Revert
+ 2661 013c 0346     		mov	r3, r0
+ 2662 013e 7B75     		strb	r3, [r7, #21]
+ 595:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         tmp[2] = prv_b64Revert(dataP[dataLen - 1]);
+ 2663              		.loc 1 595 0
+ 2664 0140 BB68     		ldr	r3, [r7, #8]
+ 2665 0142 013B     		subs	r3, r3, #1
+ 2666 0144 FA68     		ldr	r2, [r7, #12]
+ 2667 0146 1344     		add	r3, r3, r2
+ 2668 0148 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2669 014a 1846     		mov	r0, r3
+ 2670 014c FFF7FEFF 		bl	prv_b64Revert
+ 2671 0150 0346     		mov	r3, r0
+ 2672 0152 BB75     		strb	r3, [r7, #22]
+ 596:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 597:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *bufferP[result_index - 3] = (tmp[0] << 2) | (tmp[1] >> 4);
+ 2673              		.loc 1 597 0
+ 2674 0154 3B7D     		ldrb	r3, [r7, #20]	@ zero_extendqisi2
+ 2675 0156 9B00     		lsls	r3, r3, #2
+ 2676 0158 5AB2     		sxtb	r2, r3
+ 2677 015a 7B7D     		ldrb	r3, [r7, #21]	@ zero_extendqisi2
+ 2678 015c 1B09     		lsrs	r3, r3, #4
+ 2679 015e DBB2     		uxtb	r3, r3
+ 2680 0160 5BB2     		sxtb	r3, r3
+ 2681 0162 1343     		orrs	r3, r3, r2
+ 2682 0164 59B2     		sxtb	r1, r3
+ 2683 0166 3B6A     		ldr	r3, [r7, #32]
+ 2684 0168 03F18043 		add	r3, r3, #1073741824
+ 2685 016c 033B     		subs	r3, r3, #3
+ 2686 016e 9B00     		lsls	r3, r3, #2
+ 2687 0170 7A68     		ldr	r2, [r7, #4]
+ 2688 0172 1344     		add	r3, r3, r2
+ 2689 0174 1B68     		ldr	r3, [r3]
+ 2690 0176 CAB2     		uxtb	r2, r1
+ 2691 0178 1A70     		strb	r2, [r3]
+ 598:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *bufferP[result_index - 2] = (tmp[1] << 4) | (tmp[2] >> 2);
+ 2692              		.loc 1 598 0
+ 2693 017a 7B7D     		ldrb	r3, [r7, #21]	@ zero_extendqisi2
+ 2694 017c 1B01     		lsls	r3, r3, #4
+ 2695 017e 5AB2     		sxtb	r2, r3
+ 2696 0180 BB7D     		ldrb	r3, [r7, #22]	@ zero_extendqisi2
+ 2697 0182 9B08     		lsrs	r3, r3, #2
+ 2698 0184 DBB2     		uxtb	r3, r3
+ 2699 0186 5BB2     		sxtb	r3, r3
+ 2700 0188 1343     		orrs	r3, r3, r2
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 62
+
+
+ 2701 018a 59B2     		sxtb	r1, r3
+ 2702 018c 3B6A     		ldr	r3, [r7, #32]
+ 2703 018e 03F18043 		add	r3, r3, #1073741824
+ 2704 0192 023B     		subs	r3, r3, #2
+ 2705 0194 9B00     		lsls	r3, r3, #2
+ 2706 0196 7A68     		ldr	r2, [r7, #4]
+ 2707 0198 1344     		add	r3, r3, r2
+ 2708 019a 1B68     		ldr	r3, [r3]
+ 2709 019c CAB2     		uxtb	r2, r1
+ 2710 019e 1A70     		strb	r2, [r3]
+ 599:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *bufferP[result_index - 1] = (tmp[2] << 6);
+ 2711              		.loc 1 599 0
+ 2712 01a0 BA7D     		ldrb	r2, [r7, #22]	@ zero_extendqisi2
+ 2713 01a2 3B6A     		ldr	r3, [r7, #32]
+ 2714 01a4 03F18043 		add	r3, r3, #1073741824
+ 2715 01a8 013B     		subs	r3, r3, #1
+ 2716 01aa 9B00     		lsls	r3, r3, #2
+ 2717 01ac 7968     		ldr	r1, [r7, #4]
+ 2718 01ae 0B44     		add	r3, r3, r1
+ 2719 01b0 1B68     		ldr	r3, [r3]
+ 2720 01b2 9201     		lsls	r2, r2, #6
+ 2721 01b4 D2B2     		uxtb	r2, r2
+ 2722 01b6 1A70     		strb	r2, [r3]
+ 600:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         result_len -= 1;
+ 2723              		.loc 1 600 0
+ 2724 01b8 FB69     		ldr	r3, [r7, #28]
+ 2725 01ba 013B     		subs	r3, r3, #1
+ 2726 01bc FB61     		str	r3, [r7, #28]
+ 2727              	.LBE5:
+ 601:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 602:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     break;
+ 2728              		.loc 1 602 0
+ 2729 01be 0BE0     		b	.L157
+ 2730              	.L158:
+ 603:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     default:
+ 604:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         // error
+ 605:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         lwm2m_free(*bufferP);
+ 2731              		.loc 1 605 0
+ 2732 01c0 7B68     		ldr	r3, [r7, #4]
+ 2733 01c2 1B68     		ldr	r3, [r3]
+ 2734 01c4 1846     		mov	r0, r3
+ 2735 01c6 FFF7FEFF 		bl	lwm2m_free
+ 606:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         *bufferP = NULL;
+ 2736              		.loc 1 606 0
+ 2737 01ca 7B68     		ldr	r3, [r7, #4]
+ 2738 01cc 0022     		movs	r2, #0
+ 2739 01ce 1A60     		str	r2, [r3]
+ 607:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         result_len = 0;
+ 2740              		.loc 1 607 0
+ 2741 01d0 0023     		movs	r3, #0
+ 2742 01d2 FB61     		str	r3, [r7, #28]
+ 608:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****         break;
+ 2743              		.loc 1 608 0
+ 2744 01d4 00E0     		b	.L157
+ 2745              	.L159:
+ 576:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     case 2:
+ 2746              		.loc 1 576 0
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 63
+
+
+ 2747 01d6 00BF     		nop
+ 2748              	.L157:
+ 609:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     }
+ 610:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** 
+ 611:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c ****     return result_len;
+ 2749              		.loc 1 611 0
+ 2750 01d8 FB69     		ldr	r3, [r7, #28]
+ 2751              	.L147:
+ 612:D:/iot/felix2/components/connectivity/lwm2m/examples/shared\commandline.c **** }
+ 2752              		.loc 1 612 0
+ 2753 01da 1846     		mov	r0, r3
+ 2754 01dc 2837     		adds	r7, r7, #40
+ 2755              	.LCFI86:
+ 2756              		.cfi_def_cfa_offset 8
+ 2757 01de BD46     		mov	sp, r7
+ 2758              	.LCFI87:
+ 2759              		.cfi_def_cfa_register 13
+ 2760              		@ sp needed
+ 2761 01e0 80BD     		pop	{r7, pc}
+ 2762              		.cfi_endproc
+ 2763              	.LFE150:
+ 2765              		.text
+ 2766              	.Letext0:
+ 2767              		.file 2 "d:\\liteos studio\\resources\\arm-none-eabi\\lib\\gcc\\arm-none-eabi\\7.3.1\\include\\std
+ 2768              		.file 3 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\machine\\_default_ty
+ 2769              		.file 4 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\lock.h"
+ 2770              		.file 5 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_types.h"
+ 2771              		.file 6 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\reent.h"
+ 2772              		.file 7 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdlib.h"
+ 2773              		.file 8 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 2774              		.file 9 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\stdio.h"
+ 2775              		.file 10 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\ctype.h"
+ 2776              		.file 11 "d:\\liteos studio\\resources\\arm-none-eabi\\arm-none-eabi\\include\\time.h"
+ 2777              		.file 12 "D:/iot/felix2/components/connectivity/lwm2m/core/er-coap-13/er-coap-13.h"
+ 2778              		.file 13 "D:/iot/felix2/kernel/include/los_typedef.h"
+ 2779              		.file 14 "D:/iot/felix2/arch/arm/common/cmsis/core_cm4.h"
+ 2780              		.file 15 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/system_stm32l4xx.h"
+ 2781              		.file 16 "D:/iot/felix2/kernel/include/los_list.h"
+ 2782              		.file 17 "D:/iot/felix2/kernel/include/los_err.h"
+ 2783              		.file 18 "D:/iot/felix2/arch/arm/arm-m/include/los_hwi.h"
+ 2784              		.file 19 "D:/iot/felix2/kernel/include/los_tick.h"
+ 2785              		.file 20 "D:/iot/felix2/kernel/include/los_event.h"
+ 2786              		.file 21 "D:/iot/felix2/kernel/include/los_task.h"
+ 2787              		.file 22 "D:/iot/felix2/kernel/base/include/los_task.ph"
+ 2788              		.file 23 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/Inc/main.h"
+ 2789              		.file 24 "D:/iot/felix2/targets/Cloud_STM32L431_BearPi/OS_CONFIG/target_config.h"
+ 2790              		.file 25 "D:/iot/felix2/kernel/include/los_config.h"
+ 2791              		.file 26 "D:/iot/felix2/components/connectivity/lwm2m/core/liblwm2m.h"
+ 2792              		.file 27 "D:/iot/felix2/components/connectivity/lwm2m/examples/shared/commandline.h"
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 64
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 commandline.c
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:18     .text.prv_find_command:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:24     .text.prv_find_command:00000000 prv_find_command
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:150    .rodata:00000000 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:161    .text.prv_displayHelp:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:167    .text.prv_displayHelp:00000000 prv_displayHelp
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:324    .text.prv_displayHelp:000000e0 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:339    .text.handle_command:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:346    .text.handle_command:00000000 handle_command
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:521    .text.handle_command:00000100 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:528    .text.prv_end_of_space:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:534    .text.prv_end_of_space:00000000 prv_end_of_space
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:587    .text.get_end_of_arg:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:594    .text.get_end_of_arg:00000000 get_end_of_arg
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:653    .text.get_next_arg:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:660    .text.get_next_arg:00000000 get_next_arg
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:714    .text.check_end_of_args:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:721    .text.check_end_of_args:00000000 check_end_of_args
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:769    .text.print_indent:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:775    .text.print_indent:00000000 print_indent
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:828    .text.print_indent:00000034 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:833    .text.output_buffer:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:840    .text.output_buffer:00000000 output_buffer
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:922    .text.output_tlv:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:929    .text.output_tlv:00000000 output_tlv
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1237   .text.output_tlv:00000224 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1277   .text.output_data:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1284   .text.output_data:00000000 output_data
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1488   .text.output_data:0000013c $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1551   .text.dump_tlv:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1558   .text.dump_tlv:00000000 dump_tlv
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1635   .text.dump_tlv:00000078 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1645   .text.dump_tlv:000000a0 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:1940   .text.dump_tlv:000002a4 $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2010   .text.prv_status_to_string:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2016   .text.prv_status_to_string:00000000 prv_status_to_string
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2154   .text.prv_status_to_string:0000009c $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2177   .text.print_status:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2184   .text.print_status:00000000 print_status
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2236   .text.print_status:0000003c $d
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2241   .text.prv_b64Revert:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2247   .text.prv_b64Revert:00000000 prv_b64Revert
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2345   .text.prv_decodeBlock:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2351   .text.prv_decodeBlock:00000000 prv_decodeBlock
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2456   .text.base64_decode:00000000 $t
+C:\Users\91458\AppData\Local\Temp\ccTSbdId.s:2463   .text.base64_decode:00000000 base64_decode
+
+UNDEFINED SYMBOLS
+strlen
+strncmp
+__locale_ctype_ptr
+fwrite
+fprintf
+_impure_ptr
+printf
+fputc
+ARM GAS  C:\Users\91458\AppData\Local\Temp\ccTSbdId.s 			page 65
+
+
+sscanf
+lwm2m_decode_TLV
+fputs
+memset
+lwm2m_malloc
+lwm2m_free
